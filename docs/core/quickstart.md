@@ -1,57 +1,57 @@
-# 第一次回测
+# Your first backtest
 
-用随包的 GOOG 历史日线完成一次本地回测：价格上穿 EMA 时买入，下穿时平仓，最后读取交易和权益。全程无需下载行情。
+Run a local backtest on the bundled GOOG historical daily data: buy when price crosses above EMA, close when it crosses below, and read the trades and equity. No market-data download is required.
 
-## 1. 准备环境
+## 1. Prepare the environment
 
-在仓库根目录运行：
+Run from the repository root:
 
 ```sh
 uv sync --locked --extra test
 ```
 
-当前验证环境为 Python 3.12。以下路径属于源码仓库；单独安装 wheel 不包含示例目录，源码或 sdist 的安装方式见[示例说明](examples.md)。
+The current validation environment uses Python 3.12. The paths below belong to the source repository; a standalone wheel installation does not include the examples directory. See [examples](examples.md) for source and sdist installation.
 
-## 2. 写策略
+## 2. Define a strategy
 
-[作者源文件](../../examples/strategies/first_backtest.py)是完整可运行定义，直接复用或复制为自己的策略文件：
+The [author source file](../../examples/strategies/first_backtest.py) is a complete runnable definition. Reuse it directly or copy it into your own strategy file:
 
-[完整源码](../../examples/strategies/first_backtest.py)
+[Complete source](../../examples/strategies/first_backtest.py)
 
-- `init()` 登记 EMA，`length=20` 表示计算周期；数据和指标的最新值随后随回测游标推进。
-- `next()` 在可用历史上判断交叉，下单或平仓。`is_crossover` 返回当前布尔值；历史交叉序列使用 `ta.crossover`。
-- `@backtest` 保存策略默认设置。加载此文件只完成定义；下一步宿主提供行情、周期与品种规格并执行。
+- `init()` registers EMA; `length=20` sets its calculation period. The latest data and indicator values then advance with the backtest cursor.
+- `next()` tests crossings on visible history and submits orders or closes positions. `is_crossover` returns the current boolean value; use `ta.crossover` for historical crossing series.
+- `@backtest` stores strategy defaults. Loading this file only defines the strategy; the host supplies market data, timeframe, and instrument specifications and executes it in the next step.
 
-## 3. 运行同一策略
+## 3. Run the same strategy
 
-仍在仓库根目录运行：
+Still at the repository root, run:
 
 ```sh
 uv run --locked python examples/advanced/run_author.py
 ```
 
-选择索引中的其他作者示例时，把路径作为命令最后一个参数。`chart_for` 仅提供这些示例的固定行情配方；自己的宿主应注入实际图表。宿主[完整源码](../../examples/advanced/run_author.py)的执行部分如下：
+To select another author example from the index, pass its path as the final argument. `chart_for` supplies only the fixed market-data recipes for these examples; your own host should inject the actual chart. The execution portion of the host's [complete source](../../examples/advanced/run_author.py) is available here:
 
-[完整源码](../../examples/advanced/run_author.py)
+[Complete source](../../examples/advanced/run_author.py)
 
-每次加载创建新的 namespace，`runtime.describe` 无行情发现配置，`runtime.run` 接收宿主图表上下文并返回结果。只执行自己信任的本地脚本；此入口不提供沙箱。
+Each load creates a new namespace. `runtime.describe` discovers configuration without market data; `runtime.run` accepts host chart context and returns results. Execute only trusted local scripts; this entry point does not provide a sandbox.
 
-## 4. 读取结果
+## 4. Read the results
 
-命令先打印收益率、交易数和最大回撤，再打印权益曲线与交易记录的末尾几行：
+The command prints return, trade count, and maximum drawdown, followed by the final rows of the equity curve and trade records:
 
-| 内容     | 读取方式                      | 含义                               |
-| -------- | ----------------------------- | ---------------------------------- |
-| 收益率   | `result["Return [%]"]`        | 本次历史数据和配置对应的百分比收益 |
-| 交易数   | `result["# Trades"]`          | 已关闭片段数量；本例启用期末清算   |
-| 最大回撤 | `result["Max. Drawdown [%]"]` | 权益曲线最大回撤的百分比           |
-| 权益曲线 | `result["_equity_curve"]`     | 按行情索引对齐的权益表             |
-| 交易记录 | `result["_trades"]`           | 进出场、规模和盈亏等逐笔信息       |
+| Content | Access | Meaning |
+| ------- | ------ | ------- |
+| Return | `result["Return [%]"]` | Percentage return for this historical data and configuration |
+| Trade count | `result["# Trades"]` | Number of closed fragments; this example enables terminal liquidation |
+| Maximum drawdown | `result["Max. Drawdown [%]"]` | Maximum percentage drawdown of the equity curve |
+| Equity curve | `result["_equity_curve"]` | Equity table aligned to the market-data index |
+| Trade records | `result["_trades"]` | Per-trade entry, exit, size, and profit/loss information |
 
-手续费按默认 `CommissionType.PERCENT` 与 `commission_value=0.2`（0.2%）计入开平仓；结果是固定样例的计算输出，不代表未来效果。字段详情见[结果指南](guides/results.md)。
+Entry and exit fees use the default `CommissionType.PERCENT` with `commission_value=0.2` (0.2%). Results are calculations for the fixed example, not predictions of future performance. See the [results guide](guides/results.md) for field details.
 
-## 接下来
+## Next steps
 
-[策略生命周期](guides/author.md) · [参数声明](guides/inputs.md) · [EMA 参考](reference/indicators/ema.md) · [MACD 多输出](reference/indicators/macd.md) · [运行与优化](guides/runtime.md) · [完整 API](reference/core.md)
+[Strategy lifecycle](guides/author.md) · [Input declarations](guides/inputs.md) · [EMA reference](reference/indicators/ema.md) · [MACD multiple outputs](reference/indicators/macd.md) · [Running and optimization](guides/runtime.md) · [Complete API](reference/core.md)
 
-本例的加载边界和真实执行由 `tests/test_examples.py` 验证。更多边界见[当前限制](limitations.md)。
+`tests/test_examples.py` verifies this example's loading boundary and actual execution. See [current limitations](limitations.md) for further boundaries.

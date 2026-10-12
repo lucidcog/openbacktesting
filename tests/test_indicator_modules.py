@@ -1,4 +1,4 @@
-"""逐指标文件、迁移基线及语义适配的独立验收。"""
+"""Independent acceptance of per-indicator files, migration baselines, and semantic adaptations."""
 
 import base64
 import hashlib
@@ -9,10 +9,11 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from test_indicator_catalog import AVAILABLE, catalog_data
+
 from openbacktesting import indicators as public
 from openbacktesting.indicators import runtime as indicators
 from openbacktesting.indicators.methods import TechnicalAnalysis
-from test_indicator_catalog import AVAILABLE, catalog_data
 
 BASELINE = json.loads(Path(__file__).with_name("indicator-package-baseline.json").read_text())
 
@@ -39,10 +40,10 @@ def test_pre_migration_values_masks_signatures(spec):
     actual = result.metadata
     actual.pop("implementation_version", None)
     previous = expected["metadata"].copy()
-    # 删除调度开关；固定算法、数值和来源基线不改写。
+    # Remove the dispatch switch without rewriting fixed algorithm, numerical, or provenance baselines.
     previous.pop("warmup")
     assert "warmup" not in actual
-    # 仅允许目录明确化的安全选项；其余 metadata 全部比较。
+    # Allow only safe options explicitly defined by the catalog; compare all other metadata.
     additions = {
         "ta.ema": {"offset": 0},
         "ta.sma": {"offset": 0},
@@ -164,6 +165,7 @@ def test_registry_rejects_incomplete_or_ambiguous_bindings(mutation):
 )
 def test_macd_maps_names_and_rejects_bad_outputs(monkeypatch, mutation):
     import pandas as pd
+
     from openbacktesting.indicators.momentum import macd
     from openbacktesting.indicators.types import IndicatorError
 
@@ -197,22 +199,23 @@ def test_macd_maps_names_and_rejects_bad_outputs(monkeypatch, mutation):
 
 def test_common_contracts_and_stable_error_identity(monkeypatch):
     import pandas as pd
+
     from openbacktesting.indicators import common
     from openbacktesting.indicators.overlap import sma
     from openbacktesting.indicators.types import IndicatorError
 
     data = catalog_data()
-    with pytest.raises(IndicatorError, match="要求单通道"):
+    with pytest.raises(IndicatorError, match="single-channel Series is required"):
         common.named_series(pd.DataFrame({"sma": [1.0]}), "ta.sma", "sma")
     spec = public.describe("ta.sma")
-    with pytest.raises(IndicatorError, match="名称"):
+    with pytest.raises(IndicatorError, match="name"):
         common.to_arrays(spec, pd.Series([1.0], name="wrong"), pd.RangeIndex(1), {"length": 10})
 
     class MalformedSeries(pd.Series):
         def to_numpy(self, dtype=None):
             return np.zeros((2, len(self)))
 
-    with pytest.raises(IndicatorError, match="输出形状错误"):
+    with pytest.raises(IndicatorError, match="Invalid output shape"):
         common.to_arrays(spec, MalformedSeries([1.0], name="sma"), pd.RangeIndex(1), {"length": 10})
     failure = IndicatorError("output-contract", "ta.sma", "sample")
 
@@ -254,5 +257,5 @@ def test_implementation_version_and_missing_binding(monkeypatch):
 def test_alias_contract_rejects_invalid_or_duplicate_names(aliases):
     from dataclasses import replace
 
-    with pytest.raises(ValueError, match="别名"):
+    with pytest.raises(ValueError, match="alias"):
         replace(public.describe("ta.macd"), aliases=aliases)

@@ -1,20 +1,21 @@
-"""日志宿主会话、参数发现与真实优化隔离。"""
+"""Log host sessions, parameter discovery, and real optimization isolation."""
 
 import json
 import multiprocessing as mp
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing.dummy import Pool as ThreadPool
 
-import openbacktesting as api
 import pytest
-from openbacktesting import Backtest, RunLogs, backtest, runtime
-from openbacktesting.lib import MultiBacktest
-from openbacktesting.portfolio.stats import dummy_stats
-from openbacktesting.test import GOOG
 from test_backtest_declaration import chart, namespace
 from test_engine_edges import Idle, flat_data
 from test_inputs import request
 from test_strategy_logs import LoggingTrade
+
+import openbacktesting as api
+from openbacktesting import Backtest, RunLogs, backtest, runtime
+from openbacktesting.lib import MultiBacktest
+from openbacktesting.portfolio.stats import dummy_stats
+from openbacktesting.test import GOOG
 
 
 @backtest()
@@ -27,16 +28,16 @@ class SearchLogs(Idle):
     fail = ""
 
     def init(self):
-        self.log.info(f"参数={self.parameter}")
+        self.log.info(f"Parameter={self.parameter}")
         if self.fail == "candidate" and not self._log._collector.enabled:
-            raise ValueError("候选失败")
+            raise ValueError("Candidate failure")
         if self.fail == "final" and self._log._collector.enabled:
-            raise ValueError("最终失败")
+            raise ValueError("Final failure")
         if self.fail == "invalid":
             self.log.info(1)
 
     def next(self):
-        self.log.info(f"参数={self.parameter}")
+        self.log.info(f"Parameter={self.parameter}")
         if self.bar_index == 0:
             self.buy(qty=self.parameter)
         if self.bar_index == 4:
@@ -64,13 +65,13 @@ def test_runtime_success_defaults_copy_and_failure_reuse():
         with pytest.raises((TypeError, ValueError)):
             runtime.run(**args)
         assert session.get_logs() == []
-    # 同一会话失败后恢复，无旧记录残留。
+    # Recover the same session after failure without retaining old records.
     result = runtime.run(
-        namespace(DeclaredLogs), request(DeclaredLogs, {"数量": 2}), logs=session, **chart()
+        namespace(DeclaredLogs), request(DeclaredLogs, {"Quantity": 2}), logs=session, **chart()
     )
     assert result.attrs["strategy_logs"] == session.get_logs()
     assert session.get_logs()[0]["sequence"] == 1
-    assert original[0]["message"] == "初始化"
+    assert original[0]["message"] == "Initialization"
     without = runtime.run(namespace(DeclaredLogs), **chart())
     assert without.attrs["strategy_logs"]
     json.dumps(session.get_logs(), allow_nan=False)
@@ -80,23 +81,23 @@ def test_runtime_success_defaults_copy_and_failure_reuse():
 
 @pytest.mark.parametrize("supplied", [False, True])
 def test_runtime_original_exception_and_finish_logs(supplied):
-    primary = ValueError("作者异常")
+    primary = ValueError("Author exception")
 
     @backtest()
     class Fail(Idle):
         def init(self):
-            self.log.info("失败前")
+            self.log.info("Before failure")
             raise primary
 
         def on_finish(self, summary):
-            self.log.warning("异常结束")
+            self.log.warning("Exception end")
 
     session = RunLogs()
     with pytest.raises(ValueError) as caught:
         runtime.run(namespace(Fail), logs=session if supplied else None, **chart())
     assert caught.value is primary and not hasattr(primary, "logs")
     if supplied:
-        assert [r["message"] for r in session.get_logs()] == ["失败前", "异常结束"]
+        assert [r["message"] for r in session.get_logs()] == ["Before failure", "Exception end"]
 
 
 def test_active_session_reentry_and_concurrent_use():
@@ -105,10 +106,10 @@ def test_active_session_reentry_and_concurrent_use():
     @backtest()
     class Reenter(Idle):
         def init(self):
-            self.log.info("持有者")
+            self.log.info("Owner")
 
             def attempt():
-                with pytest.raises(RuntimeError, match="占用"):
+                with pytest.raises(RuntimeError, match="occupied"):
                     runtime.run(namespace(Reenter), logs=session, **chart())
 
             attempt()
@@ -124,7 +125,7 @@ def test_active_session_reentry_and_concurrent_use():
 
 def test_describe_and_stats_do_not_execute_author(monkeypatch):
     def forbidden(*args, **kwargs):
-        raise AssertionError("描述不执行作者")
+        raise AssertionError("describe must not execute the author")
 
     monkeypatch.setattr(DeclaredLogs, "init", forbidden)
     monkeypatch.setattr(DeclaredLogs, "__init__", forbidden)
@@ -142,7 +143,7 @@ def test_grid_only_final_and_no_trade_fallback(monkeypatch, mode):
     selected, heatmap = bt.optimize(parameter=[1, 2], maximize="Return [%]", return_heatmap=True)
     records = bt.get_logs()
     assert len(records) == 9 and records == selected.attrs["strategy_logs"]
-    assert {r["message"] for r in records} == {f"参数={heatmap.idxmax()[0]}"}
+    assert {r["message"] for r in records} == {f"Parameter={heatmap.idxmax()[0]}"}
     assert records[0]["sequence"] == 1
     declared = Backtest(GOOG.iloc[:8], LoggingTrade)
     result = declared.optimize(enabled=[False], units=[1, 2], maximize="Return [%]")
@@ -214,10 +215,10 @@ def test_multi_backtest_stats_and_external_output(monkeypatch, capsys):
 
     class Output(Idle):
         def init(self):
-            print("外部输出")
-            self.log.info("策略日志")
+            print("External output")
+            self.log.info("Strategy logs")
 
     bt = Backtest(flat_data(2), Output)
     bt.run()
-    assert [r["message"] for r in bt.get_logs()] == ["策略日志"]
-    assert "外部输出" in capsys.readouterr().out
+    assert [r["message"] for r in bt.get_logs()] == ["Strategy logs"]
+    assert "External output" in capsys.readouterr().out

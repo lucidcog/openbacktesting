@@ -1,4 +1,4 @@
-"""ta.running_min：固定因果序列契约。"""
+"""ta.running_min: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

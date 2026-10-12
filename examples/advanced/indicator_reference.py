@@ -1,12 +1,13 @@
-"""逐项体验指标：同一份离线数据，登记一个指标，读取各输出通道。
+"""Explore indicators individually: register one indicator against the same offline data and read its output channels.
 
-附加输入只用于演示绑定，不代表真实基准或交易所周期。无交易、无手续费，
-required_outputs=[] 使稀疏输出也能被观察；读取前逐通道检查 valid。
+Additional inputs demonstrate binding only, not real benchmarks or exchange periods. No trades or commission;
+required_outputs=[] allows sparse outputs to be observed; check valid on each channel before reading.
 """
 
 import argparse
 
 import numpy as np
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.indicators import describe
 from openbacktesting.test import GOOG
@@ -15,7 +16,7 @@ from openbacktesting.test import GOOG
 def make_data():
     data = GOOG.copy()
     data["source"] = data.Close
-    data["benchmark"] = data.Close.shift(1)  # 示例序列，请换成同日历真实基准
+    data["benchmark"] = data.Close.shift(1)  # Example series; replace with a real benchmark on the same calendar
     data["periods"] = 10.0
     data["fast"] = data.Close.rolling(3).mean()
     data["slow"] = data.Close.rolling(10).mean()

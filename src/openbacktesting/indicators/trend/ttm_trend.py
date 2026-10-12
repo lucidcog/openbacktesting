@@ -1,4 +1,4 @@
-"""ta.ttm_trend：固定依赖的计算封装与规范输出。"""
+"""ta.ttm_trend: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.trend.ttm_trend import ttm_trend as _calculate
 

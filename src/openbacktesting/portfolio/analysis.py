@@ -1,4 +1,4 @@
-"""确定性的交易分布、连续段、时间模式与权益区间。"""
+"""Deterministic trade distributions, streaks, time patterns, and equity intervals."""
 
 from decimal import ROUND_FLOOR, Decimal
 
@@ -18,7 +18,7 @@ def distribution(trades):
             )
         )
         bins.setdefault(key, []).append(t["fragmentId"])
-    # 稀疏桶避免异常大收益产生巨量空桶；每桶显式边界。
+    # Sparse buckets avoid huge numbers of empty buckets from extreme returns; each bucket has explicit boundaries.
     histogram = [
         {
             "lower": float(Decimal(k) * Decimal("0.01")),

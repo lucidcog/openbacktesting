@@ -1,4 +1,4 @@
-"""方法式指标入口的轻量适配；计算与登记仍由策略负责。"""
+"""Lightweight adapter for method-style indicator entry points; strategies still handle computation and registration."""
 
 from collections.abc import Callable, Mapping, Sequence
 
@@ -10,7 +10,7 @@ Inputs = Mapping[str, Source]
 
 
 class IndicatorResult:
-    """多输出的只读属性容器；通道视图只在初始化时创建。"""
+    """Read-only attribute container for multiple outputs; channel views are created only during initialization."""
 
     __slots__ = ("_channels", "_handle")
 
@@ -23,27 +23,27 @@ class IndicatorResult:
 
     @property
     def ready(self):
-        """各输出共享的最低历史条件掩码。"""
+        """Minimum-history mask shared by all outputs."""
         return self._handle.ready
 
     @property
     def valid(self):
-        """底层各通道的有效性掩码；交易前优先检查所选通道。"""
+        """Underlying validity masks for each channel; check the selected channel before trading."""
         return self._handle.valid
 
     @property
     def metadata(self):
-        """返回底层句柄来源元数据的独立副本。"""
+        """Return an independent copy of the underlying handle's provenance metadata."""
         return self._handle.metadata
 
     @property
     def df(self):
-        """返回全部通道当前前缀的 pandas DataFrame 副本。"""
+        """Return a pandas DataFrame copy of the currently visible prefix of all channels."""
         return self._handle.df
 
 
 class IndicatorNamespace(CrossPredicates):
-    """绑定单个策略的登记回调，避免指标层反向依赖策略实现。"""
+    """Bind a registration callback to one strategy, avoiding an indicator-layer dependency on strategy implementations."""
 
     def __init__(self, register: Callable[..., IndicatorHandle]):
         self._register = register
@@ -61,11 +61,11 @@ class IndicatorNamespace(CrossPredicates):
         if source is not None:
             if inputs is not None:
                 raise IndicatorError(
-                    "invalid-parameter", indicator, "source 与 inputs 不能同时指定"
+                    "invalid-parameter", indicator, "source and inputs cannot both be specified"
                 )
             if not isinstance(source, (str, IndicatorHandle)):
                 raise IndicatorError(
-                    "missing-input", indicator, "source 须为列名或单通道句柄；多输出请先选择通道"
+                    "missing-input", indicator, "source must be a column name or single-channel handle; select a channel from multi-output handles first"
                 )
             inputs = {primary: source}
         return self._register(
@@ -87,7 +87,7 @@ class IndicatorNamespace(CrossPredicates):
     ) -> IndicatorHandle:
         bound = {name: source for name, source in sources.items() if source is not None}
         if bound and inputs is not None:
-            raise IndicatorError("invalid-parameter", indicator, "具名输入与 inputs 不能同时指定")
+            raise IndicatorError("invalid-parameter", indicator, "Named inputs and inputs cannot both be specified")
         return self._register(
             indicator,
             inputs=bound if bound else inputs,

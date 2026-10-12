@@ -1,20 +1,21 @@
-"""方法式入口与独立计算共享计算契约；具名结果仅持有当前运行视图。"""
+"""Method entry points and independent computation share calculation contracts; named results hold current-run views only."""
 
 import inspect
 import pickle
 from multiprocessing.pool import ThreadPool
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
 import pytest
+from test_indicator_catalog import AVAILABLE, catalog_data
+
+import openbacktesting as api
 from openbacktesting import inputs
 from openbacktesting.data import _Data
 from openbacktesting.indicator_api import IndicatorResult
 from openbacktesting.indicator_methods import TechnicalAnalysis
 from openbacktesting.indicator_types import IndicatorError, IndicatorHandle
 from openbacktesting.indicators import runtime as indicators
-from test_indicator_catalog import AVAILABLE, catalog_data
 
 
 class Empty(api.Strategy):
@@ -151,7 +152,7 @@ def test_sources_options_and_default_normalization():
     "call, error",
     [
         (lambda s: s.ta.ema(20), "missing-input"),
-        (lambda s: s.ta.ema(s.ta.macd()), "选择通道"),
+        (lambda s: s.ta.ema(s.ta.macd()), "select a channel"),
         (lambda s: s.ta.ema(np.ones(512)), "missing-input"),
         (lambda s: s.ta.ema("Close", inputs={}), "invalid-parameter"),
         (lambda s: s.ta.ema(strategy().ta.ema()), "index-mismatch"),
@@ -165,7 +166,7 @@ def test_invalid_values_fail_without_bad_registration(call, error):
     owner = strategy()
     with pytest.raises(IndicatorError, match=error):
         call(owner)
-    # 唯一可能成功的预备登记是生成被拒绝的整个 MACD 结果。
+    # The only potentially successful preparatory registration creates the full MACD result that is then rejected.
     assert all(h.metadata["id"] == "ta.macd" for h in owner._indicators)
 
 
@@ -193,15 +194,15 @@ def test_reserved_ta_class_and_inherited_fields(value):
     parent = type("Conflict", (Empty,), {"ta": value})
     child = type("Inherited", (parent,), {})
     for cls in (parent, child):
-        with pytest.raises(AttributeError, match="保留属性.*改名"):
+        with pytest.raises(AttributeError, match="reserved attribute.*rename"):
             cls(None, _Data(catalog_data()), {})
 
 
 def test_reserved_assignment_parameters_and_unrelated_input_title():
     owner = strategy()
-    with pytest.raises(AttributeError, match="保留属性"):
+    with pytest.raises(AttributeError, match="reserved attribute"):
         owner.ta = 10
-    with pytest.raises(AttributeError, match="保留属性"):
+    with pytest.raises(AttributeError, match="reserved attribute"):
         Empty(None, _Data(catalog_data()), {"ta": 1})
 
     class InputTitle(Empty):

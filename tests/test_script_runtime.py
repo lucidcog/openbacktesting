@@ -1,4 +1,4 @@
-"""通过装饰器作者脚本验证框架接管，无宿主、源码加载器或 UI 依赖。"""
+"""A decorated author script verifies framework ownership without host, source-loader, or UI dependencies."""
 
 import json
 import runpy
@@ -7,13 +7,14 @@ from types import MappingProxyType
 
 import pandas as pd
 import pytest
-from openbacktesting import Backtest, Strategy, backtest, inputs, runtime
-from openbacktesting.broker import InstrumentSpec
-from openbacktesting.test import GOOG
 from example_support import example_chart
 from test_backtest_declaration import chart
 from test_backtest_declaration import namespace as module_namespace
 from test_input_runtime import TradingInputs, compare
+
+from openbacktesting import Backtest, Strategy, backtest, inputs, runtime
+from openbacktesting.broker import InstrumentSpec
+from openbacktesting.test import GOOG
 
 EXAMPLE = Path(__file__).resolve().parents[1] / "examples/strategies/ema_inputs.py"
 
@@ -34,9 +35,9 @@ def request(namespace, values):
 
 def test_author_script_needs_only_declaration_and_discovery_does_not_run(monkeypatch):
     def forbidden(*args, **kwargs):
-        raise AssertionError("发现不能构造策略或执行回测")
+        raise AssertionError("Discovery must not construct a strategy or run a backtest")
 
-    # runpy 仅为测试加载受信任仓库示例；runtime 不拥有源码执行能力。
+    # runpy loads trusted repository examples for tests only; runtime does not own source execution.
     with monkeypatch.context() as patch:
         patch.setattr(Strategy, "__init__", forbidden)
         patch.setattr(Backtest, "run", forbidden)
@@ -45,13 +46,13 @@ def test_author_script_needs_only_declaration_and_discovery_does_not_run(monkeyp
     assert "bt" not in namespace
     assert not {"schema", "request", "result", "runtime"} & namespace.keys()
     assert [item["title"] for item in schema["inputs"]] == [
-        "快线周期",
-        "慢线周期",
-        "交易数量",
-        "允许做空",
+        "Fast period",
+        "Slow period",
+        "Trade quantity",
+        "Allow shorting",
     ]
     assert schema == json.loads(json.dumps(schema))
-    # 框架不要求 namespace 另行暴露策略类，也接受只读映射。
+    # The framework does not require a separately exposed strategy class in namespace and also accepts read-only mappings.
     exported = MappingProxyType(namespace)
     assert runtime.describe(exported) == schema
     schema["inputs"][0]["default"] = 999
@@ -60,16 +61,16 @@ def test_author_script_needs_only_declaration_and_discovery_does_not_run(monkeyp
 
 def test_ema_title_injection_and_fresh_script_execution():
     first = runpy.run_path(str(EXAMPLE))
-    config = json.loads(json.dumps(request(first, {"快线周期": 5, "交易数量": 2})))
+    config = json.loads(json.dumps(request(first, {"Fast period": 5, "Trade quantity": 2})))
     result = run(first, config)
     assert result["# Trades"] > 0
     assert result["_strategy"].fast == 5
     assert set(result["_trades"]["Size"]) == {2}
     assert result.attrs["input_snapshot"]["values"] == {
-        "快线周期": 5,
-        "慢线周期": 26,
-        "交易数量": 2,
-        "允许做空": False,
+        "Fast period": 5,
+        "Slow period": 26,
+        "Trade quantity": 2,
+        "Allow shorting": False,
     }
     second = runpy.run_path(str(EXAMPLE))
     assert runtime.discover(second) is not runtime.discover(first)
@@ -101,22 +102,22 @@ def test_reloaded_definition_rejects_saved_request_before_execution(monkeypatch)
         pass
 
     original = module_namespace(Original)
-    config = request(original, {"数量": 2})
+    config = request(original, {"Quantity": 2})
 
     @backtest()
     class Updated(TradingInputs):
-        units = inputs.int(3, title="数量", minval=1)
+        units = inputs.int(3, title="Quantity", minval=1)
 
     reloaded = module_namespace(Updated)
     assert runtime.describe(reloaded)["schemaHash"] != config["schemaHash"]
 
     def forbidden(*args, **kwargs):
-        raise AssertionError("无效输入不能启动策略")
+        raise AssertionError("Invalid inputs must not start the strategy")
 
     monkeypatch.setattr(Updated, "__init__", forbidden)
     with pytest.raises(inputs.InputError, match="SchemaMismatch"):
         run(reloaded, config)
-    for invalid in ({}, False, request(reloaded, {"数量": "2"})):
+    for invalid in ({}, False, request(reloaded, {"Quantity": "2"})):
         with pytest.raises(inputs.InputError):
             run(reloaded, invalid)
 
@@ -158,7 +159,7 @@ def test_subclass_instance_dispatch_preserves_fractional_units():
     default = bt.run()
     schema = inputs.describe(FractionalInputs)
     titled = bt.run_inputs(
-        {key: schema[key] for key in ("schemaVersion", "schemaHash")} | {"values": {"数量": 2}}
+        {key: schema[key] for key in ("schemaVersion", "schemaHash")} | {"values": {"Quantity": 2}}
     )
     assert bt.calls == 2
     assert default["_trades"].Size.iloc[0] == 0.1
@@ -168,8 +169,8 @@ def test_subclass_instance_dispatch_preserves_fractional_units():
 
 def test_strategy_exception_propagates():
     namespace = runpy.run_path(str(EXAMPLE))
-    with pytest.raises(ValueError, match="快线周期必须小于慢线周期"):
-        run(namespace, request(namespace, {"快线周期": 30}))
+    with pytest.raises(ValueError, match="Fast period must be less than slow period"):
+        run(namespace, request(namespace, {"Fast period": 30}))
     assert "bt" not in namespace
 
 
@@ -186,7 +187,7 @@ def test_plotting_author_export_is_frozen_and_has_real_visuals():
     assert len(payload["panes"]) == 2 and len(payload["plots"]) == 6
     assert {p["kind"] for p in payload["plots"]} == {"line", "step", "histogram", "level"}
     assert len(payload["fills"]) == 1
-    signal = next(m for m in payload["markers"] if m["text"] == "买入信号")
+    signal = next(m for m in payload["markers"] if m["text"] == "Buy signal")
     assert signal["knownAtBar"] + 1 == payload["tradingFacts"]["fills"][0]["bar_index"]
     backdated = next(m for m in payload["markers"] if m["anchorBar"] != m["knownAtBar"])
     assert backdated["anchorBar"] == 57 and backdated["knownAtBar"] == 59

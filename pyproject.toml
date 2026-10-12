@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "openbacktesting"
 version = "0.2.0"
-description = "OpenBacktesting 原生历史回测内核"
+description = "OpenBacktesting native historical backtesting engine"
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
 dependencies = [
@@ -32,5 +32,5 @@ testpaths = ["tests"]
 packages = ["src/openbacktesting"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/README.md", "/pyproject.toml", "/uv.lock", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
+include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
 exclude = ["**/__pycache__", "**/*.pyc", "**/.pytest_cache", "/.verification", "/.venv", "/dist"]

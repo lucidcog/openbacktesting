@@ -1,12 +1,12 @@
-# 指标使用契约与能力
+# Indicator contracts and capabilities
 
-内核基于固定的 `pandas-ta-classic==0.8.32` 提供自有指标目录、批量计算和策略登记。当前目录有 247 个分类入口：211 个普通指标、24 个工具与确认事件、9 种形态开放；另有 cdl_pattern、vp、tos_stdevall 三个入口不开放交易调用。计数来自实际制品，不以文档宣传的 224 为验收常量。
+The core provides its own indicator catalog, batch computation, and strategy registration on fixed `pandas-ta-classic==0.8.32`. The current catalog has 247 classified entries: 211 ordinary indicators, 24 utilities/confirmed events, and 9 available patterns. Three further entries, cdl_pattern, vp, and tos_stdevall, are unavailable for trading calls. Counts come from actual artifacts; the advertised documentation count of 224 is not an acceptance constant.
 
-事实来源为[固定目录](../../../src/openbacktesting/indicators/catalog.json)、[逐入口合约测试](../../../tests/test_indicator_catalog.py)和子包实施记录。上游升级时必须重新审核清单、参数域、输出和因果性，不能自动反射开放新增函数。
+Sources of truth are the [fixed catalog](../../../src/openbacktesting/indicators/catalog.json), [per-entry contract tests](../../../tests/test_indicator_catalog.py), and subpackage implementation records. Upstream upgrades require a fresh review of entries, parameter domains, outputs, and causality; reflection must not automatically expose newly added functions.
 
-下列片段说明局部调用；`frame` 是调用方准备的行情 DataFrame，策略方法片段须放入 Strategy 子类。完整可执行代码由[示例入口](../examples.md)提供。
+Fragments below illustrate local calls. `frame` is a caller-prepared market-data DataFrame; strategy methods belong in a Strategy subclass. [Examples](../examples.md) provide complete executable code.
 
-## API 与后端边界
+## API and backend boundaries
 
 ```python
 from openbacktesting import indicators
@@ -16,7 +16,7 @@ print(result.s)
 print(indicators.describe("ta.macd").outputs)
 ```
 
-策略内置指标统一通过 `self.ta` 调用，序列指标的方法签名、默认值和返回类型从审核目录生成并随 wheel 发布；即时交叉判断由独立实现提供：
+Strategies consistently call built-in indicators through `self.ta`. Series-method signatures, defaults, and return types are generated from the reviewed catalog and distributed in the wheel; immediate crossing tests have a separate implementation:
 
 ```python
 def init(self):
@@ -29,134 +29,134 @@ def next(self):
     histogram = self.macd.histogram[-1]
 ```
 
-单输出保留 `IndicatorHandle`；多输出提供只读具名结果，通道视图在初始化时建立，重复属性读取不复制历史或重新登记。MACD 的 `line` 与规范名 `macd` 是同对象别名，`histogram`、`signal` 独立可读；BBands 为 `lower/middle/upper/bandwidth/percent`。多输出支持规范名键及 `ready/valid/metadata/df` 读取，不隐式选择主线进行算术或接受数值通道索引。
+Single outputs retain `IndicatorHandle`; multiple outputs provide read-only named results. Channel views are created at initialization, so repeated property reads neither copy history nor register again. MACD `line` and canonical `macd` alias the same object; `histogram` and `signal` are separately readable. BBands provides `lower/middle/upper/bandwidth/percent`. Multiple outputs support canonical keys and `ready/valid/metadata/df`; they neither implicitly choose a main line for arithmetic nor accept numeric channel indexes.
 
-单输入首参 `source` 可用行情列名或同运行单通道，例如 `self.ta.ema("Open", length=20)`；省略或 `None` 使用默认行情。交叉可写 `self.ta.crossover(left, right)`，事件取值可写 `self.ta.valuewhen(condition, source, occurrence=0)`，参数接受行情列名或同运行单通道句柄；其他多输入使用 `inputs`；非空 `source` 与 `inputs` 同时指定会报错。不推断缺少的 benchmark 等非标准输入，不接受任意 ndarray 或跨运行句柄。`backend` 与 `required_outputs` 沿用原选项，必要输出始终使用规范名（MACD 主线为 `macd`）。
+The first `source` argument of single-input methods accepts a market-data column name or same-run single channel, such as `self.ta.ema("Open", length=20)`; omission or `None` selects default market data. Crossings use `self.ta.crossover(left, right)`, and event values use `self.ta.valuewhen(condition, source, occurrence=0)`, accepting column names or same-run single-channel handles. Other multi-input methods use `inputs`; supplying both nonempty `source` and `inputs` raises an error. Missing nonstandard inputs such as benchmark are not inferred; arbitrary ndarray or cross-run handles are rejected. `backend` and `required_outputs` retain existing options, and required outputs always use canonical names (`macd` for the MACD main line).
 
-### 交叉序列与即时判断
+### Crossing series and immediate tests
 
-| 入口                                                       | 返回                                      | 使用阶段与用途                                                                 |
-| ---------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------ |
-| `self.ta.cross/crossover/crossunder(left, right)`          | `IndicatorHandle`，有效值 0/1，无效值 NaN | init 登记，可继续组合或在 next 用 `[-1]` 读取                                  |
-| `self.ta.is_cross/is_crossover/is_crossunder(left, right)` | Python `bool`                             | 直接判断输入当前可见的最后两根，适合 next 条件分支，不登记指标、不影响逐根回调 |
+| Entry point | Return | Phase and purpose |
+| ----------- | ------ | ----------------- |
+| `self.ta.cross/crossover/crossunder(left, right)` | `IndicatorHandle`, valid 0/1 values, invalid NaN | Register in init; compose further or read `[-1]` in next |
+| `self.ta.is_cross/is_crossover/is_crossunder(left, right)` | Python `bool` | Directly test the latest two visible input bars for next branches; registers no indicator and does not affect per-bar callbacks |
 
-两组使用相同交叉规则：上穿为当前左值严格大于右值且前值小于等于；下穿反向；当前相等不算交叉。序列不足两根或参与比较的值无效时，`is_*` 返回 `False`，序列仍保留 NaN 与 `valid` 掩码。
+Both groups use identical rules: crossover requires current left strictly above right and previous left less than or equal to right; crossunder reverses this. Current equality is not a crossing. With fewer than two bars or invalid comparison values, `is_*` returns `False`, while series retains NaN and `valid` masks.
 
-`is_*` 接受单通道句柄、list/tuple、NumPy 数组、pandas Series 或数字阈值；Series 按位置取最近两项。句柄遵循可见游标和 `valid` 掩码；NaN/无穷值视为无效。传 `self.close` 而非列名字符串，多输出先选择通道。不接受 `inputs/backend/required_outputs`。传入独立数组时，调用方负责截断到当前时点；在 init 调用会判断完整输入的最后两根，不产生序列。
+`is_*` accepts single-channel handles, list/tuple, NumPy arrays, pandas Series, or numeric thresholds. Series uses the latest two positions. Handles obey visible cursors and `valid` masks; NaN/infinity is invalid. Pass `self.close` rather than a column-name string and select channels from multiple outputs first. `inputs/backend/required_outputs` is unsupported. Callers must truncate independent arrays to the current moment; calling in init tests the last two values of the full input without producing a series.
 
-完整双入口用法见 [cross_signals.py](../../../examples/strategies/cross_signals.py)。
+See [cross_signals.py](../../../examples/strategies/cross_signals.py) for complete usage of both entry-point groups.
 
-`ta` 是策略保留属性；同名类字段、方法、Input 字段、参数或实例赋值必须改名，Input 展示标题不受影响。所有方法仅能在 `init()` 登记。开发阶段运行 `uv run --locked python scripts/generate_indicator_api.py --check` 校验生成物；修改目录后运行 `uv run --locked python scripts/generate_indicator_api.py`，不手改生成的运行时文件。实现与验收见方法式接口记录。
+`ta` is reserved on strategies; colliding class fields, methods, Input fields, parameters, and instance assignments must be renamed, without affecting Input display titles. Registration methods are available only in `init()`. During development, run `uv run --locked python scripts/generate_indicator_api.py --check`; after catalog changes, run `uv run --locked python scripts/generate_indicator_api.py` rather than editing generated runtime files. See the method-interface implementation record for implementation and acceptance evidence.
 
-内置指标在 `init()` 通过 `self.ta` 登记。`inputs` 映射只接受行情列名或本次运行的单通道句柄；`backend` 和 `required_outputs` 属于运行选项，其余参数按定义严格校验。未知参数、bool 充当整数、非有限数值和非法参数关系均被拒绝。上游未公开的 `**kwargs` 不透传。
+Register built-in indicators through `self.ta` in `init()`. `inputs` mappings accept only market-data column names or same-run single-channel handles. `backend` and `required_outputs` are runtime options; all other parameters are strictly validated against definitions. Unknown parameters, bool in place of integers, non-finite numbers, and invalid parameter relationships are rejected. Unpublished upstream `**kwargs` are not forwarded.
 
-后端由每项目录固定：既有封装为 `pandas-ta-classic.native`，显式传入 `talib=False`；新增本地公式与修订 NVI/PVI 为 `openbacktesting.numpy`，不安装 TA-Lib/Numba extras。测试在模拟 TA-Lib 已安装时阻止其导入；库的安装状态不改变内置调用。只有 SMA 另提供 `backend="pandas.sma"`，作为替换实现的契约证明。未知后端明确失败，没有回退。
+The catalog fixes each backend: existing wrappers use `pandas-ta-classic.native` with explicit `talib=False`; new local formulas and revised NVI/PVI use `openbacktesting.numpy`, without TA-Lib/Numba extras. Tests block TA-Lib imports while simulating its installation; installed-library state does not alter built-in calls. Only SMA additionally offers `backend="pandas.sma"` as evidence of replacement-implementation contracts. Unknown backends fail explicitly without fallback.
 
-指标领域位于 `indicators/` 子包，按类别分目录，每个可用指标独立文件，例如 `overlap/ema.py`、`overlap/sma.py`、`momentum/macd.py`。同一指标的 native/Pandas 等实现留在同一文件；文件负责明确的库调用和语义映射，不设 `backends/` 目录。
+Indicators live under the `indicators/` subpackage, organized by category, with one file per available indicator, such as `overlap/ema.py`, `overlap/sma.py`, and `momentum/macd.py`. Native/Pandas and other implementations of one indicator remain in its file. Each file owns explicit library calls and semantic mapping; no `backends/` directory exists.
 
-`types` 承载定义、结果和游标，`common` 负责共享输出验证，`calculus` 负责有限历史数学，`registry` 显式绑定 ID、backend、函数和实现版本，`runtime` 提供目录、纯计算与缓存。指标模块不导入注册表、运行时、策略或 Worker；只在缓存未命中的批量计算时调用，不增加逐 bar 包装。
+`types` contains definitions, results, and cursors; `common` validates shared outputs; `calculus` handles finite-history mathematics; `registry` explicitly binds ID, backend, function, and implementation version; `runtime` supplies catalog, pure computation, and caching. Indicator modules import neither registry, runtime, strategy, nor Worker. They are invoked only on cache-miss batch computation without adding per-bar wrappers.
 
-目录拥有公共默认值、参数域、输出及别名；私有 Wrapper 接收必填的已规范化参数。多输出按已审核的供应商列名映射成规范通道，正确列交换顺序可归一，缺列、重复列或未知列报 `output-contract`，索引错位报 `index-mismatch`。适配层的 `IndicatorError` 原样通过，真实第三方异常包装为 `calculation-failed`。不 reindex 或填零掩盖违例。
+The catalog owns public defaults, parameter domains, outputs, and aliases; private wrappers receive required normalized parameters. Reviewed vendor column names map to canonical output channels. Reordered correct columns normalize successfully; missing, duplicate, or unknown columns raise `output-contract`, and index misalignment raises `index-mismatch`. Adapter `IndicatorError` passes through unchanged; actual third-party exceptions are wrapped as `calculation-failed`. Reindexing and zero filling must not hide violations.
 
-旧 `indicator_api`、`indicator_methods`、`indicator_types` 是同对象兼容导出，保留旧导入和历史 pickle 读取；新实现与类型位于子包。`indicators.compute/catalog/describe` 和 `self.ta` 的调用方式不变。
+Legacy `indicator_api`, `indicator_methods`, and `indicator_types` remain same-object compatibility exports supporting old imports and historical pickle reads; new implementations and types live in the subpackage. Calls to `indicators.compute/catalog/describe` and `self.ta` are unchanged.
 
-## 时间、就绪与结果
+## Time, readiness, and results
 
-策略直接行情入口 `self.open/high/low/close/volume/hl2/hlc3/hlcc4` 已复用 `IndicatorHandle` 与同运行游标，支持 `self.ta.ema(self.close)`。来源句柄的 metadata 标记为 `data-source`，不登记为指标、不影响逐根回调；其 valid 仍会影响实际消费它的指标。保存引用与切片动态更新，算术和显式转换仍是当时快照。
+Direct market-data properties `self.open/high/low/close/volume/hl2/hlc3/hlcc4` reuse `IndicatorHandle` and the same-run cursor, supporting `self.ta.ema(self.close)`. Source metadata is marked `data-source`; sources are not registered indicators and do not affect per-bar callbacks, though their valid masks affect consuming indicators. Saved references and slices update dynamically; arithmetic and explicit conversions remain snapshots.
 
-首次访问新序列捕获独立 OHLCV 快照，init 的后续读取、自定义或内置指标登记前及结束边界检测行情变化并报 `data-source-mutated`，行情加工应前移；额外列不影响该检查。新来源使用 float64 和有限性掩码，派生公式固定且每运行最多计算一次。逐 bar 不扫描全表；运行中经旧 DataFrame 修改行情与新来源混用不受支持，不保证实时检测。纯旧入口保留原行为。具体规则见实施设计与[内核使用说明](../../../README.md)。
+First access to a new series captures an independent OHLCV snapshot. Subsequent init reads, custom/built-in registration, and the init completion boundary detect changed market data and raise `data-source-mutated`; preprocess data earlier. Extra columns do not affect this check. New sources use float64 and finite masks, with fixed derived formulas calculated at most once per run. Per-bar execution does not scan the full table. Mixing legacy DataFrame writes during execution with new sources is unsupported without real-time detection guarantees. Pure legacy access retains original behavior. See the implementation design and [core usage](../../../README.md) for details.
 
-`self.data_index/df/pip` 是原数据入口的委托，不能与句柄的 `.s/.df` 隔离转换混淆：保存的普通 pandas 对象不随游标更新，也不承诺深拷贝；pip 仍为估计。上述 11 个名字及 `bar_index/bar_state` 为保留字段，迁移同名策略参数时应改 Python 字段名，展示 title 不受影响。
+`self.data_index/df/pip` delegates to the original data interface and must not be confused with isolated `.s/.df` handle conversions: saved ordinary pandas objects do not follow the cursor and need not be deep copies; pip remains an estimate. These 11 names and `bar_index/bar_state` are reserved. Rename Python fields when migrating colliding strategy parameters; display title is unaffected.
 
-每个 run 持有独立游标，登记指标及其普通容器别名、具名通道和时间切片都按同一游标读取前缀；每 bar 不调用后端；指标的必要输出掩码只用于就绪诊断，执行循环不扫描指标就绪状态。初始化可访问全量历史，因此框架不能阻止用户在 `init()` 中主动保存未来信息或写非因果 callable。
+Each run has an independent cursor. Registered indicators, ordinary-container aliases, named channels, and time slices read prefixes through that cursor; backends are not called per bar. Required-output masks serve readiness diagnostics only; the execution loop does not scan indicator readiness. Initialization sees full history, so the framework cannot prevent authors from deliberately saving future information or writing noncausal callables in `init()`.
 
-`ready` 表示最低历史条件满足，`valid` 表示通道在当前 bar 有可消费值。`ready_at/first_ready` 结合最低历史与必要输出的有效性，供诊断使用；`required_outputs=[]` 时只检查最低历史条件。它们均不控制策略执行；使用者自行处理无效数据。NaN/Inf 不构成有效数值。默认要求当前输入有效；valuewhen 保留已确认历史事件值，pivot_points 保留上一完整周期水平，按输出自身判断有效性。其余缺失恢复逐项声明，不自动填零或后向填充。
+`ready` means minimum-history conditions are satisfied; `valid` means a channel has a consumable value on the current bar. `ready_at/first_ready` combines minimum history with required-output validity for diagnostics; `required_outputs=[]` checks only minimum history. None controls strategy execution; consumers handle invalid data themselves. NaN/Inf is not valid numeric data. Current-input validity is required by default; valuewhen retains confirmed historical event values, and pivot_points retains previous complete-period levels, judging validity by their own outputs. Other missing-data recovery is declared individually, without automatic zero filling or backward filling.
 
-`next()` 从位置 0 开始，对每根正常到达的 bar 调用一次，包括历史不足、全 NaN 和中途缺口。首根只可见一条历史；读取上一根前检查长度，消费指标前检查对应通道 `valid`，尤其不要用 `bool(NaN)` 判断信号。既有订单和止损继续按 broker 的因果阶段处理；破产或异常会终止回调。运行正常结束、资金耗尽或抛出异常后，诊断句柄恢复完整历史并禁止再次登记。
+`next()` starts at position 0 and runs once per normally reached bar, including insufficient history, all-NaN inputs, and intervening gaps. Only one history item is visible on the first bar; check length before reading the previous bar and channel `valid` before consuming indicators. In particular, do not use `bool(NaN)` to test signals. Existing orders and stops continue through broker causal phases; bankruptcy or exceptions terminate callbacks. After normal completion, exhaustion of funds, or exceptions, diagnostic handles restore full history and prohibit further registration.
 
-`.s`、`.df`、`np.asarray()` 是当前可见前缀的显式快照，写入副本不会污染计算结果。原始缓冲区以不可写 bytes 为底层，不能通过 `setflags` 恢复写权限。缓存模板和不同 run 不共享游标；pickle 后恢复同样的只读约束。
+`.s`, `.df`, and `np.asarray()` explicitly snapshot the visible prefix; writes to copies do not contaminate computed results. Raw buffers are backed by nonwritable bytes and cannot regain write permission through `setflags`. Cache templates and different runs do not share cursors; pickle restoration preserves read-only constraints.
 
-结果 `attrs["indicator_snapshot"]` 保存 ID、语义版本、规范化参数、输入内容身份和组合来源、后端、`implementation_version` 与依赖版本、core 版本、dtype、单位描述和缺失/就绪策略；与既有 `input_snapshot` 并存。自定义 `ind()` 标记为 custom 且不共享缓存，不承诺任意 callable 的可复现性。
+Result `attrs["indicator_snapshot"]` records ID, semantic version, normalized parameters, input-content identity and composition sources, backend, `implementation_version`, dependency/core versions, dtype, unit descriptions, and missing-data/readiness policies, alongside existing `input_snapshot`. Custom `ind()` is marked custom without shared caching or guarantees of arbitrary-callable reproducibility.
 
-## 能力与特殊入口
+## Capabilities and special entries
 
-| 分类        | 普通指标 | 工具/确认事件 | 形态 |
-| ----------- | -------: | ------------: | ---: |
-| candles     |        2 |             0 |    9 |
-| cycles      |        8 |             0 |    0 |
-| momentum    |       62 |             0 |    0 |
-| overlap     |       49 |             0 |    0 |
-| performance |        3 |             0 |    0 |
-| statistics  |       13 |             0 |    0 |
-| trend       |       29 |             2 |    0 |
-| utility     |        0 |            22 |    0 |
-| volatility  |       20 |             0 |    0 |
-| volume      |       22 |             0 |    0 |
+| Category | Ordinary indicators | Utilities/confirmed events | Patterns |
+| -------- | ------------------: | -------------------------: | -------: |
+| candles | 2 | 0 | 9 |
+| cycles | 8 | 0 | 0 |
+| momentum | 62 | 0 | 0 |
+| overlap | 49 | 0 | 0 |
+| performance | 3 | 0 | 0 |
+| statistics | 13 | 0 | 0 |
+| trend | 29 | 2 | 0 |
+| utility | 0 | 22 | 0 |
+| volatility | 20 | 0 | 0 |
+| volume | 22 | 0 | 0 |
 
-DPO 固定非居中、无前视模式。Ichimoku 固定关闭 Chikou 与未来扩展，只返回同索引的 `span_a/span_b/tenkan/kijun`。CPR 只按上一根输入 bar 计算，不提供跨周期重采样或 virgin 未来识别。VWAP 按输入日期索引的日/周/月分组，不推断交易所会话。
+DPO is fixed to noncentered, no-lookahead mode. Ichimoku disables Chikou and future extension, returning only same-index `span_a/span_b/tenkan/kijun`. CPR uses only the previous input bar, without cross-timeframe resampling or future virgin-level recognition. VWAP groups by input datetime index at daily/weekly/monthly frequencies without inferring exchange sessions.
 
-九种形态为 doji、inside、engulfing、hammer、shootingstar、harami、morningstar、eveningstar、marubozu，对应 cdl_ 方法。整数 0 表示有效但未触发；历史不足和缺失通过独立 valid 表达。doji 的正值只表示十字，inside 的符号表示当根方向，都不是独立多空建议；engulfing/harami 保留 80/100 强度。八项调用固定 classic 原生函数；doji 本地计算实体与前窗口波幅阈值，避免隐式 TA-Lib 和全样本 epsilon。未审核 cdl_pattern 分派仍不可用。
+Nine patterns are available through cdl_ methods: doji, inside, engulfing, hammer, shootingstar, harami, morningstar, eveningstar, and marubozu. Integer 0 means valid but untriggered; insufficient history and missing data use separate valid masks. Positive doji denotes a doji only, while inside's sign denotes current candle direction; neither is an independent long/short recommendation. engulfing/harami retain 80/100 strength scores. Eight calls use fixed classic native functions; doji locally compares bodies with preceding-window range thresholds to avoid implicit TA-Lib and full-sample epsilon. Unreviewed cdl_pattern dispatch remains unavailable.
 
-## 自定义指标与复用
+## Custom indicators and reuse
 
-自定义计算使用 `self.ind(func, *args, name=None, **kwargs)`，只在 `init()` 登记；旧 `self.I` 已删除，不提供别名。内置公式统一使用 `self.ta`。
+Register custom calculations only in `init()` with `self.ind(func, *args, name=None, **kwargs)`. Legacy `self.I` has been removed without an alias; built-in formulas use `self.ta` consistently.
 
-同一个纯函数可按多组参数登记，也可放在普通可导入模块中由其他策略复用。每次登记都执行函数并返回独立句柄，不启用自定义缓存。DataFrame 的列顺序决定通道顺序，须通过 `name` 列表指定通道名；返回结果用 `result['middle']` 选择通道，再用于 `self.ta` 组合或绘图。
+The same pure function may be registered with multiple parameter sets or placed in an ordinary importable module for reuse by other strategies. Every registration executes the function and returns an independent handle without custom caching. DataFrame column order determines channel order; specify channel names through a `name` list. Select a channel with `result['middle']` before composing through `self.ta` or plotting.
 
-组合已有指标时，使用接收 `ta` 和来源的组合函数，并用 `NamedTuple` 等容器保存句柄即可；容器没有计算生命周期。不要把某个运行的句柄保存在全局对象供下一次运行复用。完整示例以 `@backtest` 声明策略，默认不下单；另一策略复用同一函数的路径也由示例测试实际执行。
+To compose existing indicators, use a function receiving `ta` and sources, and retain handles in containers such as `NamedTuple`; containers have no computation lifecycle. Do not store one run's handles in global objects for reuse by subsequent runs. The complete example declares strategies with `@backtest` and places no orders by default; example tests actually execute another strategy's reuse of the same function.
 
-[完整源码](../../../examples/strategies/custom_indicators.py)
+[Complete source](../../../examples/strategies/custom_indicators.py)
 
-`init()` 看得到完整输入历史，因此滚动公式必须只依赖当前及过去数据；改用句柄不能纠正负向 shift 等已发生的未来泄漏。`.s` 在示例中是供纯计算使用的完整输入快照，保存到策略属性的是登记后的句柄。算术结果同样是普通数组，需要动态读取时应通过 `ind` 重新登记。
+`init()` sees complete input history, so rolling formulas must depend only on current and past data; handles cannot correct future leakage already introduced by negative shifts or similar operations. In the example, `.s` is a full input snapshot for pure computation, while strategy attributes store registered handles. Arithmetic likewise yields ordinary arrays; register them again through `ind` when dynamic reading is needed.
 
-自定义结果的 `valid` 默认取有限性，`ready` 默认全真；布尔 False 和整数 0 是有效值，并不表示历史不足。`warmup` 参数及元数据已移除；`ind(..., warmup=...)` 明确抛 `TypeError`，不会转发给 callable。所有通道都由消费者自行检查有效性。消费带掩码的单通道时可传入 `source.s.where(source.valid)`；`ind` 不自动传播参数中句柄的掩码，也不校验其中的运行归属。`required_outputs`、显式输出掩码、版本身份和缓存不是本入口的登记选项。
+Custom-result `valid` defaults to finiteness, and `ready` defaults to all true; boolean False and integer 0 are valid values rather than insufficient-history markers. `warmup` and its metadata were removed; `ind(..., warmup=...)` explicitly raises `TypeError` rather than forwarding it to the callable. Consumers check every channel's validity themselves. To consume a masked single channel, pass `source.s.where(source.valid)`; `ind` neither propagates argument-handle masks automatically nor validates their run ownership. `required_outputs`, explicit output masks, version identity, and caching are not registration options here.
 
-## `ind()` 结果消费约束
+## `ind()` consumption constraints
 
-| 消费方式                                                   | 当前行为与迁移约束                                                                              |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `ind(callable, *args, **kwargs)`                           | 调用形式、名称和位置数组规则保持；返回 `IndicatorHandle`                                        |
-| `len/shape/ndim/dtype`、索引、比较、基本算术、`float/bool` | 读取当前前缀；标量转换读取最新值                                                                |
-| 属性、别名、嵌套 list/dict/tuple、通道解包、切片           | 保留游标引用，不再逐 bar 重绑属性                                                               |
-| Series/DataFrame 返回值                                    | 索引必须与行情完全相同；旧的 RangeIndex 结果改为保留输入索引，或显式 `.to_numpy()` 声明位置数组 |
-| `.s/.df/np.asarray`                                        | 显式快照，不能作为会自动增长的引用                                                              |
-| 算术派生结果                                               | 普通数组；需要受控逐 bar 读取时显式再次 `ind()` 登记，不解析自动表达式图                        |
-| 原地赋值、ufunc `out`、`np.asarray(copy=False)`            | 明确拒绝；先 `.copy()` 再修改                                                                   |
-| ndarray 类型身份、任意方法表                               | 不承诺兼容；迁移到公开消费方法                                                                  |
-| `resample_apply`、SignalStrategy、原生分数交易             | 使用统一句柄且保持价格单位；交易语义见[交易指南](trading.md)                                    |
-| 历史 `_Indicator` pickle                                   | 保留旧类用于加载历史样本；新策略统一返回句柄                                                    |
+| Consumption | Current behavior and migration constraints |
+| ----------- | ------------------------------------------ |
+| `ind(callable, *args, **kwargs)` | Retains call syntax, naming, and positional-array rules; returns `IndicatorHandle` |
+| `len/shape/ndim/dtype`, indexing, comparisons, basic arithmetic, `float/bool` | Reads the current prefix; scalar conversion reads the latest value |
+| Attributes, aliases, nested list/dict/tuple, channel unpacking, slices | Retains cursor references without per-bar attribute rebinding |
+| Series/DataFrame returns | Index must exactly match market data; replace legacy RangeIndex results with the input index or explicitly use `.to_numpy()` for positional arrays |
+| `.s/.df/np.asarray` | Explicit snapshots, not automatically growing references |
+| Arithmetic-derived results | Ordinary arrays; explicitly register again through `ind()` for controlled per-bar reads, without automatic expression graphs |
+| In-place assignment, ufunc `out`, `np.asarray(copy=False)` | Explicitly rejected; use `.copy()` before modifying |
+| ndarray type identity or arbitrary methods | Compatibility is not guaranteed; migrate to public consumption methods |
+| `resample_apply`, SignalStrategy, native fractional trading | Uses unified handles and preserves price units; see the [trading guide](trading.md) for semantics |
+| Historical `_Indicator` pickle | Old classes are retained for historical samples; new strategies consistently return handles |
 
-示例见[内置指标用户脚本](../../../examples/strategies/ema_macd.py)，用户以 `@backtest` 声明策略，框架通过 `runtime` 接管。本次未接入桌面或 Worker。
+See the [built-in indicator author script](../../../examples/strategies/ema_macd.py): authors declare strategies with `@backtest`, and the framework takes over through `runtime`. Desktop and Worker integration was not added in this work.
 
-## 性能与资源范围
+## Performance and resource scope
 
-`Backtest(..., indicator_cache_bytes=64 * 1024 * 1024)` 配置每个缓存实例的 LRU 保留字节预算，设为 `0` 完全关闭复用。计量覆盖数组、掩码和索引；活跃策略引用、临时数组、Python 对象及行情不属于预算，因此它不是进程 RSS 上限。超预算结果照常计算但不保留，淘汰不损坏活跃句柄，失败不缓存。
+`Backtest(..., indicator_cache_bytes=64 * 1024 * 1024)` configures each cache instance's LRU retained-byte budget; `0` completely disables reuse. Accounting covers arrays, masks, and indexes, but excludes active strategy references, temporary arrays, Python objects, and market data, so it is not a process RSS limit. Oversized results compute normally without retention; eviction does not damage active handles, and failures are not cached.
 
-缓存开启且条目仍被保留时，单次 run 内复用相同登记。grid 优化在线程间共享缓存并合并同键并发计算，spawn 各 worker 独立缓存；只序列化调用 token，不序列化锁。SAMBO 的连续运行共享本次搜索缓存。池由本次优化创建和关闭；父进程 finally 释放本次缓存，worker 缓存随池退出释放。跨进程不承诺全局命中，最终最优 run 可以重新计算。
+With caching enabled and entries retained, identical registrations within a run are reused. grid optimization shares caches across threads and coalesces concurrent same-key computations; spawn workers have independent caches. Only call tokens are serialized, not locks. Sequential SAMBO runs share this search's cache. The optimization creates and closes its pool; parent finally releases this cache, and worker caches are released with pool exit. Global cross-process hits are not guaranteed, and the final best run may recompute.
 
-grid 原始行情只分配一次共享内存，批次复用描述符；父进程拥有释放责任。策略行情仍为私有可写副本，避免用户修改污染其他候选。共享列通过显式 `copy=False` 重建并验证内存共享；索引独立复制，运行私有行情仍会物化，不声称整个回测零拷贝。
+grid allocates original market-data shared memory once and reuses descriptors across batches; the parent owns release. Strategies still receive private writable market-data copies so user changes cannot contaminate other candidates. Shared columns are rebuilt with explicit `copy=False` and checked for shared memory; indexes are copied independently, and run-private data still materializes. The entire backtest is not claimed to be zero-copy.
 
-对可写 DataFrame 每次登记重新读取、哈希所需输入；这是防止错误命中的必要开销。已登记结果不会追溯重算。当前不提供显式冻结行情 API、持久化缓存或跨进程结果共享。真实耗时、缓存收益及退化见实施记录，不把计数优化等同于所有工作负载提速。
+Each registration rereads and hashes required inputs from writable DataFrames, a necessary cost to prevent incorrect cache hits. Registered results are not retrospectively recomputed. There is no explicit frozen-market-data API, persistent cache, or cross-process result sharing. See implementation records for actual timings, cache benefits, and regressions; reduced operation counts do not imply speedups for every workload.
 
-性能验收以 10 万 bar 为上限，重点覆盖单策略 10、30、50 个不同指标及重复登记，分别计量初始化、后端、逐 bar 消费与总耗时；详细数据见实施记录。
+Performance acceptance covers up to 100,000 bars, focusing on single strategies with 10, 30, or 50 distinct indicators and repeated registration, measuring initialization, backend computation, per-bar consumption, and total time separately. Detailed data is in the implementation record.
 
-## 新增或替换指标
+## Adding or replacing indicators
 
-1. 在对应类别新建指标文件，以无状态函数明确调用已审核算法并完成通道映射；未来形态同样每项独立文件。
-2. 在 `indicators/catalog.json` 声明参数、输出及别名、固定选项、状态和有效性契约；默认值不在 Wrapper 另写一份。
-3. 在 `indicators/registry.py` 显式登记函数及实现版本；同指标的不同实现仍放在该指标文件。版本进入 metadata 和缓存身份，修改映射须更新版本。
-4. 运行 `uv run --locked python scripts/generate_indicator_api.py`，补独立上游参考值、参数边界、缺口、短历史、前缀因果和异常测试。完整性测试验证目录、244 个当前可用 ID、独立文件和绑定对应；新增指标时同步审核集合。
-5. 更新来源清单、类别能力计数和文档，运行 `uv run --locked python scripts/check_package.py`、相关 pytest、构建及隔离 wheel 验证；性能仍以最多 10 万 bar 的多指标策略对照。
+1. Add an indicator file in the appropriate category, explicitly invoking a reviewed algorithm through stateless functions and mapping channels; future patterns likewise require individual files.
+2. Declare parameters, outputs/aliases, fixed options, status, and validity contracts in `indicators/catalog.json`; wrappers must not duplicate defaults.
+3. Explicitly register function and implementation version in `indicators/registry.py`; implementations of one indicator remain in its file. Versions enter metadata and cache identity, so mapping changes require version updates.
+4. Run `uv run --locked python scripts/generate_indicator_api.py`; add independent upstream reference values, parameter boundaries, gaps, short histories, prefix-causality, and exception tests. Integrity tests verify the catalog, 244 currently available IDs, independent files, and bindings; review and update the set when adding indicators.
+5. Update provenance manifests, category capability counts, and documentation. Run `uv run --locked python scripts/check_package.py`, relevant pytest tests, builds, and isolated wheel validation. Performance comparisons remain multi-indicator strategies with at most 100,000 bars.
 
-例如 EMA 在 `overlap/ema.py` 调用固定算法并命名单通道；MACD 在 `momentum/macd.py` 将供应商列名映射为 `macd/histogram/signal`；SMA 在 `overlap/sma.py` 同时维护 native 和 Pandas 实现。策略作者继续使用本页开头的 `self.ta` 示例。
+For example, EMA in `overlap/ema.py` invokes a fixed algorithm and names its single channel; MACD in `momentum/macd.py` maps vendor columns to `macd/histogram/signal`; SMA in `overlap/sma.py` maintains native and Pandas implementations together. Strategy authors continue using the `self.ta` examples at the start of this page.
 
-## 新增能力与迁移
+## New capabilities and migration
 
-本轮新增 53 个可用入口：20 个普通/组合指标、22 个序列工具、2 个确认 Pivot 和 9 种形态。其中 doji/inside 原已列为延期，因此目录 ID 净增 51；不将通道数、别名或 TradingView 文章数计为指标数。
+This round added 53 available entries: 20 ordinary/composite indicators, 22 series utilities, 2 confirmed Pivots, and 9 patterns. doji/inside were previously deferred entries, so the net increase in catalog IDs is 51. Channels, aliases, and TradingView article counts are not indicator counts.
 
-- 普通指标：smi_stochastic、crsi、pmo、rmi、alligator、gator、atr_stop、volatility_stop、ma_envelopes、starc、ac、ibs、frama、wavetrend、adr、rvol、rci、iii、wvad、pivot_points。
-- 工具：highest/lowest、highestbars/lowestbars、rolling_sum/rolling_count、cum、running_max/running_min、change/shift/range、percentrank、percentile_nearest_rank/percentile_linear_interpolation、cross/crossover/crossunder、barssince/valuewhen、rising/falling。
-- pivothigh/pivotlow 在右窗完成时输出 value/pivot_bar/confirmed_at，不在原极值位置回填；并列极值取最右。所有时间索引为输入的零起点 bar 位置。
+- Ordinary indicators: smi_stochastic, crsi, pmo, rmi, alligator, gator, atr_stop, volatility_stop, ma_envelopes, starc, ac, ibs, frama, wavetrend, adr, rvol, rci, iii, wvad, pivot_points.
+- Utilities: highest/lowest, highestbars/lowestbars, rolling_sum/rolling_count, cum, running_max/running_min, change/shift/range, percentrank, percentile_nearest_rank/percentile_linear_interpolation, cross/crossover/crossunder, barssince/valuewhen, rising/falling.
+- pivothigh/pivotlow output value/pivot_bar/confirmed_at when the right window completes, without backfilling the original extreme; ties select the rightmost extreme. All time indexes are zero-based input bar positions.
 
 ```python
 def init(self):
@@ -175,18 +175,18 @@ def next(self):
         score = self.pattern[-1]
 ```
 
-完整可运行策略见[扩展示例](../../../examples/strategies/confirmed_events.py)。PeriodStart 必须由调用者显式给出 0/1 序列；第一段无锚点历史不算完整周期。传统、Fibonacci、Woodie、Classic、DeMark、Camarilla 六种公式只消费上一完整周期，Woodie 另消费新周期 Open；当前周期新高不改已确认水平。它不推断交易所会话，不等于任意 TradingView 日线数据设置。
+See the [expansion example](../../../examples/strategies/confirmed_events.py) for a complete runnable strategy. Callers must explicitly provide a 0/1 PeriodStart series; initial history without an anchor is not a complete period. Traditional, Fibonacci, Woodie, Classic, DeMark, and Camarilla formulas consume only the previous complete period, with Woodie also consuming the new period's Open. Current-period highs do not change confirmed levels. Exchange sessions are not inferred, and this is not equivalent to arbitrary TradingView daily-data settings.
 
-默认参数、种子、缺失规则、阈值和来源见[冻结契约](../../../tests/fixtures/indicator_expansion/contracts.json)；研究候选完整归属见[处置清单](../../../tests/fixtures/engine-indicator-coverage-disposition.json)。工具使用固定窗口及明确缺失规则，不承诺 Pine 的动态 length、隐式 na 跳过、重绘或逐 tick 行为。Alligator 不施加绘图位移；Volatility Stop 从首次反转的下一根开始输出，不回溯清空前缀。排序类按窗口计算，未构建全样本平方矩阵。
+See [frozen contracts](../../../tests/fixtures/indicator_expansion/contracts.json) for defaults, seeds, missing-data rules, thresholds, and sources, and the [disposition inventory](../../../tests/fixtures/engine-indicator-coverage-disposition.json) for complete research-candidate ownership. Utilities use fixed windows and explicit missing-data rules without promising Pine dynamic length, implicit na skipping, repainting, or per-tick behavior. Alligator applies no plotting shift; Volatility Stop starts on the bar after its first reversal without retroactively clearing prefixes. Ranking operations work by window without full-sample quadratic matrices.
 
-五个既有入口提升语义/实现版本到 2：NVI/PVI 按指数乘价格比率更新（length 为价格间隔，量比较相邻 bar），不再累计百分数收益；缺失/零前价输出无效但保持内部状态。Squeeze/Squeeze Pro 的 use_tr 实际切换真实波幅与 high-low；MSW 拒绝 period=1。重跑旧策略可能改变结果，旧 pickle 只读已存数值，不自动重算。旧 smi 仍是 Ergodic，新增随机动量使用 smi_stochastic。
+Five existing entries raised semantic/implementation versions to 2: NVI/PVI update an index by multiplying price ratios (length is the price interval, while volume compares adjacent bars), rather than accumulating percentage returns. Missing values/zero previous prices yield invalid output while preserving internal state. Squeeze/Squeeze Pro use_tr actually switches between true range and high-low; MSW rejects period=1. Rerunning old strategies may change results; old pickles read stored values without automatic recomputation. Existing smi remains Ergodic; the new stochastic momentum entry is smi_stochastic.
 
-## 本地锚点、有限观测与显式参数
+## Local anchors, finite observations, and explicit parameters
 
-`ta.anchored_vwap` 和 `ta.anchored_vwap_bands` 的 inputs 为 `source`、`volume`、`anchor`。策略中绑定同图表列名或句柄；不接受 pandas Series。锚点必须完整且严格为 0/1，先重置再累计当前行，首次锚点前无效。源或量非有限时该行无效并跳过；即使该行缺失也执行重置。有限负量报错，零量在已有正累计量时沿用结果，否则无效。带宽为成交量加权总体标准差乘 `stdev_mult`，首个正量观测宽度为零，三通道固定为 `vwap/lower/upper`；溢出报计算错误。
+`ta.anchored_vwap` and `ta.anchored_vwap_bands` take `source`, `volume`, and `anchor` inputs. Strategies bind same-chart column names or handles, not pandas Series. Anchors must be complete and strictly 0/1; resetting precedes accumulation of the current row, and values before the first anchor are invalid. Non-finite source or volume makes that row invalid and skipped, but resets still execute on missing rows. Finite negative volume raises an error; zero volume retains a result when positive cumulative volume exists, otherwise it is invalid. Band width is volume-weighted population standard deviation times `stdev_mult`; the first positive-volume observation has zero width. Channels are fixed as `vwap/lower/upper`; overflow raises a calculation error.
 
-`ta.mode` 按最近 `length` 个有限观测计窗，不按连续 bar 计窗；并列频数选数值最小者，全部唯一也选最小。缺失值不消耗窗口，满窗后的缺失行仍有效。内部窗口、频数和候选堆有界，输出历史仍随输入长度增长。
+`ta.mode` windows over the most recent `length` finite observations rather than consecutive bars. Tied frequencies select the smallest numeric value, including when all values are unique. Missing values do not consume the window, and missing rows remain valid after it fills. Internal windows, frequency counts, and candidate heaps are bounded, while output history still grows with input length.
 
-五个扩展参数均保留原默认数值和 valid：`true_range(handle_na=True)` 缺失前收盘时使用 H-L，当前 Close 可以缺失，但 H/L 必须有限且有序；首根零振幅仍为零。`kc(use_true_range=False)` 使用平滑 H-L 波幅。`alma(floor=True)` 向下取整权重中心，保留固定后端的权重方向。`linreg(offset=...)` 在当前窗口拟合线的 `length-1-offset` 位置取值，不移动序列；负 offset 只外推当前拟合，`length=1` 继续无效。`pivot_points(developing=True)` 使用当前锚定区间，首锚点当根有效；无效 OHLC 会使该区间持续无效直至重置，Woodie 不支持此模式。
+Five extended parameters retain original default numerical outputs and valid masks: `true_range(handle_na=True)` uses H-L when the previous close is missing; the current Close may be missing, but H/L must be finite and ordered, and a zero first-bar range remains zero. `kc(use_true_range=False)` uses smoothed H-L ranges. `alma(floor=True)` rounds the weight center down while retaining fixed-backend weight direction. `linreg(offset=...)` reads position `length-1-offset` on the current window's fitted line without shifting the series; negative offsets extrapolate only the current fit, and `length=1` remains invalid. `pivot_points(developing=True)` uses the current anchored interval and is valid on the first anchor bar; invalid OHLC keeps that interval invalid until reset, and Woodie does not support this mode.
 
-这些 API 是本地契约，不构成 TradingView 逐点等价证明；条件锚点不推断交易所会话。完整八项调用和逐通道防护见[本地指标示例](../../../examples/strategies/local_builtin_indicators.py)。
+These APIs are local contracts, not proof of pointwise TradingView equivalence; conditional anchors do not infer exchange sessions. See the [local indicator example](../../../examples/strategies/local_builtin_indicators.py) for all eight calls and per-channel guards.

@@ -1,4 +1,4 @@
-"""类型化策略参数：声明、发现、规范化与按标题解析。"""
+"""Typed strategy parameters: declaration, discovery, normalization, and title-based resolution."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ _UNSET = object()
 
 
 class InputError(ValueError):
-    """可由调用方按 code/title/expected/actual_type 展示的参数错误。"""
+    """Parameter error that callers can display using code/title/expected/actual_type."""
 
     def __init__(self, code, title, expected, value=None):
         self.code = code
@@ -39,9 +39,9 @@ def _fail(code, title, expected, value=None):
 def _scalar(value, title):
     if isinstance(value, (np.bool_, np.integer, np.floating)):
         native = value.item()
-        # longdouble.item() 不保证转为 Python float，禁止有损转换。
+        # longdouble.item() does not guarantee a Python float; lossy conversion is prohibited.
         if type(native) not in (_b.bool, _b.int, _b.float):
-            _fail("InvalidInputValue", title, "无损 Python 标量", value)
+            _fail("InvalidInputValue", title, "Lossless Python scalar", value)
         return native
     return value
 
@@ -55,16 +55,16 @@ def _session(value, title):
     periods, days = match.groups()
     days = days or "1234567"
     if len(set(days)) != len(days):
-        _fail("InvalidInputValue", title, "星期不可重复", value)
+        _fail("InvalidInputValue", title, "Weekdays must not repeat", value)
     for clock in re.split("[-,]", periods):
         if _b.int(clock[:2]) > 23 or _b.int(clock[2:]) > 59:
-            _fail("InvalidInputValue", title, "时间范围 0000–2359", value)
+            _fail("InvalidInputValue", title, "Time range 0000–2359", value)
     return periods + ":" + "".join(sorted(days))
 
 
 @dataclass(frozen=True, eq=False)
 class InputSpec:
-    """策略类字段的不可变声明；通过 inputs 工厂创建，实例读取本次运行值。"""
+    """Immutable strategy class-field declaration created by inputs factories; instance reads return this run's value."""
 
     kind: str
     title: str
@@ -84,13 +84,13 @@ class InputSpec:
         return dict(instance._resolved_inputs.runtime)[self.title]
 
     def __set__(self, instance, value):
-        _fail("ImmutableInput", self.title, "input 在本次运行中只读", value)
+        _fail("ImmutableInput", self.title, "input is read-only within this run", value)
 
     def __delete__(self, instance):
-        _fail("ImmutableInput", self.title, "input 不可删除")
+        _fail("ImmutableInput", self.title, "input cannot be deleted")
 
     def normalize(self, value, *, wire=False):
-        """验证并规范化 value；wire=True 按序列化表示解析枚举，非法值抛 InputError。"""
+        """Validate and normalize value; wire=True parses enums from their serialized form, and invalid values raise InputError."""
         value = _scalar(value, self.title)
         kind = self.kind
         if kind == "color":
@@ -100,13 +100,13 @@ class InputSpec:
                 raise InputError(
                     "InvalidInputValue",
                     self.title,
-                    "Color 或 #RRGGBB/#RRGGBBAA（wire 仅字符串）",
+                    "Color or #RRGGBB/#RRGGBBAA (wire accepts strings only)",
                     value,
                 ) from error
         if kind == "enum":
             if wire:
                 if type(value) is not str or value not in self.enum_type.__members__:
-                    _fail("InvalidInputValue", self.title, "枚举成员名称", value)
+                    _fail("InvalidInputValue", self.title, "Enum member name", value)
                 value = self.enum_type[value]
             valid = type(value) is self.enum_type
         elif kind == "bool":
@@ -125,24 +125,24 @@ class InputSpec:
         else:
             valid = type(value) is str
         if not valid:
-            _fail("InvalidInputValue", self.title, f"合法的 {kind} 值", value)
+            _fail("InvalidInputValue", self.title, f"valid {kind} value", value)
         if kind == "session":
             value = _session(value, self.title)
         if self.options is not None and value not in self.options:
-            _fail("InvalidInputValue", self.title, "值必须属于 options", value)
+            _fail("InvalidInputValue", self.title, "Value must belong to options", value)
         for key, boundary in self.bounds:
             if (key == "minval" and value < boundary) or (key == "maxval" and value > boundary):
-                _fail("InvalidInputValue", self.title, f"满足 {key}={boundary}", value)
+                _fail("InvalidInputValue", self.title, f"satisfying {key}={boundary}", value)
         return value
 
     def encode(self, value):
-        """将已规范化 value 编码为配置表示；枚举使用成员名称，颜色使用大写八位字符串。"""
+        """Encode normalized value into configuration form; enums use member names, and colors use uppercase eight-digit strings."""
         if self.kind == "color":
             return value.to_hex()
         return value.name if self.kind == "enum" else value
 
     def export(self, attribute):
-        """导出声明字典；attribute 是 Python 字段名，配置关联仍使用唯一 title。"""
+        """Export the declaration dictionary; attribute is the Python field name, while configuration associations use unique title."""
         result = {
             "title": self.title,
             "attribute": attribute,
@@ -179,39 +179,39 @@ def _make(
     maxval=_UNSET,
     step=_UNSET,
 ):
-    """声明策略的只读配置字段；种类由 inputs.bool/int/float 等入口绑定。
+    """Declare read-only strategy configuration fields; inputs.bool/int/float and other entry points bind the kind.
 
     Args:
-        defval: 默认值，必须符合声明种类。
-        title: 必填且在同一策略中唯一；同时是标题配置键。
-        tooltip: 提示文本。
-        group: 展示分组，不改变 title 的唯一性范围。
-        inline: 同行展示提示。
-        display: all/none/status_line/data_window，仅为元数据。
-        active: 布尔常量或引用 bool 参数标题的映射，不跳过值验证。
-        confirm: 确认提示元数据，不启动界面。
-        options: 可选值集合；数值种类不可同时指定边界或 step。
-        minval: 数值下界，仅用于 int/float。
-        maxval: 数值上界，仅用于 int/float。
-        step: 调整增量，不是整除限制，仅用于 int/float。
+        defval: Default value matching the declared kind.
+        title: Required and unique within one strategy; also the title-based configuration key.
+        tooltip: Hint text.
+        group: Display group, without changing title uniqueness scope.
+        inline: Hint for display on the same row.
+        display: all/none/status_line/data_window; metadata only.
+        active: Boolean constant or mapping referencing a bool parameter title; does not bypass value validation.
+        confirm: Confirmation-hint metadata, without opening a UI.
+        options: Allowed-value set; numeric kinds cannot also specify bounds or step.
+        minval: Numeric lower bound for int/float only.
+        maxval: Numeric upper bound for int/float only.
+        step: Adjustment increment, not a divisibility constraint; int/float only.
 
     Returns:
-        InputSpec: 类字段描述符；实例读取本次解析值。
+        InputSpec: Class-field descriptor; instance reads return this run's resolved value.
 
     Raises:
-        InputError: 声明、默认值、参数域或展示元数据非法。
+        InputError: Invalid declaration, default, parameter domain, or display metadata.
     """
     if type(title) is not str or not title.strip():
-        _fail("InvalidDeclaration", title, "title 必填且非空", title)
+        _fail("InvalidDeclaration", title, "title is required and must not be empty", title)
     if any(type(v) is not str for v in (tooltip, group, inline)):
-        _fail("InvalidDeclaration", title, "tooltip/group/inline 必须是字符串")
+        _fail("InvalidDeclaration", title, "tooltip/group/inline must be strings")
     display = display if display is not None else ("none" if kind in ("bool", "color") else "all")
     if display not in ("all", "none", "status_line", "data_window") or type(confirm) is not _b.bool:
-        _fail("InvalidDeclaration", title, "合法 display 和布尔 confirm")
+        _fail("InvalidDeclaration", title, "Valid display and boolean confirm")
     if isinstance(active, Mapping) and set(active) == {"title"} and type(active["title"]) is str:
         active = active["title"]
     elif type(active) is not _b.bool:
-        _fail("InvalidDeclaration", title, "active 必须是 bool 或标题引用", active)
+        _fail("InvalidDeclaration", title, "active must be bool or a title reference", active)
     metadata = tuple(
         {
             "tooltip": tooltip,
@@ -225,22 +225,22 @@ def _make(
     enum_type = None
     if kind == "enum":
         if not isinstance(defval, Enum):
-            _fail("InvalidDeclaration", title, "默认值必须为 Enum 成员", defval)
+            _fail("InvalidDeclaration", title, "Default value must be an Enum member", defval)
         enum_type = type(defval)
         if len(enum_type.__members__) != len(enum_type):
-            _fail("InvalidDeclaration", title, "枚举不可包含别名")
+            _fail("InvalidDeclaration", title, "Enums must not contain aliases")
     spec = InputSpec(kind, title, defval, metadata=metadata, enum_type=enum_type)
     bounds = {
         k: v for k, v in (("minval", minval), ("maxval", maxval), ("step", step)) if v is not _UNSET
     }
     if (bounds and kind not in ("int", "float")) or (bounds and options is not _UNSET):
-        _fail("InvalidDeclaration", title, "数值边界仅用于 int/float 且与 options 互斥")
+        _fail("InvalidDeclaration", title, "Numeric bounds apply only to int/float and are mutually exclusive with options")
     try:
         bounds = {key: spec.normalize(value) for key, value in bounds.items()}
         if "minval" in bounds and "maxval" in bounds and bounds["minval"] > bounds["maxval"]:
-            _fail("InvalidDeclaration", title, "minval 不得大于 maxval")
+            _fail("InvalidDeclaration", title, "minval must not exceed maxval")
         if "step" in bounds and bounds["step"] <= 0:
-            _fail("InvalidDeclaration", title, "step 必须大于零")
+            _fail("InvalidDeclaration", title, "step must be greater than zero")
         normalized_options = None
         if options is not _UNSET:
             if (
@@ -248,10 +248,10 @@ def _make(
                 or not isinstance(options, (list, tuple))
                 or not options
             ):
-                _fail("InvalidDeclaration", title, "此类型需要非空 options 列表", options)
+                _fail("InvalidDeclaration", title, "This type requires a nonempty options list", options)
             normalized_options = tuple(spec.normalize(v) for v in options)
             if len(set(normalized_options)) != len(normalized_options):
-                _fail("InvalidDeclaration", title, "options 不可重复")
+                _fail("InvalidDeclaration", title, "options must not repeat")
         spec = replace(spec, bounds=tuple(bounds.items()), options=normalized_options)
         return replace(spec, default=spec.normalize(defval))
     except InputError as error:
@@ -284,18 +284,18 @@ def _collect(cls):
             fields[name] = value
             conflicts.discard(name)
         elif name in fields:
-            _fail("InvalidDeclaration", fields[name].title, f"普通属性遮蔽 input: {name}")
+            _fail("InvalidDeclaration", fields[name].title, f"Ordinary attribute shadows input: {name}")
     if conflicts:
-        _fail("InvalidDeclaration", None, f"多继承字段冲突: {sorted(conflicts)}")
+        _fail("InvalidDeclaration", None, f"Multiple-inheritance field conflict: {sorted(conflicts)}")
     return fields
 
 
 def _definitions(cls):
     if not isinstance(cls, type):
-        _fail("InvalidDeclaration", None, "已加载的策略类", cls)
+        _fail("InvalidDeclaration", None, "Loaded strategy class", cls)
     bases = [base for base in cls.__mro__ if vars(base).get("_input_strategy_base") is True]
     if not bases:
-        _fail("InvalidDeclaration", None, "必须继承 Strategy", cls)
+        _fail("InvalidDeclaration", None, "Must inherit Strategy", cls)
     reserved = set(vars(bases[0]))
     data_names = vars(bases[0]).get("_reserved_data_names", ())
     for base in cls.__mro__:
@@ -303,27 +303,27 @@ def _definitions(cls):
             conflicts = set(data_names).intersection(vars(base))
             if conflicts:
                 name = min(conflicts)
-                _fail("InvalidDeclaration", name, f"保留字段 {name}，请将同名字段改名")
+                _fail("InvalidDeclaration", name, f"Reserved field {name}; rename the field with the same name")
     fields = _collect(cls)
     by_title = {}
     for name, spec in fields.items():
         if name.startswith("_") or name in reserved or len(spec.bindings) != 1:
-            _fail("InvalidDeclaration", spec.title, f"保留字段或复用声明: {name}")
+            _fail("InvalidDeclaration", spec.title, f"Reserved field or reused declaration: {name}")
         if spec.title in by_title:
-            _fail("InvalidDeclaration", spec.title, "同一策略内 title 必须唯一")
+            _fail("InvalidDeclaration", spec.title, "title must be unique within one strategy")
         by_title[spec.title] = spec
     for title in by_title:
         visited = set()
         current = title
         while type(current) is str:
             if current in visited:
-                _fail("InvalidDeclaration", title, "active 不可形成依赖环")
+                _fail("InvalidDeclaration", title, "active must not form dependency cycles")
             visited.add(current)
             reference = dict(by_title[current].metadata)["active"]
             if type(reference) is str and (
                 reference not in by_title or by_title[reference].kind != "bool"
             ):
-                _fail("InvalidDeclaration", title, "active 必须引用已有 bool 标题")
+                _fail("InvalidDeclaration", title, "active must reference an existing bool title")
             current = reference
     return fields
 
@@ -341,13 +341,13 @@ def _schema(fields):
 
 
 def describe(strategy_class):
-    """导出已加载策略类的独立 JSON 定义，不运行策略。"""
+    """Export an independent JSON definition of the loaded strategy class without running it."""
     return _schema(_definitions(strategy_class))
 
 
 @dataclass(frozen=True)
 class ResolvedInputs:
-    """已校验的一次输入解析结果，包含声明摘要、运行值、编码值与显式覆盖标题。"""
+    """Validated input-resolution result containing the declaration digest, runtime values, encoded values, and explicitly overridden titles."""
 
     schema_hash: str
     runtime: tuple
@@ -356,7 +356,7 @@ class ResolvedInputs:
     attributes: tuple
 
     def snapshot(self):
-        """返回用于结果 attrs 的版本、声明摘要、完整值和显式覆盖标题快照。"""
+        """Return a snapshot of version, declaration digest, complete values, and explicitly overridden titles for result attrs."""
         return {
             "schemaVersion": SCHEMA_VERSION,
             "schemaHash": self.schema_hash,
@@ -365,7 +365,7 @@ class ResolvedInputs:
         }
 
     def overrides(self):
-        """返回显式覆盖的 Python 字段和值；供策略实例注入使用。"""
+        """Return explicitly overridden Python fields and values for injection into strategy instances."""
         runtime = dict(self.runtime)
         return {
             attribute: runtime[title]
@@ -376,11 +376,11 @@ class ResolvedInputs:
 
 def _resolve(fields, values, *, wire):
     if not isinstance(values, Mapping):
-        _fail("InvalidInputValue", None, "按标题索引的映射", values)
+        _fail("InvalidInputValue", None, "Mapping indexed by title", values)
     known = {spec.title for spec in fields.values()}
     for title in values:
         if title not in known:
-            _fail("UnknownInput", title, "当前声明中的标题")
+            _fail("UnknownInput", title, "Titles in the current declaration")
     runtime, encoded, overridden, attributes = [], [], [], []
     for name, spec in fields.items():
         value = spec.default
@@ -400,38 +400,38 @@ def _resolve(fields, values, *, wire):
 
 
 def resolve_native(strategy_class, kwargs):
-    """原生字段入口；无声明类返回 None 以保留旧行为。"""
+    """Native field entry point; undeclared classes return None to preserve legacy behavior."""
     fields = _definitions(strategy_class)
     if not fields:
         return None
     for name in kwargs:
         if name not in fields:
-            _fail("UnknownInput", name, "已声明的 Python 字段")
+            _fail("UnknownInput", name, "Declared Python fields")
     return _resolve(
         fields, {fields[name].title: value for name, value in kwargs.items()}, wire=False
     )
 
 
 def resolve_request(strategy_class, request):
-    """按 strategy_class 校验 request 的版本、摘要和标题值；失败抛 InputError，返回 ResolvedInputs。"""
+    """Validate request version, digest, and title values against strategy_class; failures raise InputError, and success returns ResolvedInputs."""
     fields = _definitions(strategy_class)
     if not fields:
-        _fail("InvalidDeclaration", None, "标题入口需要至少一个 input")
+        _fail("InvalidDeclaration", None, "Title-based entry requires at least one input")
     if not isinstance(request, Mapping) or set(request) != {
         "schemaVersion",
         "schemaHash",
         "values",
     }:
-        _fail("InvalidInputValue", None, "schemaVersion/schemaHash/values 请求", request)
+        _fail("InvalidInputValue", None, "schemaVersion/schemaHash/values request", request)
     if request["schemaVersion"] != SCHEMA_VERSION:
         _fail("UnsupportedInputVersion", None, SCHEMA_VERSION, request["schemaVersion"])
     if request["schemaHash"] != _schema(fields)["schemaHash"]:
-        _fail("SchemaMismatch", None, "重新发现并确认当前声明", request["schemaHash"])
+        _fail("SchemaMismatch", None, "Rediscover and verify the current declaration", request["schemaHash"])
     return _resolve(fields, request["values"], wire=True)
 
 
 def request_for(strategy_class, kwargs):
-    """将有声明的 strategy_class 的 Python 字段 kwargs 转为标题请求；调用前须确认类包含 Input，非法值抛 InputError。"""
+    """Convert Python field kwargs for a declared strategy_class into a title-based request; first confirm the class contains Input; invalid values raise InputError."""
     resolved = resolve_native(strategy_class, kwargs)
     snapshot = resolved.snapshot()
     snapshot["values"] = {

@@ -1,4 +1,4 @@
-"""ta.percentrank：固定因果序列契约。"""
+"""ta.percentrank: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

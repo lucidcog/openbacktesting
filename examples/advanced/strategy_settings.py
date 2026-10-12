@@ -1,10 +1,11 @@
-"""声明配置、数量覆盖、每单位佣金与利率重算；只在 main 中执行离线示例。"""
+"""Declared configuration, quantity overrides, per-unit commission, and interest recalculation; run offline examples only in main."""
 
 import json
 import runpy
 from pathlib import Path
 
 import pandas as pd
+
 from openbacktesting import (
     Backtest,
     CommissionType,
@@ -46,9 +47,9 @@ class RateExample(Strategy):
 
 
 def read_settings(envelope):
-    """宿主先验证回测配置封套版本，再把平铺设置交给 runtime。"""
+    """The host validates the backtest configuration envelope version before passing flat settings to runtime."""
     if type(envelope.get("schemaVersion")) is not int or envelope["schemaVersion"] != 2:
-        raise ValueError("只接受 schemaVersion=2 的回测配置")
+        raise ValueError("Only schemaVersion=2 backtest configurations are accepted")
     return dict(envelope["settings"])
 
 
@@ -71,12 +72,12 @@ def main():
     assert result._fills.fee.tolist() == [1, 1]
     print(result[["Return [%]", "# Trades", "Sharpe Ratio"]])
 
-    # 同一作者脚本由宿主覆盖数量设置；作者不准备行情或手动执行回测。
+    # The host overrides quantity settings for the same author script; the author neither prepares data nor manually runs the backtest.
     examples = Path(__file__).resolve().parents[1]
     path = examples / "strategies/fractional_sizing.py"
     namespace = runpy.run_path(str(path))
     chart = runpy.run_path(str(examples / "advanced/run_author.py"))["chart_for"](path)
-    # 0.1 表示 0.1%，与原生 equity_fraction=0.001 对应；固定数量则为 0.1 单位。
+    # 0.1 means 0.1%, corresponding to native equity_fraction=0.001; fixed quantity means 0.1 units.
     for kind in QuantityType:
         sized = runtime.run(
             namespace,
@@ -91,10 +92,10 @@ def main():
         runtime.run(namespace, **chart, settings={"default_qty_value": 0.0001})
     except ValueError as error:
         assert "below_min_quantity" in str(error)
-        print("过小预算在提交前拒绝：", error)
+        print("Reject an undersized budget before submission:", error)
     else:
-        raise AssertionError("低于数量步长的预算必须拒绝")
-    # 作者用枚举，JSON 宿主用严格字符串；类型切换必须连同数值提交。
+        raise AssertionError("A budget below the quantity step must be rejected")
+    # Authors use enums; JSON hosts use strict strings. A type change must include its value.
     envelope = json.loads(json.dumps(runtime.describe(namespace)["backtest"]))
     assert envelope["schemaVersion"] == 2
     replay = runtime.run(namespace, **chart, settings=read_settings(envelope))
@@ -105,7 +106,7 @@ def main():
         except ValueError:
             pass
         else:
-            raise AssertionError("宿主必须拒绝旧版或未知版本")
+            raise AssertionError("The host must reject old or unknown versions")
     for patch, error_type in (
         ({"commission_type": "cash_per_order"}, ValueError),
         ({"default_qty_value": None}, TypeError),
@@ -115,7 +116,7 @@ def main():
         except error_type:
             pass
         else:
-            raise AssertionError("类型切换缺值或无默认数量必须拒绝")
+            raise AssertionError("Reject a type change without its value or a missing default quantity")
 
     @backtest(default_qty_value=2)
     class CostExample(Strategy):
@@ -143,7 +144,7 @@ def main():
             if kind is CommissionType.CASH_PER_ORDER
             else [q * 0.2 for q in charged._fills.qty]
         )
-        # 固定价格为 100，因此本例 0.2% 与每单位 0.2 的费用恰好相等。
+        # The fixed price is 100, so 0.2% commission and 0.2 per unit happen to be equal in this example.
         assert charged._fills.fee.tolist() == expected
     for slip in SlippageType:
         for timing in ExecutionTiming:
@@ -164,7 +165,7 @@ def main():
                 assert settings["end_policy"] == end.value
                 assert not configured._fills.empty
 
-    # 复合费用仍属于低层 Backtest：每次成交固定 5，加每单位 0.5。
+    # Composite commission remains a low-level Backtest feature: fixed 5 per fill plus 0.5 per unit.
     path = examples / "strategies/trading_lifecycle.py"
     lifecycle = runpy.run_path(str(path))["TradingLifecycle"]
     chart = runpy.run_path(str(examples / "advanced/run_author.py"))["chart_for"](path)

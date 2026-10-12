@@ -1,6 +1,6 @@
-"""三份仓位分三次退出；每份每边费用 1，同收盘成交，净损益分别 10、-4、0。
+"""Three units exit in three fills; each unit costs 1 per side, fills occur on the same close, and net P&L is 10, -4, and 0.
 
-closed_count 按关闭片段计数；next 提交退出后仍读取成交前快照，on_fill 可见新事实。
+closed_count counts closed portions; next still reads the pre-fill snapshot after submitting an exit, while on_fill sees the new facts.
 """
 
 from openbacktesting import CommissionType, ExecutionTiming, Strategy, backtest
@@ -32,7 +32,7 @@ class ClosedTradeStatistics(Strategy):
 
     def on_finish(self, summary):
         self.final = self.closed_trade_stats
-        assert self.initial.closed_count == 0  # 已保存的快照不随成交改变。
+        assert self.initial.closed_count == 0  # Saved snapshots do not change after fills.
         assert self.final.closed_count == 3
         assert self.final.net_profit == 6
         assert self.final.win_rate == 1 / 3

@@ -1,4 +1,4 @@
-"""运行时冻结完整事实；读取时派生报告，不执行用户代码。"""
+"""Freeze complete facts at runtime; derive reports on reads without executing user code."""
 
 import json
 
@@ -10,10 +10,10 @@ from openbacktesting.portfolio.trades import project_trades
 
 
 class PortfolioSnapshot(str):
-    """不可变的版本化事实文本；通过to_dict读取完整报告。
+    """Immutable versioned fact text; read complete reports through to_dict.
 
-    快照不持有策略、pandas或可变输入。派生分析只读取已冻结事实；
-    文本自身是内部存储格式，跨语言消费使用export_result的报告。
+    Snapshots hold no strategy, pandas objects, or mutable inputs. Derived analyses read only frozen facts;
+    the text itself is an internal storage format; cross-language consumers use export_result reports.
     """
 
     __slots__ = ()
@@ -22,7 +22,7 @@ class PortfolioSnapshot(str):
         return super().__new__(cls, payload)
 
     def to_dict(self) -> dict:
-        """计算并返回独立的严格JSON报告；不修改快照或执行策略。"""
+        """Compute and return an independent strict JSON report without modifying the snapshot or executing strategies."""
         return build_report(json.loads(self))
 
 
@@ -95,17 +95,17 @@ def refresh_snapshot(result):
 
 
 def get_snapshot(result: pd.Series) -> PortfolioSnapshot:
-    """读取冻结事实快照；旧结果或交易子集缺少完整事实时明确拒绝。
+    """Read the frozen fact snapshot; explicitly reject old results or trade subsets lacking complete facts.
 
     Raises:
-        ValueError: 结果未采集Portfolio。
+        ValueError: The result did not collect Portfolio data.
     """
     snapshot = result.attrs.get("portfolio_snapshot")
     if not isinstance(snapshot, PortfolioSnapshot):
-        raise ValueError("portfolio_snapshot_missing")  # noqa: TRY004 — 缺少快照而非参数类型错误
+        raise ValueError("portfolio_snapshot_missing")  # noqa: TRY004 — missing snapshot rather than incorrect argument type
     return snapshot
 
 
 def export_result(result: pd.Series) -> dict:
-    """返回完整报告的独立纯值副本；无文件、网络和绘图副作用。"""
+    """Return an independent plain-value copy of the complete report without file, network, or plotting side effects."""
     return get_snapshot(result).to_dict()

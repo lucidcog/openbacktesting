@@ -1,4 +1,4 @@
-"""最近 length 个有限观测的众数；并列取最小，状态随窗口有界。"""
+"""Mode of the latest length finite observations; ties choose the smallest value, with state bounded by the window."""
 
 from collections import Counter, deque
 from heapq import heapify, heappop, heappush

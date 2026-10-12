@@ -1,4 +1,4 @@
-"""交易政策v2：人工账本、因果时序及审计记录。"""
+"""Trading policy v2: manual ledgers, causal timing, and audit records."""
 
 import json
 import pickle
@@ -7,6 +7,7 @@ from dataclasses import FrozenInstanceError
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.broker import InstrumentSpec, OrderRequest, OrderStatus, Slippage
 from openbacktesting.strategy.sizing import equity_fraction, fixed_quantity, stop_risk
@@ -107,9 +108,9 @@ def test_hedged_zero_net_has_exposure_and_separate_basis():
             assert p.gross_qty == 4 and p.net_qty == 0 and p.avg_price is None
             assert s.position.return_fraction is None
             assert p.long_avg_price == p.short_avg_price == 100
-            with pytest.raises(ValueError, match="对冲"):
+            with pytest.raises(ValueError, match="Hedged reduce-only orders must reference a trade"):
                 s.sell(qty=1, reduce_only=True)
-            with pytest.raises(ValueError, match="对冲"):
+            with pytest.raises(ValueError, match="hedging"):
                 s.order_target_quantity(target=0)
             assert len(s.close_position()) == 2
 
@@ -678,7 +679,7 @@ def test_minimum_opening_and_recompute_without_path():
 def test_zero_equity_target_and_fee_migration_error():
     def action(s, i):
         if i == 1:
-            with pytest.raises(TypeError, match="0.1交易状态"):
+            with pytest.raises(TypeError, match=r"Trading state from 0\.1 cannot resume execution"):
                 s._broker._commission_func(1, 100)
             original = s._broker.ledger.balance
             s._broker.ledger.balance = 0
@@ -868,7 +869,7 @@ def test_private_account_compatibility_and_zero_reduce_request():
         if i == 1:
             assert s._broker.margin_available == s.account.margin_available
             assert s._broker._cash == s.account.balance
-            with pytest.raises(ValueError, match="qty 必须为正有限数值"):
+            with pytest.raises(ValueError, match="qty must be a positive finite number"):
                 s.sell(qty=0, reduce_only=True)
 
     run(action)

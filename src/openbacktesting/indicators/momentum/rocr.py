@@ -1,4 +1,4 @@
-"""ta.rocr：固定依赖的计算封装与规范输出。"""
+"""ta.rocr: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.rocr import rocr as _calculate
 

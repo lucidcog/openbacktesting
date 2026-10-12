@@ -1,4 +1,4 @@
-"""原生行情视图、指标数组及预热辅助函数。"""
+"""Native market-data views, indicator arrays, and warmup helpers."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ def _strategy_indicators(strategy):
 
 
 def _indicator_warmup_nbars(strategy):
-    """旧入口的指标就绪诊断；不再控制 next 调度或收益基准。"""
+    """Indicator-readiness diagnostic for the legacy entry point; no longer controls next scheduling or return baselines."""
     if strategy is None:
         return 0
     if hasattr(strategy, "_indicator_cursor"):
@@ -153,7 +153,7 @@ class _Data:
         return self.__df.iloc[: self.__len] if self.__len < len(self.__df) else self.__df
 
     def _full_frame(self) -> pd.DataFrame:
-        """供内部来源捕获使用，不改变公开数据的可见长度。"""
+        """Used for internal provenance capture without changing the visible length of public data."""
         return self.__df
 
     @property

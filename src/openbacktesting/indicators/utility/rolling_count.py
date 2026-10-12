@@ -1,4 +1,4 @@
-"""ta.rolling_count：固定因果序列契约。"""
+"""ta.rolling_count: Fixed causal sequence contract."""
 
 from ..calculus import condition as validate_condition
 

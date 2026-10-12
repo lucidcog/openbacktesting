@@ -1,4 +1,4 @@
-"""领域迁移前固定的定义、签名及受信任 pickle 契约。"""
+"""Definitions, signatures, and trusted pickle contracts fixed before domain migration."""
 
 import base64
 import hashlib
@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+
 from openbacktesting import inputs, lib
 from openbacktesting.strategy_data import StrategyData
 from openbacktesting.test import GOOG
@@ -23,12 +24,12 @@ BASELINE = json.loads(Path(__file__).with_name("subpackages-baseline.json").read
 
 
 def test_old_definitions_keep_signatures_metadata_and_pickle():
-    # 仅恢复本仓库在迁移前生成并校验摘要的样本。
+    # Restore only digest-verified samples generated in this repository before migration.
     payload = base64.b64decode(BASELINE["pickle_base64"])
     assert hashlib.sha256(payload).hexdigest() == BASELINE["pickle_sha256"]
 
-    # 样本仅规范化包根并重新固定摘要；测试内映射已迁移统计对象，删除的函数引用映射为 None。
-    # 普通 pickle 不提供迁移支持，其失败由独立测试验证。
+    # Samples normalize only the package root and refreeze its digest; test-only mappings restore migrated statistics objects and map deleted function references to None.
+    # Ordinary pickle provides no migration support; an independent test verifies its failure.
     class HistoricalUnpickler(pickle.Unpickler):
         def find_class(self, module, name):
             if module == "openbacktesting.lib" and name in {"cross", "crossover"}:
@@ -69,13 +70,13 @@ def test_old_definitions_keep_signatures_metadata_and_pickle():
                     expected[:-1]
                     + ", context: 'DataContext | None' = None, plotting: 'bool' = True, plotting_limits: 'PlottingLimits | None' = None)"
                 )
-                # 策略设置的显式签名增量；固定历史样本不重写。
+                # Explicit signature additions for strategy settings; fixed historical samples are not rewritten.
                 expected = expected.replace(
                     "commission: 'float | tuple[float, float]' = 0.0,",
                     "commission: 'float | tuple[float, float] | Commission | Callable[[float, float], float]' = 0.0, "
                     "risk_free_rate: 'float' = 0.0, default_order_size: 'DefaultOrderSize | None' = None,",
                 )
-                # 新增私有采集参数，默认值保持普通回测的原采集行为。
+                # Add a private collection parameter whose default retains normal-backtest collection behavior.
                 expected = (
                     expected[:-1]
                     + ", _collection: 'CollectionPolicy' = CollectionPolicy(portfolio=True, logs=True, plotting=True))"
@@ -165,7 +166,7 @@ def test_parent_package_initialization_does_not_load_its_core(
         calls.append(name)
         return original(name, *args, **kwargs)
 
-    # 独立执行父包入口，区分父包自身行为和既有包根急切导入。
+    # Execute parent-package entry points independently to distinguish their behavior from existing eager package-root imports.
     with monkeypatch.context() as patch:
         patch.setattr(builtins, "__import__", observed)
         namespace = runpy.run_path(module.__file__)
@@ -239,6 +240,7 @@ def test_type_only_exports_resolve_to_existing_classes(monkeypatch, name, names)
 @pytest.mark.parametrize("invalid", [False, True])
 def test_legacy_numeric_index_conversion_keeps_success_and_value_error(monkeypatch, invalid):
     import pandas as pd
+
     from openbacktesting import Backtest
     from openbacktesting.test._test import SmaCross
 
@@ -247,7 +249,7 @@ def test_legacy_numeric_index_conversion_keeps_success_and_value_error(monkeypat
     expected = pd.date_range("2023-11-14", periods=4)
     calls = []
 
-    # 保留旧 pandas 接口分支；替身不代表当前 pandas 支持已删除的参数。
+    # Retain the old pandas-interface branch; the test double does not imply current pandas supports removed parameters.
     monkeypatch.setattr(pd.Index, "is_numeric", lambda self: True, raising=False)
 
     def convert(index, *, infer_datetime_format):

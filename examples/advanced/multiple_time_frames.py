@@ -1,9 +1,9 @@
-"""日/周 RSI 重采样：先理解原生回测与 pandas 日期索引，再显式执行 main。
+"""Daily/weekly RSI resampling: understand native backtests and pandas date indexes, then explicitly run main.
 
-随包 GOOG 日线，无额外依赖；d_rsi/w_rsi 是日/周周期，level 是入场阈值。
-W-FRI 使用周五右标签、完成周期结果再向前填充到日线；数据须有序且日历一致。
-GOOG 索引无时区，不处理盘中交易所时区或缺失交易日，不能宣称 Pine 多周期等价。
-使用内置 RSI 与均线过滤，手续费 0.2%、止损 8%，不强制期末平仓；输出一次回测统计。
+Bundled GOOG daily data, with no additional dependencies; d_rsi/w_rsi are daily/weekly periods and level is the entry threshold.
+W-FRI uses right labels on Fridays and forward-fills completed-period results into daily data; input must be ordered and calendar-aligned.
+The GOOG index is timezone-naive; this example does not handle intraday exchange timezones or missing trading days and does not establish Pine multi-timeframe equivalence.
+Built-in RSI and moving-average filters, 0.2% commission, and an 8% stop; no forced end-of-run liquidation. Print statistics for one backtest.
 """
 
 from openbacktesting import Backtest, Strategy
@@ -13,10 +13,10 @@ from openbacktesting.test import GOOG
 
 
 def resampled_rsi(close, length):
-    """周线使用独立日期索引，通过公开 compute 调用同一内置 RSI。
+    """Weekly data uses a separate date index and the same built-in RSI through public compute.
 
-    self.ta 绑定主回测日历，不能直接登记不同长度的周线；
-    resample_apply 负责把计算结果对齐日线并登记为随游标可见的指标。
+    self.ta is bound to the main backtest calendar and cannot directly register weekly data of a different length;
+    resample_apply aligns results to daily data and registers an indicator whose visibility follows the cursor.
     """
     return compute("ta.rsi", close.to_frame("Close"), parameters={"length": length}).s
 

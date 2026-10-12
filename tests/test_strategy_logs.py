@@ -1,4 +1,4 @@
-"""策略日志字段、源码定位、生命周期与回测输出隔离。"""
+"""Strategy-log fields, source locations, lifecycles, and backtest-output isolation."""
 
 import gc
 import inspect
@@ -11,13 +11,14 @@ from types import SimpleNamespace
 
 import pandas as pd
 import pytest
+from test_engine_edges import Idle, flat_data
+from test_input_runtime import TradingInputs, compare
+from test_inputs import request
+
 from openbacktesting import Backtest, inputs
 from openbacktesting import logs as log_module
 from openbacktesting.logs import StrategyLog, _Collector
 from openbacktesting.simulation import core
-from test_engine_edges import Idle, flat_data
-from test_input_runtime import TradingInputs, compare
-from test_inputs import request
 
 
 def test_levels_locations_full_history_and_copies(monkeypatch):
@@ -27,17 +28,17 @@ def test_levels_locations_full_history_and_copies(monkeypatch):
         line = inspect.currentframe().f_lineno + 1
         assert log.info("") is None
         log.warning("中文\n第二行")
-        log.error("继续")
+        log.error("Continue")
         for _ in range(10001):
-            log.info("重复")
-        for value in (None, 1, ValueError("不是字符串")):
-            with pytest.raises(TypeError, match="字符串"):
+            log.info("duplicate")
+        for value in (None, 1, ValueError("Not a string")):
+            with pytest.raises(TypeError, match="string"):
                 log.info(value)
     records = collector.snapshot()
     assert len(records) == 10004
     assert [r["sequence"] for r in records] == list(range(1, 10005))
     assert [r["level"] for r in records[:3]] == ["info", "warning", "error"]
-    assert [r["message"] for r in records[:3]] == ["", "中文\n第二行", "继续"]
+    assert [r["message"] for r in records[:3]] == ["", "中文\n第二行", "Continue"]
     assert [r["source_line"] for r in records[:3]] == [line, line + 1, line + 2]
     assert records[0]["source_file"] == __file__
     assert records[0]["bar_index"] == 12
@@ -56,14 +57,14 @@ def test_levels_locations_full_history_and_copies(monkeypatch):
     }
     assert datetime.fromisoformat(records[0]["recorded_at"]).tzinfo == UTC
     json.dumps(records, allow_nan=False)
-    records[0]["message"] = "修改副本"
+    records[0]["message"] = "Modified copy"
     records.pop()
     assert collector.snapshot()[0]["message"] == ""
-    with pytest.raises(RuntimeError, match="活动"):
-        log.info("回调外")
+    with pytest.raises(RuntimeError, match="active"):
+        log.info("Outside callback")
     collector.close()
-    with pytest.raises(RuntimeError, match="结束"), collector.phase("next"):
-        pytest.fail("关闭会话不能重新进入")
+    with pytest.raises(RuntimeError, match="ended"), collector.phase("next"):
+        pytest.fail("A closed session cannot be reentered")
 
 
 @pytest.mark.parametrize(
@@ -88,22 +89,22 @@ def test_unknown_location_keeps_log(monkeypatch, frame):
     monkeypatch.setattr(log_module, "_currentframe", lambda: frame)
     collector = _Collector()
     with collector.phase("init"):
-        StrategyLog(collector).info("仍保留")
+        StrategyLog(collector).info("Still retained")
     record = collector.snapshot()[0]
     assert record["source_file"] is record["source_line"] is None
-    assert record["message"] == "仍保留"
+    assert record["message"] == "Still retained"
 
 
 def test_virtual_helper_inherited_multiline_without_source_io(monkeypatch):
     def forbidden(*args, **kwargs):
-        raise AssertionError("不能读源码或扫描完整栈")
+        raise AssertionError("Must not read source or scan the complete stack")
 
     monkeypatch.setattr(inspect, "stack", forbidden)
     monkeypatch.setattr("linecache.getlines", forbidden)
     namespace = {}
-    exec(  # noqa: S102 — 固定测试源码
+    exec(  # noqa: S102 — fixed test source
         compile(
-            'class Base:\n def emit(self, log):\n  log.warning(\n   "跨模块"\n  )\nclass Child(Base): pass\n',
+            'class Base:\n def emit(self, log):\n  log.warning(\n   "Cross-module"\n  )\nclass Child(Base): pass\n',
             "<virtual-strategy>",
             "exec",
         ),
@@ -128,15 +129,15 @@ def test_no_frame_retention_and_clock_order(monkeypatch):
     def emit():
         payload = Payload()
         ref = weakref.ref(payload)
-        log.info("第一条")
+        log.info("First record")
         return ref
 
     gc.disable()
     try:
         with collector.phase("next", 0):
             ref = emit()
-            assert ref() is None  # 无需 GC 即可回收作者局部变量。
-            log.info("第二条")
+            assert ref() is None  # Reclaim author locals without requiring GC.
+            log.info("Second record")
     finally:
         gc.enable()
     records = collector.snapshot()
@@ -146,37 +147,37 @@ def test_no_frame_retention_and_clock_order(monkeypatch):
 
 def test_disabled_still_validates_without_location_or_clock(monkeypatch):
     def forbidden():
-        raise AssertionError("禁用采集不读取栈帧")
+        raise AssertionError("Disabled collection must not read stack frames")
 
     monkeypatch.setattr(log_module, "_currentframe", forbidden)
     collector = _Collector(enabled=False)
     log = StrategyLog(collector)
     with collector.phase("init"):
-        assert log.info("不保留") is None
+        assert log.info("Not retained") is None
         with pytest.raises(TypeError):
             log.error(1)
     with pytest.raises(RuntimeError):
-        log.warning("回调外仍拒绝")
+        log.warning("Still rejected outside callback")
     assert collector.snapshot() == []
 
 
 class LoggingTrade(TradingInputs):
     def init(self):
         super().init()
-        self.log.info("初始化")
+        self.log.info("Initialization")
 
     def on_start(self):
-        self.log.info("开始")
+        self.log.info("Start")
 
     def next(self):
-        self.log.info(f"数量={self.units}")
+        self.log.info(f"Quantity={self.units}")
         super().next()
 
     def on_order(self, event):
         self.log.warning(event.snapshot.status.value)
 
     def on_fill(self, event):
-        self.log.info("成交")
+        self.log.info("Fill")
 
     def on_finish(self, summary):
         self.log.error(summary.reason)
@@ -211,12 +212,12 @@ def test_lifecycle_time_and_query_copies(kind, count):
         assert {"on_order", "on_fill"} <= {r["phase"] for r in records}
     owner = result["_strategy"]
     with pytest.raises(RuntimeError):
-        owner.log.info("已结束")
+        owner.log.info("Ended")
     restored = pickle.loads(pickle.dumps(result))
     assert restored.attrs["strategy_logs"] == records
-    result.attrs["strategy_logs"][0]["message"] = "覆盖"
+    result.attrs["strategy_logs"][0]["message"] = "Override"
     records.clear()
-    assert bt.get_logs()[0]["message"] == "初始化"
+    assert bt.get_logs()[0]["message"] == "Initialization"
     old = bt.get_logs()
     bt.run()
     assert old[0]["sequence"] == bt.get_logs()[0]["sequence"] == 1
@@ -226,7 +227,7 @@ def test_lifecycle_time_and_query_copies(kind, count):
 @pytest.mark.parametrize("phase", ["init", "next", "finish", "stats", "export"])
 @pytest.mark.parametrize("double", [False, True])
 def test_failure_preserves_logs_original_exception_and_closes(monkeypatch, phase, double):
-    primary, secondary = ValueError("主异常"), RuntimeError("结束异常")
+    primary, secondary = ValueError("Primary exception"), RuntimeError("End exception")
     owners = []
 
     class Fail(Idle):
@@ -268,9 +269,9 @@ def test_failure_preserves_logs_original_exception_and_closes(monkeypatch, phase
     assert records[0]["message"] == "init" and records[-1]["message"] == "finish"
     assert sum(r["message"] == "finish" for r in records) == 1
     if double and phase in ("init", "next"):
-        assert "结束异常" in primary.__notes__[0]
+        assert "End exception" in primary.__notes__[0]
     with pytest.raises(RuntimeError):
-        owners[0].log.info("结束后")
+        owners[0].log.info("After end")
 
 
 def test_reset_validation_constructor_and_custom_dispatch(monkeypatch):
@@ -281,7 +282,7 @@ def test_reset_validation_constructor_and_custom_dispatch(monkeypatch):
 
     bt = Observed(flat_data(6), LoggingTrade)
     native = bt.run()
-    titled = bt.run_inputs(request(LoggingTrade, {"数量": 2}))
+    titled = bt.run_inputs(request(LoggingTrade, {"Quantity": 2}))
     assert bt.calls == 2
     assert titled.attrs["strategy_logs"][0]["sequence"] == 1
     saved = bt.get_logs()
@@ -293,10 +294,10 @@ def test_reset_validation_constructor_and_custom_dispatch(monkeypatch):
     with monkeypatch.context() as patcher:
 
         def fail(*args):
-            raise ValueError("构造失败")
+            raise ValueError("Construction failure")
 
         patcher.setattr(LoggingTrade, "__init__", fail)
-        with pytest.raises(ValueError, match="构造失败"):
+        with pytest.raises(ValueError, match="Construction failure"):
             bt.run()
         assert bt.get_logs() == []
     assert bt.run().attrs["strategy_logs"]
@@ -305,7 +306,7 @@ def test_reset_validation_constructor_and_custom_dispatch(monkeypatch):
 @pytest.mark.parametrize("conflict", ["field", "method", "input", "inherited"])
 def test_log_reserved_declarations(conflict):
     value = (
-        inputs.int(1, title="数量")
+        inputs.int(1, title="Quantity")
         if conflict == "input"
         else (lambda self: None)
         if conflict == "method"
@@ -324,9 +325,9 @@ def test_log_reserved_instance_params_and_display_title():
 
         def next(self):
             assert self.log is self.log
-            with pytest.raises(AttributeError, match="保留"):
+            with pytest.raises(AttributeError, match="reserved attribute"):
                 self.log = 1
-            with pytest.raises(AttributeError, match="保留"):
+            with pytest.raises(AttributeError, match="reserved attribute"):
                 del self.log
             self.log.info(str(self.value))
 
@@ -343,9 +344,9 @@ def test_query_during_run_no_reentry_or_output_and_trading_unchanged(capsys):
         def next(self):
             super().next()
             snapshots.append(bt.get_logs())
-            with pytest.raises(RuntimeError, match="重入"):
+            with pytest.raises(RuntimeError, match="reentrantly"):
                 bt.run()
-            with pytest.raises(RuntimeError, match="重入"):
+            with pytest.raises(RuntimeError, match="reentrantly"):
                 bt.optimize(units=[1])
 
     bt = Backtest(flat_data(6), Observe, plotting=False)
@@ -356,7 +357,7 @@ def test_query_during_run_no_reentry_or_output_and_trading_unchanged(capsys):
     finally:
         logging.getLogger().setLevel(before)
     output = capsys.readouterr()
-    assert "初始化" not in output.out + output.err
+    assert "Initialization" not in output.out + output.err
     assert snapshots and len(snapshots[0]) < len(bt.get_logs())
     compare(result, Backtest(flat_data(6), TradingInputs, plotting=False).run())
 

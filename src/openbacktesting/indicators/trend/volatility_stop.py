@@ -1,4 +1,4 @@
-"""ta.volatility_stop：独立公式与固定初始化契约。"""
+"""ta.volatility_stop: Independent formula with a fixed initialization contract."""
 
 import numpy as np
 import pandas as pd

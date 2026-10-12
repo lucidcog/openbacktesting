@@ -1,4 +1,4 @@
-"""ta.rci：独立公式与固定初始化契约。"""
+"""ta.rci: Independent formula with a fixed initialization contract."""
 
 import numpy as np
 

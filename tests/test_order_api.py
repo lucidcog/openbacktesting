@@ -1,4 +1,4 @@
-"""作者请求、显式目标参数与失败原子性的运行契约。"""
+"""Runtime contracts for author requests, explicit target arguments, and failure atomicity."""
 
 import inspect
 import pickle
@@ -7,10 +7,11 @@ from datetime import UTC, datetime
 
 import pandas as pd
 import pytest
+from test_trading_core import Idle, frame, run
+
 from openbacktesting import Backtest, DefaultOrderSize, Strategy
 from openbacktesting.broker import InstrumentSpec, OrderRequest
 from openbacktesting.broker.models import NormalizedOrderRequest
-from test_trading_core import Idle, frame, run
 
 
 def state(s):
@@ -37,8 +38,8 @@ def test_request_is_frozen_detached_and_pickle_safe():
         tag=tag,
         expires_at=datetime(2026, 1, 5, tzinfo=UTC),
     )
-    tag["purpose"].append("修改")
-    request.tag["purpose"].append("副本")
+    tag["purpose"].append("modify")
+    request.tag["purpose"].append("copy")
     assert request.tag == {"purpose": ["突破"]}
     assert request.expires_at == pd.Timestamp("2026-01-05T00:00Z")
     assert request.qty == 2 and request.stop is None and request.valid_bars is None
@@ -261,7 +262,7 @@ def test_target_validation_precedes_all_side_effects(method, target, conditions)
         if i == 0:
             old = s.order_target_quantity(target=2, limit=80)
             before = state(s)
-            # 金额目标 1 会归整到零；用 100 确保非零分支也被验证。
+            # A cash target of 1 rounds to zero; use 100 to test the nonzero branch too.
             actual_target = 100 if method == "order_target_value" and target else target
             with pytest.raises((TypeError, ValueError)):
                 getattr(s, method)(target=actual_target, **conditions)
@@ -277,7 +278,7 @@ def test_target_noop_checks_expiry_index_timezone(method, index):
     def action(s, i):
         if i == 0:
             before = state(s)
-            with pytest.raises(ValueError, match="时区"):
+            with pytest.raises(ValueError, match="timezone"):
                 getattr(s, method)(target=0, expires_at="2026-01-05T00:00Z")
             assert state(s) == before
 
@@ -291,10 +292,10 @@ def test_target_noop_and_directional_validation(method):
     def action(s, i):
         if i == 0:
             call = getattr(s, method)
-            assert call(target=0, sl=110, tp=90, tag=["无需下单"]) is None
+            assert call(target=0, sl=110, tp=90, tag=["No order needed"]) is None
             before = state(s)
             for conditions in ({"sl": 110}, {"tp": 90}):
-                with pytest.raises(ValueError, match="方向"):
+                with pytest.raises(ValueError, match="direction"):
                     call(target=100 if method == "order_target_value" else 1, **conditions)
                 assert state(s) == before
 

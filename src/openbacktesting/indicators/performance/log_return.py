@@ -1,4 +1,4 @@
-"""ta.log_return：固定依赖的计算封装与规范输出。"""
+"""ta.log_return: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.performance.log_return import log_return as _calculate
 

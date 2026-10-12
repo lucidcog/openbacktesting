@@ -1,10 +1,10 @@
-"""余额、实际费用与持仓快照，不依赖策略或结果表。"""
+"""Balance, actual fees, and position snapshots independent of strategies and result tables."""
 
 from openbacktesting.broker.models import AccountSnapshot, PositionSnapshot
 
 
 class TradingLedger:
-    """只对实际执行记账，候选试算不得调用apply。"""
+    """Record only actual executions; candidate calculations must not call apply."""
 
     def __init__(self, balance):
         self.initial_balance = float(balance)

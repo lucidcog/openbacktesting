@@ -1,4 +1,4 @@
-"""cdl_morningstar：固定原生形态与独立有效掩码。"""
+"""cdl_morningstar: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_morningstar import cdl_morningstar as _calculate
 

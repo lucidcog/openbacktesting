@@ -1,130 +1,130 @@
-# 订单、撮合与仓位
+# Orders, matching, and positions
 
-0.2 支持资产数量、金额和权益百分数下单，使用独立成交账本。`buy(qty=2)` 表示买入两单位；返回 Order 仅表示请求已登记，最终状态和 Fill 才表示执行结果。字段见[交易参考](../reference/trading.md)。
+0.2 supports orders in asset units, notional amounts, and equity percentages, using an independent execution ledger. `buy(qty=2)` means buying two units; a returned Order only confirms request registration, while final status and Fill identify execution results. See the [trading reference](../reference/trading.md) for fields.
 
-## 单位与预算
+## Units and budgets
 
-`InstrumentSpec` 从 `openbacktesting.broker` 导入。默认 `quantity_step=1`、最小数量等于步长、`price_tick=None`、`min_notional=0`；symbol/currency 是标签，不提供汇率换算。配置 `quantity_step=0.001` 后，`qty=0.1` 始终为十分之一资产单位，行情与指标不缩放。
+Import `InstrumentSpec` from `openbacktesting.broker`. Defaults are `quantity_step=1`, minimum quantity equal to the step, `price_tick=None`, and `min_notional=0`. symbol/currency are labels without exchange-rate conversion. With `quantity_step=0.001`, `qty=0.1` always denotes one-tenth of an asset unit; market data and indicators are not scaled.
 
-直接数量、limit/stop/sl/tp 必须符合显式网格；金额／百分数、默认固定量及预算函数允许向零取整。OHLC 必须有限且为正，索引必须递增且唯一；配置 tick 后行情也必须在网格上。数据的 `pip` 不是交易所规则。只减仓允许低于最低开仓金额的尾仓退出。
+Direct quantities and limit/stop/sl/tp must satisfy explicit grids. Amounts/percentages, default fixed quantities, and sizing helpers may round toward zero. OHLC must be finite and positive, with an increasing unique index; configured tick grids also apply to market data. Data `pip` is not an exchange rule. Reduce-only exits may close residual holdings below the minimum opening notional.
 
-`openbacktesting.strategy.sizing` 提供纯函数，返回冻结的 `SizingDecision(qty, reference_price, estimated_cost, reason, budget)`：
+`openbacktesting.strategy.sizing` supplies pure functions returning frozen `SizingDecision(qty, reference_price, estimated_cost, reason, budget)`:
 
-| 函数              | 预算含义                                                             |
-| ----------------- | -------------------------------------------------------------------- |
-| `fixed_quantity`  | 固定资产数量向零归整                                                 |
-| `equity_fraction` | 当前权益乘比例的名义预算，数量与每单位成本共用此预算，不按保证金放大 |
-| `stop_risk`       | 权益乘风险比例，除以止损距离与每单位往返成本之和                     |
+| Function | Budget meaning |
+| -------- | -------------- |
+| `fixed_quantity` | Fixed asset quantity rounded toward zero |
+| `equity_fraction` | Current equity times a fraction as a notional budget, shared by quantity and per-unit costs without margin amplification |
+| `stop_risk` | Equity times risk fraction divided by stop distance plus per-unit round-trip costs |
 
-成本估计由调用者提供 `cost_per_unit`，不是对未来费用或成交价的保证。零数量决策附带最低数量/金额原因，调用方应跳过下单。非正权益、错误止损方向或零距离报错。权益10000、风险比例0.01、入场100、止损95、零成本时，计划20单位；跳空仍可能损失超过100。
+Callers supply `cost_per_unit` estimates, which do not guarantee future fees or fill prices. Zero-quantity decisions include minimum-quantity/notional reasons and should be skipped. Nonpositive equity, wrong stop direction, and zero distance raise errors. With equity 10000, risk fraction 0.01, entry 100, stop 95, and zero costs, the plan is 20 units; gaps can still cause losses exceeding 100.
 
-## 下单规模与默认数量
+## Order sizing and defaults
 
-普通 `buy/sell` 支持互斥的 `qty`、`amount`、`percent`：
+Ordinary `buy/sell` accepts mutually exclusive `qty`, `amount`, and `percent`:
 
 ```python
-self.buy(qty=0.2)        # 真实资产数量，严格符合品种步长。
-self.buy(amount=2000)    # 账户结算币种的名义金额，不含费用。
-self.buy(percent=20)     # 请求时权益的 20%，不是可用现金或目标仓位。
+self.buy(qty=0.2)        # Actual asset quantity, strictly matching the instrument step.
+self.buy(amount=2000)    # Notional in account settlement currency, excluding fees.
+self.buy(percent=20)     # 20% of request-time equity, not available cash or a target position.
 self.sell(qty=0.2, reduce_only=True)
 ```
 
-三者必须为正有限数，不能为 bool 或显式 None；percent 范围为 (0,100]。同时给多个参数会报错，不设优先级。只有三者全部省略才读取默认设置；`reduce_only=True` 必须显式给 qty，不能使用金额、百分数或默认数量。普通反向订单的规模是增量，不自动加上原仓位。
+All three must be positive finite numbers, neither bool nor explicit None; percent range is (0,100]. Multiple sizing arguments raise an error without precedence. Defaults apply only when all three are omitted. `reduce_only=True` requires explicit qty, rejecting amounts, percentages, and defaults. Ordinary opposite-side order sizes are incremental and do not automatically add the existing position.
 
-作者使用 `default_qty_type=QuantityType.FIXED` 或 `QuantityType.PERCENT_OF_EQUITY`，配合 `default_qty_value`；枚举从包根导入。默认值 None 表示必须显式给一种规模；权益数量用百分数 (0,100]，20 表示 20%。例如 `@backtest(default_qty_type=QuantityType.PERCENT_OF_EQUITY, default_qty_value=20)` 后，`self.buy()` 使用默认 20%，`self.buy(amount=500)` 则覆盖默认值。宿主覆盖类型时须同时给数值，None 可清空数量。低层 `Backtest` 保留 `DefaultOrderSize("fixed", value)` 和 `DefaultOrderSize("equity_fraction", value)`；后者使用小数 (0,1]。
+Authors combine `default_qty_type=QuantityType.FIXED` or `QuantityType.PERCENT_OF_EQUITY` with `default_qty_value`, importing enums from the package root. Default None requires explicit sizing. Equity quantity uses percentages (0,100], where 20 means 20%. With `@backtest(default_qty_type=QuantityType.PERCENT_OF_EQUITY, default_qty_value=20)`, `self.buy()` uses the default 20%, while `self.buy(amount=500)` overrides it. Host type changes require a value too; None can clear quantity. Low-level `Backtest` retains `DefaultOrderSize("fixed", value)` and `DefaultOrderSize("equity_fraction", value)`, with the latter using fractions (0,1].
 
-金额／百分数预算在允许下单阶段按请求时 Close 和权益换算；限价／止损单也使用 Close，不按 margin 放大、不扣除挂单、不预留费用。框架按实际品种步长向零归整，在登记前拒绝零数量或低于最低金额的预算，错误原因包括 below_min_quantity/below_min_notional。显式 qty 严格校验网格，不静默归整；默认固定量允许归整。失败不撤原单、不修改账本。等待执行时不回算数量；费用、滑点或跳空可能导致资金不足被拒绝，amount 不保证实际成交金额等于预算。
+Amount/percentage budgets convert at request-time Close and equity during allowed submission phases. Limit/stop orders also use Close, without margin amplification, deduction for pending orders, or fee reserves. The framework rounds toward zero by instrument step and rejects zero quantities or insufficient notional before registration, with reasons including below_min_quantity/below_min_notional. Explicit qty strictly validates grids without silent rounding; default fixed quantities may round. Failure neither cancels original orders nor changes ledgers. Quantities are not recalculated while awaiting execution. Fees, slippage, and gaps can cause insufficient-funds rejection; amount does not guarantee executed notional equals budget.
 
-普通订单的只读 `order.sizing` 是提交前冻结的 `OrderSizingSnapshot`，保存 mode、source、value、equity、reference_price、budget、qty。source 区分 explicit/default；qty 模式的 budget 为 None。只减仓仍保存请求量，实际成交可能更少。内部目标、批次退出、保护单和期末清算的 sizing 为 None。结果用 `_order_sizing` 按 order_id 关联，详见[结果指南](results.md)。
+Ordinary read-only `order.sizing` is an `OrderSizingSnapshot` frozen before submission, retaining mode, source, value, equity, reference_price, budget, and qty. source distinguishes explicit/default; qty-mode budget is None. Reduce-only snapshots retain requested quantity even if less executes. Internal targets, lot exits, protection, and terminal liquidation have sizing=None. Results link `_order_sizing` by order_id; see the [results guide](results.md).
 
-`equity_fraction` 和 `stop_risk` 继续用于独立预算分析和自定义成本估计，普通下单无需先调用。`order_target_percent(target=0.2)`、`set_trailing_stop(percent=0.1)`、旧预算工具及低层 equity_fraction 默认量仍用小数；只有新下单 percent 和作者默认数量用百分数。见[分数数量作者脚本](../../../examples/strategies/fractional_sizing.py)及[宿主覆盖与拒绝示例](../../../examples/advanced/strategy_settings.py)。
+`equity_fraction` and `stop_risk` remain independent budget-analysis and custom-cost tools; ordinary orders need not call them first. `order_target_percent(target=0.2)`, `set_trailing_stop(percent=0.1)`, legacy sizing tools, and low-level equity_fraction defaults retain fractional units. Only new order percent and author default quantities use percentages. See the [fractional-sizing author script](../../../examples/strategies/fractional_sizing.py) and [host overrides/rejection example](../../../examples/advanced/strategy_settings.py).
 
-## 请求、成交与批次
+## Requests, fills, and lots
 
-- Order 有稳定 `order_id`、不可变 `request` 和冻结 `snapshot`。状态为 Submitted、Accepted、PartiallyFilled、Filled、Canceled、Expired、Rejected；终态不可重新打开，重复取消终态幂等。Accepted 不预留资金。
-- 每次实际执行产生一个 Fill，费用只收一次；一个反转 Fill 可关闭多个 FIFO 批次并开立一个剩余批次。普通反转先试算整单，拒绝不允许留下部分平仓。
-- Trade 是可单独管理的开仓批次，有 `trade_id` 和入场 Fill 身份。部分退出保留批次身份，并产生独立关闭片段；入场固定费按退出数量分摊，尾片段拿剩余费用，不重新调用入场费用模型。
-- `sell(qty=10, reduce_only=True)` 最多减掉实际可用数量，余量记录 Partial 后取消；无可减仓位则取消为 `no_position`。对冲模式的退出必须绑定批次。
+- Order has stable `order_id`, immutable `request`, and frozen `snapshot`. States are Submitted, Accepted, PartiallyFilled, Filled, Canceled, Expired, and Rejected. Terminal states cannot reopen; repeated terminal cancellation is idempotent. Accepted reserves no funds.
+- Every actual execution produces one Fill and charges fees once. A reversal Fill may close multiple FIFO lots and open one residual lot. Ordinary reversals preflight the whole order; rejection must not leave partial closure.
+- Trade is an independently manageable entry lot with `trade_id` and entry Fill identity. Partial exits preserve lot identity and produce independent closed fragments; fixed entry fees are apportioned by exit quantity, with residual fees assigned to the last fragment without calling the entry-fee model again.
+- `sell(qty=10, reduce_only=True)` reduces at most available quantity, records Partial for residual quantity, then cancels it. No reducible position cancels as `no_position`. Hedged exits must bind a lot.
 
-`Trade.close(qty=...)` 与 `Trade.close(portion=...)` 互斥，默认全部；比例向零归整，归零报错。`close_position()` 和 `position.close()` 逐批次提交退出，返回有序元组；空仓为空元组。`self.close` 仍是行情句柄。
+`Trade.close(qty=...)` and `Trade.close(portion=...)` are mutually exclusive, defaulting to complete closure. Portions round toward zero; rounding to zero raises an error. `close_position()` and `position.close()` submit exits per lot and return ordered tuples, empty when flat. `self.close` remains a market-data handle.
 
-`order_target_quantity(target=...)`、`order_target_value(target=...)`、`order_target_percent(target=...)` 仅支持净额模式。三个方法均显式接受命名参数 target、limit、stop、sl、tp、tag、reduce_only、expires_at、valid_bars，不接受位置参数或 conditions 字典。value/percent 用请求时 Close/权益换算并固定数量；同目标和条件的未完成订单复用，变化目标撤旧后按实际持仓计算差额。存在普通入场或手动退出挂单时，报 `conflicting_pending_order`；保护单可以并存。目标单成交前仍检查购买力，不保证跳空后权重等于目标。
+`order_target_quantity(target=...)`, `order_target_value(target=...)`, and `order_target_percent(target=...)` support netting mode only. All explicitly accept keyword-only target, limit, stop, sl, tp, tag, reduce_only, expires_at, and valid_bars, without positional arguments or conditions dictionaries. value/percent converts using request-time Close/equity and fixes quantity. Unfinished orders with identical targets/conditions are reused; changed targets cancel prior orders and compute differences from actual holdings. Ordinary entry/manual-exit pending orders raise `conflicting_pending_order`; protective orders may coexist. Target fills still check buying power and do not guarantee the target weight after gaps.
 
-无差额返回 None、目标去重和撤旧之前，均校验价格值域/网格、期限、标签及严格 bool 类型的 reduce_only。省略可选参数与显式提供 None/False 等价；非法替换保留原目标单。只有非零差额才按实际买卖方向检查 SL/TP 关系；合法无差额可撤销旧目标单，但不会构造零数量订单。
+Price domains/grids, expiry, tags, and strict-bool reduce_only are validated before returning None for zero differences, deduplicating targets, or canceling prior orders. Omitted optional arguments equal explicit None/False; invalid replacements preserve original targets. SL/TP relationships are checked by actual trade direction only for nonzero differences. Valid zero differences may cancel old targets without constructing zero-quantity orders.
 
-## 账户不变量
+## Account invariants
 
-单资产、单结算币种、线性保证金、合约乘数1：
+One asset, one settlement currency, linear margin, contract multiplier 1:
 
-- balance = 初始余额 + 已实现价格毛损益 − 全部实际费用。
-- equity = balance + 未实现价格毛损益。
-- margin_used = 总名义暴露 × margin；可用保证金不小于零。
-- 最终空仓时 equity = balance = 初始余额 + 所有关闭片段净损益。
+- balance = initial balance + realized gross price profit/loss − all actual fees.
+- equity = balance + unrealized gross price profit/loss.
+- margin_used = gross notional exposure × margin; available margin is nonnegative.
+- When finally flat, equity = balance = initial balance + all closed-fragment net profit/loss.
 
-`account` 是冻结账户快照，balance 不是证券交收现金。`position.snapshot` 同时给净/总/多空数量、分腿均价、毛净损益和剩余入场费。双向等量时净数量为零但 `bool(position)` 仍为真；双向或空仓没有统一成本，`return_fraction=None`。`Trade.pl`、`Position.pl` 均为净损益，活跃仓位包括剩余入场费用；`return_fraction` 是小数，统计列 `ReturnPct` 也沿用小数。
+`account` is a frozen snapshot; balance is not securities-settlement cash. `position.snapshot` provides net/gross/long/short quantities, leg-average prices, gross/net profit/loss, and remaining entry fees. Equal opposing positions have zero net quantity but `bool(position)` remains true. Hedged or flat positions have no unified cost, with `return_fraction=None`. `Trade.pl` and `Position.pl` are net profit/loss, including remaining entry fees for active holdings. `return_fraction` is fractional, as is statistical `ReturnPct`.
 
-`allow_short=False` 仅禁止新增空头；可选 `max_gross_exposure` 限制总名义/权益。合法减仓不被这些开仓限制阻止。若价格跳空导致资不抵债，取消挂单并执行清算，保留真实负权益；清算错误会传播，不伪造成功。
+`allow_short=False` only prevents new shorts; optional `max_gross_exposure` limits gross notional/equity. These opening restrictions do not block valid reductions. Gap-induced insolvency cancels pending orders and liquidates, retaining actual negative equity; liquidation errors propagate without fabricated success.
 
-## 生命周期与期末
+## Lifecycle and termination
 
-`init()` 预计算指标；`on_start()`、`on_finish(summary)` 每运行各一次且不可交易。每根正常 bar 先处理已有订单，再发 `on_order/on_fill` 的封闭通知批次，随后从首根开始调用 `next()`；单根输入也调用一次。指标无效不会跳过 `next()`；订单通知、保护单和跟踪更新保留原执行阶段；通知中新单最早下一根执行，不递归撮合。异常时调用结束钩子；结束钩子也失败时保留原异常并附注。
+`init()` precomputes indicators; `on_start()` and `on_finish(summary)` each run once and cannot trade. Each normal bar first processes existing orders, then dispatches a closed batch of `on_order/on_fill` notifications, then calls `next()` from the first bar; single-bar input also gets one call. Invalid indicators do not skip `next()`. Order notifications, protection, and trailing updates retain execution phases. Orders submitted in notifications execute no earlier than the next bar without recursive matching. Exceptions invoke the finish hook; if it also fails, the original exception is retained with a note.
 
-| 配置                                          | 行为                                                                                                  |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `execution_timing=ExecutionTiming.NEXT_OPEN`  | 默认；当前策略提交的请求最早下一根处理                                                                |
-| `execution_timing=ExecutionTiming.SAME_CLOSE` | `next()` 新增的无条件市价单在本根 Close 阶段只处理一次；新限价单及保护单不得使用已发生的本根 High/Low |
-| `end_policy=EndPolicy.MARK_TO_MARKET`         | 默认；取消挂单，保留未平仓批次并按末 Close 估值                                                       |
-| `end_policy=EndPolicy.CLOSE_AT_LAST_CLOSE`    | 先取消挂单，仅对实际持仓作末 Close 合成清算，照常收取成本                                             |
+| Configuration | Behavior |
+| ------------- | -------- |
+| `execution_timing=ExecutionTiming.NEXT_OPEN` | Default; requests submitted by the current strategy process no earlier than the next bar |
+| `execution_timing=ExecutionTiming.SAME_CLOSE` | New unconditional market orders from `next()` process once at current Close; new limit/protective orders cannot use already-occurring current High/Low |
+| `end_policy=EndPolicy.MARK_TO_MARKET` | Default; cancel pending orders, retain open lots valued at final Close |
+| `end_policy=EndPolicy.CLOSE_AT_LAST_CLOSE` | Cancel pending orders, then synthetically liquidate only actual holdings at final Close, charging costs normally |
 
-以上为作者枚举写法；低层 Backtest 仍用对应小写字符串。终止流程不重跑最后一根撮合。最后一次 `next()` 提交、尚未到达执行阶段的入场不会凭空成交。期末记独立 terminal 快照，不覆盖正常 bar 的暴露观察值。
+These are author enum forms; low-level Backtest retains corresponding lowercase strings. Termination does not rerun final-bar matching. Entries submitted in the last `next()` without reaching execution do not fill artificially. A separate terminal snapshot does not overwrite normal-bar exposure observations.
 
-## 到期、组合与成本
+## Expiry, groups, and costs
 
-默认 GTC；`valid_bars=n` 可在提交后的第1至第n根执行，下一根开始先到期；`expires_at` 与行情索引均须带时区，等于到期时刻即失效。两者互斥。保护订单为 GTC。
+Default expiry is GTC. `valid_bars=n` permits execution on bars 1 through n after submission, expiring first on the following bar. `expires_at` and market-data indexes must be timezone-aware; equality with the expiry instant means expired. The two options are mutually exclusive. Protective orders are GTC.
 
-`submit_oco(first=OrderRequest(...), second=OrderRequest(...))` 接收两个命名入场请求，OrderRequest 从 openbacktesting.broker 导入。side 必填；qty/amount/percent 必须显式三选一，不继承默认设置；其余接受 limit、stop、sl、tp、tag、expires_at、valid_bars。未选的规模属性为 None。构造没有交易副作用，可在 init 准备并跨运行复用，标签在构造时固化。
+`submit_oco(first=OrderRequest(...), second=OrderRequest(...))` accepts two named entry requests; import OrderRequest from openbacktesting.broker. side is required, with exactly one explicit qty/amount/percent sizing mode rather than inherited defaults. Other fields are limit, stop, sl, tp, tag, expires_at, and valid_bars; unselected sizing attributes are None. Construction has no trading side effects and can occur in init or be reused across runs; tags freeze on construction.
 
 ```python
-# init 中准备；此时没有读取账户或行情。
+# Prepare in init without reading account or market data.
 self.long_entry = OrderRequest(side="buy", percent=20, stop=105)
 self.short_entry = OrderRequest(side="sell", amount=2000, stop=95)
-# next 中提交；两成员使用同一时刻的账户、Close 和品种。
+# Submit in next; both members use the same account, Close, and instrument moment.
 group = self.submit_oco(first=self.long_entry, second=self.short_entry)
 ```
 
-品种网格、行情时区和保护方向在提交时校验；两成员分别解析为固定数量，先完成全部验证再原子登记和发布快照。第二笔失败不会登记第一笔或消耗订单／组身份。成员之间不拆分、叠加扣除或预留预算，成交时仍独立检查购买力；混合模式不改变执行阶段。
-两个成员允许同向或反向。任一成员成交、取消、到期或拒绝都会结束另一成员；同 bar 双触发时 first 优先，记录 `ambiguous_oco_bar`。组可查询历史和取消；取消保护组不会自动平仓。
+Instrument grids, market timezone, and protective direction are validated at submission. Members resolve separately to fixed quantities; all validation precedes atomic registration and snapshot publication. Failure of the second registers neither the first nor consumes order/group identities. Budgets are not split, cumulatively deducted, or reserved across members, and buying power remains independently checked at execution; mixed modes do not change phases.
+Members may have the same or opposing sides. Filling, canceling, expiring, or rejecting either terminates the other. first wins same-bar dual triggers, recording `ambiguous_oco_bar`. Groups support historical queries and cancellation; canceling a protective group does not close positions automatically.
 
-初始 `sl/tp` 在实际入场后激活。普通 next-open 市价入场的保护可检查本根剩余范围；条件入场及 same-close 入场保护延迟到下一根，并留下诊断。同 bar SL/TP 都可达时执行 SL，记录 `ambiguous_bracket_bar`，不声称推断了真实盘中顺序。部分退出会撤旧保护并按剩余数量重建。
+Initial `sl/tp` activates after actual entry. Protection for ordinary next-open market entries can inspect the remaining current-bar range; conditional and same-close entry protection waits until the next bar with a diagnostic. If both SL/TP are reachable in one bar, SL executes and `ambiguous_bracket_bar` is recorded, without claiming the actual intrabar order. Partial exits cancel and rebuild protection for remaining quantity.
 
-`trade.set_trailing_stop(amount=...)` 或 `percent=...` 替换固定 SL，可保留 TP。先检查旧 stop，再按本根 Close 单调收紧，下一根生效；百分比直接使用当前价格。`TrailingStrategy` 的 ATR 不回填未来值，ATR 未预热时不设置保护。
+`trade.set_trailing_stop(amount=...)` or `percent=...` replaces fixed SL and may retain TP. The old stop is checked first; then current Close tightens the stop monotonically for the next bar. Percentages apply directly to current price. `TrailingStrategy` ATR does not backfill future values and sets no protection before ATR warmup.
 
-作者以 `slippage_type=SlippageType.FIXED/BPS` 和非负 `slippage_value` 声明固定价格距离／基点滑点，0 表示关闭。spread 对每次买卖执行生效；低层 `Slippage("none")`、`Slippage("fixed", value)`、`Slippage("bps", value)` 提供确定性滑点。成本价按买上/卖下取 tick；不得越过 limit。普通市价/stop 成交限制在本根 High/Low 内；same-close 和期末合成成交允许成本价超出本根范围。费用函数必须纯粹、返回有限值；返佣允许为负，不能依靠回调副作用。
+Authors declare fixed-distance/basis-point slippage through `slippage_type=SlippageType.FIXED/BPS` and nonnegative `slippage_value`, with 0 disabling it. spread affects each buy/sell execution. Low-level `Slippage("none")`, `Slippage("fixed", value)`, and `Slippage("bps", value)` provide deterministic slippage. Cost-adjusted prices round upward for buys and downward for sells to ticks without crossing limits. Ordinary market/stop fills stay within current High/Low; same-close and terminal synthetic fills may have cost prices outside the bar range. Fee functions must be pure and return finite values; rebates may be negative, without reliance on callback side effects.
 
-普通 buy/sell 继续使用命名参数，reduce_only 必须为 bool。tag 可以是 JSON 纯值，包括嵌套字典；它只是可选元数据，不是订单条件字典。作者 OrderRequest 不接受 reduce_only/trade_id/tag_json；已登记订单的 request 是只读规范化观察值，字段与[结果表](results.md)保持一致。
+Ordinary buy/sell remain keyword-only, and reduce_only must be bool. tag may contain pure JSON values, including nested dictionaries; it is optional metadata rather than an order-conditions dictionary. Author OrderRequest rejects reduce_only/trade_id/tag_json. Registered request is a read-only normalized observation consistent with [result tables](results.md).
 
-## 佣金模式与高级复合费用
+## Commission modes and advanced composite fees
 
-作者使用 `commission_type=CommissionType.PERCENT/CASH_PER_ORDER/CASH_PER_CONTRACT` 和 `commission_value`。百分数 0.2 表示成交金额的 0.2%，范围 [-10,10)；其余为非负账户金额，分别按每次实际 Fill 或每实际资产单位收取。一个反转 Fill 仍只收一次固定费用，随后按数量分摊。作者入口一次只启用一种模式。
+Authors use `commission_type=CommissionType.PERCENT/CASH_PER_ORDER/CASH_PER_CONTRACT` and `commission_value`. Percentage 0.2 means 0.2% of executed notional, with range [-10,10); other modes use nonnegative account amounts per actual Fill or asset unit. A reversal Fill still pays one fixed fee, apportioned afterward by quantity. The author entry point enables one mode at a time.
 
-低层 `Backtest` 的 `Commission(fixed=0.0, relative=0.0, per_unit=0.0)` 从 openbacktesting.broker 导入，每个实际 Fill 费用为 `fixed + abs(qty) * price * relative + abs(qty) * per_unit`。固定额与每单位费非负，比例在 [-0.1,0.1)；数值必须有限且不能为 bool。relative=0.002 表示 0.2%，per_unit 是每实际资产单位费用，合约乘数仍为 1。
+Low-level `Backtest` uses `Commission(fixed=0.0, relative=0.0, per_unit=0.0)` imported from openbacktesting.broker. Each actual Fill pays `fixed + abs(qty) * price * relative + abs(qty) * per_unit`. Fixed and per-unit amounts are nonnegative; relative is [-0.1,0.1). Values must be finite and not bool. relative=0.002 means 0.2%, and per_unit is a fee per actual asset unit with contract multiplier still 1.
 
-低层数字和二元组佣金继续可用。购买力试算不扣费，实际 Fill 只收费一次，反转或分批退出继续分摊；所有清算路径使用同一公式。snapshot/from_snapshot 以 kind=linear、version=1 和三个完整字段严格恢复，未知字段或版本拒绝。任意 callable 仍仅限低层，且保留不可重建诊断。复合费用实际运行见[设置教程](../../../examples/advanced/strategy_settings.py)，作者模式见[每单位费用示例](../../../examples/strategies/trading_lifecycle.py)。
+Low-level numeric and two-element tuple commissions remain available. Buying-power preflight does not deduct fees; actual Fill charges once, with reversals and partial exits retaining allocation. Every liquidation path uses the same formula. snapshot/from_snapshot strictly restores kind=linear, version=1, and all three fields, rejecting unknown fields/versions. Arbitrary callables remain low-level only with nonreconstructable diagnostics. See the [settings tutorial](../../../examples/advanced/strategy_settings.py) for composite fees and [per-unit fee example](../../../examples/strategies/trading_lifecycle.py) for author modes.
 
-## 示例与验证
+## Examples and validation
 
-| 能力                                     | 可运行示例                                                                            | 验证                                                                                           |
-| ---------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| 状态、费用、账户、生命周期、期末         | [trading_lifecycle.py](../../../examples/strategies/trading_lifecycle.py) | `test_order_api.py`、`test_trading_core.py`、`test_trading_regressions.py`、`test_examples.py` |
-| 三模式、默认覆盖、快照、命名目标、只减仓 | [fractional_sizing.py](../../../examples/strategies/fractional_sizing.py) | 同上                                                                                           |
-| 到期、混合规模 OCO、保护、跟踪、成本     | [managed_orders.py](../../../examples/strategies/managed_orders.py)       | 同上                                                                                           |
+| Capability | Runnable example | Validation |
+| ---------- | ---------------- | ---------- |
+| States, fees, accounts, lifecycle, termination | [trading_lifecycle.py](../../../examples/strategies/trading_lifecycle.py) | `test_order_api.py`, `test_trading_core.py`, `test_trading_regressions.py`, `test_examples.py` |
+| Three modes, default overrides, snapshots, named targets, reduce-only | [fractional_sizing.py](../../../examples/strategies/fractional_sizing.py) | Same tests |
+| Expiry, mixed-sizing OCO, protection, trailing, costs | [managed_orders.py](../../../examples/strategies/managed_orders.py) | Same tests |
 
-按[示例入口](../examples.md)执行。交易记录由 Python 引擎直接生成。
+Run through the [example entry point](../examples.md). Trading records are generated directly by the Python engine.
 
-## 显式价格舍入与已关闭片段
+## Explicit price rounding and closed fragments
 
-`instrument.round_price_to_tick(value)` 要求有限正价和显式 `price_tick`，按十进制最近 tick 舍入，恰好半 tick 向上；结果归零、溢出或无法以 float 精确表达十进制网格时拒绝。返回值再经过原 `price` 校验。此工具只用于作者候选价，不自动修正订单，也不改变成交和保护单原有方向舍入政策。
+`instrument.round_price_to_tick(value)` requires finite positive price and explicit `price_tick`, rounding to the nearest decimal tick with exact halves upward. Zero, overflow, or inability to represent the decimal grid exactly as float is rejected. The result passes the existing `price` validator again. This tool serves author candidate prices only, without automatically correcting orders or changing existing directional rounding for fills/protection.
 
-`self.closed_trade_stats` 返回 `broker.ClosedTradeStats` 冻结快照。按已关闭片段而非唯一 `trade_id` 计数，每次部分退出单独计入；净损益包含该片段分摊的开仓和退出费用，返佣按其真实符号计入。`win_count/loss_count/even_count` 按净损益严格正、负、零划分；`winning_profit` 为正净损益之和，`losing_amount` 为非负亏损额，`net_profit` 为两者之差，`average_profit` 为净损益除片段数，`win_rate` 为 0–1 胜率。空统计的金额及次数为零，平均值与胜率为 None。
+`self.closed_trade_stats` returns a frozen `broker.ClosedTradeStats` snapshot. It counts closed fragments rather than unique `trade_id`, counting partial exits separately. Net profit/loss includes allocated entry and exit fees; rebates retain their actual sign. `win_count/loss_count/even_count` partitions strictly positive, negative, and zero net results. `winning_profit` sums positive net results, `losing_amount` is nonnegative loss magnitude, `net_profit` is their difference, `average_profit` divides net profit by fragment count, and `win_rate` is a 0–1 fraction. Empty amounts/counts are zero, with mean and win rate None.
 
-统计在关闭费用分摊后增量更新，读取不遍历历史；未平仓损益与尚未分摊的持仓开仓费不提前进入统计。`same_close` 的 next 中提交退出仍只能看到成交前事实，随后的成交通知和 on_finish 可读已完成结果。同批成交在批次结束后派送通知，因此同批通知均读取当时最新累计，不是逐事件历史快照。保存旧快照不会随成交或后续 Trade 对象修改而改变；重复运行独立。属性为保留名，不能覆盖。示例见[纯值辅助](../../../examples/strategies/local_value_helpers.py)与[关闭统计](../../../examples/strategies/closed_trade_statistics.py)。
+Statistics update incrementally after closing-fee allocation without scanning history on reads. Unrealized results and unallocated open-lot entry fees do not enter early. Exits submitted in same_close next still see pre-fill facts; subsequent fill notifications and on_finish can read completed results. Notifications dispatch after a fill batch completes, so every notification in that batch reads the latest cumulative state rather than per-event historical snapshots. Saved snapshots do not change with later fills or Trade-object modifications; repeated runs are independent. The property is reserved and cannot be overridden. See [pure-value helpers](../../../examples/strategies/local_value_helpers.py) and [closed statistics](../../../examples/strategies/closed_trade_statistics.py).

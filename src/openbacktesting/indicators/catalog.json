@@ -74,7 +74,7 @@
       "inputs": ["open_", "high", "low", "close"],
       "version": "1",
       "status": "deferred-pattern",
-      "reason": "形态识别按已批准范围延期；需独立确认分值、预热、确认延迟及 native 分派后开放。",
+      "reason": "Pattern recognition is deferred within the approved scope; scores, warmup, confirmation delay, and native dispatch require separate approval before exposure.",
       "outputs": ["cdl_pattern"],
       "fixed": {},
       "parameters": {},
@@ -1306,7 +1306,7 @@
       "inputs": ["close"],
       "version": "1",
       "status": "available",
-      "reason": "固定 open_=None，采用 native 默认公式；不因行情包含 Open 而隐式切换计算变体。",
+      "reason": "Fix open_=None and use the native default formula; do not implicitly switch variants when market data contains Open.",
       "outputs": ["psl"],
       "fixed": {
         "open_": null
@@ -2682,7 +2682,7 @@
       "inputs": ["high", "low", "close"],
       "version": "1",
       "status": "available",
-      "reason": "固定 lookahead=False、include_chikou=False；只返回同索引的历史因果通道。",
+      "reason": "Fix lookahead=False and include_chikou=False; return only historical causal channels on the same index.",
       "outputs": ["span_a", "span_b", "tenkan", "kijun"],
       "fixed": {
         "include_chikou": false,
@@ -4125,7 +4125,7 @@
       "inputs": ["close"],
       "version": "1",
       "status": "research-only",
-      "reason": "对整个选定样本进行 polyfit 和标准差计算，历史输出依赖后续样本；须替换为因果定义才能开放。",
+      "reason": "Apply polyfit and standard deviation to the entire selected sample; historical outputs depend on later samples and require a causal definition before exposure.",
       "outputs": ["tos_stdevall"],
       "fixed": {},
       "parameters": {},
@@ -4462,7 +4462,7 @@
       "inputs": ["open_", "high", "low", "close", "volume"],
       "version": "1",
       "status": "available",
-      "reason": "仅按输入的上一根 bar 计算；不执行跨周期重采样或 virgin 未来识别。",
+      "reason": "Compute only from the preceding input bar; no cross-timeframe resampling or virgin future detection.",
       "outputs": [
         "top",
         "pivot",
@@ -5841,7 +5841,7 @@
       "inputs": ["high", "low", "close", "volume"],
       "version": "1",
       "status": "available",
-      "reason": "固定 open_=None，采用 native 默认公式；不因行情包含 Open 而隐式切换计算变体。",
+      "reason": "Fix open_=None and use the native default formula; do not implicitly switch variants when market data contains Open.",
       "outputs": ["ad"],
       "fixed": {
         "open_": null
@@ -5864,7 +5864,7 @@
       "inputs": ["high", "low", "close", "volume"],
       "version": "1",
       "status": "available",
-      "reason": "固定 open_=None，采用 native 默认公式；不因行情包含 Open 而隐式切换计算变体。",
+      "reason": "Fix open_=None and use the native default formula; do not implicitly switch variants when market data contains Open.",
       "outputs": ["adosc"],
       "fixed": {
         "open_": null
@@ -5945,7 +5945,7 @@
       "inputs": ["high", "low", "close", "volume"],
       "version": "1",
       "status": "available",
-      "reason": "固定 open_=None，采用 native 默认公式；不因行情包含 Open 而隐式切换计算变体。",
+      "reason": "Fix open_=None and use the native default formula; do not implicitly switch variants when market data contains Open.",
       "outputs": ["cmf"],
       "fixed": {
         "open_": null
@@ -6402,7 +6402,7 @@
       "inputs": ["close", "volume"],
       "version": "1",
       "status": "non-series",
-      "reason": "Volume Profile 输出按价格分箱，行数为 width，不属于行情时间序列。",
+      "reason": "Volume Profile bins output by price, with width rows; it is not a market-data time series.",
       "outputs": ["vp"],
       "fixed": {},
       "parameters": {},

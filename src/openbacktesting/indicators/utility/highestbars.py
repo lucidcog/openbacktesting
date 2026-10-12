@@ -1,4 +1,4 @@
-"""ta.highestbars：固定因果序列契约。"""
+"""ta.highestbars: Fixed causal sequence contract."""
 
 from collections import deque
 

@@ -1,4 +1,4 @@
-"""ta.drawdown：固定依赖的计算封装与规范输出。"""
+"""ta.drawdown: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.performance.drawdown import drawdown as _calculate
 

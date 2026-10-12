@@ -1,4 +1,4 @@
-"""独立进程记录交易事实表规模、耗时与峰值RSS，不设无依据性能阈值。"""
+"""A separate process records trade-fact table size, elapsed time, and peak RSS without unsupported performance thresholds."""
 
 import argparse
 import json
@@ -7,6 +7,7 @@ import sys
 import time
 
 import pandas as pd
+
 from openbacktesting import Backtest, Strategy
 
 

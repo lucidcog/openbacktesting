@@ -99,7 +99,7 @@ class TestBacktest(TestCase):
         self.assertRaises(AttributeError, bt.run, foo=3)
 
     def test_run_speed(self):
-        # CPU 性能阈值在无插桩解释器测量；功能与分支仍由完整回归采集覆盖率。
+        # Measure CPU performance thresholds with an uninstrumented interpreter; full regression coverage still captures functionality and branches.
         process = subprocess.run(
             [
                 sys.executable,
@@ -190,7 +190,7 @@ print(time.process_time() - start)
 
                 assert float(self.data.Close) == self.data.Close[-1]
 
-            def next(self, _FEW_DAYS=pd.Timedelta("3 days")):  # noqa: B008 — 初始化时固定默认值，保持原生行为
+            def next(self, _FEW_DAYS=pd.Timedelta("3 days")):  # noqa: B008 — freeze defaults at initialization, preserving native behavior
                 assert self.equity >= 0
 
                 from openbacktesting.indicator_types import IndicatorHandle
@@ -279,7 +279,7 @@ print(time.process_time() - start)
 
         bt = Backtest(GOOG, Assertive)
         stats = bt.run()
-        self.assertEqual(stats["# Trades"], 267)  # 显式数量与向零分批退出的政策v2基线
+        self.assertEqual(stats["# Trades"], 267)  # Policy v2 baseline for explicit quantities and partial exits rounded toward zero
 
     def test_broker_params(self):
         bt = Backtest(
@@ -395,9 +395,9 @@ print(time.process_time() - start)
 
     def test_compute_stats(self):
         stats = Backtest(GOOG, SmaCross, end_policy="close_at_last_close").run()
-        # 政策v2：显式95%数量预算、末Close清算；原历史基线文件保留。
-        # 逐根执行：买入持有从输入首根计算；风险年化包含首个零收益日桶。
-        # 交易、权益、Beta 和回撤均未变化，Alpha 随市场对照调整。
+        # Policy v2: Explicit 95% quantity budget and liquidation at the final Close; original historical baseline files are retained.
+        # Per-bar execution: Buy-and-hold starts at the first input bar; annualized risk includes the first zero-return daily bucket.
+        # Trades, equity, Beta, and drawdowns are unchanged; Alpha changes with the market benchmark.
         expected = pd.Series(
             {
                 "Start": pd.Timestamp("2004-08-19 00:00:00"),
@@ -699,7 +699,7 @@ class TestStrategy(TestCase):
 
     def test_stop_limit_order_price_is_stop_price(self):
         def coroutine(self):
-            yield  # 此价格回归固定在第二根提交，独立于新增首根回调。
+            yield  # This price regression submits on the second bar, independently of the new first-bar callback.
             self.buy(stop=112, limit=113, qty=1)
             self.sell(stop=107, limit=105, qty=1)
             yield
@@ -803,7 +803,7 @@ class TestOptimize(TestCase):
                 if method == "grid":
                     self.assertEqual(len(heatmap), 6)
                 else:
-                    # SAMBO可以因目标收敛提前结束；预算是上限。
+                    # SAMBO may stop early when the objective converges; the budget is an upper bound.
                     self.assertTrue(0 < len(heatmap) <= 6)
                     self.assertTrue(heatmap.index.is_unique)
 
@@ -989,7 +989,7 @@ class TestLib(TestCase):
         self.assertEqual(len(trades), 42)
         trade = trades.iloc[0]
         self.assertAlmostEqual(trade["EntryPrice"], 236.69)
-        # 指标保留内部计算单位；显式换算后仍等于原价格基线。
+        # Indicators retain internal computation units; explicit conversion still matches the original price baseline.
         self.assertAlmostEqual(stats["_strategy"]._indicators[0][trade["EntryBar"]], 234.14)
 
     def test_MultiBacktest(self):
@@ -1117,7 +1117,7 @@ class TestDocs(TestCase):
         ):
             for file in examples:
                 with self.subTest(example=os.path.basename(file)):
-                    # 保留模块身份直至运行结束，fork 的任务队列仍需 pickle 策略类。
+                    # Preserve module identity until the run ends; fork task queues still need to pickle strategy classes.
                     name = "_engine_example_" + Path(file).stem
                     spec = spec_from_file_location(name, file)
                     module = module_from_spec(spec)
@@ -1254,7 +1254,7 @@ class TestRegressions(TestCase):
 
         trades = Backtest(SHORT_DATA, S).run()._trades
         self.assertEqual(trades["ExitBar"].iloc[0], 4)
-        self.assertEqual(trades["ExitPrice"].iloc[0], 104.96)  # 下一根开盘改善
+        self.assertEqual(trades["ExitPrice"].iloc[0], 104.96)  # Next-open price improvement
 
     def test_optimize_datetime_index_with_timezone(self):
         data: pd.DataFrame = GOOG.iloc[:100]

@@ -1,4 +1,4 @@
-"""ta.range：固定因果序列契约。"""
+"""ta.range: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

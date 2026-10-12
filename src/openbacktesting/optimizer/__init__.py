@@ -1,4 +1,4 @@
-"""参数穷举、逐份 Portfolio 本地保存与事后查询。"""
+"""Exhaustive parameter search, local storage of individual Portfolios, and subsequent queries."""
 
 from openbacktesting.optimizer import identity as identity
 from openbacktesting.optimizer.models import (

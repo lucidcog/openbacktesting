@@ -1,4 +1,4 @@
-"""ta.edecay：固定依赖的计算封装与规范输出。"""
+"""ta.edecay: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.trend.edecay import edecay as _calculate
 

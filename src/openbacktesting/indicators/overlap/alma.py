@@ -1,4 +1,4 @@
-"""ta.alma：固定依赖的计算封装与规范输出。"""
+"""ta.alma: Computation wrapper for the pinned dependency with canonical outputs."""
 
 import numpy as np
 import pandas as pd
@@ -11,7 +11,7 @@ def compute(*, close, length, sigma, distribution_offset, talib, floor):
     if floor:
         center = np.floor(distribution_offset * (length - 1))
         distance = np.arange(length, dtype=float) - center
-        # 中心为整数，至少一个权重精确为 1；极端 sigma 其余权重可安全下溢。
+        # The center is an integer, ensuring at least one weight is exactly 1; other weights can safely underflow for extreme sigma.
         with np.errstate(over="ignore", under="ignore"):
             scaled = distance * (sigma / length)
             weights = np.exp(-0.5 * scaled * scaled)

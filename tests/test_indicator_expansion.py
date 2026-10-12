@@ -1,4 +1,4 @@
-"""扩展目录的独立参考、边界、因果性与真实策略消费。"""
+"""Independent references, boundaries, causality, and real strategy consumption for the expanded catalog."""
 
 import builtins
 import json
@@ -64,7 +64,7 @@ def test_expansion_full_prefix_short_gap_and_no_talib(name, monkeypatch):
 
     def guarded(module, *args, **kwargs):
         if module == "talib":
-            pytest.fail("不得导入TA-Lib")
+            pytest.fail("TA-Lib must not be imported")
         return original(module, *args, **kwargs)
 
     monkeypatch.setattr(builtins, "__import__", guarded)
@@ -126,7 +126,7 @@ def test_exact_candidate_inventory_and_frozen_contract():
     for row in CONTRACT["entries"]:
         expected = dict(row)
         if row["id"] == "ta.pivot_points":
-            # 本地 built-ins 扩展显式升级这三个契约字段，其余历史字段不变。
+            # Local built-in extensions explicitly upgrade these three contract fields; other historical fields remain unchanged.
             expected = expected | {
                 "version": "2",
                 "minimum": 1,
@@ -202,7 +202,7 @@ def test_confirmed_pivot_timing_ties_and_low():
     assert not result.valid[:, :4].any()
     assert result.metadata["required_outputs"] == []
     assert "warmup" not in result._opts
-    # 相等极值只在最右候选的右窗完成后确认。
+    # Equal extrema confirm only after the rightmost candidate's right window completes.
     result = compute("pivothigh", frame, left=1, right=1)
     assert not result["value"].valid[6]
     assert result["value"][7] == 5
@@ -274,13 +274,13 @@ def test_small_ordinary_formula_fixtures():
     np.testing.assert_allclose(compute("frama", frame, length=4)[3:], 10)
     frame[["High", "Low"]] = 10.0
     np.testing.assert_allclose(compute("frama", frame, length=4)[3:], 10)
-    with pytest.raises(IndicatorError, match="偶数"):
+    with pytest.raises(IndicatorError, match="even"):
         compute("frama", frame, length=3)
     frame["Close"] = [1, 2, 2, 1, 3, 2, 4, 3, 2, 3, 4, 5]
-    # [1,2,2] 的平均秩 [1,2.5,2.5]，独立Pearson计算。
+    # Average ranks for [1,2,2] are [1,2.5,2.5], with an independent Pearson calculation.
     assert compute("rci", frame, length=3)[2] == pytest.approx(86.6025403784)
     wave = compute("wavetrend", frame, length=1, average=1, signal=1)
-    assert not wave.valid.any()  # price恰等于首级EMA，分母为0。
+    assert not wave.valid.any()  # price exactly equals the first EMA stage, so the denominator is 0.
 
 
 def test_pivot_period_formulas_and_missing_levels():
@@ -335,7 +335,7 @@ def test_pivot_period_formulas_and_missing_levels():
     frame.loc[frame.index[2], "High"] = np.nan
     assert not compute("pivot_points", frame).valid[:, 4:].any()
     frame["anchor"] = np.nan
-    with pytest.raises(IndicatorError, match="锚点"):
+    with pytest.raises(IndicatorError, match="anchor"):
         compute("pivot_points", frame)
 
 
@@ -378,7 +378,7 @@ def test_nonzero_pattern_fixtures(name, expected):
     assert result[-1] == expected and result.valid[-1]
     assert not result.valid[0]
     assert result[0] == 0
-    # 追加同一形态，原触发时间与分值不变。
+    # Appending the same pattern leaves its original trigger time and score unchanged.
     extended = pd.concat([frame, frame], ignore_index=True)
     np.testing.assert_array_equal(compute("cdl_" + name, extended)[: len(frame)], result)
     if name in ["inside", "engulfing", "harami", "marubozu"]:
@@ -450,7 +450,7 @@ def test_new_inputs_strategy_gating_and_pickle():
         )
 
     namespace = IndicatorNamespace(register)
-    with pytest.raises(IndicatorError, match="同时"):
+    with pytest.raises(IndicatorError, match="both be specified"):
         namespace._call_inputs("ta.cross", {"left": "Close"}, {"right": "Open"}, None, None, {})
     with pytest.raises(IndicatorError):
         namespace._call_inputs("ta.cross", {"left": np.ones(20)}, None, None, None, {})
@@ -481,7 +481,7 @@ def test_definition_masks_and_average_contract_edges():
     result = pd.Series([1, 2, 3], index=frame.index, name="ema")
     for mask in [np.ones(3), np.ones(4, dtype=bool)]:
         result.attrs["indicator_valid"] = mask
-        with pytest.raises(IndicatorError, match="有效掩码"):
+        with pytest.raises(IndicatorError, match="validity mask"):
             to_arrays(spec, result, frame.index, {"length": 1})
     np.testing.assert_allclose(
         average(pd.Series([1, 2, np.nan, 3, 5]), 2),
@@ -495,7 +495,7 @@ def test_definition_masks_and_average_contract_edges():
     result = indicators.compute(
         "ta.cum", frame, inputs={"source": parent}, cursor=cursor, cache=cache
     )
-    assert not result.valid[:2].any()  # 整数无效占位必须在组合时转换为缺失。
+    assert not result.valid[:2].any()  # Invalid integer placeholders must become missing values during composition.
 
 
 @pytest.mark.parametrize("name", ["nvi", "pvi"])
@@ -604,7 +604,7 @@ def test_expanded_user_example_executes_without_future_reads(monkeypatch):
     frame = example_chart(example)["data"]
     expected_anchors = ~frame.index.to_period("M").duplicated()
     np.testing.assert_array_equal(frame.PeriodStart, expected_anchors)
-    # 月首的水平只取上一完整输入月，月内后续高低点不能回写该值。
+    # Month-start levels use only the previous complete input month; subsequent highs/lows cannot rewrite them.
     strategy = result["_strategy"]
     levels = np.asarray(strategy.levels.p)
     starts = np.flatnonzero(expected_anchors)

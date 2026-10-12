@@ -1,4 +1,4 @@
-"""参数实验的纯值类型与规范编码。"""
+"""Plain-value types and canonical encoding for parameter experiments."""
 
 from __future__ import annotations
 
@@ -9,12 +9,12 @@ from dataclasses import dataclass
 
 
 def encode(value) -> str:
-    """规范 JSON；拒绝非有限数和非字符串键。"""
+    """Canonical JSON; reject nonfinite numbers and nonstring keys."""
 
     def check(item):
         if isinstance(item, dict):
             if any(type(k) is not str for k in item):
-                raise ValueError("optimizer: JSON 键必须为字符串")
+                raise ValueError("optimizer: JSON keys must be strings")
             for child in item.values():
                 check(child)
         elif isinstance(item, (list, tuple)):
@@ -33,14 +33,14 @@ def digest(value) -> str:
 
 @dataclass(frozen=True)
 class Values:
-    """有限候选值；由 plan 按对应 input 声明校验。"""
+    """Finite candidate values; plan validates against the corresponding input declaration."""
 
     values: tuple | list
 
 
 @dataclass(frozen=True)
 class Range:
-    """升序格点范围；int 使用整数，float/price 使用十进制字符串或整数。"""
+    """Ascending grid range; int uses integers, float/price uses decimal strings or integers."""
 
     start: int | str
     stop: int | str
@@ -49,7 +49,7 @@ class Range:
 
 @dataclass(frozen=True)
 class ExecutionIdentity:
-    """宿主对已加载源码及本地依赖的 SHA256 声明，不加载或执行文件。"""
+    """Host declaration of SHA256 digests for loaded source and local dependencies; no files are loaded or executed."""
 
     strategy_sha256: str
     dependencies_sha256: str
@@ -57,27 +57,27 @@ class ExecutionIdentity:
     def __post_init__(self):
         for value in (self.strategy_sha256, self.dependencies_sha256):
             if not isinstance(value, str) or re.fullmatch("[0-9a-f]{64}", value) is None:
-                raise ValueError("optimizer: 执行身份必须是小写 SHA256")
+                raise ValueError("optimizer: execution identity must be a lowercase SHA256 digest")
 
 
 @dataclass(frozen=True)
 class Plan:
-    """不可变规范文本；snapshot 返回独立副本，组合在运行时逐项产生。"""
+    """Immutable canonical text; snapshot returns an independent copy, and combinations are generated incrementally at runtime."""
 
     _json: str
 
     def snapshot(self) -> dict:
-        """返回完整计划的独立 JSON 副本。"""
+        """Return an independent JSON copy of the complete plan."""
         return json.loads(self._json)
 
     @property
     def total(self) -> int:
-        """原始笛卡尔积数量，不扣除尚未检查的约束。"""
+        """Raw Cartesian-product count, without deducting constraints not yet checked."""
         return self.snapshot()["total"]
 
 
 class OptimizationError(RuntimeError):
-    """实验基础设施错误，保留结果位置、身份及最后已知提交数。"""
+    """Experiment infrastructure error preserving result location, identity, and last known committed count."""
 
     def __init__(self, message, path, experiment_id, committed):
         self.path = str(path)
@@ -89,4 +89,4 @@ class OptimizationError(RuntimeError):
 
 
 class _ExportError(ValueError):
-    """单次回测已返回，但完整 Portfolio 导出失败。"""
+    """A backtest returned, but complete Portfolio export failed."""

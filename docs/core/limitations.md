@@ -1,9 +1,9 @@
-# 当前边界
+# Current boundaries
 
-## 语义边界
+## Semantic boundaries
 
-当前为单资产、单结算币种、线性保证金交易模型。默认下一根开盘执行；same_close 为本根单次收盘阶段；期末由 end_policy 控制。保护单歧义采用确定性政策并记录诊断，不代表已知真实盘中路径。从首根调用 next，指标有效性不门控执行；策略消费指标前须自行检查 valid。
+The current trading model has one asset, one settlement currency, and linear margin. Default execution is at the next bar's open; same_close is a single close phase on the current bar, and end_policy controls termination. Ambiguous protective orders follow deterministic policies and record diagnostics; this does not imply knowledge of the true intrabar path. next runs from the first bar, and indicator validity does not gate execution; strategies must check valid before consuming indicators.
 
-未来以自有语义 SDK 逐项建设指标、Series/状态、broker 和多周期能力。Python 库不提供代码沙箱；仅运行受信任代码。当前未验收 Windows、完整 Pine 对照、实时执行、组合账户或无开发环境桌面安装。
+Future development will build indicators, Series/state, broker, and multiple-timeframe capabilities individually through a semantic SDK owned by the project. The Python library provides no code sandbox; run only trusted code. Windows, full Pine comparisons, live execution, portfolio accounts, and desktop installation without a development environment have not been accepted.
 
-不支持成交量 filler、多资产调度、期货合约乘数/逐日结算、借券利息、资金费率、交易所会话或实盘保证。仅有 OHLC 无法验证真实滑点或流动性，止损预算不保证最大损失。
+Volume fillers, multi-asset scheduling, futures contract multipliers/daily settlement, stock-borrow interest, funding fees, exchange sessions, and live-trading guarantees are unsupported. OHLC alone cannot validate actual slippage or liquidity; a stop-loss budget does not guarantee a maximum loss.

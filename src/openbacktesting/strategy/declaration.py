@@ -1,4 +1,4 @@
-"""作者回测声明：保持类身份，无全局注册和执行副作用。"""
+"""Author backtest declaration preserving class identity, without global registration or execution side effects."""
 
 from collections.abc import Callable
 from inspect import isabstract
@@ -37,43 +37,43 @@ def backtest(
     exclusive_orders: bool = False,
     end_policy: EndPolicy = EndPolicy.MARK_TO_MARKET,
 ) -> Callable[[type[_S]], type[_S]]:
-    """将默认回测设置附在具体策略类上；实际行情和运行由宿主提供。
+    """Attach default backtest settings to a concrete strategy class; the host supplies actual market data and execution.
 
-    只接受基础值和对应枚举成员；固定选项不接受裸字符串或其他枚举。
-    仅支持带括号的装饰器形式。算法参数继续使用 inputs，不接受品种、
-    周期或资源选项；配置模型由框架构造，返回原策略类。
+    Accept only primitive values and corresponding enum members; fixed options reject bare strings and other enums.
+    Only the decorator form with parentheses is supported. Algorithm parameters still use inputs; instrument,
+    timeframe, and resource options are not accepted. The framework constructs the configuration model and returns the original strategy class.
 
     Args:
-        cash: 正有限初始账户余额。
-        spread: 每次买卖执行的价差小数比例，范围 [0,1)。
-        commission_type: 单一佣金类型；PERCENT、CASH_PER_ORDER 或 CASH_PER_CONTRACT。
-        commission_value: PERCENT 使用 [-10,10) 百分数，0.2 表示 0.2%，负值为返佣；
-            其他类型为非负金额，分别按实际 Fill 或实际资产单位收取。
-        risk_free_rate: (-1,1) 年化小数，仅用于统计，不向账户计息。
-        default_qty_type: FIXED 为固定数量，PERCENT_OF_EQUITY 为权益百分数。
-        default_qty_value: None 禁用默认数量；FIXED 为正数，权益百分数为 (0,100]。
-            仅普通 buy/sell 省略 qty 时按请求时 Close 和权益预算、向零取整并冻结。
-        margin: (0,1] 保证金小数比例，不放大默认数量预算。
-        execution_timing: NEXT_OPEN 或 SAME_CLOSE；后者仅处理 next 新增无条件市价单。
-        slippage_type: FIXED 为固定价格距离，BPS 为基点。
-        slippage_value: 非负滑点值，零为无滑点。
-        allow_short: 是否允许新增空头，严格 bool。
-        max_gross_exposure: None 或正的总名义／权益倍数上限。
-        hedging: 是否保留双向批次，严格 bool。
-        exclusive_orders: 新普通入场是否撤旧入场并提交旧仓退出，严格 bool。
-        end_policy: MARK_TO_MARKET 保留持仓估值，CLOSE_AT_LAST_CLOSE 清算实际持仓。
+        cash: Positive finite initial account balance.
+        spread: Fractional spread for every buy/sell execution, in [0,1).
+        commission_type: One commission type: PERCENT, CASH_PER_ORDER, or CASH_PER_CONTRACT.
+        commission_value: PERCENT uses percentage points in [-10,10); 0.2 means 0.2%, and negative values are rebates;
+            other types use nonnegative amounts, charged per actual Fill or actual asset unit respectively.
+        risk_free_rate: Annualized fraction in (-1,1), used only for statistics without accruing account interest.
+        default_qty_type: FIXED means fixed quantity; PERCENT_OF_EQUITY means equity percentage.
+        default_qty_value: None disables default sizing; FIXED is positive, and equity percentage is in (0,100].
+            Only ordinary buy/sell orders omitting qty use Close and equity at request time to budget, round toward zero, and freeze quantity.
+        margin: Margin fraction in (0,1], without amplifying the default quantity budget.
+        execution_timing: NEXT_OPEN or SAME_CLOSE; the latter handles only new unconditional market orders from next.
+        slippage_type: FIXED means a fixed price distance; BPS means basis points.
+        slippage_value: Nonnegative slippage value; zero means no slippage.
+        allow_short: Whether new short positions are allowed; strictly bool.
+        max_gross_exposure: None or a positive cap on gross notional/equity.
+        hedging: Whether to retain two-sided lots; strictly bool.
+        exclusive_orders: Whether a new ordinary entry cancels prior entries and submits exits for existing positions; strictly bool.
+        end_policy: MARK_TO_MARKET retains marked positions; CLOSE_AT_LAST_CLOSE liquidates actual positions.
 
     Raises:
-        TypeError: 类型、枚举、字段或装饰目标不合法。
-        ValueError: 数值越界或同一策略重复声明。
+        TypeError: Invalid types, enums, fields, or decorator targets.
+        ValueError: Out-of-range numbers or duplicate declarations on the same strategy.
     """
     settings = BacktestSettings(**locals())
 
     def decorate(cls: type[_S]) -> type[_S]:
         if not isinstance(cls, type) or not issubclass(cls, Strategy) or isabstract(cls):
-            raise TypeError("backtest 只能装饰具体 Strategy 子类")
+            raise TypeError("backtest can decorate only concrete Strategy subclasses")
         if _ATTRIBUTE in vars(cls):
-            raise ValueError("同一策略类不能重复应用 backtest")
+            raise ValueError("backtest cannot be applied repeatedly to the same strategy class")
         setattr(cls, _ATTRIBUTE, settings)
         return cls
 
@@ -81,10 +81,10 @@ def backtest(
 
 
 def declaration(cls: type[Strategy]) -> BacktestSettings | None:
-    """只读取本类的直接声明；未装饰子类不继承入口身份。"""
+    """Read only this class's direct declaration; undecorated subclasses do not inherit entry-point identity."""
     value = vars(cls).get(_ATTRIBUTE)
     if value is None:
         return None
     if not isinstance(value, BacktestSettings):
-        raise TypeError("策略回测声明无效")
+        raise TypeError("Invalid strategy backtest declaration")
     return value.resolve(None)

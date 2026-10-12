@@ -1,4 +1,4 @@
-"""从磁盘标量投影查询实验；不导入策略或重算统计。"""
+"""Query experiments from on-disk scalar projections; do not import strategies or recompute statistics."""
 
 import json
 import sqlite3
@@ -46,12 +46,12 @@ def _direction(path):
 
 def _limit(value):
     if type(value) is not int or not 1 <= value <= 1000:
-        raise ValueError("optimizer: limit 必须在 1..1000")
+        raise ValueError("optimizer: limit must be in 1..1000")
 
 
 @dataclass(frozen=True)
 class ExperimentResult:
-    """可重开的只读结果集句柄；每次访问独立连接，无活策略引用。"""
+    """Reopenable read-only result handle; each access uses an independent connection without live strategy references."""
 
     path: str
     experiment_id: str
@@ -62,7 +62,7 @@ class ExperimentResult:
         try:
             check_version(conn)
             if conn.execute("SELECT id FROM experiment").fetchone()[0] != self.experiment_id:
-                raise ValueError("optimizer: 实验 ID 不匹配")
+                raise ValueError("optimizer: experiment ID does not match")
             conn.create_collation("exact", _compare)
             conn.create_function("scalar_key", 2, _key, deterministic=True)
             conn.execute("PRAGMA temp_store=FILE")
@@ -71,14 +71,14 @@ class ExperimentResult:
             conn.close()
 
     def info(self) -> dict:
-        """返回实验状态、分类计数及不可变计划副本。"""
+        """Return experiment status, category counts, and an immutable plan copy."""
         with self._connection() as conn:
             return counts(conn) | {
                 "plan": json.loads(conn.execute("SELECT plan FROM experiment").fetchone()[0])
             }
 
     def fields(self) -> list[dict]:
-        """返回标量的路径、类型、单位、状态、方法与建议排序方向。"""
+        """Return scalar paths, types, units, statuses, methods, and suggested sort directions."""
         with self._connection() as conn:
             return [
                 dict(row) | {"suggestedDirection": _direction(row["path"])}
@@ -88,15 +88,15 @@ class ExperimentResult:
             ]
 
     def load_portfolio(self, trial_id: str) -> dict:
-        """校验并加载单份完整报告，失败或损坏时明确拒绝。"""
+        """Validate and load one complete report; explicitly reject failures and corruption."""
         with self._connection() as conn:
             return load_report(conn, trial_id)
 
     def trials(self, *, limit: int = 100, offset: int = 0) -> list[dict]:
-        """分页浏览所有已访问试验的实时状态，不附带完整 Portfolio。"""
+        """Browse live statuses of all visited trials by page, without complete Portfolios."""
         _limit(limit)
         if type(offset) is not int or offset < 0:
-            raise ValueError("optimizer: offset 必须为非负整数")
+            raise ValueError("optimizer: offset must be a nonnegative integer")
         with self._connection() as conn:
             return [
                 dict(row)
@@ -109,20 +109,20 @@ class ExperimentResult:
     def query(
         self, *, order_by=(), filters=(), fields=(), limit: int = 100, cursor: str | None = None
     ) -> dict:
-        """查询成功组的标量与参数；游标固定提交范围，重新查询刷新。
+        """Query scalar values and parameters for successful trials; cursors freeze the commit range, and new queries refresh it.
 
-        order_by 为路径或 (路径, asc/desc)，filters 为 (路径, 运算符, 值)。
-        运算符支持 eq/ne/lt/le/gt/ge/status；点号和反斜杠键需反斜杠转义。
+        order_by is a path or (path, asc/desc); filters are (path, operator, value).
+        Supported operators: eq/ne/lt/le/gt/ge/status; escape dots and backslashes in keys with a backslash.
         """
         _limit(limit)
         ordering = [
             (item, _direction(item)) if isinstance(item, str) else tuple(item) for item in order_by
         ]
         if any(len(item) != 2 or item[1] not in ("asc", "desc") for item in ordering):
-            raise ValueError("optimizer: 非法排序方向")
+            raise ValueError("optimizer: invalid sort direction")
         operations = {"eq": "=", "ne": "!=", "lt": "<", "le": "<=", "gt": ">", "ge": ">="}
         if any(len(item) != 3 or item[1] not in (*operations, "status") for item in filters):
-            raise ValueError("optimizer: 非法过滤条件")
+            raise ValueError("optimizer: invalid filter condition")
         paths = list(
             dict.fromkeys([p for p, _ in ordering] + [f[0] for f in filters] + list(fields))
         )
@@ -148,7 +148,7 @@ class ExperimentResult:
                 or type(token.get("offset")) is not int
                 or token["offset"] < 0
             ):
-                raise ValueError("optimizer: 游标与查询不匹配")
+                raise ValueError("optimizer: cursor does not match the query")
             joins, selected, params, metadata = [], [], [], {}
             for i, path in enumerate(paths):
                 rows = conn.execute(
@@ -156,12 +156,12 @@ class ExperimentResult:
                     (path, token["watermark"]),
                 ).fetchall()
                 if not rows:
-                    raise ValueError(f"optimizer: 未知或非标量字段 {path}")
+                    raise ValueError(f"optimizer: unknown or nonscalar field {path}")
                 signatures = {
                     (r["kind"], r["unit"], r["method"]) for r in rows if r["kind"] != "null"
                 }
                 if len(signatures) > 1 or len({(r["unit"], r["method"]) for r in rows}) > 1:
-                    raise ValueError(f"optimizer: 字段类型或统计口径不一致 {path}")
+                    raise ValueError(f"optimizer: inconsistent field types or statistical definitions {path}")
                 metadata[path] = next(iter(signatures), ("null", rows[0]["unit"], rows[0]["method"]))
                 joins.append(f"LEFT JOIN scalars s{i} ON s{i}.trial=t.id AND s{i}.path=?")
                 params.append(path)
@@ -184,11 +184,11 @@ class ExperimentResult:
                         and type(value) is bool
                     )
                     if not valid:
-                        raise ValueError("optimizer: 过滤值类型不匹配")
+                        raise ValueError("optimizer: filter value type does not match")
                     if kind == "number":
                         number = Decimal(str(value))
                         if not number.is_finite():
-                            raise ValueError("optimizer: 非有限过滤值")
+                            raise ValueError("optimizer: nonfinite filter value")
                     where.append(
                         f"scalar_key({alias}.value,{alias}.kind) COLLATE exact {operations[op]} ?"
                     )
@@ -227,7 +227,7 @@ class ExperimentResult:
             return {"rows": result, "cursor": following, "watermark": token["watermark"]}
 
     def backup(self, destination) -> str:
-        """一致性备份到新本地文件，拒绝覆盖已有文件。"""
+        """Create a consistent backup in a new local file; reject overwriting existing files."""
         target = local_path(destination)
         with target.open("xb"):
             pass
@@ -245,13 +245,13 @@ class ExperimentResult:
 
 
 def open_result(path, experiment_id: str | None = None) -> ExperimentResult:
-    """只读打开一个实验结果库，无策略或行情依赖。"""
+    """Open an experiment result database read-only, without strategy or market-data dependencies."""
     conn = connect(path, readonly=True)
     try:
         check_version(conn)
         current = conn.execute("SELECT id FROM experiment").fetchone()[0]
         if experiment_id is not None and current != experiment_id:
-            raise ValueError("optimizer: 实验 ID 不匹配")
+            raise ValueError("optimizer: experiment ID does not match")
         return ExperimentResult(str(local_path(path)), current)
     finally:
         conn.close()

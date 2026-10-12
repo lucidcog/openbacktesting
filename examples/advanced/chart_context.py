@@ -1,9 +1,10 @@
-"""图表上下文：品种、周期、当地时间条件、统计日界与夏令时。
+"""Chart context: instrument, timeframe, local-time conditions, statistical day boundaries, and daylight saving time.
 
-固定离线 OHLC 只用于展示注入机制，不代表行情获取或多周期重采样能力。
+Fixed offline OHLC demonstrates context injection only; it does not provide market-data retrieval or multi-timeframe resampling.
 """
 
 import pandas as pd
+
 from openbacktesting import DataContext, EndPolicy, Strategy, Timeframe, backtest, inputs, runtime
 from openbacktesting.broker import InstrumentSpec
 from openbacktesting.portfolio import export_result
@@ -11,15 +12,15 @@ from openbacktesting.portfolio import export_result
 
 @backtest(cash=10_000, commission_value=0.2, end_policy=EndPolicy.CLOSE_AT_LAST_CLOSE)
 class ChartStrategy(Strategy):
-    quantity = inputs.int(1, title="数量", minval=1)
-    local_hours = inputs.bool(False, title="按当地小时")
+    quantity = inputs.int(1, title="Quantity", minval=1)
+    local_hours = inputs.bool(False, title="Local hour")
 
     def init(self):
         self.observed_timeframe = self.timeframe
 
     def next(self):
         if self.local_hours:
-            # 直接对应图表钟点，作者无需从 UTC 手动转换。
+            # Matches the chart clock directly, without requiring manual conversion from UTC.
             hour = self.data_index[-1].hour
             if hour == 9 and not self.position:
                 self.buy(qty=self.quantity)
@@ -30,12 +31,12 @@ class ChartStrategy(Strategy):
 
 
 def timezone_examples():
-    """返回真实运行结果，供读者及示例测试核对；不修改传入的 UTC 数据。"""
+    """Return actual run results for readers and example tests; leave the supplied UTC data unchanged."""
     schema = runtime.describe(globals())
 
     def run(data, zone, *, local_hours=False):
         request = {key: schema[key] for key in ("schemaVersion", "schemaHash")} | {
-            "values": {"数量": 1, "按当地小时": local_hours}
+            "values": {"Quantity": 1, "Local hour": local_hours}
         }
         before = data.copy(deep=True)
         result = runtime.run(
@@ -64,7 +65,7 @@ def timezone_examples():
             index=index,
         )
 
-    # 01:00 UTC 对应上海 09:00；切换图表时区后用新 context 重新运行。
+    # 01:00 UTC is 09:00 in Shanghai; rerun with a new context after changing the chart timezone.
     data = frame(
         pd.date_range("2026-01-05 01:00", periods=4, freq="h", tz="UTC"),
         [100.0, 101.0, 102.0, 103.0],
@@ -74,11 +75,11 @@ def timezone_examples():
     assert local["UTC"]["# Trades"] == 0
     for zone, result in local.items():
         print(
-            f"图表 {zone}，首根 {result['_equity_curve'].index[0].isoformat()}，"
-            f"交易 {int(result['# Trades'])} 笔"
+            f"Chart {zone}, first bar {result['_equity_curve'].index[0].isoformat()}, "
+            f"Trades {int(result['# Trades'])} trades"
         )
 
-    # 回拨时两个 01:30 是不同 bar；偏移不同，绝对时间仍相差一小时。
+    # During the clock rollback, the two 01:30 values are distinct bars; their offsets differ and their absolute times remain one hour apart.
     data = frame(
         pd.date_range("2026-11-01 04:30", periods=5, freq="h", tz="UTC"),
         [100.0, 101.0, 102.0, 103.0, 104.0],
@@ -90,9 +91,9 @@ def timezone_examples():
         "2026-11-01T01:30:00-05:00",
     ]
     assert repeated[1] - repeated[0] == pd.Timedelta(hours=1)
-    print("纽约重复小时：", [time.isoformat() for time in repeated])
+    print("Repeated New York hour:", [time.isoformat() for time in repeated])
 
-    # 固定按 bar 下单，交易和权益一致；图表日期不同，每日末权益分组不同。
+    # Orders at fixed bar positions produce identical trades and equity; different chart dates change daily closing-equity groups.
     data = frame(
         pd.to_datetime(
             [
@@ -122,7 +123,7 @@ def timezone_examples():
         assert all(abs(a - b) < 1e-9 for a, b in zip(closes, expected))
         equity = statistics[zone]["_equity_curve"].Equity
         assert equity.resample("D").last().tolist() == expected
-        print(f"统计 {zone}：每日末权益 {expected}，Sharpe {statistics[zone]['Sharpe Ratio']}")
+        print(f"Statistics {zone}: daily closing equity {expected}, Sharpe {statistics[zone]['Sharpe Ratio']}")
     assert statistics["UTC"]["_equity_curve"].Equity.tolist() == (
         statistics["Asia/Shanghai"]["_equity_curve"].Equity.tolist()
     )
@@ -133,7 +134,7 @@ def timezone_examples():
 def main():
     schema = runtime.describe(globals())
     request = {key: schema[key] for key in ("schemaVersion", "schemaHash")} | {
-        "values": {"数量": 2}
+        "values": {"Quantity": 2}
     }
     results = []
     for symbol, timeframe, frequency in (

@@ -110,7 +110,7 @@ def compute_stats(
     returns = trades_df["ReturnPct"]
     durations = trades_df["Duration"]
 
-    def _round_timedelta(value, _period=_data_period(index)):  # noqa: B008 — 初始化时固定默认值，保持原生行为
+    def _round_timedelta(value, _period=_data_period(index)):  # noqa: B008 — freeze defaults at initialization, preserving native behavior
         if not isinstance(value, pd.Timedelta) or pd.isna(_period):
             return value
         resolution = getattr(_period, "resolution_string", None) or _period.resolution
@@ -188,7 +188,7 @@ def compute_stats(
         )
     max_dd = -np.nan_to_num(dd.max())
     s["Calmar Ratio"] = annualized_return / (-max_dd or np.nan)
-    with np.errstate(divide="ignore", invalid="ignore"):  # 亏空保留，不强行归零
+    with np.errstate(divide="ignore", invalid="ignore"):  # Preserve deficits instead of forcing them to zero
         equity_log_returns = np.log(equity[1:] / equity[:-1])
     market_log_returns = np.log(c[1:] / c[:-1])
     beta = np.nan

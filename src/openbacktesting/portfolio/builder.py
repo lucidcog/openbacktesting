@@ -1,4 +1,4 @@
-"""一次性装配Portfolio；仅在模拟结束后投影交易事实。"""
+"""Assemble Portfolio once; project trade facts only after simulation ends."""
 
 import math
 from types import SimpleNamespace
@@ -107,7 +107,7 @@ def build_report(source):
         for row in table:
             row["timestamp"] = index[row["bar_index"]]
     reason, context = source["reason"], source["context"]
-    # 快照曲线保留每个bar最终普通收盘，以及独立terminal；同close阶段中间观察不覆盖。
+    # Snapshot curves retain each bar's final ordinary close and a separate terminal snapshot; intermediate observations in the same close phase do not overwrite them.
     bar_rows = {r["barIndex"]: r for r in rows if r["phase"] == "bar"}
     close_rows = [bar_rows[i] for i in sorted(bar_rows)] + [
         r for r in rows if r["phase"] == "terminal"

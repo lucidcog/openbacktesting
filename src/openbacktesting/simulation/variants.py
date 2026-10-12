@@ -1,4 +1,4 @@
-"""从 lib 迁入的既有实现：FractionalBacktest, MultiBacktest。"""
+"""Existing implementations moved from lib: FractionalBacktest, MultiBacktest."""
 
 from __future__ import annotations
 
@@ -13,16 +13,16 @@ from openbacktesting.util import _tqdm
 
 
 class FractionalBacktest(Backtest):
-    """已移除的价格缩放入口；请使用Backtest与InstrumentSpec。"""
+    """Removed price-scaling entry point; use Backtest and InstrumentSpec."""
 
     def __init__(self, *args, **kwargs):
         raise TypeError(
-            "FractionalBacktest已移除；使用Backtest(instrument=InstrumentSpec(quantity_step=...))及qty"
+            "FractionalBacktest has been removed; use Backtest(instrument=InstrumentSpec(quantity_step=...)) and qty"
         )
 
 
 class MultiBacktest:
-    """在多个数据集上运行同一策略，汇总各数据集统计。
+    """Run one strategy on multiple datasets and aggregate statistics for each dataset.
 
 
     Multi-dataset `openbacktesting.engine.Backtest` wrapper.
@@ -43,7 +43,7 @@ class MultiBacktest:
         self._bt_kwargs = kwargs
 
     def run(self, **kwargs):
-        """在每份数据上执行回测，并按数据集列返回统计表。
+        """Backtest each dataset and return statistics in dataset columns.
 
 
         Wraps `openbacktesting.engine.Backtest.run`. Returns `pd.DataFrame` with
@@ -82,7 +82,7 @@ class MultiBacktest:
                 shmem.close()
 
     def optimize(self, **kwargs) -> pd.DataFrame:
-        """分别优化各数据集的参数，汇总参数评分结果。
+        """Optimize parameters separately for each dataset and aggregate parameter scores.
 
 
         Wraps `openbacktesting.engine.Backtest.optimize`, but returns `pd.DataFrame` with

@@ -1,4 +1,4 @@
-"""Portfolio真实交易、报告口径、因果边界及纯值回归。"""
+"""Real Portfolio trades, report conventions, causal boundaries, and plain-value regressions."""
 
 import json
 import pickle
@@ -6,6 +6,7 @@ import pickle
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.broker import Commission, InstrumentSpec
 from openbacktesting.lib import compute_stats
@@ -343,7 +344,7 @@ def test_encoder_precision_status_and_rejection():
         pd.Timestamp("2026-01-01").value
     )
     assert metric(float("nan"))["reason"] == "undefined_value"
-    with pytest.raises(TypeError, match="纯值编码"):
+    with pytest.raises(TypeError, match="plain-value encoding"):
         plain(object())
 
 
@@ -700,7 +701,7 @@ def test_bar_extrema_keep_direction_first_tie_and_entry_boundary(
     observations = Observations()
     observations.opened(broker, trade, conditional, phase)
     eligible_prices = []
-    # 首根范围更大；条件/收盘入场只能看首根收盘，后续并列保留第一次。
+    # The first bar has a wider range; conditional/close entries see only its close, and later ties retain the first occurrence.
     for bar, (high, low) in enumerate([(120, 80), (105, 95), (109, 91), (109, 91), (103, 90)]):
         broker._i = bar
         if reversed_range:

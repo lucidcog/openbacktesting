@@ -66,2748 +66,2748 @@
     "openbacktesting.optimizer.Plan"
   ],
   "pages": {
-    "reference/core.md": "回测与策略",
-    "reference/trading.md": "订单、仓位与交易",
-    "reference/helpers.md": "策略组合与辅助工具",
-    "reference/inputs.md": "参数声明与解析",
-    "reference/runtime.md": "宿主运行入口",
-    "reference/indicator-api.md": "指标计算与结果句柄",
-    "reference/plotting.md": "绘图声明与导出",
-    "reference/colors.md": "颜色值与预设",
-    "reference/portfolio.md": "Portfolio报告与冻结导出",
-    "reference/optimizer.md": "参数实验与本地结果集"
+    "reference/core.md": "Backtests and strategies",
+    "reference/trading.md": "Orders, positions, and trades",
+    "reference/helpers.md": "Strategy composition and helpers",
+    "reference/inputs.md": "Input declarations and resolution",
+    "reference/runtime.md": "Host runtime entry points",
+    "reference/indicator-api.md": "Indicator computation and result handles",
+    "reference/plotting.md": "Plot declarations and export",
+    "reference/colors.md": "Color values and presets",
+    "reference/portfolio.md": "Portfolio reports and frozen exports",
+    "reference/optimizer.md": "Parameter experiments and local result sets"
   },
   "objects": {
     "openbacktesting.Backtest": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Backtest.optimize": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Backtest.run": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Backtest.run_inputs": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Pool": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.ind": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.buy": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.close": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.closed_trades": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.data": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.df": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.equity": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.high": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.hl2": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.hlc3": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.hlcc4": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.init": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.low": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.next": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.open": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.orders": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.pip": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.position": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.sell": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.ta": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.trades": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.volume": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.aggregation": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.backtest": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.broker": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.data": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.engine": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.engine.Backtest": {
       "status": "compatibility",
       "canonical": "openbacktesting.Backtest",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.engine.Order": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.cancel": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.is_contingent": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.is_long": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.is_short": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.limit": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.parent_trade": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.size": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.sl": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.stop": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.tag": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Order.tp": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Position": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Position.close": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Position.is_long": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Position.is_short": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Position.pl": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Position.size": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.SharedMemoryManager": {
       "status": "internal",
-      "reason": "优化器资源管理实现，用户使用 Backtest.optimize。"
+      "reason": "Optimizer resource-management implementation; users should use Backtest.optimize."
     },
     "openbacktesting.engine.Strategy": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.engine.Trade": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.close": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.entry_time": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.exit_time": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.is_long": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.is_short": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.pl": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.size": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.sl": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.tag": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.tp": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.Trade.value": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.engine.compute_stats": {
       "status": "internal",
-      "reason": "底层统计实现；用户使用 lib.compute_stats。"
+      "reason": "Underlying statistics implementation; users should use lib.compute_stats."
     },
     "openbacktesting.engine.dummy_stats": {
       "status": "internal",
-      "reason": "内部空统计构造。"
+      "reason": "Internal empty-statistics constructor."
     },
     "openbacktesting.engine.patch": {
       "status": "internal",
-      "reason": "内部临时属性替换工具。"
+      "reason": "Internal temporary attribute-replacement helper."
     },
     "openbacktesting.engine.try_": {
       "status": "internal",
-      "reason": "内部异常包装工具。"
+      "reason": "Internal exception-wrapping helper."
     },
     "openbacktesting.helpers": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.DEFAULT_CACHE_BYTES": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。",
-      "summary": "单个指标缓存的默认保留字节预算，不是进程内存上限。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "summary": "Default retained-byte budget for one indicator cache, not a process memory limit."
     },
     "openbacktesting.indicators.IndicatorCache": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.IndicatorCache.clear": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.IndicatorCache.get": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.api": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.api.IndicatorResult": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开结果类型；通常由计算或参数入口返回，字段与方法供结果消费。"
+      "reason": "Public result type, usually returned by computation or input entry points; its fields and methods support result consumption."
     },
     "openbacktesting.indicators.api.IndicatorResult.df": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.api.IndicatorResult.metadata": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.api.IndicatorResult.ready": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.api.IndicatorResult.valid": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.calculus": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.candles": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.catalog": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.common": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.compute": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.cycles": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.describe": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.methods": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.momentum": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.overlap": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.performance": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.registry": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.runtime": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.statistics": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.trend": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.types": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.types.IndicatorHandle": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开结果类型；通常由计算或参数入口返回，字段与方法供结果消费。"
+      "reason": "Public result type, usually returned by computation or input entry points; its fields and methods support result consumption."
     },
     "openbacktesting.indicators.types.IndicatorHandle.astype": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.copy": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.df": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.dtype": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.first_ready": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.metadata": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.ndim": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.ready": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.ready_at": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.s": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.shape": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorHandle.valid": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorSpec": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开结果类型；通常由计算或参数入口返回，字段与方法供结果消费。"
+      "reason": "Public result type, usually returned by computation or input entry points; its fields and methods support result consumption."
     },
     "openbacktesting.indicators.types.IndicatorSpec.aliases": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.causal": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.default_backend": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.dtype": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.fixed": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.history_offset": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.history_required": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorSpec.history_sum": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.input_args": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.input_defaults": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.kind": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.minimum": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.missing_policy": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.normalize": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorSpec.parameters": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.reason": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.required": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.status": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.unit": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.validity": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.version": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.IndicatorSpec.windows": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.Parameter": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开结果类型；通常由计算或参数入口返回，字段与方法供结果消费。"
+      "reason": "Public result type, usually returned by computation or input entry points; its fields and methods support result consumption."
     },
     "openbacktesting.indicators.types.Parameter.choices": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.Parameter.maximum": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.Parameter.minimum": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.indicators.types.Parameter.normalize": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.utility": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.volatility": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.volume": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.inputs": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.inputs.InputError": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.InputSpec": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.InputSpec.bindings": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.inputs.InputSpec.bounds": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.inputs.InputSpec.encode": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.InputSpec.enum_type": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.inputs.InputSpec.export": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.InputSpec.metadata": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.inputs.InputSpec.normalize": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.InputSpec.options": {
       "status": "internal",
-      "reason": "声明记录字段；由所属类的字段表说明，不能独立调用。"
+      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
     },
     "openbacktesting.inputs.ResolvedInputs": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.ResolvedInputs.overrides": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.ResolvedInputs.snapshot": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.SCHEMA_VERSION": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。",
-      "summary": "参数发现与输入请求使用的 schema 版本。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "summary": "Schema version used for input discovery and requests."
     },
     "openbacktesting.inputs.bool": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.color": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.describe": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.enum": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.float": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.int": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.price": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.request_for": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.resolve_native": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.resolve_request": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.session": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.string": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.time": {
       "status": "recommended",
       "page": "reference/inputs.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.lib.Backtest": {
       "status": "compatibility",
       "canonical": "openbacktesting.Backtest",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.FractionalBacktest": {
       "status": "internal",
-      "reason": "内部保留的旧缩放入口；当前分数数量使用Backtest与InstrumentSpec。"
+      "reason": "Internally retained legacy scaling entry point; current fractional quantities use Backtest and InstrumentSpec."
     },
     "openbacktesting.lib.FractionalBacktest.optimize": {
       "status": "internal",
-      "reason": "内部保留的旧缩放入口；当前分数数量使用Backtest与InstrumentSpec。"
+      "reason": "Internally retained legacy scaling entry point; current fractional quantities use Backtest and InstrumentSpec."
     },
     "openbacktesting.lib.FractionalBacktest.run": {
       "status": "internal",
-      "reason": "内部保留的旧缩放入口；当前分数数量使用Backtest与InstrumentSpec。"
+      "reason": "Internally retained legacy scaling entry point; current fractional quantities use Backtest and InstrumentSpec."
     },
     "openbacktesting.lib.FractionalBacktest.run_inputs": {
       "status": "internal",
-      "reason": "内部保留的旧缩放入口；当前分数数量使用Backtest与InstrumentSpec。"
+      "reason": "Internally retained legacy scaling entry point; current fractional quantities use Backtest and InstrumentSpec."
     },
     "openbacktesting.lib.MultiBacktest": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.MultiBacktest.optimize": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.MultiBacktest.run": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.OHLCV_AGG": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。",
-      "summary": "行情重采样的默认聚合规则：开盘取首值，最高/最低取极值，收盘取末值，成交量求和。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "summary": "Default market-data resampling rules: first open, maximum high, minimum low, last close, and summed volume."
     },
     "openbacktesting.lib.SignalStrategy": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.SignalStrategy.ind": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.ind",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.buy": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.buy",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.close": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.close",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.closed_trades": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.closed_trades",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.data": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.data",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.df": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.df",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.equity": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.equity",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.high": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.high",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.hl2": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.hl2",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.hlc3": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.hlc3",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.hlcc4": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.hlcc4",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.init": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.init",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.low": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.low",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.next": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.SignalStrategy.open": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.open",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.orders": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.orders",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.pip": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.pip",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.position": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.position",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.sell": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.sell",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.set_signal": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.SignalStrategy.ta": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.ta",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.trades": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.trades",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.SignalStrategy.volume": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.volume",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.Strategy": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TRADES_AGG": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。",
-      "summary": "交易表重采样时各字段使用的聚合规则。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "summary": "Per-field aggregation rules for trade-table resampling."
     },
     "openbacktesting.lib.TrailingStrategy": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.TrailingStrategy.ind": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.ind",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.buy": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.buy",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.close": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.close",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.closed_trades": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.closed_trades",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.data": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.data",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.df": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.df",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.equity": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.equity",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.high": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.high",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.hl2": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.hl2",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.hlc3": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.hlc3",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.hlcc4": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.hlcc4",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.init": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.TrailingStrategy.low": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.low",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.next": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.TrailingStrategy.open": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.open",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.orders": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.orders",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.pip": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.pip",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.position": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.position",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.sell": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.sell",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.set_atr_periods": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.TrailingStrategy.set_trailing_pct": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.TrailingStrategy.set_trailing_sl": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.TrailingStrategy.ta": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.ta",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.trades": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.trades",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.volume": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.volume",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.barssince": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.compute_stats": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.quantile": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.random_ohlc_data": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.resample_apply": {
       "status": "recommended",
       "page": "reference/helpers.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.optimization": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.parallel": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.runtime": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.runtime.Backtest": {
       "status": "internal",
-      "reason": "实现所需导入，推荐包根入口。"
+      "reason": "Implementation import; prefer the package-root entry point."
     },
     "openbacktesting.runtime.Mapping": {
       "status": "internal",
-      "reason": "实现使用的标准库类型。"
+      "reason": "Standard-library type used by the implementation."
     },
     "openbacktesting.runtime.describe": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.runtime.describe_inputs": {
       "status": "internal",
-      "reason": "实现所需导入，推荐 inputs.describe。"
+      "reason": "Implementation import; prefer inputs.describe."
     },
     "openbacktesting.runtime.run": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.strategy": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.try_": {
       "status": "internal",
-      "reason": "内部异常包装辅助函数。"
+      "reason": "Internal exception-wrapping helper function."
     },
     "openbacktesting.util": {
       "status": "internal",
-      "reason": "命名空间或实现子包；按手册的推荐对象选择入口，不递归承诺全部成员稳定。"
+      "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.methods.TechnicalAnalysis.is_cross": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "即时交叉判断，返回 Python bool；在 next 中使用当前可见输入，不登记指标。"
+      "reason": "Immediate crossing test returning a Python bool; use currently visible inputs in next. It does not register an indicator."
     },
     "openbacktesting.indicators.methods.TechnicalAnalysis.is_crossover": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "即时交叉判断，返回 Python bool；在 next 中使用当前可见输入，不登记指标。"
+      "reason": "Immediate crossing test returning a Python bool; use currently visible inputs in next. It does not register an indicator."
     },
     "openbacktesting.indicators.methods.TechnicalAnalysis.is_crossunder": {
       "status": "recommended",
       "page": "reference/indicator-api.md",
-      "reason": "即时交叉判断，返回 Python bool；在 next 中使用当前可见输入，不登记指标。"
+      "reason": "Immediate crossing test returning a Python bool; use currently visible inputs in next. It does not register an indicator."
     },
     "openbacktesting.indicators.predicates": {
       "status": "internal",
-      "reason": "即时交叉判断的内部实现模块；公开入口为 Strategy.ta.is_*。"
+      "reason": "Internal implementation module for immediate crossing tests; public entry points are Strategy.ta.is_*."
     },
     "openbacktesting.Strategy.instrument": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.order_target_value": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.order_target_quantity": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.order_target_percent": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.on_finish": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.close_position": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.on_start": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.on_fill": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.account": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.submit_oco": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.Strategy.on_order": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/core.md"
     },
     "openbacktesting.engine.Order.status": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Order.request": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md",
-      "summary": "返回冻结的 NormalizedOrderRequest：可读取 side、qty、limit、stop、sl、tp、reduce_only、trade_id、expires_at、valid_bars、tag_json 和 tag。tag 返回独立 JSON 副本。此对象是已登记订单的观察值；作者使用 OrderRequest 描述待提交入场。"
+      "summary": "Return a frozen NormalizedOrderRequest with readable side, qty, limit, stop, sl, tp, reduce_only, trade_id, expires_at, valid_bars, tag_json, and tag. tag returns an independent JSON copy. This object observes a registered order; authors use OrderRequest to describe an entry awaiting submission."
     },
     "openbacktesting.engine.Order.snapshot": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Trade.set_trailing_stop": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Trade.pl_gross": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Trade.return_fraction": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Position.has_exposure": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Position.snapshot": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Position.return_fraction": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.lib.SignalStrategy.instrument": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.order_target_value": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.order_target_quantity": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.order_target_percent": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.on_finish": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.close_position": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.on_start": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.on_fill": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.account": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.submit_oco": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.SignalStrategy.on_order": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.instrument": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.order_target_value": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.order_target_quantity": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.order_target_percent": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.on_finish": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.close_position": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.on_start": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.on_fill": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.account": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.submit_oco": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.on_order": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.broker.instrument": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.PositionSnapshot": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.AccountSnapshot": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderStatus": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Trade": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderGroup": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ledger": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.OrderRequest": {
       "status": "recommended",
-      "reason": "作者通过命名参数创建无提交副作用的冻结入场请求，供 OCO 使用。",
+      "reason": "Authors create a frozen entry request through keyword arguments for OCO use, without submission side effects.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.models": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.Position": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.RunSummary": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.TradeAllocation": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Slippage": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderSnapshot": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.execution": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.Fill": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.core": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.InstrumentSpec": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderEvent": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Order": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.finite": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.strategy.sizing.dataclass": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.strategy.sizing.equity_fraction": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.SizingDecision": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.fixed_quantity": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.stop_risk": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.InstrumentSpec": {
       "status": "internal",
-      "reason": "交易核心实现依赖，不作为作者入口。"
+      "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.OrderGroup.cancel": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderGroup.orders": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.symbol": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.price_tick": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.currency": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.price": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.min_quantity": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.quantity": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.min_notional": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.validate_data": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.quantity_step": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Slippage.cost": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Slippage.mode": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Slippage.value": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.sl": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.tag": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.limit": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.valid_bars": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.tp": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.stop": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.OrderRequest.expires_at": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.PositionSnapshot.has_exposure": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.RunSummary.error": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.SizingDecision.budget": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Order.group": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Order.order_id": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.engine.Trade.group": {
       "status": "recommended",
-      "reason": "0.2交易接口；单位、生命周期、预算与原因见交易指南。",
+      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
       "page": "reference/trading.md"
     },
     "openbacktesting.strategy.sizing.AccountSnapshot": {
       "status": "internal",
-      "reason": "预算函数的快照类型依赖；推荐从broker导入。"
+      "reason": "Snapshot-type dependency of sizing functions; prefer importing from broker."
     },
     "openbacktesting.plotting.types": {
       "status": "internal",
-      "reason": "绘图内部模块，不作为作者入口。"
+      "reason": "Internal plotting module, not an author entry point."
     },
     "openbacktesting.plotting.encoding": {
       "status": "internal",
-      "reason": "绘图内部模块，不作为作者入口。"
+      "reason": "Internal plotting module, not an author entry point."
     },
     "openbacktesting.plotting.collector": {
       "status": "internal",
-      "reason": "绘图内部模块，不作为作者入口。"
+      "reason": "Internal plotting module, not an author entry point."
     },
     "openbacktesting.plotting.Plotting": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.export_result": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.FillRef": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.MarkerRef": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PaneRef": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlotRef": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingError": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.Plotting.fill": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.Plotting.histogram": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.Plotting.level": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.Plotting.line": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.Plotting.marker": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.Plotting.pane": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits.bytes": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits.events": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits.panes": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits.plots": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits.points": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting.PlottingLimits.text": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "纯数据绘图公开契约；默认值、引用归属、阶段及资源限制见绘图指南。"
+      "reason": "Public data-only plotting contract; see the plotting guide for defaults, reference ownership, phases, and resource limits."
     },
     "openbacktesting.plotting": {
       "status": "internal",
-      "reason": "绘图数据命名空间，公开入口见本模块参考。"
+      "reason": "Plotting-data namespace; see this module's reference for public entry points."
     },
     "openbacktesting.Strategy.plotting": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "只读绘图入口。"
+      "reason": "Read-only plotting entry point."
     },
     "openbacktesting.lib.SignalStrategy.plotting": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.plotting",
-      "reason": "继承只读绘图入口。"
+      "reason": "Inherited read-only plotting entry point."
     },
     "openbacktesting.lib.TrailingStrategy.plotting": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.plotting",
-      "reason": "继承只读绘图入口。"
+      "reason": "Inherited read-only plotting entry point."
     },
     "openbacktesting.plotting.Plotting.bg_color": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "逐 bar 颜色写入入口，仅 next 可用。"
+      "reason": "Per-bar color-writing entry point, available only in next."
     },
     "openbacktesting.plotting.Plotting.bar_color": {
       "status": "recommended",
       "page": "reference/plotting.md",
-      "reason": "逐 bar 颜色写入入口，仅 next 可用。"
+      "reason": "Per-bar color-writing entry point, available only in next."
     },
     "openbacktesting.colors": {
       "status": "internal",
-      "reason": "颜色常量命名空间；公开成员单独列出。"
+      "reason": "Color-constant namespace; public members are listed individually."
     },
     "openbacktesting.colors.annotations": {
       "status": "internal",
-      "reason": "Python 注解兼容标记，不是作者 API。"
+      "reason": "Python annotation compatibility marker, not an author API."
     },
     "openbacktesting.colors.Color": {
       "status": "compatibility",
       "canonical": "openbacktesting.Color",
-      "reason": "Color 定义模块路径；推荐从包根导入。"
+      "reason": "Module path defining Color; prefer importing from the package root."
     },
     "openbacktesting.Color": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.red": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.green": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.blue": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.alpha": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.transparency": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.from_hex": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.rgb": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.with_transparency": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.Color.to_hex": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.AQUA": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.BLACK": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.BLUE": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.FUCHSIA": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.GRAY": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.GREEN": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.LIME": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.MAROON": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.NAVY": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.OLIVE": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.ORANGE": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.PURPLE": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.RED": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.SILVER": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.TEAL": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.WHITE": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.colors.YELLOW": {
       "status": "recommended",
       "page": "reference/colors.md",
-      "reason": "颜色值与固定预设；运行时使用 Color，配置导出使用大写八位字符串。"
+      "reason": "Color values and fixed presets; runtime uses Color, while configuration exports uppercase eight-digit strings."
     },
     "openbacktesting.TimeframeUnit": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.DataContext": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.runtime.discover": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Strategy.timeframe": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.seconds": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.snapshot": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.hours": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.days": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.minutes": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.weeks": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.months": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.DataContext.snapshot": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "策略声明或宿主图表上下文的公开契约；具体限制见运行指南。"
+      "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.simulation": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.DEFAULT_CACHE_BYTES": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.DataContext": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.InstrumentSpec": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.PlottingLimits": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.Strategy": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.asdict": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.declaration": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.isabstract": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.pd": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.resolve_request": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.runtime.version": {
       "status": "internal",
-      "reason": "实现使用的模块或导入依赖；通过包根的公开对象使用。"
+      "reason": "Module or import dependency used by the implementation; access it through public package-root objects."
     },
     "openbacktesting.lib.SignalStrategy.timeframe": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.timeframe",
-      "reason": "继承 Strategy 的只读图表周期，保持同一属性对象。"
+      "reason": "Inherited read-only Strategy chart timeframe, retaining the same property object."
     },
     "openbacktesting.lib.TrailingStrategy.timeframe": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.timeframe",
-      "reason": "继承 Strategy 的只读图表周期，保持同一属性对象。"
+      "reason": "Inherited read-only Strategy chart timeframe, retaining the same property object."
     },
     "openbacktesting.DefaultOrderSize": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.DefaultOrderSize.snapshot": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.DefaultOrderSize.from_snapshot": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission.fixed": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission.relative": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission.per_unit": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission.snapshot": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission.from_snapshot": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "低层 Backtest 的高级纯值模型；@backtest 作者声明使用平铺枚举与数值。"
+      "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission.calculate": {
       "status": "internal",
-      "reason": "撮合已校验成交值后调用的纯费用公式；作者使用配置模型，真实费用以 Fill 为准。"
+      "reason": "Pure fee formula called after matching validates execution values; authors use configuration models, and Fill determines actual fees."
     },
     "openbacktesting.broker.commission": {
       "status": "internal",
-      "reason": "费用模型实现模块；推荐从 openbacktesting.broker 导入 Commission。"
+      "reason": "Fee-model implementation module; prefer importing Commission from openbacktesting.broker."
     },
     "openbacktesting.Strategy.data_index": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开调用入口；使用前阅读对应指南的执行阶段、值域和限制。"
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.SignalStrategy.data_index": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.data_index",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.lib.TrailingStrategy.data_index": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.data_index",
-      "reason": "同对象别名或继承成员，参见推荐入口的契约。"
+      "reason": "Alias of the same object or inherited member; see the recommended entry point's contract."
     },
     "openbacktesting.Strategy.bar_index": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "当前执行 bar 的只读位置与冻结状态；生命周期边界见行情指南。"
+      "reason": "Read-only position and frozen state of the currently executing bar; see the market-data guide for lifecycle boundaries."
     },
     "openbacktesting.Strategy.bar_state": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "当前执行 bar 的只读位置与冻结状态；生命周期边界见行情指南。"
+      "reason": "Read-only position and frozen state of the currently executing bar; see the market-data guide for lifecycle boundaries."
     },
     "openbacktesting.lib.SignalStrategy.bar_index": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.bar_index",
-      "reason": "继承 Strategy 的同一只读属性。"
+      "reason": "The same read-only property inherited from Strategy."
     },
     "openbacktesting.lib.SignalStrategy.bar_state": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.bar_state",
-      "reason": "继承 Strategy 的同一只读属性。"
+      "reason": "The same read-only property inherited from Strategy."
     },
     "openbacktesting.lib.TrailingStrategy.bar_index": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.bar_index",
-      "reason": "继承 Strategy 的同一只读属性。"
+      "reason": "The same read-only property inherited from Strategy."
     },
     "openbacktesting.lib.TrailingStrategy.bar_state": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.bar_state",
-      "reason": "继承 Strategy 的同一只读属性。"
+      "reason": "The same read-only property inherited from Strategy."
     },
     "openbacktesting.BarState": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "固定输入首末根的冻结布尔快照。"
+      "reason": "Frozen boolean snapshot identifying the first and last bars of fixed input."
     },
     "openbacktesting.BarState.is_first": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "固定输入首末根的冻结布尔快照。"
+      "reason": "Frozen boolean snapshot identifying the first and last bars of fixed input."
     },
     "openbacktesting.BarState.is_last": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "固定输入首末根的冻结布尔快照。"
+      "reason": "Frozen boolean snapshot identifying the first and last bars of fixed input."
     },
     "openbacktesting.RunLogs": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.RunLogs.get_logs": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.Backtest.get_logs": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.Strategy.log": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog.info": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog.warning": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog.error": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "本次运行结构化日志：时间、bar 与源码位置，失败保留、查询返回副本。"
+      "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs": {
       "status": "internal",
-      "reason": "日志实现模块；作者通过 self.log，宿主通过根 RunLogs 使用。"
+      "reason": "Logging implementation module; authors use self.log and hosts use the root RunLogs export."
     },
     "openbacktesting.runtime.RunLogs": {
       "status": "compatibility",
       "canonical": "openbacktesting.RunLogs",
-      "reason": "runtime 内部导入的同一对象；推荐根导出。"
+      "reason": "The same object imported internally by runtime; prefer the root export."
     },
     "openbacktesting.lib.FractionalBacktest.get_logs": {
       "status": "internal",
-      "reason": "内部保留的旧缩放入口；当前分数数量使用Backtest与InstrumentSpec。"
+      "reason": "Internally retained legacy scaling entry point; current fractional quantities use Backtest and InstrumentSpec."
     },
     "openbacktesting.lib.SignalStrategy.log": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.log",
-      "reason": "继承 Strategy 的同一只读属性。"
+      "reason": "The same read-only property inherited from Strategy."
     },
     "openbacktesting.lib.TrailingStrategy.log": {
       "status": "compatibility",
       "canonical": "openbacktesting.Strategy.log",
-      "reason": "继承 Strategy 的同一只读属性。"
+      "reason": "The same read-only property inherited from Strategy."
     },
     "openbacktesting.broker.requests": {
       "status": "internal",
-      "reason": "作者请求的实现模块；推荐从 broker 导入 OrderRequest。"
+      "reason": "Author-request implementation module; prefer importing OrderRequest from broker."
     },
     "openbacktesting.broker.models.NormalizedOrderRequest": {
       "status": "internal",
-      "reason": "Order.request 的只读规范化结果类型；由 Broker 创建，不作为作者构造入口。"
+      "reason": "Read-only normalized result type for Order.request; created by Broker, not an author construction entry point."
     },
     "openbacktesting.CommissionType": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "作者平铺配置的分类枚举；仅宿主边界接受对应字符串。",
-      "summary": "完整成员：`CommissionType.PERCENT = \"percent\"`、`CommissionType.CASH_PER_ORDER = \"cash_per_order\"`、`CommissionType.CASH_PER_CONTRACT = \"cash_per_contract\"`。单位和范围见[作者参数表](../guides/author.md#平铺回测设置)。"
+      "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
+      "summary": "Complete members: `CommissionType.PERCENT = \"percent\"`, `CommissionType.CASH_PER_ORDER = \"cash_per_order\"`, `CommissionType.CASH_PER_CONTRACT = \"cash_per_contract\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.CommissionType.PERCENT": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 percent。",
-      "summary": "宿主 JSON 值为 `\"percent\"`。"
+      "reason": "Public enum member; its JSON value is percent.",
+      "summary": "Host JSON value: `\"percent\"`."
     },
     "openbacktesting.CommissionType.CASH_PER_ORDER": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 cash_per_order。",
-      "summary": "宿主 JSON 值为 `\"cash_per_order\"`。"
+      "reason": "Public enum member; its JSON value is cash_per_order.",
+      "summary": "Host JSON value: `\"cash_per_order\"`."
     },
     "openbacktesting.CommissionType.CASH_PER_CONTRACT": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 cash_per_contract。",
-      "summary": "宿主 JSON 值为 `\"cash_per_contract\"`。"
+      "reason": "Public enum member; its JSON value is cash_per_contract.",
+      "summary": "Host JSON value: `\"cash_per_contract\"`."
     },
     "openbacktesting.QuantityType": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "作者平铺配置的分类枚举；仅宿主边界接受对应字符串。",
-      "summary": "完整成员：`QuantityType.FIXED = \"fixed\"`、`QuantityType.PERCENT_OF_EQUITY = \"percent_of_equity\"`。单位和范围见[作者参数表](../guides/author.md#平铺回测设置)。"
+      "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
+      "summary": "Complete members: `QuantityType.FIXED = \"fixed\"`, `QuantityType.PERCENT_OF_EQUITY = \"percent_of_equity\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.QuantityType.FIXED": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 fixed。",
-      "summary": "宿主 JSON 值为 `\"fixed\"`。"
+      "reason": "Public enum member; its JSON value is fixed.",
+      "summary": "Host JSON value: `\"fixed\"`."
     },
     "openbacktesting.QuantityType.PERCENT_OF_EQUITY": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 percent_of_equity。",
-      "summary": "宿主 JSON 值为 `\"percent_of_equity\"`。"
+      "reason": "Public enum member; its JSON value is percent_of_equity.",
+      "summary": "Host JSON value: `\"percent_of_equity\"`."
     },
     "openbacktesting.SlippageType": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "作者平铺配置的分类枚举；仅宿主边界接受对应字符串。",
-      "summary": "完整成员：`SlippageType.FIXED = \"fixed\"`、`SlippageType.BPS = \"bps\"`。单位和范围见[作者参数表](../guides/author.md#平铺回测设置)。"
+      "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
+      "summary": "Complete members: `SlippageType.FIXED = \"fixed\"`, `SlippageType.BPS = \"bps\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.SlippageType.FIXED": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 fixed。",
-      "summary": "宿主 JSON 值为 `\"fixed\"`。"
+      "reason": "Public enum member; its JSON value is fixed.",
+      "summary": "Host JSON value: `\"fixed\"`."
     },
     "openbacktesting.SlippageType.BPS": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 bps。",
-      "summary": "宿主 JSON 值为 `\"bps\"`。"
+      "reason": "Public enum member; its JSON value is bps.",
+      "summary": "Host JSON value: `\"bps\"`."
     },
     "openbacktesting.ExecutionTiming": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "作者平铺配置的分类枚举；仅宿主边界接受对应字符串。",
-      "summary": "完整成员：`ExecutionTiming.NEXT_OPEN = \"next_open\"`、`ExecutionTiming.SAME_CLOSE = \"same_close\"`。单位和范围见[作者参数表](../guides/author.md#平铺回测设置)。"
+      "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
+      "summary": "Complete members: `ExecutionTiming.NEXT_OPEN = \"next_open\"`, `ExecutionTiming.SAME_CLOSE = \"same_close\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.ExecutionTiming.NEXT_OPEN": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 next_open。",
-      "summary": "宿主 JSON 值为 `\"next_open\"`。"
+      "reason": "Public enum member; its JSON value is next_open.",
+      "summary": "Host JSON value: `\"next_open\"`."
     },
     "openbacktesting.ExecutionTiming.SAME_CLOSE": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 same_close。",
-      "summary": "宿主 JSON 值为 `\"same_close\"`。"
+      "reason": "Public enum member; its JSON value is same_close.",
+      "summary": "Host JSON value: `\"same_close\"`."
     },
     "openbacktesting.EndPolicy": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "作者平铺配置的分类枚举；仅宿主边界接受对应字符串。",
-      "summary": "完整成员：`EndPolicy.MARK_TO_MARKET = \"mark_to_market\"`、`EndPolicy.CLOSE_AT_LAST_CLOSE = \"close_at_last_close\"`。单位和范围见[作者参数表](../guides/author.md#平铺回测设置)。"
+      "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
+      "summary": "Complete members: `EndPolicy.MARK_TO_MARKET = \"mark_to_market\"`, `EndPolicy.CLOSE_AT_LAST_CLOSE = \"close_at_last_close\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.EndPolicy.MARK_TO_MARKET": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 mark_to_market。",
-      "summary": "宿主 JSON 值为 `\"mark_to_market\"`。"
+      "reason": "Public enum member; its JSON value is mark_to_market.",
+      "summary": "Host JSON value: `\"mark_to_market\"`."
     },
     "openbacktesting.EndPolicy.CLOSE_AT_LAST_CLOSE": {
       "status": "recommended",
       "page": "reference/core.md",
-      "reason": "公开枚举成员，JSON 值为 close_at_last_close。",
-      "summary": "宿主 JSON 值为 `\"close_at_last_close\"`。"
+      "reason": "Public enum member; its JSON value is close_at_last_close.",
+      "summary": "Host JSON value: `\"close_at_last_close\"`."
     },
     "openbacktesting.broker.OrderSizingSnapshot": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "下单规模公开入口与冻结观察值；三种模式互斥，百分数 20 表示 20%。"
+      "reason": "Public order-sizing entry point and frozen observations; the three modes are mutually exclusive, and percentage 20 means 20%."
     },
     "openbacktesting.engine.Order.sizing": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "下单规模公开入口与冻结观察值；三种模式互斥，百分数 20 表示 20%。"
+      "reason": "Public order-sizing entry point and frozen observations; the three modes are mutually exclusive, and percentage 20 means 20%."
     },
     "openbacktesting.broker.OrderRequest.qty": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "下单规模公开入口与冻结观察值；三种模式互斥，百分数 20 表示 20%。"
+      "reason": "Public order-sizing entry point and frozen observations; the three modes are mutually exclusive, and percentage 20 means 20%."
     },
     "openbacktesting.broker.OrderRequest.amount": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "下单规模公开入口与冻结观察值；三种模式互斥，百分数 20 表示 20%。"
+      "reason": "Public order-sizing entry point and frozen observations; the three modes are mutually exclusive, and percentage 20 means 20%."
     },
     "openbacktesting.broker.OrderRequest.percent": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "下单规模公开入口与冻结观察值；三种模式互斥，百分数 20 表示 20%。"
+      "reason": "Public order-sizing entry point and frozen observations; the three modes are mutually exclusive, and percentage 20 means 20%."
     },
     "openbacktesting.broker.sizing": {
       "status": "internal",
-      "reason": "Broker 层共用纯规模解析器；作者通过 buy/sell 和 OrderRequest 使用。"
+      "reason": "Pure sizing resolver shared by the Broker layer; authors access it through buy/sell and OrderRequest."
     },
     "openbacktesting.Strategy.closed_trade_stats": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/core.md"
     },
     "openbacktesting.lib.SignalStrategy.closed_trade_stats": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.lib.TrailingStrategy.closed_trade_stats": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/helpers.md"
     },
     "openbacktesting.broker.ClosedTradeStats": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.InstrumentSpec.round_price_to_tick": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.Color.from_gradient": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/colors.md"
     },
     "openbacktesting.broker.ClosedTradeStats.even_count": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.closed_count": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.win_count": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.winning_profit": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.loss_count": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.average_profit": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.win_rate": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.net_profit": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.ClosedTradeStats.losing_amount": {
       "status": "recommended",
-      "reason": "本地纯值或已关闭片段统计；精度、费用与读取时序见使用指南。",
+      "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
       "page": "reference/trading.md"
     },
     "openbacktesting.portfolio": {
       "status": "internal",
-      "reason": "报告命名空间；公开合同按其中推荐对象消费。"
+      "reason": "Report namespace; consume public contracts through its recommended objects."
     },
     "openbacktesting.portfolio.models": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.metrics": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.analysis": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.periods": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.builder": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.trades": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.snapshot": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.PortfolioSnapshot": {
       "status": "recommended",
       "page": "reference/portfolio.md",
-      "reason": "冻结事实及独立纯值报告；计算方法与精度见结果指南。"
+      "reason": "Frozen facts and independent pure-value reports; see the results guide for calculation methods and precision."
     },
     "openbacktesting.portfolio.export_result": {
       "status": "recommended",
       "page": "reference/portfolio.md",
-      "reason": "冻结事实及独立纯值报告；计算方法与精度见结果指南。"
+      "reason": "Frozen facts and independent pure-value reports; see the results guide for calculation methods and precision."
     },
     "openbacktesting.portfolio.get_snapshot": {
       "status": "recommended",
       "page": "reference/portfolio.md",
-      "reason": "冻结事实及独立纯值报告；计算方法与精度见结果指南。"
+      "reason": "Frozen facts and independent pure-value reports; see the results guide for calculation methods and precision."
     },
     "openbacktesting.portfolio.report_catalog": {
       "status": "recommended",
       "page": "reference/portfolio.md",
-      "reason": "冻结事实及独立纯值报告；计算方法与精度见结果指南。"
+      "reason": "Frozen facts and independent pure-value reports; see the results guide for calculation methods and precision."
     },
     "openbacktesting.portfolio.rates": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.stats": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.helpers": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.trading": {
       "status": "internal",
-      "reason": "Portfolio实现子模块，不独立承诺稳定接口。"
+      "reason": "Portfolio implementation submodule; interface stability is not independently guaranteed."
     },
     "openbacktesting.portfolio.PortfolioSnapshot.to_dict": {
       "status": "recommended",
       "page": "reference/portfolio.md",
-      "reason": "从不可变事实计算完整报告，返回独立副本。"
+      "reason": "Compute a complete report from immutable facts and return an independent copy."
     },
     "openbacktesting.broker.observations": {
       "status": "internal",
-      "reason": "只读账户与批次观察实现，不属于策略公开入口。"
+      "reason": "Read-only account and lot observation implementation, outside the public strategy entry points."
     },
     "openbacktesting.optimizer": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.runtime.CollectionPolicy": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.runtime.DEFAULT_COLLECTION": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.runtime.ExperimentResult": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.runtime.optimize": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.runtime.resume_optimization": {
       "status": "recommended",
       "page": "reference/runtime.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExecutionIdentity": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExperimentResult": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.OptimizationError": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.Plan": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.Range": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.Values": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.execute": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.identity": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.optimizer.models": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.optimizer.open_result": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.plan": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.query": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.optimizer.runner": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.optimizer.storage": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.optimizer.validation": {
       "status": "internal",
-      "reason": "参数实验装配、采集或模块组织细节；公开用法通过 optimizer 及 runtime 指定入口。"
+      "reason": "Parameter-experiment assembly, collection, or module-organization details; public usage goes through designated optimizer and runtime entry points."
     },
     "openbacktesting.optimizer.ExperimentResult.backup": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExperimentResult.fields": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExperimentResult.info": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExperimentResult.load_portfolio": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExperimentResult.query": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.ExperimentResult.trials": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.Plan.snapshot": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     },
     "openbacktesting.optimizer.Plan.total": {
       "status": "recommended",
       "page": "reference/optimizer.md",
-      "reason": "参数实验公开入口；遵循仅 Portfolio、执行身份和事务提交契约。"
+      "reason": "Public parameter-experiment entry point; follows the Portfolio-only, execution-identity, and transactional-commit contracts."
     }
   },
   "instance_fields": {
     "openbacktesting.engine.Trade.entry_bar": {
       "page": "reference/trading.md",
-      "summary": "Trade.entry_bar 保留为批次实例字段。对应结果表保留 EntryBar/EntryPrice/ExitBar/ExitPrice；活跃批次退出字段为空。"
+      "summary": "Trade.entry_bar remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
     },
     "openbacktesting.engine.Trade.entry_price": {
       "page": "reference/trading.md",
-      "summary": "Trade.entry_price 保留为批次实例字段。对应结果表保留 EntryBar/EntryPrice/ExitBar/ExitPrice；活跃批次退出字段为空。"
+      "summary": "Trade.entry_price remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
     },
     "openbacktesting.engine.Trade.exit_bar": {
       "page": "reference/trading.md",
-      "summary": "Trade.exit_bar 保留为批次实例字段。对应结果表保留 EntryBar/EntryPrice/ExitBar/ExitPrice；活跃批次退出字段为空。"
+      "summary": "Trade.exit_bar remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
     },
     "openbacktesting.engine.Trade.exit_price": {
       "page": "reference/trading.md",
-      "summary": "Trade.exit_price 保留为批次实例字段。对应结果表保留 EntryBar/EntryPrice/ExitBar/ExitPrice；活跃批次退出字段为空。"
+      "summary": "Trade.exit_price remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
     },
     "openbacktesting.plotting.PaneRef.id": {
       "page": "reference/plotting.md",
-      "summary": "id 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "id is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.PaneRef.title": {
       "page": "reference/plotting.md",
-      "summary": "title 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "title is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.PlotRef.id": {
       "page": "reference/plotting.md",
-      "summary": "id 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "id is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.PlotRef.title": {
       "page": "reference/plotting.md",
-      "summary": "title 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "title is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.FillRef.id": {
       "page": "reference/plotting.md",
-      "summary": "id 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "id is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.FillRef.title": {
       "page": "reference/plotting.md",
-      "summary": "title 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "title is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.MarkerRef.id": {
       "page": "reference/plotting.md",
-      "summary": "id 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "id is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.MarkerRef.title": {
       "page": "reference/plotting.md",
-      "summary": "title 为不可变身份信息，默认标题等于最终 ID；引用仅属于创建它的运行。"
+      "summary": "title is immutable identity information; the default title equals the final ID. References belong only to the run that created them."
     },
     "openbacktesting.plotting.PlottingError.code": {
       "page": "reference/plotting.md",
-      "summary": "稳定错误类别，详见绘图指南。"
+      "summary": "Stable error category; see the plotting guide for details."
     }
   }
 }

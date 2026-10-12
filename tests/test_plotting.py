@@ -1,4 +1,4 @@
-"""绘图声明、运行时序、隔离快照及非法输入的公开契约。"""
+"""Public contracts for plot declarations, execution timing, isolated snapshots, and invalid inputs."""
 
 import json
 import pickle
@@ -7,6 +7,8 @@ from dataclasses import FrozenInstanceError
 import numpy as np
 import pandas as pd
 import pytest
+from test_engine_edges import Idle, flat_data
+
 from openbacktesting import Backtest, Strategy, backtest, inputs
 from openbacktesting.indicators.types import IndicatorCursor, IndicatorHandle
 from openbacktesting.plotting import (
@@ -21,7 +23,6 @@ from openbacktesting.plotting import (
 )
 from openbacktesting.plotting.encoding import axis, scalar
 from openbacktesting.runtime import describe
-from test_engine_edges import Idle, flat_data
 
 
 @pytest.fixture
@@ -48,8 +49,8 @@ def test_references_defaults_and_shared_panes(plotting):
     with pytest.raises(FrozenInstanceError):
         pane.id = "new"
     source = handle(p)
-    lo = p.line(source, pane=pane, title="同名")
-    hi = p.line(source, pane=pane, title="同名", style="step")
+    lo = p.line(source, pane=pane, title="same name")
+    hi = p.line(source, pane=pane, title="same name", style="step")
     assert isinstance(lo, PlotRef) and lo.title == hi.title
     fill = p.fill(lo, hi)
     assert isinstance(fill, FillRef)
@@ -384,7 +385,7 @@ def test_limits_enforcement_and_export_errors():
         with pytest.raises(PlottingError, match="plots"):
             p.level(0)
         with pytest.raises(PlottingError, match="text"):
-            p.line(handle(p, metadata={"unit": "很长" * 100}))
+            p.line(handle(p, metadata={"unit": "very long" * 100}))
         p._enter("next", 1)
         p.marker()
         with pytest.raises(PlottingError, match="events"):
@@ -425,7 +426,7 @@ def test_reserved_names_and_describe():
         def init(self):
             raise AssertionError("init executed")
 
-    # describe 接受已经加载的可信命名空间。
+    # describe accepts an already loaded trusted namespace.
     assert describe({"__name__": __name__, "strategy": Description})["inputs"] == []
 
 
@@ -552,7 +553,7 @@ def test_grid_sambo_candidates_and_parallel_isolation(monkeypatch):
     best = bt.optimize(style=["line", "step"], maximize=score)
     assert len(scores) == 2 and export_result(best)["plots"]
 
-    # SAMBO 支持普通原生参数；最优重跑恢复默认采集。
+    # SAMBO supports ordinary native parameters; the best rerun restores default collection.
     class Native(VisualStrategy):
         amount = 1
 

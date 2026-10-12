@@ -1,8 +1,11 @@
-"""组合策略与时间重采样的方向、尺度和无前视边界。"""
+"""Direction, scale, and no-lookahead boundaries for composed strategies and time resampling."""
 
 import numpy as np
 import pandas as pd
 import pytest
+from pandas.testing import assert_series_equal
+from test_engine_edges import Idle, flat_data
+
 from openbacktesting import Backtest
 from openbacktesting.lib import (
     FractionalBacktest,
@@ -13,8 +16,6 @@ from openbacktesting.lib import (
     random_ohlc_data,
     resample_apply,
 )
-from pandas.testing import assert_series_equal
-from test_engine_edges import Idle, flat_data
 
 
 def test_empty_quantile_and_invalid_ohlc():

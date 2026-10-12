@@ -1,13 +1,14 @@
-"""spawn 下比较具名属性和键读取；隔离验证具名结果与绑定回调的序列化。"""
+"""Compare named attributes and key access under spawn; independently verify serialization of named results and bound callbacks."""
 
 import json
 import multiprocessing as mp
 
-import openbacktesting as api
 import pandas as pd
-from openbacktesting.indicators import runtime as indicators
 from test_fluent_indicators import Trading
 from test_indicator_catalog import catalog_data
+
+import openbacktesting as api
+from openbacktesting.indicators import runtime as indicators
 
 
 def main():

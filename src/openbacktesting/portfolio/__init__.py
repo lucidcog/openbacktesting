@@ -1,4 +1,4 @@
-"""单次回测的冻结账户、交易与报告数据。"""
+"""Frozen account, trading, and report data for a single backtest."""
 
 from .snapshot import PortfolioSnapshot as PortfolioSnapshot
 from .snapshot import export_result as export_result
@@ -8,7 +8,7 @@ __all__ = ["PortfolioSnapshot", "export_result", "get_snapshot", "report_catalog
 
 
 def report_catalog() -> dict:
-    """返回报告字段目录的独立副本，供宿主核对覆盖与方法身份。"""
+    """Return an independent copy of the report-field catalog for hosts to check coverage and method identity."""
     import json
     from importlib.resources import files
 

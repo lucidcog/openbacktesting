@@ -1,4 +1,4 @@
-"""ta.percentile_linear_interpolation：固定因果序列契约。"""
+"""ta.percentile_linear_interpolation: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

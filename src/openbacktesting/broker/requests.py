@@ -1,4 +1,4 @@
-"""作者订单描述与无交易副作用的公共参数校验。"""
+"""Author-supplied order descriptions and public argument validation without trading side effects."""
 
 from __future__ import annotations
 
@@ -27,27 +27,27 @@ def _normalize_conditions(
     expires_at=None,
     valid_bars=None,
 ) -> dict:
-    """规范化无须账户或品种的条件；不修改调用方数据。"""
+    """Normalize conditions requiring no account or instrument; do not modify caller data."""
     if type(reduce_only) is not bool:
-        raise TypeError("reduce_only必须为bool")
+        raise TypeError("reduce_only must be bool")
     prices = {
         name: None if value is None else finite(value, name, positive=True)
         for name, value in (("limit", limit), ("stop", stop), ("sl", sl), ("tp", tp))
     }
     if expires_at is not None and valid_bars is not None:
-        raise ValueError("expires_at与valid_bars互斥")
+        raise ValueError("expires_at and valid_bars are mutually exclusive")
     if valid_bars is not None and (
         isinstance(valid_bars, bool) or not isinstance(valid_bars, int) or valid_bars <= 0
     ):
-        raise ValueError("valid_bars必须为正整数")
+        raise ValueError("valid_bars must be a positive integer")
     if expires_at is not None:
         if not isinstance(expires_at, (datetime, pd.Timestamp, str)):
-            raise TypeError("expires_at必须为带时区的时间或字符串")
+            raise TypeError("expires_at must be a timezone-aware timestamp or string")
         expires_at = pd.Timestamp(expires_at)
         if pd.isna(expires_at):
-            raise ValueError("expires_at不可为NaT")
+            raise ValueError("expires_at must not be NaT")
         if expires_at.tzinfo is None:
-            raise ValueError("绝对到期必须带时区")
+            raise ValueError("Absolute expiration must be timezone-aware")
     return prices | {
         "reduce_only": reduce_only,
         "expires_at": expires_at,
@@ -58,27 +58,27 @@ def _normalize_conditions(
 
 @dataclass(frozen=True, init=False)
 class OrderRequest:
-    """待提交的冻结入场请求；构造不会登记订单，可在初始化阶段准备。
+    """Frozen entry request awaiting submission; construction does not register an order and is allowed during initialization.
 
-    所有参数必须按名称提供。品种精度、行情时区和保护方向在提交时校验。
-    ``tag`` 支持 JSON 纯值；构造时固化，读取返回独立副本。
+    All arguments must be supplied by name. Instrument precision, market-data timezone, and protection direction are validated at submission.
+    ``tag`` supports plain JSON values; it is frozen at construction, and reads return independent copies.
 
     Args:
-        side: 买入 buy 或卖出 sell。
-        qty: 有限正资产数量，与 amount/percent 三选一，不使用默认预算。
-        amount: 有限正名义金额，在提交时按 Close 换算，不预留费用。
-        percent: (0,100] 的权益百分数，20 表示 20%，在提交时计算。
-        limit: 入场限价，None 表示没有限价条件。
-        stop: 入场触发价，与入场后的 sl 不同。
-        sl: 入场后的绝对止损价。
-        tp: 入场后的绝对止盈价。
-        tag: 可选用户标签，不参与撮合条件。
-        expires_at: 带时区的绝对到期时间，与 valid_bars 互斥。
-        valid_bars: 提交后允许执行的 bar 数，必须为正整数。
+        side: Buy (buy) or sell (sell).
+        qty: Finite positive asset quantity; choose exactly one of qty/amount/percent, without using a default budget.
+        amount: Finite positive notional amount, converted using Close at submission without reserving fees.
+        percent: Equity percentage in (0,100]; 20 means 20%, calculated at submission.
+        limit: Entry limit price; None means no limit condition.
+        stop: Entry trigger price, distinct from the post-entry sl.
+        sl: Absolute post-entry stop-loss price.
+        tp: Absolute post-entry take-profit price.
+        tag: Optional user tag, excluded from matching conditions.
+        expires_at: Timezone-aware absolute expiration, mutually exclusive with valid_bars.
+        valid_bars: Number of bars eligible for execution after submission; must be a positive integer.
 
     Raises:
-        TypeError: 参数类型、命名或标签类型不合法。
-        ValueError: 数量、价格、方向或期限值不合法。
+        TypeError: Invalid argument types, names, or tag types.
+        ValueError: Invalid quantity, price, direction, or expiration values.
     """
 
     side: Literal["buy", "sell"]
@@ -105,7 +105,7 @@ class OrderRequest:
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> None:
-        """显式资产数量意图。"""
+        """Explicit asset-quantity intent."""
 
     @overload
     def __init__(
@@ -121,7 +121,7 @@ class OrderRequest:
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> None:
-        """显式名义金额意图，在提交时换算。"""
+        """Explicit notional-amount intent, converted at submission."""
 
     @overload
     def __init__(
@@ -137,7 +137,7 @@ class OrderRequest:
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> None:
-        """显式权益百分数意图，在提交时换算。"""
+        """Explicit equity-percentage intent, converted at submission."""
 
     def __init__(
         self,
@@ -155,7 +155,7 @@ class OrderRequest:
         valid_bars: int | None = None,
     ) -> None:
         if side not in ("buy", "sell"):
-            raise ValueError("side必须为buy/sell")
+            raise ValueError("side must be buy/sell")
         size = select_size(qty=qty, amount=amount, percent=percent)
         values = _normalize_conditions(
             limit=limit,
@@ -173,20 +173,20 @@ class OrderRequest:
 
     @property
     def qty(self) -> float | None:
-        """显式资产数量；其他模式返回 None。"""
+        """Explicit asset quantity; None in other modes."""
         return self._size.value if self._size.mode == "qty" else None
 
     @property
     def amount(self) -> float | None:
-        """显式名义金额；提交时换算，其他模式返回 None。"""
+        """Explicit notional amount; converted at submission, None in other modes."""
         return self._size.value if self._size.mode == "amount" else None
 
     @property
     def percent(self) -> float | None:
-        """显式权益百分数（20 为20%）；其他模式返回 None。"""
+        """Explicit equity percentage (20 means 20%); None in other modes."""
         return self._size.value if self._size.mode == "percent" else None
 
     @property
     def tag(self) -> _JsonValue:
-        """独立的 JSON 标签副本；修改副本不改变请求。"""
+        """Independent JSON tag copy; modifying it does not change the request."""
         return json.loads(self._tag_json)

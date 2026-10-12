@@ -1,4 +1,4 @@
-"""仅对稳定可编码的行情和宿主声明计算实验身份。"""
+"""Calculate experiment identity only for stably encodable market data and host declarations."""
 
 import hashlib
 import platform
@@ -11,14 +11,14 @@ from openbacktesting.optimizer.models import ExecutionIdentity, digest
 
 def execution_identity(data, identity, backtest):
     if not isinstance(identity, ExecutionIdentity):
-        raise TypeError("optimizer: identity 必须为 ExecutionIdentity")
+        raise TypeError("optimizer: identity must be an ExecutionIdentity")
     if not isinstance(data, pd.DataFrame) or not isinstance(data.index, pd.DatetimeIndex):
-        raise TypeError("optimizer: data 必须是日期索引 DataFrame")
+        raise TypeError("optimizer: data must be a DataFrame with a datetime index")
     if not data.columns.is_unique or any(type(c) is not str for c in data.columns):
-        raise ValueError("optimizer: 行情列名必须为唯一字符串")
+        raise ValueError("optimizer: market-data column names must be unique strings")
     for dtype in data.dtypes:
         if dtype.kind not in "biufMm" or str(dtype) == "object":
-            raise TypeError("optimizer: 行情只能含数值、布尔和时间列")
+            raise TypeError("optimizer: market data may contain only numeric, boolean, and datetime columns")
     hashes = pd.util.hash_pandas_object(data, index=True).to_numpy().astype("<u8").tobytes()
     data_hash = hashlib.sha256(hashes).hexdigest()
     return {

@@ -1,4 +1,4 @@
-"""订单、分配与批次的无活对象报告投影。"""
+"""Report projections of orders, allocations, and lots without live objects."""
 
 import json
 

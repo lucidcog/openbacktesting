@@ -1,4 +1,4 @@
-"""冻结与严格 JSON 编码；只接收已完成的纯值事实。"""
+"""Freezing and strict JSON encoding; accept only completed plain-value facts."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ def scalar(value):
         return value.isoformat()
     if isinstance(value, str):
         return value
-    raise PlottingError("invalid-value", f"不支持的纯值类型 {type(value).__name__}")
+    raise PlottingError("invalid-value", f"Unsupported plain-value type {type(value).__name__}")
 
 
 def axis(index):
@@ -78,25 +78,25 @@ def freeze(payload, byte_limit):
 
 
 def export_result(result: pd.Series) -> dict:
-    """从成功回测的冻结快照返回独立 PlottingResult 字典，不读取策略实例。
+    """Return an independent PlottingResult dictionary from a successful backtest's frozen snapshot without reading the strategy instance.
 
     Args:
-        result: 开启采集的 Backtest.run 或 runtime.run 结果。
+        result: Backtest.run or runtime.run result with collection enabled.
 
     Returns:
-        可经 json.dumps(..., allow_nan=False) 编码的独立字典。
+        Independent dictionary encodable with json.dumps(..., allow_nan=False).
 
     Raises:
-        PlottingError: 快照缺失、类型或版本不支持，或超过导出字节预算。
+        PlottingError: Missing snapshot, unsupported type or version, or export-byte budget exceeded.
     """
     snapshot = getattr(result, "attrs", {}).get("plotting_result")
     if not isinstance(snapshot, _Snapshot):
-        raise PlottingError("missing-snapshot", "需要开启采集且成功完成的回测结果")
+        raise PlottingError("missing-snapshot", "A successfully completed backtest result with collection enabled is required")
     if snapshot.version not in ("1.0.0", "1.1.0"):
         raise PlottingError("unsupported-version", snapshot.version)
     if snapshot.byte_length > snapshot.byte_limit:
-        raise PlottingError("PlottingLimitExceeded", "bytes 超过导出预算")
+        raise PlottingError("PlottingLimitExceeded", "bytes exceeds the export budget")
     payload = json.loads(snapshot.payload)
     if payload.get("schemaVersion") != snapshot.version:
-        raise PlottingError("unsupported-version", "快照与载荷版本不一致")
+        raise PlottingError("unsupported-version", "Snapshot and payload versions do not match")
     return payload

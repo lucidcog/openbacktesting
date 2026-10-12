@@ -1,4 +1,4 @@
-"""ta.vhf：固定依赖的计算封装与规范输出。"""
+"""ta.vhf: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.trend.vhf import vhf as _calculate
 

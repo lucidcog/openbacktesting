@@ -1,4 +1,4 @@
-"""ta.mfi：固定依赖的计算封装与规范输出。"""
+"""ta.mfi: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.volume.mfi import mfi as _calculate
 

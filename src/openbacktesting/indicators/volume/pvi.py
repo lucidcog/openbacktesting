@@ -1,4 +1,4 @@
-"""PVI：量条件下按价格比率更新前一期指数。"""
+"""PVI: Update the preceding index by the price ratio under the volume condition."""
 
 import numpy as np
 import pandas as pd

@@ -1,30 +1,30 @@
-## 1. 固定迁移范围与只读边界
+## 1. Freeze migration scope and the read-only boundary
 
-- [x] 1.1 记录源仓库提交、工作区状态和迁入文件摘要，以及目标仓库初始状态；交付不含旧名称和机器绝对路径的快照记录，确认可据此复核迁移前后变化。
-- [x] 1.2 建立核心目录与实际包外依赖的迁移清单，列明缓存等排除项；核对运行源码、资源、测试、示例、指标研究夹具、Portfolio 夹具和内核手册均有明确去向。
+- [x] 1.1 Record source revision, working-tree state, imported file digests, and initial target state; deliver snapshot records without former names or machine-absolute paths and verify they can support before/after comparison.
+- [x] 1.2 Establish a migration inventory for the core and actual external dependencies, with cache exclusions; verify explicit destinations for runtime code, resources, tests, examples, indicator research fixtures, Portfolio fixtures, and the core manual.
 
-## 2. 建立独立源码与构建配置
+## 2. Establish independent source and build configuration
 
-- [x] 2.1 将核心源码、资源、测试与示例复制到当前仓库的 `src/openbacktesting/`、`tests/`、`examples/`；逐项比对迁移清单，确认无缺失模块、资源及链接至源仓库的文件。
-- [x] 2.2 建立根级 `pyproject.toml`、测试隔离配置与 `.gitignore`，保留既定依赖范围、extras、版本与 Python 支持范围；验证配置可解析，且无 workspace 或源仓库路径依赖。
-- [x] 2.3 配置 wheel/sdist 文件集合；通过 `uv build --no-sources` 构建并检查成员，确认运行资源完整，sdist 包含测试与示例的全部本地依赖，制品不携带缓存和虚拟环境。
+- [x] 2.1 Copy core source, resources, tests, and examples into `src/openbacktesting/`, `tests/`, and `examples/`; compare the inventory item by item and verify no missing modules, resources, or source-repository links.
+- [x] 2.2 Create root `pyproject.toml`, test-isolation configuration, and `.gitignore`, preserving dependency ranges, extras, version, and Python support; verify configuration parses without workspace or source-path dependencies.
+- [x] 2.3 Configure wheel/sdist membership; build with `uv build --no-sources` and inspect members to verify runtime resources, all local test/example dependencies in the sdist, and exclusion of caches and virtual environments.
 
-## 3. 统一包与数据身份
+## 3. Unify package and data identity
 
-- [x] 3.1 更新发行元数据、导入、公开对象模块路径、动态资源定位、专属环境变量、日志文案及示例；用包身份检查确认唯一根为 `openbacktesting`，无旧入口与回退逻辑。
-- [x] 3.2 同步更新指标后端标识、Portfolio 语义标识、JSON Schema、实验环境键及对应测试身份字段；运行目录一致性与优化身份测试，确认定义、输出、校验三者一致。
-- [x] 3.3 验证新身份 pickle 往返、spawn 传输、Portfolio 保存读取及优化实验恢复；复用既有探针并补齐必要边界检查，确认不匹配身份拒绝续跑且不破坏已有数据。
+- [x] 3.1 Update distribution metadata, imports, public object module paths, dynamic resource lookup, dedicated environment variables, log copy, and examples; verify the unique root is `openbacktesting`, without former entry points or fallback logic.
+- [x] 3.2 Update indicator backend identities, Portfolio semantic identities, JSON Schema, experiment environment keys, and corresponding test fields; run catalog-consistency and optimization-identity tests to verify definitions, outputs, and validation agree.
+- [x] 3.3 Verify new-identity pickle round-trips, spawn transfer, Portfolio save/load, and experiment recovery; reuse probes and add necessary boundary checks to verify mismatched identities reject resumption without damaging existing data.
 
-## 4. 补齐测试、文档与完整性检查
+## 4. Complete tests, documentation, and integrity checks
 
-- [x] 4.1 将包外指标研究记录与 Portfolio 夹具迁入本地测试夹具目录，调整测试资源路径；执行相关测试，确认不访问旧工程层级且保留原断言。
-- [x] 4.2 迁入必要内核手册并重写根 README、示例索引及开发说明，列出独立构建、安装、测试和最小回测命令以及历史存档兼容边界；检查内部链接有效，文档不依赖整仓工具链。
-- [x] 4.3 更新来源清单中的路径、身份文本和目标摘要，区分历史来源与本次直接源快照；运行清单检查，确认覆盖所有迁入项且摘要与实际文件一致。
-- [x] 4.4 添加大小写不敏感的路径与内容零残留检查，禁用词规则本身不写入禁用原文；扫描受控与待纳入文件以及 wheel/sdist，确认文档、OpenSpec、清单和制品元数据均无命中。
+- [x] 4.1 Import external indicator research records and Portfolio fixtures into local test fixtures and adjust resource paths; run related tests to verify no access to old project levels and retention of original assertions.
+- [x] 4.2 Import the necessary core manual and rewrite the README, example index, and development guide with standalone build, install, test, minimal-backtest commands, and historical compatibility boundaries; verify internal links and independence from original tooling.
+- [x] 4.3 Update provenance paths, identity text, and target digests, separating historical sources from the direct extraction snapshot; verify complete inventory coverage and digests matching actual files.
+- [x] 4.4 Add case-insensitive zero-residual checks over paths and content without writing forbidden names into the rules; scan controlled/pending files and wheel/sdist artifacts to verify no matches in docs, OpenSpec, manifests, or metadata.
 
-## 5. 完成独立性与回归验收
+## 5. Complete standalone and regression acceptance
 
-- [x] 5.1 在当前仓库内的隔离环境安装 `test` extra，运行 `python -m pytest` 及 `python -m openbacktesting.test`，覆盖现有示例与探针；保留原数值基线，记录失败修复及显式跳过项，不靠放宽断言通过。
-- [x] 5.2 在不同干净环境中分别安装 wheel 与由 sdist 构建的 wheel，清除源码路径注入，从非源码工作目录运行导入、资源、最小回测、序列化、spawn 和优化持久化检查；确认实际加载路径位于安装环境。
-- [x] 5.3 分别验证基础安装的回测和缺少可选优化器时的明确错误，以及安装 `optimize` extra 后的最小优化；确认依赖分组没有因迁移失效。
-- [x] 5.4 最终重建制品并复核名称扫描、迁移清单和源仓库状态，记录命令、Python/依赖版本、平台及未验证项；所有必需验收通过且源仓库无本次写入后，才将抽离标为完成。
+- [x] 5.1 Install the `test` extra in an isolated environment inside this repository, run `python -m pytest` and `python -m openbacktesting.test`, and cover existing examples/probes; retain numerical baselines and record repairs and explicit skips without weakening assertions.
+- [x] 5.2 Install the wheel and an sdist-rebuilt wheel in separate clean environments, remove source-path injection, and run imports, resource access, minimal backtests, serialization, spawn, and optimization persistence outside source directories; verify imports resolve inside installed environments.
+- [x] 5.3 Verify base-install backtesting and clear missing-optimizer errors, then minimal optimization with `optimize`; confirm dependency groups remain functional after migration.
+- [x] 5.4 Rebuild final artifacts and recheck names, migration inventory, and source state; record commands, Python/dependency versions, platform, and unverified items. Mark extraction complete only after required acceptance passes and no writes to the source repository.

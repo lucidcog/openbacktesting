@@ -1,14 +1,15 @@
-"""机器学习研究教程（非推荐模板）：特征列、一次训练与滚动训练。
+"""Machine-learning research tutorial (not a recommended template): features, one-time training, and rolling training.
 
-随包 EURUSD 小时线；运行需要 scikit-learn（test extra）。先阅读原生回测和数据列接口。
-标签为未来 48 根收益，未必是连续两个日历日；训练样本末尾未知标签会被剔除。
-随机拆分准确率只演示分类，不是时序样本外证据；时序拆分、间隔与特征有效性仍待独立评估。
-main 执行分类演示和两次完整回测，逐 bar 预测、每 20 根滚动重训，较其他例子耗时。
-手续费 0.02%、20:1 杠杆、每次 20% 可用资金；预测写入普通日志数组，保留期末未平仓语义。
+Bundled EURUSD hourly data; requires scikit-learn (test extra). Read the native-backtest and data-column interfaces first.
+Labels use returns over the next 48 bars, which need not span two calendar days; unknown labels at the end of training data are dropped.
+Random-split accuracy demonstrates classification only, not time-series out-of-sample performance; temporal splits, gaps, and feature validity require independent evaluation.
+main runs a classification demonstration and two full backtests, predicting every bar and retraining every 20 bars; this example takes longer than the others.
+0.02% commission, 20:1 leverage, and 20% of available funds per order; predictions use an ordinary log array, retaining open positions at the end.
 """
 
 import numpy as np
 import pandas as pd
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.indicators import compute
 from openbacktesting.test import EURUSD
@@ -20,17 +21,17 @@ def classifier_type():
     try:
         from sklearn.neighbors import KNeighborsClassifier
     except ImportError as exc:
-        raise RuntimeError("ML 教程需要额外依赖：pip install 'openbacktesting[test]'") from exc
+        raise RuntimeError("The ML tutorial requires an extra dependency: pip install 'openbacktesting[test]'") from exc
     return KNeighborsClassifier
 
 
 def get_X(data):
-    """提取特征矩阵。"""
+    """Extract the feature matrix."""
     return data.filter(like="X").values
 
 
 def get_y(data):
-    """48 根之后的收益分类；末尾未知标签保留 NaN。"""
+    """Classify returns 48 bars ahead; keep unknown trailing labels as NaN."""
     y = data.Close.pct_change(48).shift(-48)
     y[y.between(-0.004, 0.004)] = 0
     y[y > 0] = 1
@@ -39,7 +40,7 @@ def get_y(data):
 
 
 def get_clean_Xy(df):
-    """仅移除标签尚未知的训练行。"""
+    """Remove only training rows whose labels are still unknown."""
     X = get_X(df)
     y = get_y(df).values
     isnan = np.isnan(y)
@@ -56,7 +57,7 @@ class MLTrainOnceStrategy(Strategy):
         df = self.data.df.iloc[:N_TRAIN]
         X, y = get_clean_Xy(df)
         self.clf.fit(X, y)
-        # 预测尚未产生，不能注册成参与预热的只读指标；按绝对 bar 位置记录。
+        # Predictions do not exist yet and cannot be registered as read-only warmup indicators; record them by absolute bar position.
         self.forecasts = np.full(len(self.data), np.nan)
 
     def next(self):
@@ -101,15 +102,15 @@ class MLWalkForwardStrategy(MLTrainOnceStrategy):
 
 
 def prepare_data():
-    # 只使用当前及历史行情构造特征；合成 sentiment 仅用于展示额外列。
+    # Build features from current and historical data only; synthetic sentiment demonstrates an additional column.
     data = EURUSD.copy()
     close = data.Close.values
     sma10 = compute("ta.sma", data, parameters={"length": 10}).s
     sma20 = compute("ta.sma", data, parameters={"length": 20}).s
     sma50 = compute("ta.sma", data, parameters={"length": 50}).s
     sma100 = compute("ta.sma", data, parameters={"length": 100}).s
-    # 离线特征没有 Strategy 实例，通过公开 compute 复用内置算法。
-    # HLC3 与 ddof=1 保留原特征定义，不改用默认收盘价和总体标准差。
+    # Offline features have no Strategy instance; reuse built-in algorithms through public compute.
+    # HLC3 and ddof=1 preserve the original feature definition rather than using default close prices and population standard deviation.
     bands = compute(
         "ta.bbands",
         data.assign(HLC3=(data.High + data.Low + data.Close) / 3),
@@ -145,11 +146,11 @@ def main():
     clf = classifier(7)
     clf.fit(X_train, y_train)
     accuracy = np.mean(y_test == clf.predict(X_test))
-    print("随机拆分分类准确率（不是时序样本外验证）：", accuracy)
+    print("Random-split classification accuracy (not time-series out-of-sample validation):", accuracy)
     once = Backtest(data, MLTrainOnceStrategy, commission=0.0002, margin=0.05).run()
     rolling = Backtest(data, MLWalkForwardStrategy, commission=0.0002, margin=0.05).run()
-    print("一次训练：", once)
-    print("滚动训练：", rolling)
+    print("One-time training:", once)
+    print("Rolling training:", rolling)
     return once, rolling
 
 

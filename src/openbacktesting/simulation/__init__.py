@@ -1,4 +1,4 @@
-"""模拟执行包的延迟类导出；实现位于 simulation.core。"""
+"""Lazy class exports for the simulation package; implemented in simulation.core."""
 
 from typing import TYPE_CHECKING
 

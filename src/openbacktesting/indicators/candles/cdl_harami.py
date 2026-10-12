@@ -1,4 +1,4 @@
-"""cdl_harami：固定原生形态与独立有效掩码。"""
+"""cdl_harami: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_harami import cdl_harami as _calculate
 

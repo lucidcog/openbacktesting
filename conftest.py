@@ -1,4 +1,4 @@
-"""将测试与教程的文件副作用隔离在 pytest 临时目录。"""
+"""Isolate test and tutorial file side effects in the pytest temporary directory."""
 
 import pytest
 

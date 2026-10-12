@@ -1,4 +1,4 @@
-"""内部运行采集政策；默认行为与普通回测保持一致。"""
+"""Internal run-collection policy; defaults match ordinary backtest behavior."""
 
 from dataclasses import dataclass
 

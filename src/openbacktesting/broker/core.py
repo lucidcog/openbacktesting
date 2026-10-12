@@ -1,4 +1,4 @@
-"""单资产交易调度：请求、执行事实、批次及保护组。"""
+"""Single-asset trade scheduling: requests, execution facts, lots, and protection groups."""
 
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ class _OutOfMoneyError(Exception):
 
 
 class Order:
-    """稳定订单句柄；request和snapshot为不可变值，cancel可重复调用。"""
+    """Stable order handle; request and snapshot are immutable values, and cancel is repeatable."""
 
     def __init__(self, broker, request, *, group_id=None, kind="entry", eligible=None, sizing=None):
         self._broker = broker
@@ -60,86 +60,86 @@ class Order:
 
     @property
     def order_id(self):
-        """每运行稳定且只读的订单身份。"""
+        """Stable, read-only order identity within each run."""
         return self._order_id
 
     @property
     def request(self) -> NormalizedOrderRequest:
-        """不可替换的原始规范化请求。"""
+        """The original normalized request cannot be replaced."""
         return self._request_value
 
     @property
     def snapshot(self) -> OrderSnapshot:
-        """最近一次冻结状态，不暴露可写状态。"""
+        """Latest frozen state, without exposing writable state."""
         return self._snapshot
 
     @property
     def sizing(self) -> OrderSizingSnapshot | None:
-        """提交时的冻结规模依据；目标、批次退出和内部保护订单为 None。"""
+        """Sizing basis frozen at submission; None for targets, lot exits, and internal protection orders."""
         return self._sizing_value
 
     @property
     def status(self):
-        """当前状态；历史状态从事件查询。"""
+        """Current state; query events for historical states."""
         return self.snapshot.status
 
     @property
     def size(self):
-        """原始有符号资产数量。"""
+        """Original signed asset quantity."""
         return self.request.qty * (1 if self.request.side == "buy" else -1)
 
     @property
     def limit(self):
-        """不可变请求限价。"""
+        """Immutable requested limit price."""
         return self.request.limit
 
     @property
     def stop(self):
-        """当前有效触发价；原始条件保留于request。"""
+        """Currently effective trigger price; the original condition remains in request."""
         return self.active_stop
 
     @property
     def sl(self):
-        """请求的初始止损价。"""
+        """Initial requested stop-loss price."""
         return self.request.sl
 
     @property
     def tp(self):
-        """请求的初始止盈价。"""
+        """Initial requested take-profit price."""
         return self.request.tp
 
     @property
     def group(self):
-        """关联OCO或保护组；普通独立订单返回None。"""
+        """Associated OCO or protection group; None for ordinary standalone orders."""
         return self._broker.groups.get(self.group_id)
 
     @property
     def tag(self):
-        """用户标签的独立纯值副本。"""
+        """Independent plain-value copy of the user tag."""
         return self.request.tag
 
     @property
     def is_long(self):
-        """是否买向请求。"""
+        """Whether this is a buy-side request."""
         return self.size > 0
 
     @property
     def is_short(self):
-        """是否卖向请求。"""
+        """Whether this is a sell-side request."""
         return self.size < 0
 
     @property
     def parent_trade(self):
-        """关联的活跃批次；关闭后返回None。"""
+        """Associated active lot; None after closure."""
         return next((t for t in self._broker.trades if t.trade_id == self.request.trade_id), None)
 
     @property
     def is_contingent(self):
-        """是否批次保护退出。"""
+        """Whether this is a lot protection exit."""
         return self.kind in ("sl", "tp", "trail")
 
     def cancel(self):
-        """取消未完成订单，终态调用幂等。"""
+        """Cancel an unfinished order; calls on terminal states are idempotent."""
         if not self.status.terminal:
             self._broker._permission()
         self._broker.cancel(self, "user_canceled")
@@ -150,7 +150,7 @@ class Order:
 
 
 class OrderGroup:
-    """可查询的OCO或批次保护组；取消不等于平仓。"""
+    """Queryable OCO or lot protection group; cancellation does not close positions."""
 
     def __init__(self, broker, group_id, kind):
         self._broker = broker
@@ -160,17 +160,17 @@ class OrderGroup:
 
     @property
     def orders(self):
-        """本组全部订单，包含历史终态。"""
+        """All orders in this group, including historical terminal orders."""
         return tuple(self._orders)
 
     def cancel(self):
-        """取消所有仍活动成员，不自动退出持仓。"""
+        """Cancel all still-active members without automatically exiting positions."""
         for order in self.orders:
             order.cancel()
 
 
 class Trade:
-    """可单独退出及保护的开仓批次；部分退出保留trade_id。"""
+    """Entry lot that can be exited and protected separately; partial exits preserve trade_id."""
 
     def __init__(
         self,
@@ -203,39 +203,39 @@ class Trade:
 
     @property
     def size(self):
-        """剩余或关闭片段的有符号数量。"""
+        """Signed quantity of the remaining or closed portion."""
         return self._size
 
     @property
     def group(self):
-        """批次保护组，包含历史替换成员。"""
+        """Lot protection group, including historical replaced members."""
         return self._broker.groups.get(self.group_id)
 
     @property
     def tag(self):
-        """入场标签副本。"""
+        """Copy of the entry tag."""
         import json
 
         return json.loads(self._tag_json)
 
     @property
     def entry_time(self):
-        """入场bar索引。"""
+        """Entry bar index."""
         return self._broker._index[self.entry_bar]
 
     @property
     def exit_time(self):
-        """关闭bar索引；活跃时为None。"""
+        """Closing bar index; None while active."""
         return None if self.exit_bar is None else self._broker._index[self.exit_bar]
 
     @property
     def is_long(self):
-        """是否多头批次。"""
+        """Whether this is a long lot."""
         return self.size > 0
 
     @property
     def is_short(self):
-        """是否空头批次。"""
+        """Whether this is a short lot."""
         return self.size < 0
 
     @property
@@ -244,29 +244,29 @@ class Trade:
 
     @property
     def pl_gross(self):
-        """价格毛损益。"""
+        """Gross price profit or loss."""
         price = self._broker.last_price if self.exit_price is None else self.exit_price
         return self.size * (price - self.entry_price)
 
     @property
     def pl(self):
-        """含分摊费用的净损益；活跃批次包括剩余入场费。"""
+        """Net profit or loss including allocated fees; active lots include remaining entry fees."""
         return self.pl_gross - self._commissions
 
     @property
     def return_fraction(self):
-        """以剩余/分配入场名义为分母的净回报小数。"""
+        """Net return fraction using remaining or allocated entry notional as the denominator."""
         return self.pl / (abs(self.size) * self.entry_price)
 
     @property
     def value(self):
-        """按当前或退出价计算的绝对名义价值。"""
+        """Absolute notional value at the current or exit price."""
         price = self._broker.last_price if self.exit_price is None else self.exit_price
         return abs(self.size) * price
 
     @property
     def sl(self):
-        """当前止损价；写入会留下撤旧建新的事件。"""
+        """Current stop-loss price; writes record cancellation and replacement events."""
         return (
             self._sl_order.stop
             if self._sl_order is not None and not self._sl_order.status.terminal
@@ -279,7 +279,7 @@ class Trade:
 
     @property
     def tp(self):
-        """当前止盈价；None撤销保护。"""
+        """Current take-profit price; None cancels protection."""
         return (
             self._tp_order.limit
             if self._tp_order is not None and not self._tp_order.status.terminal
@@ -291,31 +291,31 @@ class Trade:
         self._broker.protect(self, "tp", price)
 
     def close(self, portion=None, *, qty=None):
-        """只减仓退出；qty与portion互斥，默认关闭全部。"""
+        """Reduce-only exit; qty and portion are mutually exclusive, and the default closes the entire lot."""
         if qty is not None and portion is not None:
-            raise ValueError("qty与portion互斥")
+            raise ValueError("qty and portion are mutually exclusive")
         if qty is None:
             portion = 1.0 if portion is None else finite(portion, "portion", positive=True)
             if portion > 1:
-                raise ValueError("portion必须不大于1")
+                raise ValueError("portion must not exceed 1")
             qty = self._broker.instrument.quantity(
                 abs(self.size) * portion, floor=True, opening=False
             )
         else:
             qty = self._broker.instrument.quantity(qty, opening=False)
         if qty <= 0:
-            raise ValueError("平仓数量归零")
+            raise ValueError("Closing quantity rounds to zero")
         return self._broker.new_order(
             qty, side="sell" if self.is_long else "buy", trade=self, reduce_only=True, tag=self.tag
         )
 
     def set_trailing_stop(self, *, amount=None, percent=None):
-        """建立原生跟踪止损，替换固定SL，下一合法bar生效。"""
+        """Create a native trailing stop, replacing the fixed SL; effective from the next eligible bar."""
         if (amount is None) == (percent is None):
-            raise ValueError("amount与percent必须且只能提供一个")
+            raise ValueError("Exactly one of amount and percent must be supplied")
         value = finite(amount if amount is not None else percent, "trail", positive=True)
         if percent is not None and value >= 1:
-            raise ValueError("percent必须小于1")
+            raise ValueError("percent must be less than 1")
         distance = value if amount is not None else self._broker.last_price * value
         price = self._broker.instrument.price(
             self._broker.last_price - copysign(distance, self.size),
@@ -330,48 +330,48 @@ class Trade:
 
 
 class Position:
-    """活跃批次汇总；布尔值按总暴露判断。"""
+    """Aggregate active lots; truthiness depends on total exposure."""
 
     def __init__(self, broker):
         self._broker = broker
 
     @property
     def snapshot(self) -> PositionSnapshot:
-        """冻结的净仓、总暴露与费用快照。"""
+        """Frozen snapshot of net position, gross exposure, and fees."""
         return self._broker.ledger.position(self._broker.trades, self._broker.last_price)
 
     @property
     def size(self):
-        """有符号净数量。"""
+        """Signed net quantity."""
         return self.snapshot.net_qty
 
     @property
     def pl(self):
-        """包含剩余入场费用的未实现净损益。"""
+        """Unrealized net profit or loss including remaining entry fees."""
         return self.snapshot.unrealized_pnl_net
 
     @property
     def return_fraction(self):
-        """净回报小数；双向或空仓无统一成本时为None。"""
+        """Net return fraction; None when a hedged or flat position has no common cost basis."""
         return self.snapshot.return_fraction
 
     @property
     def has_exposure(self):
-        """是否仍持有任意批次。"""
+        """Whether any lot is still held."""
         return self.snapshot.has_exposure
 
     @property
     def is_long(self):
-        """是否净多。"""
+        """Whether the net position is long."""
         return self.size > 0
 
     @property
     def is_short(self):
-        """是否净空。"""
+        """Whether the net position is short."""
         return self.size < 0
 
     def close(self, portion=None):
-        """逐批次提交只减仓订单并返回有序元组。"""
+        """Submit reduce-only orders for each lot and return an ordered tuple."""
         return tuple(t.close(portion) for t in tuple(self._broker.trades))
 
     def __bool__(self):
@@ -402,10 +402,10 @@ class _Broker:
         cash = finite(cash, "cash", positive=True)
         margin = finite(margin, "margin", positive=True)
         if margin > 1:
-            raise ValueError("margin必须不大于1")
+            raise ValueError("margin must not exceed 1")
         spread = finite(spread, "spread")
         if not 0 <= spread < 1:
-            raise ValueError("spread必须在[0,1)")
+            raise ValueError("spread must be in [0,1)")
         if max_gross_exposure is not None:
             max_gross_exposure = finite(max_gross_exposure, "max_gross_exposure", positive=True)
         self._data, self._index = data, index
@@ -439,7 +439,7 @@ class _Broker:
         self.observations = None
 
     def _commission_func(self, *args):
-        raise TypeError("0.1交易状态不可继续执行；请用0.2配置重新回测")
+        raise TypeError("Trading state from 0.1 cannot resume execution; rerun the backtest with a 0.2 configuration")
 
     def _commission(self, qty, price):
         if callable(self._commission_model):
@@ -449,7 +449,7 @@ class _Broker:
     def order_target(self, target, conditions):
         self._permission()
         if self._hedging:
-            raise ValueError("目标仓位不支持对冲模式")
+            raise ValueError("Target positions do not support hedging mode")
         target = finite(target, "target")
         target = copysign(self.instrument.quantity(abs(target), floor=True, opening=False), target)
         if target < 0 and not self.allow_short:
@@ -462,7 +462,7 @@ class _Broker:
         if identity_values.get("expires_at") is not None:
             identity_values["expires_at"] = pd.Timestamp(identity_values["expires_at"]).isoformat()
         identity = (target, freeze_tag(identity_values))
-        # 先验证新请求，非法复用或替换不能改变合法旧意图。
+        # Validate the new request first; invalid reuse or replacement must not alter a valid existing intent.
         request = (
             None
             if delta == 0
@@ -511,7 +511,7 @@ class _Broker:
 
     def _permission(self):
         if self.phase not in ("next", "notify"):
-            raise RuntimeError("此生命周期阶段禁止交易命令")
+            raise RuntimeError("Trading commands are prohibited during this lifecycle phase")
 
     def _event(self, order):
         event = OrderEvent(self._seq(), self._i, self._index[self._i], self.phase, order.snapshot)
@@ -548,7 +548,7 @@ class _Broker:
         if values["expires_at"] is not None and (
             not isinstance(self._index, pd.DatetimeIndex) or self._index.tz is None
         ):
-            raise ValueError("绝对到期及行情索引必须带时区")
+            raise ValueError("Absolute expiration and market-data index must be timezone-aware")
         return values
 
     def _request(
@@ -567,7 +567,7 @@ class _Broker:
         valid_bars=None,
     ):
         if side not in ("buy", "sell"):
-            raise ValueError("side必须为buy/sell")
+            raise ValueError("side must be buy/sell")
         conditions = self._conditions(
             limit=limit,
             stop=stop,
@@ -580,14 +580,14 @@ class _Broker:
         )
         qty = self.instrument.quantity(qty, opening=not reduce_only)
         if qty <= 0:
-            raise ValueError("qty必须为正")
+            raise ValueError("qty must be positive")
         if self._hedging and reduce_only and trade is None:
-            raise ValueError("对冲只减仓必须绑定trade")
+            raise ValueError("Hedged reduce-only orders must reference a trade")
         reference = limit or stop or self.last_price
         if sl is not None and ((sl >= reference) if side == "buy" else (sl <= reference)):
-            raise ValueError("SL方向不合法")
+            raise ValueError("Invalid SL direction")
         if tp is not None and ((tp <= reference) if side == "buy" else (tp >= reference)):
-            raise ValueError("TP方向不合法")
+            raise ValueError("Invalid TP direction")
         return NormalizedOrderRequest(
             side=side,
             qty=qty,
@@ -659,7 +659,7 @@ class _Broker:
     def submit_oco(self, *, first: OrderRequest, second: OrderRequest) -> OrderGroup:
         self._permission()
         if not isinstance(first, OrderRequest) or not isinstance(second, OrderRequest):
-            raise TypeError("OCO的first和second必须为OrderRequest")
+            raise TypeError("OCO first and second must be OrderRequest instances")
         context = {
             "account": self.account,
             "reference_price": self.last_price,
@@ -696,7 +696,7 @@ class _Broker:
         if self.phase not in ("execute", "close", "terminal"):
             self._permission()
         if trade not in self.trades:
-            raise ValueError("只能为活跃批次建立保护")
+            raise ValueError("Protection can only be created for active lots")
         if price is not None:
             self.instrument.price(price)
         attr = "_sl_order" if which == "sl" else "_tp_order"
@@ -1038,7 +1038,7 @@ class _Broker:
                 self._protect_ambiguity(order, open_, high, low)
             self._execute(order, base, phase=self.phase, bounds=None if close else (low, high))
             processed.add(order.order_id)
-        # 仅处理本阶段市价入场生成的保护单，不重新执行普通请求。
+        # Process only protection orders created by market entries in this phase; do not re-execute ordinary requests.
         if not close:
             for order in sorted(self.orders, key=lambda o: o.kind not in ("sl", "trail")):
                 if (

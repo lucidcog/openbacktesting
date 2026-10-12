@@ -1,11 +1,12 @@
-"""组合 SignalStrategy 与 TrailingStrategy：向量入场信号叠加移动止损。
+"""Combine SignalStrategy and TrailingStrategy: vector entry signals with a trailing stop.
 
-随包 GOOG 日线、无额外依赖；n1/n2 是快慢 SMA 周期。覆盖 init/next 时须调用 super。
-只做多、每笔使用请求时权益的 95%、移动止损为 2 倍 ATR、手续费 0.2%。
-期末不强制平仓；显式执行 main 后输出统计，不代表止损可以保证盈利。
+Bundled GOOG daily data, with no additional dependencies; n1/n2 are fast/slow SMA periods. Call super when overriding init/next.
+Long only; each request uses 95% of equity, with a 2 ATR trailing stop and 0.2% commission.
+No forced end-of-run liquidation. Explicitly run main to print statistics; a stop does not guarantee profit.
 """
 
 import pandas as pd
+
 from openbacktesting import Backtest
 from openbacktesting.lib import SignalStrategy, TrailingStrategy
 from openbacktesting.test import GOOG

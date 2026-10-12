@@ -1,4 +1,4 @@
-"""当前可见输入的交叉判断；不登记指标，也不计算整段历史。"""
+"""Crossing checks on currently visible inputs; no indicator registration or full-history computation."""
 
 from collections.abc import Sequence
 from numbers import Real
@@ -17,9 +17,9 @@ def _last_pair(value: CrossInput) -> tuple[float, float] | None:
     if isinstance(value, (str, bytes)) or not isinstance(
         value, (Sequence, np.ndarray, pd.Series, IndicatorHandle)
     ):
-        raise TypeError("交叉判断输入须为数值序列、单通道句柄或数字常量")
+        raise TypeError("Crossing inputs must be numeric sequences, single-channel handles, or numeric constants")
     if isinstance(value, (np.ndarray, IndicatorHandle)) and value.ndim != 1:
-        raise ValueError("交叉判断仅接受单通道序列；请先选择输出通道")
+        raise ValueError("Crossing checks accept only single-channel sequences; select an output channel first")
     if len(value) < 2:
         return None
     if isinstance(value, IndicatorHandle) and not value[-2:].valid.all():
@@ -44,45 +44,45 @@ def _cross_sides(left: CrossInput, right: CrossInput) -> tuple[bool, bool]:
 
 
 class CrossPredicates:
-    """self.ta 的即时布尔判断，与交叉指标使用相同的等值边界。"""
+    """Immediate self.ta boolean predicates with the same equality boundaries as crossing indicators."""
 
     def is_cross(self, left: CrossInput, right: CrossInput) -> bool:
-        """判断当前可见的最后一根是否发生任一方向交叉。
+        """Check whether either-direction crossing occurs on the last currently visible bar.
 
         Args:
-            left: 单通道句柄、数值序列或数字常量；不接受列名字符串。
-            right: 单通道句柄、数值序列或数字常量；常量视为固定阈值。
+            left: Single-channel handle, numeric sequence, or numeric constant; column-name strings are not accepted.
+            right: Single-channel handle, numeric sequence, or numeric constant; constants act as fixed thresholds.
 
         Returns:
-            Python bool。前一根允许相等，当前相等不算交叉。
-            不足两根或最后两根含 NaN/无穷值时为 False。
-            在 next 调用只读取输入当前前缀，不登记指标或影响预热。
+            Python bool. Equality is allowed on the preceding bar; current equality is not a crossing.
+            False with fewer than two bars or NaN/infinity in either of the last two bars.
+            Calls in next read only the currently visible input prefix, without registering indicators or affecting warmup.
         """
         up, down = _cross_sides(left, right)
         return up or down
 
     def is_crossover(self, left: CrossInput, right: CrossInput) -> bool:
-        """判断当前左值是否严格高于右值，且前一根左值小于等于右值。
+        """Check whether the current left value is strictly above the right, with the preceding left value at or below the right.
 
         Args:
-            left: 单通道句柄、数值序列或数字常量；不接受列名字符串。
-            right: 单通道句柄、数值序列或数字常量；常量视为固定阈值。
+            left: Single-channel handle, numeric sequence, or numeric constant; column-name strings are not accepted.
+            right: Single-channel handle, numeric sequence, or numeric constant; constants act as fixed thresholds.
 
         Returns:
-            Python bool。只读取最后两根；不足两根或含 NaN/无穷值时为 False。
-            有效位置与 ta.crossover 序列一致；不登记指标，可在 next 调用。
+            Python bool. Read only the last two bars; False with fewer than two bars or NaN/infinity.
+            Valid positions match the ta.crossover sequence; no registration, and calls in next are allowed.
         """
         return _cross_sides(left, right)[0]
 
     def is_crossunder(self, left: CrossInput, right: CrossInput) -> bool:
-        """判断当前左值是否严格低于右值，且前一根左值大于等于右值。
+        """Check whether the current left value is strictly below the right, with the preceding left value at or above the right.
 
         Args:
-            left: 单通道句柄、数值序列或数字常量；不接受列名字符串。
-            right: 单通道句柄、数值序列或数字常量；常量视为固定阈值。
+            left: Single-channel handle, numeric sequence, or numeric constant; column-name strings are not accepted.
+            right: Single-channel handle, numeric sequence, or numeric constant; constants act as fixed thresholds.
 
         Returns:
-            Python bool。只读取最后两根；不足两根或含 NaN/无穷值时为 False。
-            有效位置与 ta.crossunder 序列一致；不登记指标，可在 next 调用。
+            Python bool. Read only the last two bars; False with fewer than two bars or NaN/infinity.
+            Valid positions match the ta.crossunder sequence; no registration, and calls in next are allowed.
         """
         return _cross_sides(left, right)[1]

@@ -1,4 +1,4 @@
-"""参数声明与序列化的公开行为、拒绝边界及稳定性。"""
+"""Public parameter-declaration and serialization behavior, rejection boundaries, and stability."""
 
 import json
 import pickle
@@ -7,6 +7,7 @@ from enum import Enum
 
 import numpy as np
 import pytest
+
 from openbacktesting import Color, Strategy, inputs
 
 
@@ -21,7 +22,7 @@ class Other(Enum):
 
 class Alias(Enum):
     A = 1
-    B = 1  # noqa: PIE796 — 验证拒绝枚举别名
+    B = 1  # noqa: PIE796 — verify enum alias rejection
 
 
 def strategy(**fields):
@@ -41,15 +42,15 @@ def request(cls, values):
 
 def test_nine_types_exports_and_roundtrip():
     cls = strategy(
-        enabled=inputs.bool(True, title="启用"),
-        shade=inputs.color("#aabbcc", title="颜色"),
-        mode=inputs.enum(Mode.FAST, title="模式", options=[Mode.FAST, Mode.SLOW]),
-        ratio=inputs.float(1, title="比例", minval=0, maxval=2, step=0.25),
-        length=inputs.int(20, title="周期", options=[10, 20, 30]),
-        price=inputs.price(-1, title="价格"),
-        hours=inputs.session("24x7", title="时段", options=["24x7", "0900-1700:5432"]),
-        text=inputs.string(" a\\nb ", title="文本", confirm=True),
-        start=inputs.time(1700000000000, title="时间"),
+        enabled=inputs.bool(True, title="Enabled"),
+        shade=inputs.color("#aabbcc", title="Color"),
+        mode=inputs.enum(Mode.FAST, title="Mode", options=[Mode.FAST, Mode.SLOW]),
+        ratio=inputs.float(1, title="Ratio", minval=0, maxval=2, step=0.25),
+        length=inputs.int(20, title="Period", options=[10, 20, 30]),
+        price=inputs.price(-1, title="Price"),
+        hours=inputs.session("24x7", title="Session", options=["24x7", "0900-1700:5432"]),
+        text=inputs.string(" a\\nb ", title="Text", confirm=True),
+        start=inputs.time(1700000000000, title="Time"),
     )
     schema = inputs.describe(cls)
     assert [x["kind"] for x in schema["inputs"]] == [
@@ -70,11 +71,11 @@ def test_nine_types_exports_and_roundtrip():
         {"name": "SLOW", "title": "SLOW"},
     ]
     assert schema["inputs"][2]["enumTypeId"].endswith(".Mode")
-    resolved = inputs.resolve_request(cls, request(cls, {"模式": "SLOW", "时段": "0900-1700:2345"}))
-    assert dict(resolved.runtime)["模式"] is Mode.SLOW
-    assert resolved.snapshot()["values"]["模式"] == "SLOW"
-    assert resolved.snapshot()["values"]["时段"] == "0900-1700:2345"
-    assert resolved.snapshot()["values"]["文本"] == " a\\nb "
+    resolved = inputs.resolve_request(cls, request(cls, {"Mode": "SLOW", "Session": "0900-1700:2345"}))
+    assert dict(resolved.runtime)["Mode"] is Mode.SLOW
+    assert resolved.snapshot()["values"]["Mode"] == "SLOW"
+    assert resolved.snapshot()["values"]["Session"] == "0900-1700:2345"
+    assert resolved.snapshot()["values"]["Text"] == " a\\nb "
     assert resolved.overrides() == {"mode": Mode.SLOW, "hours": "0900-1700:2345"}
     assert pickle.loads(pickle.dumps(resolved)) == resolved
     with pytest.raises(FrozenInstanceError):
@@ -82,8 +83,8 @@ def test_nine_types_exports_and_roundtrip():
     with pytest.raises(FrozenInstanceError):
         cls.length.title = "changed"
     snapshot = resolved.snapshot()
-    snapshot["values"]["周期"] = 999
-    assert resolved.snapshot()["values"]["周期"] == 20
+    snapshot["values"]["Period"] = 999
+    assert resolved.snapshot()["values"]["Period"] == 20
     schema["inputs"][2]["options"].append("BAD")
     assert "BAD" not in inputs.describe(cls)["inputs"][2]["options"]
 
@@ -120,11 +121,11 @@ def test_nine_types_exports_and_roundtrip():
     ],
 )
 def test_invalid_native_values(factory, default, bad):
-    cls = strategy(value=getattr(inputs, factory)(default, title="值"))
+    cls = strategy(value=getattr(inputs, factory)(default, title="Value"))
     with pytest.raises(inputs.InputError) as caught:
         inputs.resolve_native(cls, {"value": bad})
     assert caught.value.code == "InvalidInputValue"
-    assert caught.value.title == "值"
+    assert caught.value.title == "Value"
     assert caught.value.expected
     assert caught.value.actual_type
 
@@ -146,7 +147,7 @@ def test_invalid_native_values(factory, default, bad):
     ],
 )
 def test_valid_values(factory, default, raw, expected):
-    cls = strategy(value=getattr(inputs, factory)(default, title="值"))
+    cls = strategy(value=getattr(inputs, factory)(default, title="Value"))
     actual = inputs.resolve_native(cls, {"value": raw}).overrides()["value"]
     assert actual == expected and type(actual) is type(expected)
 
@@ -188,25 +189,25 @@ def test_valid_values(factory, default, raw, expected):
 )
 def test_invalid_declarations(factory, default, kwargs):
     with pytest.raises((inputs.InputError, TypeError)) as caught:
-        getattr(inputs, factory)(default, **({"title": "值"} | kwargs))
+        getattr(inputs, factory)(default, **({"title": "Value"} | kwargs))
     if isinstance(caught.value, inputs.InputError):
         assert caught.value.code == "InvalidDeclaration"
 
 
 def test_step_is_not_multiple_of_and_options_reject_outsiders():
-    cls = strategy(value=inputs.int(1, title="值", minval=1, maxval=4, step=2))
+    cls = strategy(value=inputs.int(1, title="Value", minval=1, maxval=4, step=2))
     assert inputs.resolve_native(cls, {"value": 2}).overrides() == {"value": 2}
     for value in [0, 5]:
         with pytest.raises(inputs.InputError, match="InvalidInputValue"):
             inputs.resolve_native(cls, {"value": value})
-    cls = strategy(value=inputs.string("a", title="值", options=["a", "b"]))
+    cls = strategy(value=inputs.string("a", title="Value", options=["a", "b"]))
     with pytest.raises(inputs.InputError, match="options"):
         inputs.resolve_native(cls, {"value": "c"})
 
 
 def test_discovery_never_invokes_user_lifecycle_or_getters():
     def fail(*args):
-        raise AssertionError("不应调用")
+        raise AssertionError("Must not be called")
 
     cls = type(
         "Unrunnable",
@@ -216,7 +217,7 @@ def test_discovery_never_invokes_user_lifecycle_or_getters():
             "init": fail,
             "next": fail,
             "danger": property(fail),
-            "period": inputs.int(2, title="周期"),
+            "period": inputs.int(2, title="Period"),
         },
     )
     assert inputs.describe(cls)["inputs"][0]["attribute"] == "period"
@@ -230,16 +231,16 @@ def test_discovery_never_invokes_user_lifecycle_or_getters():
 def test_titles_are_required_exact_and_unique_across_groups():
     for fields in [
         {
-            "a": inputs.int(1, title="重复", group="a"),
-            "b": inputs.bool(True, title="重复", group="b"),
+            "a": inputs.int(1, title="duplicate", group="a"),
+            "b": inputs.bool(True, title="duplicate", group="b"),
         },
-        {"_secret": inputs.int(1, title="私有")},
-        {"buy": inputs.int(1, title="买入")},
+        {"_secret": inputs.int(1, title="private")},
+        {"buy": inputs.int(1, title="buy")},
     ]:
         with pytest.raises(inputs.InputError, match="InvalidDeclaration"):
             inputs.describe(strategy(**fields))
-    shared = inputs.int(1, title="重复")
-    with pytest.raises(inputs.InputError, match="复用"):
+    shared = inputs.int(1, title="duplicate")
+    with pytest.raises(inputs.InputError, match="reuse"):
         inputs.describe(strategy(a=shared, b=shared))
     cls = strategy(
         a=inputs.int(1, title="A"), b=inputs.int(1, title="a"), c=inputs.int(1, title=" A")
@@ -253,9 +254,9 @@ def test_titles_are_required_exact_and_unique_across_groups():
 def test_inheritance_order_conflicts_shadowing_and_diamond():
     base = strategy(a=inputs.int(1, title="A"), b=inputs.int(2, title="B"))
     derived = type(
-        "Derived", (base,), {"a": inputs.int(3, title="新A"), "c": inputs.bool(True, title="C")}
+        "Derived", (base,), {"a": inputs.int(3, title="New A"), "c": inputs.bool(True, title="C")}
     )
-    assert [x["title"] for x in inputs.describe(derived)["inputs"]] == ["新A", "B", "C"]
+    assert [x["title"] for x in inputs.describe(derived)["inputs"]] == ["New A", "B", "C"]
     for attrs in [{"a": 3}, {"c": inputs.int(1, title="B")}]:
         with pytest.raises(inputs.InputError):
             inputs.describe(type("Bad", (base,), attrs))
@@ -263,8 +264,8 @@ def test_inheritance_order_conflicts_shadowing_and_diamond():
     right = type("Right", (base,), {})
     diamond = type("Diamond", (left, right), {})
     assert inputs.describe(diamond) == inputs.describe(base)
-    different = strategy(a=inputs.int(4, title="另一个A"))
-    with pytest.raises(inputs.InputError, match="多继承"):
+    different = strategy(a=inputs.int(4, title="Another A"))
+    with pytest.raises(inputs.InputError, match="Multiple-inheritance"):
         inputs.describe(type("Conflict", (base, different), {}))
     fixed = type("Fixed", (base, different), {"a": inputs.int(5, title="A")})
     assert inputs.describe(fixed)["inputs"][0]["default"] == 5
@@ -272,13 +273,13 @@ def test_inheritance_order_conflicts_shadowing_and_diamond():
 
 def test_active_references_and_presentation_hints():
     cls = strategy(
-        enabled=inputs.bool(False, title="启用"),
-        period=inputs.int(1, title="周期", active={"title": "启用"}, display="none", confirm=True),
+        enabled=inputs.bool(False, title="Enabled"),
+        period=inputs.int(1, title="Period", active={"title": "Enabled"}, display="none", confirm=True),
     )
     schema = inputs.describe(cls)
-    assert schema["inputs"][1]["active"] == {"title": "启用"}
+    assert schema["inputs"][1]["active"] == {"title": "Enabled"}
     assert schema["inputs"][1]["confirm"] is True
-    assert inputs.resolve_native(cls, {}).snapshot()["values"] == {"启用": False, "周期": 1}
+    assert inputs.resolve_native(cls, {}).snapshot()["values"] == {"Enabled": False, "Period": 1}
     with pytest.raises(inputs.InputError):
         inputs.resolve_native(cls, {"period": "bad"})
     for fields in [
@@ -295,7 +296,7 @@ def test_active_references_and_presentation_hints():
 
 
 def test_request_errors_and_native_namespace():
-    cls = strategy(a=inputs.enum(Mode.FAST, title="模式"))
+    cls = strategy(a=inputs.enum(Mode.FAST, title="Mode"))
     good = request(cls, {})
     cases = [
         (None, "InvalidInputValue"),
@@ -306,43 +307,49 @@ def test_request_errors_and_native_namespace():
         (good | {"values": []}, "InvalidInputValue"),
         (good | {"values": {"missing": 1}}, "UnknownInput"),
         (good | {"values": {"a": "FAST"}}, "UnknownInput"),
-        (good | {"values": {"模式": "NOPE"}}, "InvalidInputValue"),
-        (good | {"values": {"模式": Mode.FAST}}, "InvalidInputValue"),
-        (good | {"values": {"模式": None}}, "InvalidInputValue"),
+        (good | {"values": {"Mode": "NOPE"}}, "InvalidInputValue"),
+        (good | {"values": {"Mode": Mode.FAST}}, "InvalidInputValue"),
+        (good | {"values": {"Mode": None}}, "InvalidInputValue"),
     ]
     for payload, code in cases:
         with pytest.raises(inputs.InputError) as caught:
             inputs.resolve_request(cls, payload)
         assert caught.value.code == code
     with pytest.raises(inputs.InputError, match="UnknownInput"):
-        inputs.resolve_native(cls, {"模式": Mode.FAST})
-    with pytest.raises(inputs.InputError, match="至少一个"):
+        inputs.resolve_native(cls, {"Mode": Mode.FAST})
+    with pytest.raises(inputs.InputError, match="at least one"):
         inputs.resolve_request(strategy(), good)
     assert inputs.resolve_native(strategy(), {"legacy": 1}) is None
-    assert inputs.request_for(cls, {"a": Mode.SLOW}) == request(cls, {"模式": "SLOW"})
+    assert inputs.request_for(cls, {"a": Mode.SLOW}) == request(cls, {"Mode": "SLOW"})
 
 
 def test_schema_hash_and_renaming():
-    cls = strategy(length=inputs.int(20, title="周期"))
+    # Retain the localized-title fingerprint as historical compatibility evidence.
+    legacy = strategy(length=inputs.int(20, title="周期"))
+    assert (
+        inputs.describe(legacy)["schemaHash"]
+        == "805ec85e93d63ac52224336911d64f0a823baba0556f18848c7b5bfab3e25fa7"
+    )
+    cls = strategy(length=inputs.int(20, title="Period"))
     before = inputs.describe(cls)
     assert before == inputs.describe(cls)
     assert (
-        before["schemaHash"] == "805ec85e93d63ac52224336911d64f0a823baba0556f18848c7b5bfab3e25fa7"
+        before["schemaHash"] == "90732d727341902c60bdeeb00dbd7a7b8bc6b7ad65613e80fbc155c835b340b1"
     )
     for other in [
-        strategy(length=inputs.int(20, title="改名")),
-        strategy(period=inputs.int(20, title="周期")),
-        strategy(length=inputs.int(20, title="周期", tooltip="说明")),
+        strategy(length=inputs.int(20, title="renamed")),
+        strategy(period=inputs.int(20, title="Period")),
+        strategy(length=inputs.int(20, title="Period", tooltip="Description")),
     ]:
         assert inputs.describe(other)["schemaHash"] != before["schemaHash"]
         with pytest.raises(inputs.InputError, match="SchemaMismatch"):
-            inputs.resolve_request(other, request(cls, {"周期": 30}))
-    renamed = strategy(period=inputs.int(20, title="周期"))
-    assert inputs.resolve_request(renamed, request(renamed, {"周期": 30})).overrides() == {
+            inputs.resolve_request(other, request(cls, {"Period": 30}))
+    renamed = strategy(period=inputs.int(20, title="Period"))
+    assert inputs.resolve_request(renamed, request(renamed, {"Period": 30})).overrides() == {
         "period": 30
     }
-    zero = strategy(value=inputs.float(-0.0, title="零"))
-    positive = strategy(value=inputs.float(0.0, title="零"))
+    zero = strategy(value=inputs.float(-0.0, title="zero"))
+    positive = strategy(value=inputs.float(0.0, title="zero"))
     assert inputs.describe(zero) == inputs.describe(positive)
 
 
@@ -351,12 +358,12 @@ def test_numpy_scalar_must_not_silently_lose_precision():
 
     class ExtendedPrecision(np.float64):
         def item(self):
-            # 模拟 longdouble 在其他平台返回非 Python 原生标量的情况。
+            # Simulate longdouble returning a nonnative Python scalar on other platforms.
             return Decimal("1.0000000000000000001")
 
-    cls = strategy(value=inputs.float(1.0, title="精度"))
+    cls = strategy(value=inputs.float(1.0, title="precision"))
     with pytest.raises(inputs.InputError) as caught:
         inputs.resolve_native(cls, {"value": ExtendedPrecision(1)})
     assert caught.value.code == "InvalidInputValue"
-    assert caught.value.title == "精度"
-    assert "无损" in caught.value.expected
+    assert caught.value.title == "precision"
+    assert "Lossless" in caught.value.expected

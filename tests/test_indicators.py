@@ -1,4 +1,4 @@
-"""自有指标的数值、索引、就绪、后端和隔离契约。"""
+"""Numerical, index, readiness, backend, and isolation contracts for owned indicators."""
 
 import builtins
 import pickle
@@ -8,6 +8,8 @@ from threading import Event
 import numpy as np
 import pandas as pd
 import pytest
+from test_indicator_regressions import frame
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.indicator_types import (
     IndicatorCursor,
@@ -18,7 +20,6 @@ from openbacktesting.indicator_types import (
     immutable,
 )
 from openbacktesting.indicators import runtime as indicators
-from test_indicator_regressions import frame
 
 
 @pytest.mark.parametrize("name", ["sma", "ema", "rsi", "atr", "macd", "bbands"])
@@ -29,7 +30,7 @@ def test_representative_native_contract_and_causality(name, monkeypatch):
 
     def reject_talib(module, *args, **kwargs):
         if module == "talib":
-            raise AssertionError("内置指标不得导入 TA-Lib")
+            raise AssertionError("Built-in indicators must not import TA-Lib")
         return original(module, *args, **kwargs)
 
     monkeypatch.setitem(ta.Imports, "talib", True)
@@ -64,7 +65,7 @@ def test_sma_backends_and_hand_calculated_ema():
     "parameters", [{"length": 0}, {"length": True}, {"length": 2.5}, {"unknown": 1}]
 )
 def test_parameter_errors_precede_computation(parameters, monkeypatch):
-    monkeypatch.setattr(indicators, "execute", lambda *a: pytest.fail("不应调用后端"))
+    monkeypatch.setattr(indicators, "execute", lambda *a: pytest.fail("Backend must not be called"))
     with pytest.raises(IndicatorError, match="invalid-parameter"):
         indicators.compute("ta.sma", frame(), parameters=parameters)
 
@@ -304,7 +305,7 @@ def test_parameter_relations_and_duplicate_catalog(monkeypatch):
     rows["entries"].append(rows["entries"][0])
     fake = SimpleNamespace(joinpath=lambda _: SimpleNamespace(read_text=lambda: json.dumps(rows)))
     monkeypatch.setattr(importlib.resources, "files", lambda _: fake)
-    with pytest.raises(ValueError, match="身份重复"):
+    with pytest.raises(ValueError, match="Duplicate indicator identity"):
         indicator_backends.load_specs()
 
 
@@ -414,8 +415,9 @@ def test_user_example_exports_bt_and_retains_both_snapshots():
     import runpy
     from pathlib import Path
 
-    from openbacktesting import runtime
     from example_support import example_chart
+
+    from openbacktesting import runtime
 
     namespace = runpy.run_path(str(Path(__file__).parents[1] / "examples/strategies/ema_macd.py"))
     assert "bt" not in namespace
@@ -459,9 +461,10 @@ def test_cache_failure_wakes_concurrent_waiter_and_does_not_poison_retry(monkeyp
 
 
 def test_historical_result_table_remains_usable_by_statistics():
+    from test_modularization import baseline_objects
+
     from openbacktesting.portfolio.stats import compute_stats
     from openbacktesting.test import GOOG
-    from test_modularization import baseline_objects
 
     old = baseline_objects()["result"]
     result = compute_stats(
@@ -470,8 +473,8 @@ def test_historical_result_table_remains_usable_by_statistics():
         ohlc_data=GOOG.iloc[:80],
         strategy_instance=old["_strategy"],
     )
-    # 旧序列化指标仍可消费；仅覆盖已明确变更的统计口径，保留历史基线文件。
-    # 固定权益不变：年化包含首个零收益桶，买入持有从第0根计算，Alpha 随之调整。
+    # Historical serialized indicators remain consumable; override only explicitly changed statistics and retain historical baseline files.
+    # Fixed equity is unchanged: annualization includes the initial zero-return bucket, buy-and-hold starts at bar 0, and Alpha adjusts accordingly.
     expected = old.copy()
     expected.update(
         pd.Series(

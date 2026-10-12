@@ -1,4 +1,4 @@
-"""可导出回测默认设置；不依赖策略、宿主或执行生命周期。"""
+"""Exportable default backtest settings independent of strategies, hosts, and execution lifecycles."""
 
 from collections.abc import Mapping
 from dataclasses import dataclass, fields, replace
@@ -11,7 +11,7 @@ from openbacktesting.portfolio.rates import validate_risk_free_rate
 
 
 class CommissionType(Enum):
-    """作者佣金类型；PERCENT 使用百分数，其余成员使用账户金额。"""
+    """Author-facing commission type; PERCENT uses percentage points, and other members use account amounts."""
 
     PERCENT = "percent"
     CASH_PER_ORDER = "cash_per_order"
@@ -19,28 +19,28 @@ class CommissionType(Enum):
 
 
 class QuantityType(Enum):
-    """默认下单量：固定资产数量，或请求时权益的百分数。"""
+    """Default order size: Fixed asset quantity or a percentage of equity at request time."""
 
     FIXED = "fixed"
     PERCENT_OF_EQUITY = "percent_of_equity"
 
 
 class SlippageType(Enum):
-    """滑点距离：固定价格单位，或价格的基点数。"""
+    """Slippage distance: Fixed price units or basis points of price."""
 
     FIXED = "fixed"
     BPS = "bps"
 
 
 class ExecutionTiming(Enum):
-    """执行时机：最早下一根处理，或本根收盘处理新增无条件市价单。"""
+    """Execution timing: Process no earlier than the next bar, or process new unconditional market orders at this bar's close."""
 
     NEXT_OPEN = "next_open"
     SAME_CLOSE = "same_close"
 
 
 class EndPolicy(Enum):
-    """期末政策：保留持仓估值，或按末收盘价清算实际持仓。"""
+    """End policy: Retain marked positions or liquidate actual positions at the final close."""
 
     MARK_TO_MARKET = "mark_to_market"
     CLOSE_AT_LAST_CLOSE = "close_at_last_close"
@@ -61,7 +61,7 @@ _PAIRED_FIELDS = (
 
 
 def _decode_enums(values: Mapping) -> dict:
-    """只在宿主边界将精确字符串转换为对应枚举。"""
+    """Convert exact strings to corresponding enum members only at the host boundary."""
     result = dict(values)
     for name, kind in _ENUM_FIELDS.items():
         if name not in result:
@@ -72,50 +72,50 @@ def _decode_enums(values: Mapping) -> dict:
                 result[name] = kind(value)
             except ValueError:
                 choices = ", ".join(member.value for member in kind)
-                raise ValueError(f"{name} 必须为以下选项之一: {choices}") from None
+                raise ValueError(f"{name} must be one of: {choices}") from None
         elif not isinstance(value, kind):
-            raise TypeError(f"{name} 必须为 {kind.__name__} 成员或对应字符串")
+            raise TypeError(f"{name} must be {kind.__name__} member or corresponding string")
     return result
 
 
 @dataclass(frozen=True)
 class DefaultOrderSize:
-    """普通下单省略 qty 时的请求预算；不代表目标仓位或成交金额。"""
+    """Request budget when ordinary orders omit qty; does not represent a target position or filled notional."""
 
     mode: str
     value: float
 
     def __post_init__(self):
         if self.mode not in ("fixed", "equity_fraction"):
-            raise ValueError("mode 必须为 fixed 或 equity_fraction")
+            raise ValueError("mode must be fixed or equity_fraction")
         object.__setattr__(self, "value", finite(self.value, "value", positive=True))
         if self.mode == "equity_fraction" and self.value > 1:
-            raise ValueError("equity_fraction 必须在 (0, 1]")
+            raise ValueError("equity_fraction must be in (0, 1]")
 
     def snapshot(self) -> dict:
-        """导出独立的模式和值。"""
+        """Export independent mode and value."""
         return {"mode": self.mode, "value": self.value}
 
     @classmethod
     def from_snapshot(cls, value: Mapping) -> "DefaultOrderSize":
-        """严格恢复完整配置，不填补缺失字段。"""
+        """Strictly restore complete configuration without filling missing fields."""
         if not isinstance(value, Mapping):
-            raise TypeError("DefaultOrderSize 快照必须为映射")
+            raise TypeError("DefaultOrderSize snapshot must be a mapping")
         if set(value) != {"mode", "value"}:
-            raise ValueError("DefaultOrderSize 快照字段不完整或未知")
+            raise ValueError("DefaultOrderSize snapshot has missing or unknown fields")
         return cls(value["mode"], value["value"])
 
 
 def validate_order_size(value: DefaultOrderSize | None) -> DefaultOrderSize | None:
-    """只接受已验证的不可变模型或显式清空。"""
+    """Accept only validated immutable models or explicit clearing."""
     if value is not None and not isinstance(value, DefaultOrderSize):
-        raise TypeError("default_order_size 必须为 DefaultOrderSize 或 None")
+        raise TypeError("default_order_size must be DefaultOrderSize or None")
     return value
 
 
 @dataclass(frozen=True)
 class BacktestSettings:
-    """作者通道的平铺不可变设置；枚举与数值在宿主边界解码后校验。"""
+    """Flat immutable author-facing settings; validate enums and numbers after decoding at the host boundary."""
 
     cash: float = 10_000
     spread: float = 0.0
@@ -137,16 +137,16 @@ class BacktestSettings:
     def __post_init__(self):
         for name, kind in _ENUM_FIELDS.items():
             if not isinstance(getattr(self, name), kind):
-                raise TypeError(f"{name} 必须为 {kind.__name__} 成员")
+                raise TypeError(f"{name} must be {kind.__name__} member")
         object.__setattr__(self, "risk_free_rate", validate_risk_free_rate(self.risk_free_rate))
         for name in ("cash", "margin"):
             object.__setattr__(self, name, finite(getattr(self, name), name, positive=True))
         spread = finite(self.spread, "spread")
         object.__setattr__(self, "spread", spread)
         if self.margin > 1:
-            raise ValueError("margin 必须在 (0,1]")
+            raise ValueError("margin must be in (0,1]")
         if not 0 <= spread < 1:
-            raise ValueError("spread 必须在 [0,1)")
+            raise ValueError("spread must be in [0,1)")
         if self.max_gross_exposure is not None:
             object.__setattr__(
                 self,
@@ -155,29 +155,29 @@ class BacktestSettings:
             )
         for name in ("allow_short", "hedging", "exclusive_orders"):
             if type(getattr(self, name)) is not bool:
-                raise TypeError(f"{name} 必须为 bool")
+                raise TypeError(f"{name} must be bool")
         value = finite(self.commission_value, "commission_value")
         if self.commission_type is CommissionType.PERCENT:
             if not -10 <= value < 10:
-                raise ValueError("commission_value 百分数必须在 [-10,10)")
+                raise ValueError("commission_value percentage must be in [-10,10)")
         elif value < 0:
-            raise ValueError("commission_value 金额不得为负")
+            raise ValueError("commission_value amount must not be negative")
         object.__setattr__(self, "commission_value", value)
         if self.default_qty_value is not None:
             value = finite(self.default_qty_value, "default_qty_value", positive=True)
             if self.default_qty_type is QuantityType.PERCENT_OF_EQUITY and value > 100:
-                raise ValueError("default_qty_value 权益百分数必须在 (0,100]")
+                raise ValueError("default_qty_value equity percentage must be in (0,100]")
             object.__setattr__(self, "default_qty_value", value)
         value = finite(self.slippage_value, "slippage_value")
         if value < 0:
-            raise ValueError("slippage_value 不得为负")
+            raise ValueError("slippage_value must not be negative")
         object.__setattr__(self, "slippage_value", value)
 
     def _values(self) -> dict:
         return {field.name: getattr(self, field.name) for field in fields(self)}
 
     def kwargs(self) -> dict:
-        """适配为低层 Backtest 参数；与平铺快照及覆盖白名单分开。"""
+        """Adapt to low-level Backtest arguments, separately from flat snapshots and the override allowlist."""
         result = self._values()
         for type_name, value_name in _PAIRED_FIELDS:
             del result[type_name], result[value_name]
@@ -203,14 +203,14 @@ class BacktestSettings:
         }
 
     def resolve(self, overrides: Mapping | None) -> "BacktestSettings":
-        """解码宿主稀疏覆盖；不同类型必须与新数值一同提供。"""
+        """Decode sparse host overrides; a changed type must be supplied together with a new value."""
         if overrides is None:
             overrides = {}
         if not isinstance(overrides, Mapping):
-            raise TypeError("settings 必须为映射或 None")
+            raise TypeError("settings must be a mapping or None")
         unknown = set(overrides).difference(self._values())
         if unknown:
-            raise ValueError(f"未知回测设置: {list(unknown)!r}")
+            raise ValueError(f"Unknown backtest setting: {list(unknown)!r}")
         values = _decode_enums(overrides)
         for type_name, value_name in _PAIRED_FIELDS:
             if (
@@ -218,11 +218,11 @@ class BacktestSettings:
                 and values[type_name] is not getattr(self, type_name)
                 and value_name not in values
             ):
-                raise ValueError(f"切换 {type_name} 必须同时提供 {value_name}")
+                raise ValueError(f"Changing {type_name} requires also supplying {value_name}")
         return replace(self, **values)
 
     def snapshot(self) -> dict:
-        """导出全部平铺字段；枚举为字符串，百分数保留作者单位。"""
+        """Export all flat fields; enums become strings and percentages retain author units."""
         return {
             name: value.value if isinstance(value, Enum) else value
             for name, value in self._values().items()
@@ -230,12 +230,12 @@ class BacktestSettings:
 
     @classmethod
     def from_snapshot(cls, value: Mapping) -> "BacktestSettings":
-        """从完整 JSON 设置严格恢复；不接受稀疏字段或 Python 枚举。"""
+        """Strictly restore complete JSON settings; sparse fields and Python enums are not accepted."""
         if not isinstance(value, Mapping):
-            raise TypeError("回测设置快照必须为映射")
+            raise TypeError("Backtest settings snapshot must be a mapping")
         if set(value) != {field.name for field in fields(cls)}:
-            raise ValueError("回测设置快照字段不完整或未知")
+            raise ValueError("Backtest settings snapshot has missing or unknown fields")
         for name, item in value.items():
             if type(item) not in (str, int, float, bool, type(None)):
-                raise TypeError(f"{name} 必须为 JSON 基础值")
+                raise TypeError(f"{name} must be a JSON primitive")
         return cls(**_decode_enums(value))

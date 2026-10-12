@@ -1,4 +1,4 @@
-"""真实默认线程/显式 spawn 验证，计数文件仅记录本次测试的后端调用。"""
+"""Real default-thread/explicit-spawn verification; the count file records backend calls from this test only."""
 
 import json
 import multiprocessing as mp
@@ -7,12 +7,13 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from test_indicator_optimization import Repeated
+from test_indicator_regressions import frame
+
 import openbacktesting as api
 from openbacktesting import optimization
 from openbacktesting.indicators import runtime as indicators
 from openbacktesting.parallel import SharedMemoryManager
-from test_indicator_optimization import Repeated
-from test_indicator_regressions import frame
 
 _execute = indicators.execute
 

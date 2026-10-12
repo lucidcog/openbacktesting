@@ -1,4 +1,4 @@
-"""ta.linregangle：固定依赖的计算封装与规范输出。"""
+"""ta.linregangle: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.overlap.linregangle import linregangle as _calculate
 

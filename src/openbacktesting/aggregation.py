@@ -1,4 +1,4 @@
-"""旧 aggregation 路径的兼容导出；实现位于 data.aggregation。"""
+"""Compatibility exports for the old aggregation path; implemented in data.aggregation."""
 
 from openbacktesting.data.aggregation import (
     OHLCV_AGG,

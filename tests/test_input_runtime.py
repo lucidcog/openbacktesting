@@ -1,25 +1,26 @@
-"""输入在原生、标题、分数及并行运行中的绑定与隔离。"""
+"""Input binding and isolation across native, title-based, fractional, and parallel runs."""
 
 import multiprocessing as mp
 import pickle
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing.dummy import Pool as ThreadPool
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
 import pytest
+from test_inputs import Mode, request
+
+import openbacktesting as api
 from openbacktesting import Backtest, Strategy, inputs
 from openbacktesting.broker import InstrumentSpec
 from openbacktesting.parallel import SharedMemory, SharedMemoryManager
 from openbacktesting.test import GOOG
-from test_inputs import Mode, request
 
 
 class TradingInputs(Strategy):
-    units = inputs.int(1, minval=1, maxval=3, title="数量")
-    mode = inputs.enum(Mode.FAST, title="模式")
-    enabled = inputs.bool(True, title="启用")
+    units = inputs.int(1, minval=1, maxval=3, title="Quantity")
+    mode = inputs.enum(Mode.FAST, title="Mode")
+    enabled = inputs.bool(True, title="Enabled")
     plain = 10
 
     def init(self):
@@ -41,7 +42,7 @@ class EmptyInputs(TradingInputs):
 
 class FailingInputs(TradingInputs):
     def init(self):
-        raise ValueError("预期的输入策略错误")
+        raise ValueError("Expected input-strategy error")
 
 
 @pytest.fixture
@@ -61,26 +62,26 @@ def compare(a, b):
 def test_two_entry_points_and_full_snapshot(data):
     bt = Backtest(data, TradingInputs)
     native = bt.run(units=2, mode=Mode.SLOW)
-    titled = bt.run_inputs(request(TradingInputs, {"数量": 2, "模式": "SLOW"}))
+    titled = bt.run_inputs(request(TradingInputs, {"Quantity": 2, "Mode": "SLOW"}))
     compare(native, titled)
     assert native.attrs == titled.attrs
     assert titled["_strategy"].observed == (2, Mode.SLOW, True)
     snapshot = titled.attrs["input_snapshot"]
-    assert snapshot["values"] == {"数量": 2, "模式": "SLOW", "启用": True}
-    assert snapshot["overriddenTitles"] == ["数量", "模式"]
+    assert snapshot["values"] == {"Quantity": 2, "Mode": "SLOW", "Enabled": True}
+    assert snapshot["overriddenTitles"] == ["Quantity", "Mode"]
     assert snapshot["engineVersion"] == api.__version__
     assert titled["_strategy"]._params == {"units": 2, "mode": Mode.SLOW}
     rerun = bt.run_inputs({k: snapshot[k] for k in ("schemaVersion", "schemaHash", "values")})
     compare(titled, rerun)
-    assert rerun.attrs["input_snapshot"]["overriddenTitles"] == ["数量", "模式", "启用"]
+    assert rerun.attrs["input_snapshot"]["overriddenTitles"] == ["Quantity", "Mode", "Enabled"]
     default = bt.run()
     assert default["_strategy"].observed == (1, Mode.FAST, True)
     assert default.attrs["input_snapshot"]["overriddenTitles"] == []
     assert default["_strategy"]._params == {}
     assert TradingInputs.units.default == 1
     assert native["Return [%]"] != default["Return [%]"]
-    snapshot["values"]["数量"] = 99
-    assert native.attrs["input_snapshot"]["values"]["数量"] == 2
+    snapshot["values"]["Quantity"] = 99
+    assert native.attrs["input_snapshot"]["values"]["Quantity"] == 2
     assert bt.run()["_strategy"].units == 1
     restored = pickle.loads(pickle.dumps(titled["_strategy"]))
     assert restored.units == 2 and restored.mode is Mode.SLOW
@@ -91,7 +92,7 @@ def test_invalid_inputs_precede_all_execution(data, monkeypatch):
     last = bt.run()
 
     def fail(*args, **kwargs):
-        raise AssertionError("不应执行")
+        raise AssertionError("Must not execute")
 
     monkeypatch.setattr(bt, "_broker", fail)
     monkeypatch.setattr(TradingInputs, "__init__", fail)
@@ -99,7 +100,7 @@ def test_invalid_inputs_precede_all_execution(data, monkeypatch):
         lambda: bt.run(units=True),
         lambda: bt.run(plain=1),
         lambda: bt.run_inputs(request(TradingInputs, {"units": 2})),
-        lambda: bt.run_inputs(request(TradingInputs, {"数量": "2"})),
+        lambda: bt.run_inputs(request(TradingInputs, {"Quantity": "2"})),
         lambda: bt.run_inputs(request(TradingInputs, {}) | {"schemaHash": "old"}),
     ]:
         with pytest.raises(inputs.InputError):
@@ -136,7 +137,7 @@ def test_fractional_and_custom_run_dispatch(data):
 
     bt = ObservedFractional(data, FractionalInputs, instrument=InstrumentSpec(quantity_step=0.1))
     native = bt.run(units=2)
-    titled = bt.run_inputs(request(FractionalInputs, {"数量": 2}))
+    titled = bt.run_inputs(request(FractionalInputs, {"Quantity": 2}))
     compare(native, titled)
     assert bt.calls == 2
     assert titled["_trades"]["Size"].iloc[0] == 0.2
@@ -154,7 +155,7 @@ def test_separate_instances_across_threads(data):
 
 def test_grid_validates_before_constraints_and_dispatch(data, monkeypatch):
     def fail(*args, **kwargs):
-        raise AssertionError("不可派发或调用 constraint")
+        raise AssertionError("Must not dispatch or call constraint")
 
     monkeypatch.setattr(api, "Pool", fail)
     bt = Backtest(data, TradingInputs)
@@ -202,13 +203,13 @@ def test_grid_values_best_result_and_process_cleanup(data, monkeypatch, pool_mod
     )
     assert seen and len(heatmap) == 4
     assert heatmap.index.names == ["units", "mode"]
-    assert best.attrs["input_snapshot"]["values"]["数量"] in (1, 2)
-    assert best.attrs["input_snapshot"]["values"]["模式"] in ("FAST", "SLOW")
+    assert best.attrs["input_snapshot"]["values"]["Quantity"] in (1, 2)
+    assert best.attrs["input_snapshot"]["values"]["Mode"] in ("FAST", "SLOW")
     compare(best, bt.run(**best["_strategy"]._params))
     empty = Backtest(data, EmptyInputs).optimize(units=[1, 2], enabled=[True, False])
     assert empty["# Trades"] == 0
     assert "input_snapshot" in empty.attrs
-    with pytest.raises(ValueError, match="预期的输入策略错误"):
+    with pytest.raises(ValueError, match="Expected input-strategy error"):
         Backtest(data, FailingInputs).optimize(units=[1, 2])
     assert created
     for name in created:
@@ -232,7 +233,7 @@ def test_workers_stop_before_shared_memory_release(data, monkeypatch):
             return self.pool
 
         def __exit__(self, *exc):
-            # 即使任务抛异常，退出池时数据仍须有效，避免运行中或待派发任务访问已释放段。
+            # Even on task failure, data must remain valid during pool exit so running or queued tasks cannot access released segments.
             try:
                 assert created
                 for name in tuple(created):
@@ -243,7 +244,7 @@ def test_workers_stop_before_shared_memory_release(data, monkeypatch):
 
     monkeypatch.setattr(api, "Pool", InspectPool)
     monkeypatch.setattr(SharedMemoryManager, "SharedMemory", record)
-    with pytest.raises(ValueError, match="预期的输入策略错误"):
+    with pytest.raises(ValueError, match="Expected input-strategy error"):
         Backtest(data, FailingInputs).optimize(units=[1, 2, 3])
     for name in created:
         with pytest.raises(FileNotFoundError):
@@ -261,10 +262,10 @@ def test_thread_batches_do_not_share_backtest_state(data, monkeypatch):
     monkeypatch.setattr(api, "Pool", lambda: ThreadPool(2))
     bt = ObservedBacktest(data, TradingInputs)
     result = bt.optimize(units=[1, 2, 3])
-    # 三个批次及最佳参数重跑；保留实例引用，避免对象回收后 id 重用。
+    # Three batches and a best-parameter rerun; retain instance references to prevent id reuse after garbage collection.
     assert len({id(instance) for instance in instances}) == 4
     assert instances[-1] is bt
     for instance in instances:
         state = instance._results["_strategy"]
-        assert instance._results.attrs["input_snapshot"]["values"]["数量"] == state.units
+        assert instance._results.attrs["input_snapshot"]["values"]["Quantity"] == state.units
     assert result is bt._results

@@ -1,4 +1,4 @@
-"""串行逐组执行与提交；文件副作用只在显式执行时发生。"""
+"""Execute and commit trials sequentially; file side effects occur only during explicit execution."""
 
 import sqlite3
 
@@ -19,13 +19,13 @@ def execute(
     cancel=None,
     on_progress=None,
 ):
-    """执行或恢复计划；executor 接收标题请求并返回完整 Portfolio 字典。
+    """Execute or resume a plan; executor receives title-based requests and returns complete Portfolio dictionaries.
 
-    约束接收完整 wire 值，cancel 是无参 bool callable；on_progress 只消费通知。
-    仅显式 experiment_id 表示恢复；失败组不自动重试。
+    Constraints receive complete wire values; cancel is a no-argument bool callable, and on_progress only consumes notifications.
+    Only an explicit experiment_id indicates resumption; failed trials are not retried automatically.
     """
     if (constraint is None) != (plan_value.snapshot()["constraintId"] is None):
-        raise ValueError("optimizer: constraint 与计划摘要不匹配")
+        raise ValueError("optimizer: constraint does not match the plan digest")
     committed = 0
     store = None
     try:
@@ -46,7 +46,7 @@ def execute(
                         try:
                             accepted = constraint(dict(request["values"]))
                             if type(accepted) is not bool:
-                                raise TypeError("optimizer: 约束必须返回 bool")
+                                raise TypeError("optimizer: constraint must return bool")
                         except Exception as error:
                             store.state(
                                 trial_id,
@@ -63,7 +63,7 @@ def execute(
                         report = executor(request)
                         phase = "export"
                         validate_report(report)
-                    except Exception as error:  # noqa: BLE001 — 隔离任意用户策略/导出异常并记录失败
+                    except Exception as error:  # noqa: BLE001 — isolate arbitrary user strategy/export exceptions and record failures
                         store.state(
                             trial_id,
                             number,
@@ -88,7 +88,7 @@ def execute(
                 try:
                     store.finish("failed")
                 except sqlite3.Error as status_error:
-                    failure.add_note(f"实验失败状态未能写盘: {status_error}")
+                    failure.add_note(f"Failed to persist experiment failure status: {status_error}")
                 raise
             finally:
                 store.close()

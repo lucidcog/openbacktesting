@@ -1,4 +1,4 @@
-"""交易请求、事件与会计快照；均不依赖策略或执行循环。"""
+"""Trade requests, events, and accounting snapshots independent of strategies and execution loops."""
 
 from __future__ import annotations
 
@@ -12,17 +12,17 @@ from typing import Literal
 
 
 def finite(value, name: str, *, positive=False) -> float:
-    """拒绝布尔、非数值和非有限值，返回规范化数值。"""
+    """Reject booleans, nonnumeric values, and nonfinite values; return a normalized number."""
     if isinstance(value, bool) or not isinstance(value, Real):
-        raise TypeError(f"{name} 必须为有限数值")
+        raise TypeError(f"{name} must be a finite number")
     value = float(value)
     if not isfinite(value) or (positive and value <= 0):
-        raise ValueError(f"{name} 必须为{'正' if positive else ''}有限数值")
+        raise ValueError(f"{name} must be a {'positive ' if positive else ''}finite number")
     return value
 
 
 class OrderStatus(StrEnum):
-    """订单可观察状态；终态不可重新打开。"""
+    """Observable order states; terminal states cannot reopen."""
 
     SUBMITTED = "Submitted"
     ACCEPTED = "Accepted"
@@ -34,17 +34,17 @@ class OrderStatus(StrEnum):
 
     @property
     def terminal(self) -> bool:
-        """是否已终结。"""
+        """Whether the state is terminal."""
         return self in (self.FILLED, self.CANCELED, self.EXPIRED, self.REJECTED)
 
 
 @dataclass(frozen=True)
 class ClosedTradeStats:
-    """截至读取时的关闭片段累计；费用已分摊，不含未平仓损益。
+    """Cumulative closed portions as of the read; fees are allocated, and unrealized profit or loss is excluded.
 
-    次数按关闭片段而非 trade_id 计数，胜负按净损益严格正负分类。
-    losing_amount 是非负亏损额；空记录的平均净损益和 0–1 胜率为 None。
-    值不携带运行对象，保存的快照不受后续成交影响。
+    Count closed portions rather than trade_id values; classify wins and losses by strictly positive or negative net profit or loss.
+    losing_amount is a nonnegative loss amount; average net profit or loss and the 0–1 win rate are None for empty records.
+    Values contain no runtime objects; saved snapshots are unaffected by later fills.
     """
 
     closed_count: int = 0
@@ -60,10 +60,10 @@ class ClosedTradeStats:
 
 @dataclass(frozen=True)
 class OrderSizingSnapshot:
-    """提交时冻结的规模依据；预算不保证真实成交金额或费用。
+    """Sizing basis frozen at submission; budgets do not guarantee actual fill notional or fees.
 
-    mode 为 qty/amount/percent，source 为 explicit/default；percent 的 value
-    使用百分数（20 表示 20%），qty 模式的 budget 为 None。
+    mode is qty/amount/percent, source is explicit/default; percent value
+    uses percentage points (20 means 20%), and budget is None in qty mode.
     """
 
     mode: Literal["qty", "amount", "percent"]
@@ -77,7 +77,7 @@ class OrderSizingSnapshot:
 
 @dataclass(frozen=True)
 class NormalizedOrderRequest:
-    """不可变规范化请求；tag以JSON文本保存，读取返回独立纯值。"""
+    """Immutable normalized request; tag is stored as JSON text, and reads return independent plain values."""
 
     side: str
     qty: float
@@ -93,13 +93,13 @@ class NormalizedOrderRequest:
 
     @property
     def tag(self):
-        """返回独立标签副本，修改副本不会改变请求。"""
+        """Return an independent tag copy; modifying it does not change the request."""
         return json.loads(self.tag_json)
 
 
 @dataclass(frozen=True)
 class OrderSnapshot:
-    """订单在某次状态迁移时的冻结值。"""
+    """Frozen order values at a state transition."""
 
     order_id: str
     status: OrderStatus
@@ -112,7 +112,7 @@ class OrderSnapshot:
 
 @dataclass(frozen=True)
 class OrderEvent:
-    """带时间和阶段的不可变订单事件。"""
+    """Immutable order event with time and phase."""
 
     sequence: int
     bar_index: int
@@ -123,7 +123,7 @@ class OrderEvent:
 
 @dataclass(frozen=True)
 class Fill:
-    """一次实际执行，费用只在此处记账一次。"""
+    """An actual execution; fees are recorded exactly once here."""
 
     fill_id: str
     order_id: str
@@ -140,7 +140,7 @@ class Fill:
 
 @dataclass(frozen=True)
 class TradeAllocation:
-    """执行量在开仓批次或关闭片段上的分配。"""
+    """Allocation of an execution quantity to entry lots or closed portions."""
 
     allocation_id: str
     fill_id: str
@@ -155,7 +155,7 @@ class TradeAllocation:
 
 @dataclass(frozen=True)
 class AccountSnapshot:
-    """单币种线性保证金账户，balance并非证券交收现金。"""
+    """Single-currency linear margin account; balance is not securities settlement cash."""
 
     balance: float
     equity: float
@@ -170,7 +170,7 @@ class AccountSnapshot:
 
 @dataclass(frozen=True)
 class PositionSnapshot:
-    """净仓、双向总暴露与明确毛净损益。"""
+    """Net position, two-sided gross exposure, and explicit gross and net profit or loss."""
 
     net_qty: float
     gross_qty: float
@@ -188,13 +188,13 @@ class PositionSnapshot:
 
     @property
     def has_exposure(self) -> bool:
-        """双向净零仓仍有总暴露。"""
+        """A two-sided net-zero position still has gross exposure."""
         return self.gross_qty > 0
 
 
 @dataclass(frozen=True)
 class RunSummary:
-    """结束钩子的冻结摘要；错误信息不替代原异常。"""
+    """Frozen summary for the finish hook; error text does not replace the original exception."""
 
     reason: str
     account: AccountSnapshot
@@ -202,13 +202,13 @@ class RunSummary:
 
 
 def record(value) -> dict:
-    """生成仅含值的字典；不暴露活交易对象。"""
+    """Produce a value-only dictionary without exposing live trading objects."""
     names = _field_names(type(value))
     return dict(zip(names, map(value.__dict__.__getitem__, names)))
 
 
 def columns(model) -> list[str]:
-    """空结果表仍保留模型字段。"""
+    """Empty result tables retain model fields."""
     return list(_field_names(model))
 
 
@@ -218,19 +218,19 @@ def _field_names(model):
 
 
 def freeze_tag(value) -> str:
-    """将JSON安全标签固化为文本，拒绝非字符串键与非有限数。"""
+    """Freeze JSON-safe tags as text; reject nonstring keys and nonfinite numbers."""
 
     def validate(item):
         if isinstance(item, dict):
             if not all(isinstance(key, str) for key in item):
-                raise TypeError("tag 映射键必须为字符串")
+                raise TypeError("tag mapping keys must be strings")
             for child in item.values():
                 validate(child)
         elif isinstance(item, list):
             for child in item:
                 validate(child)
         elif item is not None and not isinstance(item, (str, bool, int, float)):
-            raise TypeError("tag 仅支持JSON纯值")
+            raise TypeError("tag supports only plain JSON values")
 
     validate(value)
     return json.dumps(value, ensure_ascii=False, allow_nan=False, sort_keys=True)

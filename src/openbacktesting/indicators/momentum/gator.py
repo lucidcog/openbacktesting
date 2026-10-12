@@ -1,4 +1,4 @@
-"""ta.gator：独立公式与固定初始化契约。"""
+"""ta.gator: Independent formula with a fixed initialization contract."""
 
 import pandas as pd
 

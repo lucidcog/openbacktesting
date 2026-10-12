@@ -1,6 +1,6 @@
-"""宿主加载可信作者脚本，注入示例行情与品种后运行；runpy 不是沙箱。
+"""The host loads trusted author source, injects example data and an instrument, and runs it; runpy is not a sandbox.
 
-chart_for 只提供离线示例配方；真实产品须提供当前图表的实际快照。
+chart_for provides offline example recipes only; products must supply an actual snapshot of the current chart.
 """
 
 import argparse
@@ -8,13 +8,14 @@ import runpy
 from pathlib import Path
 
 import pandas as pd
+
 from openbacktesting import DataContext, Timeframe, runtime
 from openbacktesting.broker import InstrumentSpec
 from openbacktesting.test import GOOG
 
 
 def chart_for(path):
-    """提供作者示例的显式宿主数据；不让策略文件负责选择图表。"""
+    """Supply explicit host data for author examples; strategy files do not select their own chart."""
     name = Path(path).name
     if name in {
         "local_value_helpers.py",
@@ -52,7 +53,7 @@ def chart_for(path):
         instrument = InstrumentSpec(symbol="GOOG")
     elif name == "confirmed_events.py":
         frame = GOOG.copy()
-        # 示例将每个月的首根输入 bar 标记为新周期；生产数据须自行保证周期完整。
+        # The example marks each month's first input bar as a new period; production data must ensure period completeness.
         months = frame.index.to_period("M")
         frame["PeriodStart"] = ~months.duplicated()
         frame = frame.copy()
@@ -86,7 +87,7 @@ def chart_for(path):
         frame = GOOG.copy()
         instrument = InstrumentSpec(symbol="GOOG")
     else:
-        raise ValueError(f"没有示例图表配方: {name}")
+        raise ValueError(f"No example chart recipe: {name}")
     if frame.index.tz is None:
         frame.index = frame.index.tz_localize("UTC")
     return {
@@ -105,7 +106,7 @@ def main(path=None):
     print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
     print(result["_equity_curve"].tail())
     print(result["_trades"].tail())
-    print(result["_order_sizing"])  # 请求预算与实际成交分开核对。
+    print(result["_order_sizing"])  # Check requested budgets separately from actual fills.
     return result
 
 

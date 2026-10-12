@@ -1,4 +1,4 @@
-"""ta.hilo：固定依赖的计算封装与规范输出。"""
+"""ta.hilo: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.overlap.hilo import hilo as _calculate
 

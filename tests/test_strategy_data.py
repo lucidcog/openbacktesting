@@ -1,4 +1,4 @@
-"""直接行情来源的可见范围、快照边界、组合与旧接口回归。"""
+"""Visibility, snapshot boundaries, composition, and legacy-interface regressions for direct market-data sources."""
 
 import json
 import pickle
@@ -7,16 +7,17 @@ import sys
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
 import pytest
-from openbacktesting import inputs
-from openbacktesting.indicators.types import IndicatorError
-from openbacktesting.strategy_data import DATA_NAMES, DERIVED, PRICE_COLUMNS, StrategyData
 from test_fluent_indicators import Empty, strategy
 from test_indicator_catalog import catalog_data
 from test_inputs import request
+
+import openbacktesting as api
+from openbacktesting import inputs
+from openbacktesting.indicators.types import IndicatorError
+from openbacktesting.strategy_data import DATA_NAMES, DERIVED, PRICE_COLUMNS, StrategyData
 
 
 def advance(owner, length):
@@ -247,14 +248,14 @@ def test_reserved_assignment_delete_and_parameters(name, monkeypatch):
         lambda: delattr(owner, name),
         lambda: owner._check_params({name: 1}),
     ):
-        with pytest.raises(AttributeError, match=f"{name}.*改名"):
+        with pytest.raises(AttributeError, match=f"{name}.*rename"):
             action()
-    with pytest.raises(AttributeError, match=f"{name}.*改名"):
+    with pytest.raises(AttributeError, match=f"{name}.*rename"):
         api.Backtest(catalog_data(20), Empty).run(**{name: 1})
-    # 优化拒绝发生在任何策略运行或创建进程池之前。
+    # Optimization rejection occurs before any strategy runs or process pools are created.
     bt = api.Backtest(catalog_data(20), Empty)
     monkeypatch.setattr(bt, "run", lambda **kw: pytest.fail("reserved parameter reached run"))
-    with pytest.raises(AttributeError, match=f"{name}.*改名"):
+    with pytest.raises(AttributeError, match=f"{name}.*rename"):
         bt.optimize(**{name: [1, 2]})
 
 
@@ -268,9 +269,9 @@ def test_reserved_mro_and_discovery(kind):
     }[kind]
     middle = type("Middle", (Empty,), {"close": value})
     child = type("Child", (middle,), {})
-    with pytest.raises(AttributeError, match="close.*改名"):
+    with pytest.raises(AttributeError, match="close.*rename"):
         child(None, strategy().data, {})
-    with pytest.raises(inputs.InputError, match="close.*改名"):
+    with pytest.raises(inputs.InputError, match="close.*rename"):
         inputs.describe(child)
 
 

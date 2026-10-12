@@ -1,21 +1,22 @@
-"""在真实独立解释器中验证默认/显式 spawn 优化和异常资源回收。"""
+"""Verify default/explicit-spawn optimization and exception cleanup in a genuinely separate interpreter."""
 
 import argparse
 import json
 import multiprocessing as mp
 
-import openbacktesting as api
 from openbacktesting._util import SharedMemory, SharedMemoryManager
+from test_modularization import assert_result
+
+import openbacktesting as api
 from openbacktesting.test import GOOG
 from openbacktesting.test._test import SmaCross
-from test_modularization import assert_result
 
 
 class FailingStrategy(api.Strategy):
     parameter = 0
 
     def init(self):
-        raise ValueError("进程内预期失败")
+        raise ValueError("Expected in-process failure")
 
     def next(self):
         pass
@@ -50,9 +51,9 @@ def main():
         try:
             failed.optimize(parameter=[1, 2], random_state=42)
         except ValueError as error:
-            assert str(error) == "进程内预期失败"
+            assert str(error) == "Expected in-process failure"
         else:
-            raise AssertionError("策略异常未传播")
+            raise AssertionError("Strategy exception was not propagated")
     finally:
         SharedMemoryManager.SharedMemory = original
     assert created
@@ -62,7 +63,7 @@ def main():
         except FileNotFoundError:
             continue
         leaked.close()
-        raise AssertionError(f"共享内存未回收: {name}")
+        raise AssertionError(f"Shared memory was not reclaimed: {name}")
     print(
         json.dumps(
             {

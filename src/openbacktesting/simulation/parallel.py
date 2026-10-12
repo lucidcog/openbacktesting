@@ -1,4 +1,4 @@
-"""原生并行批次与共享内存生命周期。"""
+"""Native parallel batches and shared-memory lifecycle."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ else:
         def __init__(self, *args, track: bool = True, **kwargs):
             self._track = track
             if track:
-                return super().__init__(*args, **kwargs)  # noqa: PLE0101 — 保留共享内存初始化重试返回
+                return super().__init__(*args, **kwargs)  # noqa: PLE0101 — preserve the shared-memory initialization retry return
             with self.__lock, patch(_mprt, "register", lambda *a, **kw: None):
                 super().__init__(*args, **kwargs)
 
@@ -72,7 +72,7 @@ class SharedMemoryManager:
                 shm.close()
                 if shm._create:
                     shm.unlink()
-            except Exception as error:  # noqa: BLE001 — 逐段回收后重新抛出首个错误
+            except Exception as error:  # noqa: BLE001 — release each segment, then re-raise the first error
                 failures.append(error)
                 warnings.warn(
                     f"Failed to unlink shared memory {shm.name!r}",
@@ -90,7 +90,7 @@ class SharedMemoryManager:
         shm = self.SharedMemory(size=vals.size * vals.dtype.base.itemsize, create=True)
         buf = np.ndarray(vals.shape, dtype=vals.dtype.base, buffer=shm.buf)
         if isinstance(vals.dtype, pd.DatetimeTZDtype):
-            # 索引与列均按原精度保存绝对时刻，不能丢掉 DST 重复小时的偏移。
+            # Preserve absolute instants at their original precision in both index and columns; do not lose offsets for repeated DST hours.
             buf.view("i8")[:] = vals.array.asi8
         else:
             buf[:] = vals
@@ -128,7 +128,7 @@ class SharedMemoryManager:
                 copy=False,
             )
             df.set_index(SharedMemoryManager._DF_INDEX_COL, drop=True, inplace=True)
-            # 结果统计会保留行情索引；索引必须在映射关闭后独立存活。
+            # Result statistics retain the market-data index; it must survive independently after the mapping closes.
             df.index = df.index.copy(deep=True)
             df.index.name = None
             return df, shm

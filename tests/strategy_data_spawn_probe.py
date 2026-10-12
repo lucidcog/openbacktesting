@@ -1,13 +1,14 @@
-"""真实 spawn 优化验证直接行情来源不会串运行。"""
+"""Real spawn optimization verifies that direct market-data sources do not leak across runs."""
 
 import json
 import multiprocessing as mp
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
 from test_indicator_catalog import catalog_data
 from test_strategy_data import DataTrading
+
+import openbacktesting as api
 
 
 def main():

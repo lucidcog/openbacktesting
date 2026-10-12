@@ -1,4 +1,4 @@
-"""复用范围、共享内存分配、失败清理及可写行情隔离。"""
+"""Reuse scopes, shared-memory allocation, failure cleanup, and writable-data isolation."""
 
 import json
 import subprocess
@@ -6,14 +6,15 @@ import sys
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
 import pytest
+from test_indicator_regressions import frame
+
+import openbacktesting as api
 from openbacktesting.indicators import runtime as indicators
 from openbacktesting.parallel import SharedMemoryManager
 from openbacktesting.simulation import optimization
-from test_indicator_regressions import frame
 
 
 class Repeated(api.Strategy):
@@ -66,18 +67,18 @@ def test_thread_cache_reuse_shared_allocation_and_off_equivalence(monkeypatch):
         )
         results.append((stats, heatmap))
         if budget:
-            assert len(calls) == 2  # 一次优化共享计算 + 最优结果单独 run。
+            assert len(calls) == 2  # Shared calculation during one optimization plus a separate run for the best result.
         else:
             assert len(calls) == 10
         assert not indicators._OPTIMIZATION_CACHES
-    assert len(allocations) == 2  # 每次 optimize 一次，不随四个批次增长。
+    assert len(allocations) == 2  # Once per optimize call, without growth across four batches.
     pd.testing.assert_series_equal(results[0][1], results[1][1])
     pd.testing.assert_frame_equal(results[0][0]["_trades"], results[1][0]["_trades"])
     pd.testing.assert_frame_equal(data, before)
     calls.clear()
     bt = api.Backtest(data, Repeated, end_policy="close_at_last_close")
     bt.optimize(threshold=[1, 2, 3], mutate=[True], maximize="Equity Final [$]")
-    assert len(calls) == 4  # 三份不同的运行私有数据与最终 run。
+    assert len(calls) == 4  # Three distinct sets of run-private data plus the final run.
     pd.testing.assert_frame_equal(data, before)
 
 
@@ -251,7 +252,7 @@ def test_optimization_setup_errors_release_shared_segments_and_scope(monkeypatch
 
 
 def test_failed_thread_pool_joins_before_releasing_cache_scope(monkeypatch):
-    """线程异常退出时，尚未进入缓存的在途任务也必须先结束。"""
+    """On thread failure, in-flight tasks not yet cached must also finish first."""
     from concurrent.futures import ThreadPoolExecutor
     from threading import Event, local
 
@@ -292,7 +293,7 @@ def test_failed_thread_pool_joins_before_releasing_cache_scope(monkeypatch):
         future = executor.submit(api.Backtest(frame(20), Failing).optimize, threshold=[1, 2])
         try:
             assert exited.wait(10)
-            # Pool.__exit__不会等待ThreadPool的在途worker；拥有者仍须保持scope。
+            # Pool.__exit__ does not wait for in-flight ThreadPool workers; the owner must retain the scope.
             with pytest.raises(TimeoutError):
                 future.result(timeout=0.1)
             assert indicators._OPTIMIZATION_CACHES

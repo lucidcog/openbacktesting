@@ -1,10 +1,10 @@
-"""三种下单规模、原生0.001数量步长、预算计算、目标去重与只减仓；价格始终是100。
+"""Three sizing modes, native 0.001 quantity steps, budgets, target deduplication, and reduce-only orders; price is always 100.
 
-预期成交数量0.1、0.1、0.2；10份资产退出请求只能减掉实际0.2份。
-金额与百分数示例挂单展示显式覆盖默认量，随后撤单；规模快照保留提交时的预算。
-止损预算只是计划损失，不能限制跳空损失。
-宿主可覆盖为 default_qty_type=QuantityType.PERCENT_OF_EQUITY、default_qty_value=0.1，同样先买0.1份。
-过小默认预算会在提交前报错；完整运行与拒绝示例见 advanced/strategy_settings.py。
+Expected fill quantities are 0.1, 0.1, and 0.2; an exit request for 10 units can reduce only the actual 0.2 units.
+Cash and percentage pending orders demonstrate explicit default-quantity overrides before cancellation; sizing snapshots retain submission budgets.
+A stop-loss budget is planned loss only and cannot limit gap losses.
+The host can override default_qty_type=QuantityType.PERCENT_OF_EQUITY and default_qty_value=0.1, still initially buying 0.1 units.
+An undersized default budget fails before submission; see advanced/strategy_settings.py for complete runs and rejection examples.
 """
 
 from openbacktesting import QuantityType, Strategy, backtest
@@ -25,7 +25,7 @@ class FractionalSizing(Strategy):
                 self.order_target_quantity(target=0, limit=-1)
             except ValueError:
                 self.invalid_noop_rejected = True
-            assert self.invalid_noop_rejected  # 无需下单也会校验条件。
+            assert self.invalid_noop_rejected  # Validate conditions even without submitting an order.
         elif bar == 2:
             self.risk_budget = stop_risk(
                 0.01,
@@ -51,10 +51,10 @@ class FractionalSizing(Strategy):
             percent_qty = self.percent_order.sizing.qty
             reference_price = self.amount_order.sizing.reference_price
             assert amount_qty == percent_qty == 0.2
-            assert reference_price == 100  # 按 Close，不按 limit。
+            assert reference_price == 100  # Use Close, not limit.
             self.amount_order.cancel()
             self.percent_order.cancel()
-            self.buy()  # 省略数量使用声明；下方只减仓始终显式给出数量。
+            self.buy()  # Omitted quantity uses the declaration; reduce-only orders below always specify quantity explicitly.
         elif bar == 3:
             self.pending = self.order_target_quantity(target=0.3, limit=80)
         elif bar == 4:

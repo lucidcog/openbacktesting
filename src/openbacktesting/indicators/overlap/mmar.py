@@ -1,4 +1,4 @@
-"""ta.mmar：固定依赖的计算封装与规范输出。"""
+"""ta.mmar: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.overlap.mmar import mmar as _calculate
 

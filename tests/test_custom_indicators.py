@@ -1,10 +1,11 @@
-"""自定义入口替换、参数复用及运行隔离的公开契约。"""
+"""Public contracts for custom-entry replacement, parameter reuse, and run isolation."""
 
 import inspect
 
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy, engine, lib
 from openbacktesting.indicators.types import IndicatorError, IndicatorHandle
 from openbacktesting.test import GOOG
@@ -24,7 +25,7 @@ def test_ind_replaces_old_entry_on_public_strategy_objects():
     class Probe(Strategy):
         def init(self):
             with pytest.raises(AttributeError, match="I"):
-                self.I()  # 仅此反例验证旧入口已删除。
+                self.I()  # Only this counterexample verifies removal of the old entry point.
             self.line = self.ind(lambda: calls.append("init") or np.ones(len(self.data)))
             assert isinstance(self.line, IndicatorHandle)
 

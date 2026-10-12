@@ -1,4 +1,4 @@
-"""已关闭片段的费用口径、冻结、阶段与运行隔离。"""
+"""Closed-portion fees, freezing, phases, and run isolation."""
 
 import pickle
 from dataclasses import FrozenInstanceError
@@ -6,6 +6,7 @@ from dataclasses import FrozenInstanceError
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy, inputs
 from openbacktesting.broker import ClosedTradeStats, Commission
 from openbacktesting.inputs import InputError
@@ -67,7 +68,7 @@ def test_partial_fees_frozen_and_same_close_visibility():
 
     class NoScan(list):
         def __iter__(self):
-            raise AssertionError("查询不应扫描历史")
+            raise AssertionError("Queries must not scan history")
 
     a._broker.closed_trades = NoScan(a._broker.closed_trades)
     assert a.closed_trade_stats == s
@@ -136,7 +137,7 @@ def test_open_cost_empty_and_failure_preserves_completed_facts():
 def test_reserved_name_all_entrypoints():
     from test_fluent_indicators import strategy
 
-    for value in (1, lambda self: 0, property(lambda self: 0), inputs.int(1, title="另一个标题")):
+    for value in (1, lambda self: 0, property(lambda self: 0), inputs.int(1, title="Another title")):
         conflict = type("Conflict", (Partial,), {"closed_trade_stats": value})
         with pytest.raises(InputError, match="closed_trade_stats"):
             Backtest(data(), conflict).run()
@@ -181,7 +182,7 @@ def test_multiple_exits_in_one_bar_share_entry_fee_once():
         data(), Batch, commission=Commission(per_unit=1), execution_timing="same_close"
     ).run()
     owner = result._strategy
-    # 既有调度在批次完成后派送通知；同批三个通知读取同一最终事实。
+    # Existing scheduling dispatches notifications after completing a batch; its three notifications read the same final facts.
     assert [snapshot.closed_count for snapshot in owner.seen] == [0, 3, 3, 3]
     assert owner.closed_trade_stats == ClosedTradeStats(3, 3, 0, 0, 30.0, 0.0, 30.0, 10.0, 1.0)
     assert sum(t.pl for t in owner.closed_trades) == 30.0

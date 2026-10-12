@@ -1,9 +1,9 @@
-"""原生参数优化与评分表：默认四组 grid，--method sambo 显式选择可选优化器。
+"""Native parameter optimization and scores: four grid combinations by default; --method sambo explicitly selects the optional optimizer.
 
-随包 GOOG 日线；grid 无额外依赖，SAMBO 需要 optimize extra。普通类参数供原生优化使用，
-不迁移到当前不支持 SAMBO 的 inputs。n1/n2 是趋势周期，n_enter/n_exit 是入场/退出周期。
-手续费 0.2%、期末不强制平仓，最大化期末权益；固定种子不保证样本外有效。
-输出最佳运行统计、评分表及按趋势周期聚合的均值；SAMBO 最多尝试 40 次，成本更高。
+Bundled GOOG daily data; grid needs no extra dependency and SAMBO requires the optimize extra. Ordinary class parameters support native optimization;
+They are not migrated to inputs, which currently does not support SAMBO. n1/n2 are trend periods and n_enter/n_exit are entry/exit periods.
+0.2% commission, no forced end-of-run liquidation, and final-equity maximization; a fixed seed does not establish out-of-sample validity.
+Print the best run, scores, and means grouped by trend period; SAMBO makes at most 40 attempts and costs more.
 """
 
 import argparse
@@ -45,13 +45,13 @@ def ordered_periods(params):
 
 def main(method="grid"):
     if method not in ("grid", "sambo"):
-        raise ValueError("method 必须为 grid 或 sambo")
+        raise ValueError("method must be grid or sambo")
     if method == "sambo":
         try:
             import sambo  # noqa: F401
         except ImportError as exc:
             raise RuntimeError(
-                "SAMBO 需要额外依赖：pip install 'openbacktesting[optimize]'"
+                "SAMBO requires an extra dependency: pip install 'openbacktesting[optimize]'"
             ) from exc
     bt = Backtest(GOOG, Sma4Cross, commission=0.002)
     common = {
@@ -61,7 +61,7 @@ def main(method="grid"):
         "return_heatmap": True,
     }
     if method == "grid":
-        # 2 × 2 × 1 × 1，四组均满足周期约束；不随机抽样。
+        # 2 × 2 × 1 × 1: all four combinations satisfy the period constraints; no random sampling.
         stats, heatmap = bt.optimize(
             n1=[40, 50],
             n2=[80, 100],

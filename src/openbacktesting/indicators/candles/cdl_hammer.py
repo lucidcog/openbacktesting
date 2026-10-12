@@ -1,4 +1,4 @@
-"""cdl_hammer：固定原生形态与独立有效掩码。"""
+"""cdl_hammer: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_hammer import cdl_hammer as _calculate
 

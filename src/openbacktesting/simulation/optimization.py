@@ -1,4 +1,4 @@
-"""原生参数搜索与并行优化编排。"""
+"""Native parameter search and parallel optimization orchestration."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ from openbacktesting.util import _tqdm
 
 @contextmanager
 def _joined_pool(pool):
-    """ThreadPool.__exit__不等待在途线程；先回收再释放行情与缓存。"""
+    """ThreadPool.__exit__ does not wait for in-flight threads; join them before releasing market data and caches."""
     active = pool
     try:
         with pool as active:
@@ -58,7 +58,7 @@ def _optimize(
     if not declarations:
         self._strategy._check_reserved_params(kwargs)
     if declarations and method in ("sambo", "skopt"):
-        raise InputError("UnsupportedOptimizationInput", None, "声明策略首期仅支持 grid")
+        raise InputError("UnsupportedOptimizationInput", None, "Declared strategies initially support only grid")
 
     maximize_key = None
     if isinstance(maximize, str):
@@ -113,7 +113,7 @@ def _optimize(
             )
 
     if declarations:
-        # 在 constraint 与随机采样之前验证所有值，不能隐藏非法候选。
+        # Validate all values before constraint evaluation and random sampling so invalid candidates cannot be hidden.
         kwargs = {
             name: [
                 resolve_native(self._strategy, {name: value}).overrides()[name]

@@ -1,10 +1,11 @@
-"""交叉序列和即时布尔判断的方向、边界、游标及公开入口契约。"""
+"""Direction, boundaries, cursors, and public entry points for crossover series and immediate boolean checks."""
 
 import pickle
 
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy, lib
 from openbacktesting.indicators.methods import TechnicalAnalysis
 from openbacktesting.indicators.types import IndicatorHandle
@@ -12,7 +13,7 @@ from openbacktesting.strategy import helpers
 
 
 def no_registration(*args, **kwargs):
-    raise AssertionError("即时判断不能登记或计算指标")
+    raise AssertionError("Immediate checks must not register or calculate indicators")
 
 
 TA = TechnicalAnalysis(no_registration)
@@ -60,16 +61,16 @@ def test_constants_pandas_positions_and_validation():
     assert TA.is_cross(np.int64(1), np.int64(1)) is False
     assert TA.is_crossover(pd.Series([0, 2], index=[-1, -2]), 1) is True
     for invalid in ("Close", b"Close", object(), {"a": 1}):
-        with pytest.raises(TypeError, match="数值序列"):
+        with pytest.raises(TypeError, match="numeric sequences"):
             TA.is_cross(invalid, [0, 1])
     for invalid in (np.array(1), np.array([[0, 1], [1, 0]])):
-        with pytest.raises(ValueError, match="单通道"):
+        with pytest.raises(ValueError, match="single-channel"):
             TA.is_cross([0, 1], invalid)
 
 
 def test_handle_validity_and_selected_channels():
     handle = IndicatorHandle([[0, 2], [1, 1]], name=["left", "right"], index=pd.RangeIndex(2))
-    with pytest.raises(ValueError, match="单通道"):
+    with pytest.raises(ValueError, match="single-channel"):
         TA.is_cross(handle, 1)
     assert TA.is_crossover(handle["left"], handle["right"]) is True
     masked = IndicatorHandle([0, 2], name="masked", index=pd.RangeIndex(2), valid=[False, True])
@@ -90,7 +91,7 @@ def test_predicates_match_series_at_every_visible_prefix_without_registration():
             self.signals = {name: getattr(self.ta, name)(self.left, self.close) for name in NAMES}
             for signal in self.signals.values():
                 assert isinstance(signal, IndicatorHandle)
-            # init 看完整输入；逐个前缀检验不足两根、缺口和最后一根。
+            # init sees complete input; test each prefix for fewer than two bars, gaps, and the last bar.
             cursor = self._indicator_cursor
             for size in range(len(left) + 1):
                 cursor.length = size
@@ -110,7 +111,7 @@ def test_predicates_match_series_at_every_visible_prefix_without_registration():
             seen.append(len(self.close))
 
     result = Backtest(frame, Signals).run()
-    # 已登记的序列在缺口处保留原门控；即时判断不改变这个调度。
+    # Registered series retain existing scheduling gates at gaps; immediate checks do not change that scheduling.
     assert seen == list(range(1, 13))
     assert len(result["_strategy"]._indicators) == 4
 
@@ -140,7 +141,7 @@ def test_removed_lib_and_helper_exports_and_legacy_pickle():
         for name in NAMES:
             assert not hasattr(module, name)
     assert not set(NAMES).intersection(lib.__all__)
-    # 删除的函数引用仍明确拒绝。
+    # Deleted function references remain explicitly rejected.
     for name in ("cross", "crossover"):
         with pytest.raises(AttributeError, match=name):
             pickle.loads(f"copenbacktesting.lib\n{name}\n.".encode())

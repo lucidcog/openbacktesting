@@ -1,4 +1,4 @@
-"""ta.ht_trendmode：固定依赖的计算封装与规范输出。"""
+"""ta.ht_trendmode: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.cycles.ht_trendmode import ht_trendmode as _calculate
 

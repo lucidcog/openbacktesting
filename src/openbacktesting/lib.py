@@ -1,4 +1,4 @@
-"""便利 API 的旧入口；各领域直接重导出同一对象。"""
+"""Legacy entry point for convenience APIs; each domain directly re-exports the same objects."""
 
 from openbacktesting.data.aggregation import OHLCV_AGG, TRADES_AGG
 from openbacktesting.data.generators import random_ohlc_data
@@ -15,7 +15,7 @@ __pdoc__ = {
     "TrailingStrategy.__init__": False,
 }
 
-__all__ = [  # noqa: RUF022 — 保留既有导出顺序
+__all__ = [  # noqa: RUF022 — preserve existing export order
     "OHLCV_AGG",
     "TRADES_AGG",
     "barssince",
@@ -26,6 +26,6 @@ __all__ = [  # noqa: RUF022 — 保留既有导出顺序
     "SignalStrategy",
     "TrailingStrategy",
     "FractionalBacktest",
-    "FractionalBacktest",  # noqa: RUF068 — 保留既有重复导出
+    "FractionalBacktest",  # noqa: RUF068 — preserve existing duplicate exports
     "MultiBacktest",
 ]

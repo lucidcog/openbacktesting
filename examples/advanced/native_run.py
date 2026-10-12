@@ -1,8 +1,8 @@
-"""原生回测与结果消费：显式调用 main，区别于只导出 bt 的作者模板。
+"""Native backtest and result consumption: explicitly call main, unlike author templates that only export bt.
 
-随包 GOOG 日线，无额外依赖。普通类参数 n1/n2 控制内置 SMA 周期；
-本例保留原生 API 与双向交叉策略，初始资金 10000、手续费 0.2%，期末不强制平仓。
-输出统计、权益曲线与交易表；参数优化参见同目录 parameter_optimization.py。
+Bundled GOOG daily data, with no additional dependencies. Ordinary class parameters n1/n2 control built-in SMA periods;
+This example retains the native API and bidirectional crossover strategy, with initial cash 10000, 0.2% commission, and no forced end-of-run liquidation.
+Print statistics, the equity curve, and the trade table; see parameter_optimization.py in this directory for optimization.
 """
 
 from openbacktesting import Backtest, Strategy

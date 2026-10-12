@@ -1,4 +1,4 @@
-"""ta.thermo：固定依赖的计算封装与规范输出。"""
+"""ta.thermo: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.volatility.thermo import thermo as _calculate
 

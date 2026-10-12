@@ -1,4 +1,4 @@
-"""cdl_eveningstar：固定原生形态与独立有效掩码。"""
+"""cdl_eveningstar: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_eveningstar import cdl_eveningstar as _calculate
 

@@ -1,4 +1,4 @@
-"""策略辅助函数：事件判断、统计与重采样。"""
+"""Strategy helpers for event predicates, statistics, and resampling."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from openbacktesting.strategy.base import Strategy
 
 
 def barssince(condition: Sequence[bool], default=np.inf) -> int:
-    """查询条件序列最近一次成立距当前的间隔；这是标量辅助函数。
+    """Query the distance from the current position to the latest true condition; this is a scalar helper.
 
 
     Return the number of bars since `condition` sequence was last `True`,
@@ -30,7 +30,7 @@ def barssince(condition: Sequence[bool], default=np.inf) -> int:
 
 
 def quantile(series: Sequence, quantile: None | float = None):
-    """查询末值的相对排名，或读取指定分位值，取决于 quantile 参数。
+    """Query the relative rank of the last value or a specified quantile value, depending on quantile.
 
 
     If `quantile` is `None`, return the quantile _rank_ of the last
@@ -63,7 +63,7 @@ def resample_apply(
     agg: str | dict | None = None,
     **kwargs,
 ):
-    """先重采样并应用函数，再对齐到原日历；策略初始化内自动登记结果句柄。
+    """Resample and apply the function, then align to the original calendar; automatically register the result handle within strategy initialization.
 
 
     Apply `func` (such as an indicator) to `series`, resampled to

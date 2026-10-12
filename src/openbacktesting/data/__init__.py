@@ -1,4 +1,4 @@
-"""旧 data 路径的兼容导出；实现位于 data.core。"""
+"""Compatibility exports for the old data path; implemented in data.core."""
 
 from openbacktesting.data.core import (
     _Array as _Array,

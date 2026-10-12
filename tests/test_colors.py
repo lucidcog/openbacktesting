@@ -1,4 +1,4 @@
-"""颜色值、量化及配置/绘图边界的行为回归。"""
+"""Behavioral regressions for color values, quantization, and configuration/plotting boundaries."""
 
 import json
 import math
@@ -7,11 +7,12 @@ from dataclasses import FrozenInstanceError
 
 import numpy as np
 import pytest
-from openbacktesting import Color, colors, inputs
-from openbacktesting.plotting import PlottingError
 from test_bar_coloring import collector
 from test_inputs import request, strategy
 from test_plotting import handle
+
+from openbacktesting import Color, colors, inputs
+from openbacktesting.plotting import PlottingError
 
 
 def test_value_identity_and_encoding():
@@ -94,7 +95,7 @@ def test_all_alpha_roundtrips():
         value = Color(0, 255, 0, alpha)
         assert value.with_transparency(value.transparency) == value
         assert Color.from_hex(value.to_hex()) == value
-    # 按明确的浮点运算公式处理最邻近半值，不另行承诺实数精度。
+    # Handle nearest half-values using the explicit floating-point formula without promising exact real-number precision.
     for t in [math.nextafter(50, 0), math.nextafter(50, 100)]:
         assert Color.rgb(0, 0, 0, transparency=t).alpha == math.floor(255 * (100 - t) / 100 + 0.5)
 
@@ -141,13 +142,13 @@ def test_fixed_palette():
 def test_input_color_schema_and_native_wire_roundtrip():
     schemas = []
     for default in ["#22aa44", "#22AA44ff", Color(34, 170, 68)]:
-        cls = strategy(tint=inputs.color(default, title="颜色"))
+        cls = strategy(tint=inputs.color(default, title="Color"))
         schemas.append(inputs.describe(cls))
         assert cls.tint.default == Color(34, 170, 68)
         for value in ["#aabbcc80", Color(170, 187, 204, 128)]:
             native = inputs.resolve_native(cls, {"tint": value})
-            assert dict(native.runtime)["颜色"] == Color(170, 187, 204, 128)
-            assert native.snapshot()["values"]["颜色"] == "#AABBCC80"
+            assert dict(native.runtime)["Color"] == Color(170, 187, 204, 128)
+            assert native.snapshot()["values"]["Color"] == "#AABBCC80"
             payload = inputs.request_for(cls, native.overrides())
             assert inputs.resolve_request(cls, payload) == native
             assert pickle.loads(pickle.dumps(native)) == native
@@ -161,18 +162,18 @@ def test_input_color_schema_and_native_wire_roundtrip():
 )
 def test_input_color_errors(value):
     with pytest.raises(inputs.InputError) as error:
-        inputs.color(value, title="颜色")
-    assert (error.value.code, error.value.title) == ("InvalidDeclaration", "颜色")
-    cls = strategy(tint=inputs.color(colors.RED, title="颜色"))
+        inputs.color(value, title="Color")
+    assert (error.value.code, error.value.title) == ("InvalidDeclaration", "Color")
+    cls = strategy(tint=inputs.color(colors.RED, title="Color"))
     for resolve in [
         lambda: inputs.resolve_native(cls, {"tint": value}),
-        lambda: inputs.resolve_request(cls, request(cls, {"颜色": value})),
+        lambda: inputs.resolve_request(cls, request(cls, {"Color": value})),
     ]:
         with pytest.raises(inputs.InputError) as error:
             resolve()
-        assert (error.value.code, error.value.title) == ("InvalidInputValue", "颜色")
+        assert (error.value.code, error.value.title) == ("InvalidInputValue", "Color")
     with pytest.raises(inputs.InputError, match="InvalidInputValue"):
-        inputs.resolve_request(cls, request(cls, {"颜色": colors.RED}))
+        inputs.resolve_request(cls, request(cls, {"Color": colors.RED}))
 
 
 @pytest.mark.parametrize("value", ["#22aa44", "#22AA44ff", Color(34, 170, 68)])
@@ -197,7 +198,7 @@ def test_all_plotting_color_entries(value):
 def test_no_arbitrary_string_conversion():
     class Pretend:
         def __str__(self):
-            raise AssertionError("禁止隐式转换")
+            raise AssertionError("Implicit conversion is forbidden")
 
     p = collector()
     with pytest.raises(PlottingError, match="invalid-color"):

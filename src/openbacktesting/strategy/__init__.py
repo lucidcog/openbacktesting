@@ -1,4 +1,4 @@
-"""旧 strategy 路径的兼容导出；实现位于 strategy.base。"""
+"""Compatibility exports for the old strategy path; implemented in strategy.base."""
 
 from typing import TYPE_CHECKING
 

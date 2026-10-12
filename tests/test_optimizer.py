@@ -1,4 +1,4 @@
-"""参数实验的真实执行、事务、查询及边界回归。"""
+"""Real execution, transactions, queries, and boundary regressions for parameter experiments."""
 
 import copy
 import json
@@ -41,12 +41,12 @@ class Scan(Strategy):
     enabled = inputs.bool(True, title="enabled")
 
     def init(self):
-        self.log.info("不要持久化")
+        self.log.info("Do not persist")
 
     def next(self):
         self.plotting.bg_color("#123456")
         if self.selected == -1:
-            raise RuntimeError("故意失败")
+            raise RuntimeError("Intentional failure")
         if self.enabled and self.bar_index == 0:
             self.buy(qty=self.selected)
         if self.enabled and self.bar_index == 2 and self.selected != 3:
@@ -202,7 +202,7 @@ def test_domain_metadata_types_and_limits(monkeypatch):
 
     module = importlib.import_module("openbacktesting.optimizer.plan")
     monkeypatch.setattr(module, "MAX_TOTAL", 1)
-    with pytest.raises(ValueError, match="组合数"):
+    with pytest.raises(ValueError, match="combination count"):
         basic_plan()
     for execution in ({}, None):
         with pytest.raises(ValueError):
@@ -287,7 +287,7 @@ def test_zero_failed_cancel_resume_and_constraints(tmp_path):
     assert [t["attempt"] for t in completed.trials()] == [1, 1, 1]
     bad = kwargs()
     bad["data"].iloc[0, 0] += 1
-    with pytest.raises(OptimizationError, match="不匹配"):
+    with pytest.raises(OptimizationError, match="does not match"):
         resume_optimization(namespace(), path=path, experiment_id=partial.experiment_id, **bad)
     skipped = optimize(
         namespace(),
@@ -349,13 +349,13 @@ def test_store_atomic_conflicts_corruption(tmp_path):
         store.state(trial, attempt, "persisting")
         wrong = copy.deepcopy(payload)
         wrong["context"]["inputs"]["values"]["selected"] = 99
-        with pytest.raises(ValueError, match="参数"):
+        with pytest.raises(ValueError, match="parameter"):
             store.commit(trial, attempt, wrong)
         store.commit(trial, attempt, payload)
         store.commit(trial, attempt, payload)
         wrong = copy.deepcopy(payload)
         wrong["diagnostics"].append("changed")
-        with pytest.raises(ValueError, match="冲突"):
+        with pytest.raises(ValueError, match="conflict"):
             store.commit(trial, attempt, wrong)
         with pytest.raises(ValueError):
             store.commit(trial, attempt + 1, payload)
@@ -363,13 +363,13 @@ def test_store_atomic_conflicts_corruption(tmp_path):
             store.state(trial, attempt, "failed")
         store.conn.execute("UPDATE trials SET report='{}' WHERE id=?", (trial,))
         store.conn.commit()
-        with pytest.raises(ValueError, match="校验"):
+        with pytest.raises(ValueError, match="verification"):
             open_result(store.path).load_portfolio(trial)
         store.close()
     conn = connect(tmp_path / "store.db")
     conn.execute("PRAGMA user_version=999")
     conn.close()
-    with pytest.raises(ValueError, match="版本"):
+    with pytest.raises(ValueError, match="version"):
         open_result(tmp_path / "store.db")
 
 
@@ -516,7 +516,7 @@ def test_query_precision_nulls_status_and_live_snapshot(tmp_path):
         "UPDATE scalars SET method='changed' WHERE path=? AND trial LIKE '%:0'", (key,)
     )
     store.conn.commit()
-    with pytest.raises(ValueError, match="口径"):
+    with pytest.raises(ValueError, match="statistical definitions"):
         result.query(order_by=[key])
     store.close()
 
@@ -563,7 +563,7 @@ def test_io_errors_keep_result_and_cleanup(tmp_path, monkeypatch):
 
     monkeypatch.setattr(runner.Store, "commit", failed)
     monkeypatch.setattr(runner.Store, "finish", failed)
-    with pytest.raises(OptimizationError, match="未能写盘"):
+    with pytest.raises(OptimizationError, match="Failed to persist experiment failure status"):
         execute(p, report, tmp_path / "fail.db")
     original = storage.connect
 
@@ -580,7 +580,7 @@ def test_io_errors_keep_result_and_cleanup(tmp_path, monkeypatch):
             return getattr(self.conn, name)
 
     monkeypatch.setattr(storage, "connect", lambda path: BadPragma(original(path)))
-    with pytest.raises(RuntimeError, match="耐久"):
+    with pytest.raises(RuntimeError, match="durability"):
         storage.Store(tmp_path / "pragma.db", p)
 
 
@@ -598,9 +598,9 @@ def test_config_validation_and_constraint_true(tmp_path):
         with pytest.raises(ValueError):
             basic_plan(base_inputs=request)
     p = plan(Scan, {"selected": Values([1])}, execution={"backtest": {"settings": {"bad": 1}}})
-    with pytest.raises(OptimizationError, match="配置"):
+    with pytest.raises(OptimizationError, match="configuration"):
         execute(p, report, tmp_path / "wrong.db")
-    # Range 表达在恢复时必须保持十进制/整数来源，不能改成另一个计划。
+    # Restored Range expressions must preserve decimal/integer origins rather than becoming a different plan.
     first = optimize(
         namespace(),
         {"selected": Range(1, 2, 1)},
@@ -772,7 +772,7 @@ def test_schema_keywords_match_independent_validator():
     }
 
     def check(schema):
-        assert set(schema) <= supported, "新增 Schema 关键字时必须扩展独立包校验器"
+        assert set(schema) <= supported, "New Schema keywords must extend the standalone package checker"
         for key in ("$defs", "properties"):
             for child in schema.get(key, {}).values():
                 check(child)
@@ -802,12 +802,12 @@ def test_resume_checks_each_identity_material(tmp_path, monkeypatch):
     frame = data().astype("float32")
     alternatives.append(original | {"data": frame})
     for alternative in alternatives:
-        with pytest.raises(OptimizationError, match="不匹配"):
+        with pytest.raises(OptimizationError, match="does not match"):
             resume_optimization(
                 namespace(), path=saved.path, experiment_id=saved.experiment_id, **alternative
             )
     monkeypatch.setattr(identity_module.platform, "python_version", lambda: "different")
-    with pytest.raises(OptimizationError, match="不匹配"):
+    with pytest.raises(OptimizationError, match="does not match"):
         resume_optimization(
             namespace(), path=saved.path, experiment_id=saved.experiment_id, **original
         )
@@ -866,7 +866,7 @@ def test_analysis_drawdown_direction_and_duration_precision(tmp_path):
     key = next(f["path"] for f in fields if ".summary.drawdown.maximum" in f["path"])
     assert next(f for f in fields if f["path"] == key)["suggestedDirection"] == "asc"
     assert result.query(order_by=[key]) == result.query(order_by=[(key, "asc")])
-    # 用报告导出中的合法纳秒字段隔离精度，仍经过完整报告校验及事务投影。
+    # Isolate precision using a valid nanosecond report-export field while retaining full report validation and transactional projection.
     path = next(f["path"] for f in fields if f["path"].endswith("averageDurationNs"))
 
     def custom(req):
@@ -900,7 +900,7 @@ def test_all_null_metrics_keep_units_and_methods(tmp_path):
     )
     conn.commit()
     conn.close()
-    with pytest.raises(ValueError, match="口径"):
+    with pytest.raises(ValueError, match="statistical definitions"):
         result.query(order_by=[field["path"]])
 
 
@@ -925,7 +925,7 @@ def test_core_identity_reads_historical_results_but_rejects_cross_identity_resum
     reopened = open_result(saved.path)
     assert len(reopened.query(order_by=["summary.all.totalReturn.value"])["rows"]) == 3
     assert reopened.load_portfolio(reopened.trials()[0]["trial_id"])["summary"]
-    with pytest.raises(OptimizationError, match="不匹配"):
+    with pytest.raises(OptimizationError, match="does not match"):
         resume_optimization(
             namespace(), path=saved.path, experiment_id=saved.experiment_id, **kwargs()
         )

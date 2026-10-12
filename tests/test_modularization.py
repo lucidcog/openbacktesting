@@ -1,4 +1,4 @@
-"""验证模块迁移保留旧消费入口、对象路径和优化分派。"""
+"""Verify that module migration preserves legacy consumption, object paths, and optimization dispatch."""
 
 import base64
 import hashlib
@@ -12,12 +12,13 @@ from importlib import import_module
 from pathlib import Path
 from typing import ClassVar
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
 import pytest
-from openbacktesting import engine, lib
 from openbacktesting._util import _Array, _Data, _Indicator
+
+import openbacktesting as api
+from openbacktesting import engine, lib
 from openbacktesting.indicator_types import IndicatorHandle
 from openbacktesting.test import GOOG
 from openbacktesting.test._test import SmaCross
@@ -42,12 +43,12 @@ def inventory():
 
 
 def baseline_objects():
-    # 仅加载本仓库在重构前生成、附 SHA-256 的受信任样本，禁止替换为外部输入。
+    # Load only trusted SHA-256-backed samples generated in this repository before refactoring; never replace them with external input.
     baseline = json.loads(BASELINE.read_text())
     payload = base64.b64decode(baseline["pickle_base64"])
     assert hashlib.sha256(payload).hexdigest() == baseline["pickle_sha256"]
 
-    # 夹具包根已统一；仅测试内映射已删除的统计类，以继续核对其他历史对象和数值。
+    # Fixture package roots are normalized; test-only mapping of the removed statistics class keeps historical objects and values verifiable.
     class HistoricalUnpickler(pickle.Unpickler):
         def find_class(self, module, name):
             if module == "openbacktesting._stats":
@@ -79,7 +80,7 @@ def assert_result(actual, expected):
 
 def test_original_exports_signatures_and_class_identity():
     expected = json.loads(BASELINE.read_text())["inventory"]
-    # 历史基线保持不变；此变更明确删除绘图 API，并将预热改为计算参数。
+    # Keep historical baselines; this change explicitly removes the plotting API and makes warmup a calculation parameter.
     expected["lib_all"].remove("plot_heatmaps")
     expected["lib_all"].remove("cross")
     expected["lib_all"].remove("crossover")
@@ -97,16 +98,16 @@ def test_original_exports_signatures_and_class_identity():
     expected["signatures"].update(
         json.loads(BASELINE.with_name("trading-v2-signatures.json").read_text())["methods"]
     )
-    # 本次仅扩展纯数据采集配置；历史基线文件保持原样。
+    # Extend only data-only collection configuration; preserve historical baseline files.
     expected["signatures"]["Backtest.__init__"] = (
         expected["signatures"]["Backtest.__init__"][:-1]
         + ", context: 'DataContext | None' = None, plotting: 'bool' = True, plotting_limits: 'PlottingLimits | None' = None)"
     )
-    # 两份历史签名快照保持原样，当前公开契约仅更名并移除旧入口。
+    # Retain both historical signature snapshots; the current public contract only renames and removes old entry points.
     expected["signatures"]["Strategy.ind"] = expected["signatures"].pop("Strategy.I")
-    # 动态策略指标入口已删除；历史签名快照仍保留原样。
+    # The dynamic strategy-indicator entry point is removed; retain historical signature snapshots.
     del expected["signatures"]["Strategy.indicator"]
-    # 策略设置只改变这三处公开方法签名，其他签名继续精确比对。
+    # Strategy settings change only these three public method signatures; compare all others exactly.
     expected["signatures"]["Backtest.__init__"] = expected["signatures"][
         "Backtest.__init__"
     ].replace(
@@ -121,16 +122,16 @@ def test_original_exports_signatures_and_class_identity():
     expected["signatures"]["Strategy.ind"] = expected["signatures"]["Strategy.ind"].replace(
         ", warmup=True", ""
     )
-    # 日志查询新增公开签名；旧基线继续用于核对其余入口。
+    # Log queries add public signatures; the old baseline still checks the remaining entry points.
     expected["signatures"]["Backtest.get_logs"] = "(self) -> 'list[dict[str, str | int | None]]'"
-    # 订单入口改为显式命名字段；精确核对新签名，保留历史快照。
+    # Order entry points use explicit named fields; check new signatures exactly and retain historical snapshots.
     conditions = (
         "limit: 'float | None' = None, stop: 'float | None' = None, "
         "sl: 'float | None' = None, tp: 'float | None' = None, tag: '_JsonValue' = None, "
         "reduce_only: 'bool' = False, expires_at: '_Expiry | None' = None, "
         "valid_bars: 'int | None' = None"
     )
-    # 三种规模互斥；私有省略标记与显式 None 区分，历史快照保持原样。
+    # Three sizing modes are mutually exclusive; the private omission sentinel differs from explicit None. Preserve historical snapshots.
     for name in ("Strategy.buy", "Strategy.sell"):
         expected["signatures"][name] = (
             "(self, *, qty: 'float' = <_Unset.VALUE: 'omitted'>, "
@@ -147,7 +148,7 @@ def test_original_exports_signatures_and_class_identity():
     expected["signatures"]["Order.__init__"] = expected["signatures"]["Order.__init__"].replace(
         "eligible=None)", "eligible=None, sizing=None)"
     )
-    # optimizer 的私有类型化采集参数默认保持三类采集开启；其余签名仍精确核对。
+    # The optimizer's private typed collection parameter enables all three collection categories by default; compare remaining signatures exactly.
     expected["signatures"]["Backtest.__init__"] = (
         expected["signatures"]["Backtest.__init__"][:-1]
         + ", _collection: 'CollectionPolicy' = CollectionPolicy(portfolio=True, logs=True, plotting=True))"
@@ -167,7 +168,7 @@ def test_pre_migration_objects_and_results():
     pd.testing.assert_frame_equal(old["data"].df, GOOG.iloc[:4])
     bt = old["backtest"]
     assert type(bt) is engine.Backtest
-    with pytest.raises(TypeError, match="0.1回测状态"):
+    with pytest.raises(TypeError, match=r"Backtest state from 0\.1 cannot resume execution"):
         bt.run(fast=5, slow=10)
     current = api.Backtest(GOOG.iloc[:80], SmaCross, end_policy="close_at_last_close")
     result = current.run(fast=5, slow=10)
@@ -194,7 +195,7 @@ class InstrumentedBacktest(api.Backtest):
 
     @staticmethod
     def _mp_task(_):
-        raise AssertionError("原优化入口不应虚分派到子类任务方法")
+        raise AssertionError("The original optimization entry point must not virtually dispatch to the subclass task method")
 
 
 class InlinePool:

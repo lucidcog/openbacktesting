@@ -1,4 +1,4 @@
-"""无运行状态的辅助函数与旧对象路径兼容。"""
+"""Stateless helpers and compatibility with old object paths."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import pandas as pd
 
 
 def _set_legacy_module(obj, module):
-    """迁移定义时保留 pickle 使用的旧限定名，不创建替代类。"""
+    """Preserve old qualified names used by pickle when moving definitions; do not create replacement classes."""
     original = obj.__module__
     obj.__module__ = module
     if isinstance(obj, type):

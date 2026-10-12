@@ -1,10 +1,10 @@
-"""只读执行观察：独立顺序、有效价格区间和批次极值。"""
+"""Read-only execution observations: independent sequence, effective price ranges, and lot extrema."""
 
 from openbacktesting.broker.models import record
 
 
 def _update_extrema(state, bar_index, favorable, adverse):
-    # 初值为零，严格比较既排除负幅度，也保留并列极值的首次位置。
+    # Initialize at zero; strict comparisons exclude negative magnitudes and preserve the first position of tied extrema.
     if favorable > state["mfe"]:
         state["mfe"], state["mfeBar"] = favorable, bar_index
     if adverse > state["mae"]:

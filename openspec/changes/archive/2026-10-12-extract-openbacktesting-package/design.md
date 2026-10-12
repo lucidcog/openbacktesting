@@ -1,74 +1,74 @@
 ## Context
 
-动机和范围见 [proposal.md](proposal.md)。2026-10-12 只读检查发现：
+See [proposal.md](proposal.md) for motivation and scope. Read-only inspection on 2026-10-12 found:
 
-- 目标仓库仅有 README；源仓库工作区干净，检查时提交为 `844bae116047a7b6cf3fe400ab0b98910ccb729b`。实施时须重新确认快照，不能把该提交当作永久不变的工作区。
-- 源 `python/core/pyproject.toml` 已使用 Hatchling，版本为 `0.2.0`，已有 wheel/sdist 配置和两组 extras，可迁用独立包结构。
-- 源测试 `test_indicator_expansion.py` 读取包外指标研究记录，`test_optimizer.py` 读取根级 Portfolio 夹具；直接复制核心目录无法保证测试独立。
-- README 依赖包外 `docs/core` 手册；来源清单包含目标路径和内容摘要；指标目录、Portfolio 目录、JSON Schema、运行时与实验身份均嵌入旧身份。
-- 源包已有数值基线、序列化与多进程探针。本次仅检查源码，尚未执行测试。
+- The target contained only a README. The source working tree was clean at revision `844bae116047a7b6cf3fe400ab0b98910ccb729b`; implementation must reconfirm the snapshot rather than assume the checkout never changes.
+- Source `python/core/pyproject.toml` already used Hatchling, version `0.2.0`, wheel/sdist configuration, and two extras, supporting reuse of an independent package layout.
+- `test_indicator_expansion.py` read external indicator research records, and `test_optimizer.py` read a root Portfolio fixture. Copying only the core directory would not make tests independent.
+- The README depended on the external `docs/core` manual. Provenance records held target paths/digests; indicator/Portfolio catalogs, JSON Schema, runtime, and experiment identities embedded the former identity.
+- Numerical baselines, serialization, and multiprocessing probes existed. This inspection read source only; tests had not run.
 
 ## Goals / Non-Goals
 
-**目标：** 将迁移定义为文件范围明确、身份变化明确、计算语义不变的一次抽离；构建和验证从目标仓库独立完成。
+**Goals:** Define extraction with an explicit file scope and identity changes while preserving computational semantics; build and validate independently from the target repository.
 
-**非目标：** 不重构算法、不升级依赖、不增加图表渲染、不提供旧身份兼容层、不发布到 PyPI、不修改源仓库。文档构建网站不属于本次交付。
+**Non-Goals:** No algorithm refactor, dependency upgrade, chart renderer, old-identity compatibility layer, PyPI publication, or source-repository modifications. A documentation website is outside delivery.
 
 ## Decisions
 
-### 1. 采用根级独立 Python 项目
+### 1. Use a root standalone Python project
 
-目标结构为 `pyproject.toml`、`src/openbacktesting/`、`tests/`、`examples/`、`docs/` 及必要的 `scripts/`。保留源包的模块划分、公开导出、依赖范围及 `0.2.0` 初始版本；`__version__` 与发行元数据保持一致。版本沿用仅用于减少本次变量，不意味着旧身份制品可混用。
+The target contains `pyproject.toml`, `src/openbacktesting/`, `tests/`, `examples/`, `docs/`, and required `scripts/`. Preserve module boundaries, public exports, dependency ranges, and initial version `0.2.0`; keep `__version__` consistent with distribution metadata. Reusing the version only reduces migration variables and does not permit mixing old-identity artifacts.
 
-独立安装验证发现 SAMBO `1.25.2` 在顶层导入 scikit-learn 和 joblib，但自身只把这些依赖声明为可选；源 `test` extra 掩盖了该缺口。因此 `optimize` extra 补入与已有测试一致的 `scikit-learn>=1.5,<2`，由其依赖声明安装 joblib；基础运行依赖与原依赖版本范围不变。这是完成独立优化安装所需的配置修复。
+Clean-install validation found that SAMBO `1.25.2` imports scikit-learn and joblib at top level but declares them as optional dependencies. The source `test` extra concealed that gap. Add `scikit-learn>=1.5,<2` to `optimize`, matching the existing test range; its dependencies install joblib. Base runtime dependencies and original version ranges remain unchanged. This configuration repair is necessary for standalone optimizer installation.
 
-sdist 同时携带当前项目的 `uv.lock`，仅用于开发测试的精确环境复现；普通 pip 安装继续按依赖范围解析。原有指标基线还核对依赖版本元数据，不能用未锁定的新依赖版本运行后重写或放宽基线。
+The sdist carries this project's `uv.lock` solely to reproduce the exact development/test environment; ordinary pip installation still resolves declared dependency ranges. Indicator baselines also check dependency-version metadata, so unlocked runs must not justify rewriting or weakening them.
 
-不保留 `python/core` 外壳、workspace 源依赖、绝对路径、符号链接或指向源仓库的 editable 依赖；这些方式都会掩盖独立性问题。wheel 包含运行源码和全部运行资源；sdist 还包含测试、示例、必要文档、夹具及本地检查所需文件。
+Do not retain the `python/core` shell, workspace source dependencies, absolute paths, symbolic links, or editable dependencies targeting the source checkout: they conceal independence failures. The wheel includes runtime source and all runtime resources; the sdist also includes tests, examples, necessary docs, fixtures, and local verification inputs.
 
-### 2. 迁移范围采用清单闭包
+### 2. Define a complete migration inventory
 
-核心目录中的源码、CSV/JSON 资源、`py.typed`、测试、示例和测试隔离配置全部纳入。排除缓存、虚拟环境、构建产物和源仓库 Git 元数据。
+Include core source, CSV/JSON resources, `py.typed`, tests, examples, and test-isolation configuration. Exclude caches, virtual environments, build artifacts, and source Git metadata.
 
-另外迁入 `docs/core` 中与内核使用有关的 Markdown/资源，修复相对链接并删除已不适用的桌面和整仓开发入口；不复制无关研究和整仓文档。将测试实际读取的 `docs/research/engine-indicator-coverage-disposition.json` 与根级 `tests/fixtures/portfolio.json` 迁为目标仓库本地测试夹具，调整调用路径但保留断言。包内运行资源优先经 `importlib.resources` 定位。
+Also import core-related Markdown/resources from `docs/core`, repair relative links, and remove inapplicable desktop/whole-repository development entries. Do not copy unrelated research or general repository docs. Import the actually consumed `docs/research/engine-indicator-coverage-disposition.json` and root `tests/fixtures/portfolio.json` as local target fixtures, adjusting paths while retaining assertions. Prefer `importlib.resources` for runtime resources.
 
-沿用并更新来源清单的路径和目标摘要，保留有依据的来源摘要及第三方声明；补充本次抽离的快照和映射记录。清单使用规范化来源标识及相对于包根的路径，不写入含旧名称的路径或机器绝对路径。已有历史来源信息与本次直接复制来源分开记录，不能将旧清单的上游提交冒充本次源仓库提交。
+Reuse and update provenance target paths/digests, retain supported source digests and third-party declarations, and add the direct extraction snapshot and mappings. Use normalized source identifiers and paths relative to the package root, without former names or machine-absolute paths. Record historical upstream provenance separately from the direct copy source; an upstream revision in an old manifest must not be presented as the extraction checkout revision.
 
-### 3. 身份替换覆盖字符串契约
+### 3. Replace identity across string contracts
 
-唯一发行名与导入根为 `openbacktesting`，展示名为 `OpenBacktesting`，专属环境变量采用 `OPENBACKTESTING_` 前缀。品牌化 Portfolio 方法/语义标识采用 `openbacktesting_portfolio_v1`，本地指标后端标识采用 `openbacktesting.numpy`；原有非品牌字段及数值定义保持不变。
+The sole distribution and import root is `openbacktesting`, display name `OpenBacktesting`, and dedicated environment prefix `OPENBACKTESTING_`. Branded Portfolio method/semantic identity is `openbacktesting_portfolio_v1`, and the local indicator backend identity is `openbacktesting.numpy`. Preserve unbranded fields and numerical definitions.
 
-同步更新动态导入、资源查找、对象模块路径、错误和日志文本、示例、测试快照、Schema 常量、实验环境中的发行包键、文档以及构建配置。源 JSON Schema 在抽离后由本项目维护，不再依赖源仓库协议生成流程。
+Update dynamic imports, resource lookup, object module paths, error/log text, examples, test snapshots, schema constants, distribution keys in experiment environments, documentation, and build configuration together. Maintain the extracted JSON Schema locally without depending on the source repository's protocol generator.
 
-不提供旧名称包、导入别名、旧环境变量回退或双协议标识。旧模块路径 pickle 不自动加载，带旧品牌语义标识的 Portfolio 数据不承诺直接读取，旧实验不支持以新身份续跑；用户应在新身份下重新运行生成数据。新身份数据须支持正常保存、读取和恢复，未涉及身份的通用数据结构保持原有契约。
+Provide no old-name package, import alias, environment fallback, or dual protocol identity. Old-module-path pickles do not load automatically; Portfolio data with former semantic identifiers is not guaranteed to load directly; old experiments cannot resume under the new identity. Users should rerun to generate new-identity data. New-identity data must save, load, and restore normally; generic data structures unrelated to identity keep their contracts.
 
-选择明确断开旧身份，是因为“零残留”与保留旧名称兼容逻辑无法同时成立。仅替换 import 会遗漏协议与执行环境身份，不能作为完成标准。
+An explicit compatibility break is necessary because zero residual names cannot coexist with old-name compatibility logic. Replacing imports alone misses protocol and execution-environment identities and is insufficient for completion.
 
-### 4. 零残留检查不豁免文档
+### 4. Include documentation in zero-residual checks
 
-对 Git 受控和未忽略的待纳入文件，扫描文件路径及内容，按大小写不敏感匹配两个禁用名称；覆盖源码、注释、测试、基线、清单、README 和 OpenSpec。检查 wheel/sdist 的成员路径、内容和发行元数据。
+Scan paths and contents of controlled and non-ignored pending files, matching the two forbidden names without regard to case. Include source, comments, tests, baselines, manifests, README, and OpenSpec. Check wheel/sdist member paths, contents, and distribution metadata.
 
-检查工具的禁用词使用字符码配置重建，使检查规则本身不引入禁用原文；检查命中必须失败，不能靠排除被检查文件通过。Git 内部历史和本地虚拟环境、缓存不作为项目交付内容；不重写历史，但禁止将这些内容打包。
+Reconstruct forbidden terms from character-code configuration so the checker does not introduce their literal names. Matches must fail; excluding checked files is not an acceptable workaround. Internal Git history and local environments/caches are outside deliverables. Do not rewrite history, and do not package these local outputs.
 
-### 5. 验证区分身份变化与计算变化
+### 5. Distinguish identity changes from computational changes in validation
 
-先执行静态完整性检查：文件迁移清单、零残留、仓库路径闭包、资源和文档链接、构建元数据。随后运行迁入的现有 pytest 套件及包内测试入口，保留数值基线，只调整身份和路径字段。不得通过重生成数值预期或删断言掩盖差异。
+First check the migration inventory, forbidden-name absence, repository path closure, resources, documentation links, and build metadata. Then run imported pytest and package self-tests, retaining numerical baselines and adjusting only identity/path fields. Do not regenerate numerical expectations or remove assertions to conceal differences.
 
-在当前仓库内的隔离验证目录创建新的虚拟环境，分别安装 wheel 与由 sdist 构建的 wheel，从不含源码的工作目录执行导入、资源读取、最小回测、新身份 pickle 往返、多进程 spawn 及优化持久化检查。清除 `PYTHONPATH` 等源目录注入，确保加载路径属于安装环境。基础依赖和 `optimize` extra 分别验证，完整测试环境使用 `test` extra；保留慢示例显式开关并报告未运行项。
+Create clean virtual environments inside this repository's isolated verification directory. Install the wheel and an sdist-rebuilt wheel separately, then run imports, resource reads, minimal backtests, new-identity pickle round-trips, multiprocessing spawn, and optimizer persistence outside source directories. Remove source injection such as `PYTHONPATH` and verify imports resolve inside installed environments. Check base installation and `optimize` separately, use `test` for the full suite, retain explicit slow-example opt-ins, and report unexecuted cases.
 
-验证不需要访问源仓库；对照基线或探针若需执行源代码，只能在当前仓库内的隔离副本运行，避免 pytest、解释器或示例向源目录写入缓存和输出。优先复用现有测试，仅补充抽离后独立安装与身份边界缺失的检查。
+Validation requires no source-repository access. If comparison probes must run source code, use an isolated copy inside the target repository so pytest, interpreters, and examples cannot create caches or outputs in the source checkout. Reuse existing tests and add only missing standalone-install/identity-boundary checks.
 
 ## Risks / Trade-offs
 
-- 隐性包外依赖遗漏 → 以独立 sdist 重建和离开源码目录后的运行检验闭包。
-- 品牌标识变更影响历史数据消费 → 明确作为破坏性身份变更，不承诺旧存档或旧 pickle 兼容，验证新身份存档往返。
-- 全量替换误改算法或快照数值 → 审查差异、保持原数值基线，单独列明允许变化的身份字段。
-- 源仓库在实施期间变动 → 开始时记录提交、工作区状态及迁入文件摘要，结束时复核；如发生外部修改，报告差异，不回滚他人改动。
-- 搬迁手册和清单造成规模增长 → 仅迁入内核资料与真实依赖，维持闭包，不复制整仓工具链。
-- 打包遗漏测试资源 → 对 wheel 与 sdist 分别检查成员；禁止用工作区可访问掩盖制品缺失。
+- [Hidden external dependency] -> Rebuild from a standalone sdist and execute outside source directories to verify closure.
+- [Branded identity changes affect historical consumers] -> Declare the identity break, exclude former archive/pickle compatibility guarantees, and test new-identity round-trips.
+- [Bulk replacement changes algorithms or numerical snapshots] -> Review diffs, retain numerical baselines, and identify allowed identity-field changes separately.
+- [Source checkout changes during implementation] -> Record revision, state, and imported digests at the start and recheck at the end; report external changes without reverting others' work.
+- [Manual/manifests increase scope] -> Import only core material and actual dependencies needed for closure, excluding the whole repository's tooling.
+- [Artifacts omit test resources] -> Inspect wheel and sdist membership separately rather than relying on workspace access to conceal omissions.
 
 ## Migration Plan
 
-先记录源快照和目标工作区状态，再复制文件至当前仓库、统一身份和路径、补齐本地依赖及文档、更新清单，最后执行静态检查、回归测试和独立制品验证。所有写入、构建及测试输出均留在当前仓库。
+Record the source snapshot and target state, copy into this repository, unify identities and paths, complete local dependencies/docs, update manifests, and perform static checks, regressions, and independent artifact validation. All writes, builds, and test outputs remain inside this repository.
 
-回退仅撤销当前仓库本次新增或修改的文件，不操作源仓库，不覆盖本次开始前已有的用户改动。实施完成后再报告可安装状态；本提案阶段不构建或发布包。
+Rollback only files added or changed by this operation in the target repository. Do not operate on the source checkout or overwrite preexisting user changes. Report installability after implementation completes; this proposal stage neither builds nor publishes the package.

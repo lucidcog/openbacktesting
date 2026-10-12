@@ -1,4 +1,4 @@
-"""TR 的旧默认计算和显式缺失前收盘回退。"""
+"""Legacy default TR calculation with explicit fallback for missing previous Close."""
 
 import numpy as np
 import pandas as pd

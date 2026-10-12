@@ -1,36 +1,34 @@
-# Core 使用手册
+# Core user manual
 
-用 Python 定义策略，在本地历史行情上回测，读取交易、权益与统计结果。当前提供独立 Python 内核，不保证 Pine 等价。
+Define strategies in Python, backtest them on local historical market data, and read trades, equity, and statistics. The current package provides an independent Python core without guaranteeing Pine equivalence.
 
-## 开始使用
+## Getting started
 
-[第一次回测 →](quickstart.md) 从固定离线数据开始，写出策略并通过宿主运行。
+[Your first backtest →](quickstart.md) starts with fixed offline data, defines a strategy, and runs it through the host.
 
-想查用法？直接进入[回测与策略 API](reference/core.md)、[指标目录](reference/indicators/index.md)或[EMA 指数移动平均](reference/indicators/ema.md)。
+For API usage, go directly to [backtests and strategies](reference/core.md), the [indicator catalog](reference/indicators/index.md), or [EMA](reference/indicators/ema.md).
 
-## 专题教程
+## Guides
 
-- **写策略**：[生命周期](guides/author.md) · [读取行情](guides/data.md) · [声明参数](guides/inputs.md) · [组合指标](guides/indicators.md)
-- **运行与分析**：[运行和优化](guides/runtime.md) · [订单与交易](guides/trading.md) · [读取结果](guides/results.md) · [绘图声明与导出](guides/plotting.md)
-- **完整代码**：[可运行示例](examples.md)
-- **参数实验**：[完整 Portfolio 保存与排序](guides/optimizer.md)
+- **Strategy authoring**: [Lifecycle](guides/author.md) · [Market data](guides/data.md) · [Input declarations](guides/inputs.md) · [Indicator composition](guides/indicators.md)
+- **Execution and analysis**: [Running and optimization](guides/runtime.md) · [Orders and trades](guides/trading.md) · [Results](guides/results.md) · [Plot declarations and export](guides/plotting.md)
+- **Complete code**: [Runnable examples](examples.md)
+- **Parameter experiments**: [Saving and ranking complete Portfolios](guides/optimizer.md)
 
-## API 参考
+## API reference
 
-- [回测与策略](reference/core.md)
-- [订单、仓位与交易](reference/trading.md)
-- [策略组合与辅助工具](reference/helpers.md)
-- [参数声明与解析](reference/inputs.md)
-- [宿主运行入口](reference/runtime.md)
-- [指标句柄与计算](reference/indicator-api.md)
-- [绘图声明与导出](reference/plotting.md)
-- [颜色值与预设](reference/colors.md)
-- [Portfolio 报告与导出](reference/portfolio.md)
-- [Optimizer 结果集](reference/optimizer.md)
-- [按类别查找指标](reference/indicators/index.md)
+- [Backtests and strategies](reference/core.md)
+- [Orders, positions, and trades](reference/trading.md)
+- [Strategy composition and helpers](reference/helpers.md)
+- [Input declarations and resolution](reference/inputs.md)
+- [Host runtime entry points](reference/runtime.md)
+- [Indicator handles and computation](reference/indicator-api.md)
+- [Plot declarations and export](reference/plotting.md)
+- [Color values and presets](reference/colors.md)
+- [Portfolio reports and export](reference/portfolio.md)
+- [Optimizer result sets](reference/optimizer.md)
+- [Indicators by category](reference/indicators/index.md)
 
-## 维护与限制
+## Maintenance and limitations
 
-[当前限制](limitations.md) · [兼容入口](reference/classification.md) · [文档维护](development.md) · [构建来源](build-info.md)
-
-
+[Current limitations](limitations.md) · [Compatibility entry points](reference/classification.md) · [Documentation maintenance](development.md) · [Build provenance](build-info.md)

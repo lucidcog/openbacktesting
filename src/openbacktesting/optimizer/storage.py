@@ -1,4 +1,4 @@
-"""本地单实验 SQLite 结果库；一份报告对应一次原子提交。"""
+"""Local single-experiment SQLite result database; one report corresponds to one atomic commit."""
 
 import hashlib
 import json
@@ -33,7 +33,7 @@ CREATE INDEX scalar_path ON scalars(path);
 def local_path(path):
     raw = str(path)
     if raw.startswith(("file:", "//", "\\\\")) or raw == ":memory:":
-        raise ValueError("optimizer: 需要本地文件路径")
+        raise ValueError("optimizer: a local file path is required")
     return Path(path).expanduser().resolve()
 
 
@@ -54,12 +54,12 @@ def check_version(conn):
         conn.execute("PRAGMA application_id").fetchone()[0] != APPLICATION_ID
         or conn.execute("PRAGMA user_version").fetchone()[0] != VERSION
     ):
-        raise ValueError("optimizer: 不支持的结果库版本")
+        raise ValueError("optimizer: unsupported result database version")
 
 
 @contextmanager
 def owner(path):
-    """独立锁库持有操作系统文件锁，不阻止结果库 reader。"""
+    """Separate lock database holding an operating-system file lock without blocking result database readers."""
     path = local_path(path)
     lock = sqlite3.connect(str(path) + ".owner", timeout=0)
     try:
@@ -74,7 +74,7 @@ def now():
 
 
 def flatten(value, path="", metadata=None):
-    """标量投影；点号/反斜杠键使用反斜杠转义，不遍历数组。"""
+    """Scalar projection; escape dots/backslashes in keys with a backslash, and do not traverse arrays."""
     if isinstance(value, dict):
         if {"value", "unit", "status", "methodId"} <= value.keys():
             metadata = value
@@ -117,7 +117,7 @@ class Store:
                 if self.conn.execute(
                     "SELECT name FROM sqlite_master WHERE type='table'"
                 ).fetchone():
-                    raise FileExistsError("optimizer: 数据库已有实验；请显式恢复或使用新路径")
+                    raise FileExistsError("optimizer: database already contains an experiment; resume explicitly or use a new path")
                 self.conn.executescript(DDL)
                 self.conn.execute(f"PRAGMA application_id={APPLICATION_ID}")
                 self.conn.execute(f"PRAGMA user_version={VERSION}")
@@ -133,12 +133,12 @@ class Store:
                     "SELECT * FROM experiment WHERE id=?", (experiment_id,)
                 ).fetchone()
                 if row is None or row["plan"] != plan_value._json:
-                    raise ValueError("optimizer: 实验身份或计划不匹配")
+                    raise ValueError("optimizer: experiment identity or plan does not match")
                 self.id = experiment_id
             mode = self.conn.execute("PRAGMA journal_mode=WAL").fetchone()[0]
             self.conn.execute("PRAGMA synchronous=FULL")
             if mode != "wal" or self.conn.execute("PRAGMA synchronous").fetchone()[0] != 2:
-                raise RuntimeError("optimizer: 无法启用本地耐久策略")
+                raise RuntimeError("optimizer: unable to enable local durability policy")
             with self.conn:
                 self.conn.execute(
                     "UPDATE attempts SET state='interrupted',ended=? WHERE state IN ('running','persisting')",
@@ -179,7 +179,7 @@ class Store:
                 (state, trial_id, attempt),
             ).rowcount
             if count != 1:
-                raise ValueError("optimizer: 过期试验尝试")
+                raise ValueError("optimizer: stale trial attempt")
             self.conn.execute(
                 "UPDATE attempts SET state=?,ended=?,error=? WHERE trial=? AND number=?",
                 (state, None if state == "persisting" else now(), error, trial_id, attempt),
@@ -191,17 +191,17 @@ class Store:
         checksum = hashlib.sha256(payload.encode()).hexdigest()
         row = self.conn.execute("SELECT * FROM trials WHERE id=?", (trial_id,)).fetchone()
         if row is None or row["attempt"] != attempt:
-            raise ValueError("optimizer: 过期试验尝试")
+            raise ValueError("optimizer: stale trial attempt")
         if row["state"] == "succeeded":
             if row["hash"] != checksum:
-                raise ValueError("optimizer: 已提交报告内容冲突")
+                raise ValueError("optimizer: committed report content conflicts")
             return
         if row["state"] != "persisting":
-            raise ValueError("optimizer: 试验尚未生成完整报告")
+            raise ValueError("optimizer: trial has not produced a complete report")
         request = json.loads(row["request"])
         inputs = report["context"]["inputs"]
         if inputs is None or any(inputs.get(k) != v for k, v in request.items()):
-            raise ValueError("optimizer: Portfolio 参数与试验不一致")
+            raise ValueError("optimizer: Portfolio parameters do not match the trial")
         execution = json.loads(self.conn.execute("SELECT plan FROM experiment").fetchone()[0])[
             "execution"
         ]
@@ -209,7 +209,7 @@ class Store:
         if expected is not None:
             actual = report["context"]["backtest"]
             if actual is None or any(actual.get(k) != v for k, v in expected.items()):
-                raise ValueError("optimizer: Portfolio 配置与实验不一致")
+                raise ValueError("optimizer: Portfolio configuration does not match the experiment")
         with self.conn:
             self.conn.execute("UPDATE experiment SET sequence=sequence+1")
             sequence = self.conn.execute("SELECT sequence FROM experiment").fetchone()[0]
@@ -234,9 +234,9 @@ class Store:
 def load_report(conn, trial_id):
     row = conn.execute("SELECT report,hash,state FROM trials WHERE id=?", (trial_id,)).fetchone()
     if row is None or row["state"] != "succeeded":
-        raise ValueError("optimizer: 此试验没有已提交 Portfolio")
+        raise ValueError("optimizer: this trial has no committed Portfolio")
     if hashlib.sha256(row["report"].encode()).hexdigest() != row["hash"]:
-        raise ValueError("optimizer: Portfolio 内容校验失败")
+        raise ValueError("optimizer: Portfolio content verification failed")
     return validate_report(json.loads(row["report"]))
 
 

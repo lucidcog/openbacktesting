@@ -1,7 +1,7 @@
-"""选部分 inputs、逐份保存 Portfolio、取消恢复及事后排序。
+"""Select some inputs, save each Portfolio, cancel and resume, and sort results afterward.
 
-运行：uv run --locked python examples/advanced/optimizer_results.py --output /tmp/optimizer-demo.db
-output 必须是新本地文件；不保存日志或绘图。宿主负责加载代码并提供真实执行身份。
+Run: uv run --locked python examples/advanced/optimizer_results.py --output /tmp/optimizer-demo.db
+output must be a new local file; logs and plots are not saved. The host loads code and supplies the actual execution identity.
 """
 
 import argparse
@@ -10,6 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import pandas as pd
+
 from openbacktesting import DataContext, Strategy, Timeframe, backtest, inputs
 from openbacktesting.broker import InstrumentSpec
 from openbacktesting.data.timeframe import TimeframeUnit
@@ -20,9 +21,9 @@ from openbacktesting.strategy.inputs import request_for
 
 @backtest()
 class Example(Strategy):
-    quantity = inputs.int(1, title="数量", minval=1)
-    exit_bar = inputs.int(2, title="退出根")
-    enabled = inputs.bool(True, title="交易开关")
+    quantity = inputs.int(1, title="Quantity", minval=1)
+    exit_bar = inputs.int(2, title="Exit bar")
+    enabled = inputs.bool(True, title="Trading enabled")
 
     def init(self):
         pass
@@ -49,10 +50,10 @@ def _demo(path):
         "data": data,
         "context": DataContext(Timeframe(TimeframeUnit.DAY, 1), "UTC"),
         "instrument": InstrumentSpec(),
-        # 退出根不参与搜索，所有组合保持当前值 3，而非声明默认 2。
+        # Exit bar is not searched: every combination retains its current value 3 rather than the declared default 2.
         "request": request_for(Example, {"exit_bar": 3}),
     }
-    search = {"数量": Range(1, 3, 1), "交易开关": Values([True, False])}
+    search = {"Quantity": Range(1, 3, 1), "Trading enabled": Values([True, False])}
     saved_events = []
 
     def committed(event):
@@ -68,7 +69,7 @@ def _demo(path):
     by_return = saved.query(order_by=["summary.all.totalReturn.value"])
     by_drawdown = saved.query(order_by=["summary.all.maxDrawdownFraction.value"])
     assert saved.info()["committed"] == 6
-    assert all(row["inputs"]["退出根"] == 3 for row in by_return["rows"])
+    assert all(row["inputs"]["Exit bar"] == 3 for row in by_return["rows"])
     portfolio = saved.load_portfolio(by_return["rows"][0]["trial_id"])
     assert "plotting_result" not in portfolio and "strategy_logs" not in portfolio
     return {
@@ -80,7 +81,7 @@ def _demo(path):
 
 
 def main(path=None):
-    """指定 path 时保留结果库；省略时在临时目录演示并清理。"""
+    """Keep the result database when path is supplied; otherwise demonstrate in a temporary directory and clean up."""
     if path is not None:
         return _demo(path)
     with TemporaryDirectory(prefix="optimizer-example-") as directory:

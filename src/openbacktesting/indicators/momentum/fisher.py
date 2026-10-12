@@ -1,4 +1,4 @@
-"""ta.fisher：固定依赖的计算封装与规范输出。"""
+"""ta.fisher: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.fisher import fisher as _calculate
 

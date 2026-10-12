@@ -1,4 +1,4 @@
-"""从 lib 迁入的既有实现：compute_stats。"""
+"""Existing implementation moved from lib: compute_stats."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ def compute_stats(
     trades: pd.DataFrame = None,
     risk_free_rate: float = cast(float, ...),
 ) -> pd.Series:
-    """从既有结果、数据及可选交易子集重新计算绩效统计。
+    """Recompute performance statistics from existing results, data, and an optional trade subset.
 
 
     (Re-)compute strategy performance metrics.
@@ -29,10 +29,10 @@ def compute_stats(
     `data` is OHLC data as passed to the `openbacktesting.engine.Backtest`
     the `stats` were obtained in.
     `trades` can be a dataframe subset of `stats._trades` (e.g. only long trades).
-    risk_free_rate 为年化小数，用于 Sharpe、Sortino 与 Alpha；省略时继承最近统计值，
-    缺失记录回退零，显式零覆盖，None 无效。重算不改写原运行快照或实际费用。
-    初始资金继承 statistics_initial_equity；历史缺失记录回退首条权益。
-    初始资金必须为正数有限值，交易子集的近似权益也从该本金开始。
+    risk_free_rate is an annualized fraction used for Sharpe, Sortino, and Alpha; omission inherits the latest statistics value,
+    missing records fall back to zero, explicit zero overrides, and None is invalid. Recalculation does not rewrite the original run snapshot or actual fees.
+    Initial capital inherits statistics_initial_equity; historical records lacking it fall back to the first equity value.
+    Initial capital must be positive and finite; approximate equity for trade subsets starts from the same principal.
 
         >>> stats = Backtest(GOOG, MyStrategy).run()
         >>> only_long_trades = stats._trades[stats._trades.Size > 0]

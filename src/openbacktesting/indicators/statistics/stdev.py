@@ -1,4 +1,4 @@
-"""ta.stdev：固定依赖的计算封装与规范输出。"""
+"""ta.stdev: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.statistics.stdev import stdev as _calculate
 

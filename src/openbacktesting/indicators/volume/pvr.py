@@ -1,4 +1,4 @@
-"""ta.pvr：固定依赖的计算封装与规范输出。"""
+"""ta.pvr: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.volume.pvr import pvr as _calculate
 

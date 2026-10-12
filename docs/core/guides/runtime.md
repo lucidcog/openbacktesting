@@ -1,10 +1,10 @@
-# 宿主接管与优化
+# Host execution and optimization
 
-需要保留每组完整结果时使用[参数实验与本地 Portfolio](optimizer.md)中的 `runtime.optimize()`；它独立于下文返回最佳评分的 `Backtest.optimize()`。
+To retain each combination's complete result, use `runtime.optimize()` from [parameter experiments and local Portfolios](optimizer.md). It is separate from `Backtest.optimize()`, described below, which returns the best score.
 
-## 框架代码：发现与运行
+## Framework code: discovery and execution
 
-作者通过 `@backtest(...)` 声明策略设置，框架负责当前图表数据、上下文和品种规格。以下都是框架代码；`namespace` 是宿主本次成功加载用户模块后的全局映射。core 不加载源码，也不提供桌面运行器。
+Authors declare strategy settings through `@backtest(...)`; the framework supplies current chart data, context, and instrument specifications. Everything below is framework code. `namespace` is the global mapping from the user module successfully loaded by the host for this run. The core neither loads source nor provides a desktop runner.
 
 ```python
 from openbacktesting import DataContext, Timeframe, runtime
@@ -14,11 +14,11 @@ schema = runtime.describe(namespace)
 request = {
     "schemaVersion": schema["schemaVersion"],
     "schemaHash": schema["schemaHash"],
-    "values": {"均线周期": 30},
+    "values": {"Moving-average period": 30},
 }
 result = runtime.run(
     namespace,
-    request,  # 针对参数指南中的 ConfigurableSma；省略时使用默认值
+    request,  # For ConfigurableSma in the input guide; omit to use defaults.
     data=chart_data,
     context=DataContext(Timeframe.minutes(15), "Asia/Shanghai"),
     instrument=chart_instrument,
@@ -28,68 +28,68 @@ result = runtime.run(
 snapshot = result.attrs["input_snapshot"]
 ```
 
-`chart_data`、真实周期/时区和 `chart_instrument` 均由宿主从本次图表提供，不能复制示例常量假定用户正在查看 15 分钟图。完整离线配方见[图表上下文示例](../../../examples/advanced/chart_context.py)，展示两套品种/周期、图表当地小时条件、统计日界和夏令时重复小时。
+The host supplies `chart_data`, the actual timeframe/timezone, and `chart_instrument` from this chart; copying example constants does not establish that the user is viewing a 15-minute chart. The complete offline [chart-context example](../../../examples/advanced/chart_context.py) demonstrates two instrument/timeframe configurations, chart-local hour conditions, statistical day boundaries, and repeated daylight-saving hours.
 
-| 责任                   | 用户代码                          | 框架代码                             |
-| ---------------------- | --------------------------------- | ------------------------------------ |
-| 策略逻辑与参数         | `Strategy`、`inputs`、`init/next` | 发现参数并保留标题请求               |
-| 默认回测设置           | `@backtest(...)`                  | 以 `settings` 稀疏覆盖本次有效值     |
-| 数据、周期、时区与品种 | 不声明                            | 注入 `data/context/instrument`       |
-| 缓存与绘图预算         | 不声明                            | `options`                            |
-| 运行与结果             | 不调用执行 API                    | 构造新的 `Backtest` 并执行、保存快照 |
+| Responsibility | User code | Framework code |
+| -------------- | --------- | -------------- |
+| Strategy logic and inputs | `Strategy`, `inputs`, `init/next` | Discover inputs and retain title-based requests |
+| Default backtest settings | `@backtest(...)` | Apply sparse `settings` overrides to this run's effective values |
+| Data, timeframe, timezone, instrument | No declarations | Inject `data/context/instrument` |
+| Cache and plotting budgets | No declarations | `options` |
+| Execution and results | Does not call execution APIs | Construct a fresh `Backtest`, execute, and save snapshots |
 
-发现要求 namespace 是含非空 `__name__` 的映射，且存在唯一的本模块直接装饰、非抽象 `Strategy` 类。类的多个别名去重，导入类和未直接装饰的派生类不算入口；零个或多个入口报错。装饰器返回原类，不使用全局注册表。`discover/describe` 不需要数据，不执行构造、init 或 next；只导出旧 bt 的脚本不再是 runtime 入口。
+Discovery requires a mapping namespace with a nonempty `__name__` and exactly one nonabstract `Strategy` class defined in the module and decorated directly. Multiple aliases of a class are deduplicated; imported classes and derived classes without direct decoration are not entry points. Zero or multiple entries raise errors. The decorator returns the original class without a global registry. `discover/describe` requires no data and executes neither construction, init, nor next; scripts exporting only legacy bt are no longer runtime entry points.
 
-`schema["backtest"]` 使用 `schemaVersion=2`，settings 完整列出 [16 个平铺字段](author.md#平铺回测设置)。五类枚举导出为精确小写字符串，佣金和权益数量保留作者百分数单位；不导出嵌套模型。
+`schema["backtest"]` uses `schemaVersion=2`; settings lists all [16 flat fields](author.md#flat-backtest-settings). The five enum categories export exact lowercase strings; commission and equity quantity retain author percentage units, without nested models.
 
-宿主 `settings` 接受稀疏映射，分类字段可传对应枚举或表中精确字符串，拒绝大写、空白、错误枚举、旧字段和对象。未覆盖字段保留声明值；`default_qty_value=None` 清空默认数量，`max_gross_exposure=None` 清空暴露上限。三组 type/value 参数遵守同一规则：只改 value 沿用类型；重复相同 type 可不带值；改为不同 type 必须同时给 value，包括 0 或合法的 None。整份设置在构造策略前解码和校验，失败不会部分应用或修改原声明。
+Host `settings` accepts sparse mappings. Categorical fields accept the corresponding enum or exact table string, rejecting uppercase, whitespace, incorrect enums, legacy fields, and objects. Unoverridden fields retain declaration values; `default_qty_value=None` clears default quantity, and `max_gross_exposure=None` clears the exposure limit. All three type/value pairs follow the same rules: changing value alone retains type; repeating the same type does not require value; changing to another type requires value too, including 0 or valid None. The entire settings mapping is decoded and validated before strategy construction; failure neither applies partial changes nor modifies the declaration.
 
-宿主保存／读取配置封套时必须先验证版本 2，拒绝版本 1 和未知版本，再使用 settings；不要把旧数值自动解释成新百分数。可运行的 `read_settings` 及拒绝断言见[宿主教程](../../../examples/advanced/strategy_settings.py)。内部不可变 BacktestSettings 的 snapshot/from_snapshot 用于完整 16 字段 JSON 往返，恢复拒绝缺失／未知字段、嵌套对象及 Python 枚举；稀疏覆盖则走 runtime。
+When saving/reading a configuration envelope, hosts must first validate version 2 and reject version 1 and unknown versions before using settings. Do not reinterpret legacy values automatically as new percentages. Runnable `read_settings` and rejection assertions are in the [host tutorial](../../../examples/advanced/strategy_settings.py). The immutable internal BacktestSettings snapshot/from_snapshot supports a complete 16-field JSON round-trip, rejecting missing/unknown fields, nested objects, and Python enums on restoration; sparse overrides go through runtime.
 
-运行选项仅接受 `indicator_cache_bytes/plotting/plotting_limits`，不混入作者默认设置。`settings/options` 只作用于本次会话，不修改类声明。原生 `Backtest(data, StrategyClass, ...)` 保持显式配置，不自动合并装饰器；原生优化或回测变体继续由高级宿主自行构造调用。
+Runtime options accept only `indicator_cache_bytes/plotting/plotting_limits` and do not mix with author defaults. `settings/options` apply only to this session without changing class declarations. Native `Backtest(data, StrategyClass, ...)` retains explicit configuration and does not automatically merge the decorator; advanced hosts continue to construct and call native optimizers and backtest variants themselves.
 
-## 周期与上下文
+## Timeframe and context
 
-`TimeframeUnit` 是字符串枚举：`SECOND/MINUTE/DAY/WEEK/MONTH`。`Timeframe(unit, multiplier)` 不可变且可哈希；倍数须为严格正整数，拒绝 bool、浮点与字符串。可用 `seconds/minutes/hours/days/weeks/months` 六个便利构造；小时规范化成分钟，日、周、月保留日历单位，`days(7) != weeks(1)`。不使用固定 Enum 列举所有倍数，也不提供 Pine 周期字符串解析或秒数换算。
+`TimeframeUnit` is a string enum: `SECOND/MINUTE/DAY/WEEK/MONTH`. `Timeframe(unit, multiplier)` is immutable and hashable; multiplier must be a strictly positive integer, rejecting bool, floats, and strings. Six convenience constructors are available: `seconds/minutes/hours/days/weeks/months`. Hours normalize to minutes; days, weeks, and months retain calendar units, so `days(7) != weeks(1)`. No fixed Enum lists every multiplier, and Pine timeframe-string parsing or conversion to seconds is not provided.
 
-`DataContext(timeframe, timezone)` 不可变，时区使用有效的 IANA 标识，推荐 `UTC` 或 `America/New_York` 等地区名称。runtime 必须接收它和显式 `InstrumentSpec`，并要求行情使用带时区的 `DatetimeIndex`。宿主统一提供 UTC 数据；内核也兼容其他带时区输入，在策略构造和 init 前于副本上转换索引，保持绝对时刻、OHLCV 和休市缺口。不猜测周期、不本地化未知时区，也不自动重采样；无时区输入在带 context 路径中拒绝。
+`DataContext(timeframe, timezone)` is immutable and uses a valid IANA timezone identifier; `UTC` or regional names such as `America/New_York` are recommended. runtime requires this and explicit `InstrumentSpec`, with market data indexed by a timezone-aware `DatetimeIndex`. Hosts provide UTC data consistently; the core also accepts other aware inputs and converts the index on a copy before strategy construction and init, preserving absolute instants, OHLCV, and market-closure gaps. It neither guesses timeframe, localizes unknown timezones, nor resamples automatically; naive input is rejected on the context-enabled path.
 
-本次 `timezone` 同时用于图表、策略日历判断和统计分组。三个策略索引入口直接提供图表时区，用户不必手动换算。图表改时区后，宿主应以新 context 重新运行；原结果仍属于旧快照。时间条件策略的交易及统计均可能改变，无时间条件策略的权益可相同而年化指标不同，详见[统计口径](results.md#统计基准与重算)。周期不改变当前年化推断算法，图表自然日也不等于交易所交易日。
+This run's `timezone` governs charts, strategy calendar tests, and statistical grouping. All three strategy index entry points directly expose the chart timezone, without manual conversion. After changing chart timezone, hosts should rerun with new context; previous results retain their old snapshot. Both trading and statistics may change for time-dependent strategies. Time-independent strategies can have identical equity but different annualized metrics; see [statistical conventions](results.md#statistical-benchmarks-and-recalculation). Timeframe does not change the current annualization-inference algorithm, and chart calendar days are not exchange trading days.
 
-共享内存按绝对时刻和原精度传递时间，再恢复图表时区，夏令时回拨的同名小时保留不同偏移。绘图轴继续输出 UTC 纳秒标签与时区元信息，不给 UNIX 时间戳人为加偏移；桌面消费与切换时区联动尚未接入。
+Shared memory transfers timestamps by absolute instant at original precision before restoring chart timezone; repeated daylight-saving hours retain distinct offsets. Plot axes continue to emit UTC nanosecond labels and timezone metadata without adding artificial offsets to UNIX timestamps. Desktop consumption and timezone-switch integration are not yet connected.
 
-策略在构造后的 `init` 和 `next` 通过只读 `self.timeframe` 读取实际周期；类字段、params、inputs、赋值或删除均不能覆盖。低层 `Backtest` 的 `context` 可省略，此时 `self.timeframe is None`，保留旧数据入口行为。
+After construction, strategies read the actual timeframe through read-only `self.timeframe` in `init` and `next`; class fields, params, inputs, assignment, and deletion cannot override it. Low-level `Backtest` may omit `context`; then `self.timeframe is None`, preserving legacy data-entry behavior.
 
-## 参数与结果快照
+## Input and result snapshots
 
-原有输入摘要仅描述 inputs，修改回测设置不会改变 `schemaHash`。请求在策略构造前校验；只有 request 为 None 才使用默认值，空字典不被忽略。无 inputs 的策略描述仍为空；向它提交标题请求会被拒绝。异常原样传播。
+The existing input digest describes only inputs; changes to backtest settings do not change `schemaHash`. Requests are validated before strategy construction. Only request=None selects defaults; an empty dictionary is not ignored. Descriptions remain empty for strategies without inputs, and title-based requests to them are rejected. Exceptions propagate unchanged.
 
-统计、交易、指标与绘图结果保持原出口。`result.attrs["backtest_snapshot"]` 以 `schemaVersion=2` 独立记录策略 module/qualname、解析后的全部设置、图表上下文、品种、运行选项和 core 版本，表示为纯 JSON 值；它不包含代码摘要或完整行情。带 inputs 的策略仍有独立 `input_snapshot`。修改描述或请求副本不会修改类声明和已有结果。
+Statistics, trades, indicators, and plotting results retain their existing outlets. `result.attrs["backtest_snapshot"]` independently records strategy module/qualname, all resolved settings, chart context, instrument, runtime options, and core version with `schemaVersion=2` as pure JSON values. It contains neither source digests nor complete market data. Strategies with inputs retain separate `input_snapshot`. Changing description or request copies does not modify class declarations or existing results.
 
-宿主每次加载失败就停止，不回退到上一轮 namespace；runtime 不缓存策略实例。宿主负责源码身份、输入配置归属和代码执行边界。模块加载会执行用户顶层 Python，发现 API 和 Worker 都不是系统沙箱。
+The host stops after each failed load rather than falling back to a previous namespace; runtime does not cache strategy instances. The host owns source identity, input-configuration ownership, and code-execution boundaries. Module loading executes user top-level Python; neither discovery APIs nor Workers are system sandboxes.
 
-## 框架代码：优化与结果消费
+## Framework code: optimization and result consumption
 
-优化与结果消费也由宿主调用。下面片段直接引用原生优化教程的 main；完整文件定义了 Sma4Cross、周期约束和显式执行入口，见[统一示例](../examples.md)。
+Hosts also call optimization and consume results. The fragment below references the native optimization tutorial's main; the full file defines Sma4Cross, period constraints, and an explicit execution entry point. See the [unified examples](../examples.md).
 
-[完整源码](../../../examples/advanced/parameter_optimization.py)
+[Complete source](../../../examples/advanced/parameter_optimization.py)
 
-默认 grid 搜索；`method="sambo"` 需要安装优化 extra。跨进程入口放在 `if __name__ == "__main__"` 内，遵循 Python 的启动方式要求。平台默认采用 spawn 时，内核会提示并使用线程池；高级调用方可显式覆盖 `openbacktesting.Pool`。不同平台性能与启动行为不能视为一致。
+Search defaults to grid; `method="sambo"` requires the optimize extra. Put cross-process entry points inside `if __name__ == "__main__"`, following Python startup requirements. Where the platform defaults to spawn, the core emits a notice and uses a thread pool; advanced callers may explicitly override `openbacktesting.Pool`. Performance and startup behavior should not be assumed identical across platforms.
 
-内核返回统计、`_trades` 交易明细和 `_equity_curve` 权益数据；`return_heatmap=True` 返回参数评分表，不生成图表。示例统一从 [examples/README.md](../../../examples/README.md) 选择：`strategies/` 是推荐作者模板，`advanced/` 包含自定义作者例与显式执行的原生教程，类别由索引标明。新增 core 功能必须同批补充或更新可运行示例、索引与验证。示例随源码和 sdist 分发，wheel 不包含；机器学习教程需 test extra 且标为非推荐研究。
+The core returns statistics, `_trades` details, and `_equity_curve` data; `return_heatmap=True` returns a parameter-score table without generating charts. Select examples from [examples/README.md](../../../examples/README.md): `strategies/` contains recommended author templates, while `advanced/` includes custom author examples and explicitly executed native tutorials, with categories identified by the index. New core functionality must add or update runnable examples, the index, and validation together. Examples ship with source and sdist, not the wheel; ML tutorials require the test extra and are marked as nonrecommended research.
 
-新字段随默认描述和有效运行快照导出，仍不参与 input schemaHash。`risk_free_rate` 默认为零、范围 (-1,1)，0.02 表示年化 2%；它不进入交易账户。枚举及内部有效配置可 pickle；内部适配仅在进入原生 Backtest 前将佣金／权益百分数除以 100，复用 Commission、DefaultOrderSize 与 Slippage。原生 Backtest/优化保持原单位和高级模型入口，不自动读取装饰器。参见[统计基准](results.md#统计基准与重算)与[运行示例](../../../examples/advanced/strategy_settings.py)。
+New fields export with default descriptions and effective runtime snapshots but do not participate in input schemaHash. `risk_free_rate` defaults to zero with range (-1,1), and 0.02 means 2% annually; it does not enter the trading account. Enums and internal effective configuration are pickleable. Internal adaptation only divides commission/equity percentages by 100 before entering native Backtest, reusing Commission, DefaultOrderSize, and Slippage. Native Backtest/optimization retains its units and advanced-model entry points and does not read decorators automatically. See [statistical benchmarks](results.md#statistical-benchmarks-and-recalculation) and the [runtime example](../../../examples/advanced/strategy_settings.py).
 
-## 宿主在失败后取回日志
+## Host retrieval of logs after failure
 
-从根包导入 `RunLogs`，将会话作为独立关键字传入 `runtime.run(..., logs=session)`，随后 `session.get_logs()` 可读取成功或失败前的已写记录。运行依然返回 Series，异常保持原对象；会话不放入 settings/options。不传会话时成功结果仍有 `attrs["strategy_logs"]`，失败没有额外公开日志出口。
+Import `RunLogs` from the package root and pass a session separately through `runtime.run(..., logs=session)`. Then `session.get_logs()` reads records written before success or failure. Execution still returns Series and preserves the original exception object; the session does not belong in settings/options. Without a session, successful results still have `attrs["strategy_logs"]`, while failures have no additional public log outlet.
 
-顺序复用会话会在策略发现与请求验证前清空旧记录；同时复用或重入抛 RuntimeError，且不清空活动运行；错误类型抛 TypeError。会话退出后可重用，旧返回副本不变。以下受测教程演示低层与宿主的异常取回及位置字段：
+Sequential session reuse clears old records before strategy discovery and request validation. Concurrent reuse or reentry raises RuntimeError without clearing an active run; an incorrect type raises TypeError. Sessions may be reused after exit, and previously returned copies remain unchanged. The tested tutorial below demonstrates low-level and host exception retrieval and location fields:
 
-[完整源码](../../../examples/advanced/strategy_logs.py)
+[Complete source](../../../examples/advanced/strategy_logs.py)
 
-grid 与 SAMBO 候选不采集日志，仅最终正式重跑采集；无交易回退也视为正式重跑。搜索失败返回空日志，最终重跑失败保留该次记录。候选仍校验消息类型，并正常求值 f-string 等表达式，不能依赖候选日志评分。MultiBacktest 保持统计汇总接口，不提供跨数据集日志合流。字段与容量边界见[日志结果](results.md#策略日志)。
+grid and SAMBO candidates collect no logs; only the final formal rerun collects them, including the no-trade fallback. Search failure returns empty logs; final-rerun failure retains that run's records. Candidates still validate message types and normally evaluate expressions such as f-strings; candidate logs must not be used for scoring. MultiBacktest retains its statistics-summary interface without cross-dataset log merging. See [log results](results.md#strategy-logs) for fields and capacity boundaries.
 
-## 消费Portfolio
+## Consuming Portfolio
 
-成功出口可调用`openbacktesting.portfolio.export_result(result)`获取完整严格JSON字典；它与plotting的同名函数分属独立模块。报告无需策略活对象，包含原运行配置和有效统计利率；只在宿主明确需要时持久化或传输。Portfolio独立合同不改变Worker的RunResult或strategy.execute能力，当前没有网页或桌面回测接入。见[结果口径](results.md#portfolio-完整报告)。
+On success, call `openbacktesting.portfolio.export_result(result)` for a complete strict-JSON dictionary; the plotting function of the same name is in a separate module. Reports require no live strategy object and retain the original run configuration and effective statistical rate; persist or transmit only when the host explicitly needs it. Portfolio's independent contract does not change Worker RunResult or strategy.execute capabilities; web and desktop backtest integration is currently absent. See [result conventions](results.md#portfolio-complete-report).

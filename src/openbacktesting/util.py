@@ -24,8 +24,8 @@ except ImportError:
 
 
 def _tqdm(seq, **kwargs):
-    # fork可能继承已失去拥有者的tqdm锁；disable=True仍会在构造时获取锁。
-    # 子进程不构造进度条，外层任务的进度由主进程报告。
+    # fork may inherit a tqdm lock whose owner is gone; disable=True still acquires the lock during construction.
+    # Child processes do not construct progress bars; the main process reports progress for outer tasks.
     if _progress is None or parent_process() is not None:
         return seq
     return _progress(seq, **{"leave": False, **kwargs})

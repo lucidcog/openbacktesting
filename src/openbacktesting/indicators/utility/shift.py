@@ -1,4 +1,4 @@
-"""ta.shift：固定因果序列契约。"""
+"""ta.shift: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

@@ -1,4 +1,4 @@
-"""验证结果计算不依赖展示能力，且稀疏信号不改变执行时序。"""
+"""Verify result calculations do not depend on presentation and sparse signals do not change execution timing."""
 
 import importlib.util
 import inspect
@@ -7,10 +7,11 @@ import sys
 import textwrap
 from pathlib import Path
 
-import openbacktesting as api
 import numpy as np
-from openbacktesting import engine, lib
 from test_engine_edges import Idle, flat_data
+
+import openbacktesting as api
+from openbacktesting import engine, lib
 
 
 def test_removed_rendering_api_and_resources():
@@ -58,7 +59,7 @@ def test_sparse_signals_trade_at_first_event_without_warmup_delay():
 
 
 def test_backtest_and_optimization_without_rendering_imports_or_output(tmp_path):
-    # 独立进程避免父进程已导入模块掩盖依赖，同时检测默认输出副作用。
+    # A separate process prevents parent imports from masking dependencies and checks default-output side effects.
     source = textwrap.dedent("""
         import importlib.abc
         import sys

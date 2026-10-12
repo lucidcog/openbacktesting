@@ -1,6 +1,6 @@
-"""第一次回测：价格上穿 EMA 时买入，下穿时平仓，仅声明策略。
+"""First backtest: buy when price crosses above EMA and close below it; declare the strategy only.
 
-使用随包 GOOG 日线，手续费 0.2%，互斥订单，期末平仓计入结果。
+Bundled GOOG daily data, 0.2% commission, and exclusive orders; end-of-run liquidation enters the results.
 """
 
 from openbacktesting import EndPolicy, Strategy, backtest

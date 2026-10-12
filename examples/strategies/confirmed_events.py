@@ -1,8 +1,8 @@
-"""确认事件与月锚点：进阶作者脚本，组合、形态及周期水平共用 self.ta。
+"""Confirmed events and monthly anchors: an advanced author script combining indicators, patterns, and period levels through self.ta.
 
-随包 GOOG 日线、无额外依赖。左右各三根的 Pivot 只在右侧确认后可见，不能回填交易。
-PeriodStart 标记每月首根输入 bar；首月可能不完整，生产数据须保证周期完整性。
-互斥订单、期末平仓，手续费沿用默认零；此例展示机制，不提供收益验证。
+Bundled GOOG daily data, with no extra dependencies. A Pivot with three bars on each side appears only after right-side confirmation and cannot backdate trades.
+PeriodStart marks each month's first input bar; the first month may be incomplete, so production data must ensure complete periods.
+Exclusive orders and end-of-run liquidation, with default zero commission; this demonstrates mechanics rather than validating returns.
 """
 
 from openbacktesting import EndPolicy, Strategy, backtest

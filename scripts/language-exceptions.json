@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "exceptions": [
+    {
+      "path": "tests/test_strategy_logs.py",
+      "value": "中文\n第二行",
+      "count": 2,
+      "reason": "Multilingual log text must round-trip with its newline intact.",
+      "selector": "test_levels_locations_full_history_and_copies"
+    },
+    {
+      "path": "tests/test_inputs.py",
+      "value": "快速",
+      "count": 1,
+      "reason": "Localized enum value used to verify declaration and serialization.",
+      "selector": "Mode"
+    },
+    {
+      "path": "tests/test_inputs.py",
+      "value": "快速",
+      "count": 1,
+      "reason": "Localized enum value used to verify declaration and serialization.",
+      "selector": "Other"
+    },
+    {
+      "path": "tests/test_inputs.py",
+      "value": "慢速",
+      "count": 1,
+      "reason": "Localized enum value used to verify declaration and serialization.",
+      "selector": "Mode"
+    },
+    {
+      "path": "tests/test_order_api.py",
+      "value": "突破",
+      "count": 2,
+      "reason": "Unicode order tag retained to verify immutable copies and serialization.",
+      "selector": "test_request_is_frozen_detached_and_pickle_safe"
+    },
+    {
+      "path": "tests/test_order_api.py",
+      "value": "突破",
+      "count": 2,
+      "reason": "Unicode order tag retained to verify immutable copies and serialization.",
+      "selector": "test_request_reuse_in_init_and_independent_runs"
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-12-standardize-repository-english/specs/extraction-parity/spec.md",
+      "value": "- FROM: `### Requirement: 保持既有计算语义`",
+      "count": 1,
+      "reason": "Historical requirement identifier retained for exact OpenSpec delta matching."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-12-standardize-repository-english/specs/extraction-parity/spec.md",
+      "value": "- FROM: `### Requirement: 测试和示例独立运行`",
+      "count": 1,
+      "reason": "Historical requirement identifier retained for exact OpenSpec delta matching."
+    },
+    {
+      "path": "tests/test_inputs.py",
+      "value": "周期",
+      "count": 1,
+      "selector": "test_schema_hash_and_renaming",
+      "reason": "Historical localized-title schema fingerprint remains compatibility evidence alongside the English-title fingerprint."
+    },
+    {
+      "path": "tests/test_modularization.py",
+      "value": "旧指标",
+      "count": 1,
+      "selector": "test_pre_migration_objects_and_results",
+      "reason": "The unchanged trusted historical pickle preserves its localized indicator name."
+    },
+    {
+      "path": "tests/test_subpackages.py",
+      "value": "周期",
+      "count": 3,
+      "selector": "test_old_definitions_keep_signatures_metadata_and_pickle",
+      "reason": "The unchanged trusted historical pickle preserves the input title and resolved snapshot keys."
+    }
+  ]
+}

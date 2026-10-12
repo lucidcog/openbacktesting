@@ -1,4 +1,4 @@
-"""ta.ppo：固定依赖的计算封装与规范输出。"""
+"""ta.ppo: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.ppo import ppo as _calculate
 

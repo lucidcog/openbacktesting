@@ -1,4 +1,4 @@
-"""从唯一生成模式验证 Portfolio，独立内核不依赖协议包。"""
+"""Validate Portfolio against the single generated schema; the standalone kernel does not depend on the protocol package."""
 
 import json
 from functools import lru_cache
@@ -59,6 +59,6 @@ def _valid(value, schema):
 def validate_report(report):
     encode(report)
     if not _valid(report, _schema()):
-        raise ValueError("optimizer: Portfolio 结构或版本无效")
+        raise ValueError("optimizer: invalid Portfolio structure or version")
     check_portfolio(report)
     return report

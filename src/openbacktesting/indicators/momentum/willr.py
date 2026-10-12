@@ -1,4 +1,4 @@
-"""ta.willr：固定依赖的计算封装与规范输出。"""
+"""ta.willr: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.willr import willr as _calculate
 

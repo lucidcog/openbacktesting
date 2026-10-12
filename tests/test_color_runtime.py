@@ -1,22 +1,23 @@
-"""Color 参数的真实运行、优化、冻结和进程传递。"""
+"""Color parameters in actual runs, optimization, frozen results, and process transfer."""
 
 import json
 import multiprocessing as mp
 import pickle
 from multiprocessing.dummy import Pool as ThreadPool
 
-import openbacktesting as api
 import numpy as np
 import pytest
-from openbacktesting import Backtest, Color, colors, inputs
-from openbacktesting.plotting import export_result
-from openbacktesting.test import GOOG
 from test_input_runtime import TradingInputs, compare
 from test_inputs import request
 
+import openbacktesting as api
+from openbacktesting import Backtest, Color, colors, inputs
+from openbacktesting.plotting import export_result
+from openbacktesting.test import GOOG
+
 
 class ColorInputs(TradingInputs):
-    tint = inputs.color(colors.TEAL, title="颜色")
+    tint = inputs.color(colors.TEAL, title="Color")
 
     def init(self):
         super().init()
@@ -37,7 +38,7 @@ def test_run_color_binding_freeze_and_disabled():
     results = [
         bt.run(tint="#22aa44"),
         bt.run(tint=Color(34, 170, 68)),
-        bt.run_inputs(request(ColorInputs, {"颜色": "#22aa44"})),
+        bt.run_inputs(request(ColorInputs, {"Color": "#22aa44"})),
     ]
     for result in results:
         state = result["_strategy"]
@@ -46,7 +47,7 @@ def test_run_color_binding_freeze_and_disabled():
         assert pickle.loads(pickle.dumps(state)).tint == state.tint
         with pytest.raises(inputs.InputError, match="ImmutableInput"):
             state.tint = colors.RED
-        assert result.attrs["input_snapshot"]["values"]["颜色"] == "#22AA44FF"
+        assert result.attrs["input_snapshot"]["values"]["Color"] == "#22AA44FF"
         compare(results[0], result)
     payload = export_result(results[0])
     assert payload["plots"][0]["color"] == "#22AA44FF"
@@ -88,13 +89,13 @@ def test_color_grid_and_best_rerun(monkeypatch, mode):
         maximize="Return [%]",
         return_heatmap=True,
     )
-    assert seen and len(heatmap) == 6  # 不去重等价拼写的候选。
+    assert seen and len(heatmap) == 6  # Do not deduplicate equivalent candidate spellings.
     assert all(type(tint) is Color for tint in heatmap.index.get_level_values("tint"))
     selected = heatmap.idxmax()
     assert (np.asarray(heatmap.loc[selected]) == heatmap.max()).all()
     rerun = bt.run(**dict(zip(heatmap.index.names, selected)))
     compare(best, rerun)
-    assert best.attrs["input_snapshot"]["values"]["颜色"] == selected[0].to_hex()
+    assert best.attrs["input_snapshot"]["values"]["Color"] == selected[0].to_hex()
     assert export_result(best) == export_result(rerun)
     assert pickle.loads(pickle.dumps(heatmap)).equals(heatmap)
 
@@ -103,7 +104,7 @@ def test_color_rejected_before_execution_or_candidate_filter(monkeypatch):
     bt = Backtest(GOOG.iloc[:12], ColorInputs)
 
     def forbidden(*args, **kwargs):
-        raise AssertionError("非法颜色不能执行策略、constraint 或派发")
+        raise AssertionError("Invalid colors must not execute the strategy, constraint, or dispatch")
 
     monkeypatch.setattr(ColorInputs, "__init__", forbidden)
     monkeypatch.setattr(bt, "_broker", forbidden)
@@ -114,6 +115,6 @@ def test_color_rejected_before_execution_or_candidate_filter(monkeypatch):
         with pytest.raises(inputs.InputError, match="InvalidInputValue"):
             bt.optimize(tint=[colors.RED, value], constraint=forbidden, max_tries=0.01)
     with pytest.raises(inputs.InputError, match="InvalidInputValue"):
-        bt.run_inputs(request(ColorInputs, {"颜色": colors.RED}))
+        bt.run_inputs(request(ColorInputs, {"Color": colors.RED}))
     with pytest.raises(inputs.InputError, match="UnsupportedOptimizationInput"):
         bt.optimize(tint=[colors.RED], method="sambo")

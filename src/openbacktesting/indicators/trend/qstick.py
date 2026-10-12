@@ -1,4 +1,4 @@
-"""ta.qstick：固定依赖的计算封装与规范输出。"""
+"""ta.qstick: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.trend.qstick import qstick as _calculate
 

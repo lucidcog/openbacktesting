@@ -1,4 +1,4 @@
-"""三种规模的意图、提交快照与普通／OCO 的可观察行为。"""
+"""Observable sizing intent and submission snapshots for ordinary and OCO orders across three modes."""
 
 import multiprocessing as mp
 import pickle
@@ -6,6 +6,10 @@ from dataclasses import FrozenInstanceError, replace
 
 import pandas as pd
 import pytest
+from test_order_api import state
+from test_strategy_settings import run_flat
+from test_trading_core import Idle, frame, run
+
 from openbacktesting import Backtest, DefaultOrderSize
 from openbacktesting.broker import (
     AccountSnapshot,
@@ -15,9 +19,6 @@ from openbacktesting.broker import (
     OrderSizingSnapshot,
 )
 from openbacktesting.broker.sizing import _SizeIntent, resolve_size, select_size
-from test_order_api import state
-from test_strategy_settings import run_flat
-from test_trading_core import Idle, frame, run
 
 
 def account(equity=10_000):
@@ -33,7 +34,7 @@ def test_size_invalid_values(mode, value):
 
 def test_size_selection_conflicts_defaults_and_reduce_only():
     for values in ({"qty": 1, "amount": None}, {"amount": 2, "percent": 20}):
-        with pytest.raises(TypeError, match="互斥"):
+        with pytest.raises(TypeError, match="mutually exclusive"):
             select_size(**values)
     with pytest.raises(TypeError, match="qty"):
         select_size()
@@ -42,7 +43,7 @@ def test_size_selection_conflicts_defaults_and_reduce_only():
     with pytest.raises(TypeError, match="bool"):
         select_size(qty=2, reduce_only=1)
     for values in ({}, {"amount": 10}, {"percent": 20}):
-        with pytest.raises(TypeError, match="只减仓"):
+        with pytest.raises(TypeError, match="Reduce-only"):
             select_size(**values, reduce_only=True)
     default = _SizeIntent("percent", 20, "default")
     assert select_size(default=default) is default
@@ -77,7 +78,7 @@ def test_size_resolution_and_frozen_snapshot(intent, expected, budget):
 @pytest.mark.parametrize(
     "intent,instrument,reason",
     [
-        (select_size(qty=0.13), InstrumentSpec(quantity_step=0.05), "网格"),
+        (select_size(qty=0.13), InstrumentSpec(quantity_step=0.05), "grid"),
         (select_size(amount=1), InstrumentSpec(), "below_min_quantity"),
         (select_size(percent=1), InstrumentSpec(min_quantity=2), "below_min_quantity"),
         (select_size(amount=100), InstrumentSpec(min_notional=101), "below_min_notional"),
@@ -108,14 +109,14 @@ def test_equity_requirement_and_nonfinite_intermediate():
                 ).qty
                 == 1
             )
-    with pytest.raises(ValueError, match="预算数量"):
+    with pytest.raises(ValueError, match="Budgeted quantity"):
         resolve_size(
             select_size(amount=1e308),
             account=account(),
             reference_price=1e-308,
             instrument=InstrumentSpec(),
         )
-    with pytest.raises(ValueError, match="预算名义"):
+    with pytest.raises(ValueError, match="Budgeted notional amount"):
         resolve_size(
             _SizeIntent("qty", 1e308, "default"),
             account=account(),
@@ -130,7 +131,7 @@ def test_equity_requirement_and_nonfinite_intermediate():
         reduce_only=True,
     )
     assert result.qty == 0.1
-    # 已有保证金不改变权益分母。
+    # Existing margin does not change the equity denominator.
     tied = replace(account(), margin_used=9000, margin_available=1000)
     assert (
         resolve_size(
@@ -212,7 +213,7 @@ def test_price_conditions_do_not_change_budget_reference(conditions, timing):
     assert result._order_sizing.budget.tolist() == [2000]
     expected_bar = 0 if timing == "same_close" and not conditions else 1
     if "stop" in conditions and "limit" in conditions:
-        # OHLC 无法证明触发后又回落至限价，既有撮合推迟到下一根。
+        # OHLC cannot prove a return to the limit after triggering; existing matching defers until the next bar.
         expected_bar = 2
     assert result._fills.bar_index.tolist() == [expected_bar]
 

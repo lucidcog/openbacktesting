@@ -1,4 +1,4 @@
-"""ta.crossover：固定因果序列契约。"""
+"""ta.crossover: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

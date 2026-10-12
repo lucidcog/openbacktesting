@@ -1,4 +1,4 @@
-"""ta.pmax：固定依赖的计算封装与规范输出。"""
+"""ta.pmax: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.trend.pmax import pmax as _calculate
 

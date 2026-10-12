@@ -1,12 +1,13 @@
-"""原生引擎输入、指标、撮合与优化的边界回归。"""
+"""Boundary regressions for native engine input, indicators, matching, and optimization."""
 
 import numpy as np
 import pandas as pd
 import pytest
+from pandas.testing import assert_frame_equal
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.strategy.sizing import equity_fraction
 from openbacktesting.test import GOOG
-from pandas.testing import assert_frame_equal
 
 
 class Idle(Strategy):
@@ -43,7 +44,7 @@ def test_backtest_rejects_invalid_types(kwargs, message):
 def test_unsorted_input_is_rejected_without_mutating_caller():
     data = GOOG.iloc[:10].iloc[::-1].copy()
     original = data.copy()
-    with pytest.raises(ValueError, match="递增且唯一"):
+    with pytest.raises(ValueError, match="increasing and unique"):
         Backtest(data, Idle)
     assert_frame_equal(data, original)
 
@@ -109,7 +110,7 @@ def test_short_order_rejects_inverted_bracket():
         def next(self):
             self.sell(qty=1, sl=90, tp=110)
 
-    with pytest.raises(ValueError, match="SL方向"):
+    with pytest.raises(ValueError, match="SL direction"):
         Backtest(flat_data(), BadShort).run()
 
 
@@ -225,8 +226,9 @@ def test_sambo_timedelta_bounds_and_constrained_grid_size():
 
 
 def test_large_grid_warns_and_returns_all_parameter_scores(monkeypatch):
-    import openbacktesting
     from test_modularization import InlinePool
+
+    import openbacktesting
 
     monkeypatch.setattr(openbacktesting, "Pool", lambda: InlinePool([]))
     with pytest.warns(UserWarning, match="Searching for best of 301 configurations"):
@@ -235,6 +237,6 @@ def test_large_grid_warns_and_returns_all_parameter_scores(monkeypatch):
         )
     assert len(scores) == 301
     assert scores.index.tolist() == [(i,) for i in range(301)]
-    assert scores.isna().all()  # 无交易的组合不应产生虚假评分。
+    assert scores.isna().all()  # Combinations without trades must not produce spurious scores.
     assert stats["_strategy"].parameter == 0
     assert stats["# Trades"] == 0

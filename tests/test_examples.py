@@ -1,4 +1,4 @@
-"""示例选择索引、加载边界和真实运行；语义覆盖由明确的执行集合承担。"""
+"""Example selection index, loading boundaries, and real execution; explicit execution sets provide semantic coverage."""
 
 import ast
 import builtins
@@ -16,17 +16,18 @@ from urllib.parse import unquote
 import numpy as np
 import pandas as pd
 import pytest
+from example_support import example_chart
+
 from openbacktesting import Backtest, Color, Strategy, runtime
 from openbacktesting.indicators import compute
 from openbacktesting.indicators.methods import TechnicalAnalysis
 from openbacktesting.plotting import export_result
 from openbacktesting.test import GOOG
-from example_support import example_chart
 
 ENGINE = Path(__file__).resolve().parents[1]
 EXAMPLES = ENGINE / "examples"
-# 明确测试每个入口，而不把未知新例的“加载成功”冒充实际执行。
-# 新增主题需同步扩展集合/断言；没有固定的示例数量上限。
+# Test each entry point explicitly rather than treating an unknown new example's successful load as execution.
+# New topics must extend the execution set/assertions; there is no fixed example-count limit.
 AUTHORS = (
     "strategies/local_value_helpers.py",
     "strategies/local_builtin_indicators.py",
@@ -64,24 +65,24 @@ ML = "advanced/machine_learning.py"
 
 
 def read_index(root):
-    """只解析选择表的固定三列，拒绝遗漏、重复和不合法类别。"""
+    """Parse only the selection table's three fixed columns; reject omissions, duplicates, and invalid categories."""
     text = (root / "README.md").read_text()
     rows = re.findall(
         r"^\| \[([^]]+\.py)\]\(([^)]+)\)\s*\|\s*([^|]+)\|\s*([^|]+)\|", text, re.MULTILINE
     )
     entries = {}
     for label, target, category, status in rows:
-        assert label == target, f"索引标签与路径不一致: {label}"
-        assert target not in entries, f"重复示例: {target}"
+        assert label == target, f"Index label does not match path: {label}"
+        assert target not in entries, f"Duplicate example: {target}"
         assert re.fullmatch(r"(?:strategies|advanced)/[a-z][a-z0-9_]*\.py", target), target
-        assert category.strip() in ("作者脚本", "命令式教程"), category
-        assert status.strip() in ("推荐", "进阶", "非推荐研究"), status
+        assert category.strip() in ("Author script", "Imperative tutorial"), category
+        assert status.strip() in ("Recommended", "Advanced", "Research only"), status
         entries[target] = (category.strip(), status.strip())
     actual = {p.relative_to(root).as_posix() for p in root.rglob("*.py")}
-    assert entries and set(entries) == actual, f"索引与文件集不一致: {set(entries) ^ actual}"
+    assert entries and set(entries) == actual, f"Index does not match file set: {set(entries) ^ actual}"
     for target in re.findall(r"\]\(([^)]+)\)", text):
         if not target.startswith(("https://", "http://", "#")):
-            assert (root / unquote(target.split("#")[0])).exists(), f"失效链接: {target}"
+            assert (root / unquote(target.split("#")[0])).exists(), f"Broken link: {target}"
     return entries
 
 
@@ -89,10 +90,10 @@ def test_index_and_execution_sets_match():
     entries = read_index(EXAMPLES)
     assert set(entries) == set(AUTHORS + TUTORIALS + (ML,))
     for path, (category, status) in entries.items():
-        assert category == ("作者脚本" if path in AUTHORS else "命令式教程")
+        assert category == ("Author script" if path in AUTHORS else "Imperative tutorial")
         tree = ast.parse((EXAMPLES / path).read_text())
         assert ast.get_docstring(tree)
-        # 只允许自定义主题登记其原创组合公式，已有内置算法仍使用 self.ta。
+        # Only the custom-indicator topic may register original composed formulas; existing built-ins still use self.ta.
         custom_calls = {
             ast.unparse(node.args[0])
             for node in ast.walk(tree)
@@ -106,11 +107,11 @@ def test_index_and_execution_sets_match():
             {"mean_band"} if path == "strategies/custom_indicators.py" else set()
         )
         if path.startswith("strategies/"):
-            assert category == "作者脚本" and status in ("推荐", "进阶")
+            assert category == "Author script" and status in ("Recommended", "Advanced")
             attributes = [n for n in ast.walk(tree) if isinstance(n, ast.Attribute)]
             assert any(n.attr in ("close", "hlcc4") for n in attributes)
             assert any(n.attr == "ta" for n in attributes)
-            # next 的交易判断先取标量；init 中的 inputs 整数校验不属于数组比较。
+            # next extracts scalars before trade conditions; integer input validation in init is not an array comparison.
             next_nodes = (
                 node
                 for node in ast.walk(tree)
@@ -123,27 +124,27 @@ def test_index_and_execution_sets_match():
                     not isinstance(n, ast.Attribute) for n in (compare.left, *compare.comparators)
                 )
         else:
-            assert status in ("进阶", "非推荐研究")
-    assert entries[ML][1] == "非推荐研究"
+            assert status in ("Advanced", "Research only")
+    assert entries[ML][1] == "Research only"
 
 
 @pytest.mark.parametrize("defect", ["missing", "duplicate", "category", "status", "link", "name"])
 def test_index_rejects_drift(tmp_path, defect):
     directory = tmp_path / "strategies"
     directory.mkdir()
-    (directory / "sample.py").write_text('"""示例。"""')
-    row = "| [strategies/sample.py](strategies/sample.py) | 作者脚本 | 推荐 |\n"
+    (directory / "sample.py").write_text('"""Example."""')
+    row = "| [strategies/sample.py](strategies/sample.py) | Author script | Recommended |\n"
     text = row
     if defect == "missing":
         (directory / "extra.py").write_text("")
     elif defect == "duplicate":
         text += row
     elif defect == "category":
-        text = text.replace("作者脚本", "未知")
+        text = text.replace("Author script", "unknown")
     elif defect == "status":
-        text = text.replace("推荐", "未知")
+        text = text.replace("Recommended", "unknown")
     elif defect == "link":
-        text += "[失效](missing.md)\n"
+        text += "[Broken](missing.md)\n"
     else:
         (directory / "sample.py").rename(directory / "Bad Name.py")
         text = text.replace("sample.py", "Bad Name.py")
@@ -157,8 +158,8 @@ def test_index_accepts_additional_examples(tmp_path):
     rows = []
     for name in ("one", "two", "three"):
         relative = f"advanced/{name}.py"
-        (tmp_path / relative).write_text('"""新功能示例。"""')
-        rows.append(f"| [{relative}]({relative}) | 作者脚本 | 进阶 |")
+        (tmp_path / relative).write_text('"""New feature example."""')
+        rows.append(f"| [{relative}]({relative}) | Author script | Advanced |")
     (tmp_path / "README.md").write_text("\n".join(rows))
     assert len(read_index(tmp_path)) == len(rows)
 
@@ -166,14 +167,14 @@ def test_index_accepts_additional_examples(tmp_path):
 @pytest.mark.parametrize("relative", AUTHORS + TUTORIALS + (ML,))
 def test_loading_has_no_execution_or_optional_dependency(relative, monkeypatch):
     def forbidden(*args, **kwargs):
-        raise AssertionError("加载示例不能执行计算、网络或写出")
+        raise AssertionError("Loading examples must not compute, access the network, or write output")
 
     original_import = builtins.__import__
     original_open = builtins.open
 
     def guarded_import(name, *args, **kwargs):
         if name.split(".")[0] in ("sklearn", "sambo"):
-            raise AssertionError("加载定义不能要求可选依赖")
+            raise AssertionError("Loading definitions must not require optional dependencies")
         return original_import(name, *args, **kwargs)
 
     def readonly_open(file, mode="r", *args, **kwargs):
@@ -326,7 +327,7 @@ def test_chart_timezone_example_results(capsys):
         assert stats["_equity_curve"].Equity.resample("D").last().tolist() == ends
         assert stats.attrs["backtest_snapshot"]["context"]["timezone"] == zone
     output = capsys.readouterr().out
-    assert "纽约重复小时" in output and "每日末权益" in output
+    assert "Repeated New York hour" in output and "daily closing equity" in output
 
 
 def test_readme_runtime_recipe(monkeypatch, tmp_path):
@@ -337,7 +338,7 @@ def test_readme_runtime_recipe(monkeypatch, tmp_path):
     script.write_text(recipe)
     namespace = runpy.run_path(str(script))
     assert len(namespace["result"]["_equity_curve"]) == len(GOOG)
-    assert namespace["result"].attrs["input_snapshot"]["values"]["均线周期"] == 20
+    assert namespace["result"].attrs["input_snapshot"]["values"]["Moving-average period"] == 20
 
 
 def test_saved_sources_execution(monkeypatch):
@@ -386,7 +387,7 @@ def test_builtin_sma_preserves_example_behavior(filename, class_name, params, mo
     )
 
     def legacy_sma(namespace, source, *, length):
-        # 独立复现迁移前的 pandas rolling + self.ind 路径，不调用内置后端。
+        # Independently reproduce the pre-migration pandas rolling + self.ind path without calling the built-in backend.
         owner = namespace._register.__self__
         return owner.ind(
             lambda values: pd.Series(values).rolling(length).mean().to_numpy(),
@@ -399,9 +400,9 @@ def test_builtin_sma_preserves_example_behavior(filename, class_name, params, mo
     expected_indicators = expected["_strategy"]._indicators
     assert len(actual_indicators) == len(expected_indicators)
     for builtin, legacy in zip(actual_indicators, expected_indicators):
-        # 同时比较数值、NaN 预热前缀；基类的信号与 ATR 也必须保持一致。
+        # Compare both values and the NaN warmup prefix; base-class signals and ATR must also remain consistent.
         np.testing.assert_array_equal(np.asarray(builtin), np.asarray(legacy))
-    # 指标附加列随注册名称改变；逐列核对完整成交记录，指标值已在上面单独核对。
+    # Indicator columns vary with registration names; compare complete fill records column by column, having checked indicator values separately above.
     trade_columns = [
         "Size",
         "EntryBar",
@@ -429,19 +430,19 @@ def test_builtin_sma_preserves_example_behavior(filename, class_name, params, mo
     [
         {},
         {
-            "显示高亮": True,
-            "均线周期": 5,
-            "高亮倍率": 1.01,
-            "价格来源": "hl2",
-            "均线类型": "SMA",
-            "参考价格": 120.5,
-            "高亮起点": 1096502400000,
-            "时段说明": "0930-1600:23456",
-            "均线颜色": "#abcdef",
+            "Show highlights": True,
+            "Moving-average period": 5,
+            "Highlight multiplier": 1.01,
+            "Price source": "hl2",
+            "Moving-average type": "SMA",
+            "Reference price": 120.5,
+            "Highlight start": 1096502400000,
+            "Session description": "0930-1600:23456",
+            "Moving-average color": "#abcdef",
         },
-        {"显示高亮": False},
-        {"高亮起点": 4102444800000},
-        {"高亮倍率": 2.0},
+        {"Show highlights": False},
+        {"Highlight start": 4102444800000},
+        {"Highlight multiplier": 2.0},
     ],
 )
 def test_all_inputs_example_execution(overrides):
@@ -465,18 +466,18 @@ def test_all_inputs_example_execution(overrides):
     owner = stats["_strategy"]
     values = stats.attrs["input_snapshot"]["values"]
     expected_values = {field["title"]: field["default"] for field in schema["inputs"]} | overrides
-    expected_values["均线颜色"] = Color.from_hex(expected_values["均线颜色"]).to_hex()
+    expected_values["Moving-average color"] = Color.from_hex(expected_values["Moving-average color"]).to_hex()
     assert values == expected_values
-    assert owner.average_kind is namespace["AverageKind"][values["均线类型"]]
+    assert owner.average_kind is namespace["AverageKind"][values["Moving-average type"]]
     assert isinstance(owner.line_color, Color)
-    assert owner.session == values["时段说明"]
-    assert len(stats["_equity_curve"]) == 120  # session 不过滤输入行情。
+    assert owner.session == values["Session description"]
+    assert len(stats["_equity_curve"]) == 120  # session does not filter input market data.
     assert stats["# Trades"] == 0
 
     data = chart["data"]
-    source = data.Close if values["价格来源"] == "close" else (data.High + data.Low) / 2
-    length = values["均线周期"]
-    if values["均线类型"] == "SMA":
+    source = data.Close if values["Price source"] == "close" else (data.High + data.Low) / 2
+    length = values["Moving-average period"]
+    if values["Moving-average type"] == "SMA":
         expected = source.rolling(length).mean()
     else:
         seeded = source.copy()
@@ -485,16 +486,16 @@ def test_all_inputs_example_execution(overrides):
         expected = seeded.ewm(span=length, adjust=False).mean()
     np.testing.assert_allclose(owner.average, expected, equal_nan=True)
     payload = export_result(stats)
-    assert payload["plots"][0]["color"] == values["均线颜色"]
-    assert payload["plots"][1]["value"] == values["参考价格"]
+    assert payload["plots"][0]["color"] == values["Moving-average color"]
+    assert payload["plots"][1]["value"] == values["Reference price"]
     mask = (
-        (data.Close > expected * values["高亮倍率"])
-        & (data.index >= pd.to_datetime(values["高亮起点"], unit="ms", utc=True))
-        & values["显示高亮"]
+        (data.Close > expected * values["Highlight multiplier"])
+        & (data.index >= pd.to_datetime(values["Highlight start"], unit="ms", utc=True))
+        & values["Show highlights"]
     )
     events = payload["colorEvents"]
     assert [event["knownAtBar"] for event in events] == np.flatnonzero(mask).tolist()
-    if not overrides or "均线类型" in overrides:
+    if not overrides or "Moving-average type" in overrides:
         assert events
     assert all(event["color"] == owner.background.to_hex() for event in events)
 
@@ -504,13 +505,13 @@ def test_builtin_ema_inputs(fast, slow):
     namespace = runpy.run_path(str(EXAMPLES / "strategies/ema_inputs.py"))
     schema = runtime.describe(namespace)
     request = {key: schema[key] for key in ("schemaVersion", "schemaHash")}
-    request["values"] = {"快线周期": fast, "慢线周期": slow}
+    request["values"] = {"Fast period": fast, "Slow period": slow}
     stats = runtime.run(namespace, request, **example_chart(namespace))
     strategy = stats["_strategy"]
     for handle, length in ((strategy.fast_line, fast), (strategy.slow_line, slow)):
         assert handle.metadata["id"] == "ta.ema"
         assert handle.metadata["parameters"]["length"] == length
-        # 独立核对默认 SMA seed、预热和后续递推；不再要求旧自定义 EMA 基线。
+        # Independently verify the default SMA seed, warmup, and subsequent recurrence; the old custom EMA baseline no longer applies.
         expected = GOOG.Close.copy()
         seed = expected.iloc[:length].mean()
         expected.iloc[: length - 1] = np.nan
@@ -532,7 +533,7 @@ def test_builtin_rsi_resampling_has_no_future_values():
     aligned = expected_weekly.reindex(GOOG.index, method="ffill")
     np.testing.assert_array_equal(np.asarray(full.weekly_rsi), aligned.to_numpy())
     assert aligned.first_valid_index() == expected_weekly.first_valid_index()
-    # 在一周内不同日期截断数据，未完成周不得泄漏完整周结果。
+    # Truncate data on different weekdays; an incomplete week must not leak full-week results.
     for stop in range(400, 407):
         partial = Backtest(GOOG.iloc[:stop], strategy).run()["_strategy"]
         np.testing.assert_array_equal(
@@ -579,7 +580,7 @@ def test_missing_optional_dependency(relative, dependency, extra, monkeypatch):
 
     def missing(name, *args, **kwargs):
         if name.split(".")[0] == dependency:
-            raise ImportError("测试缺失依赖")
+            raise ImportError("Test missing dependency")
         return original(name, *args, **kwargs)
 
     monkeypatch.setattr(builtins, "__import__", missing)
@@ -603,7 +604,7 @@ def test_ml_builtin_features_preserve_definition():
         "X_BB_lower": (lower - data.Close) / data.Close,
         "X_BB_width": (upper - lower) / data.Close,
     }.items():
-        # 内置方差计算与 pandas rolling.std 存在浮点舍入差异。
+        # Built-in variance and pandas rolling.std differ in floating-point rounding.
         np.testing.assert_allclose(features[name], expected.loc[features.index], rtol=0, atol=1e-10)
 
 
@@ -619,7 +620,7 @@ def test_ml_execution_light(monkeypatch):
 
 
 @pytest.mark.skipif(
-    os.environ.get("OPENBACKTESTING_RUN_SLOW_EXAMPLES") != "1", reason="显式启用完整 ML 慢例"
+    os.environ.get("OPENBACKTESTING_RUN_SLOW_EXAMPLES") != "1", reason="Explicitly enable the full slow ML example"
 )
 def test_ml_execution_slow(tmp_path):
     pytest.importorskip("sklearn")
@@ -633,7 +634,7 @@ def test_ml_execution_slow(tmp_path):
         env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
     )
     assert result.returncode == 0, result.stderr
-    assert "一次训练：" in result.stdout and "滚动训练：" in result.stdout
+    assert "One-time training:" in result.stdout and "Rolling training:" in result.stdout
     assert result.stdout.count("# Trades") == 2
     assert not list(tmp_path.iterdir())
 
@@ -678,7 +679,7 @@ def test_plotting_example_color_events(capsys):
     namespace = runpy.run_path(str(EXAMPLES / "strategies/plotting.py"))
     result = runtime.run(namespace, **example_chart(namespace))
     assert type(result["_strategy"].up_color) is Color
-    assert result.attrs["input_snapshot"]["values"]["上涨颜色"] == "#22AA44FF"
+    assert result.attrs["input_snapshot"]["values"]["Rising color"] == "#22AA44FF"
     payload = export_result(result)
     assert payload["plots"][0]["color"] == "#22AA44FF"
     assert any(e["color"] == "#22AA4426" for e in payload["colorEvents"])
@@ -686,11 +687,11 @@ def test_plotting_example_color_events(capsys):
     alternate = runtime.run(
         namespace,
         {key: schema[key] for key in ("schemaVersion", "schemaHash")}
-        | {"values": {"上涨颜色": "#ABCDEFFF"}},
+        | {"values": {"Rising color": "#ABCDEFFF"}},
         **example_chart(namespace),
     )
     assert export_result(alternate)["plots"][0]["color"] == "#ABCDEFFF"
-    assert alternate.attrs["input_snapshot"]["values"]["上涨颜色"] == "#ABCDEFFF"
+    assert alternate.attrs["input_snapshot"]["values"]["Rising color"] == "#ABCDEFFF"
     events = payload["colorEvents"]
     assert {e["kind"] for e in events} == {"background", "bar"}
     assert any(e["pane"] != "main" and e["kind"] == "background" for e in events)
@@ -756,7 +757,7 @@ def test_local_builtin_examples_values():
     assert owner.weighted[1] == pytest.approx(108.0)
     assert owner.bands.upper[1] == pytest.approx(108.0 + np.sqrt(32.0))
     assert owner.regime[-1] == 0
-    # 平均价相同；仅波幅分支在跳空行情产生不同上下带。
+    # Average prices agree; only the range branch produces different bands on gap data.
     original = compute("ta.kc", chart["data"], parameters={"length": 3})
     assert not np.allclose(owner.channel.upper, original[2], equal_nan=True)
 

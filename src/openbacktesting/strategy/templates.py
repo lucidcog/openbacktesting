@@ -1,4 +1,4 @@
-"""从 lib 迁入的既有实现：SignalStrategy, TrailingStrategy。"""
+"""Existing implementations moved from lib: SignalStrategy, TrailingStrategy."""
 
 from __future__ import annotations
 
@@ -12,12 +12,12 @@ from openbacktesting.strategy.base import Strategy
 
 
 class SignalStrategy(Strategy):
-    """按预计算的进入与退出信号运行的可组合策略基类。
+    """Composable strategy base class driven by precomputed entry and exit signals.
 
 
     A simple helper strategy that operates on position entry/exit signals.
     This makes the backtest of the strategy simulate a [vectorized backtest].
-    用法见使用手册的可运行示例。
+    See runnable examples in the user guide.
 
     [vectorized backtest]: https://altpower.app/?q=vectorized+backtest
 
@@ -43,7 +43,7 @@ class SignalStrategy(Strategy):
         entry_size: Sequence[float],
         exit_portion: Sequence[float] | None = None,
     ):
-        """登记真实资产数量及退出比例序列；正数开多、负数开空，零不入场。
+        """Register actual asset quantities and exit-fraction sequences; positive opens long, negative opens short, zero does not enter.
 
 
         Set entry/exit signal vectors (arrays).
@@ -56,7 +56,7 @@ class SignalStrategy(Strategy):
         (see `openbacktesting.engine.Trade.close()`) in the respective direction
         (positive values close long trades, negative short).
 
-        稀疏信号不影响逐根回调，NaN 不触发交易。
+        Sparse signals do not affect per-bar callbacks; NaN does not trigger trades.
         """
         self.__entry_signal = self.ind(  # type: ignore
             lambda: pd.Series(entry_size, dtype=float).replace(0, np.nan).to_numpy(),
@@ -90,14 +90,14 @@ class SignalStrategy(Strategy):
 
 
 class TrailingStrategy(Strategy):
-    """依据 ATR 更新交易止损的可组合策略基类。
+    """Composable strategy base class that updates trade stop losses using ATR.
 
 
     A strategy with automatic trailing stop-loss, trailing the current
     price at distance of some multiple of average true range (ATR). Call
     `TrailingStrategy.set_trailing_sl()` to set said multiple
     (`6` by default).
-    用法见使用手册的可运行示例。
+    See runnable examples in the user guide.
 
 
     Remember to call `super().init()` and `super().next()` in your
@@ -113,14 +113,14 @@ class TrailingStrategy(Strategy):
         self.set_atr_periods()
 
     def set_atr_periods(self, periods: int = 100):
-        """设置因果 ATR 窗口；默认100，预热期不回填、不设置 ATR 止损。"""
+        """Set the causal ATR window, default 100; do not backfill or set ATR stops during warmup."""
         hi, lo, c_prev = self.data.High, self.data.Low, pd.Series(self.data.Close).shift(1)
         tr = np.max([hi - lo, (c_prev - hi).abs(), (c_prev - lo).abs()], axis=0)
         atr = pd.Series(tr).rolling(periods).mean().values
         self.__atr = atr
 
     def set_trailing_sl(self, n_atr: float = 6):
-        """设置后续跟踪止损使用的 ATR 倍数。
+        """Set the ATR multiple for subsequent trailing stops.
 
 
         Set the future trailing stop-loss as some multiple (`n_atr`)
@@ -130,10 +130,10 @@ class TrailingStrategy(Strategy):
         self.__pct = None
 
     def set_trailing_pct(self, pct: float = 0.05):
-        """按当前已确认价格计算百分比距离，默认5%，不使用全样本估计。
+        """Calculate percentage distance from the currently confirmed price, default 5%, without full-sample estimation.
 
-        pct必须在0与1之间。多头止损仅上移、空头仅下移；更新最早下一根生效。
-        next逐根调用；ATR未就绪时跳过止损更新，百分比模式不依赖ATR。
+        pct must be between 0 and 1. Long stops move only upward, short stops only downward; updates take effect no earlier than the next bar.
+        next runs on each bar; skip stop updates until ATR is ready, while percentage mode is independent of ATR.
         """
         assert 0 < pct < 1, "Need pct= as rate, i.e. 5% == 0.05"
         self.__pct = pct

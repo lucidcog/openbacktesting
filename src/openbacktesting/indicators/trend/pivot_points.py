@@ -1,4 +1,4 @@
-"""显式周期锚点的六种Pivot公式；只消费已经结束的周期。"""
+"""Six Pivot formulas with explicit period anchors; consume only completed periods."""
 
 import numpy as np
 import pandas as pd
@@ -53,10 +53,10 @@ def _levels(open_, high, low, close, current_open, method):
 
 def compute(*, open_, high, low, close, anchor, method, developing):
     if developing and method == "woodie":
-        raise IndicatorError("invalid-parameter", "ta.pivot_points", "Woodie 不支持 developing")
+        raise IndicatorError("invalid-parameter", "ta.pivot_points", "Woodie does not support developing")
     anchor = condition(anchor, "ta.pivot_points")
     if anchor.isna().any():
-        raise IndicatorError("invalid-input", "ta.pivot_points", "周期锚点不能缺失")
+        raise IndicatorError("invalid-input", "ta.pivot_points", "Period anchors must not be missing")
     values = np.column_stack([open_, high, low, close])
     output = np.full((len(close), 11), np.nan)
     levels = np.full(11, np.nan)

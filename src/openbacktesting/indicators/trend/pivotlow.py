@@ -1,4 +1,4 @@
-"""ta.pivotlow：固定因果序列契约。"""
+"""ta.pivotlow: Fixed causal sequence contract."""
 
 import numpy as np
 import pandas as pd

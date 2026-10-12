@@ -1,4 +1,4 @@
-"""策略设置：纯值往返、请求预算、真实费用和统计基准。"""
+"""Strategy settings: plain-value round-trips, request budgets, real fees, and statistical baselines."""
 
 import json
 import pickle
@@ -7,6 +7,7 @@ from dataclasses import FrozenInstanceError
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import (
     Backtest,
     CommissionType,
@@ -52,7 +53,7 @@ def run(action, **settings):
 
 
 def run_flat(action, **settings):
-    """同一行为经作者声明／宿主入口执行，与低层入口共享断言。"""
+    """Run identical behavior through author declarations/host entry points with assertions shared by the low-level entry point."""
     data = settings.pop("data", frame())
     instrument = settings.pop("instrument", InstrumentSpec())
     size = settings.pop("default_order_size", None)
@@ -206,7 +207,7 @@ def test_invalid_size_and_commission_before_lifecycle():
     commission_value=1.5,
 )
 class Declared(Idle):
-    length = inputs.int(4, title="退出位置", minval=3)
+    length = inputs.int(4, title="Exit position", minval=3)
 
     def next(self):
         if len(self.data) == 2:
@@ -372,7 +373,7 @@ def test_budget_error_has_no_side_effects(instrument, reason, entry):
 def test_quantity_permissions_and_reduce_only():
     class Phases(Idle):
         def init(self):
-            with pytest.raises(RuntimeError, match="生命周期"):
+            with pytest.raises(RuntimeError, match="lifecycle"):
                 self.buy()
 
         def on_start(self):

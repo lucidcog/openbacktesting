@@ -1,4 +1,4 @@
-"""独立绘图数据接口；不包含绘图后端、文件输出或浏览器操作。"""
+"""Standalone plotting-data interface without rendering backends, file output, or browser operations."""
 
 from openbacktesting.plotting.collector import Plotting
 from openbacktesting.plotting.encoding import export_result

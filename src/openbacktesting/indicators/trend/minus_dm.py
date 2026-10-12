@@ -1,4 +1,4 @@
-"""ta.minus_dm：固定依赖的计算封装与规范输出。"""
+"""ta.minus_dm: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.trend.minus_dm import minus_dm as _calculate
 

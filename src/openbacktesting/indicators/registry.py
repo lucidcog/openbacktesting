@@ -1,4 +1,4 @@
-"""已审核的显式计算绑定；注册不会自动发现或开放供应商函数。"""
+"""Reviewed explicit computation bindings; registration does not discover or expose provider functions automatically."""
 
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -270,9 +270,9 @@ def build_bindings(entries, specs):
     for indicator, backend, compute, implementation_version in entries:
         key = (indicator, backend)
         if key in bindings or indicator not in available:
-            raise ValueError(f"重复或未经审核的指标绑定: {key}")
+            raise ValueError(f"Duplicate or unreviewed indicator binding: {key}")
         if backend not in (NATIVE, PANDAS, LOCAL) or backend == PANDAS and indicator != "ta.sma":
-            raise ValueError(f"未经审核的后端: {key}")
+            raise ValueError(f"Unreviewed backend: {key}")
         spec = available[indicator]
         expected = set(spec.inputs) | dict(spec.parameters).keys() | dict(spec.fixed).keys()
         if backend == NATIVE:
@@ -282,20 +282,20 @@ def build_bindings(entries, specs):
             p.kind != SignatureParameter.KEYWORD_ONLY or p.default != SignatureParameter.empty
             for p in parameters.values()
         ):
-            raise ValueError(f"指标绑定签名与目录不一致: {key}")
+            raise ValueError(f"Indicator binding signature does not match the catalog: {key}")
         module = f"openbacktesting.indicators.{spec.category}.{spec.id.removeprefix('ta.')}"
         if (
             compute.__module__ != module
             or not isinstance(implementation_version, str)
             or not implementation_version
         ):
-            raise ValueError(f"指标归属或实现版本非法: {key}")
+            raise ValueError(f"Invalid indicator ownership or implementation version: {key}")
         bindings[key] = Binding(compute, implementation_version)
     missing = {
         name for name, spec in available.items() if (name, spec.default_backend) not in bindings
     }
     if missing:
-        raise ValueError(f"可用指标缺少默认实现: {sorted(missing)}")
+        raise ValueError(f"Available indicator has no default implementation: {sorted(missing)}")
     return bindings
 
 
@@ -552,7 +552,7 @@ BINDINGS = build_bindings(ENTRIES, SPECS)
 def validate_backend(spec, backend):
     if backend not in (NATIVE, PANDAS, LOCAL) or backend == PANDAS and spec.id != "ta.sma":
         raise IndicatorError("backend-unavailable", spec.id, backend, backend=backend)
-    # 不可用条目由运行时报告原有 unavailable-indicator，而非伪装为缺后端。
+    # The runtime reports the existing unavailable-indicator for unavailable entries, rather than disguising them as missing backends.
     if spec.status != "available":
         return None
     try:

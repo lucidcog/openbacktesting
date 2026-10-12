@@ -1,4 +1,4 @@
-"""原生策略接口与指标登记。"""
+"""Native strategy interface and indicator registration."""
 
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ from openbacktesting.strategy.inputs import ResolvedInputs
 
 
 class Strategy(metaclass=ABCMeta):
-    """策略基类：在 init 登记指标，在 next 根据当前可见历史下单。
+    """Strategy base class: Register indicators in init and place orders from currently visible history in next.
 
 
     A trading strategy base class. Extend this class and
@@ -73,7 +73,7 @@ class Strategy(metaclass=ABCMeta):
                 ).intersection(cls.__dict__)
                 if conflicts:
                     name = min(conflicts)
-                    raise AttributeError(f"Strategy.{name} 是保留属性，请将同名字段或方法改名")
+                    raise AttributeError(f"Strategy.{name} is a reserved attribute; rename the field or method with the same name")
         self._bar_context: tuple[int, BarState] | None = None
         self._indicators = []
         self._indicator_cursor = IndicatorCursor(len(data))
@@ -92,7 +92,7 @@ class Strategy(metaclass=ABCMeta):
             "log",
             "closed_trade_stats",
         }:
-            raise AttributeError(f"Strategy.{name} 是保留属性，请将同名字段或参数改名")
+            raise AttributeError(f"Strategy.{name} is a reserved attribute; rename the field or parameter with the same name")
         super().__setattr__(name, value)
 
     def __delattr__(self, name):
@@ -104,7 +104,7 @@ class Strategy(metaclass=ABCMeta):
             "log",
             "closed_trade_stats",
         }:
-            raise AttributeError(f"Strategy.{name} 是保留属性，不可删除；请将同名字段改名")
+            raise AttributeError(f"Strategy.{name} is a reserved attribute and cannot be deleted; rename the field with the same name")
         super().__delattr__(name)
 
     @staticmethod
@@ -115,69 +115,69 @@ class Strategy(metaclass=ABCMeta):
         ).intersection(params)
         if conflicts:
             name = min(conflicts)
-            raise AttributeError(f"Strategy.{name} 是保留属性，请将同名参数改名")
+            raise AttributeError(f"Strategy.{name} is a reserved attribute; rename the parameter with the same name")
 
     def _enter_bar(self, index: int, total: int):
         self._bar_context = (index, BarState(index == 0, index == total - 1))
 
     @property
     def bar_index(self) -> int:
-        """当前零起点数据位置；init、on_finish 和运行结束后不可读。"""
+        """Current zero-based data position; unavailable in init, on_finish, and after the run ends."""
         if self._bar_context is None:
-            raise RuntimeError("bar_index: 不存在当前执行 bar")
+            raise RuntimeError("bar_index: no current execution bar")
         return self._bar_context[0]
 
     @property
     def bar_state(self) -> BarState:
-        """当前数据首尾的冻结快照；提前终止不会将当前位置改称末根。"""
+        """Frozen first/last snapshot for the current data position; early termination does not relabel the current position as the last bar."""
         if self._bar_context is None:
-            raise RuntimeError("bar_state: 不存在当前执行 bar")
+            raise RuntimeError("bar_state: no current execution bar")
         return self._bar_context[1]
 
     @property
     def timeframe(self) -> Timeframe | None:
-        """本次图表周期；低层未提供上下文时为 None，不从行情猜测。"""
+        """This chart's timeframe; None without low-level context, with no inference from market data."""
         context = getattr(self._data, "_context", None)
         return context.timeframe if context is not None else None
 
     @property
     def log(self) -> StrategyLog:
-        """当前运行的结构化日志；在作者回调中使用 info、warning 和 error。"""
+        """Structured logs for the current run; use info, warning, and error inside author callbacks."""
         return self._log
 
     @property
     def plotting(self) -> Plotting:
-        """当前运行的纯数据绘图入口；init 声明，运行回调写入。"""
+        """Pure plotting-data entry point for the current run; declare in init and write during runtime callbacks."""
         return self._plotting
 
     @property
     def open(self) -> IndicatorHandle:
-        """当前运行的开盘价序列；[-1] 为当前值。"""
+        """Open-price series for the current run; [-1] is the current value."""
         return self._strategy_data.get("open")
 
     @property
     def high(self) -> IndicatorHandle:
-        """当前运行的最高价序列。"""
+        """High-price series for the current run."""
         return self._strategy_data.get("high")
 
     @property
     def low(self) -> IndicatorHandle:
-        """当前运行的最低价序列。"""
+        """Low-price series for the current run."""
         return self._strategy_data.get("low")
 
     @property
     def close(self) -> IndicatorHandle:
-        """当前运行的收盘价序列，可在 init 直接传给 self.ta。"""
+        """Close-price series for the current run, usable directly with self.ta in init."""
         return self._strategy_data.get("close")
 
     @property
     def volume(self) -> IndicatorHandle:
-        """成交量序列；缺失 Volume 保留 NaN。"""
+        """Volume series; missing Volume remains NaN."""
         return self._strategy_data.get("volume")
 
     @property
     def hl2(self) -> IndicatorHandle:
-        """(High + Low) / 2，按运行惰性计算。"""
+        """(High + Low) / 2, computed lazily per run."""
         return self._strategy_data.get("hl2")
 
     @property
@@ -187,32 +187,32 @@ class Strategy(metaclass=ABCMeta):
 
     @property
     def hlcc4(self) -> IndicatorHandle:
-        """(High + Low + Close + Close) / 4，不包含 Open。"""
+        """(High + Low + Close + Close) / 4, excluding Open."""
         return self._strategy_data.get("hlcc4")
 
     @property
     def data_index(self) -> pd.Index:
-        """当前可见索引；保存的 pandas 对象不随游标更新。"""
+        """Currently visible index; saved pandas objects do not update with the cursor."""
         return self.data.index
 
     @property
     def df(self) -> pd.DataFrame:
-        """当前可见的原行情表；不承诺深拷贝或内容隔离。"""
+        """Currently visible original market-data table; no guarantee of deep copying or content isolation."""
         return self.data.df
 
     @property
     def pip(self) -> float:
-        """沿用全样本小数位精度估计，不代表交易所最小步长。"""
+        """Retains full-sample decimal-precision estimation; does not represent an exchange minimum step."""
         return self.data.pip
 
     @property
     def ta(self) -> TechnicalAnalysis:
-        """当前运行的指标入口，例如 ta.ema(length=20)、ta.macd().histogram。"""
+        """Indicator entry point for the current run, such as ta.ema(length=20) or ta.macd().histogram."""
         return self._ta
 
     @ta.setter
     def ta(self, value):
-        raise AttributeError("Strategy.ta 是保留属性，请将同名字段或参数改名")
+        raise AttributeError("Strategy.ta is a reserved attribute; rename the field or parameter with the same name")
 
     def __repr__(self):
         return "<Strategy " + str(self) + ">"
@@ -251,40 +251,40 @@ class Strategy(metaclass=ABCMeta):
         name=None,
         **kwargs,
     ) -> IndicatorHandle:
-        """在初始化阶段批量计算自定义指标，返回随回测游标读取的只读句柄。
+        """Compute custom indicators in bulk during initialization and return read-only handles read through the backtest cursor.
 
-        同一函数可按不同参数登记多次，也可供多个策略复用。每次登记均执行
-        函数，不共享自定义计算缓存；内置公式优先使用 ``self.ta``。
-        函数在 init 中接收完整历史，作者须保证计算只依赖当前及过去数据。
+        Register the same function with different parameters or reuse it across strategies. Each registration executes the
+        function without sharing a custom-computation cache; prefer ``self.ta`` for built-in formulas.
+        Functions receive complete history in init; authors must ensure computations depend only on current and past data.
 
         Args:
-            func: 返回一维或二维 array-like 的计算函数，时间轴长度须等于行情。
-                Series/DataFrame 的索引须与行情完全一致；数组按位置对齐。
-            *args: 原样传给计算函数的位置参数。
-            name: 展示名称或多输出的通道名称序列，序列长度须与通道数一致。
-                默认由函数和参数组成，名称中的格式字段由计算参数填充。
-            **kwargs: 原样传给计算函数的关键字参数。
+            func: Computation function returning one- or two-dimensional array-like output with time-axis length equal to market data.
+                Series/DataFrame indices must exactly match market data; arrays align by position.
+            *args: Positional arguments passed unchanged to the computation function.
+            name: Display name or sequence of multi-output channel names, with length equal to the channel count.
+                Defaults to the function and arguments; format fields in names are filled from computation arguments.
+            **kwargs: Keyword arguments passed unchanged to the computation function.
 
         Returns:
-            只读 IndicatorHandle。具名通道可用 ``result['middle']`` 读取；
-            ``np.asarray()``、``.s`` 和 ``.df`` 得到读取时的前缀快照。
+            Read-only IndicatorHandle. Access named channels with ``result['middle']``;
+            ``np.asarray()``, ``.s``, and ``.df`` return prefix snapshots at read time.
 
         Raises:
-            IndicatorError: 非 init 阶段登记、行情来源已改变或 pandas 索引错位。
-            TypeError: name 不是字符串或字符串序列。
-            ValueError: 输出形状、长度或通道名称数量不匹配。
-            RuntimeError: 用户函数计算失败，原异常保留为 cause。
+            IndicatorError: Registration outside init, changed market-data source, or misaligned pandas index.
+            TypeError: name is not a string or string sequence.
+            ValueError: Output shape, length, or channel-name count does not match.
+            RuntimeError: User-function computation failed, with the original exception retained as cause.
 
         Note:
-            默认 ready 全真，valid 由有限值决定；next 从首根逐根执行，
-            作者须自行检查历史长度和所用通道的 valid。指标无效不抑制回调。
-            更复杂的输出掩码不是此入口的公开参数。
+            ready defaults to all True; valid depends on finite values. next runs on every bar starting with the first;
+            authors must check history length and valid for the channels they use. Invalid indicators do not suppress callbacks.
+            More complex output masks are not public parameters of this entry point.
         """
 
         if "warmup" in kwargs:
-            raise TypeError("warmup 已移除；next 逐根执行，请显式检查指标 valid")
+            raise TypeError("warmup has been removed; next runs on every bar, so check indicator valid explicitly")
         if self._indicator_cursor.phase != "init":
-            raise IndicatorError("invalid-phase", "custom", "指标只允许在 init() 登记")
+            raise IndicatorError("invalid-phase", "custom", "Indicators may be registered only in init()")
         self._strategy_data.validate()
 
         def _format_name(name: str) -> str:
@@ -311,7 +311,7 @@ class Strategy(metaclass=ABCMeta):
             raise RuntimeError(f'Indicator "{name}" error. See traceback above.') from e
 
         if isinstance(value, (pd.Series, pd.DataFrame)) and not value.index.equals(self.data.index):
-            raise IndicatorError("index-mismatch", name, "指标索引必须与行情 index 一致")
+            raise IndicatorError("index-mismatch", name, "Indicator index must match the market-data index")
         if isinstance(value, pd.DataFrame):
             value = value.values.T
 
@@ -349,9 +349,9 @@ class Strategy(metaclass=ABCMeta):
     def _register_indicator(
         self, indicator, *, inputs=None, backend=None, required_outputs=None, **parameters
     ):
-        """供 self.ta 内部登记内置指标；输出名和参数由自有目录定义。"""
+        """Register built-in indicators internally for self.ta; the owned catalog defines output names and parameters."""
         if self._indicator_cursor.phase != "init":
-            raise IndicatorError("invalid-phase", indicator, "指标只允许在 init() 登记")
+            raise IndicatorError("invalid-phase", indicator, "Indicators may be registered only in init()")
         self._strategy_data.validate()
         value = compute(
             indicator,
@@ -368,7 +368,7 @@ class Strategy(metaclass=ABCMeta):
 
     @abstractmethod
     def init(self):
-        """策略初始化入口，用于预计算及登记指标；可以访问完整历史数据。
+        """Strategy initialization entry point for precomputation and indicator registration; complete historical data is accessible.
 
 
         Initialize the strategy.
@@ -385,10 +385,10 @@ class Strategy(metaclass=ABCMeta):
 
     @abstractmethod
     def next(self):
-        """逐根策略回调，从输入第 0 根开始，每根正常到达的 bar 调用一次。
+        """Per-bar strategy callback, starting at input bar 0 and called once for each normally reached bar.
 
-        指标历史不足或无效也会调用；读取 [-2] 前检查长度，消费指标前检查 valid。
-        bar_index/bar_state 表示当前输入位置及冻结首尾状态。
+        Called even with insufficient or invalid indicator history; check length before [-2] and valid before consuming indicators.
+        bar_index/bar_state represent the current input position and frozen first/last state.
 
 
         Main strategy runtime method, called as each new
@@ -405,16 +405,16 @@ class Strategy(metaclass=ABCMeta):
         """
 
     def on_start(self):
-        """初始化完成后的单次通知；此时不可下单。"""
+        """One notification after initialization completes; order submission is prohibited here."""
 
     def on_finish(self, summary: RunSummary):
-        """接收冻结结束摘要；异常结束也调用，禁止交易。"""
+        """Receive a frozen finish summary, including exceptional termination; trading is prohibited."""
 
     def on_order(self, event: OrderEvent):
-        """接收冻结订单事件；新请求最早于下一根执行。"""
+        """Receive frozen order events; new requests execute no earlier than the next bar."""
 
     def on_fill(self, fill: Fill):
-        """接收实际成交事实；回调不递归触发撮合。"""
+        """Receive actual fill facts; callbacks do not recursively trigger matching."""
 
     def _order_size(self, qty, amount, percent, reduce_only):
         self._broker._permission()
@@ -444,7 +444,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """显式资产数量；允许只减仓。"""
+        """Explicit asset quantity; reduce-only is allowed."""
 
     @overload
     def buy(
@@ -460,7 +460,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """显式名义金额；不允许只减仓。"""
+        """Explicit notional amount; reduce-only is not allowed."""
 
     @overload
     def buy(
@@ -476,7 +476,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """显式权益百分数；不允许只减仓。"""
+        """Explicit equity percentage; reduce-only is not allowed."""
 
     @overload
     def buy(
@@ -491,7 +491,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """省略全部规模，使用已配置默认值。"""
+        """Omit all sizing choices to use the configured default."""
 
     def buy(
         self,
@@ -508,10 +508,10 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """提交增量订单；qty/amount/percent 三选一，percent=20 表示权益20%。
+        """Submit an incremental order; choose one of qty/amount/percent, where percent=20 means 20% of equity.
 
-        全部省略时使用默认数量。金额为单币种名义预算，不含费用；
-        按请求时 Close 换算并冻结，成交时仍可能拒绝。只减仓须显式 qty。
+        Omitting all choices uses the default quantity. Amount is a single-currency notional budget excluding fees;
+        convert and freeze it using Close at request time, with rejection still possible at execution. Reduce-only requires explicit qty.
         """
         return self._broker.submit_order(
             self._order_size(qty, amount, percent, reduce_only),
@@ -540,7 +540,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """显式资产数量；允许只减仓。"""
+        """Explicit asset quantity; reduce-only is allowed."""
 
     @overload
     def sell(
@@ -556,7 +556,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """显式名义金额；不允许只减仓。"""
+        """Explicit notional amount; reduce-only is not allowed."""
 
     @overload
     def sell(
@@ -572,7 +572,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """显式权益百分数；不允许只减仓。"""
+        """Explicit equity percentage; reduce-only is not allowed."""
 
     @overload
     def sell(
@@ -587,7 +587,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """省略全部规模，使用已配置默认值。"""
+        """Omit all sizing choices to use the configured default."""
 
     def sell(
         self,
@@ -604,10 +604,10 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order:
-        """提交增量订单；qty/amount/percent 三选一，percent=20 表示权益20%。
+        """Submit an incremental order; choose one of qty/amount/percent, where percent=20 means 20% of equity.
 
-        全部省略时使用默认数量。金额为单币种名义预算，不含费用；
-        按请求时 Close 换算并冻结，成交时仍可能拒绝。只减仓须显式 qty。
+        Omitting all choices uses the default quantity. Amount is a single-currency notional budget excluding fees;
+        convert and freeze it using Close at request time, with rejection still possible at execution. Reduce-only requires explicit qty.
         """
         return self._broker.submit_order(
             self._order_size(qty, amount, percent, reduce_only),
@@ -624,20 +624,20 @@ class Strategy(metaclass=ABCMeta):
 
     @property
     def account(self) -> AccountSnapshot:
-        """当前余额、权益、实际费用及保证金的冻结快照。"""
+        """Frozen snapshot of current balance, equity, actual fees, and margin."""
         return self._broker.account
 
     @property
     def instrument(self) -> InstrumentSpec:
-        """本次运行的资产规则。"""
+        """Asset rules for this run."""
         return self._broker.instrument
 
     def close_position(self, portion: float | None = None) -> tuple[Order, ...]:
-        """逐批次退出；空仓返回空元组，self.close仍是行情。"""
+        """Exit each lot; return an empty tuple when flat, while self.close remains market data."""
         return self.position.close(portion)
 
     def submit_oco(self, *, first: OrderRequest, second: OrderRequest) -> OrderGroup:
-        """原子提交两个入场请求；先验证两笔，first优先，返回可查询组。"""
+        """Atomically submit two entry requests; validate both first, prioritize first, and return a queryable group."""
         return self._broker.submit_oco(first=first, second=second)
 
     def order_target_quantity(
@@ -653,11 +653,11 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order | None:
-        """按实际净仓生成差额订单；条件始终校验，相同活动目标复用。
+        """Generate a difference order from the actual net position; always validate conditions and reuse identical active targets.
 
-        target 为目标资产数量；无需下单时返回 None。仅支持净额模式。
-        所有参数必须按名称提供，limit/stop/sl/tp 均为绝对价格。
-        无差额时仍校验价格、期限和标签，但不虚构买卖方向检查保护关系。
+        target is the target asset quantity; return None when no order is needed. Only netting mode is supported.
+        All arguments must be supplied by name; limit/stop/sl/tp are absolute prices.
+        Validate prices, expiration, and tags even with no difference; do not invent a buy/sell direction to check protection relationships.
         """
         return self._broker.order_target(
             target,
@@ -686,7 +686,7 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order | None:
-        """以请求时Close把目标净名义换算为数量；显式条件与数量目标一致。"""
+        """Convert target net notional to quantity using Close at request time; explicit conditions match quantity targets."""
         from openbacktesting.broker.models import finite
 
         return self.order_target_quantity(
@@ -714,11 +714,11 @@ class Strategy(metaclass=ABCMeta):
         expires_at: _Expiry | None = None,
         valid_bars: int | None = None,
     ) -> Order | None:
-        """以请求时权益比例确定目标净名义；不持续再平衡或保证成交权重。"""
+        """Determine target net notional from equity percentage at request time; no continuous rebalancing or guaranteed fill weight."""
         from openbacktesting.broker.models import finite
 
         if self.equity <= 0:
-            raise ValueError("目标比例要求正权益")
+            raise ValueError("Target percentage requires positive equity")
         return self.order_target_value(
             target=finite(target, "target") * self.equity,
             limit=limit,
@@ -733,14 +733,14 @@ class Strategy(metaclass=ABCMeta):
 
     @property
     def equity(self) -> float:
-        """当前账户权益，包含现金和持仓价值。
+        """Current account equity, including cash and position value.
 
         Current account equity (cash plus assets)."""
         return self._broker.equity
 
     @property
     def data(self) -> _Data:
-        """当前可见的原始行情访问入口；在 init 中可见全历史，next 中只可见当前前缀。
+        """Currently visible original market-data entry point; full history in init and only the current prefix in next.
 
 
         Price data, roughly as passed into
@@ -771,37 +771,37 @@ class Strategy(metaclass=ABCMeta):
 
     @property
     def position(self) -> Position:
-        """当前净仓位汇总，可读取规模、盈亏或请求平仓。
+        """Current net-position aggregate, supporting size/profit reads and closure requests.
 
         Instance of `openbacktesting.engine.Position`."""
         return self._broker.position
 
     @property
     def orders(self) -> tuple[Order, ...]:
-        """等待执行的订单列表，可对其中订单调用 cancel。
+        """Orders awaiting execution; cancel may be called on these orders.
 
         List of orders (see `Order`) waiting for execution."""
         return tuple(self._broker.orders)
 
     @property
     def trades(self) -> tuple[Trade, ...]:
-        """当前仍持有的交易列表，区别于已结算的 closed_trades。
+        """Currently held trades, distinct from settled closed_trades.
 
         List of active trades (see `Trade`)."""
         return tuple(self._broker.trades)
 
     @property
     def closed_trade_stats(self) -> ClosedTradeStats:
-        """读取冻结的已关闭片段统计，包含已分摊费用，不包含浮盈亏。
+        """Read frozen statistics for closed portions, including allocated fees and excluding unrealized profit or loss.
 
-        每次读取不扫描历史；所有生命周期及运行结束后均可读。
-        same_close 成交前不可提前看到其结果；保存的值不随新成交变化。
+        Reads do not scan history; available throughout the lifecycle and after the run ends.
+        same_close results are not visible before execution; saved values do not change with later fills.
         """
         return self._broker._closed_stats
 
     @property
     def closed_trades(self) -> tuple[Trade, ...]:
-        """已完成的交易列表，供逐笔分析使用。
+        """Completed trades for individual-trade analysis.
 
         List of settled trades (see `Trade`)."""
         return tuple(self._broker.closed_trades)

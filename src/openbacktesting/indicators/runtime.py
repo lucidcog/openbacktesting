@@ -1,4 +1,4 @@
-"""内置指标目录、纯计算入口及有界计算复用。"""
+"""Built-in indicator catalog, pure computation entry points, and bounded computation reuse."""
 
 from __future__ import annotations
 
@@ -25,38 +25,38 @@ _COLUMNS = {"open_": "Open", "high": "High", "low": "Low", "close": "Close", "vo
 
 
 def catalog():
-    """返回全部已审核定义的元组，包括不可调用的延期项。
+    """Return a tuple of all reviewed definitions, including deferred entries that cannot be called.
 
     Returns:
-        tuple: 指标定义；调用前检查 status，数量随审核目录变化。
+        tuple: Indicator definitions; check status before calling, and expect the count to vary with the reviewed catalog.
     """
     return tuple(_CATALOG.values())
 
 
 def describe(indicator):
-    """按稳定 ID 查询指标定义，不执行计算。
+    """Look up an indicator definition by stable ID without computing it.
 
     Args:
-        indicator: 目录中的完整 ID，例如 ta.ema。
+        indicator: Full catalog ID, such as ta.ema.
 
     Returns:
-        IndicatorSpec: 参数域、输出、状态及语义版本定义。
+        IndicatorSpec: Definition of parameter domains, outputs, status, and semantic version.
 
     Raises:
-        IndicatorError: ID 不存在时 code 为 unknown-indicator。
+        IndicatorError: code is unknown-indicator when the ID does not exist.
     """
     try:
         return _CATALOG[indicator]
     except KeyError as error:
-        raise IndicatorError("unknown-indicator", indicator, "未登记指标") from error
+        raise IndicatorError("unknown-indicator", indicator, "Unregistered indicator") from error
 
 
 class IndicatorCache:
-    """预算是缓存保留量；活跃策略持有量不受这个预算限制。"""
+    """The budget limits cache retention; active strategies' holdings are not bounded by this budget."""
 
     def __init__(self, budget=DEFAULT_CACHE_BYTES):
         if isinstance(budget, bool) or not isinstance(budget, int) or budget < 0:
-            raise ValueError("缓存预算必须是非负整数")
+            raise ValueError("Cache budget must be a nonnegative integer")
         self.budget = budget
         self.bytes = 0
         self.hits = self.misses = 0
@@ -65,7 +65,7 @@ class IndicatorCache:
         self._lock = RLock()
 
     def get(self, key, calculate):
-        """使用 key 查找缓存，否则执行 calculate；同键并发合并，失败不缓存，返回只读模板。"""
+        """Look up key in the cache or run calculate; coalesce concurrent identical keys, do not cache failures, and return read-only templates."""
         if not self.budget:
             self.misses += 1
             return calculate()
@@ -109,7 +109,7 @@ class IndicatorCache:
                 del self._pending[key]
 
     def clear(self):
-        """清空保留条目并归零保留字节数；不撤销活跃结果引用。"""
+        """Clear retained entries and reset retained bytes to zero; do not revoke active result references."""
         with self._lock:
             self._entries.clear()
             self.bytes = 0
@@ -132,10 +132,10 @@ def _data_identity(frame):
 
 def _prepare_inputs(spec, frame, inputs, cursor):
     if not isinstance(frame, pd.DataFrame) or not frame.index.is_unique:
-        raise IndicatorError("index-mismatch", spec.id, "输入必须为唯一索引 DataFrame")
+        raise IndicatorError("index-mismatch", spec.id, "Input must be a DataFrame with a unique index")
     mapping = dict(inputs or {})
     if mapping.keys() - set(spec.inputs):
-        raise IndicatorError("missing-input", spec.id, "输入映射包含未声明字段")
+        raise IndicatorError("missing-input", spec.id, "Input mapping contains undeclared fields")
     columns = {}
     dtypes = {}
     defaults = dict(spec.input_defaults)
@@ -143,16 +143,16 @@ def _prepare_inputs(spec, frame, inputs, cursor):
         source = mapping.get(name, defaults.get(name, _COLUMNS.get(name, name)))
         if isinstance(source, IndicatorHandle):
             if cursor is None or source._cursor is not cursor or source.ndim != 1:
-                raise IndicatorError("index-mismatch", spec.id, "指标输入必须来自本运行的单通道")
+                raise IndicatorError("index-mismatch", spec.id, "Indicator inputs must come from a single channel in this run")
             series = source.s.where(source.valid)
         else:
             if not isinstance(source, str) or source not in frame:
-                raise IndicatorError("missing-input", spec.id, f"缺少输入: {name}")
+                raise IndicatorError("missing-input", spec.id, f"Missing input: {name}")
             series = frame[source]
         if not series.index.equals(frame.index):
-            raise IndicatorError("index-mismatch", spec.id, "输入索引不一致")
+            raise IndicatorError("index-mismatch", spec.id, "Input index does not match")
         if not pd.api.types.is_numeric_dtype(series.dtype):
-            raise IndicatorError("missing-input", spec.id, f"{name} 必须为数值")
+            raise IndicatorError("missing-input", spec.id, f"{name} must be numeric")
         dtypes[name] = str(series.dtype)
         columns[name] = series.to_numpy(dtype=float, copy=False)
     prepared = pd.DataFrame(columns, index=frame.index, copy=True)
@@ -171,23 +171,23 @@ def compute(
     cursor=None,
     required_outputs=None,
 ):
-    """对显式行情批量计算已审核指标，返回只读结果句柄。
+    """Compute reviewed indicators in bulk on explicit market data and return read-only result handles.
 
     Args:
-        indicator: 完整目录 ID。
-        frame: pandas DataFrame；索引和输入必须满足指标契约。
-        parameters: 参数映射；未知键、非法类型和关系均拒绝。
-        backend: 后端标识；None 使用目录默认值，不静默回退。
-        inputs: 指标输入到行情列名或同运行单通道的映射。
-        cache: 可选 IndicatorCache；None 每次重新计算。
-        cursor: 框架内部运行游标；独立计算保留 None。
-        required_outputs: 必要输出规范名；空列表关闭预热门控。
+        indicator: Full catalog ID.
+        frame: pandas DataFrame; index and inputs must satisfy the indicator contract.
+        parameters: Parameter mapping; reject unknown keys, invalid types, and invalid relationships.
+        backend: Backend identifier; None uses the catalog default without silent fallback.
+        inputs: Mapping from indicator inputs to market-data column names or single channels from the same run.
+        cache: Optional IndicatorCache; None recomputes each time.
+        cursor: Internal framework run cursor; None for standalone computation.
+        required_outputs: Canonical required output names; an empty list disables warmup gating.
 
     Returns:
-        IndicatorHandle: 单通道或多通道句柄，具有 valid/ready 与来源 metadata。
+        IndicatorHandle: Single- or multi-channel handle with valid/ready masks and provenance metadata.
 
     Raises:
-        IndicatorError: ID、参数、后端、输入、输出或计算失败。
+        IndicatorError: Failure in ID, parameters, backend, inputs, outputs, or computation.
     """
     spec = describe(indicator)
     parameters = spec.normalize(dict(parameters or {}))
@@ -198,7 +198,7 @@ def compute(
     required = spec.outputs if spec.required is None else spec.required
     required = tuple(required if required_outputs is None else required_outputs)
     if not set(required) <= set(spec.outputs):
-        raise IndicatorError("output-contract", indicator, "未知必要通道")
+        raise IndicatorError("output-contract", indicator, "Unknown required channel")
     data = _prepare_inputs(spec, frame, inputs, cursor)
     metadata = {
         "id": indicator,
@@ -241,7 +241,7 @@ def compute(
         valid &= ready
         if spec.validity == "current-inputs":
             valid &= current_valid
-        # 未就绪数值不用于交易；保留 native 值便于诊断，不用填零伪装有效。
+        # Unready values are not used for trading; preserve native values for diagnostics rather than filling zeros to feign validity.
         if spec.dtype != "float64":
             values = np.nan_to_num(values).astype(spec.dtype)
         if len(spec.outputs) == 1:
@@ -271,7 +271,7 @@ _OPTIMIZATION_LOCK = RLock()
 
 
 def optimization_cache(token, budget):
-    """进程内复用；token 可序列化，缓存和锁不进入任务消息。"""
+    """Reuse within a process; token is serializable, while caches and locks are excluded from task messages."""
     with _OPTIMIZATION_LOCK:
         if token not in _OPTIMIZATION_CACHES:
             _OPTIMIZATION_CACHES[token] = IndicatorCache(budget)
@@ -280,7 +280,7 @@ def optimization_cache(token, budget):
 
 @contextmanager
 def optimization_scope(budget):
-    """父进程/线程在 finally 释放；子进程缓存随本次拥有的 Pool 退出释放。"""
+    """The parent process/thread releases in finally; child caches are released when the Pool owned by this run exits."""
     token = uuid4().hex
     optimization_cache(token, budget)
     try:

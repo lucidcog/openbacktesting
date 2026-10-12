@@ -1,4 +1,4 @@
-"""ta.valuewhen：固定因果序列契约。"""
+"""ta.valuewhen: Fixed causal sequence contract."""
 
 from collections import deque
 

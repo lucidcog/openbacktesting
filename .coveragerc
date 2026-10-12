@@ -9,5 +9,5 @@ sigterm = True
 [report]
 precision = 2
 show_missing = True
-# 不采用 coverage 默认排除规则；类型导入和含省略号的文档也不得隐藏可执行行。
+# Do not use coverage default exclusion rules; type imports and docstrings with ellipses must not hide executable lines.
 exclude_lines =

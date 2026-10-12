@@ -1,4 +1,4 @@
-"""OpenBacktesting 原生历史回测内核。"""
+"""OpenBacktesting native historical backtesting kernel."""
 
 import sys as _sys
 
@@ -28,7 +28,7 @@ __pdoc__ = {"openbacktesting.Pool": False}
 
 # Add overridable openbacktesting.Pool used for parallel optimization
 def Pool(processes=None, initializer=None, initargs=()):
-    """创建优化执行池；spawn 默认使用线程池。高级调用方可覆盖此入口，多进程调用须有 main 保护。"""
+    """Create an optimization execution pool; spawn uses a thread pool by default. Advanced callers may override this entry point; multiprocessing calls require a main guard."""
     import multiprocessing as mp
     import sys
 
@@ -68,7 +68,7 @@ from . import (  # noqa: F401
     util,
 )
 
-# 旧模块路径与新文件共用同一对象，保留原导入、补丁和 pickle 查找。
+# The old module path and new file share the same objects, preserving imports, patching, and pickle lookup.
 for _module_name in (
     "aggregation",
     "broker",

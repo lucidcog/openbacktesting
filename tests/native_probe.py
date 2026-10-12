@@ -1,4 +1,4 @@
-"""固定输入的原生语义观测器；可对任意兼容基线包执行。"""
+"""Native-semantics observer with fixed input; runnable against any compatible baseline package."""
 
 import argparse
 import importlib

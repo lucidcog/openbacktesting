@@ -1,4 +1,4 @@
-"""有版本的金额、交易和路径指标；旧统计独立保留。"""
+"""Versioned monetary, trade, and path metrics; legacy statistics are retained independently."""
 
 import math
 from itertools import groupby
@@ -101,7 +101,7 @@ def path_metrics(rows, initial, *, prefix="", approximate=False):
     dd_ref = ru_ref = ddf_ref = ruf_ref = None
     invalid_runup_base = False
 
-    # 同bar未知顺序的高低点作为一组；只与此前峰谷比较，不虚构组内顺序。
+    # Treat same-bar highs and lows with unknown ordering as a group; compare only with earlier peaks/troughs without inventing within-group order.
     def group_key(row):
         return row["barIndex"] if not row.get("ordered", True) else row["observationId"]
 

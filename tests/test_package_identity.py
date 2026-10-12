@@ -1,4 +1,4 @@
-"""更名后的独立发行、资源及序列化边界。"""
+"""Independent distribution, resources, and serialization boundaries after renaming."""
 
 import pickle
 from importlib.metadata import distribution, version
@@ -14,7 +14,7 @@ def test_new_identity_resources_and_pickle_without_old_import_alias():
         for path in distribution("openbacktesting").files
         if str(path).endswith("/__init__.py")
     }
-    # wheel 只公开唯一包根；editable 安装通过公开对象元数据验证。
+    # The wheel exposes a single package root; verify editable installs through public object metadata.
     assert roots <= {"openbacktesting"}
     for value in (Backtest, Strategy):
         assert value.__module__.startswith("openbacktesting.")

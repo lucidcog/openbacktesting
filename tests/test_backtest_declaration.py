@@ -1,4 +1,4 @@
-"""声明与图表上下文的公开行为和拒绝边界。"""
+"""Public declaration and chart-context behavior, including rejection boundaries."""
 
 import json
 import pickle
@@ -8,6 +8,7 @@ from types import MappingProxyType
 
 import pandas as pd
 import pytest
+
 from openbacktesting import (
     Backtest,
     CommissionType,
@@ -41,7 +42,7 @@ class Plain(Strategy):
 
 @backtest(cash=20_000, commission_value=0.2)
 class Declared(Plain):
-    length = inputs.int(2, title="长度")
+    length = inputs.int(2, title="Length")
 
 
 class Inherited(Declared):
@@ -119,18 +120,18 @@ def test_decorator_identity_defaults_and_inheritance():
     assert declaration(Plain) is None and declaration(Inherited) is None
     assert runtime.discover(namespace(Child)) is Child
     assert declaration(Declared).cash == 20_000
-    with pytest.raises(ValueError, match="重复"):
+    with pytest.raises(ValueError, match="repeatedly"):
         backtest()(Child)
     with pytest.raises(FrozenInstanceError):
         declaration(Child).cash = 0
     Child._openbacktesting_backtest_settings = "corrupted"
-    with pytest.raises(TypeError, match="声明"):
+    with pytest.raises(TypeError, match="declaration"):
         runtime.discover(namespace(Child))
 
 
 @pytest.mark.parametrize("target", [1, object, Strategy])
 def test_invalid_decorator_target(target):
-    with pytest.raises(TypeError, match="具体"):
+    with pytest.raises(TypeError, match="concrete"):
         backtest()(target)
 
 
@@ -178,7 +179,7 @@ def test_settings_overrides_and_export():
     for invalid in ([], False):
         with pytest.raises(TypeError, match="settings"):
             initial.resolve(invalid)
-    with pytest.raises(ValueError, match="未知"):
+    with pytest.raises(ValueError, match="unknown"):
         initial.resolve({"unknown": 1})
 
 
@@ -190,7 +191,7 @@ def test_invalid_namespace(value):
 
 def test_discovery_selection_and_description(monkeypatch):
     def forbidden(*args, **kwargs):
-        raise AssertionError("发现不能实例化")
+        raise AssertionError("Discovery must not instantiate")
 
     monkeypatch.setattr(Backtest, "__init__", forbidden)
     monkeypatch.setattr(Strategy, "__init__", forbidden)
@@ -206,7 +207,7 @@ def test_discovery_selection_and_description(monkeypatch):
     assert exported["schemaHash"] == inputs.describe(Declared)["schemaHash"]
     exported["backtest"]["settings"]["cash"] = 1
     assert runtime.describe(ns)["backtest"]["settings"]["cash"] == 20_000
-    with pytest.raises(ValueError, match="候选: \\[\\]"):
+    with pytest.raises(ValueError, match="candidates: \\[\\]"):
         runtime.discover({"__name__": "other", "strategy": Declared})
 
     @backtest()
@@ -346,14 +347,14 @@ def test_runtime_invalid_context_and_options(overrides):
 def test_low_level_invalid_context():
     with pytest.raises(TypeError, match="context"):
         Backtest(GOOG, Plain, context="bad")
-    with pytest.raises(ValueError, match="带时区"):
+    with pytest.raises(ValueError, match="timezone-aware"):
         Backtest(GOOG, Plain, context=DataContext(Timeframe.days(1), "UTC"))
 
 
 @pytest.mark.parametrize("kind", ["class", "params", "input", "set", "delete"])
 def test_timeframe_reserved(kind):
     if kind in ("class", "input"):
-        member = 2 if kind == "class" else inputs.int(2, title="周期")
+        member = 2 if kind == "class" else inputs.int(2, title="Period")
 
         class Invalid(Plain):
             timeframe = member
@@ -439,7 +440,7 @@ def test_runtime_propagates_strategy_failure_and_releases_session(stage):
     with pytest.raises(RuntimeError) as raised:
         runtime.run(namespace(Broken), **chart())
     assert raised.value is error
-    # 上一次生命周期失败不污染后续声明及会话。
+    # A failed lifecycle does not contaminate subsequent declarations or sessions.
     assert runtime.run(namespace(), **chart())["_strategy"].initial_timeframe == Timeframe.days(1)
 
 
@@ -490,7 +491,7 @@ def test_runtime_complete_settings_and_snapshot_copies():
 
 def test_context_retains_prices_gaps_and_data_validation():
     args = chart()
-    # 本地休市缺口保留，周期来自图表元信息，不从观测间隔猜测。
+    # Preserve local market-closure gaps; the timeframe comes from chart metadata, not observed intervals.
     args["data"] = args["data"].iloc[[0, 1, 5, 8, 11]]
     result = runtime.run(namespace(), **args)
     pd.testing.assert_frame_equal(result["_strategy"].df, args["data"])

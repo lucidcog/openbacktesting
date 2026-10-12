@@ -1,4 +1,4 @@
-"""ta.vosc：固定依赖的计算封装与规范输出。"""
+"""ta.vosc: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.volume.vosc import vosc as _calculate
 

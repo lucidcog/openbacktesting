@@ -1,4 +1,4 @@
-"""ta.massi：固定依赖的计算封装与规范输出。"""
+"""ta.massi: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.volatility.massi import massi as _calculate
 

@@ -1,4 +1,4 @@
-"""ta.er：固定依赖的计算封装与规范输出。"""
+"""ta.er: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.er import er as _calculate
 

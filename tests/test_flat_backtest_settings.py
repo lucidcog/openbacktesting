@@ -1,4 +1,4 @@
-"""平铺作者配置、宿主解码与低层适配的行为契约。"""
+"""Behavioral contracts for flat author configuration, host decoding, and low-level adaptation."""
 
 import inspect
 import json
@@ -7,6 +7,8 @@ from dataclasses import fields
 
 import pandas as pd
 import pytest
+from test_backtest_declaration import chart, namespace
+
 from openbacktesting import (
     Backtest,
     CommissionType,
@@ -21,7 +23,6 @@ from openbacktesting import (
 )
 from openbacktesting.broker import Commission, Slippage
 from openbacktesting.simulation.config import BacktestSettings, DefaultOrderSize
-from test_backtest_declaration import chart, namespace
 
 ENUMS = {
     "commission_type": CommissionType,
@@ -171,10 +172,10 @@ def test_complete_json_snapshot_and_independent_copies():
     assert BacktestSettings.from_snapshot(json.loads(json.dumps(snapshot, allow_nan=False))) == base
     assert pickle.loads(pickle.dumps(base)) == base
     for bad in ([], None):
-        with pytest.raises(TypeError, match="映射"):
+        with pytest.raises(TypeError, match="mapping"):
             BacktestSettings.from_snapshot(bad)
     for bad in ({}, snapshot | {"unknown": 0}, snapshot | {"commission": {"relative": 0.002}}):
-        with pytest.raises(ValueError, match="字段"):
+        with pytest.raises(ValueError, match="field"):
             BacktestSettings.from_snapshot(bad)
     for bad in (CommissionType.PERCENT, {"relative": 0.002}, [], Commission()):
         with pytest.raises(TypeError, match="JSON"):
@@ -185,7 +186,7 @@ def test_complete_json_snapshot_and_independent_copies():
 
 @backtest(default_qty_value=2, commission_value=0.2)
 class Trades(Strategy):
-    period = inputs.int(2, title="周期")
+    period = inputs.int(2, title="Period")
 
     def init(self):
         pass
@@ -261,7 +262,7 @@ def test_flat_runtime_matches_native_ledger(
 
 def test_invalid_override_precedes_strategy_construction(monkeypatch):
     def forbidden(*args, **kwargs):
-        pytest.fail("错误配置不应构造策略")
+        pytest.fail("Invalid configuration must not construct a strategy")
 
     monkeypatch.setattr(Trades, "__init__", forbidden)
     for overrides in (

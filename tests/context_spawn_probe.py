@@ -1,13 +1,14 @@
-"""真实线程/spawn 验证上下文随优化实例传递，而非依赖全局当前图表。"""
+"""Real threads/spawn verify context propagation through optimizer instances without relying on a global current chart."""
 
 import json
 import multiprocessing as mp
 import sys
 from multiprocessing.pool import ThreadPool
 
-import openbacktesting as api
 import numpy as np
 import pandas as pd
+
+import openbacktesting as api
 from openbacktesting.broker import ClosedTradeStats, Commission, InstrumentSpec
 from openbacktesting.parallel import SharedMemory, SharedMemoryManager
 from openbacktesting.portfolio import export_result
@@ -66,7 +67,7 @@ class TimezoneStrategy(api.Strategy):
         )
         pd.testing.assert_index_equal(self.data_index.as_unit("ns"), expected)
         if self.fail:
-            raise ValueError("时区候选预期失败")
+            raise ValueError("Expected timezone candidate failure")
 
     def next(self):
         assert self.data_index[-1].value == self.df.Instant.iloc[-1]
@@ -136,9 +137,9 @@ def verify_timezones():
         try:
             bt.optimize(quantity=[1, 2], fail=[True])
         except ValueError as error:
-            assert str(error) == "时区候选预期失败"
+            assert str(error) == "Expected timezone candidate failure"
         else:
-            raise AssertionError("未传播子进程异常")
+            raise AssertionError("Child-process exception was not propagated")
     finally:
         SharedMemoryManager.SharedMemory = original
     assert created
@@ -148,7 +149,7 @@ def verify_timezones():
         except FileNotFoundError:
             continue
         leaked.close()
-        raise AssertionError(f"共享内存未回收: {name}")
+        raise AssertionError(f"Shared memory was not reclaimed: {name}")
     return cases
 
 

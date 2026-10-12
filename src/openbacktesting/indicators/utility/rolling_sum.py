@@ -1,4 +1,4 @@
-"""ta.rolling_sum：固定因果序列契约。"""
+"""ta.rolling_sum: Fixed causal sequence contract."""
 
 from ..calculus import clean
 

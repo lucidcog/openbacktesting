@@ -1,1 +1,6 @@
 schema: spec-driven
+context: |
+  Use English by default for repository code, comments, docstrings, documentation,
+  OpenSpec artifacts, and project-authored messages. Preserve intentional
+  multilingual or localized copy and associated test fixtures. Keep established
+  identifiers, numerical behavior, and machine-readable contracts stable.

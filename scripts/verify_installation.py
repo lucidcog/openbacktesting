@@ -1,4 +1,4 @@
-"""在干净的制品安装环境执行回测、资源、序列化和持久化验收。"""
+"""Validate backtests, resources, serialization, and persistence in a clean artifact installation."""
 
 import argparse
 import json
@@ -23,7 +23,7 @@ from openbacktesting.test._test import SmaCross
 
 @backtest()
 class Probe(Strategy):
-    quantity = inputs.int(1, title="数量", minval=1)
+    quantity = inputs.int(1, title="Quantity", minval=1)
 
     def init(self):
         pass
@@ -62,7 +62,7 @@ def verify_optimizer():
         events = []
         partial = optimize(
             globals(),
-            {"数量": Values([1, 2])},
+            {"Quantity": Values([1, 2])},
             **options,
             on_progress=events.append,
             cancel=lambda: len(events) == 1,
@@ -81,9 +81,9 @@ def verify_optimizer():
         try:
             resume_optimization(globals(), experiment_id=result.experiment_id, **incompatible)
         except OptimizationError as error:
-            assert "身份" in str(error)
+            assert "Identity" in str(error)
         else:
-            raise AssertionError("不匹配身份未拒绝续跑")
+            raise AssertionError("Resume with a mismatched identity was not rejected")
         assert path.read_bytes() == before
     return {"committed": 2, "portfolio_roundtrip": True, "identity_rejection": True}
 
@@ -96,13 +96,13 @@ def verify_optional(mode):
         except ImportError:
             pass
         else:
-            raise AssertionError("基础环境意外包含可选优化器")
+            raise AssertionError("Base environment unexpectedly contains an optional optimizer")
         try:
             bt.optimize(fast=[5, 10], slow=[20, 30], method="sambo")
         except ImportError as error:
             assert "sambo" in str(error).lower()
         else:
-            raise AssertionError("缺少优化器时未报告依赖错误")
+            raise AssertionError("Missing optimizer did not produce a dependency error")
         return "missing_dependency_error"
     result = bt.optimize(fast=[5, 10], slow=[20, 30], method="sambo", max_tries=10)
     assert isinstance(result, pd.Series)

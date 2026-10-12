@@ -1,4 +1,4 @@
-"""条件 VWAP 的成交量加权总体标准差带。"""
+"""Volume-weighted population standard-deviation bands for conditional VWAP."""
 
 from .anchored_vwap import _calculate
 

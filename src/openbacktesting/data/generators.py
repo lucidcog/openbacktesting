@@ -1,4 +1,4 @@
-"""从 lib 迁入的既有实现：random_ohlc_data。"""
+"""Existing implementation moved from lib: random_ohlc_data."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from openbacktesting.helpers import _set_legacy_module
 def random_ohlc_data(
     example_data: pd.DataFrame, *, frac=1.0, random_state: int | None = None
 ) -> Generator[pd.DataFrame, None, None]:
-    """迭代生成保留基本行情结构的随机样例，不代表真实市场预测。
+    """Iteratively generate random samples preserving basic market-data structure; these are not real-market forecasts.
 
 
     OHLC data generator. The generated OHLC data has basic

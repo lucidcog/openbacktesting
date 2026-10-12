@@ -1,7 +1,7 @@
-"""读取日志的时间、bar 与源码行；比较成功、失败、重跑和宿主入口。
+"""Read log times, bars, and source lines; compare success, failure, reruns, and the host entry point.
 
-GOOG 前四根日线，无网络和额外依赖。作者不下单，费用不参与。
-本教程显式加载可信本地作者文件，不提供沙箱或控制台实现。
+The first four GOOG daily bars, with no network or extra dependencies. The author submits no orders, so fees do not apply.
+This tutorial explicitly loads trusted local author source; it provides neither a sandbox nor a console implementation.
 """
 
 import json
@@ -45,19 +45,19 @@ def main():
     try:
         bt.run(fail=True)
     except ValueError as error:
-        assert str(error) == "演示显式失败"
+        assert str(error) == "Demonstrate explicit failure"
     else:
-        raise AssertionError("失败示例必须抛出异常")
+        raise AssertionError("The failure example must raise an exception")
     failed = bt.get_logs()
-    assert failed[-1]["message"] == "结束原因：error"
+    assert failed[-1]["message"] == "End reason: error"
     bt.run()
     assert len(bt.get_logs()) == len(success) and bt.get_logs()[0]["sequence"] == 1
 
-    # runtime 隐藏内部 bt：用调用方持有的会话在异常后读取。
+    # runtime hides its internal bt; read logs after failure through the caller-owned session.
     data.index = data.index.tz_localize("UTC")
     schema = runtime.describe(namespace)
     request = {key: schema[key] for key in ("schemaVersion", "schemaHash")} | {
-        "values": {"演示失败": True}
+        "values": {"Demonstrate failure": True}
     }
     session = RunLogs()
     try:
@@ -70,11 +70,11 @@ def main():
             logs=session,
         )
     except ValueError as error:
-        assert str(error) == "演示显式失败"
+        assert str(error) == "Demonstrate explicit failure"
     else:
-        raise AssertionError("宿主失败示例必须抛出异常")
+        raise AssertionError("The host failure example must raise an exception")
     hosted = session.get_logs()
-    assert hosted[-1]["message"] == "结束原因：error"
+    assert hosted[-1]["message"] == "End reason: error"
     assert hosted[1]["bar_index"] == 0 and hosted[1]["bar_time"].endswith("+00:00")
     return {"success": success, "failed": failed, "hosted": hosted}
 

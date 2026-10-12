@@ -1,4 +1,4 @@
-"""测试复用真实示例宿主的行情配方；不复刻一份数据准备。"""
+"""Tests reuse the real example host's data recipes rather than duplicating preparation."""
 
 import runpy
 from pathlib import Path

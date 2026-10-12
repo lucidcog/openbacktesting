@@ -1,4 +1,4 @@
-"""ta.ht_dcperiod：固定依赖的计算封装与规范输出。"""
+"""ta.ht_dcperiod: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.cycles.ht_dcperiod import ht_dcperiod as _calculate
 

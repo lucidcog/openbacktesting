@@ -1,7 +1,7 @@
-"""EMA 与 MACD 过滤：推荐作者脚本，框架从当前图表注入数据并运行。
+"""EMA with a MACD filter: recommended author script; the framework injects current chart data and runs it.
 
-随包 GOOG 日线、无额外依赖；均线周期由 inputs 调整。内置指标统一通过 self.ta 在 init 登记，next 只取当前标量。
-手续费 0.2%、互斥订单，期末平仓计入统计；默认下单规模沿用引擎可用资金比例。
+Bundled GOOG daily data, with no extra dependencies; inputs adjusts moving-average periods. Register built-ins through self.ta in init; next reads current scalars only.
+0.2% commission and exclusive orders; end-of-run liquidation enters statistics. Default sizing follows the engine's available-funds fraction.
 """
 
 from openbacktesting import EndPolicy, Strategy, backtest, inputs
@@ -9,14 +9,14 @@ from openbacktesting import EndPolicy, Strategy, backtest, inputs
 
 @backtest(commission_value=0.2, exclusive_orders=True, end_policy=EndPolicy.CLOSE_AT_LAST_CLOSE)
 class BuiltInSignals(Strategy):
-    length = inputs.int(20, minval=2, title="均线周期")
+    length = inputs.int(20, minval=2, title="Moving-average period")
 
     def init(self):
         self.ema = self.ta.ema(self.close, length=self.length)
         self.macd = self.ta.macd(self.close)
 
     def next(self):
-        # 交叉需要两根有效均线；MACD 过滤只用于入场。
+        # Crossovers need two valid moving-average bars; the MACD filter applies to entry only.
         if len(self.close) < 2 or not self.ema.valid[-2:].all():
             return
         if (

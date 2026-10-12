@@ -1,31 +1,31 @@
 ## Why
 
-当前仓库仅有 README，尚不能独立开发、安装或运行回测内核。需要将用户指定源仓库的 `python/core` 抽离至本仓库，以 `openbacktesting` 作为唯一发行名和导入根，并解除原工程布局与品牌身份的依赖。
+The repository currently contains only a README and cannot independently develop, install, or run the backtesting core. Extract the user-designated source repository's `python/core` into this repository, use `openbacktesting` as the sole distribution and import root, and remove dependencies on the original project layout and brand identity.
 
 ## What Changes
 
-- 将源包的运行时、类型标记、资源、测试、夹具和示例迁入当前仓库，采用根级 `pyproject.toml` 与 `src/openbacktesting/` 布局；源仓库始终只读。
-- **BREAKING**：发行名、导入根、模块身份、环境变量、品牌化协议标识及相关说明统一为新名称，不提供旧名称别名或兼容包。
-- 清除旧项目名称及旧包名称的所有大小写形式，覆盖当前仓库的受控文件、拟纳入版本控制的文件及分发制品；文档与 OpenSpec 不豁免。
-- 迁入测试实际使用的包外夹具和必要手册，调整路径、元数据和来源清单，使构建、测试与使用不依赖源仓库、桌面组件或 JavaScript 工具链。
-- 保持回测、指标、订单、统计、优化及纯数据绘图能力的计算语义；通过现有回归基线、资源检查和独立安装验证确认迁移完整性。
-- 本次仅形成提案；后续实施不包含包注册平台发布、原仓库消费者迁移、桌面集成或新增回测功能。
+- Import runtime code, type markers, resources, tests, fixtures, and examples into a root `pyproject.toml` and `src/openbacktesting/` layout; keep the source repository read-only.
+- **BREAKING**: Standardize distribution name, import root, module identities, environment variables, branded protocol identifiers, and descriptions on the new name, without former-name aliases or compatibility packages.
+- Remove all case variants of the former project and package names across controlled files, files intended for version control, and artifacts. Documentation and OpenSpec are not exempt.
+- Import external fixtures actually used by tests and the necessary manual; adapt paths, metadata, and provenance manifests so builds, tests, and usage require neither the source repository nor desktop components or JavaScript tooling.
+- Preserve computational semantics for backtests, indicators, orders, statistics, optimization, and data-only plotting; verify completeness with existing regression baselines, resource checks, and standalone installations.
+- This stage creates a proposal only. Subsequent implementation excludes registry publication, migration of original consumers, desktop integration, and new backtesting features.
 
 ## Capabilities
 
 ### New Capabilities
 
-- `standalone-python-package`：独立源码布局、安装与分发、运行资源和开发资料完整性，以及源仓库只读边界。
-- `package-identity`：唯一的新包身份、旧名称零残留、序列化与持久化兼容边界。
-- `extraction-parity`：迁移范围可核对、计算语义保持、现有测试与示例独立运行。
+- `standalone-python-package`: Standalone source layout, installation/distribution, complete runtime and development materials, and the read-only source boundary.
+- `package-identity`: Unique new package identity, no residual former names, and serialization/persistence compatibility boundaries.
+- `extraction-parity`: Auditable migration scope, preserved computational semantics, and independent tests/examples.
 
 ### Modified Capabilities
 
-无；当前仓库尚无既有规范。
+None; this repository has no existing specifications.
 
 ## Impact
 
-- 新增运行源码、根级 Python 构建配置、测试、示例、必要文档及本地检查工具；更新根 README。
-- 初始保留源包版本 `0.2.0`、Python `>=3.12,<3.15`，以及 NumPy、pandas、固定版本 `pandas-ta-classic` 的依赖范围和 `optimize`、`test` extras；实施中的干净安装验证要求在 `optimize` 中补齐 SAMBO 导入必需的 scikit-learn，沿用已有测试的版本范围。
-- 公开 API 的导入前缀和带品牌的输出身份发生变化；旧模块路径的 pickle、旧协议标识和旧实验续跑不纳入兼容承诺，具体边界由设计和规范定义。
-- 原仓库及其现有未提交改动不受影响；此提案不声称源包测试已运行或新包已可用。
+- Add runtime source, root Python build configuration, tests, examples, necessary documentation, and local verification tools; update the root README.
+- Initially retain version `0.2.0`, Python `>=3.12,<3.15`, dependency ranges for NumPy, pandas, and pinned `pandas-ta-classic`, and the `optimize`/`test` extras. Clean-install validation during implementation requires adding the scikit-learn dependency needed by SAMBO to `optimize`, using the existing test range.
+- Public import prefixes and branded output identities change. Pickles with old module paths, former protocol identifiers, and resumption of old experiments are outside compatibility guarantees; design and specifications define the boundaries.
+- The original repository and its uncommitted changes are unaffected. This proposal does not claim source tests have run or the new package is usable.

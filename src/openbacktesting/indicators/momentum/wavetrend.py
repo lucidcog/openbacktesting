@@ -1,4 +1,4 @@
-"""ta.wavetrend：独立公式与固定初始化契约。"""
+"""ta.wavetrend: Independent formula with a fixed initialization contract."""
 
 import pandas as pd
 

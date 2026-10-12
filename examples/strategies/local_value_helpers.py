@@ -1,6 +1,6 @@
-"""显式 tick 舍入和逐根渐变；宿主注入 0.05 tick，无手续费，市价买一份后期末平仓。
+"""Explicit tick rounding and per-bar gradients; the host injects a 0.05 tick, with no commission, a one-unit market buy, and end-of-run liquidation.
 
-舍入候选价仍须通过 instrument.price；渐变沿用既有颜色事件导出。
+Rounded candidate prices still pass instrument.price validation; gradients use existing color-event export.
 """
 
 from openbacktesting import Color, EndPolicy, Strategy, backtest, colors
@@ -27,5 +27,5 @@ class LocalValueHelpers(Strategy):
         bar = self.bar_index
         if bar == 1:
             pending = self.buy(qty=1, limit=self.rounded)
-            pending.cancel()  # 合法网格价通过原校验；取消后另下市价单。
+            pending.cancel()  # A valid grid price passes existing validation; cancel it and submit a market order.
             self.buy(qty=1)

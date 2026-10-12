@@ -1,4 +1,4 @@
-"""ta.zlma：固定依赖的计算封装与规范输出。"""
+"""ta.zlma: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.overlap.zlma import zlma as _calculate
 

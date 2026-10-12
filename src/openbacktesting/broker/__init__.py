@@ -1,4 +1,4 @@
-"""旧 broker 路径的兼容导出；实现位于 broker.core。"""
+"""Compatibility exports for the old broker path; implemented in broker.core."""
 
 from openbacktesting.broker.core import (
     Order as Order,

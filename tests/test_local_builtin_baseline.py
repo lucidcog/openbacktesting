@@ -1,4 +1,4 @@
-"""扩展前冻结的默认输出；夹具不得随算法更新自动再生成。"""
+"""Default outputs frozen before expansion; fixtures must not be automatically regenerated after algorithm changes."""
 
 import json
 from pathlib import Path
@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting.indicators import compute
 
 NAMES = ("true_range", "kc", "alma", "linreg", "pivot_points")

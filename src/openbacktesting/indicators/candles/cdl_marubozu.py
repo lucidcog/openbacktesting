@@ -1,4 +1,4 @@
-"""cdl_marubozu：固定原生形态与独立有效掩码。"""
+"""cdl_marubozu: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_marubozu import cdl_marubozu as _calculate
 

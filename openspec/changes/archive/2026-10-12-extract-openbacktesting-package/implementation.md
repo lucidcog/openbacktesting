@@ -1,22 +1,22 @@
-# 实施与验证
+# Implementation and verification
 
-本次实施完成独立包抽离，唯一发行与导入身份为 `openbacktesting`，版本为 `0.2.0`。原仓库未改动；公开计算行为保留，旧身份兼容边界按设计执行。
+The standalone extraction is complete. The sole distribution and import identity is `openbacktesting`, version `0.2.0`. The original repository was not modified; public computational behavior was preserved, and historical compatibility boundaries follow the design.
 
-## 实际结果
+## Actual results
 
-- 根级 Python 项目、源码、资源、测试、示例、内核手册及独立检查工具已落地。
-- 现有 pytest 回归为 `2877 passed, 1 skipped`；包内自测为 `67` 项、`OK (skipped=1)`。
-- 独立解压 sdist、使用安装包和基线依赖运行的完整 pytest 同样为 `2877 passed, 1 skipped`；sdist 携带当前项目锁文件以复现版本元数据基线。
-- wheel 直接安装与 sdist 重建安装均通过资源、回测、pickle、spawn、优化持久化和基础/可选依赖边界验证。
-- 346 个运行时文件仅作身份与路径替换；3 份编码 pickle 基线除字符串编码与帧封装外的操作码字节保持一致。
-- 2107 个源文件摘要、源提交和 Git 工作区状态复核一致。
+- Root Python project, source, resources, tests, examples, core manual, and independent verification tools are present.
+- Existing pytest regressions: `2877 passed, 1 skipped`; package self-tests: `67` tests, `OK (skipped=1)`.
+- Full pytest from an independently extracted sdist, using the installed package and baseline dependency versions, also reported `2877 passed, 1 skipped`. The sdist carries the project lock file to reproduce dependency-metadata baselines.
+- Direct wheel installation and sdist-rebuilt installation passed resource, backtest, pickle, spawn, optimization-persistence, and base/optional-dependency checks.
+- Changes to 346 runtime files were limited to identities and paths; opcode bytes in three encoded pickle baselines remained unchanged except string encoding and frame packaging.
+- Rechecks of 2107 source file digests, the source revision, and Git working state agreed.
 
-## 实施中修正
+## Implementation corrections
 
-独立环境发现 SAMBO 的顶层导入需要 scikit-learn/joblib，源 `optimize` extra 未声明且被 `test` 环境掩盖。已将 `scikit-learn>=1.5,<2` 补入 `optimize`，沿用已有测试范围；基础依赖、算法及数值基线未变。
+Clean installation revealed that SAMBO's top-level import requires scikit-learn/joblib, a dependency absent from the source `optimize` extra and concealed by the `test` environment. Added `scikit-learn>=1.5,<2` to `optimize` using the existing test range; base dependencies, algorithms, and numerical baselines were unchanged.
 
-已将文档生成工具适配为直接可读的 Markdown，修复原工程命令、历史链接和资源路径。网站构建配置未迁入，排除理由保存在清单中。
+Documentation tooling was adapted to directly readable Markdown, and original-project commands, historical links, and resource paths were repaired. Website-build configuration was not imported; the manifest records its exclusion reason.
 
-## 验证依据
+## Validation evidence
 
-环境、命令、结果及未验证范围见[验收记录](../../../../docs/core/extraction-verification.md)。验证平台为 macOS ARM64、Python `3.12.12`；其他 Python 版本、平台和完整 ML 慢例未验收。项目文件及 wheel/sdist 经名称与完整性扫描通过，未发布至包注册平台。
+See the [acceptance record](../../../../docs/core/extraction-verification.md) for environments, commands, results, and unverified scope. Validation used macOS ARM64 and Python `3.12.12`; other Python versions, platforms, and full slow ML examples were not accepted. Repository files and wheel/sdist artifacts passed name and integrity scans. No registry publication occurred.

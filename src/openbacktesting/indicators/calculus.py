@@ -1,4 +1,4 @@
-"""本地指标共享的有限历史数学；不依赖登记、缓存或策略。"""
+"""Shared finite-history mathematics for local indicators, independent of registration, caches, and strategies."""
 
 import numpy as np
 import pandas as pd
@@ -11,13 +11,13 @@ def clean(source):
 
 
 def segments(valid):
-    """返回连续有效区段，缺失后的递归状态必须重新建立。"""
+    """Return contiguous valid segments; recursive state must be rebuilt after missing data."""
     edges = np.diff(np.r_[False, valid, False].astype(np.int8))
     return zip(np.flatnonzero(edges == 1), np.flatnonzero(edges == -1))
 
 
 def average(source, length, *, alpha=None, seeded=True):
-    """SMA种子或首值种子的递归平均；缺失后重新预热。"""
+    """Recursive average seeded by an SMA or the first value; warm up again after missing data."""
     source = clean(source)
     out = np.full(len(source), np.nan)
     alpha = 2 / (length + 1) if alpha is None else alpha
@@ -54,12 +54,12 @@ def strength(delta, length):
 def condition(source, indicator):
     source = clean(source)
     if not source.dropna().isin([0, 1]).all():
-        raise IndicatorError("invalid-input", indicator, "条件输入只允许0、1或缺失")
+        raise IndicatorError("invalid-input", indicator, "Condition inputs allow only 0, 1, or missing values")
     return source
 
 
 def pattern_result(calculate, indicator, inputs, minimum, **options):
-    """按有效OHLC区段调用原生形态，独立保留整数分值和有效掩码。"""
+    """Call native patterns on valid OHLC segments, preserving integer scores and validity masks separately."""
     frame = pd.DataFrame(inputs)
     values = np.zeros(len(frame), dtype=np.int16)
     valid = np.zeros(len(frame), dtype=bool)

@@ -1,7 +1,7 @@
-"""交叉序列与即时布尔判断：序列用于事件组合，is_* 用于当前 bar 下单。
+"""Crossover series and immediate boolean checks: use series for event composition and is_* for orders on the current bar.
 
-随包 GOOG 日线，无额外依赖。前一根相等后分离也算交叉。
-互斥订单、期末平仓、默认零手续费；示例只展示 API，不验证策略收益。
+Bundled GOOG daily data, with no extra dependencies. Separation after equality on the previous bar also counts as a crossover.
+Exclusive orders, end-of-run liquidation, and default zero commission; this demonstrates the API rather than validating returns.
 """
 
 from openbacktesting import EndPolicy, Strategy, backtest
@@ -15,13 +15,13 @@ class CrossSignals(Strategy):
         self.crosses = self.ta.cross(self.fast, self.slow)
         self.up = self.ta.crossover(self.fast, self.slow)
         self.down = self.ta.crossunder(self.fast, self.slow)
-        # 序列可继续组合：离上次交叉的根数、上次上穿/下穿时的价格。
+        # Series compose further: bars since the last crossover and prices at the last upward/downward cross.
         self.cross_age = self.ta.barssince(self.crosses)
         self.last_up_price = self.ta.valuewhen(self.up, self.close)
         self.last_down_price = self.ta.valuewhen(self.down, self.close)
 
     def next(self):
-        # 即时判断不登记新指标；返回原生 bool，直接用于条件分支。
+        # Immediate checks register no new indicator; they return native bool values for conditional branches.
         if self.ta.is_cross(self.fast, self.slow):
             if self.ta.is_crossover(self.fast, self.slow):
                 self.buy(percent=95)

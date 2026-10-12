@@ -1,4 +1,4 @@
-"""ta.percentile_nearest_rank：固定因果序列契约。"""
+"""ta.percentile_nearest_rank: Fixed causal sequence contract."""
 
 from math import ceil
 

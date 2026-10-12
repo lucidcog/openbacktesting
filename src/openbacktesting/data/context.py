@@ -1,4 +1,4 @@
-"""宿主提供的图表上下文；品种规格单独绑定。"""
+"""Host-provided chart context; instrument specifications are bound separately."""
 
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
@@ -8,11 +8,11 @@ from openbacktesting.data.timeframe import Timeframe
 
 @dataclass(frozen=True)
 class DataContext:
-    """描述已有行情的周期及图表、策略日历和统计共用的时区。
+    """Describe the existing market-data timeframe and shared timezone for charts, strategy calendars, and statistics.
 
-    带时区行情在策略构造前转换为此时区；绝对时刻与原始数据不变。
-    统计按当地日界分组，切换时区后须重新运行，年化指标允许不同。
-    不提供下载、重采样或交易所日历能力。
+    Timezone-aware market data is converted to this timezone before strategy construction; absolute instants and original data remain unchanged.
+    Statistics group by local day boundaries; changing timezone requires a new run, and annualized metrics may differ.
+    Provides no downloading, resampling, or exchange-calendar capability.
     """
 
     timeframe: Timeframe
@@ -20,11 +20,11 @@ class DataContext:
 
     def __post_init__(self):
         if not isinstance(self.timeframe, Timeframe):
-            raise TypeError("timeframe 必须为 Timeframe")
+            raise TypeError("timeframe must be a Timeframe")
         if not isinstance(self.timezone, str) or not self.timezone:
-            raise TypeError("timezone 必须为非空 IANA 时区字符串")
+            raise TypeError("timezone must be a nonempty IANA timezone string")
         ZoneInfo(self.timezone)
 
     def snapshot(self) -> dict:
-        """返回独立纯值，不复用可变请求对象。"""
+        """Return independent plain values without reusing mutable request objects."""
         return {"timeframe": self.timeframe.snapshot(), "timezone": self.timezone}

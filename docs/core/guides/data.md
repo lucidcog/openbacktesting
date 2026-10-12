@@ -1,10 +1,10 @@
-# 行情与稳定句柄
+# Market data and stable handles
 
-完整代码见[行情来源示例](../../../examples/strategies/data_sources.py)；以下方法片段放在 Strategy 子类中。
+See the [data-source example](../../../examples/strategies/data_sources.py) for complete code; place the method fragments below in a Strategy subclass.
 
-## 直接访问行情
+## Direct market-data access
 
-`self.open/high/low/close/volume` 和 `self.hl2/hlc3/hlcc4` 返回只读 `IndicatorHandle`，保存引用和切片仍随本次运行游标更新，可在 `init()` 直接传给 `self.ta`：
+`self.open/high/low/close/volume` and `self.hl2/hlc3/hlcc4` return read-only `IndicatorHandle` objects. Saved references and slices continue to follow this run's cursor and can be passed directly to `self.ta` in `init()`:
 
 ```python
 def init(self):
@@ -18,24 +18,24 @@ def next(self):
         pass
 ```
 
-`hl2=(H+L)/2`、`hlc3=(H+L+C)/3`、`hlcc4=(H+L+C+C)/4`；后者不包含 Open。当前值用 `[-1]`，上一根用 `[-2]`，`[0]` 是首值，不采用 Pine 历史偏移。比较和算术产生普通数组，不自动跟随游标；条件判断应先取标量。`.s/.df/np.asarray()` 转换也是当时前缀的快照，init 主动保存的完整数据不会被撤回。
+`hl2=(H+L)/2`, `hlc3=(H+L+C)/3`, and `hlcc4=(H+L+C+C)/4`; the last excludes Open. Use `[-1]` for the current value and `[-2]` for the previous bar; `[0]` is the first value, rather than a Pine historical offset. Comparisons and arithmetic produce ordinary arrays that do not automatically follow the cursor; extract scalars before conditional tests. `.s/.df/np.asarray()` conversions are also snapshots of the prefix visible at that moment; full data explicitly saved during init is not withdrawn later.
 
-`self.data_index/df` 每次读取返回当前可见的普通 pandas 对象，保存后不随游标改变长度，不承诺深拷贝或内容隔离。df 保留原列名和额外列，不自动添加派生列。`self.pip` 沿用全样本小数位估计，不能用作可靠的交易所 tick size。
+Each read of `self.data_index/df` returns an ordinary pandas object for currently visible data. A saved object's length does not change with the cursor; deep copies and content isolation are not guaranteed. df retains original and additional columns and does not add derived columns automatically. `self.pip` retains the full-sample decimal-place estimate and is not a reliable exchange tick size.
 
-首次读取八个序列之一会捕获完整 OHLCV 和索引；同运行的新序列使用同一快照。**行情加工须在首次读取新序列前完成**：之后在 init 修改 OHLCV、dtype 或索引，会在后续新序列读取、指标登记或 init 结束时抛 `data-source-mutated`；仅增加额外列不受影响。新序列与运行中行情写入混用不受支持：旧 `self.data/df` 仍可写，但新句柄不跟随写入，也不保证立即检测。仅使用旧接口不启用新快照约束。
+The first read of any of the eight series captures the full OHLCV data and index; new series in the same run use that snapshot. **Complete market-data preprocessing before the first read of a new series**: later init changes to OHLCV, dtype, or index raise `data-source-mutated` on a subsequent series read, indicator registration, or completion of init. Adding only extra columns is unaffected. Mixing new series with market-data writes during execution is unsupported: legacy `self.data/df` remains writable, but new handles do not follow writes and immediate detection is not guaranteed. Using only the legacy interface does not enable the new snapshot constraints.
 
-新来源统一为 float64，接受整数、浮点及 pandas 可空整数/浮点；拒绝布尔、复数、object 等类型，索引须唯一。缺失成交量保持 NaN；非有限输入和派生溢出通过 valid 标记无效，不填零。来源读取不增加指标数量；来源与指标的有效性均不影响逐根调用 `next()`。
+New sources use float64 consistently, accepting integers, floats, and pandas nullable integer/float types; booleans, complex numbers, object types, and similar types are rejected, and the index must be unique. Missing volume remains NaN; non-finite inputs and derived overflow are marked invalid through valid without zero filling. Reading sources does not increase the indicator count; neither source nor indicator validity affects per-bar `next()` calls.
 
-上述 11 个属性名均为保留名，同名策略字段、方法、InputSpec 绑定字段和运行参数须改名，例如将参数 `close` 改为 `close_threshold`。InputSpec 的展示 `title="close"` 仍可用。旧 `self.data` 入口保留。
+All 11 property names above are reserved. Rename colliding strategy fields, methods, InputSpec binding fields, and runtime parameters, for example from `close` to `close_threshold`. An InputSpec display `title="close"` remains valid. The legacy `self.data` entry point is retained.
 
-## 当前 bar 的位置与状态
+## Current bar position and state
 
-`self.bar_index` 是当前输入 bar 的零起点整数位置；`self.data_index` 是可见历史的 pandas 标签索引，`self.data.index` 保留。顶层 `self.index` 已移除，不再保留该名字。
+`self.bar_index` is the zero-based integer position of the current input bar; `self.data_index` is the pandas label index of visible history, and `self.data.index` is retained. Top-level `self.index` has been removed, and that name is no longer reserved.
 
-`self.bar_state` 返回冻结的 `BarState` 值，`is_first` 表示位置 0，`is_last` 表示固定输入的最后一根。单根输入两者同时为真；提前终止不把最后实际访问的 bar 改成 `is_last`。保存的状态是当时快照，不随游标更新。类型可从 `openbacktesting` 或 `openbacktesting.strategy` 导入。
+`self.bar_state` returns a frozen `BarState`: `is_first` denotes position 0, and `is_last` denotes the final bar of the fixed input. Both are true for single-bar input; early termination does not turn the last visited bar into `is_last`. Saved states are snapshots and do not update with the cursor. Import the type from `openbacktesting` or `openbacktesting.strategy`.
 
-状态在 `on_start()`（首根）、`next()`、订单/成交通知（含期末通知）可读；`init()`、`on_finish()` 和运行结束后的访问抛 `RuntimeError`。每次运行独立维护常量大小的当前上下文。
+State is readable in `on_start()` (the first bar), `next()`, and order/fill notifications, including terminal notifications. Reads during `init()`, `on_finish()`, or after execution raise `RuntimeError`. Each run independently maintains a constant-size current context.
 
-`bar_index/bar_state/data_index` 是只读保留属性，不允许同名类字段、方法、Input 绑定、运行参数、实例赋值或删除；Input 的展示标题仍可使用这些名字。
+`bar_index/bar_state/data_index` are reserved read-only properties: colliding class fields, methods, Input bindings, runtime parameters, instance assignment, and deletion are prohibited. Input display titles may still use these names.
 
-完整示例见 [bar_states.py](../../../examples/strategies/bar_states.py)。从首根调用 `next()`，此时只有一条可见历史：读取 `[-2]` 前检查长度，消费指标前检查对应通道的 `valid[-1]`。
+See [bar_states.py](../../../examples/strategies/bar_states.py) for a complete example. `next()` runs from the first bar, with only one visible history item: check length before reading `[-2]`, and check the corresponding channel's `valid[-1]` before consuming indicators.

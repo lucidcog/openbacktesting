@@ -1,4 +1,4 @@
-"""ta.vwma：固定依赖的计算封装与规范输出。"""
+"""ta.vwma: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.overlap.vwma import vwma as _calculate
 

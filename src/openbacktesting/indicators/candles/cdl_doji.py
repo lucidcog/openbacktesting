@@ -1,4 +1,4 @@
-"""Doji：历史范围均值阈值；明确本地实现，避免隐式TA-Lib与全样本epsilon。"""
+"""Doji: Threshold based on mean historical range; explicit local implementation avoids implicit TA-Lib and full-sample epsilon."""
 
 import numpy as np
 

@@ -1,4 +1,4 @@
-"""隔离验证：fork继承被异常退出进程遗留的进度锁时，回测仍须结束。"""
+"""Isolated regression: a backtest must finish when fork inherits a progress lock left by an abnormally terminated process."""
 
 import hashlib
 import json
@@ -6,9 +6,10 @@ import multiprocessing as mp
 import os
 
 import pandas as pd
+from tqdm.auto import tqdm
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.test import GOOG
-from tqdm.auto import tqdm
 
 
 class Signals(Strategy):
@@ -37,7 +38,7 @@ def run_backtest(connection):
 def abandon_progress_lock(connection):
     tqdm.get_lock().acquire()
     connection.send("held")
-    # 模拟worker在持有共享进度锁时被终止；操作系统不会自动释放此信号量。
+    # Simulate worker termination while holding the shared progress lock; the OS does not release this semaphore automatically.
     os._exit(0)
 
 
@@ -47,7 +48,7 @@ def collect(context):
     process.start()
     sender.close()
     try:
-        assert receiver.poll(5), "子进程回测被继承的进度锁阻塞"
+        assert receiver.poll(5), "Child backtest blocked on the inherited progress lock"
         result = receiver.recv()
         process.join(5)
         assert process.exitcode == 0
@@ -63,7 +64,7 @@ def collect(context):
 def main():
     context = mp.get_context("fork")
     expected = collect(context)
-    # 父进程只创建锁，不创建进度条或监视线程，污染状态局限于本探针。
+    # The parent creates only a lock, without a progress bar or monitor thread; contaminated state remains local to this probe.
     tqdm.get_lock()
     receiver, sender = context.Pipe(duplex=False)
     owner = context.Process(target=abandon_progress_lock, args=(sender,))

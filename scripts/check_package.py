@@ -1,4 +1,4 @@
-"""检查交付文件名称、来源清单、资源、文档链接与分发制品。"""
+"""Check deliverable names, provenance manifests, resources, documentation links, and artifacts."""
 
 import argparse
 import ast
@@ -13,8 +13,10 @@ import zipfile
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from check_language import REGISTRY, check_files
+
 ROOT = Path(__file__).resolve().parents[1]
-# 字符码规则避免检查配置自身带入禁用原文。
+# Character-code rules keep forbidden names out of the checker configuration itself.
 FORBIDDEN = tuple(
     bytes(codes)
     for codes in (
@@ -58,7 +60,7 @@ def scan(name, data):
         if isinstance(value, dict) and "pickle_base64" in value:
             haystack += b"\n" + base64.b64decode(value["pickle_base64"]).lower()
     return [
-        f"{name}: 禁用名称规则 {index + 1} 命中"
+        f"{name}: forbidden-name rule {index + 1} matched"
         for index, term in enumerate(FORBIDDEN)
         if term in haystack
     ]
@@ -101,20 +103,20 @@ def manifests(root):
         manifest = json.loads((root / filename).read_text())
         if filename == "extraction-manifest.json":
             if manifest["sourceFileCount"] != len(manifest[key]):
-                issues.append("抽离清单来源数量不一致")
+                issues.append("Extraction manifest source count mismatch")
         else:
             if manifest["sourceFileCount"] != len(manifest["sources"]):
-                issues.append("历史来源数量不一致")
+                issues.append("Historical source count mismatch")
             source_ids = {row["sourceId"] for row in manifest["sources"]}
             for row in manifest[key]:
                 if not set(row.get("sourceIds", [])) <= source_ids:
-                    issues.append(f"未知历史来源引用: {row.get('target')}")
+                    issues.append(f"Unknown historical source reference: {row.get('target')}")
         seen = set()
         for row in manifest[key]:
             name = row.get("target")
             if name is None:
                 if not row.get("excludedReason"):
-                    issues.append(f"来源未分类: {row.get('source')}")
+                    issues.append(f"Unclassified source: {row.get('source')}")
                 continue
             path = root / name
             if (
@@ -123,19 +125,19 @@ def manifests(root):
                 or ".." in Path(name).parts
                 or not path.resolve().is_relative_to(root.resolve())
             ):
-                issues.append(f"清单目标重复或越界: {name}")
+                issues.append(f"Duplicate or out-of-bounds manifest target: {name}")
                 continue
             seen.add(name)
             if not path.is_file():
-                issues.append(f"缺少目标: {name}")
+                issues.append(f"Missing target: {name}")
             elif row.get("targetSha256") != digest(path.read_bytes()):
-                issues.append(f"目标摘要不一致: {name}")
+                issues.append(f"Target digest mismatch: {name}")
         for folder in ("src", "examples"):
             for path in (root / folder).rglob("*"):
                 if path.is_file() and "__pycache__" not in path.parts:
                     name = path.relative_to(root).as_posix()
                     if name not in seen:
-                        issues.append(f"{filename}: 未登记文件: {name}")
+                        issues.append(f"{filename}: unregistered file: {name}")
     return issues
 
 
@@ -144,7 +146,7 @@ def links(root, paths):
     for path in paths:
         if path.suffix != ".md":
             continue
-        # 围栏中的代码不是 Markdown 链接。
+        # Code inside fences is not a Markdown link.
         text = re.sub(r"```.*?```", "", path.read_text(), flags=re.DOTALL)
         for link in re.findall(r"\]\(([^\s)]+)", text):
             parts = urlsplit(link.strip("<>"))
@@ -152,7 +154,7 @@ def links(root, paths):
                 continue
             target = (path.parent / unquote(parts.path)).resolve()
             if not target.is_relative_to(root.resolve()) or not target.is_file():
-                issues.append(f"{path.relative_to(root)}: 无效本地链接 {link}")
+                issues.append(f"{path.relative_to(root)}: invalid local link {link}")
     return issues
 
 
@@ -162,27 +164,30 @@ def repository(root):
     for path in paths:
         name = path.relative_to(root).as_posix()
         if path.is_symlink():
-            issues.append(f"交付文件不可为符号链接: {name}")
+            issues.append(f"Deliverable must not be a symbolic link: {name}")
         data = path.read_bytes()
         issues.extend(scan(name, data))
         if path.suffix == ".py":
             try:
                 ast.parse(data, filename=name)
             except SyntaxError as error:
-                issues.append(f"Python 语法错误: {name}: {error}")
+                issues.append(f"Python syntax error: {name}: {error}")
     issues.extend(manifests(root))
     issues.extend(links(root, paths))
+    issues.extend(
+        check_files({path.relative_to(root).as_posix(): path.read_bytes() for path in paths})
+    )
     metadata = tomllib.loads((root / "pyproject.toml").read_text())
     project = metadata["project"]
     if project["name"] != "openbacktesting" or project["version"] != "0.2.0":
-        issues.append("发行身份或版本不一致")
+        issues.append("Distribution identity or version mismatch")
     for name in RESOURCES:
         if not (root / "src/openbacktesting" / name).is_file():
-            issues.append(f"运行资源缺失: {name}")
+            issues.append(f"Missing runtime resource: {name}")
     return issues, len(paths)
 
 
-def artifact(path):
+def artifact(path, registry_data=None):
     issues = []
     if zipfile.is_zipfile(path):
         with zipfile.ZipFile(path) as archive:
@@ -191,16 +196,16 @@ def artifact(path):
             }
         for resource in RESOURCES:
             if f"openbacktesting/{resource}" not in members:
-                issues.append(f"{path.name}: wheel 缺少资源 {resource}")
+                issues.append(f"{path.name}: wheel is missing resource {resource}")
         metadata = members.get("openbacktesting-0.2.0.dist-info/METADATA", b"")
         if b"Name: openbacktesting\n" not in metadata or b"Version: 0.2.0\n" not in metadata:
-            issues.append(f"{path.name}: wheel 发行元数据不一致")
+            issues.append(f"{path.name}: wheel distribution metadata mismatch")
     elif tarfile.is_tarfile(path):
         with tarfile.open(path) as archive:
             members = {}
             for member in archive:
                 if member.issym() or member.islnk():
-                    issues.append(f"{path.name}: 制品含链接 {member.name}")
+                    issues.append(f"{path.name}: artifact contains a link {member.name}")
                 if member.isfile():
                     members[member.name] = archive.extractfile(member).read()
         prefix = "openbacktesting-0.2.0/"
@@ -212,6 +217,8 @@ def artifact(path):
             "source-manifest.json",
             "extraction-manifest.json",
             "scripts/check_package.py",
+            "scripts/check_language.py",
+            REGISTRY,
             "tests/fixtures/portfolio.json",
             "examples/README.md",
             "docs/core/index.md",
@@ -220,15 +227,28 @@ def artifact(path):
         required += [f"src/openbacktesting/{name}" for name in RESOURCES]
         for name in required:
             if prefix + name not in members:
-                issues.append(f"{path.name}: sdist 缺少文件 {name}")
+                issues.append(f"{path.name}: sdist is missing file {name}")
     else:
-        return [f"无法识别制品: {path}"], 0
+        return [f"Unrecognized artifact: {path}"], 0
     for name, data in members.items():
         issues.extend(scan(f"{path.name}/{name}", data))
         if Path(name).is_absolute() or ".." in Path(name).parts:
-            issues.append(f"制品成员路径越界: {name}")
+            issues.append(f"Artifact member path escapes its root: {name}")
         if set(Path(name).parts) & LOCAL_OUTPUTS or Path(name).suffix in {".pyc", ".pyo"}:
-            issues.append(f"制品包含本地缓存或构建输出: {name}")
+            issues.append(f"Artifact contains local cache or build output: {name}")
+    normalized = {}
+    for name, data in members.items():
+        if name.startswith("openbacktesting-0.2.0/"):
+            name = name.removeprefix("openbacktesting-0.2.0/")
+        elif name.startswith("openbacktesting/"):
+            name = "src/" + name
+        normalized[name] = data
+    if REGISTRY in normalized:
+        registry_data = normalized[REGISTRY]
+    if registry_data is None:
+        registry_path = ROOT / REGISTRY
+        registry_data = registry_path.read_bytes() if registry_path.is_file() else None
+    issues.extend(check_files(normalized, registry_data, subset=True))
     return issues, len(members)
 
 
@@ -238,13 +258,15 @@ def main():
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
     issues, count = repository(args.root.resolve())
+    registry_path = args.root.resolve() / REGISTRY
+    registry_data = registry_path.read_bytes() if registry_path.is_file() else None
     for path in args.artifact:
-        errors, members = artifact(path)
+        errors, members = artifact(path, registry_data)
         issues.extend(errors)
-        print(f"检查制品 {path.name}: {members} 文件")
+        print(f"Checked artifact {path.name}: {members} files")
     if issues:
         raise SystemExit("\n".join(issues))
-    print(f"完整性检查通过: {count} 项目文件，禁用名称零命中")
+    print(f"Integrity check passed: {count} project files; no forbidden names found")
 
 
 if __name__ == "__main__":

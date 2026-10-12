@@ -99,7 +99,7 @@
             "trade_id": null,
             "expires_at": null,
             "valid_bars": null,
-            "tag_json": "{\"comment\": \"固定离线案例\", \"signal\": \"趋势入场\"}",
+            "tag_json": "{\"comment\": \"Fixed offline case\", \"signal\": \"Trend entry\"}",
             "group_id": null,
             "kind": "entry",
             "created_bar": 0
@@ -122,7 +122,7 @@
             "trade_id": "trade-1",
             "expires_at": null,
             "valid_bars": null,
-            "tag_json": "{\"comment\": \"固定离线案例\", \"signal\": \"趋势入场\"}",
+            "tag_json": "{\"comment\": \"Fixed offline case\", \"signal\": \"Trend entry\"}",
             "group_id": null,
             "kind": "entry",
             "created_bar": 1
@@ -145,7 +145,7 @@
             "trade_id": "trade-1",
             "expires_at": null,
             "valid_bars": null,
-            "tag_json": "{\"comment\": \"固定离线案例\", \"signal\": \"趋势入场\"}",
+            "tag_json": "{\"comment\": \"Fixed offline case\", \"signal\": \"Trend entry\"}",
             "group_id": null,
             "kind": "entry",
             "created_bar": 2
@@ -414,8 +414,8 @@
               "phase": "close",
               "sequence": 3,
               "price": 100.0,
-              "signal": "趋势入场",
-              "comment": "固定离线案例"
+              "signal": "Trend entry",
+              "comment": "Fixed offline case"
             },
             "exit": {
               "fillId": "fill-2",
@@ -428,8 +428,8 @@
               "phase": "close",
               "sequence": 7,
               "price": 112.0,
-              "signal": "趋势入场",
-              "comment": "固定离线案例"
+              "signal": "Trend entry",
+              "comment": "Fixed offline case"
             },
             "quantity": 1.0,
             "signedQuantity": 1.0,
@@ -478,8 +478,8 @@
               },
               "Duration": "2678400000000000",
               "Tag": {
-                "comment": "固定离线案例",
-                "signal": "趋势入场"
+                "comment": "Fixed offline case",
+                "signal": "Trend entry"
               },
               "trade_id": "trade-1",
               "entry_fill_id": "fill-1",
@@ -505,8 +505,8 @@
               "phase": "close",
               "sequence": 3,
               "price": 100.0,
-              "signal": "趋势入场",
-              "comment": "固定离线案例"
+              "signal": "Trend entry",
+              "comment": "Fixed offline case"
             },
             "exit": {
               "fillId": "fill-3",
@@ -519,8 +519,8 @@
               "phase": "close",
               "sequence": 11,
               "price": 98.0,
-              "signal": "趋势入场",
-              "comment": "固定离线案例"
+              "signal": "Trend entry",
+              "comment": "Fixed offline case"
             },
             "quantity": 1.0,
             "signedQuantity": 1.0,
@@ -569,8 +569,8 @@
               },
               "Duration": "5097600000000000",
               "Tag": {
-                "comment": "固定离线案例",
-                "signal": "趋势入场"
+                "comment": "Fixed offline case",
+                "signal": "Trend entry"
               },
               "trade_id": "trade-1",
               "entry_fill_id": "fill-1",
@@ -596,8 +596,8 @@
               "phase": "close",
               "sequence": 3,
               "price": 100.0,
-              "signal": "趋势入场",
-              "comment": "固定离线案例"
+              "signal": "Trend entry",
+              "comment": "Fixed offline case"
             },
             "exit": null,
             "remainingQuantity": 1.0,
@@ -619,8 +619,8 @@
               "reason": null
             },
             "tag": {
-              "comment": "固定离线案例",
-              "signal": "趋势入场"
+              "comment": "Fixed offline case",
+              "signal": "Trend entry"
             }
           }
         ]
@@ -4468,7 +4468,7 @@
         "breakdown": {
           "signal": [
             {
-              "key": "趋势入场",
+              "key": "Trend entry",
               "metrics": {
                 "closedFragmentCount": {
                   "value": 2,

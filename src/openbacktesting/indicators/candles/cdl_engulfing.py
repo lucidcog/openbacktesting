@@ -1,4 +1,4 @@
-"""cdl_engulfing：固定原生形态与独立有效掩码。"""
+"""cdl_engulfing: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_engulfing import cdl_engulfing as _calculate
 

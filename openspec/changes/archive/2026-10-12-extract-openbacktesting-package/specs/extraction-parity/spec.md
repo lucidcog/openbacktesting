@@ -1,41 +1,41 @@
 ## Purpose
 
-确保抽离后的包保有源快照中已实现的回测与研究能力，迁移范围能够核对，测试可独立复现，身份变化与计算行为变化能够被区分，避免以更名为由丢失功能或放宽已有验证。
+Ensure the extracted package retains the source snapshot's implemented backtesting and research capabilities, provides an auditable migration scope and independently reproducible tests, and distinguishes identity changes from computational changes without losing functionality or weakening validation.
 
 ## ADDED Requirements
 
-### Requirement: 迁移范围可核对
+### Requirement: Auditable migration scope
 
-迁移记录 MUST 标明源快照、迁入文件及必要的包外依赖，目标文件摘要 MUST 与实际内容一致；排除项 MUST 有明确理由，不得遗漏运行必需模块、资源、测试或示例。记录 MUST 同时满足名称零残留约束。
+Migration records MUST identify the source snapshot, imported files, and necessary external dependencies. Target file digests MUST match actual contents. Exclusions MUST have explicit reasons and MUST NOT omit required runtime modules, resources, tests, or examples. Records MUST also satisfy the zero-residual-name constraint.
 
-#### Scenario: 核对迁移清单
+#### Scenario: Verify migration manifests
 
-- **WHEN** 检查迁入内容、目标路径和文件摘要
-- **THEN** 所有计划迁入文件均可定位且摘要匹配，无未说明的功能性删减或缺失
+- **WHEN** imported contents, target paths, and file digests are checked
+- **THEN** every planned imported file is present with a matching digest, without unexplained functional removals or missing files
 
-### Requirement: 保持既有计算语义
+### Requirement: Preserve existing computational semantics
 
-在相同输入、参数与依赖条件下，新包 MUST 保持源包的公开 API 签名及回测、指标、订单撮合、统计、优化和纯数据绘图语义；仅允许预先声明的包身份、品牌标识及路径字段变化。
+Under identical inputs, parameters, and dependencies, the new package MUST preserve the source package's public API signatures and semantics for backtests, indicators, order matching, statistics, optimization, and data-only plotting. Only predeclared package-identity, branding, and path-field changes are permitted.
 
-#### Scenario: 原数值基线回归
+#### Scenario: Regress existing numerical baselines
 
-- **WHEN** 对新包执行迁入的固定行情、策略、订单与指标回归测试
-- **THEN** 数值结果、事件顺序及错误边界满足原有断言；身份与路径字段按映射更新，数值预期不因迁移被重写
+- **WHEN** imported fixed-market-data, strategy, order, and indicator regressions are run against the new package
+- **THEN** numerical results, event order, and error boundaries satisfy existing assertions; identity and path fields follow their mappings, and numerical expectations are not rewritten for migration
 
-### Requirement: 测试和示例独立运行
+### Requirement: Independent tests and examples
 
-迁入测试和示例 MUST 只依赖新包及当前仓库内文件，不得通过源仓库或旧发行包补齐功能。现有断言 MUST 保留，仅适配身份与路径；慢示例 MUST 保留显式启用机制。
+Imported tests and examples MUST depend only on the new package and files in the current repository, without obtaining missing functionality from the source repository or former distribution. Existing assertions MUST remain, with only identity and path adaptations. Slow examples MUST retain an explicit opt-in mechanism.
 
-#### Scenario: 离开原工程布局执行测试
+#### Scenario: Execute outside the original project layout
 
-- **WHEN** 在当前仓库或独立解压的 sdist 中运行测试和默认示例检查
-- **THEN** 既有覆盖范围可以执行，不因缺少原仓库研究记录、夹具或父级配置失败
+- **WHEN** tests and default example checks run in the repository or an independently extracted sdist
+- **THEN** existing coverage executes without failures caused by missing original research records, fixtures, or parent configuration
 
-### Requirement: 验证结果可追溯
+### Requirement: Traceable validation results
 
-实施交付 MUST 记录实际使用的 Python 版本、依赖环境、静态检查、回归测试与制品验证结果，明确跳过或未验证项；仅创建提案或成功构建不得被表述为运行验收通过。
+Implementation delivery MUST record the actual Python version, dependency environment, static checks, regressions, and artifact validation results and identify skipped or unverified items. A proposal or successful build alone MUST NOT be presented as successful runtime acceptance.
 
-#### Scenario: 交付验证记录
+#### Scenario: Deliver a validation record
 
-- **WHEN** 宣布抽离实施完成
-- **THEN** 必需检查和回归均有真实成功记录，平台覆盖与未运行的可选慢示例被明确说明
+- **WHEN** extraction implementation is declared complete
+- **THEN** required checks and regressions have actual success records, and platform coverage and unexecuted optional slow examples are explicitly described

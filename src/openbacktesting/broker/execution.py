@@ -1,4 +1,4 @@
-"""独立的确定性OHLC成交价格政策。"""
+"""Independent deterministic OHLC fill-price policy."""
 
 from dataclasses import dataclass
 
@@ -7,27 +7,27 @@ from openbacktesting.broker.models import finite
 
 @dataclass(frozen=True)
 class Slippage:
-    """无滑点、固定金额或基点滑点；每次成交只应用一次。"""
+    """No slippage, fixed-price slippage, or basis-point slippage; apply once per fill."""
 
     mode: str = "none"
     value: float = 0
 
     def __post_init__(self):
         if self.mode not in ("none", "fixed", "bps"):
-            raise ValueError("slippage模式必须为none/fixed/bps")
+            raise ValueError("slippage mode must be none/fixed/bps")
         object.__setattr__(self, "value", finite(self.value, "slippage"))
         if self.value < 0 or (self.mode == "none" and self.value != 0):
-            raise ValueError("slippage值不合法")
+            raise ValueError("Invalid slippage value")
 
     def cost(self, price: float) -> float:
-        """返回非负单单位滑点距离。"""
+        """Return a nonnegative slippage distance per unit."""
         if self.mode == "fixed":
             return self.value
         return price * self.value / 10000 if self.mode == "bps" else 0.0
 
 
 def match_price(request, *, triggered, open_, high, low):
-    """返回候选基准价及触发状态，不修改请求。"""
+    """Return the candidate reference price and trigger state without modifying the request."""
     buy = request.side == "buy"
     stop = request.stop if not triggered else None
     if stop is not None:
@@ -45,7 +45,7 @@ def match_price(request, *, triggered, open_, high, low):
 
 
 def execution_price(base, side, *, spread, slippage, instrument, limit, bounds=None):
-    """先应用成本和网格，再检查限价；普通执行约束于OHLC范围。"""
+    """Apply costs and the grid before checking the limit; ordinary execution is constrained to the OHLC range."""
     sign = 1 if side == "buy" else -1
     price = base * (1 + sign * spread) + sign * slippage.cost(base)
     price = instrument.price(price, side=side)

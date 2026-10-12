@@ -1,4 +1,4 @@
-"""cdl_inside：固定原生形态与独立有效掩码。"""
+"""cdl_inside: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_inside import cdl_inside as _calculate
 

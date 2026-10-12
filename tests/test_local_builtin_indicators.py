@@ -1,15 +1,16 @@
-"""局部指标扩展：手算、拒绝域、每前缀因果性及真实句柄。"""
+"""Local indicator extensions: hand calculations, rejection domains, prefix causality, and real handles."""
 
 from collections import Counter
 
 import numpy as np
 import pandas as pd
 import pytest
+from test_local_builtin_baseline import DEFAULTS, baseline_data
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.indicators import IndicatorCache, compute
 from openbacktesting.indicators.statistics.mode import _ModeWindow
 from openbacktesting.indicators.types import IndicatorError
-from test_local_builtin_baseline import DEFAULTS, baseline_data
 
 
 def calculate(name, frame, **params):
@@ -136,7 +137,7 @@ def test_linreg_parameter_domain_and_short():
     assert not calculate("linreg", f.iloc[:2], offset=1).valid.any()
     assert not calculate("linreg", f, offset=1, length=1).valid.any()
     huge = pd.DataFrame({"Close": [1.0, 2.0, 3.0]})
-    # 有限参数仍可能造成输出溢出。
+    # Finite parameters can still cause output overflow.
     huge["Close"] = [1.0, 10.0, 20.0]
     assert not calculate("linreg", huge, length=3, offset=10**308).valid[-1]
 
@@ -256,8 +257,8 @@ def test_method_handles_and_input_boundaries():
 def test_tr_wrapper_preserves_backend_rejected_input():
     from openbacktesting.indicators.volatility.true_range import compute as wrapped
 
-    # 公开运行时已校验来源；适配器仍须保留后端拒绝输入时的空结果契约。
-    # 这里直接调用适配器，避免把公共入口的 missing-input 当作算法返回值。
+    # The public runtime validates sources; adapters must retain the empty-result contract when the backend rejects input.
+    # Call the adapter directly to avoid confusing a public missing-input error with an algorithm result.
     prices = pd.Series([10.0])
     assert (
         wrapped(high=None, low=prices, close=prices, drift=1, talib=False, handle_na=False) is None

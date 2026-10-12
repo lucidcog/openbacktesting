@@ -1,4 +1,4 @@
-"""ta.crsi：独立公式与固定初始化契约。"""
+"""ta.crsi: Independent formula with a fixed initialization contract."""
 
 import numpy as np
 import pandas as pd

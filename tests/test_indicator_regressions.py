@@ -1,8 +1,9 @@
-"""内置指标改造前已复现的历史边界，断言目标行为而非错误现状。"""
+"""Historical boundaries reproduced before the indicator overhaul; assert intended behavior rather than existing bugs."""
 
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy
 
 
@@ -53,7 +54,7 @@ def test_same_length_wrong_index_is_rejected():
             self.line = self.ind(lambda: pd.Series(np.arange(10.0), index=data.index[::-1]))
 
         def next(self):
-            raise AssertionError("错位指标不应进入回测")
+            raise AssertionError("Misaligned indicators must not enter the backtest")
 
-    with pytest.raises(ValueError, match="index|索引"):
+    with pytest.raises(ValueError, match="index"):
         Backtest(data, Probe).run()

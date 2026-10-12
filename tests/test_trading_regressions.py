@@ -1,7 +1,8 @@
-"""交易核心研究探针：使用人工预期验证因果性、费用与暴露。"""
+"""Trading-core research probe: manual expectations verify causality, fees, and exposure."""
 
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Strategy
 from openbacktesting.lib import TrailingStrategy
 

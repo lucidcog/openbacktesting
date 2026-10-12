@@ -1,4 +1,4 @@
-"""辅助设施的异常、资源生命周期和平台分派契约。"""
+"""Exceptions, resource lifecycles, and platform dispatch contracts for utilities."""
 
 import builtins
 import importlib.util
@@ -7,12 +7,13 @@ import sys
 from types import SimpleNamespace
 from unittest.mock import Mock
 
-import openbacktesting
 import numpy as np
 import pandas as pd
 import pytest
-from openbacktesting import _util
 from openbacktesting._util import SharedMemory, SharedMemoryManager, _Array, _Data, patch
+
+import openbacktesting
+from openbacktesting import _util
 from openbacktesting.portfolio.stats import dummy_stats
 from openbacktesting.test import GOOG
 
@@ -81,7 +82,7 @@ def test_linux_pool_selects_fork_without_changing_real_start_method(monkeypatch,
         set_method.assert_called_once_with("fork")
 
 
-@pytest.mark.skipif(sys.platform == "win32", reason="验证 POSIX 的显式 unlink 语义")
+@pytest.mark.skipif(sys.platform == "win32", reason="Verify explicit POSIX unlink semantics")
 def test_shared_memory_track_false_can_unlink_without_unregistering():
     shm = SharedMemory(create=True, size=8, track=False)
     try:
@@ -165,7 +166,7 @@ def test_new_python_uses_standard_shared_memory_class(monkeypatch):
 
     from openbacktesting.simulation import parallel
 
-    # 仅验证版本选择，不把替身视为新 Python 运行时验收。
+    # Verify version selection only; a test double is not acceptance evidence for a new Python runtime.
     monkeypatch.setattr(sys, "version_info", (3, 13))
     spec = importlib.util.spec_from_file_location(
         "openbacktesting.simulation.parallel_future", parallel.__file__
@@ -175,7 +176,7 @@ def test_new_python_uses_standard_shared_memory_class(monkeypatch):
     assert module.SharedMemory is shared_memory.SharedMemory
 
 
-@pytest.mark.skipif(sys.version_info >= (3, 13), reason="仅旧版兼容包装器实现显式 unlink")
+@pytest.mark.skipif(sys.version_info >= (3, 13), reason="Only the legacy compatibility wrapper implements explicit unlink")
 @pytest.mark.parametrize("posix, name", [(False, "segment"), (True, None)])
 def test_legacy_unlink_ignores_non_posix_or_missing_name(monkeypatch, posix, name):
     from openbacktesting.simulation import parallel
@@ -204,10 +205,10 @@ def test_progress_parent_preserves_options_and_child_never_constructs_bar(monkey
     renderer.reset_mock()
     monkeypatch.setattr(util, "parent_process", lambda: object())
     assert util._tqdm(sequence, disable=False) is sequence
-    renderer.assert_not_called()  # disable=True也会先经过tqdm.__new__并触碰共享锁。
+    renderer.assert_not_called()  # disable=True still passes through tqdm.__new__ and touches the shared lock.
 
 
-@pytest.mark.skipif("fork" not in mp.get_all_start_methods(), reason="验证fork继承的进度锁")
+@pytest.mark.skipif("fork" not in mp.get_all_start_methods(), reason="Verify the progress lock inherited by fork")
 def test_fork_backtest_survives_abandoned_progress_lock():
     import json
     import subprocess

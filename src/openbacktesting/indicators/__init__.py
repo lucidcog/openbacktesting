@@ -1,4 +1,4 @@
-"""内置指标公开入口；具体计算实现按类别维护。"""
+"""Public entry points for built-in indicators; computation implementations are maintained by category."""
 
 from .runtime import DEFAULT_CACHE_BYTES as DEFAULT_CACHE_BYTES
 from .runtime import IndicatorCache as IndicatorCache

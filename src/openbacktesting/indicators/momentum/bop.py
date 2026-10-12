@@ -1,4 +1,4 @@
-"""ta.bop：固定依赖的计算封装与规范输出。"""
+"""ta.bop: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.bop import bop as _calculate
 

@@ -1,4 +1,4 @@
-"""与算法供应商无关的指标定义、不可变结果及游标视图。"""
+"""Provider-independent indicator definitions, immutable results, and cursor views."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from numpy.lib.mixins import NDArrayOperatorsMixin
 
 
 class IndicatorError(ValueError):
-    """稳定错误类别；detail 不充当程序分派接口。"""
+    """Stable error categories; detail is not a programmatic dispatch interface."""
 
     def __init__(self, code, indicator, detail, *, backend=None, parameter=None):
         self.code = code
@@ -23,10 +23,10 @@ class IndicatorError(ValueError):
 
 
 def immutable(values, dtype=None):
-    """以不可写 bytes 为底层，不能通过 setflags 恢复写权限。"""
+    """Backed by immutable bytes, so setflags cannot restore write access."""
     array = np.asarray(values, dtype=dtype)
     if array.dtype.hasobject:
-        raise ValueError("指标数组不接受 object dtype")
+        raise ValueError("Indicator arrays do not accept object dtype")
     return np.frombuffer(array.tobytes(), dtype=array.dtype).reshape(array.shape)
 
 
@@ -37,7 +37,7 @@ class IndicatorCursor:
 
 
 class IndicatorHandle(NDArrayOperatorsMixin):
-    """时间维在最后；所有派生视图在读取时才应用游标和选择器。"""
+    """Time is the final dimension; all derived views apply cursors and selectors only when read."""
 
     def __init__(
         self,
@@ -83,16 +83,16 @@ class IndicatorHandle(NDArrayOperatorsMixin):
         return self._opts["index"][np.atleast_2d(indices)[0]]
 
     def __array__(self, dtype=None, copy=None):
-        # 转换只保存当前可见快照；不会经 .base 暴露完整未来数组。
+        # Conversion saves only the currently visible snapshot; .base does not expose the complete future array.
         if copy is False:
-            raise ValueError("指标转换需要隔离快照，不能请求 copy=False")
+            raise ValueError("Indicator conversion requires an isolated snapshot; copy=False is not allowed")
         if copy is True:
             return np.array(self._view(), dtype=dtype, copy=True)
         return immutable(self._view(), dtype)
 
     def __array_ufunc__(self, ufunc, method, *inputs, **kwargs):
         if kwargs.get("out") is not None or method == "at":
-            raise TypeError("指标只读；请先复制为数组再执行原地运算")
+            raise TypeError("Indicators are read-only; copy to an array before in-place operations")
         values = [
             value._view() if isinstance(value, IndicatorHandle) else value for value in inputs
         ]
@@ -129,44 +129,44 @@ class IndicatorHandle(NDArrayOperatorsMixin):
 
     @property
     def shape(self):
-        """当前可见前缀的形状；多输出的时间轴位于最后。"""
+        """Shape of the currently visible prefix; time is the last axis for multiple outputs."""
         return self._view().shape
 
     @property
     def ndim(self):
-        """输出维数；单通道为 1，多通道为 2。"""
+        """Output dimensions: 1 for a single channel, 2 for multiple channels."""
         return self._view().ndim
 
     @property
     def dtype(self):
-        """底层只读数值缓冲区的数据类型。"""
+        """Data type of the underlying read-only numeric buffer."""
         return self._values.dtype
 
     @property
     def s(self):
-        """首通道当前前缀的 pandas Series 副本；保存后不随游标增长。"""
+        """pandas Series copy of the first channel's current prefix; saved copies do not grow with the cursor."""
         return pd.Series(
             np.atleast_2d(np.asarray(self))[0].copy(), index=self._index(), name=self.name
         )
 
     @property
     def df(self):
-        """全部通道当前前缀的 pandas DataFrame 副本。"""
+        """pandas DataFrame copy of all channels' current prefixes."""
         value = np.atleast_2d(np.asarray(self))
         names = self.name if isinstance(self.name, (list, tuple)) else [self.name] * len(value)
         return pd.DataFrame(value.T.copy(), index=self._index(), columns=names)
 
     def copy(self):
-        """返回当前前缀的可写 NumPy 副本，不再跟随游标。"""
+        """Return a writable NumPy copy of the current prefix that no longer follows the cursor."""
         return np.array(self, copy=True)
 
     def astype(self, dtype):
-        """按 dtype 转换当前前缀为 NumPy 数组快照，不保留动态游标。"""
+        """Convert the current prefix to a NumPy array snapshot with dtype; do not retain a dynamic cursor."""
         return np.asarray(self, dtype=dtype)
 
     @property
     def valid(self):
-        """当前前缀各通道的只读有效性掩码；False 不表示数值零。"""
+        """Read-only validity masks for each channel's current prefix; False does not mean numeric zero."""
         value = self._valid[..., : self._cursor.length]
         for selector in self._selectors:
             value = value[selector]
@@ -174,12 +174,12 @@ class IndicatorHandle(NDArrayOperatorsMixin):
 
     @property
     def ready(self):
-        """当前前缀最低历史条件是否满足的只读掩码。"""
+        """Read-only mask indicating whether the current prefix meets minimum-history conditions."""
         return immutable(self._ready[: self._cursor.length])
 
     @property
     def metadata(self):
-        """返回来源元数据的深拷贝，修改不影响登记结果。"""
+        """Return a deep copy of provenance metadata; modifications do not affect the registered result."""
         return deepcopy(self._metadata)
 
     def _set_required(self, required):
@@ -189,11 +189,11 @@ class IndicatorHandle(NDArrayOperatorsMixin):
         )
 
     def ready_at(self, bar):
-        """查询必要输出与最低历史条件的就绪状态；不控制策略回调。"""
+        """Query readiness of required outputs and minimum-history conditions; does not control strategy callbacks."""
         return bool(self._gating[bar])
 
     def first_ready(self):
-        """返回必要输出最早就绪位置；从未就绪时为总长度，不控制回调。"""
+        """Return the earliest ready position for required outputs, or total length if never ready; does not control callbacks."""
         positions = np.flatnonzero(self._gating)
         return int(positions[0]) if positions.size else len(self._gating)
 
@@ -210,7 +210,7 @@ class IndicatorHandle(NDArrayOperatorsMixin):
 
 @dataclass(frozen=True)
 class Parameter:
-    """指标参数定义：default/kind 为默认值与类型，minimum/maximum/choices 限定允许值。"""
+    """Indicator parameter definition: default/kind define default value and type; minimum/maximum/choices constrain allowed values."""
 
     default: object
     kind: str
@@ -219,7 +219,7 @@ class Parameter:
     choices: tuple = ()
 
     def normalize(self, value, indicator, name):
-        """校验 value 的类型、边界和 choices 并转换为原生类型；失败抛 IndicatorError，indicator/name 用于定位。"""
+        """Validate value type, bounds, and choices and convert to a native type; failures raise IndicatorError, located by indicator/name."""
         types = {
             "int": (int, np.integer),
             "float": (int, float, np.integer, np.floating),
@@ -249,7 +249,7 @@ class Parameter:
 
 @dataclass(frozen=True)
 class IndicatorSpec:
-    """已审核指标定义；字段含身份、输入/输出、参数域、后端、有效性与历史要求。"""
+    """Reviewed indicator definition containing identity, inputs/outputs, parameter domains, backends, validity, and history requirements."""
 
     id: str
     source: str
@@ -280,7 +280,7 @@ class IndicatorSpec:
     validity: str = "current-inputs"
 
     def history_required(self, parameters):
-        """根据规范化 parameters 计算最低历史长度；不代表每个输出已经有效。"""
+        """Calculate minimum history length from normalized parameters; this does not imply every output is valid."""
         return max(
             [
                 self.minimum,
@@ -292,53 +292,53 @@ class IndicatorSpec:
 
     def __post_init__(self):
         if not self.id or not self.outputs or len(set(self.outputs)) != len(self.outputs):
-            raise ValueError("指标身份和唯一输出不能为空")
+            raise ValueError("Indicator identity and unique outputs must not be empty")
         aliases = [name for name, _ in self.aliases]
         if len(set(aliases)) != len(aliases) or any(
             name in self.outputs or target not in self.outputs for name, target in self.aliases
         ):
-            raise ValueError("输出别名重复或目标非法")
+            raise ValueError("Duplicate output aliases or invalid targets")
         if self.kind not in ("indicator", "utility", "pattern") or self.validity not in (
             "current-inputs",
             "output",
         ):
-            raise ValueError("未知指标种类或有效性政策")
+            raise ValueError("Unknown indicator kind or validity policy")
         if len(set(self.input_args)) != len(self.input_args) or not set(self.input_args) <= set(
             self.inputs
         ):
-            raise ValueError("公开输入参数必须唯一且已声明")
+            raise ValueError("Public input parameters must be unique and declared")
         defaults = dict(self.input_defaults)
         if len(defaults) != len(self.input_defaults) or not defaults.keys() <= set(self.inputs):
-            raise ValueError("默认输入必须唯一且已声明")
+            raise ValueError("Default inputs must be unique and declared")
         names = [name for name, _ in self.parameters]
         if len(set(names)) != len(names) or set(names) & {"inputs", "backend", "required_outputs"}:
-            raise ValueError("参数重复或占用执行选项")
+            raise ValueError("Duplicate parameters or parameters reserved for execution options")
         if self.required is not None and not set(self.required) <= set(self.outputs):
-            raise ValueError("必要输出未在定义中声明")
+            raise ValueError("Required outputs are not declared in the definition")
 
     def normalize(self, parameters):
-        """校验 parameters 映射，填充目录默认值并验证参数关系；非法值抛 IndicatorError。"""
+        """Validate the parameters mapping, fill catalog defaults, and check parameter relationships; invalid values raise IndicatorError."""
         definitions = dict(self.parameters)
         unknown = parameters.keys() - definitions.keys()
         if unknown:
-            raise IndicatorError("invalid-parameter", self.id, f"未知参数: {sorted(unknown)}")
+            raise IndicatorError("invalid-parameter", self.id, f"Unknown parameter: {sorted(unknown)}")
         values = {
             name: rule.normalize(parameters.get(name, rule.default), self.id, name)
             for name, rule in self.parameters
         }
         if "fast" in values and "slow" in values and values["fast"] >= values["slow"]:
-            raise IndicatorError("invalid-parameter", self.id, "fast 必须小于 slow")
+            raise IndicatorError("invalid-parameter", self.id, "fast must be less than slow")
         if "ddof" in values and "length" in values and values["ddof"] >= values["length"]:
-            raise IndicatorError("invalid-parameter", self.id, "ddof 必须小于 length")
+            raise IndicatorError("invalid-parameter", self.id, "ddof must be less than length")
         for lower, upper in (("minperiod", "maxperiod"), ("slowlimit", "fastlimit")):
             if lower in values and upper in values and values[lower] >= values[upper]:
-                raise IndicatorError("invalid-parameter", self.id, f"{lower} 必须小于 {upper}")
+                raise IndicatorError("invalid-parameter", self.id, f"{lower} must be less than {upper}")
         if "kc_scalar_wide" in values and not (
             values["kc_scalar_wide"] > values["kc_scalar_normal"] > values["kc_scalar_narrow"]
         ):
             raise IndicatorError(
-                "invalid-parameter", self.id, "KC 系数必须满足 wide > normal > narrow"
+                "invalid-parameter", self.id, "KC coefficients must satisfy wide > normal > narrow"
             )
         if self.id == "ta.frama" and values["length"] % 2:
-            raise IndicatorError("invalid-parameter", self.id, "length 必须为偶数")
+            raise IndicatorError("invalid-parameter", self.id, "length must be even")
         return values

@@ -1,7 +1,7 @@
-"""首根逐根执行：数据首尾、整数位置、标签及局部有效性防护。
+"""Execute from the first bar: data boundaries, integer positions, labels, and local validity guards.
 
-随包 GOOG 日线，无额外依赖。只记录与着色，不下单；手续费和仓位不参与示例。
-首尾状态针对固定输入，不能作为实时市场开闭或运行成功的判断。
+Bundled GOOG daily data, with no extra dependencies. Log and color only; no orders, fees, or sizing.
+Boundary states describe fixed input data and do not indicate live market hours or run success.
 """
 
 from openbacktesting import Strategy, backtest, colors
@@ -13,16 +13,16 @@ class BarStates(Strategy):
         self.average = self.ta.sma(self.close, length=3)
         self.observed = []
         self.above_average = []
-        self.plotting.line(self.average, title="三根均线")
+        self.plotting.line(self.average, title="Three-bar moving average")
 
     def next(self):
-        # 冻结快照适合保存；data_index 是标签，bar_index 是零起点位置。
+        # Frozen snapshots can be saved; data_index is a label and bar_index is a zero-based position.
         state = self.bar_state
         self.observed.append((self.bar_index, self.data_index[-1], state))
         if state.is_first:
             self.plotting.bg_color(colors.BLUE)
         if state.is_last:
             self.plotting.bar_color(colors.ORANGE)
-        # 只保护依赖均线的逻辑，均线未就绪时仍执行上方的首根记录与着色。
+        # Guard only logic that depends on the moving average; first-bar logging and coloring above still run before it is ready.
         if self.average.valid[-1]:
             self.above_average.append(self.close[-1] > self.average[-1])

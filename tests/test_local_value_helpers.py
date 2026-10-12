@@ -1,10 +1,11 @@
-"""价格网格与颜色梯度的值、拒绝域及真实策略消费。"""
+"""Values, rejection domains, and real strategy consumption for price grids and color gradients."""
 
 from dataclasses import FrozenInstanceError
 
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import Backtest, Color, Strategy
 from openbacktesting.broker import InstrumentSpec
 from openbacktesting.plotting import export_result
@@ -31,7 +32,7 @@ def test_tick_input_errors(value):
 
 
 def test_tick_missing_zero_and_unrepresentable():
-    with pytest.raises(ValueError, match="显式"):
+    with pytest.raises(ValueError, match="explicit"):
         InstrumentSpec().round_price_to_tick(100)
     with pytest.raises(ValueError):
         InstrumentSpec(price_tick=1).round_price_to_tick(0.1)

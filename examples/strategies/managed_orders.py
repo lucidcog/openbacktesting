@@ -1,10 +1,11 @@
-"""到期、混合规模原子入场OCO、保护组与百分比跟踪；每次成交滑点0.5。
+"""Expiry, atomic mixed-size entry OCO, protection groups, and percentage trailing stops; slippage is 0.5 per fill.
 
-同bar双触发OCO按提交顺序决定并留下歧义诊断；跟踪价在收盘更新，下一根生效。
-这只是确定性OHLC政策，不表示可以推断真实盘中路径。
+Same-bar dual-trigger OCO follows submission order and records ambiguity; trailing prices update at close and take effect on the next bar.
+This deterministic OHLC policy cannot establish the actual intrabar path.
 """
 
 import pandas as pd
+
 from openbacktesting import SlippageType, Strategy, backtest
 from openbacktesting.broker import OrderRequest
 
@@ -13,7 +14,7 @@ from openbacktesting.broker import OrderRequest
 class ManagedOrders(Strategy):
     def init(self):
         self.reference = self.ta.sma(self.close, length=2)
-        # 这里只记录意图；提交时才按同一账户与 Close 换算。
+        # Record intent only here; convert on submission using the same account and Close.
         self.long_entry = OrderRequest(side="buy", percent=1, stop=105, sl=90, tp=130)
         self.short_entry = OrderRequest(side="sell", amount=100, stop=95)
 

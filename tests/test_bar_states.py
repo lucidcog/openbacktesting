@@ -1,4 +1,4 @@
-"""首根执行、状态生命周期和首根资金基准的可观察契约。"""
+"""Observable contracts for first-bar execution, state lifecycles, and initial-capital baselines."""
 
 import pickle
 from dataclasses import FrozenInstanceError
@@ -6,17 +6,18 @@ from dataclasses import FrozenInstanceError
 import numpy as np
 import pandas as pd
 import pytest
+from test_engine_edges import Idle, flat_data
+
 from openbacktesting import Backtest, BarState
 from openbacktesting.indicators.types import IndicatorHandle
 from openbacktesting.inputs import InputError
 from openbacktesting.lib import compute_stats
 from openbacktesting.strategy import BarState as StrategyBarState
-from test_engine_edges import Idle, flat_data
 
 
 def unavailable(owner):
     for name in ("bar_index", "bar_state"):
-        with pytest.raises(RuntimeError, match="不存在当前执行 bar"):
+        with pytest.raises(RuntimeError, match="no current execution bar"):
             getattr(owner, name)
 
 
@@ -295,7 +296,7 @@ def test_primary_and_finish_errors_keep_context_closed():
 def test_input_binding_rejected_but_display_title_allowed(name):
     from openbacktesting import inputs
 
-    conflict = type("Conflict", (Idle,), {name: inputs.int(2, title="参数")})
+    conflict = type("Conflict", (Idle,), {name: inputs.int(2, title="parameter")})
     with pytest.raises(InputError, match=name):
         Backtest(flat_data(), conflict).run()
     allowed = type("Allowed", (Idle,), {"period": inputs.int(2, title=name)})

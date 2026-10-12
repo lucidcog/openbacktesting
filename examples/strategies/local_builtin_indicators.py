@@ -1,6 +1,6 @@
-"""八项本地指标扩展；宿主以 Reset/Regime 提供因果锚点与离散观测，无下单。
+"""Eight local indicator extensions; the host supplies causal anchors and discrete observations through Reset/Regime. No orders.
 
-来源使用同一图表的列名或句柄；多输出按通道检查 valid，不能直接传 pandas Series。
+Sources use column names or handles from the same chart; check valid per output channel and do not pass pandas Series directly.
 """
 
 from openbacktesting import Strategy, backtest
@@ -19,8 +19,8 @@ class LocalBuiltinIndicators(Strategy):
         self.fit = self.ta.linreg(self.close, length=3, offset=1)
         self.levels = self.ta.pivot_points(inputs={"anchor": "Reset"}, developing=True)
         self.observed = []
-        self.plotting.line(self.weighted, title="条件 VWAP")
-        self.plotting.line(self.bands.upper, title="加权总体标准差上带")
+        self.plotting.line(self.weighted, title="Conditional VWAP")
+        self.plotting.line(self.bands.upper, title="Weighted population-standard-deviation upper band")
 
     def next(self):
         handles = (

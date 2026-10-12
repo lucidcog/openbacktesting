@@ -1,4 +1,4 @@
-"""原生回测配置、生命周期与逐 bar 执行协调。"""
+"""Native backtest configuration, lifecycle, and per-bar execution coordination."""
 
 from __future__ import annotations
 
@@ -43,19 +43,19 @@ from openbacktesting.util import _tqdm
 
 
 class Backtest:
-    """保存单资产历史行情、策略及线性保证金账户配置。
+    """Store single-asset historical market data, strategy, and linear margin-account configuration.
 
-    data的OHLC必须为有限正价，索引有序且唯一。instrument明确数量步长和可选价格网格。
-    cash为初始余额；margin为名义保证金比例；hedging控制是否保留双向批次。
-    commission可为比例、(固定额, 比例)、Commission或纯费用函数，按每次实际执行收取一次。
-    spread及slippage作用于每次买卖执行；滑点不会允许订单越过限价。
-    execution_timing支持next_open或same_close；end_policy支持mark_to_market或close_at_last_close。
-    allow_short控制新增空头，max_gross_exposure是总名义/权益上限；合法减仓始终允许。
-    exclusive_orders在新普通订单提交时取消旧入场并提交现有批次退出。
-    context可选；提供时要求带时区索引并在副本上转换显示时区，策略可读self.timeframe。
-    risk_free_rate为年化小数，仅影响统计；default_order_size提供省略qty时的请求预算。
-    底层构造不自动合并@backtest设置，声明接管由runtime负责。
-    不支持旧size比例猜测、价格缩放、跨币种、成交量部分成交或实盘执行。
+    data OHLC must contain finite positive prices, with an ordered unique index. instrument specifies quantity steps and an optional price grid.
+    cash is the initial balance; margin is the notional margin fraction; hedging controls retention of two-sided lots.
+    commission may be a rate, (fixed fee, rate), Commission, or pure fee function, charged once per actual execution.
+    spread and slippage apply to every buy/sell execution; slippage never permits orders to cross their limits.
+    execution_timing supports next_open or same_close; end_policy supports mark_to_market or close_at_last_close.
+    allow_short controls new short positions; max_gross_exposure caps gross notional/equity; valid reductions are always allowed.
+    exclusive_orders cancels previous entries and submits exits for existing lots when a new ordinary order is submitted.
+    context is optional; when provided, it requires a timezone-aware index and converts display timezone on a copy; strategies can read self.timeframe.
+    risk_free_rate is an annualized fraction affecting statistics only; default_order_size supplies the request budget when qty is omitted.
+    Low-level construction does not automatically merge @backtest settings; runtime handles declaration adoption.
+    No legacy size-fraction inference, price scaling, cross-currency trading, volume-based partial fills, or live execution.
     """
 
     def __init__(
@@ -87,9 +87,9 @@ class Backtest:
         _collection: CollectionPolicy = DEFAULT_COLLECTION,
     ):
         if type(plotting) is not bool:
-            raise PlottingError("invalid-option", "plotting 必须为 bool")
+            raise PlottingError("invalid-option", "plotting must be bool")
         if plotting_limits is not None and not isinstance(plotting_limits, PlottingLimits):
-            raise PlottingError("invalid-limit", "plotting_limits 必须为 PlottingLimits")
+            raise PlottingError("invalid-limit", "plotting_limits must be PlottingLimits")
         self._plotting_enabled = plotting and _collection.plotting
         self._portfolio_enabled = _collection.portfolio
         self._plotting_limits = plotting_limits
@@ -108,9 +108,9 @@ class Backtest:
         data = data.copy(deep=False)
         if context is not None:
             if not isinstance(context, DataContext):
-                raise TypeError("context 必须为 DataContext 或 None")
+                raise TypeError("context must be DataContext or None")
             if not isinstance(data.index, pd.DatetimeIndex) or data.index.tz is None:
-                raise ValueError("提供 context 时行情必须使用带时区的 DatetimeIndex")
+                raise ValueError("Market data must use a timezone-aware DatetimeIndex when context is provided")
             data.index = data.index.tz_convert(context.timezone)
         self._context = context
 
@@ -149,9 +149,9 @@ class Backtest:
         instrument = instrument or InstrumentSpec()
         instrument.validate_data(data)
         if execution_timing not in ("next_open", "same_close"):
-            raise ValueError("execution_timing必须为next_open或same_close")
+            raise ValueError("execution_timing must be next_open or same_close")
         if end_policy not in ("mark_to_market", "close_at_last_close"):
-            raise ValueError("end_policy必须为mark_to_market或close_at_last_close")
+            raise ValueError("end_policy must be mark_to_market or close_at_last_close")
         if not isinstance(data.index, pd.DatetimeIndex):
             warnings.warn(
                 "Data index is not datetime. Assuming simple periods, "
@@ -184,17 +184,17 @@ class Backtest:
         self._log_delegate = None
 
     def run_inputs(self, request) -> pd.Series:
-        """按唯一 title 提交带 schemaVersion/schemaHash/values 的输入请求。"""
+        """Submit an input request with schemaVersion/schemaHash/values keyed by unique title."""
         with self._log_scope() as logs:
             resolved = resolve_request(self._strategy, request)
             self._log_delegate = logs
             return self.run(**resolved.overrides())
 
     def get_logs(self) -> list[dict[str, str | int | None]]:
-        """返回本次运行全部策略日志的独立副本，尚未运行时为空。
+        """Return an independent copy of all strategy logs for this run; empty before any run.
 
-        失败保留已写记录；run/run_inputs/optimize 的新调用清空旧日志。
-        日志带时间、bar_index、源码文件和行号；默认全量保留，不静默截断。
+        Failures preserve written records; new run/run_inputs/optimize calls clear old logs.
+        Logs contain time, bar_index, source file, and line; retained in full by default without silent truncation.
         """
         logs = getattr(self, "_log_collector", None)
         return [] if logs is None else logs.snapshot()
@@ -202,7 +202,7 @@ class Backtest:
     @contextmanager
     def _log_scope(self):
         if getattr(self, "_log_running", False):
-            raise RuntimeError("Backtest 不能重入运行")
+            raise RuntimeError("Backtest cannot run reentrantly")
         self._log_collector = logs = _Collector(enabled=getattr(self, "_logs_enabled", True))
         self._log_running = True
         try:
@@ -213,9 +213,9 @@ class Backtest:
             self._log_delegate = None
 
     def run(self, **kwargs) -> pd.Series:
-        """按策略参数回测，返回统计Series、纯值账本表及可选诊断策略。
+        """Backtest strategy parameters and return a statistics Series, plain-value ledger tables, and an optional diagnostic strategy.
 
-        公开统计键：
+        Public statistics keys:
         Start, End, Duration, Exposure Time [%]
         Equity Final [$], Equity Peak [$], Return [%], Buy & Hold Return [%]
         Return (Ann.) [%], Volatility (Ann.) [%], CAGR [%], Sharpe Ratio
@@ -228,9 +228,9 @@ class Backtest:
         _orders, _order_sizing, _order_events, _fills, _trade_allocations
         _positions, _account_curve, _final_account, _open_trades
 
-        订单及成交事件不受指标NaN门控；next从首根逐根调用。
-        每个正常bar保留账户与总暴露，终止处理另记terminal快照。
-        结果attrs含交易政策版本、配置和输入快照；_strategy不是重建交易事实的必要条件。
+        Order and fill events are not gated by indicator NaN; next runs on every bar starting with the first.
+        Retain account and gross exposure on each normal bar; record terminal handling in a separate terminal snapshot.
+        Result attrs contain trading-policy version, configuration, and input snapshots; _strategy is not required to reconstruct trading facts.
         """
         delegated = getattr(self, "_log_delegate", None)
         if delegated is not None:
@@ -242,7 +242,7 @@ class Backtest:
     def _run(self, kwargs, logs):
         if not hasattr(self, "_end_policy"):
             raise TypeError(
-                "0.1回测状态不可继续执行；请用execution_timing/end_policy重新构造Backtest"
+                "Backtest state from 0.1 cannot resume execution; reconstruct Backtest using execution_timing/end_policy"
             )
         resolved = resolve_native(self._strategy, kwargs)
         data = _Data(self._data.copy(deep=True))
@@ -283,7 +283,7 @@ class Backtest:
         finished = False
 
         def notify(*, terminal=False):
-            # 封闭批次：回调产生的通知留待下一个通知点，不能递归耗尽。
+            # Closed notification batches: notifications produced by callbacks wait for the next notification point and cannot be drained recursively.
             batch, broker._notifications = broker._notifications, []
             broker.phase = "terminal" if terminal else "notify"
             for event in batch:
@@ -399,8 +399,8 @@ class Backtest:
                         strategy.on_finish,
                         RunSummary("error", broker.account, repr(error)),
                     )
-                except BaseException as finish_error:  # noqa: BLE001 — 保留主异常并附加结束钩子失败
-                    error.add_note(f"on_finish同时失败: {finish_error!r}")
+                except BaseException as finish_error:  # noqa: BLE001 — preserve the primary exception and attach finish-hook failures
+                    error.add_note(f"on_finish also failed: {finish_error!r}")
             raise
         finally:
             strategy._bar_context = None
@@ -423,7 +423,7 @@ class Backtest:
         random_state: int | None = None,
         **kwargs,
     ) -> pd.Series | tuple[pd.Series, pd.Series] | tuple[pd.Series, pd.Series, dict]:
-        """搜索策略参数组合并按指定统计项或评分函数选择结果。
+        """Search strategy-parameter combinations and select results by a specified statistic or scoring function.
 
 
         Optimize strategy parameters to an optimal combination.
@@ -482,7 +482,7 @@ class Backtest:
                                            constraint=lambda p: p.sma1 < p.sma2)
         """
         if getattr(self, "_log_running", False):
-            raise RuntimeError("Backtest 不能重入优化")
+            raise RuntimeError("Backtest cannot optimize reentrantly")
         self._log_collector = None
         return _optimize(
             self,
@@ -500,7 +500,7 @@ class Backtest:
     @staticmethod
     def _mp_task(arg):
         bt, data_shm, params_batch = arg
-        # 线程池传入同一模板对象；批次必须隔离 _data/_results 等可变运行状态。
+        # Thread pools receive the same template object; batches must isolate mutable run state such as _data/_results.
         bt = copy(bt)
         bt._plotting_enabled = False
         bt._logs_enabled = False

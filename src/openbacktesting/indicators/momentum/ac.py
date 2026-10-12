@@ -1,4 +1,4 @@
-"""ta.ac：独立公式与固定初始化契约。"""
+"""ta.ac: Independent formula with a fixed initialization contract."""
 
 from ..calculus import clean
 

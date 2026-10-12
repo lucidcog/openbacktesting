@@ -1,4 +1,4 @@
-"""ta.stc：固定依赖的计算封装与规范输出。"""
+"""ta.stc: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.stc import stc as _calculate
 

@@ -1,4 +1,4 @@
-"""图表日历桶、基准和周期相关性。"""
+"""Chart-calendar buckets, benchmarks, and period correlations."""
 
 from decimal import ROUND_FLOOR, Decimal
 
@@ -119,7 +119,7 @@ def periodical(rows, trades, fills, benchmark, initial, index):
         buckets = []
         for key, group in groups.items():
             last = group[-1]["equity"] if group else previous
-            # 只有日历范围内无观察的桶结转，绝不延伸执行范围。
+            # Carry forward only unobserved buckets within the calendar range; never extend the execution range.
             bvalue = bench_by_bar[group[-1]["barIndex"]] if group else previous_bench
             left, right = key.start_time, (key + 1).start_time
             if timezone:

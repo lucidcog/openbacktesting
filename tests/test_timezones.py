@@ -1,10 +1,11 @@
-"""图表日界、绝对时刻和共享内存 DST 保真的独立回归。"""
+"""Independent regressions for chart day boundaries, absolute times, and shared-memory DST fidelity."""
 
 from datetime import UTC, datetime
 
 import numpy as np
 import pandas as pd
 import pytest
+
 from openbacktesting import DataContext, EndPolicy, RunLogs, Strategy, Timeframe, backtest, runtime
 from openbacktesting.broker import InstrumentSpec
 from openbacktesting.parallel import SharedMemoryManager
@@ -83,7 +84,7 @@ class TimedTrade(Strategy):
 
     def next(self):
         self.observed.append(self.data_index[-1])
-        self.log.info("当前 bar")
+        self.log.info("Current bar")
         if self.bar_index == 0:
             self.buy(qty=1)
         elif self.bar_index == 2:
@@ -151,7 +152,7 @@ def test_statistics_use_chart_days_with_independent_bucket_expectations():
         np.array([100.0, 100.0, 110.0, 120.0, 115.0, 125.0]),
     )
     results = []
-    # 手工分组：UTC 为 [14,17,23] / [01,16] / [02]；上海为 [22] / [01,07,09] / [00,10]。
+    # Manual groups: UTC [14,17,23] / [01,16] / [02]; Shanghai [22] / [01,07,09] / [00,10].
     for zone, ends in [
         ("UTC", [1010.0, 1015.0, 1025.0]),
         ("Asia/Shanghai", [1000.0, 1020.0, 1025.0]),
@@ -162,7 +163,7 @@ def test_statistics_use_chart_days_with_independent_bucket_expectations():
         np.testing.assert_array_equal(equity.resample("D").last(), ends)
         returns = np.array(ends) / np.array([1000.0, *ends[:-1]]) - 1
         growth = (1025 / 1000) ** (1 / 3)
-        annual = growth**252 - 1  # 两种图表时区均为周一至周三。
+        annual = growth**252 - 1  # Both chart timezones span Monday through Wednesday.
         volatility = np.sqrt((returns.var(ddof=1) + growth**2) ** 252 - growth**504)
         assert result["Return (Ann.) [%]"] == pytest.approx(annual * 100)
         assert result["Volatility (Ann.) [%]"] == pytest.approx(volatility * 100)

@@ -1,4 +1,4 @@
-"""消费成功加载的策略模块；发现无数据依赖，运行由宿主注入图表上下文。"""
+"""Consume successfully loaded strategy modules; discovery needs no data, and the host injects chart context for execution."""
 
 from collections.abc import Mapping
 from dataclasses import asdict
@@ -22,23 +22,23 @@ from openbacktesting.strategy.inputs import resolve_request
 
 
 def discover(namespace: Mapping) -> type[Strategy]:
-    """发现本模块直接装饰的唯一具体策略；别名去重，排除导入与继承入口。
+    """Discover the single concrete strategy directly decorated in this module; deduplicate aliases and exclude imported and inherited entry points.
 
     Args:
-        namespace: 成功加载模块的命名空间，必须含非空字符串 __name__。
+        namespace: Successfully loaded module namespace containing a nonempty string __name__.
 
     Returns:
-        type[Strategy]: 原策略类，不构造实例。
+        type[Strategy]: Original strategy class, without instance construction.
 
     Raises:
-        TypeError: 命名空间或声明无效。
-        ValueError: 没有或存在多个入口。
+        TypeError: Invalid namespace or declaration.
+        ValueError: No entry point or multiple entry points.
     """
     if not isinstance(namespace, Mapping):
-        raise TypeError("namespace 必须为模块映射")
+        raise TypeError("namespace must be a module mapping")
     name = namespace.get("__name__")
     if not isinstance(name, str) or not name:
-        raise TypeError("namespace 必须包含非空 __name__")
+        raise TypeError("namespace must contain a nonempty __name__")
     candidates = {}
     for value in namespace.values():
         if (
@@ -51,14 +51,14 @@ def discover(namespace: Mapping) -> type[Strategy]:
             candidates[id(value)] = value
     if len(candidates) != 1:
         names = sorted(f"{cls.__module__}:{cls.__qualname__}" for cls in candidates.values())
-        raise ValueError(f"模块必须有且仅有一个 @backtest 策略；候选: {names}")
+        raise ValueError(f"The module must contain exactly one @backtest strategy; candidates: {names}")
     return next(iter(candidates.values()))
 
 
 def describe(namespace: Mapping) -> dict:
-    """无行情导出 inputs 及完整默认回测设置，不执行策略生命周期。
+    """Export inputs and complete default backtest settings without market data or executing the strategy lifecycle.
 
-    返回的 backtest 描述独立于 input schemaHash；修改副本不修改类声明。
+    The returned backtest description is independent of input schemaHash; modifying copies does not alter class declarations.
     """
     cls = discover(namespace)
     settings = declaration(cls)
@@ -78,25 +78,25 @@ def run(
     options: Mapping | None = None,
     logs: RunLogs | None = None,
 ) -> pd.Series:
-    """按本次图表运行新会话，返回既有结果及 backtest_snapshot。
+    """Run a new session for this chart and return existing results plus backtest_snapshot.
 
     Args:
-        namespace: 宿主本次成功加载的模块；不再接受 bt-only 导出。
-        request: 既有按标题的输入请求；None 使用默认参数。
-        data: 当前图表 OHLC，必须具有带时区的 DatetimeIndex。
-        context: 实际周期及图表、策略日历和统计共用的时区。
-            在策略构造前转换内部索引，保留输入与绝对时刻，不触发重采样。
-            改变时区需重新运行，当地时间条件及统计分日结果允许变化。
-        instrument: 图表品种规格，不从行情推断。
-        settings: 平铺设置的稀疏覆盖；枚举字段接受对应成员或精确字符串。
-            切换类型必须同时给数值，default_qty_value=None 清除默认数量。
-        options: 缓存预算、plotting 和 plotting_limits，属于宿主运行选项。
-        logs: 可选的宿主日志会话，成功或异常后均可 get_logs，顺序重用清空旧记录。
+        namespace: Module successfully loaded by the host for this run; bt-only exports are no longer accepted.
+        request: Existing title-based input request; None uses defaults.
+        data: Current chart OHLC with a timezone-aware DatetimeIndex.
+        context: Actual timeframe and shared timezone for charts, strategy calendars, and statistics.
+            Convert the internal index before strategy construction, preserving inputs and absolute instants without resampling.
+            Changing timezone requires a new run; local-time conditions and statistics grouped by day may change.
+        instrument: Chart instrument specifications, without inference from market data.
+        settings: Sparse overrides of flat settings; enum fields accept corresponding members or exact strings.
+            Changing types requires supplying a value too; default_qty_value=None clears the default quantity.
+        options: cache budget, plotting, and plotting_limits are host runtime options.
+        logs: Optional host log session; get_logs works after success or exceptions, and sequential reuse clears old records.
 
-    不加载源码、不缓存旧实例、不修改声明；异常原样传播。
+    No source loading, cached old instances, or declaration changes; exceptions propagate unchanged.
     """
     if logs is not None and not isinstance(logs, RunLogs):
-        raise TypeError("logs 必须为 RunLogs 或 None")
+        raise TypeError("logs must be RunLogs or None")
     session = RunLogs() if logs is None else logs
     with session._capture():
         return _run(namespace, request, data, context, instrument, settings, options, session)
@@ -116,13 +116,13 @@ def _run(
     cls = discover(namespace)
     resolved = declaration(cls).resolve(settings)
     if not isinstance(context, DataContext):
-        raise TypeError("context 必须为 DataContext")
+        raise TypeError("context must be DataContext")
     if not isinstance(instrument, InstrumentSpec):
-        raise TypeError("instrument 必须为 InstrumentSpec")
+        raise TypeError("instrument must be InstrumentSpec")
     if options is None:
         options = {}
     if not isinstance(options, Mapping):
-        raise TypeError("options 必须为映射或 None")
+        raise TypeError("options must be a mapping or None")
     defaults = {
         "indicator_cache_bytes": DEFAULT_CACHE_BYTES,
         "plotting": True,
@@ -130,11 +130,11 @@ def _run(
     }
     unknown = set(options).difference(defaults)
     if unknown:
-        raise ValueError(f"未知运行选项: {list(unknown)!r}")
+        raise ValueError(f"Unknown runtime option: {list(unknown)!r}")
     effective_options = defaults | dict(options)
     if effective_options["plotting_limits"] is None:
         effective_options["plotting_limits"] = PlottingLimits()
-    # 摘要和值错误必须在任何策略构造之前暴露，保持既有标题入口语义。
+    # Digest and value errors must surface before constructing any strategy, preserving existing title-based entry semantics.
     if request is not None:
         resolve_request(cls, request)
     bt = Backtest(
@@ -182,12 +182,12 @@ def optimize(
     cancel=None,
     on_progress=None,
 ) -> ExperimentResult:
-    """串行穷举选定 inputs，将每份完整 Portfolio 提交到新本地结果库。
+    """Exhaustively search selected inputs sequentially, committing each complete Portfolio to a new local result database.
 
-    未选值来自当前 request；仅保留 Portfolio，不采集日志/绘图。
-    identity 是宿主提供的 ExecutionIdentity；数据/配置身份由框架计算。
-    constraint 使用完整 wire 值并需 constraint_id；cancel 为无参 callable。
-    返回只读 ExperimentResult；策略失败组记错误后继续，存储失败停止。
+    Unselected values come from the current request; retain only Portfolio without collecting logs/plotting.
+    identity is a host-supplied ExecutionIdentity; the framework computes data/configuration identities.
+    constraint uses complete wire values and requires constraint_id; cancel is a no-argument callable.
+    Return a read-only ExperimentResult; record strategy-trial failures and continue, but stop on storage failures.
     """
     return _optimize(
         namespace,
@@ -223,7 +223,7 @@ def resume_optimization(
     cancel=None,
     on_progress=None,
 ) -> ExperimentResult:
-    """核验当前声明、输入与执行身份后恢复未完成试验；不自动重试失败组。"""
+    """Resume unfinished trials after checking current declarations, inputs, and execution identity; failed trials are not automatically retried."""
     from openbacktesting.optimizer.models import Range, Values
     from openbacktesting.optimizer.query import open_result
 
@@ -279,7 +279,7 @@ def _optimize(
     cls = discover(namespace)
     resolved = declaration(cls).resolve(settings)
     if not isinstance(context, DataContext) or not isinstance(instrument, InstrumentSpec):
-        raise TypeError("optimizer: 必须提供 DataContext 和 InstrumentSpec")
+        raise TypeError("optimizer: DataContext and InstrumentSpec must be supplied")
     frozen = data.copy(deep=True)
     run_settings = resolved.snapshot()
     backtest = {
@@ -293,7 +293,7 @@ def _optimize(
     plan_value = plan(
         cls, search, base_inputs=request, execution=execution, constraint_id=constraint_id
     )
-    # 构造校验不执行策略；必须在新建结果库及第一组之前拒绝无效行情。
+    # Construction validation does not execute strategies; reject invalid market data before creating a database or running the first trial.
     Backtest(
         frozen, cls, context=context, instrument=instrument, **resolved.kwargs(), plotting=False
     )

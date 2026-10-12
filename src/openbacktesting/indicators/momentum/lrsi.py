@@ -1,4 +1,4 @@
-"""ta.lrsi：固定依赖的计算封装与规范输出。"""
+"""ta.lrsi: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.lrsi import lrsi as _calculate
 

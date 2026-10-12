@@ -1,4 +1,4 @@
-"""严格纯值编码、指标与不可变快照；不持有运行对象。"""
+"""Strict plain-value encoding, metrics, and immutable snapshots without runtime objects."""
 
 import math
 
@@ -34,7 +34,7 @@ def plain(value):
         return str(value)
     if isinstance(value, (str, bool, int, float)):
         return value
-    raise TypeError(f"Portfolio不支持纯值编码: {type(value).__name__}")
+    raise TypeError(f"Portfolio does not support plain-value encoding: {type(value).__name__}")
 
 
 def metric(

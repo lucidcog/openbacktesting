@@ -1,4 +1,4 @@
-"""不可变 RGBA 颜色值与固定预设；不依赖渲染器或运行上下文。"""
+"""Immutable RGBA color values and fixed presets independent of renderers and runtime context."""
 
 from __future__ import annotations
 
@@ -10,25 +10,25 @@ from math import isfinite as _isfinite
 
 def _alpha(transparency):
     if type(transparency) not in (int, float):
-        raise TypeError("透明度必须为 Python int 或 float，不接受 bool")
+        raise TypeError("Transparency must be a Python int or float; bool is not accepted")
     if not 0 <= transparency <= 100:
-        raise ValueError("透明度必须为 0–100 的有限数值")
+        raise ValueError("Transparency must be a finite number from 0 to 100")
     return _floor(255 * (100 - transparency) / 100 + 0.5)
 
 
 @_dataclass(frozen=True, slots=True)
 class Color:
-    """按四通道比较的不可变颜色；alpha 表示不透明度，不与字符串隐式相等。
+    """Immutable color compared by all four channels; alpha means opacity, with no implicit equality to strings.
 
     Args:
-        red: 0–255 的原生 Python int 红色分量。
-        green: 0–255 的原生 Python int 绿色分量。
-        blue: 0–255 的原生 Python int 蓝色分量。
-        alpha: 0–255 的原生 Python int；0 全透明，255 不透明。
+        red: Native Python int red component from 0 to 255.
+        green: Native Python int green component from 0 to 255.
+        blue: Native Python int blue component from 0 to 255.
+        alpha: Native Python int from 0 to 255; 0 is fully transparent, 255 is opaque.
 
     Raises:
-        TypeError: 通道不是原生 int，包括 bool。
-        ValueError: 通道超出范围。
+        TypeError: A channel is not a native int, including bool.
+        ValueError: A channel is outside its range.
     """
 
     red: int
@@ -39,44 +39,44 @@ class Color:
     def __post_init__(self):
         for value in (self.red, self.green, self.blue, self.alpha):
             if type(value) is not int:
-                raise TypeError("颜色通道必须为 Python int，不接受 bool")
+                raise TypeError("Color channels must be Python int values; bool is not accepted")
             if not 0 <= value <= 255:
-                raise ValueError("颜色通道必须位于 0–255")
+                raise ValueError("Color channels must be in 0–255")
 
     @classmethod
     def from_hex(cls, value: str) -> Color:
-        """解析六/八位十六进制颜色，六位补 FF。
+        """Parse six- or eight-digit hexadecimal colors; append FF for six digits.
 
         Args:
-            value: 不带空白的 #RRGGBB 或 #RRGGBBAA，大小写均可。
+            value: #RRGGBB or #RRGGBBAA without whitespace, in either case.
 
         Returns:
-            对应颜色值。
+            The corresponding color value.
 
         Raises:
-            TypeError: 输入不是原生字符串。
-            ValueError: 字符串格式非法；不接受 CSS 名称或短写。
+            TypeError: Input is not a native string.
+            ValueError: Invalid string format; CSS names and shorthand are not accepted.
         """
         if type(value) is not str:
-            raise TypeError("颜色必须为十六进制字符串")
+            raise TypeError("Color must be a hexadecimal string")
         if _re.fullmatch(r"#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?", value) is None:
-            raise ValueError("颜色必须为 #RRGGBB 或 #RRGGBBAA")
+            raise ValueError("Color must be #RRGGBB or #RRGGBBAA")
         rgba = value[1:] + ("FF" if len(value) == 7 else "")
         return cls(*(int(rgba[i : i + 2], 16) for i in (0, 2, 4, 6)))
 
     @classmethod
     def rgb(cls, red: int, green: int, blue: int, *, transparency: float = 0) -> Color:
-        """以整数 RGB 和 0–100 透明度构造；0 不透明，100 全透明。
+        """Construct from integer RGB and 0–100 transparency; 0 is opaque, 100 is fully transparent.
 
-        透明度仅接受原生有限 int/float，错误类型抛 TypeError，越界抛 ValueError。
-        alpha 按最接近字节量化，半值向上，不先舍入百分比。
+        Transparency accepts only native finite int/float values; invalid types raise TypeError, out-of-range values raise ValueError.
+        Quantize alpha to the nearest byte, rounding half values upward without first rounding the percentage.
         """
         return cls(red, green, blue, _alpha(transparency))
 
     def with_transparency(self, transparency: float) -> Color:
-        """以 0–100 透明度替换 alpha 并返回新值，不修改原色、不叠乘。
+        """Replace alpha using 0–100 transparency and return a new value; do not modify or multiply the original color.
 
-        透明度与 rgb 使用相同范围、量化和异常契约。
+        Transparency uses the same range, quantization, and exception contract as rgb.
         """
         return Color(self.red, self.green, self.blue, _alpha(transparency))
 
@@ -90,40 +90,40 @@ class Color:
         lower_color: Color,
         upper_color: Color,
     ) -> Color:
-        """标量在两端未预乘 RGBA 字节之间线性插值，区间外钳制到端点。
+        """Linearly interpolate a scalar between unpremultiplied RGBA bytes at both endpoints; clamp outside the interval.
 
         Args:
-            value: 有限原生 int/float，不接受 bool。
-            lower: 有限下界，必须小于 upper。
-            upper: 有限上界。
-            lower_color: 下界 Color，不接受 None 或字符串。
-            upper_color: 上界 Color。
+            value: Finite native int/float; bool is not accepted.
+            lower: Finite lower bound, strictly below upper.
+            upper: Finite upper bound.
+            lower_color: Lower-bound Color; None and strings are not accepted.
+            upper_color: Upper-bound Color.
 
         Returns:
-            不可变 Color，各通道半字节向上量化；不修改两端颜色。
+            Immutable Color, with each channel rounding half-byte values upward; neither endpoint is modified.
 
         Raises:
-            TypeError: 数值或颜色类型非法。
-            ValueError: 非有限值或上下界顺序非法。
+            TypeError: Invalid numeric or color types.
+            ValueError: Nonfinite values or invalid bound ordering.
         """
         for number in (value, lower, upper):
             if type(number) not in (int, float):
-                raise TypeError("梯度值与边界必须为 Python int 或 float")
+                raise TypeError("Gradient values and bounds must be Python int or float values")
             try:
                 valid = _isfinite(number)
             except OverflowError:
                 valid = False
             if not valid:
-                raise ValueError("梯度值与边界必须为有限数值")
+                raise ValueError("Gradient values and bounds must be finite numbers")
         if lower >= upper:
-            raise ValueError("梯度 lower 必须小于 upper")
+            raise ValueError("Gradient lower must be less than upper")
         if not isinstance(lower_color, Color) or not isinstance(upper_color, Color):
-            raise TypeError("梯度两端必须为 Color")
+            raise TypeError("Gradient endpoints must be Color instances")
         if value <= lower:
             return lower_color
         if value >= upper:
             return upper_color
-        # 异号极大值的 upper-lower 可溢出；同号使用原差值避免近邻精度损失。
+        # upper-lower can overflow for extreme opposite signs; use the original difference for equal signs to avoid losing precision between nearby values.
         if lower < 0 < upper:
             scale = max(-lower, upper)
             ratio = (value / scale - lower / scale) / (upper / scale - lower / scale)
@@ -141,11 +141,11 @@ class Color:
 
     @property
     def transparency(self) -> float:
-        """由已量化 alpha 反算的 0–100 透明度，可能不等于原始百分比。"""
+        """0–100 transparency derived from quantized alpha; it may differ from the original percentage."""
         return 100 * (255 - self.alpha) / 255
 
     def to_hex(self) -> str:
-        """返回大写 #RRGGBBAA；全透明颜色仍保留 RGB，不转换为 None。"""
+        """Return uppercase #RRGGBBAA; fully transparent colors retain RGB and do not become None."""
         return f"#{self.red:02X}{self.green:02X}{self.blue:02X}{self.alpha:02X}"
 
     def __str__(self) -> str:

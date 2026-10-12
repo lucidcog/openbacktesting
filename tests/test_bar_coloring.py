@@ -1,4 +1,4 @@
-"""逐 bar 颜色：调用语义、预算、生命周期及独立冻结。"""
+"""Per-bar colors: call semantics, budgets, lifecycle, and independent freezing."""
 
 import json
 import pickle
@@ -6,6 +6,9 @@ import pickle
 import numpy as np
 import pandas as pd
 import pytest
+from test_engine_edges import Idle, flat_data
+from test_plotting import VisualStrategy, handle
+
 from openbacktesting import Backtest
 from openbacktesting.indicators.types import IndicatorCursor
 from openbacktesting.plotting import (
@@ -15,8 +18,6 @@ from openbacktesting.plotting import (
     PlottingLimits,
     export_result,
 )
-from test_engine_edges import Idle, flat_data
-from test_plotting import VisualStrategy, handle
 
 
 def collector(enabled=True, **limits):
@@ -97,7 +98,7 @@ def test_color_reference_and_resource_boundaries(enabled):
     assert p._counts["points"] == before["points"]
     assert p._counts["plots"] == before["plots"]
     p._counts["color"] = 2**53 - 1
-    with pytest.raises(PlottingError, match="安全整数"):
+    with pytest.raises(PlottingError, match="safe-integer"):
         p.bar_color(None)
 
 
@@ -152,7 +153,7 @@ def test_frozen_colors_replay_and_run_isolation():
     assert merge(events, 0) == {}
     expected = {("background", "aux", 1): "#00FF0020", ("bar", "main", 1): "#00FF0000"}
     assert merge(events, 1) == expected
-    assert merge(events, 7) == expected  # 不调用不跨 bar 继承；另一个 bar 的 null 不清除旧 bar。
+    assert merge(events, 7) == expected  # Without a call, colors do not carry across bars; null on another bar does not clear an earlier bar.
     assert merge(events[:1], 1) == {("background", "main", 1): "#FF000020"}
     assert r["_strategy"].plotting._color_events == []
     with pytest.raises(PlottingError, match="invalid-phase"):

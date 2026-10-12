@@ -1,4 +1,4 @@
-"""ta.squeeze_pro：固定依赖的计算封装与规范输出。"""
+"""ta.squeeze_pro: Computation wrapper for the pinned dependency with canonical outputs."""
 
 from pandas_ta_classic.momentum.squeeze_pro import squeeze_pro as _calculate
 

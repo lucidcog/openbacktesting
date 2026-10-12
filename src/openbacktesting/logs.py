@@ -1,4 +1,4 @@
-"""每次历史运行独立的策略日志；不连接 Python 全局 logging 或输出流。"""
+"""Independent strategy logs for each historical run; no connection to global Python logging or output streams."""
 
 from contextlib import contextmanager as _contextmanager
 from datetime import UTC
@@ -31,7 +31,7 @@ class _Collector:
     @_contextmanager
     def phase(self, phase, bar_index=None, bar_time=None, time_kind="none"):
         if self._closed:
-            raise RuntimeError("策略日志会话已经结束")
+            raise RuntimeError("Strategy log session has ended")
         self._context = (phase, bar_index, bar_time, time_kind)
         try:
             yield
@@ -47,40 +47,40 @@ class _Collector:
 
 
 class StrategyLog:
-    """策略的只读日志句柄，通过 self.log 使用，不需要作者构造。
+    """Read-only strategy log handle, accessed through self.log without author construction.
 
-    活动作者回调内可记录字符串；error 仅表示级别，不中止回测。
-    自动记录实际调用文件与行号，结束后调用抛 RuntimeError。
+    Record strings inside active author callbacks; error denotes only a level and does not stop the backtest.
+    Automatically record the actual calling file and line; calls after termination raise RuntimeError.
     """
 
     def __init__(self, collector: _Collector):
         self._collector = collector
 
     def info(self, message: str) -> None:
-        """记录普通信息，保留空字符串、中文和换行。"""
+        """Record informational messages, preserving empty strings, Chinese text, and newlines."""
         self._write("info", message)
 
     def warning(self, message: str) -> None:
-        """记录警告信息，不改变策略执行。"""
+        """Record warning messages without changing strategy execution."""
         self._write("warning", message)
 
     def error(self, message: str) -> None:
-        """记录错误级别信息；需要中止策略时由作者显式 raise。"""
+        """Record error-level messages; authors must explicitly raise to stop the strategy."""
         self._write("error", message)
 
     def _write(self, level, message):
         if not isinstance(message, str):
-            raise TypeError("策略日志 message 必须为字符串")
+            raise TypeError("Strategy log message must be a string")
         collector = self._collector
         if collector._context is None:
-            raise RuntimeError("策略日志只能在活动作者回调内写入")
+            raise RuntimeError("Strategy logs can only be written inside active author callbacks")
         if not collector.enabled:
             return
         source_file, source_line = None, None
         frame = _currentframe()
         caller = None
         try:
-            # 固定跳过本函数和三级公开方法，不扫描作者的辅助函数。
+            # Skip this function and the three public level methods explicitly; do not scan author helper functions.
             caller = frame.f_back if frame is not None else None
             caller = caller.f_back if caller is not None else None
             if caller is not None:
@@ -103,10 +103,10 @@ class StrategyLog:
 
 
 class RunLogs:
-    """宿主持有的单次运行日志，通过 runtime.run(..., logs=session) 注入。
+    """Host-owned single-run log session, injected through runtime.run(..., logs=session).
 
-    顺序重用会在策略发现前清空记录；同一会话不能同时用于多个运行。
-    成功或异常退出后均可查询，返回列表和字典副本，不持有作者栈帧。
+    Sequential reuse clears records before strategy discovery; a session cannot serve concurrent runs.
+    Queryable after success or exceptional exit; returns list and dictionary copies without holding author stack frames.
     """
 
     def __init__(self):
@@ -114,13 +114,13 @@ class RunLogs:
         self._lock = _Lock()
 
     def get_logs(self) -> list[dict[str, str | int | None]]:
-        """返回本次运行全部日志的独立副本；首次运行前为空列表。"""
+        """Return an independent copy of all logs from this run; an empty list before the first run."""
         return self._collector.snapshot()
 
     @_contextmanager
     def _capture(self):
         if not self._lock.acquire(blocking=False):
-            raise RuntimeError("RunLogs 已被其他运行占用")
+            raise RuntimeError("RunLogs is already occupied by another run")
         try:
             self._collector = _Collector()
             yield

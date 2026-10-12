@@ -1,4 +1,4 @@
-"""行情与交易的原生重采样规则。"""
+"""Native resampling rules for market data and trades."""
 
 from collections import OrderedDict
 

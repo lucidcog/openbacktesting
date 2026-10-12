@@ -1,4 +1,4 @@
-"""绘图声明的不可变身份、预算与稳定错误；不包含渲染能力。"""
+"""Immutable plotting-declaration identities, budgets, and stable errors without rendering capabilities."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from typing import Any
 
 
 class PlottingError(ValueError):
-    """绘图契约错误，code 为可供调用者分派的稳定类别。"""
+    """Plotting contract error; code is a stable category for caller dispatch."""
 
     def __init__(self, code: str, detail: str):
         self.code = code
@@ -16,11 +16,11 @@ class PlottingError(ValueError):
 
 @dataclass(frozen=True)
 class PlottingLimits:
-    """采集预算；所有上限均为正整数，bytes 在显式导出时检查。
+    """Collection budgets; all limits are positive integers, and bytes is checked during explicit export.
 
-    points 按唯一密集源计数，包含五列行情与两列执行掩码。
-    panes 包含主图；plots 包含填充；events 包含每次颜色调用、标记和交易事实。
-    text 为作者身份、标题、单位及标记文本的累计 UTF-8 字节数。
+    points counts unique dense sources, including five market-data columns and two execution masks.
+    panes includes the main chart; plots includes fills; events includes every color call, marker, and trade fact.
+    text is the cumulative UTF-8 byte count of author identities, titles, units, and marker text.
     """
 
     panes: int = 32
@@ -34,7 +34,7 @@ class PlottingLimits:
         for field in fields(self):
             value = getattr(self, field.name)
             if type(value) is not int or value <= 0:
-                raise PlottingError("invalid-limit", f"{field.name} 必须为正整数")
+                raise PlottingError("invalid-limit", f"{field.name} must be a positive integer")
 
 
 @dataclass(frozen=True)
@@ -46,26 +46,26 @@ class _Ref:
 
 @dataclass(frozen=True)
 class PaneRef(_Ref):
-    """当前运行的副图身份；仅将此引用传给 pane 参数。"""
+    """Separate-pane identity for the current run; pass this reference only to pane arguments."""
 
 
 @dataclass(frozen=True)
 class PlotRef(_Ref):
-    """线、柱或水平线的身份，可作为 fill 端点。"""
+    """Line, histogram, or horizontal-line identity usable as a fill endpoint."""
 
 
 @dataclass(frozen=True)
 class FillRef(_Ref):
-    """两个兼容图层之间的填充身份。"""
+    """Fill identity between two compatible layers."""
 
 
 @dataclass(frozen=True)
 class MarkerRef(_Ref):
-    """一次运行标记的身份。"""
+    """Identity of one runtime marker."""
 
 
 class _Snapshot(tuple):
-    """不可变纯值元组；整个 result.attrs 仍可 JSON 编码。"""
+    """Immutable plain-value tuple; the entire result.attrs remains JSON-encodable."""
 
     __slots__ = ()
 

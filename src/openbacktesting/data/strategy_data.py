@@ -1,4 +1,4 @@
-"""每运行的行情快照和稳定序列；不参与指标登记。"""
+"""Per-run market-data snapshot and stable series; does not register indicators."""
 
 import numpy as np
 import pandas as pd
@@ -25,7 +25,7 @@ class StrategyData:
         self._handles: dict[str, IndicatorHandle] = {}
 
     def validate(self):
-        """只在初始化边界检查；逐 bar 不扫描全量数据。"""
+        """Check only at the initialization boundary; do not scan all data on each bar."""
         if self._baseline is None or self._cursor.phase != "init":
             return
         frame = self._data._full_frame()
@@ -39,16 +39,16 @@ class StrategyData:
             raise IndicatorError(
                 "data-source-mutated",
                 "strategy.data",
-                "OHLCV 或索引已变化；请在首次读取行情序列前完成行情加工",
+                "OHLCV or index changed; finish market-data preprocessing before first reading a market-data series",
             )
 
     def _capture(self):
         frame = self._data._full_frame()
         if not frame.index.is_unique:
-            raise IndicatorError("invalid-data-source", "strategy.data", "行情索引必须唯一")
+            raise IndicatorError("invalid-data-source", "strategy.data", "Market-data index must be unique")
         columns = frame.columns[frame.columns.isin(PRICE_COLUMNS.values())]
         if len(columns) != 5 or set(columns) != set(PRICE_COLUMNS.values()):
-            raise IndicatorError("invalid-data-source", "strategy.data", "需要唯一的 OHLCV 列")
+            raise IndicatorError("invalid-data-source", "strategy.data", "Unique OHLCV columns are required")
         baseline = frame.loc[:, columns].copy(deep=True)
         values = {}
         for name, column in PRICE_COLUMNS.items():
@@ -58,7 +58,7 @@ class StrategyData:
                 or pd.api.types.is_float_dtype(series.dtype)
             ):
                 raise IndicatorError(
-                    "invalid-data-source", "strategy.data", f"{column} 必须为实数行情列"
+                    "invalid-data-source", "strategy.data", f"{column} must be a real-valued market-data column"
                 )
             values[name] = immutable(series.to_numpy(dtype=np.float64, na_value=np.nan))
         self._baseline = baseline

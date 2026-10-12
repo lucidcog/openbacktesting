@@ -1,4 +1,4 @@
-"""cdl_shootingstar：固定原生形态与独立有效掩码。"""
+"""cdl_shootingstar: Fixed native pattern with a separate validity mask."""
 
 from pandas_ta_classic.candles.cdl_shootingstar import cdl_shootingstar as _calculate
 

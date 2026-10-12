@@ -1,4 +1,4 @@
-"""固定制品的逐入口验收；目录变化必须经审阅，不能自动开放 API。"""
+"""Per-entry acceptance against fixed artifacts; catalog changes require review rather than automatically exposing APIs."""
 
 import builtins
 import json
@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import pandas_ta_classic as ta
 import pytest
+
 from openbacktesting.indicator_types import IndicatorError
 from openbacktesting.indicators import runtime as indicators
 
@@ -78,7 +79,7 @@ def test_catalog_native_values_prefixes_short_history_and_talib_sentinel(spec, m
 
     def reject(module, *args, **kwargs):
         if module == "talib":
-            pytest.fail(f"{spec.id} 触发了 TA-Lib")
+            pytest.fail(f"{spec.id} TA-Lib was invoked")
         return original(module, *args, **kwargs)
 
     monkeypatch.setitem(ta.Imports, "talib", True)
@@ -129,8 +130,8 @@ def test_catalog_parameters_reject_unknown_and_bool_lengths(spec):
 def test_supported_parameter_boundaries_and_enums_are_causal(spec):
     data = catalog_data()
     for name, rule in spec.parameters:
-        # 新增本地参数的非默认语义由 test_local_builtin_indicators 手算/前缀验证，
-        # 上游同名参数不存在或代表 shift，不能充当这些新分支的参考值。
+        # test_local_builtin_indicators verifies nondefault semantics of new local parameters with hand calculations and prefix checks;
+        # Upstream parameters with the same name are absent or mean shift and cannot provide reference values for these branches.
         if (spec.id, name) in {
             ("ta.true_range", "handle_na"),
             ("ta.kc", "use_true_range"),
@@ -150,7 +151,7 @@ def test_supported_parameter_boundaries_and_enums_are_causal(spec):
             try:
                 spec.normalize({name: value})
             except IndicatorError:
-                continue  # 单参数边界可能违反已单独测试的参数间约束。
+                continue  # A single-parameter boundary may violate independently tested cross-parameter constraints.
             full = indicators.compute(spec.id, data, parameters={name: value})
             params = spec.normalize({name: value})
             inputs = {key: data[indicators._COLUMNS.get(key, key)] for key in spec.inputs}

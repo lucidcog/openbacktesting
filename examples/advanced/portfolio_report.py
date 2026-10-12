@@ -1,23 +1,24 @@
-"""一次运行消费全部报告区域；只返回内存JSON，不写文件或连接网页。"""
+"""Consume every report section in one run; return in-memory JSON without writing files or connecting to a webpage."""
 
 import json
 import pickle
 
 import pandas as pd
+
 from openbacktesting import Backtest, DataContext, Strategy, Timeframe
 from openbacktesting.broker import Commission
 from openbacktesting.portfolio import export_result, get_snapshot, report_catalog
 
 
 class ReportStrategy(Strategy):
-    """同一批次部分退出并保留余额，展示信号与极值身份。"""
+    """Partially exit one entry batch while retaining its balance, demonstrating signal and extrema identities."""
 
     def init(self):
         pass
 
     def next(self):
         if self.bar_index == 0:
-            self.buy(qty=3, tag={"signal": "趋势入场", "comment": "固定离线案例"})
+            self.buy(qty=3, tag={"signal": "Trend entry", "comment": "Fixed offline case"})
         if self.bar_index in (1, 2):
             self.trades[0].close(qty=1)
 
@@ -39,8 +40,8 @@ def main():
     print(result[["Return [%]", "# Trades"]])
     frozen = get_snapshot(result)
     assert pickle.loads(pickle.dumps(frozen)) == frozen
-    result["_strategy"] = None  # 宿主消费无需策略活对象。
-    # 整份结果通过真实 portfolio 类路径序列化，恢复后仍可独立导出。
+    result["_strategy"] = None  # Host consumption does not require a live strategy object.
+    # Serialize the full result through its actual portfolio class path; the restored result still exports independently.
     result = pickle.loads(pickle.dumps(result))
     report = export_result(result)
     json.dumps(report, ensure_ascii=False, allow_nan=False)
@@ -55,7 +56,7 @@ def main():
     assert [t["pnlNet"] for t in closed] == [10.0, -4.0]
     assert closed[0]["excursion"]["mfeMoney"] == 14
     assert opened[0]["excursion"]["mfeMoney"] == 32
-    assert opened[0]["entry"]["signal"] == "趋势入场"
+    assert opened[0]["entry"]["signal"] == "Trend entry"
     assert report["summary"]["all"]["totalPnl"]["value"] == 30
     assert report["summary"]["all"]["marginCalls"]["status"] == "unsupported"
     assert report["analysis"]["periodical"]["status"] == "ok"

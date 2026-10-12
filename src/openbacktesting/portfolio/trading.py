@@ -1,4 +1,4 @@
-"""从交易事实生成固定列的纯值结果表。"""
+"""Generate plain-value result tables with fixed columns from trading facts."""
 
 from dataclasses import asdict
 from importlib.metadata import version
@@ -66,7 +66,7 @@ _OBJECT_FIELDS = {"timestamp", "expires_at", "EntryTime", "Tag"}
 
 
 def _table(rows, *, columns):
-    # 按目标dtype一次构造列，避免先推断再逐列转换/替换整个DataFrame的块。
+    # Construct columns once with target dtypes; avoid inference followed by per-column conversion/replacement of entire DataFrame blocks.
     data = {}
     for name in columns:
         values = [row.get(name) for row in rows]
@@ -77,7 +77,7 @@ def _table(rows, *, columns):
         elif name in _BOOL_FIELDS:
             data[name] = np.asarray(values, dtype=bool)
         elif name in _OBJECT_FIELDS:
-            # Series保留object；直接传数组会使DataFrame再次推断时间/嵌套标签。
+            # Series preserves object dtype; passing arrays directly makes DataFrame infer timestamps/nested tags again.
             data[name] = pd.Series(values, dtype="object")
         else:
             data[name] = pd.array(values, dtype="Int64" if name == "valid_bars" else "string")
@@ -85,7 +85,7 @@ def _table(rows, *, columns):
 
 
 def trading_results(stats, broker, end_policy):
-    """附加账本表及可追溯配置，不依赖_strategy读取交易记录。"""
+    """Attach ledger tables and traceable configuration without reading trade records from _strategy."""
     original = stats
     stats = dict(stats)
     order_columns = (

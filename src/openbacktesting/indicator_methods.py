@@ -1,4 +1,4 @@
-"""旧类型路径的兼容导出；实现位于 indicators 子包。"""
+"""Compatibility exports for old type paths; implemented in the indicators subpackage."""
 
 from .indicators.methods import (
     AberrationResult,
