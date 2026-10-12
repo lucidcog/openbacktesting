@@ -1,0 +1,15 @@
+{
+  "sourceCommit": "e32c481",
+  "data": "GOOG",
+  "ema": {
+    "12": "1fc2a5cecd3ee9c073e1f2dfebd8dc1a6ea9b3245a8930b6ecab092cbca44f3d",
+    "26": "8d42376df1b9aaf2c6870cbc967101e30896c9bc3538295fc9640282762f2906"
+  },
+  "trades": "88be4c5b2fb3329eb008afdac1d9d6ae0c534c89fffd4dbce7fe30e522b77447",
+  "equity": "3b4dbbce8619186e6cf9efafc33c3c0d9585a31d38a976007e818e8d8aaf4721",
+  "tradeCount": 24,
+  "nanPrefix": {
+    "12": 11,
+    "26": 25
+  }
+}

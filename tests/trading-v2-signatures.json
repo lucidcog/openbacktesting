@@ -1,0 +1,40 @@
+{
+  "methods": {
+    "Strategy.__init__": "(self, broker, data, params)",
+    "Strategy.I": "(self, func: 'Callable', *args, name=None, warmup=True, **kwargs) -> 'IndicatorHandle'",
+    "Strategy.indicator": "(self, indicator, *, inputs=None, backend=None, required_outputs=None, **parameters)",
+    "Strategy.init": "(self)",
+    "Strategy.next": "(self)",
+    "Strategy.on_start": "(self)",
+    "Strategy.on_finish": "(self, summary: 'RunSummary')",
+    "Strategy.on_order": "(self, event: 'OrderEvent')",
+    "Strategy.on_fill": "(self, fill: 'Fill')",
+    "Strategy.buy": "(self, *, qty: 'float', limit: 'float | None' = None, stop: 'float | None' = None, sl: 'float | None' = None, tp: 'float | None' = None, tag=None, reduce_only=False, expires_at=None, valid_bars=None) -> 'Order'",
+    "Strategy.sell": "(self, *, qty: 'float', limit: 'float | None' = None, stop: 'float | None' = None, sl: 'float | None' = None, tp: 'float | None' = None, tag=None, reduce_only=False, expires_at=None, valid_bars=None) -> 'Order'",
+    "Strategy.close_position": "(self, portion: 'float | None' = None) -> 'tuple[Order, ...]'",
+    "Strategy.submit_oco": "(self, requests) -> 'OrderGroup'",
+    "Strategy.order_target_quantity": "(self, target: 'float', **conditions) -> 'Order | None'",
+    "Strategy.order_target_value": "(self, target: 'float', **conditions) -> 'Order | None'",
+    "Strategy.order_target_percent": "(self, target: 'float', **conditions) -> 'Order | None'",
+    "Position.__init__": "(self, broker)",
+    "Position.close": "(self, portion=None)",
+    "Order.__init__": "(self, broker, request, *, group_id=None, kind='entry', eligible=None)",
+    "Order.cancel": "(self)",
+    "Trade.__init__": "(self, broker, size, entry_price, entry_bar, tag=None, *, trade_id=None, entry_fill_id='', entry_fee=0, group_id=None)",
+    "Trade.close": "(self, portion=None, *, qty=None)",
+    "Trade.set_trailing_stop": "(self, *, amount=None, percent=None)",
+    "Backtest.__init__": "(self, data: 'pd.DataFrame', strategy: 'type[Strategy]', *, cash: 'float' = 10000, spread: 'float' = 0.0, commission: 'float | tuple[float, float]' = 0.0, margin: 'float' = 1.0, execution_timing='next_open', instrument=None, slippage=None, allow_short=True, max_gross_exposure=None, hedging=False, exclusive_orders=False, end_policy='mark_to_market', indicator_cache_bytes=67108864)",
+    "Backtest.run_inputs": "(self, request) -> 'pd.Series'",
+    "Backtest.run": "(self, **kwargs) -> 'pd.Series'",
+    "Backtest.optimize": "(self, *, maximize: 'str | Callable[[pd.Series], float]' = 'SQN', method: 'str' = 'grid', max_tries: 'float | None' = None, constraint: 'Callable[[dict], bool] | None' = None, return_heatmap: 'bool' = False, return_optimization: 'bool' = False, random_state: 'int | None' = None, **kwargs) -> 'pd.Series | tuple[pd.Series, pd.Series] | tuple[pd.Series, pd.Series, dict]'"
+  },
+  "objects": {
+    "broker.Position": "(broker)",
+    "broker.Order": "(broker, request, *, group_id=None, kind='entry', eligible=None)",
+    "broker.Trade": "(broker, size, entry_price, entry_bar, tag=None, *, trade_id=None, entry_fill_id='', entry_fee=0, group_id=None)",
+    "broker._Broker": "(*, data, cash, spread, commission, margin, hedging=False, exclusive_orders=False, index, instrument=None, slippage=None, allow_short=True, max_gross_exposure=None, execution_timing='next_open')",
+    "backtest.Backtest": "(data: 'pd.DataFrame', strategy: 'type[Strategy]', *, cash: 'float' = 10000, spread: 'float' = 0.0, commission: 'float | tuple[float, float]' = 0.0, margin: 'float' = 1.0, execution_timing='next_open', instrument=None, slippage=None, allow_short=True, max_gross_exposure=None, hedging=False, exclusive_orders=False, end_policy='mark_to_market', indicator_cache_bytes=67108864)",
+    "lib.FractionalBacktest": "(*args, **kwargs)",
+    "stats.compute_stats": "(trades: 'list[Trade] | pd.DataFrame', equity: 'np.ndarray', ohlc_data: 'pd.DataFrame', strategy_instance: 'Strategy | None', risk_free_rate: 'float' = 0, exposure: 'np.ndarray | None' = None) -> 'pd.Series'"
+  }
+}

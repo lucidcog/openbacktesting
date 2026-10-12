@@ -1,0 +1,1980 @@
+[
+  {
+    "id": "ta.aberration",
+    "name": "Aberration 波幅通道",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "aberration.html"
+  },
+  {
+    "id": "ta.ac",
+    "name": "加速震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "ac.html"
+  },
+  {
+    "id": "ta.accbands",
+    "name": "加速带",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "accbands.html"
+  },
+  {
+    "id": "ta.ad",
+    "name": "累积派发线",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "ad.html"
+  },
+  {
+    "id": "ta.adosc",
+    "name": "Chaikin 累积派发震荡",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "adosc.html"
+  },
+  {
+    "id": "ta.adr",
+    "name": "平均日内区间",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "adr.html"
+  },
+  {
+    "id": "ta.adx",
+    "name": "平均方向指数",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "adx.html"
+  },
+  {
+    "id": "ta.adxr",
+    "name": "平均方向指数评级",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "adxr.html"
+  },
+  {
+    "id": "ta.alligator",
+    "name": "鳄鱼均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "alligator.html"
+  },
+  {
+    "id": "ta.alma",
+    "name": "Arnaud Legoux 均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "alma.html"
+  },
+  {
+    "id": "ta.amat",
+    "name": "Archer 均线趋势",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "amat.html"
+  },
+  {
+    "id": "ta.anchored_vwap",
+    "name": "条件锚点 VWAP",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "anchored_vwap.html"
+  },
+  {
+    "id": "ta.anchored_vwap_bands",
+    "name": "条件锚点 VWAP 带",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "anchored_vwap_bands.html"
+  },
+  {
+    "id": "ta.ao",
+    "name": "动量震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "ao.html"
+  },
+  {
+    "id": "ta.aobv",
+    "name": "Archer 能量潮",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "aobv.html"
+  },
+  {
+    "id": "ta.apo",
+    "name": "绝对价格震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "apo.html"
+  },
+  {
+    "id": "ta.aroon",
+    "name": "阿隆指标",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "aroon.html"
+  },
+  {
+    "id": "ta.atr",
+    "name": "平均真实波幅",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "atr.html"
+  },
+  {
+    "id": "ta.atr_stop",
+    "name": "ATR 跟踪止损",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "atr_stop.html"
+  },
+  {
+    "id": "ta.avgprice",
+    "name": "四价平均",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "avgprice.html"
+  },
+  {
+    "id": "ta.avolume",
+    "name": "年化历史波动",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "avolume.html"
+  },
+  {
+    "id": "ta.barssince",
+    "name": "距条件成立间隔",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "barssince.html"
+  },
+  {
+    "id": "ta.bbands",
+    "name": "布林带",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "bbands.html"
+  },
+  {
+    "id": "ta.beta",
+    "name": "滚动贝塔",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "beta.html"
+  },
+  {
+    "id": "ta.bias",
+    "name": "乖离率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "bias.html"
+  },
+  {
+    "id": "ta.bop",
+    "name": "多空力量平衡",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "bop.html"
+  },
+  {
+    "id": "ta.brar",
+    "name": "人气与意愿指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "brar.html"
+  },
+  {
+    "id": "ta.cci",
+    "name": "顺势指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "cci.html"
+  },
+  {
+    "id": "ta.cdl_doji",
+    "name": "十字星",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_doji.html"
+  },
+  {
+    "id": "ta.cdl_engulfing",
+    "name": "吞没形态",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_engulfing.html"
+  },
+  {
+    "id": "ta.cdl_eveningstar",
+    "name": "暮星",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_eveningstar.html"
+  },
+  {
+    "id": "ta.cdl_hammer",
+    "name": "锤子线",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_hammer.html"
+  },
+  {
+    "id": "ta.cdl_harami",
+    "name": "孕线",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_harami.html"
+  },
+  {
+    "id": "ta.cdl_inside",
+    "name": "内包线",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_inside.html"
+  },
+  {
+    "id": "ta.cdl_marubozu",
+    "name": "光头光脚线",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_marubozu.html"
+  },
+  {
+    "id": "ta.cdl_morningstar",
+    "name": "晨星",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_morningstar.html"
+  },
+  {
+    "id": "ta.cdl_pattern",
+    "name": "形态分派器",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "形态延期",
+    "href": "cdl_pattern.html"
+  },
+  {
+    "id": "ta.cdl_shootingstar",
+    "name": "射击之星",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_shootingstar.html"
+  },
+  {
+    "id": "ta.cdl_z",
+    "name": "蜡烛标准分",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "cdl_z.html"
+  },
+  {
+    "id": "ta.ce",
+    "name": "吊灯止损",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "ce.html"
+  },
+  {
+    "id": "ta.cfo",
+    "name": "Chande 预测震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "cfo.html"
+  },
+  {
+    "id": "ta.cg",
+    "name": "重心震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "cg.html"
+  },
+  {
+    "id": "ta.change",
+    "name": "间隔变化",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "change.html"
+  },
+  {
+    "id": "ta.chop",
+    "name": "震荡指数",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "chop.html"
+  },
+  {
+    "id": "ta.cksp",
+    "name": "Chande Kroll 止损线",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "cksp.html"
+  },
+  {
+    "id": "ta.cmf",
+    "name": "Chaikin 资金流",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "cmf.html"
+  },
+  {
+    "id": "ta.cmo",
+    "name": "Chande 动量震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "cmo.html"
+  },
+  {
+    "id": "ta.coppock",
+    "name": "Coppock 曲线",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "coppock.html"
+  },
+  {
+    "id": "ta.correl",
+    "name": "滚动相关系数",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "correl.html"
+  },
+  {
+    "id": "ta.cpr",
+    "name": "中央枢轴区间",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "cpr.html"
+  },
+  {
+    "id": "ta.cross",
+    "name": "双向交叉序列",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "cross.html"
+  },
+  {
+    "id": "ta.crossover",
+    "name": "上穿序列",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "crossover.html"
+  },
+  {
+    "id": "ta.crossunder",
+    "name": "下穿序列",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "crossunder.html"
+  },
+  {
+    "id": "ta.crsi",
+    "name": "Connors 相对强弱",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "crsi.html"
+  },
+  {
+    "id": "ta.cti",
+    "name": "相关趋势指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "cti.html"
+  },
+  {
+    "id": "ta.cum",
+    "name": "累计求和",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "cum.html"
+  },
+  {
+    "id": "ta.cvi",
+    "name": "Chaikin 波动率",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "cvi.html"
+  },
+  {
+    "id": "ta.decay",
+    "name": "信号衰减",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "decay.html"
+  },
+  {
+    "id": "ta.decreasing",
+    "name": "下降判断",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "decreasing.html"
+  },
+  {
+    "id": "ta.dema",
+    "name": "双指数均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "dema.html"
+  },
+  {
+    "id": "ta.dm",
+    "name": "方向运动",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "dm.html"
+  },
+  {
+    "id": "ta.donchian",
+    "name": "唐奇安通道",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "donchian.html"
+  },
+  {
+    "id": "ta.dpo",
+    "name": "去趋势价格震荡器",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "dpo.html"
+  },
+  {
+    "id": "ta.drawdown",
+    "name": "回撤序列",
+    "category": "收益与回撤",
+    "aliases": [],
+    "status": "可用",
+    "href": "drawdown.html"
+  },
+  {
+    "id": "ta.dsp",
+    "name": "去趋势合成价格",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "dsp.html"
+  },
+  {
+    "id": "ta.dx",
+    "name": "方向指数",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "dx.html"
+  },
+  {
+    "id": "ta.ebsw",
+    "name": "改进正弦波",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "ebsw.html"
+  },
+  {
+    "id": "ta.edecay",
+    "name": "指数衰减",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "edecay.html"
+  },
+  {
+    "id": "ta.efi",
+    "name": "Elder 力量指数",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "efi.html"
+  },
+  {
+    "id": "ta.ema",
+    "name": "指数移动平均",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ema.html"
+  },
+  {
+    "id": "ta.emv",
+    "name": "原始简易波动",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "emv.html"
+  },
+  {
+    "id": "ta.entropy",
+    "name": "滚动熵",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "entropy.html"
+  },
+  {
+    "id": "ta.eom",
+    "name": "平滑简易波动",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "eom.html"
+  },
+  {
+    "id": "ta.er",
+    "name": "效率比率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "er.html"
+  },
+  {
+    "id": "ta.eri",
+    "name": "Elder 多空力量",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "eri.html"
+  },
+  {
+    "id": "ta.falling",
+    "name": "低于前窗判断",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "falling.html"
+  },
+  {
+    "id": "ta.fisher",
+    "name": "Fisher 变换",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "fisher.html"
+  },
+  {
+    "id": "ta.fosc",
+    "name": "预测震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "fosc.html"
+  },
+  {
+    "id": "ta.frama",
+    "name": "分形自适应均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "frama.html"
+  },
+  {
+    "id": "ta.fwma",
+    "name": "斐波那契加权均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "fwma.html"
+  },
+  {
+    "id": "ta.gator",
+    "name": "鳄鱼震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "gator.html"
+  },
+  {
+    "id": "ta.ha",
+    "name": "平均蜡烛",
+    "category": "蜡烛与形态",
+    "aliases": [],
+    "status": "可用",
+    "href": "ha.html"
+  },
+  {
+    "id": "ta.highest",
+    "name": "窗口最高值",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "highest.html"
+  },
+  {
+    "id": "ta.highestbars",
+    "name": "最高值位置",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "highestbars.html"
+  },
+  {
+    "id": "ta.hilo",
+    "name": "Gann 高低激活线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "hilo.html"
+  },
+  {
+    "id": "ta.hl2",
+    "name": "高低中间价",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "hl2.html"
+  },
+  {
+    "id": "ta.hlc3",
+    "name": "典型价格",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "hlc3.html"
+  },
+  {
+    "id": "ta.hma",
+    "name": "Hull 均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "hma.html"
+  },
+  {
+    "id": "ta.ht_dcperiod",
+    "name": "希尔伯特主周期",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "ht_dcperiod.html"
+  },
+  {
+    "id": "ta.ht_dcphase",
+    "name": "希尔伯特主周期相位",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "ht_dcphase.html"
+  },
+  {
+    "id": "ta.ht_phasor",
+    "name": "希尔伯特相量",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "ht_phasor.html"
+  },
+  {
+    "id": "ta.ht_sine",
+    "name": "希尔伯特正弦波",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "ht_sine.html"
+  },
+  {
+    "id": "ta.ht_trendline",
+    "name": "希尔伯特趋势线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ht_trendline.html"
+  },
+  {
+    "id": "ta.ht_trendmode",
+    "name": "希尔伯特趋势状态",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "ht_trendmode.html"
+  },
+  {
+    "id": "ta.hvol",
+    "name": "历史波动率",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "hvol.html"
+  },
+  {
+    "id": "ta.hwc",
+    "name": "Holt-Winters 通道",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "hwc.html"
+  },
+  {
+    "id": "ta.hwma",
+    "name": "Holt-Winters 均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "hwma.html"
+  },
+  {
+    "id": "ta.ibs",
+    "name": "内部强度",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "ibs.html"
+  },
+  {
+    "id": "ta.ichimoku",
+    "name": "一目均衡线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ichimoku.html"
+  },
+  {
+    "id": "ta.iii",
+    "name": "日内强度",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "iii.html"
+  },
+  {
+    "id": "ta.increasing",
+    "name": "上升判断",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "increasing.html"
+  },
+  {
+    "id": "ta.inertia",
+    "name": "惯性指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "inertia.html"
+  },
+  {
+    "id": "ta.jma",
+    "name": "Jurik 风格均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "jma.html"
+  },
+  {
+    "id": "ta.kama",
+    "name": "Kaufman 自适应均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "kama.html"
+  },
+  {
+    "id": "ta.kc",
+    "name": "Keltner 通道",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "kc.html"
+  },
+  {
+    "id": "ta.kdj",
+    "name": "KDJ 随机指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "kdj.html"
+  },
+  {
+    "id": "ta.kst",
+    "name": "综合动量指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "kst.html"
+  },
+  {
+    "id": "ta.kurtosis",
+    "name": "滚动峰度",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "kurtosis.html"
+  },
+  {
+    "id": "ta.kvo",
+    "name": "Klinger 成交量震荡",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "kvo.html"
+  },
+  {
+    "id": "ta.linreg",
+    "name": "线性回归值",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "linreg.html"
+  },
+  {
+    "id": "ta.linregangle",
+    "name": "回归角度",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "linregangle.html"
+  },
+  {
+    "id": "ta.linregintercept",
+    "name": "回归截距",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "linregintercept.html"
+  },
+  {
+    "id": "ta.linregslope",
+    "name": "回归斜率",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "linregslope.html"
+  },
+  {
+    "id": "ta.log_return",
+    "name": "对数收益",
+    "category": "收益与回撤",
+    "aliases": [],
+    "status": "可用",
+    "href": "log_return.html"
+  },
+  {
+    "id": "ta.long_run",
+    "name": "多头趋势阶段",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "long_run.html"
+  },
+  {
+    "id": "ta.lowest",
+    "name": "窗口最低值",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "lowest.html"
+  },
+  {
+    "id": "ta.lowestbars",
+    "name": "最低值位置",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "lowestbars.html"
+  },
+  {
+    "id": "ta.lrsi",
+    "name": "Laguerre 相对强弱",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "lrsi.html"
+  },
+  {
+    "id": "ta.ma",
+    "name": "可选类型均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ma.html"
+  },
+  {
+    "id": "ta.ma_envelopes",
+    "name": "均线包络",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ma_envelopes.html"
+  },
+  {
+    "id": "ta.macd",
+    "name": "平滑异同移动平均",
+    "category": "动量",
+    "aliases": [
+      "line"
+    ],
+    "status": "可用",
+    "href": "macd.html"
+  },
+  {
+    "id": "ta.macdext",
+    "name": "扩展 MACD",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "macdext.html"
+  },
+  {
+    "id": "ta.macdfix",
+    "name": "固定周期 MACD",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "macdfix.html"
+  },
+  {
+    "id": "ta.mad",
+    "name": "平均绝对偏差",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "mad.html"
+  },
+  {
+    "id": "ta.mama",
+    "name": "Mesa 自适应均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "mama.html"
+  },
+  {
+    "id": "ta.marketfi",
+    "name": "市场便利指数",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "marketfi.html"
+  },
+  {
+    "id": "ta.massi",
+    "name": "质量指数",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "massi.html"
+  },
+  {
+    "id": "ta.mavp",
+    "name": "可变周期均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "mavp.html"
+  },
+  {
+    "id": "ta.mcgd",
+    "name": "McGinley 动态线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "mcgd.html"
+  },
+  {
+    "id": "ta.md",
+    "name": "平均偏差",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "md.html"
+  },
+  {
+    "id": "ta.median",
+    "name": "滚动中位数",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "median.html"
+  },
+  {
+    "id": "ta.medprice",
+    "name": "中间价格",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "medprice.html"
+  },
+  {
+    "id": "ta.mfi",
+    "name": "资金流量指标",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "mfi.html"
+  },
+  {
+    "id": "ta.midpoint",
+    "name": "窗口中点",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "midpoint.html"
+  },
+  {
+    "id": "ta.midprice",
+    "name": "窗口高低中点",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "midprice.html"
+  },
+  {
+    "id": "ta.minus_dm",
+    "name": "负向方向运动",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "minus_dm.html"
+  },
+  {
+    "id": "ta.mmar",
+    "name": "Madrid 均线组",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "mmar.html"
+  },
+  {
+    "id": "ta.mode",
+    "name": "有限观测众数",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "mode.html"
+  },
+  {
+    "id": "ta.mom",
+    "name": "动量差",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "mom.html"
+  },
+  {
+    "id": "ta.msw",
+    "name": "Mesa 正弦波",
+    "category": "周期",
+    "aliases": [],
+    "status": "可用",
+    "href": "msw.html"
+  },
+  {
+    "id": "ta.natr",
+    "name": "归一化平均真实波幅",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "natr.html"
+  },
+  {
+    "id": "ta.nvi",
+    "name": "负成交量指数",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "nvi.html"
+  },
+  {
+    "id": "ta.obv",
+    "name": "能量潮",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "obv.html"
+  },
+  {
+    "id": "ta.ohlc4",
+    "name": "开高低收均价",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ohlc4.html"
+  },
+  {
+    "id": "ta.pdist",
+    "name": "价格距离",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "pdist.html"
+  },
+  {
+    "id": "ta.percent_return",
+    "name": "比例收益",
+    "category": "收益与回撤",
+    "aliases": [],
+    "status": "可用",
+    "href": "percent_return.html"
+  },
+  {
+    "id": "ta.percentile_linear_interpolation",
+    "name": "插值分位数",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "percentile_linear_interpolation.html"
+  },
+  {
+    "id": "ta.percentile_nearest_rank",
+    "name": "最近秩分位数",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "percentile_nearest_rank.html"
+  },
+  {
+    "id": "ta.percentrank",
+    "name": "百分位排名",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "percentrank.html"
+  },
+  {
+    "id": "ta.pgo",
+    "name": "PGO 震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pgo.html"
+  },
+  {
+    "id": "ta.pivot_points",
+    "name": "确认周期枢轴",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "pivot_points.html"
+  },
+  {
+    "id": "ta.pivothigh",
+    "name": "确认高点",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "pivothigh.html"
+  },
+  {
+    "id": "ta.pivotlow",
+    "name": "确认低点",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "pivotlow.html"
+  },
+  {
+    "id": "ta.plus_dm",
+    "name": "正向方向运动",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "plus_dm.html"
+  },
+  {
+    "id": "ta.pmax",
+    "name": "价格最大止损线",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "pmax.html"
+  },
+  {
+    "id": "ta.pmo",
+    "name": "价格动量震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pmo.html"
+  },
+  {
+    "id": "ta.po",
+    "name": "投影震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "po.html"
+  },
+  {
+    "id": "ta.ppo",
+    "name": "百分比价格震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "ppo.html"
+  },
+  {
+    "id": "ta.psar",
+    "name": "抛物线转向",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "psar.html"
+  },
+  {
+    "id": "ta.psl",
+    "name": "心理线",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "psl.html"
+  },
+  {
+    "id": "ta.pvi",
+    "name": "正成交量指数",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pvi.html"
+  },
+  {
+    "id": "ta.pvo",
+    "name": "百分比成交量震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pvo.html"
+  },
+  {
+    "id": "ta.pvol",
+    "name": "价量乘积",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pvol.html"
+  },
+  {
+    "id": "ta.pvr",
+    "name": "价量等级",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pvr.html"
+  },
+  {
+    "id": "ta.pvt",
+    "name": "价量趋势",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "pvt.html"
+  },
+  {
+    "id": "ta.pwma",
+    "name": "Pascal 加权均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "pwma.html"
+  },
+  {
+    "id": "ta.qqe",
+    "name": "定量定性估计",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "qqe.html"
+  },
+  {
+    "id": "ta.qstick",
+    "name": "实体均值指标",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "qstick.html"
+  },
+  {
+    "id": "ta.quantile",
+    "name": "滚动分位数",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "quantile.html"
+  },
+  {
+    "id": "ta.rainbow",
+    "name": "彩虹均线组",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "rainbow.html"
+  },
+  {
+    "id": "ta.range",
+    "name": "窗口极差",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "range.html"
+  },
+  {
+    "id": "ta.rci",
+    "name": "等级相关指数",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rci.html"
+  },
+  {
+    "id": "ta.rising",
+    "name": "高于前窗判断",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "rising.html"
+  },
+  {
+    "id": "ta.rma",
+    "name": "Wilder 平滑均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "rma.html"
+  },
+  {
+    "id": "ta.rmi",
+    "name": "相对动量指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rmi.html"
+  },
+  {
+    "id": "ta.roc",
+    "name": "百分比变化率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "roc.html"
+  },
+  {
+    "id": "ta.rocp",
+    "name": "比例变化率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rocp.html"
+  },
+  {
+    "id": "ta.rocr",
+    "name": "价格比率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rocr.html"
+  },
+  {
+    "id": "ta.rocr100",
+    "name": "百分尺度价格比率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rocr100.html"
+  },
+  {
+    "id": "ta.rolling_count",
+    "name": "条件计数",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "rolling_count.html"
+  },
+  {
+    "id": "ta.rolling_sum",
+    "name": "滚动求和",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "rolling_sum.html"
+  },
+  {
+    "id": "ta.rsi",
+    "name": "相对强弱指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rsi.html"
+  },
+  {
+    "id": "ta.rsx",
+    "name": "平滑相对强弱",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rsx.html"
+  },
+  {
+    "id": "ta.running_max",
+    "name": "历史最高值",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "running_max.html"
+  },
+  {
+    "id": "ta.running_min",
+    "name": "历史最低值",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "running_min.html"
+  },
+  {
+    "id": "ta.rvgi",
+    "name": "相对活力指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rvgi.html"
+  },
+  {
+    "id": "ta.rvi",
+    "name": "相对波动率指标",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "rvi.html"
+  },
+  {
+    "id": "ta.rvol",
+    "name": "相对成交量",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "rvol.html"
+  },
+  {
+    "id": "ta.sarext",
+    "name": "扩展抛物线转向",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "sarext.html"
+  },
+  {
+    "id": "ta.shift",
+    "name": "历史位移",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "shift.html"
+  },
+  {
+    "id": "ta.short_run",
+    "name": "空头趋势阶段",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "short_run.html"
+  },
+  {
+    "id": "ta.sinwma",
+    "name": "正弦加权均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "sinwma.html"
+  },
+  {
+    "id": "ta.skew",
+    "name": "滚动偏度",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "skew.html"
+  },
+  {
+    "id": "ta.slope",
+    "name": "变化斜率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "slope.html"
+  },
+  {
+    "id": "ta.sma",
+    "name": "简单移动平均",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "sma.html"
+  },
+  {
+    "id": "ta.smc_sweep",
+    "name": "流动性扫掠",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "smc_sweep.html"
+  },
+  {
+    "id": "ta.smi",
+    "name": "SMI Ergodic",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "smi.html"
+  },
+  {
+    "id": "ta.smi_stochastic",
+    "name": "随机动量指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "smi_stochastic.html"
+  },
+  {
+    "id": "ta.squeeze",
+    "name": "挤压指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "squeeze.html"
+  },
+  {
+    "id": "ta.squeeze_pro",
+    "name": "多级挤压指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "squeeze_pro.html"
+  },
+  {
+    "id": "ta.ssf",
+    "name": "超级平滑滤波",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "ssf.html"
+  },
+  {
+    "id": "ta.starc",
+    "name": "STARC 通道",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "starc.html"
+  },
+  {
+    "id": "ta.stc",
+    "name": "Schaff 趋势周期",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "stc.html"
+  },
+  {
+    "id": "ta.stderr",
+    "name": "均值标准误",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "stderr.html"
+  },
+  {
+    "id": "ta.stdev",
+    "name": "滚动标准差",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "stdev.html"
+  },
+  {
+    "id": "ta.stoch",
+    "name": "随机震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "stoch.html"
+  },
+  {
+    "id": "ta.stochf",
+    "name": "快速随机震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "stochf.html"
+  },
+  {
+    "id": "ta.stochrsi",
+    "name": "随机相对强弱",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "stochrsi.html"
+  },
+  {
+    "id": "ta.supertrend",
+    "name": "超级趋势",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "supertrend.html"
+  },
+  {
+    "id": "ta.swma",
+    "name": "对称加权均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "swma.html"
+  },
+  {
+    "id": "ta.t3",
+    "name": "T3 均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "t3.html"
+  },
+  {
+    "id": "ta.td_seq",
+    "name": "TD 顺序计数",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "td_seq.html"
+  },
+  {
+    "id": "ta.tema",
+    "name": "三指数均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "tema.html"
+  },
+  {
+    "id": "ta.thermo",
+    "name": "Elder 温度计",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "thermo.html"
+  },
+  {
+    "id": "ta.tos_stdevall",
+    "name": "全区间标准差参考",
+    "category": "统计",
+    "aliases": [],
+    "status": "仅供研究",
+    "href": "tos_stdevall.html"
+  },
+  {
+    "id": "ta.trima",
+    "name": "三角移动平均",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "trima.html"
+  },
+  {
+    "id": "ta.trix",
+    "name": "三重平滑变化率",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "trix.html"
+  },
+  {
+    "id": "ta.trixh",
+    "name": "三重平滑柱值",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "trixh.html"
+  },
+  {
+    "id": "ta.true_range",
+    "name": "真实波幅",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "true_range.html"
+  },
+  {
+    "id": "ta.tsf",
+    "name": "时间序列预测",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "tsf.html"
+  },
+  {
+    "id": "ta.tsi",
+    "name": "真实强度指数",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "tsi.html"
+  },
+  {
+    "id": "ta.tsignals",
+    "name": "趋势事件",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "tsignals.html"
+  },
+  {
+    "id": "ta.ttm_trend",
+    "name": "TTM 趋势",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "ttm_trend.html"
+  },
+  {
+    "id": "ta.typprice",
+    "name": "典型价",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "typprice.html"
+  },
+  {
+    "id": "ta.ui",
+    "name": "溃疡指数",
+    "category": "波动率",
+    "aliases": [],
+    "status": "可用",
+    "href": "ui.html"
+  },
+  {
+    "id": "ta.uo",
+    "name": "终极震荡器",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "uo.html"
+  },
+  {
+    "id": "ta.valuewhen",
+    "name": "条件事件值",
+    "category": "序列工具",
+    "aliases": [],
+    "status": "可用",
+    "href": "valuewhen.html"
+  },
+  {
+    "id": "ta.variance",
+    "name": "滚动方差",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "variance.html"
+  },
+  {
+    "id": "ta.vfi",
+    "name": "成交量流指标",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "vfi.html"
+  },
+  {
+    "id": "ta.vhf",
+    "name": "垂直水平过滤",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "vhf.html"
+  },
+  {
+    "id": "ta.vidya",
+    "name": "可变指数动态均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "vidya.html"
+  },
+  {
+    "id": "ta.volatility_stop",
+    "name": "波动跟踪止损",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "volatility_stop.html"
+  },
+  {
+    "id": "ta.vortex",
+    "name": "涡旋指标",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "vortex.html"
+  },
+  {
+    "id": "ta.vosc",
+    "name": "成交量震荡器",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "vosc.html"
+  },
+  {
+    "id": "ta.vp",
+    "name": "成交量分布",
+    "category": "成交量",
+    "aliases": [],
+    "status": "非逐根序列",
+    "href": "vp.html"
+  },
+  {
+    "id": "ta.vwap",
+    "name": "成交量加权均价",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "vwap.html"
+  },
+  {
+    "id": "ta.vwma",
+    "name": "成交量加权移动平均",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "vwma.html"
+  },
+  {
+    "id": "ta.vwmacd",
+    "name": "成交量加权 MACD",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "vwmacd.html"
+  },
+  {
+    "id": "ta.wad",
+    "name": "威廉累积派发",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "wad.html"
+  },
+  {
+    "id": "ta.wavetrend",
+    "name": "波浪趋势",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "wavetrend.html"
+  },
+  {
+    "id": "ta.wcp",
+    "name": "加权收盘价",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "wcp.html"
+  },
+  {
+    "id": "ta.willr",
+    "name": "威廉百分比指标",
+    "category": "动量",
+    "aliases": [],
+    "status": "可用",
+    "href": "willr.html"
+  },
+  {
+    "id": "ta.wma",
+    "name": "线性加权均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "wma.html"
+  },
+  {
+    "id": "ta.wvad",
+    "name": "威廉变异累积派发",
+    "category": "成交量",
+    "aliases": [],
+    "status": "可用",
+    "href": "wvad.html"
+  },
+  {
+    "id": "ta.xsignals",
+    "name": "阈值交叉事件",
+    "category": "趋势",
+    "aliases": [],
+    "status": "可用",
+    "href": "xsignals.html"
+  },
+  {
+    "id": "ta.zlma",
+    "name": "低滞后均线",
+    "category": "均线与价格",
+    "aliases": [],
+    "status": "可用",
+    "href": "zlma.html"
+  },
+  {
+    "id": "ta.zscore",
+    "name": "滚动标准分",
+    "category": "统计",
+    "aliases": [],
+    "status": "可用",
+    "href": "zscore.html"
+  }
+]

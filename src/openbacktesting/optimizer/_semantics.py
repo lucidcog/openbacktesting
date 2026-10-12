@@ -1,0 +1,155 @@
+# 此文件由 scripts/generate-contracts.mjs 生成，请勿手工修改。
+"""Portfolio跨表语义；Schema先保证结构，本层拒绝不一致引用。"""
+
+import math
+
+
+def check_portfolio(p):
+    def require(ok, reason):
+        if not ok:
+            raise ValueError("portfolio-result: " + reason)
+
+    def unique(rows, key):
+        values = [r[key] for r in rows]
+        require(len(values) == len(set(values)), "duplicate_" + key)
+        return {r[key]: r for r in rows}
+
+    def close(a, b):
+        return math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-8)
+
+    facts, trades, series = p["facts"], p["trades"], p["series"]
+    orders = unique(facts["orders"], "order_id")
+    fills = unique(facts["fills"], "fill_id")
+    allocations = unique(facts["allocations"], "allocation_id")
+    observations = unique(series["account"], "observationId")
+    fragments = unique(trades["closedFragments"], "fragmentId")
+    unique(trades["openLots"], "lotId")
+    require(bool(observations), "empty_observations")
+    require(
+        [r["observationSequence"] for r in observations.values()]
+        == list(range(1, len(observations) + 1)),
+        "observation_sequence",
+    )
+    require(
+        all(
+            a["barIndex"] <= b["barIndex"] for a, b in zip(series["account"], series["account"][1:])
+        ),
+        "bar_order",
+    )
+    require(series["account"][-1]["barIndex"] == p["run"]["processedThroughBar"], "executed_range")
+    for r in series["account"]:
+        require(0 <= r["barIndex"] <= p["run"]["processedThroughBar"], "bar_range")
+    for rows in (facts["orderSizing"], facts["orderEvents"], facts["fills"]):
+        require(all(r["order_id"] in orders for r in rows), "order_reference")
+    for table in (facts["fills"], facts["orderEvents"]):
+        seq = [r["sequence"] for r in table]
+        require(seq == sorted(set(seq)), "event_sequence")
+    require(
+        all(
+            r["fillSequence"] in {0} | {f["sequence"] for f in fills.values()}
+            for r in series["account"]
+        ),
+        "fill_sequence_reference",
+    )
+    for a in allocations.values():
+        require(a["fill_id"] in fills and a["entry_fill_id"] in fills, "fill_reference")
+    require(
+        set(fragments)
+        == {a["allocation_id"] for a in allocations.values() if a["kind"] == "close"},
+        "fragment_allocations",
+    )
+    require(
+        [t["displayOrdinal"] for t in fragments.values()] == list(range(1, len(fragments) + 1)),
+        "fragment_order",
+    )
+    for t in list(fragments.values()) + trades["openLots"]:
+        require(
+            t["entry"]["fillId"] in fills and t["entry"]["orderId"] in orders, "entry_reference"
+        )
+    for t in fragments.values():
+        require(t["exit"]["fillId"] in fills and t["exit"]["orderId"] in orders, "exit_reference")
+        require(allocations[t["fragmentId"]]["trade_id"] == t["lotId"], "lot_reference")
+        require(close(t["pnlNet"], t["pnlGross"] - t["feeTotal"]), "trade_accounting")
+    require(all(t["asOf"] in observations for t in trades["openLots"]), "open_asof")
+    for row in series["close"]:
+        require(row == observations.get(row["observationId"]), "close_reference")
+    require(len(series["margin"]) == len(observations), "margin_length")
+    for row, account in zip(series["margin"], series["account"]):
+        require(row["observationId"] == account["observationId"], "margin_axis")
+    for curve in series["directions"].values():
+        require(len(curve) == len(observations), "direction_length")
+        for row, account in zip(curve, series["account"]):
+            require(row["observationId"] == account["observationId"], "direction_axis")
+    initial = p["summary"]["all"]["initialCapital"]["value"]
+    for row, long, short in zip(
+        series["account"], series["directions"]["long"], series["directions"]["short"]
+    ):
+        require(
+            close(row["equity"] - initial, long["contribution"] + short["contribution"]),
+            "direction_accounting",
+        )
+    require(
+        close(sum(f["fee"] for f in fills.values()), sum(a["fee"] for a in allocations.values())),
+        "fee_conservation",
+    )
+    require(p["summary"]["all"]["closedFragmentCount"]["value"] == len(fragments), "closed_count")
+    require(p["summary"]["all"]["openLotCount"]["value"] == len(trades["openLots"]), "open_count")
+    for row in series["closedCumulative"]:
+        require(row["fragmentId"] in fragments, "cumulative_reference")
+    for bucket in p["analysis"]["distribution"]["histogram"]:
+        require(bucket["count"] == len(bucket["fragmentIds"]), "histogram_count")
+        require(all(ref in fragments for ref in bucket["fragmentIds"]), "histogram_reference")
+
+    histogram_ids = [
+        ref
+        for bucket in p["analysis"]["distribution"]["histogram"]
+        for ref in bucket["fragmentIds"]
+    ]
+    require(
+        len(histogram_ids) == len(fragments) and set(histogram_ids) == set(fragments),
+        "histogram_coverage",
+    )
+    for t in list(fragments.values()) + trades["openLots"]:
+        for leg in (t["entry"], t["exit"]):
+            if leg is not None:
+                fill = fills[leg["fillId"]]
+                require(
+                    leg["orderId"] == fill["order_id"]
+                    and leg["sequence"] == fill["sequence"]
+                    and leg["barIndex"] == fill["bar_index"]
+                    and leg["price"] == fill["price"],
+                    "leg_fill_consistency",
+                )
+    total = sum(t["pnlNet"] for t in fragments.values()) + sum(
+        t["openPnlNet"] for t in trades["openLots"]
+    )
+    require(close(total, series["account"][-1]["equity"] - initial), "portfolio_accounting")
+    for name in ("drawdowns", "alternating"):
+        for episode in p["analysis"]["growthAndDecline"][name]:
+            require(
+                all(episode[k] in observations for k in ("start", "end", "extreme")),
+                "episode_reference",
+            )
+    for ref in p["analysis"]["distribution"]["outliers"]["fragmentIds"]:
+        require(ref in fragments, "outlier_reference")
+    for streak in p["analysis"]["streaks"]["rows"]:
+        require(
+            streak["startFragmentId"] in fragments and streak["endFragmentId"] in fragments,
+            "streak_reference",
+        )
+
+    def metrics(value):
+        if isinstance(value, dict):
+            if "methodId" in value and "unit" in value and "status" in value:
+                missing = value["value"] is None
+                require((value["status"] in ("ok", "approximate")) != missing, "metric_status")
+                require(not missing or bool(value["reason"]), "metric_reason")
+            for item in value.values():
+                metrics(item)
+        elif isinstance(value, list):
+            for item in value:
+                metrics(item)
+
+    metrics(p["summary"])
+    metrics(p["analysis"])
+    metrics(p["extensions"])

@@ -1,0 +1,2103 @@
+{
+  "schema_version": 1,
+  "research": "engine-indicator-coverage-gap-inventory.md",
+  "candidates": [
+    {
+      "id": "N01",
+      "research_row": [
+        "Stochastic Momentum Index：SI [get_smi](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/smi.py#L10)",
+        "M；本地 `smi` 是另一算法",
+        "HLC；双平滑窗口，收盘可知",
+        "滚动最高/最低、中点差与区间双 EMA；P1，补真实语义空缺"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N02",
+      "research_row": [
+        "Connors RSI：SI [get_connors_rsi](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/connors_rsi.py#L10)、TL `CRSI`",
+        "M；RSI+连续涨跌 streak RSI+ROC 排名",
+        "C；窗口，收盘可知",
+        "复用 RSI，新增 streak 与 percentile-rank；P1，依赖排名工具"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N03",
+      "research_row": [
+        "Price Momentum Oscillator：SI [get_pmo](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/pmo.py#L10)",
+        "M；非 MACD/TSI 同义词",
+        "C；多层平滑窗口",
+        "按标准缩放的 ROC 双平滑及 signal；P1"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N04",
+      "research_row": [
+        "Relative Momentum Index：TECH [RMI](https://github.com/freqtrade/technical/blob/337262bfddec06003d2f10bea89edf736c6cb567/technical/indicators/indicators.py#L955)、BT `RelativeMomentumIndex`",
+        "M；RSI 的 momentum 间隔变体",
+        "C；窗口",
+        "把单步涨跌改为指定间隔，独立固定语义；P1，常见迁移需求"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N05",
+      "research_row": [
+        "Williams Alligator 与 Gator：SI `get_alligator/get_gator`",
+        "C/M；三条 SMMA 已可计算，完整输出未封装",
+        "HL；三平滑及向右显示位移，收盘可知",
+        "同一族输出 jaw/teeth/lips 及差值振荡，不向过去写未来；P1"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N06",
+      "research_row": [
+        "ATR Trailing Stop：SI [get_atr_stop](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/atr_stop.py#L14)",
+        "M；不同于 Chandelier/Supertrend",
+        "OHLC；递归、种子和趋势反转敏感",
+        "按官方状态机独立实现，核对 close/high-low 端点模式；P1"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N07",
+      "research_row": [
+        "Volatility Stop：SI [get_volatility_stop](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/volatility_stop.py#L10)",
+        "M；与 ATR Stop/PSAR/Supertrend 不互相等价",
+        "HLC；递归",
+        "固定极值和 ATR 更新/反转规则；P1"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N08",
+      "research_row": [
+        "Pivot Points（Standard/Fibonacci/Woodie/Camarilla/DeMark）及 Rolling Pivot",
+        "M/D；`cpr` 只覆盖部分中枢数学",
+        "OHLC+T；上一完整周期或已完成滚动窗口",
+        "先会话/重采样服务，再函数族输出 P/S/R；P1。不同公式不合并数值"
+      ],
+      "disposition": "partially-implemented",
+      "reason": "已实现六种显式周期Pivot Points；Rolling Pivot延期，未实现滚动窗口与会话自动推断"
+    },
+    {
+      "id": "N09",
+      "research_row": [
+        "Moving Average Envelopes：SI [get_ma_envelopes](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/ma_envelopes.py#L11)、PYTI、PI",
+        "C；现有 MA×百分比带",
+        "C；窗口",
+        "组合封装、参数与多输出契约；P1，廉价迁移能力，不算新数学算法"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N10",
+      "research_row": [
+        "STARC Bands：SI [get_starc_bands](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/starc_bands.py#L10)",
+        "C；SMA±ATR 倍数，不能默认等于 KC",
+        "HLC；窗口",
+        "复用 SMA/ATR，固定中心与ATR口径；P1"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N11",
+      "research_row": [
+        "Fractal Chaos Bands：SI [get_fcb](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/fcb.py#L13)",
+        "M/R；Donchian 不等价",
+        "HL；右侧 fractal bars 确认后可知",
+        "使用已确认分形维护上/下带，输出确认时间；P2"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N12",
+      "research_row": [
+        "Acceleration/Deceleration Oscillator：BT、TL `AC`",
+        "C；AO−SMA(AO)",
+        "HL；窗口",
+        "AO 组合且审核其 smoothing；P1"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N13",
+      "research_row": [
+        "Internal Bar Strength：QTP [ibs](https://github.com/ranaroussi/qtpylib/blob/2c1af0eef85fb3205d8fcefc41a421b074b371de/qtpylib/indicators.py#L189)、TL `IBS`、TALIPP `IBS`",
+        "C；(C−L)/(H−L)，非 BOP",
+        "HLC；收盘可知",
+        "统一零区间与缺口规则；P1，极小实现成本"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N14",
+      "research_row": [
+        "FRAMA：FINTA [FRAMA](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L463)、TL [FRAMA](https://github.com/TA-Lib/ta-lib/blob/7836a9803d030ffda3b19d34f838ce6b4713fc2b/src/ta_func/ta_FRAMA.c)",
+        "M；非 KAMA/VIDYA",
+        "HLC或C，取决已选定义；窗口后递归",
+        "依分形维数调节 EMA；先固定价格源/窗口分段；P1，勿照搬 Finta 未使用参数"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N15",
+      "research_row": [
+        "WaveTrend：FINTA [WTO](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L1805)、SS `wt1/wt2`",
+        "M；非本地 Fisher/TSI",
+        "HLC；层叠 EMA/SMA",
+        "typical price 的偏离归一化及信号平滑；P1，两个输出为一个指标"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N16",
+      "research_row": [
+        "Hurst Exponent / Rescaled Range：SI [get_hurst](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/hurst.py#L10)、BT",
+        "M",
+        "C；仅滚动历史窗口可因果",
+        "分段 R/S 与 log-log 拟合；P2，需最小窗口、有限值、估计偏差声明"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N17",
+      "research_row": [
+        "Rogers–Satchell 历史波动率：TALIPP `RogersSatchell`",
+        "M；`hvol` 的 close-return 波动率不等价",
+        "OHLC；窗口",
+        "对数 O/H/L/C 范围估计再滚动平均/开方；P2，处理非正价格和年化"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N18",
+      "research_row": [
+        "VPCI / VPCII：TECH `vpci/vpcii`",
+        "M；非 VFI/CMF",
+        "CV；窗口",
+        "量加权与普通均线的差、比及量比组合；P2，两版本分别命名"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N19",
+      "research_row": [
+        "Volume Zone / Price Zone Oscillator：FINTA `VZO/PZO`",
+        "M",
+        "CV/C；EMA窗口",
+        "价格方向签名×量/价格，经 EMA 比值；P2，分母零值与tie规则"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N20",
+      "research_row": [
+        "Intraday Momentum Index：TL `IMI`",
+        "M；不同于 RSI/CMO",
+        "OC；窗口",
+        "累计阳/阴实体大小比例；P2，简单、独立"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N21",
+      "research_row": [
+        "Swing Index / Accumulative Swing Index：TL `SI/ASI`",
+        "M；FINTA `SWI` 只是未实现占位",
+        "OHLC及limit-move参数；当前与上一根",
+        "明确 Wilder 分母/符号规则，ASI 累计 SI；P2，两个输出同族"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N22",
+      "research_row": [
+        "ATR/平均振幅派生 ADR 与相对成交量：TL `ADR/RVOL`",
+        "C；本地 `avolume` 是close log-return年化历史波动率，完全不是均量或RVOL",
+        "HL/V；窗口",
+        "明确平均 H−L、V/历史均量及是否排除当前bar；P1，和按时刻RVOL分开"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N23",
+      "research_row": [
+        "Rank Correlation Index：TradingView `ta.rci`",
+        "M；Pearson `cti/correl` 不等价",
+        "C；滚动窗口",
+        "时间排名与价格排名 Spearman、ties规则；P1；详见 Pine 节"
+      ],
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "N24",
+      "research_row": [
+        "Elastic Volume WMA / EV-MACD / EV-STC：FINTA `EVWMA/EV_MACD/EVSTC`",
+        "M；不是 VWMA/VWMACD",
+        "CV；递归",
+        "量决定递推更新强度，MACD/STC复用其输出；P2，同一均线族不重复计算法"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N25",
+      "research_row": [
+        "Volume Adjusted MA：FINTA [VAMA](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L226)、PYTI `volume_adjusted_moving_average`",
+        "V/M/R；两库公式及VWMA不可直接同义，PYTI用全样本均量",
+        "CV；PYTI原实现依赖未来样本",
+        "按来源命名variant、先核对定义；P3，无明确需求不增加歧义"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N26",
+      "research_row": [
+        "Inverse Fisher RSI：FINTA [IFT_RSI](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L714)",
+        "C",
+        "C；RSI窗口+平滑",
+        "RSI缩放、WMA、双曲正切；P2，易组合，保留参数化"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N27",
+      "research_row": [
+        "Dynamic Momentum Index：FINTA [DYMI](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L752)",
+        "M；与Directional Movement Index不同",
+        "C；滚动波动估计后动态RSI窗",
+        "变长窗口、因果参数更新；P2，需避免逐窗重复开销"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N28",
+      "research_row": [
+        "Volatility Based Momentum：FINTA [VBM](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L664)",
+        "C",
+        "HLC；窗口",
+        "动量/ATR；P2，参数与零ATR处理比新增算法更重要"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N29",
+      "research_row": [
+        "Weighted OBV / Cumulative Force：FINTA `WOBV/CFI`",
+        "C/V；需审核与PVT、EFI差别",
+        "CV；当前/上一根和累计",
+        "价格变化×量、累计/平滑的明确变体；P3，防止别名膨胀"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N30",
+      "research_row": [
+        "Buy/Sell Pressure 及归一化：FINTA `BASP/BASPN`",
+        "M",
+        "OHLCV；窗口",
+        "买卖压力和量的平滑比值；P2，标准化两通道同族"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N31",
+      "research_row": [
+        "Finite Volume Element：FINTA [FVE](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L2001)",
+        "M；与VFI阈值定义不同",
+        "HLCV；窗口",
+        "价格范围/方向门槛决定签名量，累计归一化；P2"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N32",
+      "research_row": [
+        "Adaptive Price Zone：FINTA [APZ](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L1910)",
+        "C/M；不同于KC",
+        "HLC；双EMA",
+        "双EMA中心/范围偏移；P2，属于可组合通道"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N33",
+      "research_row": [
+        "Value Chart：FINTA [VC](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L2244)",
+        "M",
+        "OHLC；窗口",
+        "浮动均值与波动单位归一化OHLC；P2，四输出一个变换"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N34",
+      "research_row": [
+        "WAVE PM：FINTA [WAVEPM](https://github.com/peerchemist/finta/blob/af01fa594995de78f5ada5c336e61cd87c46b151/finta/finta.py#L2262)",
+        "M",
+        "C；窗口",
+        "归一化波动振荡；P3，先核原始定义与数值边界"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N35",
+      "research_row": [
+        "Double Smoothed Stochastic：PYTI `double_smoothed_stochastic`",
+        "M；不是StochRSI/SMI",
+        "HLC；层叠平滑",
+        "对随机振荡做指定双平滑；P2，需按Bressert等定义消歧"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N36",
+      "research_row": [
+        "Traders Dynamic Index：QTP [tdi](https://github.com/ranaroussi/qtpylib/blob/2c1af0eef85fb3205d8fcefc41a421b074b371de/qtpylib/indicators.py#L132)",
+        "C",
+        "C；RSI+均线+布林窗口",
+        "复用RSI及BBands组合；P2，不是新的基础数学核"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N37",
+      "research_row": [
+        "Weighted Bollinger / MOBO / Zero-lag envelopes：QTP [weighted_bollinger_bands](https://github.com/ranaroussi/qtpylib/blob/2c1af0eef85fb3205d8fcefc41a421b074b371de/qtpylib/indicators.py#L440)、FINTA `MOBO`、PI `zero_lag_ema_envelope`",
+        "C/V",
+        "C；窗口",
+        "审核加权中心、标准差、非对称倍数；P2，尽量参数扩展"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N38",
+      "research_row": [
+        "Rolling VWAP：QTP [rolling_vwap](https://github.com/ranaroussi/qtpylib/blob/2c1af0eef85fb3205d8fcefc41a421b074b371de/qtpylib/indicators.py#L350)",
+        "C/V；现有VWAP为calendar anchor",
+        "HLCV；窗口",
+        "rollingΣ(TP×V)/rollingΣV；P1，勿与close VWMA混同"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N39",
+      "research_row": [
+        "Zero-lag SMA/HMA、Error-Correcting ZeroLag：QTP `zlsma/zlhma`、BT `ZeroLagIndicator`",
+        "V/M",
+        "C；窗口/递归",
+        "本地`zlma.mamode`仅sma/ema/rma/wma；QTP以lag作为MA窗口，不能直接同参映射；zlhma需扩参数或variant；EC均线独立算法；P2"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N40",
+      "research_row": [
+        "Dickson Moving Average：BT `DicksonMovingAverage`",
+        "C/M",
+        "C；递归/窗口",
+        "HMA与zero-lag error-correcting组合；P3，先N39再决定"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N41",
+      "research_row": [
+        "DV2：BT `DV2`",
+        "M",
+        "HLC；平滑+排名窗口",
+        "收盘对中价比率的百分位秩；P2，排名工具可复用"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N42",
+      "research_row": [
+        "haDelta：BT `haDelta`",
+        "C",
+        "OHLC；HA递推后差值",
+        "HA close−open及平滑；P2，不新增HA算法"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N43",
+      "research_row": [
+        "Laguerre Filter：BT `LaguerreFilter`",
+        "M；本地有Laguerre RSI但未暴露滤波器",
+        "C；递归",
+        "固定阶滤波状态输出；P2，可共用状态数学但独立契约"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N44",
+      "research_row": [
+        "OLS spread/Z-score、cointegration：BT `OLS_TransformationN/OLS_BetaN/CointN`",
+        "M/U；beta/correl并非全部OLS模型",
+        "两组对齐价格C+B；历史窗口",
+        "回归残差、平稳性检验；P2，跨标的对齐和额外统计依赖先行"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N45",
+      "research_row": [
+        "Volume Ratio：SS `vr`",
+        "M；非PVR/RVOL",
+        "CV；窗口",
+        "上涨/下跌/平价量分桶比；P2，tie与分母规则"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N46",
+      "research_row": [
+        "CR Energy：SS `cr`",
+        "M；非BRAR",
+        "HLC；窗口",
+        "对上一中价的向上/向下能量比；P2"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N47",
+      "research_row": [
+        "DMA（均线差）与 AMA：SS `dma`",
+        "C；不是McGinley Dynamic",
+        "C；窗口",
+        "快慢SMA差及平滑；P2，中文市场语义消歧"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N48",
+      "research_row": [
+        "TRAMA：TECH [tv_trama](https://github.com/freqtrade/technical/blob/337262bfddec06003d2f10bea89edf736c6cb567/technical/indicators/indicators.py#L1366)",
+        "M；非TRIMA",
+        "C；历史极值状态",
+        "趋势规则驱动自适应均线；P2，核对初始化、NaN及原实现"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N49",
+      "research_row": [
+        "SSL Channels：TECH [SSLChannels](https://github.com/freqtrade/technical/blob/337262bfddec06003d2f10bea89edf736c6cb567/technical/indicators/indicators.py#L1084)",
+        "M",
+        "HLC；MA窗口+方向状态",
+        "高/低均线及状态切换；P2，独立于Supertrend"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N50",
+      "research_row": [
+        "MADR：TECH [MADR](https://github.com/freqtrade/technical/blob/337262bfddec06003d2f10bea89edf736c6cb567/technical/indicators/indicators.py#L1025)",
+        "C",
+        "C；窗口",
+        "对EMA偏离再平滑/阈值；P3，适合作为组合样例"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N51",
+      "research_row": [
+        "Madrid squeeze / oscillator / TKE：TECH `madrid_sqz/osc/TKE`",
+        "C/V",
+        "OHLCV视入口；窗口",
+        "多个现有均线或振荡指标的复合；P3，按具体策略公式封装，非等同本地`squeeze`"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N52",
+      "research_row": [
+        "Price Relative Strength：SI [get_prs](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/prs.py#L10)",
+        "C/D；不是RSI",
+        "C+B且严格对齐；当前可知",
+        "相对基准比值及标准化；P2，沿用benchmark显式输入，不猜symbol"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N53",
+      "research_row": [
+        "滚动回归标准差通道：SI [get_stdev_channels](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/stdev_channels.py#L10)",
+        "M/C；`tos_stdevall`为全样本研究模式",
+        "C；仅尾随窗因果",
+        "回归拟合+残差宽度；P2，不直接开放全样本历史重写"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N54",
+      "research_row": [
+        "回归质量R²/MAE/MSE/MAPE：SI .NET `SmaAnalysis/Correlation/Slope`",
+        "C/U；非新的价格指标",
+        "一/两列、窗口",
+        "滚动统计质量输出；P2，与全样本报告指标区分"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N55",
+      "research_row": [
+        "Fibonacci Retracement/Extension：TECH、TALIPP、PI",
+        "C/R",
+        "已确定高低点，或确认后的pivot",
+        "静态两锚点乘比例很简单；自动选pivot的时点是难点；P2"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N56",
+      "research_row": [
+        "ROC with Bands：SI [get_roc_with_band](https://github.com/facioquo/stock-indicators-python/blob/343ec49a529d4ff447183c7731d3665ce37faea9/stock_indicators/indicators/roc.py#L44) / .NET `RocWb`",
+        "C",
+        "C；ROC及标准差窗口",
+        "ROC与波动带复合；P2，仅需明确中心/宽度输出，非新增基础数学核"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N57",
+      "research_row": [
+        "KST可选平滑、CMO无平滑、CHOP变体：TL `KSTEXT/CMOU/CHOPTR`",
+        "V",
+        "C/HLC；窗口",
+        "现有参数域未必覆盖；P2，仅确有迁移需求时扩参数/variant，不重复算全新指标"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N58",
+      "research_row": [
+        "AlphaTrend：PTA `alphatrend`",
+        "M；不是Supertrend",
+        "OHLCV或无量时RSI；ATR+MFI/RSI状态",
+        "P2；基于动量阈值选择ATR追踪方向，明确volume缺失时切换是否允许"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N59",
+      "research_row": [
+        "Random Walk Index：PTA `rwi`、官方Pine ta库`rwi`",
+        "M",
+        "HLC；历史窗口",
+        "P2；范围相对ATR×sqrt(length)归一化；PTA仅指定一个lag，其他定义可能跨多个窗口取最大，必须variant消歧"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N60",
+      "research_row": [
+        "True Momentum Oscillator：PTA `tmo`",
+        "M；不是TSI或SMI",
+        "OC；比较计数及多重MA窗口",
+        "P2；close与历史open比较聚合，再平滑，固定inclusive/exclusive规则"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N61",
+      "research_row": [
+        "Ehlers Reflex / Trendflex：PTA `reflex/trendflex`",
+        "M；与EBSW/SSF不是同一输出",
+        "C；滤波递归+历史窗口",
+        "P2；SuperSmoother后的周期/趋势归一化两个互补算法；需独立输出、种子与常量审核"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N62",
+      "research_row": [
+        "Time Segmented Volume：PTA `tsv`",
+        "M/C；并非OBV同义",
+        "CV；价格变动×量的滚动聚合和signal",
+        "P2；可复用量价与rolling原语，明确上游实现与原始品牌定义的范围"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N63",
+      "research_row": [
+        "Exhaustion Count：PTA `exhc`",
+        "V；本地`td_seq`无可选参数",
+        "C；滞后比较与连续计数",
+        "P2；审核length/cap/show_all，不因同族另造完整TD品牌等价承诺"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "N64",
+      "research_row": [
+        "Volume Heatmap：PTA `vhm`",
+        "C；volume的MA偏离/标准差",
+        "V；窗口",
+        "P2/P3；同窗口SMA可由`zscore(source=volume)`表达；独立mean/std窗和MA类型作为扩展，颜色不计指标"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P01",
+      "research_row": [
+        "[nadaraya_watson_envelope](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/nadaraya_watson_envelope.py#L15)",
+        "C；现有MA无相同Gaussian kernel regression",
+        "源码为endpoint尾随核+历史绝对误差带，不是双边平滑；O(nw)，NaN权重处理仍需审核",
+        "P2，独立平滑核有增量，但需窗口上限/性能测试"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P02",
+      "research_row": [
+        "`ema_trend_ribbon/volume_gated_trend_ribbon`",
+        "C或CV；已有MA/ribbon，量门控是变体",
+        "尾随均量门槛控制更新源再快慢MA；可状态化",
+        "P3，优先组合层；不能把plain与量门控说成完全等价"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P03",
+      "research_row": [
+        "[volume_weighted_trend](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/volume_weighted_trend.py#L122)",
+        "HLCV；VWMA+ATR带+状态",
+        "闭bar尾随组合，需明确趋势翻转规则",
+        "P3，复用VWMA/ATR，不装全库"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P04",
+      "research_row": [
+        "[momentum_confluence](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/momentum_confluence.py#L28)",
+        "HLCV；money-flow、波动阈值、趋势波及背离",
+        "数值组合可复用，背离必须等待确认；多输出不是多指标",
+        "P3，未经实证的confluence分数不等于预测准确率"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P05",
+      "research_row": [
+        "[momentum_cycle_sentry](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/momentum_cycle_sentry.py#L182)",
+        "C；五层平滑momentum+stdev带",
+        "尾随组合可因果；源码声明从LuxAlgo作品移植",
+        "P3，额外核对原作来源/许可，不能仅依据包级MIT照搬"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P06",
+      "research_row": [
+        "[pulse_mean_accelerator](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/pulse_mean_accelerator.py#L135)",
+        "C/HLC；MA+波动/动量加速偏移",
+        "可按历史状态实现；量纲/加速上限/确认规则需固定",
+        "P3，现有组件足够，不是新的数据能力"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P07",
+      "research_row": [
+        "[range_intelligence](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/range_intelligence.py#L488)",
+        "OHLCV；ATR压缩区、价量分箱、扫单",
+        "`hide_overlaps`会抛弃旧重叠区域；需区域事件与非序列结果；OHLCV delta为估计",
+        "P3/D/R，不作为直接普通Series包装"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P08",
+      "research_row": [
+        "[z_score_predictive_zones](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/z_score_predictive_zones.py#L330)",
+        "HLCV；Z-score+VWMA+反转pivot记忆+RSI颜色",
+        "只有确认pivot后更新可交易；名称predictive不构成预测证据",
+        "P3，先S01及区域状态模型"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P09",
+      "research_row": [
+        "[supertrend_clustering](https://github.com/coding-kitties/PyIndicators/blob/f4c0d26548e37c187e01f199072817231738622f/pyindicators/indicators/supertrend.py#L186)",
+        "HLC；多ATR倍数Supertrend、每bar性能聚类",
+        "不是全样本一次fit，但源码`start_idx=max(0,n-max_data)`随总长度变，截断状态会破坏前缀稳定；需重做固定起点/可流式状态",
+        "P3/R，不能仅因per-bar KMeans就宣称因果安全"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "P10",
+      "research_row": [
+        "`bollinger_overshoot`",
+        "C；Bollinger超轨程度/信号",
+        "现有BBands输出可组合；阈值与归一化需固定",
+        "P3，参数/组合扩展而非独立基础指标"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S01",
+      "research_row": [
+        "Pivot High/Low / Williams Fractal / Swing Structure：SI `fractal/pivots`、SMC `swing_highs_lows`、PI `detect_peaks/swing_structure`、TALIPP `PivotsHL`",
+        "HL；需要右侧R根才能确认。把结果画到中心bar不等于当时可用",
+        "P0。结果同时保留`pivot_bar`和`confirmed_at`，交易只看确认事件；稀疏NaN不阻止全部策略"
+      ],
+      "disposition": "partially-implemented",
+      "reason": "已实现确认式pivothigh/pivotlow及原极值/确认位置；Williams Fractal别名和完整Swing Structure延期"
+    },
+    {
+      "id": "S02",
+      "research_row": [
+        "ZigZag：SI `get_zig_zag`、TALIPP `ZigZag`",
+        "最末段会延伸，未来反转才确认；当前无公开入口",
+        "P2。稳定已确认段+独立可变候选端点，禁止在原端点时间交易"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S03",
+      "research_row": [
+        "Renko/ATR Renko：SI `get_renko`及.NET `RenkoAtr`",
+        "非每输入bar一行；ATR砖大小可能随新增样本变化；同bar多个brick",
+        "P3/D。先非等长结果/砖与行情映射；避免把合成砖价当可成交价"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S04",
+      "research_row": [
+        "Fair Value Gap / Volume Imbalance：SMC `fvg`、PI `fair_value_gap/volume_imbalance`",
+        "SMC用`shift(-1)`给中间bar标注，至少后一bar才确认；成交量失衡不同于真实买卖盘差额",
+        "P1/P2。三bar收盘确认并从确认时刻建区域；缺口填补不能提前写入区域创建行"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S05",
+      "research_row": [
+        "BOS/CHoCH/Market Structure Break：SMC `bos_choch`、PI `market_structure_break/market_structure_choch_bos`",
+        "依赖确认pivot及突破价格；上游历史标注含未来断点",
+        "P2。事件状态机，独立显示原pivot时间和突破确认时间"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S06",
+      "research_row": [
+        "Order/Breaker/Mitigation/Rejection Blocks：SMC `ob`、PI同名四类",
+        "OHLCV、结构确认；订单块不证明存在真实机构订单",
+        "P2/P3。统一区域生命周期模型；四种规则作为明确variant，不当真实订单数据"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S07",
+      "research_row": [
+        "Liquidity Pools/Equal High-Low/Sweeps：SMC `liquidity`、PI `liquidity_pools/equal_highs_lows/liquidity_sweeps/buyside_sellside_liquidity/pure_price_action_liquidity_sweeps`",
+        "部分同族本地`smc_sweep`；平价聚类、候选摆动、后续扫单规则不同",
+        "V/R，P2。先与现有sweep契约比对，再添加稳定已确认事件；「流动性」为价格代理量"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S08",
+      "research_row": [
+        "Premium/Discount、OTE、Strong/Weak、Internal/External Liquidity、Retracements",
+        "PI对应入口、SMC `retracements`；由已确认波段及其后续状态派生",
+        "C/R，P3。复用S01/S05/S06；独立接口不是新增基础算法"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S09",
+      "research_row": [
+        "Previous High/Low、Opening Gap、Sessions、Opening Range",
+        "SMC `previous_high_low/sessions`、PI `opening_gap`；T+OHLC及已完成周期",
+        "D/C，P1。会话/时区/DST与不完整周期必须明确；可复用已有`resample_apply`但不代表已完成会话模型"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S10",
+      "research_row": [
+        "Trendline Breakout、自动Fib、自动图形",
+        "PI `trendline_breakout_navigator`和TV chart patterns；需pivot确认、几何规则与区域状态",
+        "R/D，P3。回填图形和实时可消费事件分开，不把自动绘图当普通Series"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S11",
+      "research_row": [
+        "确认背离：PI `bullish_divergence/bearish_divergence`及multi_dataframe版本",
+        "两条序列或跨周期pivot；两边拐点都须确认，时间对齐不能用未来最近点",
+        "P2/R。先S01及已确认HTF；正/隐背离是显式规则variant"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    },
+    {
+      "id": "S12",
+      "research_row": [
+        "Accumulation/Distribution Zones 与 Volumetric Supply/Demand：PI对应两入口",
+        "前者是收敛摆动结构，不是ADL；后者含OHLCV价量分箱与区域合并",
+        "P3/D/R。确认pivot及区域生命周期可共用S01/S06；量分布是估计模型"
+      ],
+      "disposition": "deferred",
+      "reason": "首轮之外；保留该行的数据/因果/必要性与优先级约束"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "cdl_2crows",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_3blackcrows",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_3inside",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_3linestrike",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_3outside",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_3starsinsouth",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_3whitesoldiers",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_abandonedbaby",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_advanceblock",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_belthold",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_breakaway",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_closingmarubozu",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_concealbabyswall",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_counterattack",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_darkcloudcover",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_doji",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_dojistar",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_dragonflydoji",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_engulfing",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_eveningdojistar",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_eveningstar",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_gapsidesidewhite",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_gravestonedoji",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_hammer",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_hangingman",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_harami",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_haramicross",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_highwave",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_hikkake",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_hikkakemod",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_homingpigeon",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_identical3crows",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_inneck",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_inside",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_invertedhammer",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_kicking",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_kickingbylength",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_ladderbottom",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_longleggeddoji",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_longline",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_marubozu",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_matchinglow",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_mathold",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_morningdojistar",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_morningstar",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_onneck",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_piercing",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_rickshawman",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_risefall3methods",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_separatinglines",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_shootingstar",
+      "disposition": "implemented",
+      "reason": "首轮已实现；参数、掩码和时间契约以冻结清单及扩展测试为准，不宣称完整Pine兼容"
+    },
+    {
+      "id": "cdl_shortline",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_spinningtop",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_stalledpattern",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_sticksandwich",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_takuri",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_tasukigap",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_thrusting",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_tristar",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_unique3river",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_upsidegap2crows",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    },
+    {
+      "id": "cdl_xsidegap3methods",
+      "disposition": "deferred",
+      "reason": "后续补充独立触发夹具与必要性评审"
+    }
+  ],
+  "additional_tv_patterns": [
+    {
+      "id": "rising_window",
+      "disposition": "deferred",
+      "reason": "无直接同义原生入口，需独立定义阈值"
+    },
+    {
+      "id": "falling_window",
+      "disposition": "deferred",
+      "reason": "无直接同义原生入口，需独立定义阈值"
+    },
+    {
+      "id": "long_upper_shadow",
+      "disposition": "deferred",
+      "reason": "无直接同义原生入口，需独立定义阈值"
+    },
+    {
+      "id": "long_lower_shadow",
+      "disposition": "deferred",
+      "reason": "无直接同义原生入口，需独立定义阈值"
+    },
+    {
+      "id": "tweezer_top",
+      "disposition": "deferred",
+      "reason": "无直接同义原生入口，需独立定义阈值"
+    },
+    {
+      "id": "tweezer_bottom",
+      "disposition": "deferred",
+      "reason": "无直接同义原生入口，需独立定义阈值"
+    }
+  ],
+  "pine_rows": [
+    "| [ta.accdist](https://www.tradingview.com/pine-script-reference/v6/#var_ta.accdist)                                                 | 变量1           | ta.ad                                 | K    | ADL 数学家族；初始化、零振幅、缺失量语义未验证。                                                              |",
+    "| [ta.alma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.alma)                                                       | 函数记录1       | ta.alma                               | P    | Gaussian MA 家族；Pine floor 参数未开放，source、窗口与缺失值需比对。                                         |",
+    "| [ta.atr](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.atr)                                                         | 函数记录1       | ta.atr                                | P    | 同为 ATR；Pine 默认 RMA，需核对 TR 首值与 Wilder 种子。                                                       |",
+    "| [ta.barssince](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.barssince)                                             | 函数记录1       | lib.barssince                         | U/P  | 已有最新标量助手；Pine 返回逐bar序列，未发生时 na，仓库默认 np.inf。                                          |",
+    "| [ta.bb](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.bb)                                                           | 函数记录1       | ta.bbands                             | K    | Pine tuple=[basis,upper,lower]；本地具名通道lower/middle/upper，middle对应basis；默认长度、ddof与首值未验证。 |",
+    "| [ta.bbw](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.bbw)                                                         | 函数记录1       | ta.bbands.bandwidth                   | P    | 已有带宽通道；本次官方描述是比值，官方示例另有 ×100，须实测单位，不据名称断言。                               |",
+    "| [ta.cci](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.cci)                                                         | 函数记录1       | ta.cci                                | P    | Pine 接任意 source；仓库使用 HLC 典型价，源绑定与0.015/NaN需核对。                                            |",
+    "| [ta.change](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.change)                                                   | 函数记录3       | ta.mom；Python差分                    | U/P  | 数值差分可复用；bool变化重载和任意 lag/逐bar缺失语义需适配。                                                  |",
+    "| [ta.cmo](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.cmo)                                                         | 函数记录1       | ta.cmo                                | K    | 同数学家族，drift、首值/缺失处理未对拍。                                                                      |",
+    "| [ta.cog](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.cog)                                                         | 函数记录1       | ta.cg                                 | K    | Center of Gravity 异名；权重方向、符号与窗口需对拍。                                                          |",
+    "| [ta.correlation](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.correlation)                                         | 函数记录1       | ta.correl                             | K    | 双序列 Pearson 内核；窗口及缺失配对未验证。                                                                   |",
+    "| [ta.cross](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.cross)                                                     | 函数记录1       | lib.cross                             | U/P  | 最新标量助手，组合两次严格交叉；Pine逐bar且等号边界需适配。                                                   |",
+    "| [ta.crossover](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.crossover)                                             | 函数记录1       | lib.crossover                         | U/P  | 仓库前bar严格 <，Pine前bar <=；当前bar双方都用 >。                                                            |",
+    "| [ta.crossunder](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.crossunder)                                           | 函数记录1       | lib.crossover(b,a)                    | U/P  | 交换输入可构造标量；Pine前bar >=、当前 <，需序列化与边界修正。                                                |",
+    "| [ta.cum](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.cum)                                                         | 函数记录1       | 无目录入口；累计和可组合              | U    | 累计序列工具，定义 na 与初始值，不作为独立指标计数。                                                          |",
+    "| [ta.dev](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.dev)                                                         | 函数记录1       | ta.mad                                | K    | 窗口对本窗口均值的绝对偏差均值；本地md直接委托mad。不是median absolute deviation。                            |",
+    "| [ta.dmi](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.dmi)                                                         | 函数记录1       | ta.adx.positive/negative/adx          | P    | DI长度与ADX平滑长度可对应；仓库 ta.dm 是方向运动而非完整DMI，输出次序不同。                                   |",
+    "| [ta.ema](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.ema)                                                         | 函数记录1       | 同名入口                              | P    | Pine EMA 示例首个有效src作种子，RMA以SMA作种子；当前后端初始化不可仅凭同名认定。                              |",
+    "| [ta.falling](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.falling)                                                 | 函数记录1       | ta.decreasing/increasing              | U/P  | Pine当前值与过去length窗口极值比较，不表示每一步单调；现有 strict/非strict不是同一契约。                      |",
+    "| [ta.highest](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.highest)                                                 | 函数记录1       | ta.donchian相关通道；滚动极值可组合   | U/P  | 通用source窗口工具；含只给length的默认H/L调用，不能把Donchian输出当通用接口已齐。                             |",
+    "| [ta.highestbars](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.highestbars)                                         | 函数记录1       | 无专门入口                            | U    | 窗口极值相对当前bar的偏移；应明确相等极值取近/远、符号、NaN。                                                 |",
+    "| [ta.hma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.hma)                                                         | 函数记录1       | ta.hma                                | K    | 同家族；半窗和sqrt舍入、首值需核对。                                                                          |",
+    "| [ta.iii](https://www.tradingview.com/pine-script-reference/v6/#var_ta.iii)                                                         | 变量1           | 无；ta.ad的单bar增量相关              | N    | Intraday Intensity：量×收盘在H/L的位置，OHLCV可算；不要用累计AD直接替代。                                     |",
+    "| [ta.kc](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.kc)                                                           | 函数记录1       | ta.kc                                 | P    | Pine tuple=[basis,upper,lower]，中心EMA、TR或H-L作EMA；本地lower/middle/upper且true-range选择未开放。         |",
+    "| [ta.kcw](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.kcw)                                                         | 函数记录1       | ta.kc上下中轨组合                     | U/P  | (upper-lower)/basis 比值工具；不是已开放独立入口，零基准需规则。                                              |",
+    "| [ta.linreg](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.linreg)                                                   | 函数记录1       | ta.linreg/linregslope/linregintercept | P    | Pine offset 是拟合线取值点 length−1−offset，不是序列shift；仓库linreg无offset，端点实现需核对。               |",
+    "| [ta.lowest](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.lowest)                                                   | 函数记录1       | ta.donchian相关通道；滚动极值可组合   | U/P  | 通用source窗口工具；含只给length的默认H/L调用，不能把Donchian输出当通用接口已齐。                             |",
+    "| [ta.lowestbars](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.lowestbars)                                           | 函数记录1       | 无专门入口                            | U    | 窗口极值相对当前bar的偏移；应明确相等极值取近/远、符号、NaN。                                                 |",
+    "| [ta.macd](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.macd)                                                       | 函数记录1       | ta.macd                               | K    | 需按macd/signal/histogram映射，均线种子不同可导致暖机差异。                                                   |",
+    "| [ta.max](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.max)                                                         | 函数记录1       | 无目录入口；expanding extrema可组合   | U    | 从数据起点至当前的累计极值，不是固定窗口极值。                                                                |",
+    "| [ta.median](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.median)                                                   | 函数记录2       | ta.median                             | K    | 滚动中位数内核；偶数窗/NaN/整数重载需对齐。                                                                   |",
+    "| [ta.mfi](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.mfi)                                                         | 函数记录1       | ta.mfi                                | P    | Pine source任意，目录HLC典型价；volume、相等价与缺失规则需验证。                                              |",
+    "| [ta.min](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.min)                                                         | 函数记录1       | 无目录入口；expanding extrema可组合   | U    | 从数据起点至当前的累计极值，不是固定窗口极值。                                                                |",
+    "| [ta.mode](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.mode)                                                       | 函数记录2       | 无入口                                | U    | 滚动众数；Pine并列众数选最小值，连续价格重复少，优先级低于rank。                                              |",
+    "| [ta.mom](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.mom)                                                         | 函数记录1       | ta.mom                                | K    | 数值lag差分家族；源/缺失与length需对齐。                                                                      |",
+    "| [ta.nvi](https://www.tradingview.com/pine-script-reference/v6/#var_ta.nvi)                                                         | 变量1           | 同名入口语义不等价                    | P!   | 官方按前一期指数复利更新、初始1；本地0.8.32是initial1000加所选ROC百分数的累计和，不能靠除1000修复。           |",
+    "| [ta.obv](https://www.tradingview.com/pine-script-reference/v6/#var_ta.obv)                                                         | 变量1           | ta.obv                                | P    | 同家族；Pine例子cum(sign(change(close))*volume)，后端首条累加volume，可能常量偏移。                           |",
+    "| [ta.percentile_linear_interpolation](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.percentile_linear_interpolation) | 函数记录1       | ta.quantile；lib.quantile             | U/P  | 目录q域不含0；Pine percentage为0..100。lib.quantile是最新值的rank/quantile助手，不能混为滑窗输出。            |",
+    "| [ta.percentile_nearest_rank](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.percentile_nearest_rank)                 | 函数记录1       | 无对应method入口                      | U    | 不同于线性插值；需nearest-rank定义、端点与重复值契约。                                                        |",
+    "| [ta.percentrank](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.percentrank)                                         | 函数记录1       | lib.quantile低层相关                  | U/P  | Pine逐bar窗口百分位排名并含 <=；lib.quantile默认只给最新标量且比较 <；目录quantile是逆映射。                  |",
+    "| [ta.pivot_point_levels](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.pivot_point_levels)                           | 函数记录1       | ta.cpr仅上一输入bar经典部分           | N/P  | Pine六种公式，anchor布尔重置、developing与11级数组；CPR无跨周期、无六种族。                                   |",
+    "| [ta.pivothigh](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.pivothigh)                                             | 函数记录2       | 无通用入口；smc_sweep内部不足         | U    | 需左/右窗确认；结果应在确认bar可见，图示−rightbars回画不应成为交易信号时间。                                  |",
+    "| [ta.pivotlow](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.pivotlow)                                               | 函数记录2       | 无通用入口；smc_sweep内部不足         | U    | 需左/右窗确认；结果应在确认bar可见，图示−rightbars回画不应成为交易信号时间。                                  |",
+    "| [ta.pvi](https://www.tradingview.com/pine-script-reference/v6/#var_ta.pvi)                                                         | 变量1           | 同名入口语义不等价                    | P!   | 官方按前一期指数复利更新、初始1；本地0.8.32是initial1000加所选ROC百分数的累计和，不能靠除1000修复。           |",
+    "| [ta.pvt](https://www.tradingview.com/pine-script-reference/v6/#var_ta.pvt)                                                         | 变量1           | ta.pvt                                | P    | Pine使用分数收益×volume；本地pvt.py明确调用百分数ROC×volume再累计，尺度需除100并核对首值。                    |",
+    "| [ta.range](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.range)                                                     | 函数记录2       | 窗口最高−最低组合                     | U/P  | 同一source滑窗范围；不是逐barH−L或ATR。                                                                       |",
+    "| [ta.rci](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.rci)                                                         | 函数记录1       | 无；ta.cti不是RCI                     | N    | Spearman价格秩对时间秩，×100；当前cti为Pearson价格/时间相关。重复值用并列秩。                                 |",
+    "| [ta.rising](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.rising)                                                   | 函数记录1       | ta.decreasing/increasing              | U/P  | Pine当前值与过去length窗口极值比较，不表示每一步单调；现有 strict/非strict不是同一契约。                      |",
+    "| [ta.rma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.rma)                                                         | 函数记录1       | 同名入口                              | P    | Pine EMA 示例首个有效src作种子，RMA以SMA作种子；当前后端初始化不可仅凭同名认定。                              |",
+    "| [ta.roc](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.roc)                                                         | 函数记录1       | ta.roc                                | K    | 百分数收益差分家族；勿与rocp/rocr混淆。                                                                       |",
+    "| [ta.rsi](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.rsi)                                                         | 函数记录1       | ta.rsi                                | P    | 同族；RMA种子与空窗差异，平盘/单边行情需对拍。                                                                |",
+    "| [ta.sar](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.sar)                                                         | 函数记录1       | ta.psar                               | P    | af0/af/max_af映射start/inc/max，合并long/short；初始化/反转顺序未验证，sarext不是默认同义。                   |",
+    "| [ta.sma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.sma)                                                         | 函数记录1       | ta.sma                                | K    | 同族；Pine忽略na并取length个非na，固定bar窗口后端不保证相同。                                                 |",
+    "| [ta.stdev](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.stdev)                                                     | 函数记录1       | 同名入口                              | P    | Pine biased默认true；仓库ddof默认需映射，不能只对length。                                                     |",
+    "| [ta.stoch](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.stoch)                                                     | 函数记录1       | ta.stochf.k 或 ta.stoch(smooth_k=1).k | P    | Pine只输出raw%K；仓库stoch默认smooth_k=3并另出%D，不能默认直接等价。                                          |",
+    "| [ta.supertrend](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.supertrend)                                           | 函数记录1       | ta.supertrend                         | P    | Pine方向−1上行/+1下行；后端+1上行/−1下行，线值与ATR种子另验。                                                 |",
+    "| [ta.swma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.swma)                                                       | 函数记录1       | ta.swma(length=4)                     | P    | Pine固定4权重1,2,2,1；目录默认10且asc可调。                                                                   |",
+    "| [ta.tr](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.tr)                                                           | 变量1/函数记录1 | ta.true_range                         | P    | 同名空间变量与函数；Pine变量等于handle_na=false，函数可true回退H−L；目录只暴露drift。                         |",
+    "| [ta.tsi](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.tsi)                                                         | 函数记录1       | ta.tsi(scalar=1).tsi                  | P    | Pine−1..1，目录默认scalar100并出signal；不要与Trend Strength Index混淆。                                      |",
+    "| [ta.valuewhen](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.valuewhen)                                             | 函数记录4       | 无通用入口                            | U    | 事件采样保持工具，occurrence从0起；当前未收bar事件会撤回，先规定确认bar语义。                                 |",
+    "| [ta.variance](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.variance)                                               | 函数记录1       | 同名入口                              | P    | Pine biased默认true；仓库ddof默认需映射，不能只对length。                                                     |",
+    "| [ta.vwap](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.vwap)                                                       | 变量1/函数记录2 | ta.vwap(anchor=D/W/M)                 | P    | Pine变量HLC3，函数任意source、bool anchor及标准差tuple；当前只有日/周/月分组VWAP无bands。                     |",
+    "| [ta.vwma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.vwma)                                                       | 函数记录1       | 同名入口                              | K    | 同数学家族；source、零量与NaN规则需核对。                                                                     |",
+    "| [ta.wad](https://www.tradingview.com/pine-script-reference/v6/#var_ta.wad)                                                         | 变量1           | ta.wad                                | K    | 同数学家族，初值/缺失需核对。                                                                                 |",
+    "| [ta.wma](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.wma)                                                         | 函数记录1       | 同名入口                              | K    | 同数学家族；权重方向、source与NaN规则需核对。                                                                 |",
+    "| [ta.wpr](https://www.tradingview.com/pine-script-reference/v6/#fun_ta.wpr)                                                         | 函数记录1       | ta.willr                              | K    | Williams %R异名，范围−100..0，窗口与零幅需核对。                                                              |",
+    "| [ta.wvad](https://www.tradingview.com/pine-script-reference/v6/#var_ta.wvad)                                                       | 变量1           | 无；ta.wad不是同一式                  | N    | Williams Variable AD：量×(C−O)/(H−L)，OHLCV单bar值；零振幅需契约。                                            |"
+  ],
+  "platform_rows": [
+    "| 1    | [1 year active supply %](https://www.tradingview.com/support/solutions/43000773986-1-year-active-supply/)                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 2    | [24-hour Volume](https://www.tradingview.com/support/solutions/43000668584-24-hour-volume/)                                                                               | N/S  | 24h滚动volume                                  | 按真实时间窗口求和；报价币种换算需成交金额/价格或汇率。                                  |",
+    "| 3    | [Accumulation Distribution (ADL)](https://www.tradingview.com/support/solutions/43000501770-accumulation-distribution-adl/)                                               | K    | ta.ad                                          | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 4    | [Active addresses with contracts](https://www.tradingview.com/support/solutions/43000778587-active-addresses-with-contracts/)                                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 5    | [Addresses with balance ≥ X (% of supply)](https://www.tradingview.com/support/solutions/43000773987-addresses-with-balance-x-of-supply/)                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 6    | [Addresses with balance ≥ X (USD)](https://www.tradingview.com/support/solutions/43000773988-addresses-with-balance-x-usd/)                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 7    | [Advance/Decline Line](https://www.tradingview.com/support/solutions/43000589092-advance-decline-line/)                                                                   | D    | 市场广度数据                                   | 需要涨跌家数/涨跌股票成交量或相应指数feed；CVI≠仓库Chaikin Volatility。                  |",
+    "| 8    | [Advance/Decline Ratio](https://www.tradingview.com/support/solutions/43000589093-advance-decline-ratio/)                                                                 | D    | 市场广度数据                                   | 需要涨跌家数/涨跌股票成交量或相应指数feed；CVI≠仓库Chaikin Volatility。                  |",
+    "| 9    | [Advance/Decline Ratio (Bars)](https://www.tradingview.com/support/solutions/43000644914-advance-decline-ratio-bars/)                                                     | N    | 上涨bar数/下跌bar数                            | 单标的bar统计；明确平价bar、分母0，与市场广度版不同。                                    |",
+    "| 10   | [Analyst price forecast](https://www.tradingview.com/support/solutions/43000678409-analyst-price-forecast/)                                                               | D    | 分析师/财务数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 11   | [Arnaud Legoux Moving Average](https://www.tradingview.com/support/solutions/43000594683-arnaud-legoux-moving-average/)                                                   | P    | ta.alma                                        | floor/source等参数契约需核对。                                                           |",
+    "| 12   | [Aroon Indicator](https://www.tradingview.com/support/solutions/43000501801-aroon-indicator/)                                                                             | K    | ta.aroon.up/down/oscillator                    | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 13   | [Aroon Oscillator](https://www.tradingview.com/support/solutions/43000773004-aroon-oscillator/)                                                                           | K    | ta.aroon.up/down/oscillator                    | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 14   | [Auto Fib Extension](https://www.tradingview.com/support/solutions/43000612397-auto-fib-extension/)                                                                       | V    | 确认pivot + 绘图对象                           | Fib/趋势线/Pitchfork为枢轴几何展示；候选pivot会变，已确认发生时间与绘图时间分开。        |",
+    "| 15   | [Auto Fib Retracement](https://www.tradingview.com/support/solutions/43000585089-auto-fib-retracement/)                                                                   | V    | 确认pivot + 绘图对象                           | Fib/趋势线/Pitchfork为枢轴几何展示；候选pivot会变，已确认发生时间与绘图时间分开。        |",
+    "| 16   | [Auto key levels](https://www.tradingview.com/support/solutions/43000783958-auto-key-levels/)                                                                             | D/S  | VP POC/VAH/VAL + 周期OHLC                      | 官方以低周期成交量轮廓计算；只有当前bar OHLCV不能精确还原。                              |",
+    "| 17   | [Auto Pitchfork](https://www.tradingview.com/support/solutions/43000657911-auto-pitchfork/)                                                                               | V    | 确认pivot + 绘图对象                           | Fib/趋势线/Pitchfork为枢轴几何展示；候选pivot会变，已确认发生时间与绘图时间分开。        |",
+    "| 18   | [Auto trendlines](https://www.tradingview.com/support/solutions/43000741165-auto-trendlines/)                                                                             | V    | 确认pivot + 绘图对象                           | Fib/趋势线/Pitchfork为枢轴几何展示；候选pivot会变，已确认发生时间与绘图时间分开。        |",
+    "| 19   | [Average Daily Range (ADR) indicator](https://www.tradingview.com/support/solutions/43000695003-average-daily-range-adr-indicator/)                                       | N/S  | 日高低差的均值                                 | ADR非ATR；日bar可算，盘中需交易日历/完整日范围。                                         |",
+    "| 20   | [Average Directional Index (ADX)](https://www.tradingview.com/support/solutions/43000589099-average-directional-index-adx/)                                               | P    | ta.adx                                         | DMI为positive/negative/adx三通道，不应重复计两种新增指标。                               |",
+    "| 21   | [Average transaction volume](https://www.tradingview.com/support/solutions/43000773989-average-transaction-volume/)                                                       | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 22   | [Average True Range (ATR)](https://www.tradingview.com/support/solutions/43000501823-average-true-range-atr/)                                                             | P    | ta.atr                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 23   | [Awesome Oscillator (AO)](https://www.tradingview.com/support/solutions/43000501826-awesome-oscillator-ao/)                                                               | K    | ta.ao                                          | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 24   | [Balance of Power (BOP)](https://www.tradingview.com/support/solutions/43000589100-balance-of-power-bop/)                                                                 | K    | ta.bop                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 25   | [Basis](https://www.tradingview.com/support/solutions/43000784536-basis/)                                                                                                 | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 26   | [BBTrend](https://www.tradingview.com/support/solutions/43000726749-bbtrend/)                                                                                             | N    | 双Bollinger带的差分                            | BBTrend已有bbands可复用；新复合指标。                                                    |",
+    "| 27   | [Block height](https://www.tradingview.com/support/solutions/43000778555-block-height/)                                                                                   | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 28   | [Blocks mined](https://www.tradingview.com/support/solutions/43000778556-blocks-mined/)                                                                                   | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 29   | [Bollinger Bands (BB)](https://www.tradingview.com/support/solutions/43000501840-bollinger-bands-bb/)                                                                     | K    | ta.bbands.middle/upper/lower/percent/bandwidth | %b/BBW是现有输出通道；单位与默认参数仍需验。                                             |",
+    "| 30   | [Bollinger Bands %b (%b)](https://www.tradingview.com/support/solutions/43000501971-bollinger-bands-b-b/)                                                                 | K    | ta.bbands.middle/upper/lower/percent/bandwidth | %b/BBW是现有输出通道；单位与默认参数仍需验。                                             |",
+    "| 31   | [Bollinger BandWidth (BBW)](https://www.tradingview.com/support/solutions/43000501972-bollinger-bandwidth-bbw/)                                                           | K    | ta.bbands.middle/upper/lower/percent/bandwidth | %b/BBW是现有输出通道；单位与默认参数仍需验。                                             |",
+    "| 32   | [Bollinger Bars](https://www.tradingview.com/support/solutions/43000742575-bollinger-bars/)                                                                               | V/C  | OHLC蜡烛等宽实体/影线着色                      | 官方仅改变蜡烛绘制宽度与颜色，不是Bollinger %b归一化；无需新增数学指标。                 |",
+    "| 33   | [Bull Bear Power](https://www.tradingview.com/support/solutions/43000717955-bull-bear-power/)                                                                             | P    | ta.eri.bull/bear可组合                         | Bull Bear Power可能画两者之和；先核对平台输出，不当全新底层。                            |",
+    "| 34   | [Chaikin Money Flow (CMF)](https://www.tradingview.com/support/solutions/43000501974-chaikin-money-flow-cmf/)                                                             | K    | ta.cmf                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 35   | [Chaikin Oscillator](https://www.tradingview.com/support/solutions/43000501979-chaikin-oscillator/)                                                                       | K    | ta.adosc                                       | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 36   | [Chande Kroll Stop](https://www.tradingview.com/support/solutions/43000589105-chande-kroll-stop/)                                                                         | K    | ta.cksp                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 37   | [Chande Momentum Oscillator (CMO)](https://www.tradingview.com/support/solutions/43000589109-chande-momentum-oscillator-cmo/)                                             | K    | ta.cmo                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 38   | [Chandelier Exit](https://www.tradingview.com/support/solutions/43000773013-chandelier-exit/)                                                                             | K    | ta.ce                                          | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 39   | [Chop Zone](https://www.tradingview.com/support/solutions/43000589111-chop-zone/)                                                                                         | N/V? | Chop Zone状态分类                              | 帮助正文不够精确且混用CHOP概念；须核对平台源码，不能标ta.chop等价。                      |",
+    "| 40   | [Choppiness Index (CHOP)](https://www.tradingview.com/support/solutions/43000501980-choppiness-index-chop/)                                                               | K    | ta.chop                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 41   | [Commodity Channel Index (CCI)](https://www.tradingview.com/support/solutions/43000502001-commodity-channel-index-cci/)                                                   | K    | ta.cci                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 42   | [Connors RSI (CRSI)](https://www.tradingview.com/support/solutions/43000502017-connors-rsi-crsi/)                                                                         | N    | Connors RSI                                    | RSI(close)+RSI(涨跌连续段)+收益percent-rank；缺事件/排名工具。                           |",
+    "| 43   | [Coppock Curve](https://www.tradingview.com/support/solutions/43000589114-coppock-curve/)                                                                                 | K    | ta.coppock                                     | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 44   | [Correlation Coefficient (CC)](https://www.tradingview.com/support/solutions/43000502022-correlation-coefficient-cc/)                                                     | P    | ta.correl                                      | 跨symbol版本还需第二标的对齐；双序列数学内核已在。                                       |",
+    "| 45   | [Created UTXOs](https://www.tradingview.com/support/solutions/43000778564-created-utxos/)                                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 46   | [Cumulative Volume Delta](https://www.tradingview.com/support/solutions/43000725058-cumulative-volume-delta/)                                                             | D/S  | CVD / Up-Down Volume / Volume Delta            | 需要lower-timeframe或tick/quote数据；当前bar方向乘volume只是代理量，不是同值。           |",
+    "| 47   | [Cumulative Volume Index (CVI)](https://www.tradingview.com/support/solutions/43000589126-cumulative-volume-index-cvi/)                                                   | D    | 市场广度数据                                   | 需要涨跌家数/涨跌股票成交量或相应指数feed；CVI≠仓库Chaikin Volatility。                  |",
+    "| 48   | [Detrended Price Oscillator (DPO)](https://www.tradingview.com/support/solutions/43000502246-detrended-price-oscillator-dpo/)                                             | P    | ta.dpo                                         | 现有centered=False/lookahead=False；平台可居中绘制，不可回填交易历史。                   |",
+    "| 49   | [Difficulty](https://www.tradingview.com/support/solutions/43000778562-difficulty/)                                                                                       | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 50   | [Directional Movement (DMI)](https://www.tradingview.com/support/solutions/43000502250-directional-movement-dmi/)                                                         | P    | ta.adx                                         | DMI为positive/negative/adx三通道，不应重复计两种新增指标。                               |",
+    "| 51   | [Dividend Yield](https://www.tradingview.com/support/solutions/43000589129-dividend-yield/)                                                                               | D    | 分析师/财务数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 52   | [Donchian Channels (DC)](https://www.tradingview.com/support/solutions/43000502253-donchian-channels-dc/)                                                                 | K    | ta.donchian                                    | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 53   | [Double Exponential Moving Average (EMA)](https://www.tradingview.com/support/solutions/43000589132-double-exponential-moving-average-ema/)                               | K    | ta.dema                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 54   | [Ease of Movement (EOM)](https://www.tradingview.com/support/solutions/43000502256-ease-of-movement-eom/)                                                                 | P    | ta.eom                                         | 同族，但单位divisor与平滑需对齐。                                                        |",
+    "| 55   | [El Salvador Government balance](https://www.tradingview.com/support/solutions/43000778575-el-salvador-government-balance/)                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 56   | [Elder's Force Index (EFI)](https://www.tradingview.com/support/solutions/43000502259-elder-s-force-index-efi/)                                                           | K    | ta.efi                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 57   | [Envelope (ENV)](https://www.tradingview.com/support/solutions/43000502260-envelope-env/)                                                                                 | N/C  | MA百分比Envelope                               | 现有MA组合上下百分比包络，OHLCV可行。                                                    |",
+    "| 58   | [ETF balances](https://www.tradingview.com/support/solutions/43000778590-etf-balances/)                                                                                   | D    | ETF持仓/流量数据                               | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 59   | [ETF flows](https://www.tradingview.com/support/solutions/43000778591-etf-flows/)                                                                                         | D    | ETF持仓/流量数据                               | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 60   | [Ethereum new deposits](https://www.tradingview.com/support/solutions/43000778578-ethereum-new-deposits/)                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 61   | [Ethereum new unique depositors](https://www.tradingview.com/support/solutions/43000778580-ethereum-new-unique-depositors/)                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 62   | [Ethereum new value staked](https://www.tradingview.com/support/solutions/43000778579-ethereum-new-value-staked/)                                                         | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 63   | [Ethereum total number of deposits](https://www.tradingview.com/support/solutions/43000778581-ethereum-total-number-of-deposits/)                                         | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 64   | [Ethereum total unique depositors](https://www.tradingview.com/support/solutions/43000778582-ethereum-total-unique-depositors/)                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 65   | [Ethereum total value staked](https://www.tradingview.com/support/solutions/43000778583-ethereum-total-value-staked/)                                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 66   | [Exponential Moving Average](https://www.tradingview.com/support/solutions/43000592270-exponential-moving-average/)                                                       | P    | ta.ema                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 67   | [Fisher Transform](https://www.tradingview.com/support/solutions/43000589141-fisher-transform/)                                                                           | K    | ta.fisher                                      | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 68   | [Funding rate: a guide to market sentiment](https://www.tradingview.com/support/solutions/43000762390-funding-rate-a-guide-to-market-sentiment/)                          | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 69   | [Hash Rate](https://www.tradingview.com/support/solutions/43000778561-hash-rate/)                                                                                         | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 70   | [Held tokens in addresses ≥ X (% of supply)](https://www.tradingview.com/support/solutions/43000773992-held-tokens-in-addresses-x-of-supply/)                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 71   | [Held tokens in addresses ≥ X (tokens)](https://www.tradingview.com/support/solutions/43000773991-held-tokens-in-addresses-x-tokens/)                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 72   | [Held tokens in addresses ≥ X (USD)](https://www.tradingview.com/support/solutions/43000773990-held-tokens-in-addresses-x-usd/)                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 73   | [Historical Volatility](https://www.tradingview.com/support/solutions/43000589145-historical-volatility/)                                                                 | P    | ta.hvol                                        | 年化交易日/周期假设需对齐。                                                              |",
+    "| 74   | [Hull Moving Average](https://www.tradingview.com/support/solutions/43000589149-hull-moving-average/)                                                                     | K    | ta.hma                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 75   | [Ichimoku Cloud](https://www.tradingview.com/support/solutions/43000589152-ichimoku-cloud/)                                                                               | P    | ta.ichimoku                                    | 4条因果通道；禁用Chikou/未来索引，不等于完整平台绘图。                                   |",
+    "| 76   | [Index price](https://www.tradingview.com/support/solutions/43000784533-index-price/)                                                                                     | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 77   | [Kaufman's Adaptive Moving Average (KAMA)](https://www.tradingview.com/support/solutions/43000773012-kaufman-s-adaptive-moving-average-kama/)                             | K    | ta.kama                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 78   | [Keltner Channels (KC)](https://www.tradingview.com/support/solutions/43000502266-keltner-channels-kc/)                                                                   | P    | ta.kc                                          | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 79   | [Klinger Oscillator](https://www.tradingview.com/support/solutions/43000589157-klinger-oscillator/)                                                                       | K    | ta.kvo                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 80   | [Know Sure Thing (KST)](https://www.tradingview.com/support/solutions/43000502329-know-sure-thing-kst/)                                                                   | K    | ta.kst                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 81   | [Large transaction volume](https://www.tradingview.com/support/solutions/43000773993-large-transaction-volume/)                                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 82   | [Learn using seasonals](https://www.tradingview.com/support/solutions/43000745201-learn-using-seasonals/)                                                                 | H/V  | 季节性功能说明                                 | 非独立指标；与154同一季节分析家族，避免双计。                                            |",
+    "| 83   | [Least Squares Moving Average](https://www.tradingview.com/support/solutions/43000599877-least-squares-moving-average/)                                                   | P    | ta.linreg                                      | Pine offset是拟合端点；仓库未开放。                                                      |",
+    "| 84   | [Linear Regression](https://www.tradingview.com/support/solutions/43000644936-linear-regression/)                                                                         | N/V  | 滚动回归channel                                | 已有linreg为逐bar端点；平台画当前窗口整条拟合线+偏差带，须分离历史交易值与重绘图。       |",
+    "| 85   | [Liquidation data: what to watch and why it matters](https://www.tradingview.com/support/solutions/43000762400-liquidation-data-what-to-watch-and-why-it-matters/)        | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 86   | [Long / Short Ratio Accounts](https://www.tradingview.com/support/solutions/43000762399-long-short-ratio-accounts/)                                                       | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 87   | [Long Short Accounts %](https://www.tradingview.com/support/solutions/43000762397-long-short-accounts/)                                                                   | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 88   | [MA Cross](https://www.tradingview.com/support/solutions/43000599879-ma-cross/)                                                                                           | C    | MA + lib.cross/crossover                       | 交叉复合/展示层，不新增MA数学家族；lib等号边界不同。                                     |",
+    "| 89   | [Mark price](https://www.tradingview.com/support/solutions/43000784534-mark-price/)                                                                                       | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 90   | [Mass Index](https://www.tradingview.com/support/solutions/43000589169-mass-index/)                                                                                       | K    | ta.massi                                       | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 91   | [McGinley Dynamic](https://www.tradingview.com/support/solutions/43000589175-mcginley-dynamic/)                                                                           | K    | ta.mcgd                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 92   | [Mean block interval](https://www.tradingview.com/support/solutions/43000778557-mean-block-interval/)                                                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 93   | [Mean block size in bytes](https://www.tradingview.com/support/solutions/43000778560-mean-block-size-in-bytes/)                                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 94   | [Mean gas used](https://www.tradingview.com/support/solutions/43000778551-mean-gas-used/)                                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 95   | [Mean transaction fees](https://www.tradingview.com/support/solutions/43000778548-mean-transaction-fees/)                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 96   | [Mean transaction gas limit](https://www.tradingview.com/support/solutions/43000778584-mean-transaction-gas-limit/)                                                       | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 97   | [Mean transaction gas price](https://www.tradingview.com/support/solutions/43000778553-mean-transaction-gas-price/)                                                       | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 98   | [Mean transaction size in bytes](https://www.tradingview.com/support/solutions/43000778574-mean-transaction-size-in-bytes/)                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 99   | [Mean transfer volume](https://www.tradingview.com/support/solutions/43000778538-mean-transfer-volume/)                                                                   | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 100  | [Mean UTXO value created](https://www.tradingview.com/support/solutions/43000778566-mean-utxo-value-created/)                                                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 101  | [Mean UTXO value spent](https://www.tradingview.com/support/solutions/43000778569-mean-utxo-value-spent/)                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 102  | [Median](https://www.tradingview.com/support/solutions/43000644897-median/)                                                                                               | C    | ta.median + ta.ema + ta.atr                    | 平台Median是中位线、EMA云、ATR通道；不是只有median单线。                                 |",
+    "| 103  | [Median block interval](https://www.tradingview.com/support/solutions/43000778558-median-block-interval/)                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 104  | [Median gas used](https://www.tradingview.com/support/solutions/43000778552-median-gas-used/)                                                                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 105  | [Median transaction fees](https://www.tradingview.com/support/solutions/43000778549-median-transaction-fees/)                                                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 106  | [Median transaction gas limit](https://www.tradingview.com/support/solutions/43000778585-median-transaction-gas-limit/)                                                   | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 107  | [Median transaction gas price](https://www.tradingview.com/support/solutions/43000778554-median-transaction-gas-price/)                                                   | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 108  | [Median transfer volume](https://www.tradingview.com/support/solutions/43000778539-median-transfer-volume/)                                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 109  | [Median UTXO value created](https://www.tradingview.com/support/solutions/43000778567-median-utxo-value-created/)                                                         | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 110  | [Median UTXO value spent](https://www.tradingview.com/support/solutions/43000778570-median-utxo-value-spent/)                                                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 111  | [Momentum](https://www.tradingview.com/support/solutions/43000589187-momentum/)                                                                                           | K    | ta.mom                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 112  | [Money Flow (MFI)](https://www.tradingview.com/support/solutions/43000502348-money-flow-mfi/)                                                                             | P    | ta.mfi                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 113  | [Moon Phases](https://www.tradingview.com/support/solutions/43000599884-moon-phases/)                                                                                     | D/V  | 月相天文历法                                   | 时间/天文历，不是OHLCV指标；无证据表明对当前策略内核必要。                               |",
+    "| 114  | [Moving average convergence divergence (MACD) indicator](https://www.tradingview.com/support/solutions/43000502344-moving-average-convergence-divergence-macd-indicator/) | K    | ta.macd                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 115  | [Moving Average Ribbon](https://www.tradingview.com/support/solutions/43000644913-moving-average-ribbon/)                                                                 | C    | ta.ma/现有多MA能力                             | 平台4条可选MA；mmar/rainbow不同预设，不直接称同指标。                                    |",
+    "| 116  | [Moving Averages](https://www.tradingview.com/support/solutions/43000502589-moving-averages/)                                                                             | H    | MA概述                                         | 帮助文章，不是另一独立计算核。                                                           |",
+    "| 117  | [MovingAvg Cross](https://www.tradingview.com/support/solutions/43000599885-movingavg-cross/)                                                                             | C    | MA + lib.cross/crossover                       | 交叉复合/展示层，不新增MA数学家族；lib等号边界不同。                                     |",
+    "| 118  | [MovingAvg2Line Cross](https://www.tradingview.com/support/solutions/43000599886-movingavg2line-cross/)                                                                   | C    | MA + lib.cross/crossover                       | 交叉复合/展示层，不新增MA数学家族；lib等号边界不同。                                     |",
+    "| 119  | [Multi-Time Period Charts indicator](https://www.tradingview.com/support/solutions/43000502591-multi-time-period-charts-indicator/)                                       | S/V  | 多周期OHLC框                                   | 需要resample+日历+确认bar映射；非单个数值指标。                                          |",
+    "| 120  | [Negative Volume Index (NVI)](https://www.tradingview.com/support/solutions/43000773005-negative-volume-index-nvi/)                                                       | P!   | ta.nvi / ta.pvi                                | 公式累加与复利不等价，见Pine表；列入兼容修复。                                           |",
+    "| 121  | [Net Volume](https://www.tradingview.com/support/solutions/43000589192-net-volume/)                                                                                       | N?   | Net Volume                                     | 官方页描述uptick/downtick但未完整定义tie/采样；核对源码再决定bar或intrabar契约。         |",
+    "| 122  | [On Balance Volume (OBV)](https://www.tradingview.com/support/solutions/43000502593-on-balance-volume-obv/)                                                               | P    | ta.obv                                         | 首bar基线可能不同。                                                                      |",
+    "| 123  | [Open Interest](https://www.tradingview.com/support/solutions/43000685269-open-interest/)                                                                                 | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 124  | [Parabolic SAR (SAR)](https://www.tradingview.com/support/solutions/43000502597-parabolic-sar-sar/)                                                                       | P    | ta.psar                                        | 分段long/short合并、种子/方向需验。                                                      |",
+    "| 125  | [Percentage Price Oscillator (PPO)](https://www.tradingview.com/support/solutions/43000502346-percentage-price-oscillator-ppo/)                                           | K    | ta.ppo                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 126  | [Percentage Volume Oscillator (PVO)](https://www.tradingview.com/support/solutions/43000591350-percentage-volume-oscillator-pvo/)                                         | K    | ta.pvo                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 127  | [Performance](https://www.tradingview.com/support/solutions/43000736064-performance/)                                                                                     | C    | ta.percent_return + 周期/跨标的展示            | 固定日/周/月收益表需要日历和as-of映射，不是再造ROC。                                     |",
+    "| 128  | [Pivot Points High Low](https://www.tradingview.com/support/solutions/43000589195-pivot-points-high-low/)                                                                 | U/N  | 确认高低枢轴/Williams Fractal                  | 共享左/右窗检测；5bar典型分型需至少2根右bar后确认。                                      |",
+    "| 129  | [Pivot Points Standard](https://www.tradingview.com/support/solutions/43000521824-pivot-points-standard/)                                                                 | N/S  | 六族Pivot Points                               | CPR只有上一输入bar部分经典线；补周期聚合、公式族、session设置。                          |",
+    "| 130  | [Positive Volume Index (PVI)](https://www.tradingview.com/support/solutions/43000773006-positive-volume-index-pvi/)                                                       | P!   | ta.nvi / ta.pvi                                | 公式累加与复利不等价，见Pine表；列入兼容修复。                                           |",
+    "| 131  | [Power-Law Model](https://www.tradingview.com/support/solutions/43000778576-power-law-model/)                                                                             | D/V? | Power-law model                                | BTC特定时龄拟合/来源；全样本重估不可直接回填策略历史。                                   |",
+    "| 132  | [Premium](https://www.tradingview.com/support/solutions/43000784535-premium/)                                                                                             | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 133  | [Price Momentum Oscillator (PMO)](https://www.tradingview.com/support/solutions/43000773010-price-momentum-oscillator-pmo/)                                               | N    | PMO                                            | 两层alpha=2/length的ROC平滑+标准EMA signal，不是PPO/TSI。                                |",
+    "| 134  | [Price target - indicator](https://www.tradingview.com/support/solutions/43000730980-price-target-indicator/)                                                             | D    | 分析师/财务数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 135  | [Price Volume Trend (PVT)](https://www.tradingview.com/support/solutions/43000502345-price-volume-trend-pvt/)                                                             | P    | ta.pvt                                         | 分数/百分数收益单位需对齐。                                                              |",
+    "| 136  | [Pring's Special K](https://www.tradingview.com/support/solutions/43000773011-pring-s-special-k/)                                                                         | N    | Special K                                      | 12组ROC/SMA固定加权+双SMA signal；需要较长暖机。                                         |",
+    "| 137  | [Rank Correlation Index (RCI)](https://www.tradingview.com/support/solutions/43000765570-rank-correlation-index-rci/)                                                     | N    | RCI / 多周期RCI ribbon                         | 共享Spearman RCI核；ribbon作为多参数复合，不另计核。                                     |",
+    "| 138  | [Rate of Change (ROC)](https://www.tradingview.com/support/solutions/43000502343-rate-of-change-roc/)                                                                     | K    | ta.roc                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 139  | [RCI Ribbon](https://www.tradingview.com/support/solutions/43000765571-rci-ribbon/)                                                                                       | N    | RCI / 多周期RCI ribbon                         | 共享Spearman RCI核；ribbon作为多参数复合，不另计核。                                     |",
+    "| 140  | [Realized market cap](https://www.tradingview.com/support/solutions/43000773994-realized-market-cap/)                                                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 141  | [Receiving addresses](https://www.tradingview.com/support/solutions/43000778535-receiving-addresses/)                                                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 142  | [Relative Strength Index (RSI)](https://www.tradingview.com/support/solutions/43000502338-relative-strength-index-rsi/)                                                   | P    | ta.rsi                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 143  | [Relative Vigor Index](https://www.tradingview.com/support/solutions/43000591593-relative-vigor-index/)                                                                   | K    | ta.rvgi                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 144  | [Relative Volatility Index](https://www.tradingview.com/support/solutions/43000594684-relative-volatility-index/)                                                         | K    | ta.rvi                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 145  | [Relative Volume at Time](https://www.tradingview.com/support/solutions/43000705489-relative-volume-at-time/)                                                             | N/S  | Relative Volume at Time                        | volume对同anchor内时间偏移的跨日历史均值；不能用普通rolling RVOL替代。                   |",
+    "| 146  | [Rob Booker - ADX Breakout](https://www.tradingview.com/support/solutions/43000591333-rob-booker-adx-breakout/)                                                           | C/N? | Rob Booker复合规则                             | ADX/动量/RSI等已在，缺原方案事件组合；收益必要性未证实，低优先级并核源码。               |",
+    "| 147  | [Rob Booker - Knoxville Divergence](https://www.tradingview.com/support/solutions/43000591336-rob-booker-knoxville-divergence/)                                           | N/U  | Knoxville / RSI divergence                     | pivot序列间背离检测；等待右窗确认，不可在pivot原bar提前可用。                            |",
+    "| 148  | [Rob Booker Intraday Pivot Points](https://www.tradingview.com/support/solutions/43000594546-rob-booker-intraday-pivot-points/)                                           | N/S? | Rob Booker pivot变体                           | 与129共享周期枢轴底座；未触及检测与预测pivot需明确当时可得状态，低优先级。               |",
+    "| 149  | [Rob Booker Missed Pivot Points](https://www.tradingview.com/support/solutions/43000594678-rob-booker-missed-pivot-points/)                                               | N/S? | Rob Booker pivot变体                           | 与129共享周期枢轴底座；未触及检测与预测pivot需明确当时可得状态，低优先级。               |",
+    "| 150  | [Rob Booker Reversal](https://www.tradingview.com/support/solutions/43000599840-rob-booker-reversal/)                                                                     | C/N? | Rob Booker复合规则                             | ADX/动量/RSI等已在，缺原方案事件组合；收益必要性未证实，低优先级并核源码。               |",
+    "| 151  | [Rob Booker Ziv Ghost Pivots](https://www.tradingview.com/support/solutions/43000594679-rob-booker-ziv-ghost-pivots/)                                                     | N/S? | Rob Booker pivot变体                           | 与129共享周期枢轴底座；未触及检测与预测pivot需明确当时可得状态，低优先级。               |",
+    "| 152  | [RSI divergence indicator](https://www.tradingview.com/support/solutions/43000589127-rsi-divergence-indicator/)                                                           | N/U  | Knoxville / RSI divergence                     | pivot序列间背离检测；等待右窗确认，不可在pivot原bar提前可用。                            |",
+    "| 153  | [RVT ratio, 90 days](https://www.tradingview.com/support/solutions/43000773995-rvt-ratio-90-days/)                                                                        | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 154  | [Seasonality](https://www.tradingview.com/support/solutions/43000723025-seasonality/)                                                                                     | S/V  | 季节性收益表与历史预测                         | 需多年数据/日历；只能用当时已知年份训练，平台全图统计不能直接作逐bar特征。               |",
+    "| 155  | [Sending addresses](https://www.tradingview.com/support/solutions/43000778534-sending-addresses/)                                                                         | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 156  | [Simple Moving Average](https://www.tradingview.com/support/solutions/43000696841-simple-moving-average/)                                                                 | K    | ta.sma                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 157  | [SMI Ergodic Indicator](https://www.tradingview.com/support/solutions/43000594669-smi-ergodic-indicator/)                                                                 | K    | ta.smi 或 ta.tsi                               | 现有smi是Ergodic线/signal/osc；和163号Stochastic Momentum Index不同。                    |",
+    "| 158  | [SMI Ergodic Oscillator](https://www.tradingview.com/support/solutions/43000594671-smi-ergodic-oscillator/)                                                               | K    | ta.smi 或 ta.tsi                               | 现有smi是Ergodic线/signal/osc；和163号Stochastic Momentum Index不同。                    |",
+    "| 159  | [Smoothed Moving Average](https://www.tradingview.com/support/solutions/43000591343-smoothed-moving-average/)                                                             | P    | ta.rma                                         | SMMA/Wilder种子需验证。                                                                  |",
+    "| 160  | [Spent Output Profit Ratio (SOPR)](https://www.tradingview.com/support/solutions/43000778537-spent-output-profit-ratio-sopr/)                                             | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 161  | [Spent UTXOs](https://www.tradingview.com/support/solutions/43000778565-spent-utxos/)                                                                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 162  | [Stochastic (STOCH)](https://www.tradingview.com/support/solutions/43000502332-stochastic-stoch/)                                                                         | P    | ta.stoch                                       | 平台慢%K/%D与Pine raw ta.stoch要分开。                                                   |",
+    "| 163  | [Stochastic Momentum Index (SMI)](https://www.tradingview.com/support/solutions/43000707882-stochastic-momentum-index-smi/)                                               | N    | 真正Stochastic Momentum Index                  | HLC区间中点相对距离双EMA/区间宽度双EMA；现有smi Ergodic不能覆盖。                        |",
+    "| 164  | [Stochastic RSI (STOCH RSI)](https://www.tradingview.com/support/solutions/43000502333-stochastic-rsi-stoch-rsi/)                                                         | K    | ta.stochrsi                                    | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 165  | [Stock-to-Flow Ratio in USD](https://www.tradingview.com/support/solutions/43000778577-stock-to-flow-ratio-in-usd/)                                                       | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 166  | [Supertrend](https://www.tradingview.com/support/solutions/43000634738-supertrend/)                                                                                       | P    | ta.supertrend                                  | 方向编码Pine与后端相反，默认period不同。                                                 |",
+    "| 167  | [Supply Equality Ratio](https://www.tradingview.com/support/solutions/43000773996-supply-equality-ratio/)                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 168  | [Technical Ratings](https://www.tradingview.com/support/solutions/43000614331-technical-ratings/)                                                                         | N/C  | Technical Ratings                              | 官方定义26组件的离散投票复合；多数内核已有，但规则/权重/周期需固定。                     |",
+    "| 169  | [Time Weighted Average Price](https://www.tradingview.com/support/solutions/43000692939-time-weighted-average-price/)                                                     | N/S  | Anchored TWAP                                  | 按anchor累计source均值；官方帮助首段误像VWAP描述，需源码确认，不能照错句实现。           |",
+    "| 170  | [Top trader long/short accounts](https://www.tradingview.com/support/solutions/43000784529-top-trader-long-short-accounts/)                                               | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 171  | [Top trader long/short accounts ratio](https://www.tradingview.com/support/solutions/43000784530-top-trader-long-short-accounts-ratio/)                                   | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 172  | [Top trader long/short positions](https://www.tradingview.com/support/solutions/43000784531-top-trader-long-short-positions/)                                             | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 173  | [Top trader long/short positions ratio](https://www.tradingview.com/support/solutions/43000784532-top-trader-long-short-positions-ratio/)                                 | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 174  | [Total block size in bytes](https://www.tradingview.com/support/solutions/43000778559-total-block-size-in-bytes/)                                                         | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 175  | [Total gas used](https://www.tradingview.com/support/solutions/43000778550-total-gas-used/)                                                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 176  | [Total transactions size in bytes](https://www.tradingview.com/support/solutions/43000778573-total-transactions-size-in-bytes/)                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 177  | [Total UTXO value created](https://www.tradingview.com/support/solutions/43000778568-total-utxo-value-created/)                                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 178  | [Total UTXO value spent](https://www.tradingview.com/support/solutions/43000778572-total-utxo-value-spent/)                                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 179  | [Total UTXOs](https://www.tradingview.com/support/solutions/43000778563-total-utxos/)                                                                                     | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 180  | [Trading Sessions](https://www.tradingview.com/support/solutions/43000729030-trading-sessions/)                                                                           | S/V  | 交易时段对象与统计                             | 需交易所时区、DST、跨夜session；时间规则可算，不属于TA-Lib指标。                         |",
+    "| 181  | [Transaction fees](https://www.tradingview.com/support/solutions/43000773997-transaction-fees/)                                                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 182  | [Transaction fees](https://www.tradingview.com/support/solutions/43000778547-transaction-fees/)                                                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 183  | [Transaction rate](https://www.tradingview.com/support/solutions/43000778543-transaction-rate/)                                                                           | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 184  | [Transfer count](https://www.tradingview.com/support/solutions/43000778541-transfer-count/)                                                                               | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 185  | [Transfer rate](https://www.tradingview.com/support/solutions/43000778542-transfer-rate/)                                                                                 | D    | 链上/链属性数据                                | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 186  | [Trend Strength Index](https://www.tradingview.com/support/solutions/43000730926-trend-strength-index/)                                                                   | K    | ta.cti                                         | 价格与bar_index的Pearson相关，数学内核候选已覆盖；不是ta.tsi，更不是Spearman RCI。       |",
+    "| 187  | [Triple EMA](https://www.tradingview.com/support/solutions/43000591346-triple-ema/)                                                                                       | K    | ta.tema                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 188  | [TRIX](https://www.tradingview.com/support/solutions/43000502331-trix/)                                                                                                   | P    | ta.trix/ta.trixh                               | 尺度、signal输出需对齐。                                                                 |",
+    "| 189  | [True Strength Index](https://www.tradingview.com/support/solutions/43000592290-true-strength-index/)                                                                     | P    | ta.tsi                                         | True Strength Index；Pine函数范围和平台百分数图有区别。                                  |",
+    "| 190  | [Ulcer Index](https://www.tradingview.com/support/solutions/43000773115-ulcer-index/)                                                                                     | K    | ta.ui                                          | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 191  | [Ultimate Oscillator (UO)](https://www.tradingview.com/support/solutions/43000502328-ultimate-oscillator-uo/)                                                             | K    | ta.uo                                          | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 192  | [Understanding crypto open interest](https://www.tradingview.com/support/solutions/43000762388-understanding-crypto-open-interest/)                                       | D    | 衍生品/跨合约数据                              | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 193  | [Up/Down Volume](https://www.tradingview.com/support/solutions/43000672561-up-down-volume/)                                                                               | D/S  | CVD / Up-Down Volume / Volume Delta            | 需要lower-timeframe或tick/quote数据；当前bar方向乘volume只是代理量，不是同值。           |",
+    "| 194  | [US spot crypto ETF balances](https://www.tradingview.com/support/solutions/43000778588-us-spot-crypto-etf-balances/)                                                     | D    | ETF持仓/流量数据                               | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 195  | [US spot crypto ETF flows](https://www.tradingview.com/support/solutions/43000778589-us-spot-crypto-etf-flows/)                                                           | D    | ETF持仓/流量数据                               | 需独立历史feed及发布时间/as-of规则；无法从单标的OHLCV恢复。                              |",
+    "| 196  | [Visible Average Price](https://www.tradingview.com/support/solutions/43000678766-visible-average-price/)                                                                 | V    | 可见区间均价                                   | 依赖视口；移动图表改变范围，不能作为稳定历史回测信号。                                   |",
+    "| 197  | [Volatility Stop](https://www.tradingview.com/support/solutions/43000594676-volatility-stop/)                                                                             | N    | Volatility Stop                                | 候选官方ta库vStop ATR递推；平台帮助比较泛化，先指定版本语义，不把ce/supertrend视作同式。 |",
+    "| 198  | [Volume](https://www.tradingview.com/support/solutions/43000591617-volume/)                                                                                               | C    | 输入volume + 可选MA                            | 原始行情展示，无需新增volume计算入口。                                                   |",
+    "| 199  | [Volume Delta](https://www.tradingview.com/support/solutions/43000725057-volume-delta/)                                                                                   | D/S  | CVD / Up-Down Volume / Volume Delta            | 需要lower-timeframe或tick/quote数据；当前bar方向乘volume只是代理量，不是同值。           |",
+    "| 200  | [Volume Weighted Average Price (VWAP)](https://www.tradingview.com/support/solutions/43000502018-volume-weighted-average-price-vwap/)                                     | P    | ta.vwap                                        | 仅D/W/M HLC3且无bands；session/event anchor另列。                                        |",
+    "| 201  | [Volume-Weighted Moving Average (VWMA)](https://www.tradingview.com/support/solutions/43000592293-volume-weighted-moving-average-vwma/)                                   | K    | ta.vwma                                        | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 202  | [Vortex Indicator](https://www.tradingview.com/support/solutions/43000591352-vortex-indicator/)                                                                           | K    | ta.vortex                                      | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 203  | [VWAP Auto Anchored](https://www.tradingview.com/support/solutions/43000652199-vwap-auto-anchored/)                                                                       | N/S  | Auto Anchored VWAP                             | 除D/W/M还按高/低/最高量或事件锚定；动态锚定会重算，anchor可得时点需记录。                |",
+    "| 204  | [Weighted Moving Average](https://www.tradingview.com/support/solutions/43000594680-weighted-moving-average/)                                                             | K    | ta.wma                                         | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 205  | [Williams %R (%R)](https://www.tradingview.com/support/solutions/43000501985-williams-r-r/)                                                                               | K    | ta.willr                                       | 已存在相同数学家族；不代表参数、初始化、NaN或绘图逐值等价。                              |",
+    "| 206  | [Williams Alligator](https://www.tradingview.com/support/solutions/43000592305-williams-alligator/)                                                                       | C    | Williams Alligator                             | HL2上3条SMMA/RMA+视觉位移；底层已有，禁止把未来显示偏移当提前信息。                      |",
+    "| 207  | [Williams fractal indicator](https://www.tradingview.com/support/solutions/43000591663-williams-fractal-indicator/)                                                       | U/N  | 确认高低枢轴/Williams Fractal                  | 共享左/右窗检测；5bar典型分型需至少2根右bar后确认。                                      |",
+    "| 208  | [Woodies CCI](https://www.tradingview.com/support/solutions/43000594673-woodies-cci/)                                                                                     | C    | Woodies CCI                                    | CCI6/14 + 过零持续bar着色；新增复合规则而非新CCI公式。                                   |",
+    "| 209  | [Zigzag indicator](https://www.tradingview.com/support/solutions/43000591664-zigzag-indicator/)                                                                           | N/V  | ZigZag                                         | 转向阈值与depth/pivot状态；末段持续重绘，确认端点事件需独立输出。                        |",
+    "| [All Chart Patterns](https://www.tradingview.com/support/solutions/43000706927-all-chart-patterns/)                                             | 概述/聚合功能说明；不能当单独数学指标计数。                                                                                     |",
+    "| [Auto chart patterns on TradingView](https://www.tradingview.com/support/solutions/43000690464-auto-chart-patterns-on-tradingview/)             | 概述/聚合功能说明；不能当单独数学指标计数。                                                                                     |",
+    "| [Chart Pattern Bearish Flag](https://www.tradingview.com/support/solutions/43000697936-chart-pattern-bearish-flag/)                             | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Bearish Pennant](https://www.tradingview.com/support/solutions/43000697937-chart-pattern-bearish-pennant/)                       | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Bullish Flag](https://www.tradingview.com/support/solutions/43000653209-chart-pattern-bullish-flag/)                             | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Bullish Pennant](https://www.tradingview.com/support/solutions/43000653215-chart-pattern-bullish-pennant/)                       | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Cup and Handle](https://www.tradingview.com/support/solutions/43000732556-chart-pattern-cup-and-handle/)                         | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Double Bottom](https://www.tradingview.com/support/solutions/43000690659-chart-pattern-double-bottom/)                           | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Double Top](https://www.tradingview.com/support/solutions/43000653211-chart-pattern-double-top/)                                 | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Falling Wedge](https://www.tradingview.com/support/solutions/43000697938-chart-pattern-falling-wedge/)                           | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Head And Shoulders](https://www.tradingview.com/support/solutions/43000653213-chart-pattern-head-and-shoulders/)                 | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Inverse Head And Shoulders](https://www.tradingview.com/support/solutions/43000690666-chart-pattern-inverse-head-and-shoulders/) | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Inverted Cup and Handle](https://www.tradingview.com/support/solutions/43000732559-chart-pattern-inverted-cup-and-handle/)       | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Rectangle](https://www.tradingview.com/support/solutions/43000653216-chart-pattern-rectangle/)                                   | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Rising Wedge](https://www.tradingview.com/support/solutions/43000653219-chart-pattern-rising-wedge/)                             | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Triangle](https://www.tradingview.com/support/solutions/43000653217-chart-pattern-triangle/)                                     | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Triple Bottom](https://www.tradingview.com/support/solutions/43000690660-chart-pattern-triple-bottom/)                           | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Chart Pattern Triple Top](https://www.tradingview.com/support/solutions/43000653218-chart-pattern-triple-top/)                                 | 未有平台同等形态对象；基于确认pivot的状态机与几何匹配，右窗确认/形态完成后才发事件。公式阈值非统一标准，P3；不是cdl蜡烛形态库。 |",
+    "| [Elliott wave theory and tools](https://www.tradingview.com/support/solutions/43000653212-elliott-wave-theory-and-tools/)                       | 概述/聚合功能说明；不能当单独数学指标计数。                                                                                     |",
+    "| [Gaps](https://www.tradingview.com/support/solutions/43000675999-gaps/)                                                                         | OHLC缺口区间与后续填补状态；可因果输出，但图框延伸/回填要对象模型，P2/P3。                                                      |",
+    "| [I cannot find the Volume Profile indicators](https://www.tradingview.com/support/solutions/43000653375-i-cannot-find-the-volume-profile-indicators/) | 查找/机制概述；非另一个指标。                                                                                                               |",
+    "| [Volume profile indicators: basic concepts](https://www.tradingview.com/support/solutions/43000502040-volume-profile-indicators-basic-concepts/)      | 查找/机制概述；非另一个指标。                                                                                                               |",
+    "| [Fixed Range Volume Profile indicator](https://www.tradingview.com/support/solutions/43000480324-fixed-range-volume-profile-indicator/)               | 未开放；现有ta.vp为non-series且不是TV低周期精确profile。需价格分箱/POC/VA对象模型及低周期数据；会话、周期、固定/可见/动态锚定分别定义，P3。 |",
+    "| [Session Volume Profile HD](https://www.tradingview.com/support/solutions/43000557450-session-volume-profile-hd/)                                     | 未开放；现有ta.vp为non-series且不是TV低周期精确profile。需价格分箱/POC/VA对象模型及低周期数据；会话、周期、固定/可见/动态锚定分别定义，P3。 |",
+    "| [Periodic Volume Profile](https://www.tradingview.com/support/solutions/43000703071-periodic-volume-profile/)                                         | 未开放；现有ta.vp为non-series且不是TV低周期精确profile。需价格分箱/POC/VA对象模型及低周期数据；会话、周期、固定/可见/动态锚定分别定义，P3。 |",
+    "| [Session Volume Profile](https://www.tradingview.com/support/solutions/43000703072-session-volume-profile/)                                           | 未开放；现有ta.vp为non-series且不是TV低周期精确profile。需价格分箱/POC/VA对象模型及低周期数据；会话、周期、固定/可见/动态锚定分别定义，P3。 |",
+    "| [Visible Range Volume Profile](https://www.tradingview.com/support/solutions/43000703076-visible-range-volume-profile/)                               | 未开放；现有ta.vp为non-series且不是TV低周期精确profile。需价格分箱/POC/VA对象模型及低周期数据；会话、周期、固定/可见/动态锚定分别定义，P3。 |",
+    "| [Auto Anchored Volume Profile](https://www.tradingview.com/support/solutions/43000703077-auto-anchored-volume-profile/)                               | 未开放；现有ta.vp为non-series且不是TV低周期精确profile。需价格分箱/POC/VA对象模型及低周期数据；会话、周期、固定/可见/动态锚定分别定义，P3。 |",
+    "| [Time price opportunity (TPO) indicator](https://www.tradingview.com/support/solutions/43000713306-time-price-opportunity-tpo-indicator/)                   | 未开放；需要time-price分箱/周期或session日历和lower-timeframe采样。TPO按时间机会计数，不是volume profile；非单时间序列结果，P3。 |",
+    "| [Session Time Price Opportunity (STPO) indicator](https://www.tradingview.com/support/solutions/43000719900-session-time-price-opportunity-stpo-indicator/) | 未开放；需要time-price分箱/周期或session日历和lower-timeframe采样。TPO按时间机会计数，不是volume profile；非单时间序列结果，P3。 |",
+    "| 1    | [Automatic candlestick pattern detection](https://www.tradingview.com/support/solutions/43000584462-automatic-candlestick-pattern-detection/) | 概述，不计形态                          | 平台技术指标入口的自动识别/标签/告警说明。                                                     |",
+    "| 2    | [Abandoned Baby - Bearish](https://www.tradingview.com/support/solutions/43000583765-abandoned-baby-bearish/)                                 | cdl_pattern(name=abandonedbaby) 候选    | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 3    | [Abandoned Baby - Bullish](https://www.tradingview.com/support/solutions/43000583766-abandoned-baby-bullish/)                                 | cdl_pattern(name=abandonedbaby) 候选    | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 4    | [Dark Cloud Cover - Bearish](https://www.tradingview.com/support/solutions/43000592563-dark-cloud-cover-bearish/)                             | cdl_pattern(name=darkcloudcover) 候选   | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 5    | [Doji](https://www.tradingview.com/support/solutions/43000583767-doji/)                                                                       | cdl_pattern(name=doji) 候选             | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 6    | [Doji Star - Bearish](https://www.tradingview.com/support/solutions/43000592727-doji-star-bearish/)                                           | cdl_pattern(name=dojistar) 候选         | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 7    | [Doji Star - Bullish](https://www.tradingview.com/support/solutions/43000592726-doji-star-bullish/)                                           | cdl_pattern(name=dojistar) 候选         | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 8    | [Downside Tasuki Gap - Bearish](https://www.tradingview.com/support/solutions/43000592723-downside-tasuki-gap-bearish/)                       | cdl_pattern(name=tasukigap) 候选        | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 9    | [Dragonfly Doji - Bullish](https://www.tradingview.com/support/solutions/43000583768-dragonfly-doji-bullish/)                                 | cdl_pattern(name=dragonflydoji) 候选    | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 10   | [Engulfing - Bearish](https://www.tradingview.com/support/solutions/43000583769-engulfing-bearish/)                                           | cdl_pattern(name=engulfing) 候选        | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 11   | [Engulfing - Bullish](https://www.tradingview.com/support/solutions/43000583771-engulfing-bullish/)                                           | cdl_pattern(name=engulfing) 候选        | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 12   | [Evening Doji Star - Bearish](https://www.tradingview.com/support/solutions/43000592705-evening-doji-star-bearish/)                           | cdl_pattern(name=eveningdojistar) 候选  | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 13   | [Evening Star - Bearish](https://www.tradingview.com/support/solutions/43000583772-evening-star-bearish/)                                     | cdl_pattern(name=eveningstar) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 14   | [Falling Three Methods - Bearish](https://www.tradingview.com/support/solutions/43000592712-falling-three-methods-bearish/)                   | cdl_pattern(name=risefall3methods) 候选 | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 15   | [Falling Window - Bearish](https://www.tradingview.com/support/solutions/43000592713-falling-window-bearish/)                                 | 62原生候选无直接同义项                  | 两bar全价区间向下缺口；不能用xsidegap3methods三bar公式替代。                                   |",
+    "| 16   | [Gravestone Doji - Bearish](https://www.tradingview.com/support/solutions/43000583773-gravestone-doji-bearish/)                               | cdl_pattern(name=gravestonedoji) 候选   | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 17   | [Hammer - Bullish](https://www.tradingview.com/support/solutions/43000583775-hammer-bullish/)                                                 | cdl_pattern(name=hammer) 候选           | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 18   | [Hanging Man - Bearish](https://www.tradingview.com/support/solutions/43000583776-hanging-man-bearish/)                                       | cdl_pattern(name=hangingman) 候选       | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 19   | [Harami - Bearish](https://www.tradingview.com/support/solutions/43000583777-harami-bearish/)                                                 | cdl_pattern(name=harami) 候选           | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 20   | [Harami - Bullish](https://www.tradingview.com/support/solutions/43000583778-harami-bullish/)                                                 | cdl_pattern(name=harami) 候选           | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 21   | [Harami Cross - Bearish](https://www.tradingview.com/support/solutions/43000592707-harami-cross-bearish/)                                     | cdl_pattern(name=haramicross) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 22   | [Harami Cross - Bullish](https://www.tradingview.com/support/solutions/43000592708-harami-cross-bullish/)                                     | cdl_pattern(name=haramicross) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 23   | [Inverted Hammer - Bullish](https://www.tradingview.com/support/solutions/43000583780-inverted-hammer-bullish/)                               | cdl_pattern(name=invertedhammer) 候选   | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 24   | [Kicking - Bearish](https://www.tradingview.com/support/solutions/43000583781-kicking-bearish/)                                               | cdl_pattern(name=kicking) 候选          | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 25   | [Kicking - Bullish](https://www.tradingview.com/support/solutions/43000583782-kicking-bullish/)                                               | cdl_pattern(name=kicking) 候选          | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 26   | [Long Lower Shadow - Bullish](https://www.tradingview.com/support/solutions/43000583783-long-lower-shadow-bullish/)                           | 62原生候选无直接同义项                  | 影线/实体比例；takuri是特定长下影Doji，不能直接替代一般Long Lower Shadow。                     |",
+    "| 27   | [Long Upper Shadow - Bearish](https://www.tradingview.com/support/solutions/43000583784-long-upper-shadow-bearish/)                           | 62原生候选无直接同义项                  | 影线/实体比例；shootingstar还含其他结构/趋势条件，不能直接等价。                               |",
+    "| 28   | [Marubozu Black - Bearish](https://www.tradingview.com/support/solutions/43000583785-marubozu-black-bearish/)                                 | cdl_pattern(name=marubozu) 候选         | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 29   | [Marubozu White - Bullish](https://www.tradingview.com/support/solutions/43000583786-marubozu-white-bullish/)                                 | cdl_pattern(name=marubozu) 候选         | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 30   | [Morning Doji Star - Bullish](https://www.tradingview.com/support/solutions/43000592704-morning-doji-star-bullish/)                           | cdl_pattern(name=morningdojistar) 候选  | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 31   | [Morning Star - Bullish](https://www.tradingview.com/support/solutions/43000583787-morning-star-bullish/)                                     | cdl_pattern(name=morningstar) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 32   | [On Neck - Bearish](https://www.tradingview.com/support/solutions/43000592722-on-neck-bearish/)                                               | cdl_pattern(name=onneck) 候选           | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 33   | [Piercing - Bullish](https://www.tradingview.com/support/solutions/43000592558-piercing-bullish/)                                             | cdl_pattern(name=piercing) 候选         | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 34   | [Rising Three Methods - Bullish](https://www.tradingview.com/support/solutions/43000592711-rising-three-methods-bullish/)                     | cdl_pattern(name=risefall3methods) 候选 | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 35   | [Rising Window - Bullish](https://www.tradingview.com/support/solutions/43000592721-rising-window-bullish/)                                   | 62原生候选无直接同义项                  | 两bar全价区间向上缺口；不能用gapsidesidewhite等三bar结构替代。                                 |",
+    "| 36   | [Shooting Star - Bearish](https://www.tradingview.com/support/solutions/43000583789-shooting-star-bearish/)                                   | cdl_pattern(name=shootingstar) 候选     | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 37   | [Spinning Top Black](https://www.tradingview.com/support/solutions/43000583791-spinning-top-black/)                                           | cdl_pattern(name=spinningtop) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 38   | [Spinning Top White](https://www.tradingview.com/support/solutions/43000583790-spinning-top-white/)                                           | cdl_pattern(name=spinningtop) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 39   | [Three Black Crows - Bearish](https://www.tradingview.com/support/solutions/43000583792-three-black-crows-bearish/)                           | cdl_pattern(name=3blackcrows) 候选      | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 40   | [Three White Soldiers - Bullish](https://www.tradingview.com/support/solutions/43000583793-three-white-soldiers-bullish/)                     | cdl_pattern(name=3whitesoldiers) 候选   | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 41   | [Tri Star - Bearish](https://www.tradingview.com/support/solutions/43000583794-tri-star-bearish/)                                             | cdl_pattern(name=tristar) 候选          | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 42   | [Tri Star - Bullish](https://www.tradingview.com/support/solutions/43000583796-tri-star-bullish/)                                             | cdl_pattern(name=tristar) 候选          | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |",
+    "| 43   | [Tweezer Bottom - Bullish](https://www.tradingview.com/support/solutions/43000592709-tweezer-bottom-bullish/)                                 | 62原生候选无直接同义项                  | 两bar近同低点、不同方向；matchinglow匹配收盘而非低点，非同一形态。                             |",
+    "| 44   | [Tweezer Top - Bearish](https://www.tradingview.com/support/solutions/43000592710-tweezer-top-bearish/)                                       | 62原生候选无直接同义项                  | 两bar近同高点、不同方向；62候选无同名对应。                                                    |",
+    "| 45   | [Upside Tasuki Gap - Bullish](https://www.tradingview.com/support/solutions/43000592725-upside-tasuki-gap-bullish/)                           | cdl_pattern(name=tasukigap) 候选        | 只对应形态家族；当前catalog仍deferred。方向由符号/蜡烛颜色筛选，趋势过滤、阈值和穿透率未对拍。 |"
+  ],
+  "implementation_scope": {
+    "change": "expand-engine-indicator-coverage",
+    "added_available_methods": [
+      "ta.highest",
+      "ta.lowest",
+      "ta.highestbars",
+      "ta.lowestbars",
+      "ta.rolling_sum",
+      "ta.range",
+      "ta.percentrank",
+      "ta.rolling_count",
+      "ta.cum",
+      "ta.running_max",
+      "ta.running_min",
+      "ta.change",
+      "ta.shift",
+      "ta.percentile_nearest_rank",
+      "ta.percentile_linear_interpolation",
+      "ta.cross",
+      "ta.crossover",
+      "ta.crossunder",
+      "ta.barssince",
+      "ta.valuewhen",
+      "ta.rising",
+      "ta.falling",
+      "ta.pivothigh",
+      "ta.pivotlow",
+      "ta.smi_stochastic",
+      "ta.crsi",
+      "ta.pmo",
+      "ta.rmi",
+      "ta.alligator",
+      "ta.gator",
+      "ta.atr_stop",
+      "ta.volatility_stop",
+      "ta.ma_envelopes",
+      "ta.starc",
+      "ta.ac",
+      "ta.ibs",
+      "ta.frama",
+      "ta.wavetrend",
+      "ta.adr",
+      "ta.rvol",
+      "ta.rci",
+      "ta.iii",
+      "ta.wvad",
+      "ta.pivot_points",
+      "ta.cdl_doji",
+      "ta.cdl_inside",
+      "ta.cdl_engulfing",
+      "ta.cdl_hammer",
+      "ta.cdl_shootingstar",
+      "ta.cdl_harami",
+      "ta.cdl_morningstar",
+      "ta.cdl_eveningstar",
+      "ta.cdl_marubozu"
+    ],
+    "contracts": "../../tests/fixtures/indicator_expansion/contracts.json",
+    "note": "pine_rows/platform_rows保留原始研究快照；名称可用不等于Pine语义一致，兼容性仍按原始差异审计及冻结契约判断。"
+  },
+  "pine_current_names": [
+    {
+      "name": "ta.accdist",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.alma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.atr",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.barssince",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.bb",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.bbw",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.cci",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.change",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.cmo",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.cog",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.correlation",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.cross",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.crossover",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.crossunder",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.cum",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.dev",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.dmi",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.ema",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.falling",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.highest",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.highestbars",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.hma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.iii",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.kc",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.kcw",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.linreg",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.lowest",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.lowestbars",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.macd",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.max",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.median",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.mfi",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.min",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.mode",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.mom",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.nvi",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.obv",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.percentile_linear_interpolation",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.percentile_nearest_rank",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.percentrank",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.pivot_point_levels",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.pivothigh",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.pivotlow",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.pvi",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.pvt",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.range",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.rci",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.rising",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.rma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.roc",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.rsi",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.sar",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.sma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.stdev",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.stoch",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.supertrend",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.swma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.tr",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.tsi",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.valuewhen",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.variance",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.vwap",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.vwma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.wad",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.wma",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.wpr",
+      "same_named_method_available": false,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    },
+    {
+      "name": "ta.wvad",
+      "same_named_method_available": true,
+      "parity": "unverified",
+      "reason": "仅按当前目录检查同名入口；别名映射与单位、种子、缺失行为差异见对应研究行，不据此宣称平台兼容"
+    }
+  ]
+}

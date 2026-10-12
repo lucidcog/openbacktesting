@@ -1,0 +1,1722 @@
+{
+  "ta.cdl_doji": {
+    "name": "十字星",
+    "summary": "比较实体与前窗口波幅，识别实体很小的蜡烛；正值只表示十字，不代表看涨。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_doji"
+  },
+  "ta.cdl_inside": {
+    "name": "内包线",
+    "summary": "识别高低区间被前一根包住的蜡烛；分值符号表示当根方向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_inside"
+  },
+  "ta.cdl_pattern": {
+    "name": "形态分派器",
+    "summary": "批量蜡烛形态分派尚未开放；使用目录中已审核的单项 cdl_ 入口。"
+  },
+  "ta.cdl_z": {
+    "name": "蜡烛标准分",
+    "summary": "分别标准化开高低收，观察各价格相对滚动均值的偏离。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "open"
+  },
+  "ta.ha": {
+    "name": "平均蜡烛",
+    "summary": "将开高低收转换为平滑蜡烛序列；输出不是原始成交价。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "open"
+  },
+  "ta.dsp": {
+    "name": "去趋势合成价格",
+    "summary": "去除价格趋势分量，观察剩余周期波动。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "dsp"
+  },
+  "ta.ebsw": {
+    "name": "改进正弦波",
+    "summary": "用滤波后的波形观察周期状态，输出在有限范围内振荡。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ebsw"
+  },
+  "ta.ht_dcperiod": {
+    "name": "希尔伯特主周期",
+    "summary": "估计价格主导周期的长度，用于观察周期变化。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ht_dcperiod"
+  },
+  "ta.ht_dcphase": {
+    "name": "希尔伯特主周期相位",
+    "summary": "估计主导周期相位，供周期分析使用。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ht_dcphase"
+  },
+  "ta.ht_phasor": {
+    "name": "希尔伯特相量",
+    "summary": "提供同相与正交分量，用于描述周期相位关系。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "inphase"
+  },
+  "ta.ht_sine": {
+    "name": "希尔伯特正弦波",
+    "summary": "输出正弦与领先正弦分量，比较周期相位关系。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "sine"
+  },
+  "ta.ht_trendmode": {
+    "name": "希尔伯特趋势状态",
+    "summary": "用趋势或周期状态值区分两种行情模式。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ht_trendmode"
+  },
+  "ta.msw": {
+    "name": "Mesa 正弦波",
+    "summary": "用最近窗口估计相位并生成正弦与领先正弦；period 必须大于一。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "sine"
+  },
+  "ta.ao": {
+    "name": "动量震荡器",
+    "summary": "比较中间价的快慢平均，观察动量方向及变化。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ao"
+  },
+  "ta.apo": {
+    "name": "绝对价格震荡器",
+    "summary": "计算快慢均线的绝对差，数值保留价格尺度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "apo"
+  },
+  "ta.bias": {
+    "name": "乖离率",
+    "summary": "衡量价格相对均线的偏离比例。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "bias"
+  },
+  "ta.bop": {
+    "name": "多空力量平衡",
+    "summary": "用开收差与高低区间的关系描述当根价格力量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "bop"
+  },
+  "ta.brar": {
+    "name": "人气与意愿指标",
+    "summary": "分别观察相对开盘价和前收盘价的上涨、下跌力量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ar"
+  },
+  "ta.cci": {
+    "name": "顺势指标",
+    "summary": "按平均偏差标准化价格偏离，观察偏离均值的程度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cci"
+  },
+  "ta.cfo": {
+    "name": "Chande 预测震荡器",
+    "summary": "比较实际价格与回归预测值，观察预测偏差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cfo"
+  },
+  "ta.cg": {
+    "name": "重心震荡器",
+    "summary": "用窗口价格加权重心刻画价格波动的转折形态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cg"
+  },
+  "ta.cmo": {
+    "name": "Chande 动量震荡器",
+    "summary": "比较窗口内上涨和下跌幅度，衡量净动量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cmo"
+  },
+  "ta.coppock": {
+    "name": "Coppock 曲线",
+    "summary": "平滑不同周期的变化率组合，观察较长周期动量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "coppock"
+  },
+  "ta.cti": {
+    "name": "相关趋势指标",
+    "summary": "衡量窗口价格与线性趋势的接近程度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cti"
+  },
+  "ta.dm": {
+    "name": "方向运动",
+    "summary": "分别计算正向与负向方向运动；两个通道应分别读取。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "positive"
+  },
+  "ta.er": {
+    "name": "效率比率",
+    "summary": "比较净变化和累计波动，观察路径中的方向性与噪声。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "er"
+  },
+  "ta.eri": {
+    "name": "Elder 多空力量",
+    "summary": "计算高价与低价相对均线的距离，分别表示多方和空方力量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "bull_power"
+  },
+  "ta.fisher": {
+    "name": "Fisher 变换",
+    "summary": "对归一化价格做变换，提供主线与信号线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "fisher"
+  },
+  "ta.fosc": {
+    "name": "预测震荡器",
+    "summary": "计算实际收盘与向前一步回归预测之间的相对差异。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "fosc"
+  },
+  "ta.inertia": {
+    "name": "惯性指标",
+    "summary": "对相对波动率 RVI 做线性回归平滑，观察较缓慢的变化。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "inertia"
+  },
+  "ta.kdj": {
+    "name": "KDJ 随机指标",
+    "summary": "由随机位置及平滑值形成 K、D 和派生 J 线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "k"
+  },
+  "ta.kst": {
+    "name": "综合动量指标",
+    "summary": "组合不同周期变化率并平滑，提供主线与信号线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "kst"
+  },
+  "ta.lrsi": {
+    "name": "Laguerre 相对强弱",
+    "summary": "用 Laguerre 滤波构造相对强弱序列，平滑程度由参数控制。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lrsi"
+  },
+  "ta.macd": {
+    "name": "平滑异同移动平均",
+    "summary": "快慢 EMA 的差为主线；信号线平滑主线，柱值表示两者之差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "histogram"
+  },
+  "ta.macdext": {
+    "name": "扩展 MACD",
+    "summary": "允许快线、慢线与信号线使用不同均线类型。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "macd"
+  },
+  "ta.macdfix": {
+    "name": "固定周期 MACD",
+    "summary": "快慢周期固定为 12 与 26，只调整信号周期。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "macd"
+  },
+  "ta.mom": {
+    "name": "动量差",
+    "summary": "计算当前价格与指定间隔历史价格之差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mom"
+  },
+  "ta.pgo": {
+    "name": "PGO 震荡器",
+    "summary": "以平均真实波幅为尺度，衡量价格离开简单均线的距离。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pgo"
+  },
+  "ta.po": {
+    "name": "投影震荡器",
+    "summary": "衡量价格相对线性回归趋势的偏离。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "po"
+  },
+  "ta.ppo": {
+    "name": "百分比价格震荡器",
+    "summary": "将快慢均线差标准化为百分比，并提供信号与柱值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ppo"
+  },
+  "ta.psl": {
+    "name": "心理线",
+    "summary": "统计窗口内上涨期数占比，观察上涨出现的频率。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "psl"
+  },
+  "ta.pvo": {
+    "name": "百分比成交量震荡器",
+    "summary": "比较快慢成交量均线，提供主线、信号和柱值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pvo"
+  },
+  "ta.qqe": {
+    "name": "定量定性估计",
+    "summary": "对平滑 RSI 构造动态带及方向状态；多空带存在稀疏输出。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "qqe"
+  },
+  "ta.roc": {
+    "name": "百分比变化率",
+    "summary": "计算指定间隔的价格变化率并按百分数表示。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "roc"
+  },
+  "ta.rocp": {
+    "name": "比例变化率",
+    "summary": "计算价格变化比例，不乘以一百。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rocp"
+  },
+  "ta.rocr": {
+    "name": "价格比率",
+    "summary": "计算当前价格与指定历史价格的比值；一表示无变化。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rocr"
+  },
+  "ta.rocr100": {
+    "name": "百分尺度价格比率",
+    "summary": "将价格比率乘以一百；一百表示无变化。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rocr100"
+  },
+  "ta.rsi": {
+    "name": "相对强弱指标",
+    "summary": "比较平滑上涨和下跌幅度，观察价格动量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rsi"
+  },
+  "ta.rsx": {
+    "name": "平滑相对强弱",
+    "summary": "采用多级平滑形成相对强弱序列，算法不等同普通 RSI。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rsx"
+  },
+  "ta.rvgi": {
+    "name": "相对活力指标",
+    "summary": "比较开收变化和高低区间，提供主线、信号及差值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "histogram"
+  },
+  "ta.slope": {
+    "name": "变化斜率",
+    "summary": "按指定间隔计算变化斜率，可选角度表示。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "slope"
+  },
+  "ta.smc_sweep": {
+    "name": "流动性扫掠",
+    "summary": "识别越过局部高低水平后的拒绝形态；不是成交簿流动性观测。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "smc_sweep"
+  },
+  "ta.smi": {
+    "name": "SMI Ergodic",
+    "summary": "基于双重平滑动量构成主线、信号和差值；不同于随机动量 SMI。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "smi"
+  },
+  "ta.squeeze": {
+    "name": "挤压指标",
+    "summary": "比较布林带与 Keltner 通道的关系，结合动量观察压缩和释放状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "squeeze"
+  },
+  "ta.squeeze_pro": {
+    "name": "多级挤压指标",
+    "summary": "在不同通道宽度下提供挤压状态和动量；分别读取状态通道。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "squeeze"
+  },
+  "ta.stc": {
+    "name": "Schaff 趋势周期",
+    "summary": "对 MACD 做连续随机化和平滑，形成周期读数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "stc"
+  },
+  "ta.stoch": {
+    "name": "随机震荡器",
+    "summary": "衡量收盘在近期高低区间的位置，提供平滑 K、D 线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "k"
+  },
+  "ta.stochf": {
+    "name": "快速随机震荡器",
+    "summary": "提供较少平滑的随机位置 K 线及其 D 线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "k"
+  },
+  "ta.stochrsi": {
+    "name": "随机相对强弱",
+    "summary": "对 RSI 进行窗口归一化，提供 K、D 线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "k"
+  },
+  "ta.td_seq": {
+    "name": "TD 顺序计数",
+    "summary": "按历史价格比较累计上涨与下跌序列计数；不提供交易保证。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "up"
+  },
+  "ta.trix": {
+    "name": "三重平滑变化率",
+    "summary": "计算三重指数平滑后的变化率，并提供信号线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "trix"
+  },
+  "ta.trixh": {
+    "name": "三重平滑柱值",
+    "summary": "在 TRIX 与信号线之外输出两者的差值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "trix"
+  },
+  "ta.tsi": {
+    "name": "真实强度指数",
+    "summary": "双重平滑动量与绝对动量，提供强度值和信号。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "tsi"
+  },
+  "ta.uo": {
+    "name": "终极震荡器",
+    "summary": "组合多个周期的买压与真实区间关系，观察动量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "uo"
+  },
+  "ta.vwmacd": {
+    "name": "成交量加权 MACD",
+    "summary": "以成交量加权均线替代普通快慢均线，输出主线、信号和柱值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "macd"
+  },
+  "ta.willr": {
+    "name": "威廉百分比指标",
+    "summary": "衡量收盘相对窗口最高价与最低价的位置。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "willr"
+  },
+  "ta.alma": {
+    "name": "Arnaud Legoux 均线",
+    "summary": "用可偏移的高斯权重平滑价格，控制平滑性与响应。 floor=True 将权重中心向下取整并稳定归一化；保持固定后端权重方向，不承诺 Pine 数值一致。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "alma"
+  },
+  "ta.avgprice": {
+    "name": "四价平均",
+    "summary": "计算开、高、低、收四个价格的算术平均。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "avgprice"
+  },
+  "ta.dema": {
+    "name": "双指数均线",
+    "summary": "组合一级与二级 EMA，减少普通平滑引入的滞后。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "dema"
+  },
+  "ta.ema": {
+    "name": "指数移动平均",
+    "summary": "对近期价格赋予更高权重，平滑价格并观察趋势；默认使用简单平均作种子。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ema"
+  },
+  "ta.fwma": {
+    "name": "斐波那契加权均线",
+    "summary": "按斐波那契权重平滑窗口价格。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "fwma"
+  },
+  "ta.hilo": {
+    "name": "Gann 高低激活线",
+    "summary": "结合高价和低价均线形成随趋势切换的水平及方向输出。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "hilo"
+  },
+  "ta.hl2": {
+    "name": "高低中间价",
+    "summary": "计算最高价与最低价的平均值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "hl2"
+  },
+  "ta.hlc3": {
+    "name": "典型价格",
+    "summary": "计算最高价、最低价和收盘价的平均值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "hlc3"
+  },
+  "ta.hma": {
+    "name": "Hull 均线",
+    "summary": "组合不同窗口的加权平均，平滑价格并减少滞后。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "hma"
+  },
+  "ta.ht_trendline": {
+    "name": "希尔伯特趋势线",
+    "summary": "用周期估计形成平滑趋势线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ht_trendline"
+  },
+  "ta.hwma": {
+    "name": "Holt-Winters 均线",
+    "summary": "使用水平、趋势等递推分量平滑价格。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "hwma"
+  },
+  "ta.ichimoku": {
+    "name": "一目均衡线",
+    "summary": "提供转换线、基准线与同索引云带；不输出未来扩展或滞后线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "span_a"
+  },
+  "ta.jma": {
+    "name": "Jurik 风格均线",
+    "summary": "通过自适应平滑观察价格趋势；本实现不承诺与其他平台完全等价。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "jma"
+  },
+  "ta.kama": {
+    "name": "Kaufman 自适应均线",
+    "summary": "利用效率比调整平滑速度，区分方向变化与噪声。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "kama"
+  },
+  "ta.linreg": {
+    "name": "线性回归值",
+    "summary": "拟合滚动窗口的线性趋势，读取回归值。 offset 在当前窗口拟合直线上选择位置 length-1-offset，允许负值外推；不是结果序列位移，length=1 保持无效。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "linreg"
+  },
+  "ta.linregangle": {
+    "name": "回归角度",
+    "summary": "将线性回归斜率转换为角度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "linregangle"
+  },
+  "ta.linregintercept": {
+    "name": "回归截距",
+    "summary": "输出滚动线性拟合的截距。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "linregintercept"
+  },
+  "ta.linregslope": {
+    "name": "回归斜率",
+    "summary": "输出滚动线性拟合的每步斜率。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "linregslope"
+  },
+  "ta.ma": {
+    "name": "可选类型均线",
+    "summary": "按指定均线类型计算平滑值；可选类型受参数域约束。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ma"
+  },
+  "ta.mama": {
+    "name": "Mesa 自适应均线",
+    "summary": "依据周期相位变化调整平滑速度，同时提供跟随均线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mama"
+  },
+  "ta.mavp": {
+    "name": "可变周期均线",
+    "summary": "由调用方提供逐根 periods 序列，在允许范围内改变均线窗口。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mavp"
+  },
+  "ta.mcgd": {
+    "name": "McGinley 动态线",
+    "summary": "根据价格相对动态线的距离调整递推平滑。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mcgd"
+  },
+  "ta.medprice": {
+    "name": "中间价格",
+    "summary": "计算高低均价，供后续价格变换与平滑使用。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "medprice"
+  },
+  "ta.midpoint": {
+    "name": "窗口中点",
+    "summary": "计算同一输入序列窗口最大值与最小值的中点。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "midpoint"
+  },
+  "ta.midprice": {
+    "name": "窗口高低中点",
+    "summary": "计算窗口最高价与最低价的中点。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "midprice"
+  },
+  "ta.mmar": {
+    "name": "Madrid 均线组",
+    "summary": "同时计算不同周期的均线，观察排列与间距。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ma1"
+  },
+  "ta.ohlc4": {
+    "name": "开高低收均价",
+    "summary": "计算 OHLC 四价平均，可作为组合指标输入。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ohlc4"
+  },
+  "ta.pwma": {
+    "name": "Pascal 加权均线",
+    "summary": "用 Pascal 三角形权重平滑窗口。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pwma"
+  },
+  "ta.rainbow": {
+    "name": "彩虹均线组",
+    "summary": "连续对前一级平滑结果求平均，输出多层均线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ma1"
+  },
+  "ta.rma": {
+    "name": "Wilder 平滑均线",
+    "summary": "采用与窗口长度相关的 Wilder 平滑系数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rma"
+  },
+  "ta.sinwma": {
+    "name": "正弦加权均线",
+    "summary": "按正弦权重平滑窗口价格。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "sinwma"
+  },
+  "ta.sma": {
+    "name": "简单移动平均",
+    "summary": "计算最近窗口价格的算术平均，每个样本权重相同。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "sma"
+  },
+  "ta.ssf": {
+    "name": "超级平滑滤波",
+    "summary": "使用指定极数的递推滤波减少价格中的高频波动。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ssf"
+  },
+  "ta.supertrend": {
+    "name": "超级趋势",
+    "summary": "依据平均真实波幅构造趋势跟随水平，并提供方向和多空水平。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "trend"
+  },
+  "ta.swma": {
+    "name": "对称加权均线",
+    "summary": "以对称三角权重平滑序列；支持配置窗口长度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "swma"
+  },
+  "ta.t3": {
+    "name": "T3 均线",
+    "summary": "组合多级 EMA 与体积因子，得到平滑趋势线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "t3"
+  },
+  "ta.tema": {
+    "name": "三指数均线",
+    "summary": "组合一级、二级和三级 EMA，以降低平滑滞后。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "tema"
+  },
+  "ta.trima": {
+    "name": "三角移动平均",
+    "summary": "使用三角形权重对价格进行平滑。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "trima"
+  },
+  "ta.tsf": {
+    "name": "时间序列预测",
+    "summary": "依据窗口线性回归计算下一步预测值，不读取未来价格。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "tsf"
+  },
+  "ta.typprice": {
+    "name": "典型价",
+    "summary": "将高、低、收三价平均为单通道。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "typprice"
+  },
+  "ta.vidya": {
+    "name": "可变指数动态均线",
+    "summary": "用相对动量调整 EMA 的平滑系数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vidya"
+  },
+  "ta.vwap": {
+    "name": "成交量加权均价",
+    "summary": "在日期索引定义的分组内累计价格与成交量，不自动推断交易所会话。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vwap"
+  },
+  "ta.vwma": {
+    "name": "成交量加权移动平均",
+    "summary": "在滚动窗口内以成交量作为价格权重。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vwma"
+  },
+  "ta.wcp": {
+    "name": "加权收盘价",
+    "summary": "计算高价、低价与双倍收盘价的加权平均。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "wcp"
+  },
+  "ta.wma": {
+    "name": "线性加权均线",
+    "summary": "对窗口价格施加线性权重。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "wma"
+  },
+  "ta.zlma": {
+    "name": "低滞后均线",
+    "summary": "先进行滞后补偿再平滑，观察响应较快的趋势值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "zlma"
+  },
+  "ta.drawdown": {
+    "name": "回撤序列",
+    "summary": "计算价格相对历史峰值的回撤，输出不同尺度的回撤通道。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "absolute"
+  },
+  "ta.log_return": {
+    "name": "对数收益",
+    "summary": "计算价格比率的对数，可选累计方式。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "log_return"
+  },
+  "ta.percent_return": {
+    "name": "比例收益",
+    "summary": "计算价格相对变化，可选累计方式；具体尺度由输出定义决定。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "percent_return"
+  },
+  "ta.beta": {
+    "name": "滚动贝塔",
+    "summary": "比较价格与基准序列的共同变化，调用方必须提供同日历 benchmark。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "beta"
+  },
+  "ta.correl": {
+    "name": "滚动相关系数",
+    "summary": "衡量两条同日历价格序列的线性相关关系。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "correl"
+  },
+  "ta.entropy": {
+    "name": "滚动熵",
+    "summary": "按窗口内的相对分布计算信息量，观察分布变化。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "entropy"
+  },
+  "ta.kurtosis": {
+    "name": "滚动峰度",
+    "summary": "衡量窗口分布尾部与峰形特征。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "kurtosis"
+  },
+  "ta.mad": {
+    "name": "平均绝对偏差",
+    "summary": "计算窗口样本相对平均值的绝对偏差均值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mad"
+  },
+  "ta.md": {
+    "name": "平均偏差",
+    "summary": "计算窗口样本相对均值的绝对偏差均值；当前实现调用 MAD。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "md"
+  },
+  "ta.median": {
+    "name": "滚动中位数",
+    "summary": "读取窗口分布的中间位置，减少极端值影响。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "median"
+  },
+  "ta.quantile": {
+    "name": "滚动分位数",
+    "summary": "按参数指定的分位位置读取窗口统计值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "quantile"
+  },
+  "ta.skew": {
+    "name": "滚动偏度",
+    "summary": "衡量窗口分布的不对称性。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "skew"
+  },
+  "ta.stderr": {
+    "name": "均值标准误",
+    "summary": "用样本标准差和窗口长度估计均值的不确定程度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "stderr"
+  },
+  "ta.stdev": {
+    "name": "滚动标准差",
+    "summary": "衡量窗口价格的离散程度；自由度由参数决定。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "stdev"
+  },
+  "ta.tos_stdevall": {
+    "name": "全区间标准差参考",
+    "summary": "依赖全区间统计的研究入口，不作为逐根因果指标开放。"
+  },
+  "ta.variance": {
+    "name": "滚动方差",
+    "summary": "计算窗口离散程度的平方尺度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "variance"
+  },
+  "ta.zscore": {
+    "name": "滚动标准分",
+    "summary": "用均值与标准差标准化价格偏离。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "zscore"
+  },
+  "ta.adx": {
+    "name": "平均方向指数",
+    "summary": "平滑方向运动强度，并提供正负方向通道；强度本身不等于方向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "adx"
+  },
+  "ta.adxr": {
+    "name": "平均方向指数评级",
+    "summary": "将当前与滞后 ADX 组合，进一步平滑趋势强度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "adxr"
+  },
+  "ta.amat": {
+    "name": "Archer 均线趋势",
+    "summary": "比较快慢均线变化，输出多向和空向趋势状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "long"
+  },
+  "ta.aroon": {
+    "name": "阿隆指标",
+    "summary": "衡量近期高低点距当前的时间，输出上行、下行与差值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "down"
+  },
+  "ta.chop": {
+    "name": "震荡指数",
+    "summary": "结合累计真实波幅和价格区间，区分趋势与震荡特征。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "chop"
+  },
+  "ta.cksp": {
+    "name": "Chande Kroll 止损线",
+    "summary": "依据价格极值与波幅形成多头和空头参考止损水平。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "long"
+  },
+  "ta.cpr": {
+    "name": "中央枢轴区间",
+    "summary": "仅使用上一根输入 bar 计算中枢与支撑阻力，不自动跨周期聚合。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "top"
+  },
+  "ta.decay": {
+    "name": "信号衰减",
+    "summary": "将历史信号按选定衰减模式向后传播。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "decay"
+  },
+  "ta.decreasing": {
+    "name": "下降判断",
+    "summary": "判断指定期间内是否下降，可选择连续下降规则。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "decreasing"
+  },
+  "ta.dpo": {
+    "name": "去趋势价格震荡器",
+    "summary": "移除均线趋势，当前固定采用非居中、无前视模式。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "dpo"
+  },
+  "ta.dx": {
+    "name": "方向指数",
+    "summary": "从正负方向运动的相对差异计算趋势强度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "dx"
+  },
+  "ta.edecay": {
+    "name": "指数衰减",
+    "summary": "对历史序列递推衰减，同时受当前输入值约束。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "edecay"
+  },
+  "ta.increasing": {
+    "name": "上升判断",
+    "summary": "判断指定期间内是否上升，可选择连续上升规则。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "increasing"
+  },
+  "ta.long_run": {
+    "name": "多头趋势阶段",
+    "summary": "根据快慢序列的上升和下降关系识别多头阶段。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "long_run"
+  },
+  "ta.minus_dm": {
+    "name": "负向方向运动",
+    "summary": "平滑向下的方向运动，尚未归一化为负向方向指数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "minus_dm"
+  },
+  "ta.plus_dm": {
+    "name": "正向方向运动",
+    "summary": "平滑向上的方向运动，尚未归一化为正向方向指数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "plus_dm"
+  },
+  "ta.pmax": {
+    "name": "价格最大止损线",
+    "summary": "结合均线与真实波幅生成动态趋势参考水平。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pmax"
+  },
+  "ta.psar": {
+    "name": "抛物线转向",
+    "summary": "递推跟踪趋势与反转，提供多空水平、加速系数与反转标记。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "long"
+  },
+  "ta.qstick": {
+    "name": "实体均值指标",
+    "summary": "平滑收盘与开盘差，观察蜡烛实体的平均方向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "qstick"
+  },
+  "ta.sarext": {
+    "name": "扩展抛物线转向",
+    "summary": "分别控制多头和空头阶段的加速参数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "sarext"
+  },
+  "ta.short_run": {
+    "name": "空头趋势阶段",
+    "summary": "根据快慢序列的方向变化识别空头阶段。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "short_run"
+  },
+  "ta.tsignals": {
+    "name": "趋势事件",
+    "summary": "将输入趋势状态转换为交易变化、进入和退出事件。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "trend"
+  },
+  "ta.ttm_trend": {
+    "name": "TTM 趋势",
+    "summary": "比较收盘与近期平均价格水平，给出趋势方向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ttm_trend"
+  },
+  "ta.vhf": {
+    "name": "垂直水平过滤",
+    "summary": "比较价格区间和累计变化，观察方向运动的集中程度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vhf"
+  },
+  "ta.vortex": {
+    "name": "涡旋指标",
+    "summary": "分别度量正向和负向趋势运动。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "positive"
+  },
+  "ta.xsignals": {
+    "name": "阈值交叉事件",
+    "summary": "将输入信号跨越阈值的变化转换为趋势、进入和退出事件。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "trend"
+  },
+  "ta.aberration": {
+    "name": "Aberration 波幅通道",
+    "summary": "围绕平滑价格构造上下通道，并输出真实波幅。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "middle"
+  },
+  "ta.accbands": {
+    "name": "加速带",
+    "summary": "用价格区间调整上下包络，再进行平滑。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lower"
+  },
+  "ta.atr": {
+    "name": "平均真实波幅",
+    "summary": "平滑包含跳空影响的真实区间，用来衡量波动尺度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "atr"
+  },
+  "ta.avolume": {
+    "name": "年化历史波动",
+    "summary": "将对数收益的总体标准差按固定年化因子换算；不是成交量指标。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "avolume"
+  },
+  "ta.bbands": {
+    "name": "布林带",
+    "summary": "在均线周围按标准差构造上下轨，并提供带宽与相对位置。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lower"
+  },
+  "ta.ce": {
+    "name": "吊灯止损",
+    "summary": "以价格极值和 ATR 形成多头、空头退出参考水平。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "long"
+  },
+  "ta.cvi": {
+    "name": "Chaikin 波动率",
+    "summary": "观察高低区间平滑值的变化率。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cvi"
+  },
+  "ta.donchian": {
+    "name": "唐奇安通道",
+    "summary": "读取滚动最高价与最低价，并给出通道中线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lower"
+  },
+  "ta.hvol": {
+    "name": "历史波动率",
+    "summary": "对窗口对数收益计算年化标准差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "hvol"
+  },
+  "ta.hwc": {
+    "name": "Holt-Winters 通道",
+    "summary": "在 Holt-Winters 平滑值周围构造上下通道。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "middle"
+  },
+  "ta.kc": {
+    "name": "Keltner 通道",
+    "summary": "围绕均线按价格范围或真实波幅建立通道。 use_true_range=False 改用 H-L 平滑波幅；不改变价格均线或 ATR，全参数仍遵循固定后端。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lower"
+  },
+  "ta.massi": {
+    "name": "质量指数",
+    "summary": "通过高低区间的平滑比例观察波幅扩张。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "massi"
+  },
+  "ta.natr": {
+    "name": "归一化平均真实波幅",
+    "summary": "按价格尺度归一化 ATR，便于比较相对波动。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "natr"
+  },
+  "ta.pdist": {
+    "name": "价格距离",
+    "summary": "综合开高低收的移动距离，观察当根价格活动程度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pdist"
+  },
+  "ta.rvi": {
+    "name": "相对波动率指标",
+    "summary": "按上涨与下跌方向累计波动量；不同于相对活力 RVGI。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rvi"
+  },
+  "ta.thermo": {
+    "name": "Elder 温度计",
+    "summary": "观察高低价变化强度，提供温度、平滑值及阈值状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "thermo"
+  },
+  "ta.true_range": {
+    "name": "真实波幅",
+    "summary": "取高低区间及相对前收盘跳空范围的最大值。 handle_na=True 时缺失前收盘回退 H-L，允许当前 Close 缺失；H/L 非有限或倒置无效。默认保留旧输出。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "true_range"
+  },
+  "ta.ui": {
+    "name": "溃疡指数",
+    "summary": "以回撤平方均值衡量下行波动，对较大回撤赋予更高权重。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ui"
+  },
+  "ta.ad": {
+    "name": "累积派发线",
+    "summary": "按收盘在高低区间的位置分配成交量，并累积结果。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ad"
+  },
+  "ta.adosc": {
+    "name": "Chaikin 累积派发震荡",
+    "summary": "计算累积派发线快慢平滑值之间的差异。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "adosc"
+  },
+  "ta.aobv": {
+    "name": "Archer 能量潮",
+    "summary": "在 OBV 上增加均线、区间极值及趋势状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "obv"
+  },
+  "ta.cmf": {
+    "name": "Chaikin 资金流",
+    "summary": "结合收盘区间位置与成交量，衡量窗口资金流倾向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cmf"
+  },
+  "ta.efi": {
+    "name": "Elder 力量指数",
+    "summary": "结合价格变化与成交量，度量价格移动的力量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "efi"
+  },
+  "ta.emv": {
+    "name": "原始简易波动",
+    "summary": "衡量价格区间移动与成交量的关系，不进行后续平滑。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "emv"
+  },
+  "ta.eom": {
+    "name": "平滑简易波动",
+    "summary": "平滑价格移动与成交量关系，观察相对移动难易。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "eom"
+  },
+  "ta.kvo": {
+    "name": "Klinger 成交量震荡",
+    "summary": "组合价格与成交量变化，提供主线和信号线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "kvo"
+  },
+  "ta.marketfi": {
+    "name": "市场便利指数",
+    "summary": "衡量每单位成交量对应的高低价区间，不同于资金流 MFI。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "marketfi"
+  },
+  "ta.mfi": {
+    "name": "资金流量指标",
+    "summary": "结合典型价格与成交量，比较正向和负向资金流。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mfi"
+  },
+  "ta.nvi": {
+    "name": "负成交量指数",
+    "summary": "在量缩条件下按价格比率更新指数；缺失时保持内部状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "nvi"
+  },
+  "ta.obv": {
+    "name": "能量潮",
+    "summary": "按价格上涨或下跌方向累计成交量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "obv"
+  },
+  "ta.pvi": {
+    "name": "正成交量指数",
+    "summary": "在量增条件下按价格比率更新指数；缺失时保持内部状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pvi"
+  },
+  "ta.pvol": {
+    "name": "价量乘积",
+    "summary": "计算价格与成交量的乘积，可选择方向处理。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pvol"
+  },
+  "ta.pvr": {
+    "name": "价量等级",
+    "summary": "按价格与成交量的增减组合给出分类等级。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pvr"
+  },
+  "ta.pvt": {
+    "name": "价量趋势",
+    "summary": "按价格变化率加权成交量并累积。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pvt"
+  },
+  "ta.vfi": {
+    "name": "成交量流指标",
+    "summary": "结合价格变化阈值与成交量，观察资金流方向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vfi"
+  },
+  "ta.vosc": {
+    "name": "成交量震荡器",
+    "summary": "用慢均线归一化快慢成交量均线之差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vosc"
+  },
+  "ta.vp": {
+    "name": "成交量分布",
+    "summary": "按价格区间汇总成交量，输出不是逐根同索引序列，因此未开放。"
+  },
+  "ta.wad": {
+    "name": "威廉累积派发",
+    "summary": "依据价格相对前收盘的变化累积方向力量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "wad"
+  },
+  "ta.highest": {
+    "name": "窗口最高值",
+    "summary": "读取最近固定窗口的最大有效值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "highest"
+  },
+  "ta.lowest": {
+    "name": "窗口最低值",
+    "summary": "读取最近固定窗口的最小有效值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lowest"
+  },
+  "ta.highestbars": {
+    "name": "最高值位置",
+    "summary": "返回窗口最高值相对当前的非正 bar 偏移；并列时取最右位置。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "highestbars"
+  },
+  "ta.lowestbars": {
+    "name": "最低值位置",
+    "summary": "返回窗口最低值相对当前的非正 bar 偏移；并列时取最右位置。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "lowestbars"
+  },
+  "ta.rolling_sum": {
+    "name": "滚动求和",
+    "summary": "计算最近固定窗口的输入总和。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rolling_sum"
+  },
+  "ta.range": {
+    "name": "窗口极差",
+    "summary": "计算窗口最大值与最小值之差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "range"
+  },
+  "ta.percentrank": {
+    "name": "百分位排名",
+    "summary": "衡量当前输入在窗口内的相对排名。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "percentrank"
+  },
+  "ta.rolling_count": {
+    "name": "条件计数",
+    "summary": "统计窗口内条件成立的次数。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rolling_count"
+  },
+  "ta.cum": {
+    "name": "累计求和",
+    "summary": "按历史顺序累积输入；缺失位置无有效输出，后续有效值继续此前累计。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cum"
+  },
+  "ta.running_max": {
+    "name": "历史最高值",
+    "summary": "递推记录已见历史中的最大值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "running_max"
+  },
+  "ta.running_min": {
+    "name": "历史最低值",
+    "summary": "递推记录已见历史中的最小值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "running_min"
+  },
+  "ta.change": {
+    "name": "间隔变化",
+    "summary": "计算当前输入与指定历史间隔值的差。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "change"
+  },
+  "ta.shift": {
+    "name": "历史位移",
+    "summary": "读取指定间隔之前的输入，不提供未来位移。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "shift"
+  },
+  "ta.percentile_nearest_rank": {
+    "name": "最近秩分位数",
+    "summary": "按最近秩规则读取窗口指定百分位。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "percentile_nearest_rank"
+  },
+  "ta.percentile_linear_interpolation": {
+    "name": "插值分位数",
+    "summary": "在线性插值规则下计算窗口指定百分位。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "percentile_linear_interpolation"
+  },
+  "ta.cross": {
+    "name": "双向交叉序列",
+    "summary": "标记前一根到当前发生的任一方向交叉，返回历史序列。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cross"
+  },
+  "ta.crossover": {
+    "name": "上穿序列",
+    "summary": "当前左值大于右值、前一根小于或等于时标记上穿；返回历史序列。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "crossover"
+  },
+  "ta.crossunder": {
+    "name": "下穿序列",
+    "summary": "当前左值小于右值、前一根大于或等于时标记下穿；返回历史序列。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "crossunder"
+  },
+  "ta.barssince": {
+    "name": "距条件成立间隔",
+    "summary": "统计距离最近一次条件成立的 bar 数，首次成立前无有效结果。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "barssince"
+  },
+  "ta.valuewhen": {
+    "name": "条件事件值",
+    "summary": "返回指定次历史条件成立时的输入值，不将未确认事件写回过去。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "valuewhen"
+  },
+  "ta.rising": {
+    "name": "高于前窗判断",
+    "summary": "判断当前值是否严格高于前 length 根的最高值，不要求连续上升。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rising"
+  },
+  "ta.falling": {
+    "name": "低于前窗判断",
+    "summary": "判断当前值是否严格低于前 length 根的最低值，不要求连续下降。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "falling"
+  },
+  "ta.pivothigh": {
+    "name": "确认高点",
+    "summary": "右窗完成后输出高点及原位置、确认位置；不在原高点回填。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "value"
+  },
+  "ta.pivotlow": {
+    "name": "确认低点",
+    "summary": "右窗完成后输出低点及原位置、确认位置；不在原低点回填。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "value"
+  },
+  "ta.smi_stochastic": {
+    "name": "随机动量指标",
+    "summary": "平滑价格相对窗口中点的距离，并按区间归一化；不同于 SMI Ergodic。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "smi"
+  },
+  "ta.crsi": {
+    "name": "Connors 相对强弱",
+    "summary": "组合价格 RSI、连续涨跌 RSI 与变化率排名。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "crsi"
+  },
+  "ta.pmo": {
+    "name": "价格动量震荡器",
+    "summary": "对价格动量递推平滑，提供主线与信号线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "pmo"
+  },
+  "ta.rmi": {
+    "name": "相对动量指标",
+    "summary": "使用指定间隔动量构造相对强弱，而非仅比较相邻价格。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rmi"
+  },
+  "ta.alligator": {
+    "name": "鳄鱼均线",
+    "summary": "输出不同平滑周期的颚、齿、唇线；不施加绘图位移。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "jaw"
+  },
+  "ta.gator": {
+    "name": "鳄鱼震荡器",
+    "summary": "观察鳄鱼均线间的距离，提供上下两个通道。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "upper"
+  },
+  "ta.atr_stop": {
+    "name": "ATR 跟踪止损",
+    "summary": "按价格与 ATR 递推止损水平，同时输出方向状态。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "stop"
+  },
+  "ta.volatility_stop": {
+    "name": "波动跟踪止损",
+    "summary": "依据波幅与方向递推止损；首次反转的下一根起输出，不回填历史。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "stop"
+  },
+  "ta.ma_envelopes": {
+    "name": "均线包络",
+    "summary": "在均线两侧按固定比例设置上下轨。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "middle"
+  },
+  "ta.starc": {
+    "name": "STARC 通道",
+    "summary": "以均线为中线，按 ATR 倍数形成上下轨。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "middle"
+  },
+  "ta.ac": {
+    "name": "加速震荡器",
+    "summary": "比较动量震荡值与其平滑值，观察动量变化速度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ac"
+  },
+  "ta.ibs": {
+    "name": "内部强度",
+    "summary": "衡量收盘在当根高低区间中的位置。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "ibs"
+  },
+  "ta.frama": {
+    "name": "分形自适应均线",
+    "summary": "根据窗口分形特征调整平滑速度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "frama"
+  },
+  "ta.wavetrend": {
+    "name": "波浪趋势",
+    "summary": "标准化并平滑典型价格偏离，提供波浪主线与信号线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "wave"
+  },
+  "ta.adr": {
+    "name": "平均日内区间",
+    "summary": "平均输入 bar 的高低区间；使用非日线数据时不自动转成日线。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "adr"
+  },
+  "ta.rvol": {
+    "name": "相对成交量",
+    "summary": "将当前成交量与近期平均量比较。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rvol"
+  },
+  "ta.rci": {
+    "name": "等级相关指数",
+    "summary": "比较价格排名与时间排名，观察窗口价格的单调方向。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "rci"
+  },
+  "ta.iii": {
+    "name": "日内强度",
+    "summary": "结合收盘区间位置与成交量描述日内力量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "iii"
+  },
+  "ta.wvad": {
+    "name": "威廉变异累积派发",
+    "summary": "用开收变化相对高低区间的比例加权成交量。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "wvad"
+  },
+  "ta.pivot_points": {
+    "name": "确认周期枢轴",
+    "summary": "从显式 anchor 标记的上一完整周期计算支撑阻力；Woodie 另使用新周期开盘。 developing=True 输出当前锚定区间的累计水平；首锚点当根可用，无效 OHLC 污染到下一锚点；Woodie 禁用 developing。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "p"
+  },
+  "ta.cdl_engulfing": {
+    "name": "吞没形态",
+    "summary": "识别相邻实体的吞没关系，分值保留方向和强度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_engulfing"
+  },
+  "ta.cdl_hammer": {
+    "name": "锤子线",
+    "summary": "识别小实体与较长下影等条件，输出形态分值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_hammer"
+  },
+  "ta.cdl_shootingstar": {
+    "name": "射击之星",
+    "summary": "识别小实体与较长上影等条件，输出形态分值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_shootingstar"
+  },
+  "ta.cdl_harami": {
+    "name": "孕线",
+    "summary": "识别前后实体的包含关系，分值保留方向与强度。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_harami"
+  },
+  "ta.cdl_morningstar": {
+    "name": "晨星",
+    "summary": "识别三根蜡烛构成的晨星条件，须等待第三根确认。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_morningstar"
+  },
+  "ta.cdl_eveningstar": {
+    "name": "暮星",
+    "summary": "识别三根蜡烛构成的暮星条件，须等待第三根确认。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_eveningstar"
+  },
+  "ta.cdl_marubozu": {
+    "name": "光头光脚线",
+    "summary": "识别影线很短的实体蜡烛，并输出方向分值。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "cdl_marubozu"
+  },
+  "ta.anchored_vwap": {
+    "name": "条件锚点 VWAP",
+    "summary": "显式 0/1 锚点先重置再纳入当前观测；首锚点前无效，缺失源或量跳过，零量沿用已有正权重均值，负量拒绝。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vwap"
+  },
+  "ta.anchored_vwap_bands": {
+    "name": "条件锚点 VWAP 带",
+    "summary": "中线与条件 VWAP 相同，上下带采用成交量加权总体标准差；累计或输出溢出报错。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "vwap"
+  },
+  "ta.mode": {
+    "name": "有限观测众数",
+    "summary": "最近 length 个有限观测中的众数；并列取最小，非有限值跳过，满窗后缺失行沿用结果。",
+    "example": "examples/advanced/indicator_reference.py",
+    "symbol": "main",
+    "channel": "mode"
+  }
+}

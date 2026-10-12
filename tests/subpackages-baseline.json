@@ -1,0 +1,448 @@
+{
+  "head": "fd5e9ded24be3e9916dab2416afe72d7455141e8",
+  "mapping": {
+    "data": "data.core",
+    "broker": "broker.core",
+    "strategy": "strategy.base",
+    "backtest": "backtest.core",
+    "inputs": "strategy.inputs",
+    "strategy_data": "data.strategy_data",
+    "aggregation": "data.aggregation",
+    "stats": "results.stats",
+    "optimization": "backtest.optimization",
+    "parallel": "backtest.parallel"
+  },
+  "lib_mapping": {
+    "barssince": "strategy.helpers",
+    "cross": "strategy.helpers",
+    "crossover": "strategy.helpers",
+    "quantile": "strategy.helpers",
+    "resample_apply": "strategy.helpers",
+    "SignalStrategy": "strategy.templates",
+    "TrailingStrategy": "strategy.templates",
+    "FractionalBacktest": "backtest.variants",
+    "MultiBacktest": "backtest.variants",
+    "compute_stats": "results.helpers",
+    "random_ohlc_data": "data.generators"
+  },
+  "lib_all": [
+    "OHLCV_AGG",
+    "TRADES_AGG",
+    "barssince",
+    "cross",
+    "crossover",
+    "quantile",
+    "compute_stats",
+    "resample_apply",
+    "random_ohlc_data",
+    "SignalStrategy",
+    "TrailingStrategy",
+    "FractionalBacktest",
+    "FractionalBacktest",
+    "MultiBacktest"
+  ],
+  "objects": [
+    {
+      "old": "data",
+      "new": "data.core",
+      "name": "_data_period",
+      "module": "openbacktesting._util",
+      "qualname": "_data_period",
+      "signature": "(index) -> 'pd.Timedelta | Number'"
+    },
+    {
+      "old": "data",
+      "new": "data.core",
+      "name": "_strategy_indicators",
+      "module": "openbacktesting._util",
+      "qualname": "_strategy_indicators",
+      "signature": "(strategy)"
+    },
+    {
+      "old": "data",
+      "new": "data.core",
+      "name": "_indicator_warmup_nbars",
+      "module": "openbacktesting._util",
+      "qualname": "_indicator_warmup_nbars",
+      "signature": "(strategy)"
+    },
+    {
+      "old": "data",
+      "new": "data.core",
+      "name": "_Array",
+      "module": "openbacktesting._util",
+      "qualname": "_Array",
+      "signature": "(array, *, name=None, **kwargs)"
+    },
+    {
+      "old": "data",
+      "new": "data.core",
+      "name": "_Indicator",
+      "module": "openbacktesting._util",
+      "qualname": "_Indicator",
+      "signature": "(array, *, name=None, **kwargs)"
+    },
+    {
+      "old": "data",
+      "new": "data.core",
+      "name": "_Data",
+      "module": "openbacktesting._util",
+      "qualname": "_Data",
+      "signature": "(df: 'pd.DataFrame')"
+    },
+    {
+      "old": "broker",
+      "new": "broker.core",
+      "name": "Position",
+      "module": "openbacktesting.engine",
+      "qualname": "Position",
+      "signature": "(broker: '_Broker')"
+    },
+    {
+      "old": "broker",
+      "new": "broker.core",
+      "name": "_OutOfMoneyError",
+      "module": "openbacktesting.engine",
+      "qualname": "_OutOfMoneyError",
+      "signature": null
+    },
+    {
+      "old": "broker",
+      "new": "broker.core",
+      "name": "Order",
+      "module": "openbacktesting.engine",
+      "qualname": "Order",
+      "signature": "(broker: '_Broker', size: 'float', limit_price: 'float | None' = None, stop_price: 'float | None' = None, sl_price: 'float | None' = None, tp_price: 'float | None' = None, parent_trade: 'Trade | None' = None, tag: 'object' = None)"
+    },
+    {
+      "old": "broker",
+      "new": "broker.core",
+      "name": "Trade",
+      "module": "openbacktesting.engine",
+      "qualname": "Trade",
+      "signature": "(broker: '_Broker', size: 'int', entry_price: 'float', entry_bar, tag)"
+    },
+    {
+      "old": "broker",
+      "new": "broker.core",
+      "name": "_Broker",
+      "module": "openbacktesting.engine",
+      "qualname": "_Broker",
+      "signature": "(*, data, cash, spread, commission, margin, trade_on_close, hedging, exclusive_orders, index)"
+    },
+    {
+      "old": "strategy",
+      "new": "strategy.base",
+      "name": "Strategy",
+      "module": "openbacktesting.engine",
+      "qualname": "Strategy",
+      "signature": "(broker, data, params)"
+    },
+    {
+      "old": "backtest",
+      "new": "backtest.core",
+      "name": "Backtest",
+      "module": "openbacktesting.engine",
+      "qualname": "Backtest",
+      "signature": "(data: 'pd.DataFrame', strategy: 'type[Strategy]', *, cash: 'float' = 10000, spread: 'float' = 0.0, commission: 'float | tuple[float, float]' = 0.0, margin: 'float' = 1.0, trade_on_close=False, hedging=False, exclusive_orders=False, finalize_trades=False, indicator_cache_bytes=67108864)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "InputError",
+      "module": "openbacktesting.inputs",
+      "qualname": "InputError",
+      "signature": "(code, title, expected, value=None)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_fail",
+      "module": "openbacktesting.inputs",
+      "qualname": "_fail",
+      "signature": "(code, title, expected, value=None)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_scalar",
+      "module": "openbacktesting.inputs",
+      "qualname": "_scalar",
+      "signature": "(value, title)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_session",
+      "module": "openbacktesting.inputs",
+      "qualname": "_session",
+      "signature": "(value, title)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "InputSpec",
+      "module": "openbacktesting.inputs",
+      "qualname": "InputSpec",
+      "signature": "(kind: 'str', title: 'str', default: 'object', options: 'tuple | None' = None, bounds: 'tuple' = (), metadata: 'tuple' = (), enum_type: 'type[Enum] | None' = None, bindings: 'tuple' = ()) -> None"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_make",
+      "module": "openbacktesting.inputs",
+      "qualname": "_make",
+      "signature": "(kind, defval, *, title, tooltip='', group='', inline='', display=None, active=True, confirm=False, options=<object object at <address>>, minval=<object object at <address>>, maxval=<object object at <address>>, step=<object object at <address>>)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_collect",
+      "module": "openbacktesting.inputs",
+      "qualname": "_collect",
+      "signature": "(cls)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_definitions",
+      "module": "openbacktesting.inputs",
+      "qualname": "_definitions",
+      "signature": "(cls)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_schema",
+      "module": "openbacktesting.inputs",
+      "qualname": "_schema",
+      "signature": "(fields)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "describe",
+      "module": "openbacktesting.inputs",
+      "qualname": "describe",
+      "signature": "(strategy_class)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "ResolvedInputs",
+      "module": "openbacktesting.inputs",
+      "qualname": "ResolvedInputs",
+      "signature": "(schema_hash: 'str', runtime: 'tuple', encoded: 'tuple', overridden: 'tuple', attributes: 'tuple') -> None"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "_resolve",
+      "module": "openbacktesting.inputs",
+      "qualname": "_resolve",
+      "signature": "(fields, values, *, wire)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "resolve_native",
+      "module": "openbacktesting.inputs",
+      "qualname": "resolve_native",
+      "signature": "(strategy_class, kwargs)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "resolve_request",
+      "module": "openbacktesting.inputs",
+      "qualname": "resolve_request",
+      "signature": "(strategy_class, request)"
+    },
+    {
+      "old": "inputs",
+      "new": "strategy.inputs",
+      "name": "request_for",
+      "module": "openbacktesting.inputs",
+      "qualname": "request_for",
+      "signature": "(strategy_class, kwargs)"
+    },
+    {
+      "old": "strategy_data",
+      "new": "data.strategy_data",
+      "name": "StrategyData",
+      "module": "openbacktesting.strategy_data",
+      "qualname": "StrategyData",
+      "signature": "(data: openbacktesting._util._Data, cursor: openbacktesting.indicators.types.IndicatorCursor)"
+    },
+    {
+      "old": "stats",
+      "new": "results.stats",
+      "name": "compute_drawdown_duration_peaks",
+      "module": "openbacktesting._stats",
+      "qualname": "compute_drawdown_duration_peaks",
+      "signature": "(dd: 'pd.Series')"
+    },
+    {
+      "old": "stats",
+      "new": "results.stats",
+      "name": "geometric_mean",
+      "module": "openbacktesting._stats",
+      "qualname": "geometric_mean",
+      "signature": "(returns: 'pd.Series') -> 'float'"
+    },
+    {
+      "old": "stats",
+      "new": "results.stats",
+      "name": "compute_stats",
+      "module": "openbacktesting._stats",
+      "qualname": "compute_stats",
+      "signature": "(trades: 'list[Trade] | pd.DataFrame', equity: 'np.ndarray', ohlc_data: 'pd.DataFrame', strategy_instance: 'Strategy | None', risk_free_rate: 'float' = 0) -> 'pd.Series'"
+    },
+    {
+      "old": "stats",
+      "new": "results.stats",
+      "name": "_Stats",
+      "module": "openbacktesting._stats",
+      "qualname": "_Stats",
+      "signature": "(data=None, index=None, dtype: 'Dtype | None' = None, name=None, copy: 'bool | None' = None) -> 'None'"
+    },
+    {
+      "old": "stats",
+      "new": "results.stats",
+      "name": "dummy_stats",
+      "module": "openbacktesting._stats",
+      "qualname": "dummy_stats",
+      "signature": "()"
+    },
+    {
+      "old": "optimization",
+      "new": "backtest.optimization",
+      "name": "_joined_pool",
+      "module": "openbacktesting.optimization",
+      "qualname": "_joined_pool",
+      "signature": "(pool)"
+    },
+    {
+      "old": "optimization",
+      "new": "backtest.optimization",
+      "name": "_optimize",
+      "module": "openbacktesting.optimization",
+      "qualname": "_optimize",
+      "signature": "(self, _mp_task, *, maximize: 'str | Callable[[pd.Series], float]' = 'SQN', method: 'str' = 'grid', max_tries: 'float | None' = None, constraint: 'Callable[[dict], bool] | None' = None, return_heatmap: 'bool' = False, return_optimization: 'bool' = False, random_state: 'int | None' = None, **kwargs) -> 'pd.Series | tuple[pd.Series, pd.Series] | tuple[pd.Series, pd.Series, dict]'"
+    },
+    {
+      "old": "parallel",
+      "new": "backtest.parallel",
+      "name": "_batch",
+      "module": "openbacktesting._util",
+      "qualname": "_batch",
+      "signature": "(seq)"
+    },
+    {
+      "old": "parallel",
+      "new": "backtest.parallel",
+      "name": "SharedMemoryManager",
+      "module": "openbacktesting._util",
+      "qualname": "SharedMemoryManager",
+      "signature": "(create=False) -> 'None'"
+    },
+    {
+      "old": "parallel",
+      "new": "backtest.parallel",
+      "name": "SharedMemory",
+      "module": "openbacktesting._util",
+      "qualname": "SharedMemory",
+      "signature": "(*args, track: 'bool' = True, **kwargs)"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.helpers",
+      "name": "barssince",
+      "module": "openbacktesting.lib",
+      "qualname": "barssince",
+      "signature": "(condition: 'Sequence[bool]', default=inf) -> 'int'"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.helpers",
+      "name": "cross",
+      "module": "openbacktesting.lib",
+      "qualname": "cross",
+      "signature": "(series1: 'Sequence', series2: 'Sequence') -> 'bool'"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.helpers",
+      "name": "crossover",
+      "module": "openbacktesting.lib",
+      "qualname": "crossover",
+      "signature": "(series1: 'Sequence', series2: 'Sequence') -> 'bool'"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.helpers",
+      "name": "quantile",
+      "module": "openbacktesting.lib",
+      "qualname": "quantile",
+      "signature": "(series: 'Sequence', quantile: 'None | float' = None)"
+    },
+    {
+      "old": "lib",
+      "new": "results.helpers",
+      "name": "compute_stats",
+      "module": "openbacktesting.lib",
+      "qualname": "compute_stats",
+      "signature": "(*, stats: 'pd.Series', data: 'pd.DataFrame', trades: 'pd.DataFrame' = None, risk_free_rate: 'float' = 0.0) -> 'pd.Series'"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.helpers",
+      "name": "resample_apply",
+      "module": "openbacktesting.lib",
+      "qualname": "resample_apply",
+      "signature": "(rule: 'str', func: 'Callable[..., Sequence] | None', series: 'pd.Series | pd.DataFrame | _Array', *args, agg: 'str | dict | None' = None, **kwargs)"
+    },
+    {
+      "old": "lib",
+      "new": "data.generators",
+      "name": "random_ohlc_data",
+      "module": "openbacktesting.lib",
+      "qualname": "random_ohlc_data",
+      "signature": "(example_data: 'pd.DataFrame', *, frac=1.0, random_state: 'int | None' = None) -> 'Generator[pd.DataFrame, None, None]'"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.templates",
+      "name": "SignalStrategy",
+      "module": "openbacktesting.lib",
+      "qualname": "SignalStrategy",
+      "signature": "(broker, data, params)"
+    },
+    {
+      "old": "lib",
+      "new": "strategy.templates",
+      "name": "TrailingStrategy",
+      "module": "openbacktesting.lib",
+      "qualname": "TrailingStrategy",
+      "signature": "(broker, data, params)"
+    },
+    {
+      "old": "lib",
+      "new": "backtest.variants",
+      "name": "FractionalBacktest",
+      "module": "openbacktesting.lib",
+      "qualname": "FractionalBacktest",
+      "signature": "(data, *args, fractional_unit=1e-08, **kwargs)"
+    },
+    {
+      "old": "lib",
+      "new": "backtest.variants",
+      "name": "MultiBacktest",
+      "module": "openbacktesting.lib",
+      "qualname": "MultiBacktest",
+      "signature": "(df_list, strategy_cls, **kwargs)"
+    }
+  ],
+  "pickle_base64": "gAR9lCiMCnJlZmVyZW5jZXOUfZQojBFkYXRhLl9kYXRhX3BlcmlvZJSMFW9wZW5iYWNrdGVzdGluZy5fdXRpbJSMDF9kYXRhX3BlcmlvZJSTlIwZZGF0YS5fc3RyYXRlZ3lfaW5kaWNhdG9yc5RoBIwUX3N0cmF0ZWd5X2luZGljYXRvcnOUk5SMHGRhdGEuX2luZGljYXRvcl93YXJtdXBfbmJhcnOUaASMF19pbmRpY2F0b3Jfd2FybXVwX25iYXJzlJOUjAtkYXRhLl9BcnJheZRoBIwGX0FycmF5lJOUjA9kYXRhLl9JbmRpY2F0b3KUaASMCl9JbmRpY2F0b3KUk5SMCmRhdGEuX0RhdGGUaASMBV9EYXRhlJOUjA9icm9rZXIuUG9zaXRpb26UjBZvcGVuYmFja3Rlc3RpbmcuZW5naW5llIwIUG9zaXRpb26Uk5SMF2Jyb2tlci5fT3V0T2ZNb25leUVycm9ylGgXjBBfT3V0T2ZNb25leUVycm9ylJOUjAxicm9rZXIuT3JkZXKUaBeMBU9yZGVylJOUjAxicm9rZXIuVHJhZGWUaBeMBVRyYWRllJOUjA5icm9rZXIuX0Jyb2tlcpRoF4wHX0Jyb2tlcpSTlIwRc3RyYXRlZ3kuU3RyYXRlZ3mUjBZvcGVuYmFja3Rlc3RpbmcuZW5naW5llIwIU3RyYXRlZ3mUk5SMEWJhY2t0ZXN0LkJhY2t0ZXN0lIwWb3BlbmJhY2t0ZXN0aW5nLmVuZ2luZZSMCEJhY2t0ZXN0lJOUjBFpbnB1dHMuSW5wdXRFcnJvcpSMFm9wZW5iYWNrdGVzdGluZy5pbnB1dHOUjApJbnB1dEVycm9ylJOUjAxpbnB1dHMuX2ZhaWyUaC+MBV9mYWlslJOUjA5pbnB1dHMuX3NjYWxhcpRoL4wHX3NjYWxhcpSTlIwPaW5wdXRzLl9zZXNzaW9ulGgvjAhfc2Vzc2lvbpSTlIwQaW5wdXRzLklucHV0U3BlY5RoL4wJSW5wdXRTcGVjlJOUjAxpbnB1dHMuX21ha2WUaC+MBV9tYWtllJOUjA9pbnB1dHMuX2NvbGxlY3SUaC+MCF9jb2xsZWN0lJOUjBNpbnB1dHMuX2RlZmluaXRpb25zlGgvjAxfZGVmaW5pdGlvbnOUk5SMDmlucHV0cy5fc2NoZW1hlGgvjAdfc2NoZW1hlJOUjA9pbnB1dHMuZGVzY3JpYmWUaC+MCGRlc2NyaWJllJOUjBVpbnB1dHMuUmVzb2x2ZWRJbnB1dHOUaC+MDlJlc29sdmVkSW5wdXRzlJOUjA9pbnB1dHMuX3Jlc29sdmWUaC+MCF9yZXNvbHZllJOUjBVpbnB1dHMucmVzb2x2ZV9uYXRpdmWUaC+MDnJlc29sdmVfbmF0aXZllJOUjBZpbnB1dHMucmVzb2x2ZV9yZXF1ZXN0lGgvjA9yZXNvbHZlX3JlcXVlc3SUk5SMEmlucHV0cy5yZXF1ZXN0X2ZvcpRoL4wLcmVxdWVzdF9mb3KUk5SMGnN0cmF0ZWd5X2RhdGEuU3RyYXRlZ3lEYXRhlIwdb3BlbmJhY2t0ZXN0aW5nLnN0cmF0ZWd5X2RhdGGUjAxTdHJhdGVneURhdGGUk5SMJXN0YXRzLmNvbXB1dGVfZHJhd2Rvd25fZHVyYXRpb25fcGVha3OUjBZvcGVuYmFja3Rlc3RpbmcuX3N0YXRzlIwfY29tcHV0ZV9kcmF3ZG93bl9kdXJhdGlvbl9wZWFrc5STlIwUc3RhdHMuZ2VvbWV0cmljX21lYW6UaGGMDmdlb21ldHJpY19tZWFulJOUjBNzdGF0cy5jb21wdXRlX3N0YXRzlGhhjA1jb21wdXRlX3N0YXRzlJOUjAxzdGF0cy5fU3RhdHOUaGGMBl9TdGF0c5STlIwRc3RhdHMuZHVtbXlfc3RhdHOUaGGMC2R1bW15X3N0YXRzlJOUjBlvcHRpbWl6YXRpb24uX2pvaW5lZF9wb29slIwcb3BlbmJhY2t0ZXN0aW5nLm9wdGltaXphdGlvbpSMDF9qb2luZWRfcG9vbJSTlIwWb3B0aW1pemF0aW9uLl9vcHRpbWl6ZZRocYwJX29wdGltaXpllJOUjA9wYXJhbGxlbC5fYmF0Y2iUjBVvcGVuYmFja3Rlc3RpbmcuX3V0aWyUjAZfYmF0Y2iUk5SMHHBhcmFsbGVsLlNoYXJlZE1lbW9yeU1hbmFnZXKUaHiME1NoYXJlZE1lbW9yeU1hbmFnZXKUk5SMFXBhcmFsbGVsLlNoYXJlZE1lbW9yeZRoeIwMU2hhcmVkTWVtb3J5lJOUjA1saWIuYmFyc3NpbmNllIwTb3BlbmJhY2t0ZXN0aW5nLmxpYpSMCWJhcnNzaW5jZZSTlIwJbGliLmNyb3NzlGiCjAVjcm9zc5STlIwNbGliLmNyb3Nzb3ZlcpRogowJY3Jvc3NvdmVylJOUjAxsaWIucXVhbnRpbGWUaIKMCHF1YW50aWxllJOUjBFsaWIuY29tcHV0ZV9zdGF0c5Rogmhok5SMEmxpYi5yZXNhbXBsZV9hcHBseZRogowOcmVzYW1wbGVfYXBwbHmUk5SMFGxpYi5yYW5kb21fb2hsY19kYXRhlGiCjBByYW5kb21fb2hsY19kYXRhlJOUjBJsaWIuU2lnbmFsU3RyYXRlZ3mUaIKMDlNpZ25hbFN0cmF0ZWd5lJOUjBRsaWIuVHJhaWxpbmdTdHJhdGVneZRogowQVHJhaWxpbmdTdHJhdGVneZSTlIwWbGliLkZyYWN0aW9uYWxCYWNrdGVzdJRogowSRnJhY3Rpb25hbEJhY2t0ZXN0lJOUjBFsaWIuTXVsdGlCYWNrdGVzdJRogowNTXVsdGlCYWNrdGVzdJSTlHWMBWlucHV0lGg9KYGUfZQojARraW5klIwDaW50lIwFdGl0bGWUjAblkajmnJ+UjAdkZWZhdWx0lEsDjAdvcHRpb25zlE6MBmJvdW5kc5SMBm1pbnZhbJRLAYaUjAZtYXh2YWyUSwiGlIaUjAhtZXRhZGF0YZQojAd0b29sdGlwlIwAlIaUjAVncm91cJRos4aUjAZpbmxpbmWUaLOGlIwHZGlzcGxheZSMA2FsbJSGlIwGYWN0aXZllIiGlIwHY29uZmlybZSJhpR0lIwJZW51bV90eXBllE6MCGJpbmRpbmdzlCl1YowIcmVzb2x2ZWSUaE8pgZR9lCiMC3NjaGVtYV9oYXNolIwIYmFzZWxpbmWUjAdydW50aW1llGioSwOGlIWUjAdlbmNvZGVklGjKjApvdmVycmlkZGVulGiohZSMCmF0dHJpYnV0ZXOUaKiMBmxlbmd0aJSGlIWUdWKMBGRhdGGUaF8pgZR9lCiMBV9kYXRhlGgVKYGUfZQojAlfRGF0YV9fZGaUjAZwYW5kYXOUjAlEYXRhRnJhbWWUk5QpgZR9lCiMBF9tZ3KUjB5wYW5kYXMuY29yZS5pbnRlcm5hbHMubWFuYWdlcnOUjAxCbG9ja01hbmFnZXKUk5SMFnBhbmRhcy5fbGlicy5pbnRlcm5hbHOUjA9fdW5waWNrbGVf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",
+  "pickle_sha256": "c2d39299bdce7ecd7792ff5819298055c0895f596486a8fde0f161b2f88e4d86"
+}

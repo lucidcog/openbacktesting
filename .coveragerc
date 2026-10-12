@@ -1,0 +1,13 @@
+[run]
+branch = True
+source = openbacktesting
+omit = */openbacktesting/test/*
+concurrency = multiprocessing,thread
+parallel = True
+sigterm = True
+
+[report]
+precision = 2
+show_missing = True
+# 不采用 coverage 默认排除规则；类型导入和含省略号的文档也不得隐藏可执行行。
+exclude_lines =

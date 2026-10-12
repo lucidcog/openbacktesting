@@ -1,0 +1,4218 @@
+{
+  "schemaVersion": 2,
+  "sourceRevision": "ca2e2611621e472542ba90f7243a1fa06a7d7108",
+  "retrievedAt": "2026-10-02",
+  "sourceFileCount": 53,
+  "sources": [
+    {
+      "sourceId": ".codecov.yml",
+      "sourceSha256": "fece3829f79708ef9028b2b36a89ec080670cf395fa2d90ff3beb8536c845b00",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/FUNDING.yml",
+      "sourceSha256": "991db88aeec1bafcac95ed1eb154e61638fb427fad40e172e0addab6685159d9",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/ISSUE_TEMPLATE/1-bug.yml",
+      "sourceSha256": "ad2cfc3c0740a165d4661367b7859b4044e643fab5847f9ff401f73c138a5970",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/ISSUE_TEMPLATE/2-enh.yml",
+      "sourceSha256": "c99552d56b969941dfc8dada5fbfaf5e5594ef61177b0713916181fa08dd20fa",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/ISSUE_TEMPLATE/config.yml",
+      "sourceSha256": "2df7559bdfeef10496c56af5880ddec4a1e9fcc7585a90bcc8506036ac373587",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/deploy-gh-pages.sh",
+      "sourceSha256": "47b07bac696c14a9c79999a181e02913ccb83230fc564e68b331b530420747cd",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/issue_template.md",
+      "sourceSha256": "d2be9f4783a7c1309ab3875e9210af90a101f7cf020848d92b865e6d6e53abdb",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/workflows/ci.yml",
+      "sourceSha256": "808335002a27593db37d46aa14901d3cec0191b7e9383424ba07e9be0a7f2034",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".github/workflows/deploy-docs.yml",
+      "sourceSha256": "736a4bc3ccb1498c633dd124a9a5e8f4f9b99081f9e7c9b55c7940dfbd3913e7",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": ".gitignore",
+      "sourceSha256": "3927fa023d0cb9f0c83675d13be2b7a924632b21ce577b0b58660696f00cda7d",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "CHANGELOG.md",
+      "sourceSha256": "e25de83edc0380f394eeafb58537f2cdb016b5653972f17f75d0894c4d4c0959",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "CONTRIBUTING.md",
+      "sourceSha256": "85b12163b6d64a7e4906df850d0741c1a0edbfb50b777a56d3b24a1f0edab432",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "LICENSE.md",
+      "sourceSha256": "ad858d53cae05eed9531ecd4c467440803acffe34c69de7b88e03affc5b6a1bd",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "MANIFEST.in",
+      "sourceSha256": "7b720244983edfb5e17c5ec247720bbe36eb875eab102333d8e3d9522b80f869",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "README.md",
+      "sourceSha256": "849a6a8ee692f47dee16bdf72bf37eb23e2a2358fed722aae077ff9014ffa304",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "openbacktesting/__init__.py",
+      "sourceSha256": "6eecd96f78ce4006429d16c1e270e25fbed46b449c933cd74a7c46da43a4c598"
+    },
+    {
+      "sourceId": "openbacktesting/_plotting.py",
+      "sourceSha256": "d7716a06df169189650636faeb04ae97f6dfdf2d4cb99a8ba87ad37d3e0871a6",
+      "excludedReason": "内核仅输出回测结果，绘图实现与浏览器资源由其他模块负责，已删除本地目标"
+    },
+    {
+      "sourceId": "openbacktesting/_stats.py",
+      "sourceSha256": "4b83396a8226c93b024eb96d070ad582a22cf41487bdb5af471d0eb6e713e1b7"
+    },
+    {
+      "sourceId": "openbacktesting/_util.py",
+      "sourceSha256": "be477162114eab7e6146ce54711300e0d66e37a0766e2368f284af7badf0f383"
+    },
+    {
+      "sourceId": "openbacktesting/autoscale_cb.js",
+      "sourceSha256": "4dd9734e334695001ed7cfc957d284b538b106481ec9169aac987e3562ed8535",
+      "excludedReason": "内核仅输出回测结果，绘图实现与浏览器资源由其他模块负责，已删除本地目标"
+    },
+    {
+      "sourceId": "openbacktesting/engine.py",
+      "sourceSha256": "30d8b5ed9c69e4891bd41fe6fa157dcdd9915c2aff279056c8975b0918178852"
+    },
+    {
+      "sourceId": "openbacktesting/lib.py",
+      "sourceSha256": "fffdfdd3922633a07f59cac7e2ac3092320ebd3a306adbd89e7ca7bde94d5403"
+    },
+    {
+      "sourceId": "openbacktesting/test/BTCUSD.csv",
+      "sourceSha256": "ff253d97891080e5226f99d8a8f334621cecf33c5e1d8e5278cb5728024552d9"
+    },
+    {
+      "sourceId": "openbacktesting/test/EURUSD.csv",
+      "sourceSha256": "81e977905a006cc8fbc034ebdb83c999a8ed6ba00191dc7ea5ef5b386fb74a82"
+    },
+    {
+      "sourceId": "openbacktesting/test/GOOG.csv",
+      "sourceSha256": "60e961a567490b157f71888df9e6afb36190a34a40a6286aa38988e2343f1b1a"
+    },
+    {
+      "sourceId": "openbacktesting/test/__init__.py",
+      "sourceSha256": "823c9e294b8a70a394350f4089f102a5bd3ddfecb4ac3e8fe41085f6970906e4"
+    },
+    {
+      "sourceId": "openbacktesting/test/__main__.py",
+      "sourceSha256": "f8d497e0fe29de4559152995a441352ac8eb3dec58bea84d0f16302fe487a219"
+    },
+    {
+      "sourceId": "openbacktesting/test/_test.py",
+      "sourceSha256": "5291f673cd9fc162c2dd29e6b994e8ff53ba571a2372791ce8ff0dbb8698a9fa"
+    },
+    {
+      "sourceId": "doc/README.md",
+      "sourceSha256": "42d6a14d246da938f3317f7edda873c14aa2e3a33409c6615c483c3de5db761e",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/alternatives.md",
+      "sourceSha256": "051df36dcb90ceea1f40f267d24e68a2a21e1da10a93a795068d59631ba479f9",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/build.sh",
+      "sourceSha256": "730da89f3e58b34a3e4494f9dce46d9c09a33d88236a1c75aa23f798bbd87297",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/examples/Multiple Time Frames.ipynb",
+      "sourceSha256": "47305cee92b9d5a82693818316acfba53ea2a32b1381e8ed3456fa3b550d6af5",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/examples/Multiple Time Frames.py",
+      "sourceSha256": "ec650c430c1e8247f6907ae8ccd05ee0aff3dc38a4de64c7e838a109d04efd0b"
+    },
+    {
+      "sourceId": "doc/examples/Parameter Heatmap & Optimization.ipynb",
+      "sourceSha256": "25a7f2865dd44e37cfa5b69a2100226e7f4cddd5a59e63e0b38c2ec862cb2a70",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/examples/Parameter Heatmap & Optimization.py",
+      "sourceSha256": "6d950d63c7ff551733025903e61b3574023494a2e2c881aaa9488b9708db6931"
+    },
+    {
+      "sourceId": "doc/examples/Quick Start User Guide.ipynb",
+      "sourceSha256": "31313d655956f3f5d61c85499ac89515d42ec510205747a6d5faf50f03b84d4b",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/examples/Quick Start User Guide.py",
+      "sourceSha256": "925ac90587591a994a87985493367d30cb32730ab91351d05beac6872edd780b"
+    },
+    {
+      "sourceId": "doc/examples/Strategies Library.ipynb",
+      "sourceSha256": "e88e621b5bb581292c6a0b86766376ae1e65018ef1f53df3357f4d938d63469b",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/examples/Strategies Library.py",
+      "sourceSha256": "41d8698f6a3782780d81e5f4cceca17a26072b806fa15cfb67f63fa15c883e33"
+    },
+    {
+      "sourceId": "doc/examples/Trading with Machine Learning.ipynb",
+      "sourceSha256": "e9f6f91f40af147443fe414062914224e8a41fa9dd6968939cdcf02df083e8d8",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/examples/Trading with Machine Learning.py",
+      "sourceSha256": "08f4a27f71d665017aa8a5bb90ceb6550900e3bfa0f7f40781c7a7b87659492c"
+    },
+    {
+      "sourceId": "doc/logo.png",
+      "sourceSha256": "faa20a396cc1c2c82a7b16fddd9bd1278f6cd2f8048ff71ea147efc7215e3021",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/pdoc_template/config.mako",
+      "sourceSha256": "85697da8f66073617bdd707a50e0666bafeee3b80f71e6ad02d1924a7a561811",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/pdoc_template/credits.mako",
+      "sourceSha256": "25b8bf3cf090243d45f24d72b89b1edd39c0c6b958393b03882ffbecb873cbfc",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/pdoc_template/head.mako",
+      "sourceSha256": "043646a5d9356893f543676dc112e06dc7ca64215769e64c055b756bc0c867be",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/pdoc_template/logo.mako",
+      "sourceSha256": "c99ea142b45d7316391b274307c00ea0b5c636d905c008d441e85aa03f8bc762",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/scripts/ipython_config.py",
+      "sourceSha256": "e88b0768057f9e18e1a5d8e98a9a0f909b0ac60044e02e16bacde594ea78ca50",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/scripts/logo.py",
+      "sourceSha256": "803ce05034c32a09a8e1f948e4b9c3132c01c62d66bc5bdf6e9a32509dfa75ea",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "doc/scripts/strip_yaml.awk",
+      "sourceSha256": "ccc67e6aba525014246c36e44860fe80b58a6fbf1ea5684c188f180188ee4c43",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "pyproject.toml",
+      "sourceSha256": "88826d7401884bcc1341248ad51e3064ff2ffd6ea87a7844c87264a7968b7e8d",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "requirements.txt",
+      "sourceSha256": "75135f45227abf5d72ccbcd72c2ec2f241eec77f216c847d97f8da9ac83a78d0",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "setup.cfg",
+      "sourceSha256": "c03769526954a68746cd678232443628a70a513ed09cf893cea9bfb2e17b6072",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    },
+    {
+      "sourceId": "setup.py",
+      "sourceSha256": "4dc6173776d26b7f74adcdaae91ee3b0deb7fc8cdb20ec2c1a678da04d2e22f7",
+      "excludedReason": "网站、品牌、授权说明、CI 或由本地配置替代的发布文件"
+    }
+  ],
+  "targets": [
+    {
+      "target": "src/openbacktesting/__init__.py",
+      "targetSha256": "bd73b74727b8a1af4bb61b2fe92bab87dda2f2cacc1ee623181e95264b91a4a1",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "移除原项目介绍与授权说明；本地版本0.1.0",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "公开 inputs 命名空间；保留原公开对象与兼容别名",
+        "公开无状态 runtime 框架接管入口；经差异及公开导入测试审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "类型化发布显式重导出 Backtest 与 Strategy，保留现有对象身份",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "接入 Color 值、统一颜色编码及颜色参数使用示例。",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "公开冻结 BarState 类型。",
+        "接入每运行策略日志、源码定位、失败取回及优化隔离；保持原交易行为。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "未发布阶段直接删除results/stats/_stats统计兼容入口，使用真实Portfolio模块身份与pickle路径。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/__init__.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/util.py",
+      "targetSha256": "fd88e9f680563ed7ebcaa0180bbfcc25e3da002af1ec5d92045fdbc57ea3daa7",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "迁移数据视图和纯辅助函数；保留旧路径导出",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "主进程保留进度条，子进程直接消费迭代器，避免获取fork继承或异常退出遗留的进度锁",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/_util.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/engine.py",
+      "targetSha256": "b2733f7278895c7bc6c71ef73116fdf5caad1c05c89474e55d84efd572ff0975",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/engine.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/lib.py",
+      "targetSha256": "24601f7e73cd928f49699df6984cda7ffc88344df90298c45b953de0267edbbc",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/test/BTCUSD.csv",
+      "targetSha256": "ff253d97891080e5226f99d8a8f334621cecf33c5e1d8e5278cb5728024552d9",
+      "changes": [],
+      "sourceIds": [
+        "openbacktesting/test/BTCUSD.csv"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/test/EURUSD.csv",
+      "targetSha256": "81e977905a006cc8fbc034ebdb83c999a8ed6ba00191dc7ea5ef5b386fb74a82",
+      "changes": [],
+      "sourceIds": [
+        "openbacktesting/test/EURUSD.csv"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/test/GOOG.csv",
+      "targetSha256": "60e961a567490b157f71888df9e6afb36190a34a40a6286aa38988e2343f1b1a",
+      "changes": [],
+      "sourceIds": [
+        "openbacktesting/test/GOOG.csv"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/test/__init__.py",
+      "targetSha256": "10c3c6c615e2a8218448e03b3d78d91dac495b5267c5ce51f154cb7fe1138c22",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅"
+      ],
+      "sourceIds": [
+        "openbacktesting/test/__init__.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/test/__main__.py",
+      "targetSha256": "78410f1d09a420866b0310696fde3a6156d90d70100ab73d347fd4562fdb4b05",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/test/__main__.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/test/_test.py",
+      "targetSha256": "7e2a98011fd474633afd15101dcc0a1d664e088e10fad167ffb3d8eab7d4c9eb",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "本地路径、离线资源固定大小扣除、测试不打开浏览器；保留交易断言",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "示例规范化：更新索引及递归发现，显式执行教程入口与作者 bt，避免仅加载导致漏测；保留模块身份以支持 fork 队列序列化",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "按项目要求将优化速度测试的当前进程 CPU 时间门槛统一调整为15秒。",
+        "自定义指标入口统一为 ind，移除 I 并同步作者契约与示例索引",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "逐项更新首根成交时点及首收益桶和买入持有预期；保留历史基线文件。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "未发布阶段直接删除results/stats/_stats统计兼容入口，使用真实Portfolio模块身份与pickle路径。",
+        "统一 Core 发行与导入身份，保持既有计算语义。",
+        "速度断言在无 coverage 的独立解释器中计时，保留原 0.3 秒 CPU 时间阈值；功能覆盖率仍由完整测试采集。"
+      ],
+      "sourceIds": [
+        "openbacktesting/test/_test.py"
+      ]
+    },
+    {
+      "target": "examples/advanced/multiple_time_frames.py",
+      "targetSha256": "06736889f628052b3955010188a541f8b69d9773c7403031754d23e5f9049997",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "示例统一通过 self.ta.sma 使用内置 SMA；self.I 仅保留自定义计算；核对指标数值、预热与成交及权益结果",
+        "统一采用内置 EMA、RSI 与离线 SMA/布林带，移除示例自定义同名算法；同步参数例路径与使用说明",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "doc/examples/Multiple Time Frames.py"
+      ]
+    },
+    {
+      "target": "examples/advanced/parameter_optimization.py",
+      "targetSha256": "7d78203ce359866fb71d1e3c5350ee379348d35355879d0502ab0fe1e642bbd0",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "示例统一通过 self.ta.sma 使用内置 SMA；self.I 仅保留自定义计算；核对指标数值、预热与成交及权益结果",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "doc/examples/Parameter Heatmap & Optimization.py"
+      ]
+    },
+    {
+      "target": "examples/advanced/native_run.py",
+      "targetSha256": "edefd61bb2e6a3114b6fe5b421e62c85844e6283a3badb0507f139029b223f56",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "示例统一通过 self.ta.sma 使用内置 SMA；self.I 仅保留自定义计算；核对指标数值、预热与成交及权益结果",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "doc/examples/Quick Start User Guide.py"
+      ]
+    },
+    {
+      "target": "examples/advanced/composable_strategies.py",
+      "targetSha256": "3f33d14752954d14685c1b0fef578fdf8c0f8f3b186b547c05a9055b18e4e7e2",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "示例统一通过 self.ta.sma 使用内置 SMA；self.I 仅保留自定义计算；核对指标数值、预热与成交及权益结果",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "doc/examples/Strategies Library.py"
+      ]
+    },
+    {
+      "target": "examples/advanced/machine_learning.py",
+      "targetSha256": "8ae7206a1e47a61e6772df9f8993124187745b8e645391fc9e2305d257342bf8",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "统一采用内置 EMA、RSI 与离线 SMA/布林带，移除示例自定义同名算法；同步参数例路径与使用说明",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "doc/examples/Trading with Machine Learning.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/helpers.py",
+      "targetSha256": "cd5b445191c1f59a36c6158b7fd1fb719e8a166f1c4f5f1099d04f15ef703239",
+      "sourceIds": [
+        "openbacktesting/_util.py"
+      ],
+      "changes": [
+        "迁入原定义并保留原限定名；AST 对照通过",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/runtime.py",
+      "targetSha256": "fb07e77c18a9a5c7556ee557a9bdfa0436fde3cc00d7e2b8a0e512b9baeff24d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：消费用户脚本 bt 导出的框架发现与运行入口，不执行源码；经边界测试与差异审阅",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "接入每运行策略日志、源码定位、失败取回及优化隔离；保持原交易行为。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "文档明确策略构造前转换及图表日界统计，不改变公开签名。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "增加参数实验的完整 Portfolio 持久化、仅 Portfolio 采集或可运行示例；保留既有公开行为",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/ema_inputs.py",
+      "targetSha256": "c62390fc3bc05d6ee6dcce3131ba38f6abafff913cc52e63deee8f50f6eb89e8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：声明 Input 并仅导出 bt 的 EMA 用户脚本；经框架发现、注入与重跑测试审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "统一采用内置 EMA、RSI 与离线 SMA/布林带，移除示例自定义同名算法；同步参数例路径与使用说明",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicator_types.py",
+      "targetSha256": "712c4a9cf3ef00f6f01bf4c4bdf4788772c10ef57256b0d0f87d9f00802e0aea",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：固定发布物的审核指标定义/适配、游标结果与缓存，或只导出 bt 的指标示例；算法仍调用独立 MIT 依赖，未复制上游算法",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份"
+      ]
+    },
+    {
+      "target": "examples/strategies/ema_macd.py",
+      "targetSha256": "f5ff4794b80cf0e782de590819826865c5c0a67013b4417f936648f1a33e73c5",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：固定发布物的审核指标定义/适配、游标结果与缓存，或只导出 bt 的指标示例；算法仍调用独立 MIT 依赖，未复制上游算法",
+        "方法式指标 API：登记门面、保留属性和用户示例迁移；保持原计算契约",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "删除公开动态策略指标入口；内置指标仅通过 self.ta 登记，保留私有计算机制并同步说明。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicator_api.py",
+      "targetSha256": "f84e86921615549d155cd15cf87718d9715ce5f55d3c41a63fc0df220920ad45",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "自有方法式指标适配、审核目录生成签名与具名输出、公开类型发布标记",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicator_methods.py",
+      "targetSha256": "85795ef535c042390b2dab80c05a113ffaad3449c4ccbbe112cbb74efb1e264b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "自有方法式指标适配、审核目录生成签名与具名输出、公开类型发布标记",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/py.typed",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "自有方法式指标适配、审核目录生成签名与具名输出、公开类型发布标记"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/__init__.py",
+      "targetSha256": "b6dfff7051363c1907eceec7e16aad4d5877028bb09bbfc6dafeab8f29dd0af4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/api.py",
+      "targetSha256": "66c8c953e31db088e6bf0bba9e75fd585eff8e8f988d7121e43123ca1996cd8b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/catalog.json",
+      "targetSha256": "6b02b5086060b820a47c3c015126f21c523a5dd271992701c99b1d4f3236f7cf",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/common.py",
+      "targetSha256": "f6fbc68f420cc29c3766adf8b99d6d025d8592b939f1de387cf8e73add4a2384",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/methods.py",
+      "targetSha256": "f0c0169927fcb1edb40f79849a60e22dbaa259d28ab78b68de4549be2b5a8d9f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/runtime.py",
+      "targetSha256": "dd569639c8b0d022d2c9129c13dd8e54a228336d94c1f842f3cf183f075cc4f1",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "移除 warmup 登记元数据及空必要输出的旧执行开关，保留就绪诊断。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/types.py",
+      "targetSha256": "027c9456e47d0ea9b8e0ac625a8cfc2b84f849654516794d356304c377f27555",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "移除 warmup 参数和选项；ready_at/first_ready 仅按最低历史与必要输出诊断。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_z.py",
+      "targetSha256": "18ac8dfb618edd6e86cd45c7bd17b9ae16d390d8b2e0468aedf471a7fd7f30dd",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/ha.py",
+      "targetSha256": "d8cd2f17073023996a3b41881466e894f2d6c584b8fb5788fb63ae8a71760925",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/dsp.py",
+      "targetSha256": "fbed677800d1c17115f8538f59a7a4fe8894c9add1ee9236c77e7e5022a6fe8a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/ebsw.py",
+      "targetSha256": "e9ba6f68b2649a72953cde206cc7ac0ca9b5a896a7d4f2c3acddc0fc59bf0e47",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/ht_dcperiod.py",
+      "targetSha256": "fcf4daaa4c5e7893ef30fc96338d354e4efe994dc16ee9f0785e2897d62fb07d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/ht_dcphase.py",
+      "targetSha256": "a165bcd2e7dc796884952d41ff4eaf06600cd4ca45c24e0a1b7e8de8cd6d746a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/ht_phasor.py",
+      "targetSha256": "f04c41420558e324e0d51bdf53ba5cb56efb7a597176f811f2d21fe1cd51a1db",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/ht_sine.py",
+      "targetSha256": "ffa7a08a7c7ceed140e00535522cf21abf7d7624f7cc2eb128d04f2f8219447a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/ht_trendmode.py",
+      "targetSha256": "4fe00b38023d5e2de68bf57dda5a4f2e6099407aafb2f5dfb4aa839dea9af98a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/cycles/msw.py",
+      "targetSha256": "602ff8f2f7e6e288e95f2a6d9c75579710e97df4660d7ff3a27480abd3d3af69",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/ao.py",
+      "targetSha256": "606096eee8ad956ec66e05f5de254372f349c0aaea0d2456caef81a102e8f4ac",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/apo.py",
+      "targetSha256": "98ccb7ec4052e5bbce4185564f55c775199833b0987a129b03977d2445d9262b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/bias.py",
+      "targetSha256": "fcab492784a74020cd9c2dd76c89874436e6b346d8456255ccda6c6fb6329901",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/bop.py",
+      "targetSha256": "ff2a3358feb224ba92bd8331eb8eddfc00b056a5f4beae5b97fb5a7504e11887",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/brar.py",
+      "targetSha256": "392c65b707679d61cc4eb39b0c2d26fc85c0c1b4af835e6b3d11c86aae02bc77",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/cci.py",
+      "targetSha256": "b36f8a7b516304c475adc33d4e2db623a969eb95c47ac943f994e9c4b5da1adb",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/cfo.py",
+      "targetSha256": "3cd331126159f18801ee881ba2c9e83abc4fdeb7d0eef814fa1a9902314fe69a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/cg.py",
+      "targetSha256": "1f61bd2f1ac55bced4016eed555da0cd6d9f578e50a8a91ff12ac115c851399a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/cmo.py",
+      "targetSha256": "24c15b54b6750444ff4b4af4fbc8c51119594eda6a6add17e3900cffeaf77e1d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/coppock.py",
+      "targetSha256": "7866ef0c1aa99d044c1cffc87ae5cf1da323003bd5cd06267b96e776b68a4958",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/cti.py",
+      "targetSha256": "759f05d854ff6d4aca294bed459aa7990046b271bbed5c178d2af15419969cbf",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/dm.py",
+      "targetSha256": "fd714857df69c70a90df979973319d0686f662fb57e852c5694a9b49a26cc7e2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/er.py",
+      "targetSha256": "b5be73e85813b990e95b0cb3c85c89dc6b5e6864c4db7951c88576e063301134",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/eri.py",
+      "targetSha256": "c71d14b482f8f76244c2a8729e8dffc1632c56296431dedce6684761c099aaaf",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/fisher.py",
+      "targetSha256": "a94ac0b8cff00659fe468192a8bd6eb1b1a102ebf9fc53102422d8310d99c8fb",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/fosc.py",
+      "targetSha256": "2860998e9d1f4faa55da5458b19fb8288dfe124526bc005f407ba35f9e51912a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/inertia.py",
+      "targetSha256": "944efca4ad401a34ad4f276d1096daf58c97c2d210c99645c6584932c562536f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/kdj.py",
+      "targetSha256": "3e7f7e30d9a0febb87f646a3bc7df7755a83755e485a1b5404c027f3c71ef954",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/kst.py",
+      "targetSha256": "617011305c26893df1baf0b731af7bb64c13e329cb63927807021ec44f4a4a21",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/lrsi.py",
+      "targetSha256": "5b78fb011a1cbaf0fa167b1c8aaa37dacbd30a8ed7ddca2e2de33b9d0a7d313f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/macd.py",
+      "targetSha256": "143951b74dca7bf54eb648efd8c9162d7e7e84365b3196f360bbd428b474eeb9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/macdext.py",
+      "targetSha256": "58ce1bc71c6851ddd9acf284492c2dd6ea5fd50ef1710a8e824625bb84be6d77",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/macdfix.py",
+      "targetSha256": "182d9c37b427bf84527b14f33e0ef265219c7a358b6b304aaae363538b8a95ff",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/mom.py",
+      "targetSha256": "67746170da8ff6b78028419ca253ecebea841c3c56a3cbf2033b72189e06a11d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/pgo.py",
+      "targetSha256": "8104fcfeef0841d96b28fe1bfda6b729123bb114f9cf79cf0e488392a3b85da8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/po.py",
+      "targetSha256": "c11695ffa26af221e65c4c4523f4f852fa2353ab4ce29ad52868bc7920750856",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/ppo.py",
+      "targetSha256": "e9e0241a73af80bcabb5f7fc34287a9127dee0b2f8f27c4e43c94dd786cac90e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/psl.py",
+      "targetSha256": "5918a9d72974a8a5c58fd22dd5deb9df214d1f6de21a3cafa3f73711c2224d15",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/pvo.py",
+      "targetSha256": "cb06a2ac5f23ec0ee091fb7f9e14dfa300003c618010c832d3cfd7d20b3563b6",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/qqe.py",
+      "targetSha256": "2b3fac831877c86f19493500208b5d260f0e908d53ff88363951f3fcdd420cff",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/roc.py",
+      "targetSha256": "f450c532aeb5f88871fe737fc112fc5c60af130632afde2fdf1adff4b264bcad",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rocp.py",
+      "targetSha256": "faa300dd0e9e5bebbc77a929f0b0729ceeea008e57e1b00321966a2e343228a6",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rocr.py",
+      "targetSha256": "c6cdb1566e72dab7c786ff06aa4d384e88d95fbe64bf5bc2856d3ff925685d12",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rocr100.py",
+      "targetSha256": "45b059cfbe57a1a5a224438178d3f9f442f3cabb471c5e5470d6dec4116b5f0a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rsi.py",
+      "targetSha256": "c9594ca5210e2bdc41e4496a94c9561f698a7fcc82712450e898bf69316f015e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rsx.py",
+      "targetSha256": "2827bf0080ca8bbd8b15833c05ae03bc6e6728408ef86e5b4e4e6c0a378bef8f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rvgi.py",
+      "targetSha256": "b038ed62faa03f4c872dab86b50f669b12ded1bafb57fb23aa78cac9db7e6b56",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/slope.py",
+      "targetSha256": "4318ab01f4af8541d44b2548d453c5b99a1f97ae68d0338e2545c3c6abb03543",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/smc_sweep.py",
+      "targetSha256": "721788774ba79b1a01fcef496ca4982a3cd9fd9d5bc46d9819df13adaa9ee6f7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/smi.py",
+      "targetSha256": "cd2300246c7389fe14de268c2ba8e387619971d47c56b8e8f65c374b9e9c349a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/squeeze.py",
+      "targetSha256": "e74724757b0c0b78a85ce5180f553ee54a424f5da7fc34f88cf1d217309f8501",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/squeeze_pro.py",
+      "targetSha256": "a5271e2e7c4f0ee5b077b376a041a97f257a996d75cabab70ad566c1e5d31f03",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/stc.py",
+      "targetSha256": "2381d7c93208e70ae6c4faac4488e5e4033f13a8aa5a5dc71f6ee09eccfbeeb4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/stoch.py",
+      "targetSha256": "deec79243d21f9e1e0d4d421ae2452f7f7a66ebd1b7eb13317eb4f0f3a6d6e71",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/stochf.py",
+      "targetSha256": "1be804f6daf473e2000eb84d25890b166458bd5ca8a23ef709a2b2bc96a89de4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/stochrsi.py",
+      "targetSha256": "054c6cbf6f51e0bd7a4df4e314101d05c5c6c146ccf1b2ec35478562360ce18c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/td_seq.py",
+      "targetSha256": "6b09a2d805db40e4bbfea7daa80111817dc52143aa390080c556e7dad67ffa06",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/trix.py",
+      "targetSha256": "5e5f90c12bcb53cd83e79703df8f8bed07bd1b8cf57eaae832e5a3af6a92ada7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/trixh.py",
+      "targetSha256": "3edaa9d104815cb7668334af7747405cd6407dc584deea42a31d414d512aad6b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/tsi.py",
+      "targetSha256": "c3f5f4a06ec8b5842494e9c9330af3b6e337da95ee1123d30f8f705f2a0c4da8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/uo.py",
+      "targetSha256": "82007ce05acbaa372118fdefd0995f79bf0712917261258f8c9d150ed04750d2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/vwmacd.py",
+      "targetSha256": "77d9be3522c1af47d8997ff668a453dc62121d6ec34d13ee0c458a88dbf14314",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/willr.py",
+      "targetSha256": "095f6d7dc02b68c417efc232edca94811a2ca2a2262d465d9176703a035f9d80",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/alma.py",
+      "targetSha256": "c9115c0f015f7a5a0745a397dd4c3939ace2b0d5885e167c5844ecc9bb0307df",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/avgprice.py",
+      "targetSha256": "863b6975e03b39b9ff2cc93fb6f1e7883e7fbfa8d3b9871e9a8574a1345f8e87",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/dema.py",
+      "targetSha256": "4d90b3262d216c7df2cb082d52f6c1dbea9df9b116be99463c782153386293bc",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ema.py",
+      "targetSha256": "ae87c2007d512409565e7214548de7fe35433deb06cda885727b1c5dd5f3099d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/fwma.py",
+      "targetSha256": "859844ca832b61a636e55e8a2505de187b3d4a3dd7538f0f9df24a2b6a0601ee",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/hilo.py",
+      "targetSha256": "047fda4b05527acdda705a89c6f78b055859dba33ca82700c5404d7ef5fefea3",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/hl2.py",
+      "targetSha256": "43ae654589d76a5c3f5941d44bf07aef8f1d881d167951cd6dab1957946adc61",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/hlc3.py",
+      "targetSha256": "5c8b8d491a8f75164491ad193b3f831abe8252a6da576011ec05b745d54f63df",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/hma.py",
+      "targetSha256": "1989c7c0321c752f359f04c3d207b1034a408147f051164690898571a2b8af32",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ht_trendline.py",
+      "targetSha256": "ae075d4d8e9f9278b6e10ea5a972f7b3b5d3b3767bb65c4f50a99593512b56d4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/hwma.py",
+      "targetSha256": "c385c878018dcc1a539c605efec54ccdc70757cc3c2d22fec0c50b13f007171a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ichimoku.py",
+      "targetSha256": "fe4f8554be6cf368891c7fb9ba3378895ee76553b58ad90efbd04893c8e3d4db",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/jma.py",
+      "targetSha256": "b360cd5f32a82d4db606116ec4db1151c359b0e12b197d7ee5e1b25e5311c06d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/kama.py",
+      "targetSha256": "529d807b27e77a7aaf58f63de7c6ddfb2ee6c86cc117fd746c01ca646106804c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/linreg.py",
+      "targetSha256": "5d424c2c83e22770bd774c23a7efe8e11dc9b267ed8da160f6680c678a5c0cd7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/linregangle.py",
+      "targetSha256": "9b574ff4d221380639e7fb9d0d33c15756d6e2ba5e95edd15d0c60491ee53d24",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/linregintercept.py",
+      "targetSha256": "3879943a330215acda851e049b3b89d61ede4ec3ecb75f87441e71677f838e2e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/linregslope.py",
+      "targetSha256": "3563160d1b0c1522dcafd6ef926b3454aa2f3716aa3f43889c34a961be8ad736",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ma.py",
+      "targetSha256": "25628b3dea29660fd9970ed79d926c781a80c39a8f0ec60b73c4a6e30da49a9e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/mama.py",
+      "targetSha256": "3d765dd3be78657c75e405a09c0b19dc2a3f8c14037737124c418207b0bf9a8e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/mavp.py",
+      "targetSha256": "60476aa29ed9a56d45a8781552acb6cc2b054407264c21ecbfb938b966b8c3f2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/mcgd.py",
+      "targetSha256": "4c4be217bfbb1a47a2f2901ff0399d33cdc668e381e9c44ee63b866675b40730",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/medprice.py",
+      "targetSha256": "c9b261c37fb9d813b611b323d6d744667263f430bebb3cfa682a59ab96a45e7d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/midpoint.py",
+      "targetSha256": "1110fe552593ca74cb200d1fbaeab4bc8d2f81685e0c2a0ecb85a2203518fb69",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/midprice.py",
+      "targetSha256": "e8817c3abfabc3247eaf234a02939cd4da6a90c509deabb322713b31889af6a7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/mmar.py",
+      "targetSha256": "93df88214152cde0bc975aeb77bcdf7c88115d5adc1a39faa758adce11417914",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ohlc4.py",
+      "targetSha256": "f980545f371fc56a64e45f5d0893ff31092ce4218b4c11f0477edeeaf295843a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/pwma.py",
+      "targetSha256": "a8717d5d48afc0d591e9178237f8eb4bbdb619173fd0cafdc67b4308e47e8eb6",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/rainbow.py",
+      "targetSha256": "d382f3b4a69d823826d33d537c522ad19f3acbe14f60a3ec35959d6d4f1e6ed2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/rma.py",
+      "targetSha256": "2b56c2410bc097ef65ad2d396970296b18c6535737f8fb750a19b8c7695fd4d1",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/sinwma.py",
+      "targetSha256": "7f3342c9ec319bffb3c85d981ba5289b65e5a0196d5ea4a3358188494a23bbfa",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/sma.py",
+      "targetSha256": "f98fe698ce577732523c6c640abee19a923aa1d00aae8a93e737733d718c5602",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ssf.py",
+      "targetSha256": "50de392caf8dfadecce87f0a2aa2b0883e6dd866583d5006129b1c287570f05e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/supertrend.py",
+      "targetSha256": "48bc36c8be21ca2adffab4aab7bdf00f424456b78dd18d232f02528708e81716",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/swma.py",
+      "targetSha256": "2ecb0b3cd65c4ea0b7e18f7302db7f233058db347953e9ebd5695c7faf056556",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/t3.py",
+      "targetSha256": "2414ebea462d8f37162dd71b782f00df453675eaaecc8be0fe498a5945374bba",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/tema.py",
+      "targetSha256": "dfa7f560d5d1f01206771ebf02ccb67d8ea39af36cedeb61fbfa16c516fe3e76",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/trima.py",
+      "targetSha256": "e4a13a35fce2a661dabe122c61e9ce1826509a7ac61a3cdfc951defc2234b2a9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/tsf.py",
+      "targetSha256": "999a695fbc04aaa09167ed5bf3e86b47d5211aefcb3b5f35c1b7d0be6f8da483",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/typprice.py",
+      "targetSha256": "94255c03bb760bdd9ee14ea005321f4e382ad38a99e2b7de85f74f3e118a9ab8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/vidya.py",
+      "targetSha256": "ed33e6473d2537a869cda8a5fda0b0d26966125fdf9bd3b969b933db74d6983c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/vwap.py",
+      "targetSha256": "22267b9909cd99c7997a89b2796a0c50196da6dc7ed12762e80dd2cae6932b78",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/vwma.py",
+      "targetSha256": "e03ec3f58a6fad669a72a0c096ccf9aabfbe3149d4615a94158692a9e327105f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/wcp.py",
+      "targetSha256": "bdd3009ecbc8c353c7678f2e6cf958ce4ca7673570633bb8c88324e59cc4e6b9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/wma.py",
+      "targetSha256": "d63fe33edd8ee1bfca9b641e1b7aa7ebd2a7d29cf026ae572503f7cc8153eab0",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/zlma.py",
+      "targetSha256": "2390507e97d488a839014bc4841d3d14c0f04dc7dbb77a198ba5a508fdc71161",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/performance/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/performance/drawdown.py",
+      "targetSha256": "9710ff8c9b1998d776b2eaed4467208b4e3fed5c0892a6a34496a271924075b8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/performance/log_return.py",
+      "targetSha256": "c1528785ab972383523c8400a0a27c5474339653404dbadef77d1871203e7787",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/performance/percent_return.py",
+      "targetSha256": "70d184c0633d376e3deba9167b50885468b3b2be166b42dfd7cb61810f5c28db",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/registry.py",
+      "targetSha256": "ffb4e890e58f6bf16cfb7b6ba20c9838e6fea5f8978642b336fe3547abb4b826",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/beta.py",
+      "targetSha256": "8b88c17787817bca257857e2ee21665d9b799bdb5c436010e596adcf6a8f0080",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/correl.py",
+      "targetSha256": "fb0a4729813b30a5f67a36cd3cec08ebe622809c8030f2d45c83cb60f34af814",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/entropy.py",
+      "targetSha256": "4e6022215134602cc0e0381b9440190c8a69ec0d24cd312cd05e2adbd36f78e2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/kurtosis.py",
+      "targetSha256": "a55e16273700ab2c6d42b84125b223b66a348addfb850919e9146d46715b8b7d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/mad.py",
+      "targetSha256": "5f4d02bf93e528034a32f683c09b8363fe8bf920593ec2d92929c5ca37181f02",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/md.py",
+      "targetSha256": "437f0bab2e58bd726644ce3bf7af43e96f5e4301e23ef9afe263e30b28aeb10b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/median.py",
+      "targetSha256": "e8d4475cc8ccb0356c6da4b7745de718fe57d150bf2c03d667b5696d00e0992c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/quantile.py",
+      "targetSha256": "64e67f237f9eb83880d41bd5b71cd583b1247dc45021f523a30fd699d2d83237",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/skew.py",
+      "targetSha256": "1cc54b346d60bde2e495d971e615d113639e98106c00caa5fc44f20686a74ab3",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/stderr.py",
+      "targetSha256": "e1753acc25e18fe72e30e6983743193f806c64230c31df8b27db7fc4806e7072",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/stdev.py",
+      "targetSha256": "8f7003581206f8709e5211793039997200274191dd71e4004a3c892f739b6968",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/variance.py",
+      "targetSha256": "471e75f0acb6f3bb389424fc39627e31c43c728e498ace41c3ca5a95a617b7b5",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/zscore.py",
+      "targetSha256": "b69070e143bc60159fe49ac611d1df0684f0da7f4022b35a61812364f807d164",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/adx.py",
+      "targetSha256": "0fb31ceb7ba124bc66f0c9c56247ee9b3bc98d62cccca67906ec4a6ba40a5da9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/adxr.py",
+      "targetSha256": "0e4599c112654526582d75bf2fa98ff5fc45240496cb95b8ec460ba4bb4becc3",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/amat.py",
+      "targetSha256": "482e1c064158651fbb0a3a645a7ab0bdfbfd6cabb94ba4f79060e4ddfad2a03a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/aroon.py",
+      "targetSha256": "07ae6a4be52fc4ebff3aef1aca4fc6b56463cc50a1cf4120ca235e66d0fb39f9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/chop.py",
+      "targetSha256": "52880c56301641c710cf26379447b82ed6f5e44676a0b69b77a30d19120d5496",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/cksp.py",
+      "targetSha256": "8096a8b352dd90fe4d668c14c7c4becb0f9f339affdc794c1aad18ecd7d9f6ca",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/cpr.py",
+      "targetSha256": "d4c0cabfd5f7d7963e60eca2643195aab10939438fce4a33a0c9aff36caf2120",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/decay.py",
+      "targetSha256": "6d9bf50e12bc6624788513a67a79042b3b8717717f8b272fc05a9b7e3cf5d38a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/decreasing.py",
+      "targetSha256": "704f0b39f38889b28fc54d8211b00aa4a122a38e33f46ab4a6f16752c93de471",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/dpo.py",
+      "targetSha256": "d7fc056052fa11ebedeed49c66ae9c41c9ec65b55a890f3fa3a6b789b4cadc1d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/dx.py",
+      "targetSha256": "90826fccdd8f816e5eadc94ffc3eeb04f5c2ff75ac22b730f732a8c6f603939f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/edecay.py",
+      "targetSha256": "20b35342dce59c58c1247680cf88140a3bf1d95b3426fe15656bcb055ff59e1d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/increasing.py",
+      "targetSha256": "efb1e5bede1baae6d434c6712076cbd1841ef35a92496661c8d629d0e44d32d8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/long_run.py",
+      "targetSha256": "a66ef0bd2db54f833f6f78d65723850c5a1cbe61ede32ebb0916191ce850f26e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/minus_dm.py",
+      "targetSha256": "10d8a3b4878f3e44ae3e6bbc5272b47a3d0728233ec822a94a7e7325513876a0",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/plus_dm.py",
+      "targetSha256": "bc2c68046f2863d85a5bd11d82c06bdfbdf75aaeae1dbcfd5d578b15b06bcf85",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/pmax.py",
+      "targetSha256": "8f9619112098f309dcbb75765c104094eec7e424eafe7435673cf32cdbed7176",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/psar.py",
+      "targetSha256": "782bef64143ba26069a671ad1b9326ba10d3bcfcba6c8a750f97b8f71ab502c7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/qstick.py",
+      "targetSha256": "05df06b07c19c4cf138650410a41ebcd108ec19fbdd3020bced4bc52b0ff4df1",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/sarext.py",
+      "targetSha256": "f8b5c1bfbc00b00a5e85455500b271b686193692971e2111c1ff049dcc709ee8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/short_run.py",
+      "targetSha256": "d5ee907b91ffd3f8b02e6a1030c611cf3b57a8e270e8bb7609c55458ef52c277",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/tsignals.py",
+      "targetSha256": "ed6c8388c9efe7abe605cb0600e254fb187f22b6939252da3729008e0bd19094",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/ttm_trend.py",
+      "targetSha256": "57d9784b1cdc979936c8c225aaf338e775d230c510026fd4b333b6f387bdcd6a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/vhf.py",
+      "targetSha256": "0d4985a5bdb896a248c6bf09c5ff487345c37c84830252a0656ca93f5ebad171",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/vortex.py",
+      "targetSha256": "ceaed47a5400fa133511078d86b1c6d15639cd8c2a5af1b0250a203fcda89164",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/xsignals.py",
+      "targetSha256": "a7a722dc3274de86fae1ccce09dae3558e2fedd370df5cbfb0ed87a661460d7f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/aberration.py",
+      "targetSha256": "62853c251f0bc4502cad10c64fd9dc569094df5ff4e0aadf72da2ed41d4e4be6",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/accbands.py",
+      "targetSha256": "79dacb55a7efd6e39c8b5be8b7bbab67598dced9f81c32bf500716dbd8650d73",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/atr.py",
+      "targetSha256": "bc0e9e254768c118b89972014fd66b8ab89b8dc0200f07f62076df7a9534cd69",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/avolume.py",
+      "targetSha256": "45aaaefc00e761f5bc99cd0a9f78232a86d7c0602642394b6286de2a2d2f5d59",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/bbands.py",
+      "targetSha256": "9a61f3a788b97e40ebdac9c20db8f92a9eb6a21c744c0c7d16f312980c3d9836",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/ce.py",
+      "targetSha256": "68d7f7f455cda60ca631b8785a52e50e6c97089a793503cebbab7c6f22e94ddc",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/cvi.py",
+      "targetSha256": "ae760d4de0838cd853e74d90800848b306a148d6d3efe4241a2d0682b8875c22",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/donchian.py",
+      "targetSha256": "7f7964051bd50575d3bca626db2dd287946ea25b63656ae7be763411b9ee5360",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/hvol.py",
+      "targetSha256": "e82283dbda5105a75bed402df896a5f0b94c451a867e2094d40cc2b6187dec7a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/hwc.py",
+      "targetSha256": "1bfcadf60c0499f2d476f0595e4c5080db0786d12385a9a66f72a242d8275737",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/kc.py",
+      "targetSha256": "069a15ff3533a45b40dbc1f35f05c5294681c3a8fd684cb68d8c7dcab2174570",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/massi.py",
+      "targetSha256": "caefb7d51598b388146a2dfdf3531adc9943eafd72409401481124d556badd1d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/natr.py",
+      "targetSha256": "2063904b4b036452d889c993c2d7011e0670318c922c8211e3806fc9b2f1295e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/pdist.py",
+      "targetSha256": "8f3aada38a08e5e00993721b0d669cb4271aeb37e569ffea0400873305775aa9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/rvi.py",
+      "targetSha256": "b42155c78004c098fc19ccad247879f77fbe80d22d1325b5d1b9494747afebee",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/thermo.py",
+      "targetSha256": "be25e27e694a899601f3bc117d70e552041458498c192e53192a678e5335de60",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/true_range.py",
+      "targetSha256": "e40d12d7ee365ca75bea4cb8cefea005fc5dda884fd763cfbc2988c7d39a617b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/ui.py",
+      "targetSha256": "cd2afd7b296b44dfcf8864a1a57c4e7de47cc5c0c6887b6e3454da84aee3a016",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/ad.py",
+      "targetSha256": "95e3e135fa0e5b5283f26c11fc7cb603b7a67c8cc6d7a17388a69b73c661c2a4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/adosc.py",
+      "targetSha256": "2deeaf5da88f87bbb827191dfc6fb78e0e8d590ec1778c00023151935aa5eb91",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/aobv.py",
+      "targetSha256": "27ccda9551dc6e2e587e21a10d3108ed82d510ff1e21a6005f154445d20be573",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/cmf.py",
+      "targetSha256": "34dd1d57cdfc08e5eb3c3384a22db1ce0e58bf8aec0c56ad6cab6337d1a71874",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/efi.py",
+      "targetSha256": "d314b6ce94fd8c6e8f9cb4870c5d8803fa41e7a0037829d3441282446c17e412",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/emv.py",
+      "targetSha256": "ae2cd4d9f5f199f091a596e826efc9eaf4c5b20925eaf0dfc830a97143dcd5d4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/eom.py",
+      "targetSha256": "e53c57db199c9e3449635c9bc941fdd11ee504aa66476d5c14abfa15c7426a88",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/kvo.py",
+      "targetSha256": "1a40fc26055e99ae010850de8e92da21837a2ce1b6b2f488040928b789158175",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/marketfi.py",
+      "targetSha256": "676199587d3c91e0f4254f410ae5aeb75d70a38258ec020eee13949ab7c5a27c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/mfi.py",
+      "targetSha256": "2b978d2de3c2a7b5b951133f758c8f28520c5d79a677f79aa71ec75b77f4dd66",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/nvi.py",
+      "targetSha256": "0d5ceaa50583579f6afb62647c9830f61d14b9f44a4bee63602c94137aa22f84",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/obv.py",
+      "targetSha256": "b7e9e23c47c03473c2b1bf86c0b029ae12a436e23987fd444d8a87a3532bf482",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/pvi.py",
+      "targetSha256": "36fbfa10d0ec109a61f73246b932e425fbfeadab2e619eadc93f17d64949d06a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/pvol.py",
+      "targetSha256": "911d85fe45902c258b3ac341f27892df68403cba17f7744350dd1fd47bf6ff1b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/pvr.py",
+      "targetSha256": "0201e8de316ef424fa3d669bc5f052db06ebdee91667f58a0973fc37cde69e31",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/pvt.py",
+      "targetSha256": "092d2119560e1505552ac39c385a68edf3ef915f7fc53593621cea6d1d9c0585",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/vfi.py",
+      "targetSha256": "ab97d81d37f96caf15b9c03273c6b91ec0102015befd3bf42a070c9394477dcb",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/vosc.py",
+      "targetSha256": "46d539bc72abcd848311e2ecb5e99b0babe0cc69e109df5ed12a79f47dab47bd",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/wad.py",
+      "targetSha256": "09c788ce21c1db300d2cdeff1194a4fd62142fbd6b992e33a647e2fd4bdf022f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创指标契约、运行时或逐指标语义 Wrapper；仅调用固定依赖，未复制第三方计算算法"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/calculus.py",
+      "targetSha256": "7643ec449e06d27ebe6d4be4dbc74db24b007be23832365ff7acc0379aeb284a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rmi.py",
+      "targetSha256": "7eb97acc60d2d7865f8a544dfc25bbf9797702e915daeec574847f0a09e973d5",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/pmo.py",
+      "targetSha256": "76eb037bfa998ad5ac2bde2d58ea0eb7ab7b23e38f6393fafe3fff160403b88f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/ac.py",
+      "targetSha256": "a1e89239fb13b9db6d9ac240e36e726101bd378fa15885eef8fba89411ec35b9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/crsi.py",
+      "targetSha256": "5f8f9f8b6472c756cef67aaa2efb34778cbdbc3b1b352c38c5883331e5eecfd9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/gator.py",
+      "targetSha256": "13a02d735a87d2ac842cfa777714b6a27da2e79603a47570ce1390aef6eec889",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/wavetrend.py",
+      "targetSha256": "302fa32318f5de3fac97c94a61570ac0122e7dba9e7198c573346a465fba1bce",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/ibs.py",
+      "targetSha256": "860c71e4caf2609eb4d33cc3fe08a3b9a066556b3d8a16706824aa879d2a16d6",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/rci.py",
+      "targetSha256": "531337fb71f3332d7f029d939802085d8c3d1291b0df6f945548ad7b1a115067",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/momentum/smi_stochastic.py",
+      "targetSha256": "24cc8a60577c6fe782ac21e4430974c07de91353fb954b7bab8e6a51cd574d02",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/pivothigh.py",
+      "targetSha256": "cb486c903949635da329ee522ffa1ff9cb1bfaf1be144744c87b062d1355c8b4",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/volatility_stop.py",
+      "targetSha256": "6399cc04b67659ee8b997c7ae4f96bc8a79f12ee6b5a634b7045df19e9980e3f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/pivot_points.py",
+      "targetSha256": "e025f5f53cfd872e6410266ef8f78a630b6c18640f0884afe3166165ee4f2982",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/atr_stop.py",
+      "targetSha256": "0e0b5267ae35ef14f49766a938cad0a3230347be54889760c72f9699d2985c68",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/trend/pivotlow.py",
+      "targetSha256": "dbce14fba23d860af9d4d3b13c3f414491bd8d93687af73d02238718d32dd0d2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/starc.py",
+      "targetSha256": "0e2f1f8ef04d4e62410be7c92167fe78ce30ef17619ce91f1eee9e19fd952437",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volatility/adr.py",
+      "targetSha256": "dac1b441d032066b097344c6b50a07d61d4e6c4baffa9fc4af22f4de7fa680ec",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_eveningstar.py",
+      "targetSha256": "d1814197d45a9391843100f458bf6ea859376b81afe8cbc912c9e9c9f3ee28d3",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_morningstar.py",
+      "targetSha256": "78a86f94b66d435629fd7818903460de0113c4992a92b05ff6bb0a80e45ecc43",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_shootingstar.py",
+      "targetSha256": "deacf404dd0837b18ea6ae35fce72dbfe34f95c8b984fe4174c520f5cca8f132",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_marubozu.py",
+      "targetSha256": "ee92b744f427a3e122849b939e59dfde56dfc22d270ec111a6865b72f2fae4cb",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_doji.py",
+      "targetSha256": "a7a5eee80024042469381a7e4dc03bb1b27d9f545b23f685e4862fbc1e5ebdce",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_harami.py",
+      "targetSha256": "0dcc2c42a5192890a01fcfaf3f75658d826d45228bd5c7313448dd6c039eca7f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_inside.py",
+      "targetSha256": "94712ca45b8bb8a1e1ddf2a3d1959108c802e1dd7ef4ccad3d1280020a373afb",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_hammer.py",
+      "targetSha256": "8c9a5d6020a08e4c4052947050456b3617ceeddb4d2117e0f6e66e78205fcf15",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/candles/cdl_engulfing.py",
+      "targetSha256": "8372850d589e2ae993e32187a05ffb9d45cafa2c7951d4129f7c4b4d5ed35468",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/ma_envelopes.py",
+      "targetSha256": "dba2d783e0d517535d5e3f4db51b7a3df959e51ff6757e43d78036e031761836",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/alligator.py",
+      "targetSha256": "7e279c66209cd4f55ac2f869ef9d536522f0e28a2745bd1f92e5f998cd7781c9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/frama.py",
+      "targetSha256": "23368a27f6849f2cbd0c5d5b851f7f04418012beb34f26a37cd4f01a92877cce",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/wvad.py",
+      "targetSha256": "243cc8fab592971a80230ec582dd883feadefaa7d981733474e2c0b363c1655b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/rvol.py",
+      "targetSha256": "db64da016473c55d959512ea8c33dd1405a147a01591dc6674ee7984c9831740",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/volume/iii.py",
+      "targetSha256": "c014fd7da0e692c812804ad35108df0ef3e84d2b06c98190e50dfdf8d16042c5",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/cross.py",
+      "targetSha256": "459f3207ee3f1ed161ab6e5537c4a43078a523f64a6fc6f78545105273fccc2e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/percentrank.py",
+      "targetSha256": "867ec9fe71afdf000c0b63bcbffcb83429772bdbf492921869e6866bedc03e0a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/running_max.py",
+      "targetSha256": "9147b3ee54eca1d0693d652956b728a1b26e4bb6dafecd9272e2508f8cfd330b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/valuewhen.py",
+      "targetSha256": "b465cd7b356ad10a9f93253e40aeac39b65d1bf2636a8d33b81351bcff7e9d4a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/range.py",
+      "targetSha256": "a7e93bc09ca04731b2076d3e97029d46a1da14424bbe11eeac7c5e048261557f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/rising.py",
+      "targetSha256": "0694093749b41df61fd497578f87e8267cdc951b4c561258bf88fd79db1028db",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/cum.py",
+      "targetSha256": "8ce0b7d54234d270be55b3a757c54f924aedec44d8a45f374c3a3778e4233686",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/__init__.py",
+      "targetSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/rolling_sum.py",
+      "targetSha256": "c43149ab6b1add28b251f8330212ab3e558ab51a7d5cbc2ea628d22d5cd31509",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/crossunder.py",
+      "targetSha256": "cdd043f410c87e6a6f4aaccc72417b1bd3501570359f2ad2e538227978b2f695",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/highest.py",
+      "targetSha256": "4359a157a08a657c8603edce0f218e55e92ee4832c238f53633cbb456188f75b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/rolling_count.py",
+      "targetSha256": "d68311f121e897a2d3626452ec8e3ba3545f2cf20b1262e7d0f673ee0e4d1eed",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/shift.py",
+      "targetSha256": "82a395b41f29f7f47cb2c12eef22b5d3bdf8aa2da8612fe5511262ab6a2cf04b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/highestbars.py",
+      "targetSha256": "43c64339199999f847d9a7c293ed33f44b56107f291706cc6e5c7063af723e70",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/lowestbars.py",
+      "targetSha256": "41c39cf202d42450fecd41a0c2a1f7c74bba7e8d1c1c8506068e494027baed21",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/crossover.py",
+      "targetSha256": "abbcaded4b6cf4a9ffec2cdbd2587d1d5cba4077885323b83d53323ca14a1692",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/percentile_linear_interpolation.py",
+      "targetSha256": "62c38e0a857e99012499fda2c7a4335ce538e39b9589d78f4f8910bdea9e9f86",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/running_min.py",
+      "targetSha256": "d80c2bea873bd7f8522fa37d961841913015e95e3156674e530e4254106ed9ca",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/falling.py",
+      "targetSha256": "58a331b7b252c5e1c6f0f0f6bb12fc9a3dec6d956b08d523ec3347957c40d614",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/change.py",
+      "targetSha256": "25cd2355a057ae779490ef1f3b6f4211735b710e9a5f15fe9ecad0670c3f5a92",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/barssince.py",
+      "targetSha256": "1b7ee29b883a7d41df82b82c0369d5d5f0b6e5563b70932c12ec7a0f0c62ee38",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/percentile_nearest_rank.py",
+      "targetSha256": "c368efc76100cd689e3685d60a83c7ed82db754f3db338ca7d7f083011050895",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/utility/lowest.py",
+      "targetSha256": "bc374a967dd67246cffcade19d1e60b49cbff07339a2c433b25c4793caaf1c4d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标或工具公式；逐项参数、种子、缺失恢复及公开参考见指标扩展冻结契约，未复制第三方实现源码"
+      ]
+    },
+    {
+      "target": "examples/strategies/confirmed_events.py",
+      "targetSha256": "019c491dbb876998f567411589aea48fad7bb8dd63f76116b3b94d70654c1dee",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地指标扩展：按公开公式实现独立指标与序列工具，形态显式调用固定依赖；契约与来源见指标扩展冻结清单",
+        "示例规范化：按用途迁移路径、中文说明及显式入口；推荐稳定来源；保留自定义算法，修复指标返回索引及预测日志；经差异与执行验证审阅",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/README.md",
+      "targetSha256": "545ffa77b57e5360a56820aac9b76e7a0d9a19b5ac466a654f9514834bc7975d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：统一示例选择和功能配套规则，稳定行情来源与组合的可运行示范",
+        "示例统一通过 self.ta.sma 使用内置 SMA；self.I 仅保留自定义计算；核对指标数值、预热与成交及权益结果",
+        "统一采用内置 EMA、RSI 与离线 SMA/布林带，移除示例自定义同名算法；同步参数例路径与使用说明",
+        "文档体系：维护分层手册与独立使用入口。",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "增加 next 当根背景/K 线颜色事件、版本校验与配套示例文档，保持交易隔离。",
+        "接入 Color 值、统一颜色编码及颜色参数使用示例。",
+        "自定义指标入口统一为 ind，移除 I 并同步作者契约与示例索引",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "删除公开动态策略指标入口；内置指标仅通过 self.ta 登记，保留私有计算机制并同步说明。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "新增三级策略日志与宿主消费示例、运行配方和阅读入口；展示时间、bar 与源码行及失败取回。",
+        "新增全部九种 Input 作者示例索引与宿主执行命令。",
+        "统一订单命名参数入口、作者请求和可运行示例。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "更新图表上下文示例的时区使用与统计范围。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "增加参数实验的完整 Portfolio 持久化、仅 Portfolio 采集或可运行示例；保留既有公开行为",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/data_sources.py",
+      "targetSha256": "7236f2bcb6587c67792d22297e2591500d56fed3e8546dde019c8b130d11a116",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：统一示例选择和功能配套规则，稳定行情来源与组合的可运行示范",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/core.py",
+      "targetSha256": "3ae163622786321f9851087666264ed1b2f6e0b4062bb469e054037e498269f8",
+      "sourceIds": [
+        "openbacktesting/_util.py"
+      ],
+      "changes": [
+        "迁入原定义并保留原限定名；AST 对照通过",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "方案 B：提供来源快照内部全量读取，保持公开前缀不变；经差异及单测审阅",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "明确历史预热辅助函数仅用于诊断，执行和统计不再消费。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/core.py",
+      "sourceIds": [
+        "openbacktesting/engine.py"
+      ],
+      "changes": [
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "aff459aa936345de7c072b1cd4bcf4735509f1b593e14d4bce6ef41a393ac7a7"
+    },
+    {
+      "target": "src/openbacktesting/strategy/base.py",
+      "sourceIds": [
+        "openbacktesting/engine.py"
+      ],
+      "changes": [
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "只为声明策略绑定不可变解析值；保留无声明参数路径",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "方法式指标 API：登记门面、保留属性和用户示例迁移；保持原计算契约",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "方案 B：增加稳定行情属性、只读保留名和初始化来源校验；经差异及单测审阅",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "自定义指标入口统一为 ind，移除 I 并同步作者契约与示例索引",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "删除公开动态策略指标入口；内置指标仅通过 self.ta 登记，保留私有计算机制并同步说明。",
+        "新增只读 bar_index/bar_state，标签入口改为 data_index；拒绝旧 warmup 及新保留名冲突。",
+        "接入每运行策略日志、源码定位、失败取回及优化隔离；保持原交易行为。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "6fbb980ad2e69fbb6babcfb937f0df19ddfd39886b7a5c47bfdc8a44cf9dc51a"
+    },
+    {
+      "target": "src/openbacktesting/strategy/inputs.py",
+      "targetSha256": "11f3d81022d6a692b15758c23c674f2506433f58608cc66a1fa6e7466a1c3e03",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：九种 Input 声明、标题发现、纯校验、规范化与请求/快照；经逐项测试和差异审阅",
+        "方案 B：参数发现静态拒绝行情属性名冲突；经差异及单测审阅",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "接入 Color 值、统一颜色编码及颜色参数使用示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/strategy_data.py",
+      "targetSha256": "5433941442b55c89723938662cf4135014d9809fb7e00bf92ad12e8914db9685",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：每运行行情快照、稳定来源句柄、派生计算与初始化一致性检查",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "标签入口保留名改为 data_index，行情句柄移除 warmup 参数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/aggregation.py",
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ],
+      "changes": [
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "按领域迁移实现，保持执行行为与旧限定名"
+      ],
+      "targetSha256": "9e0c42ed716b2744268d5cccdcd8b013f8095719592b7e2511fd97efa3824ea9"
+    },
+    {
+      "target": "src/openbacktesting/strategy_data.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "ee53bfbcb26bab96531586537701c2299110940248ff56b3e2677e51b0540060",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/aggregation.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "6f6bcf4ea293fc528bbb4b68e63e93e7ea05e85f413090654ca0a6231405deb4",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/inputs.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "c262a6ace1f3b82add36b1a353a14d20421de8650cb594b8281c1e741db883e2",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/__init__.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "46e329464ea080394ebf6442553397c302980b57aa0b4b1501c089e058673c20",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/__init__.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "3edf270baa633fb1620b27fb216b4918e4a39c34f702291d2b426d6efd41a70b",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/strategy/__init__.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "eee005bc1e2fecc4b7bb1cbb12e5723bea17aa059c25170fc04d80892b81bdf1",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "策略包导出与根相同的 BarState 类型。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/simulation/core.py",
+      "sourceIds": [
+        "openbacktesting/engine.py"
+      ],
+      "changes": [
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "新增标题入口及结果快照，运行前校验并隔离并行批次；经接入回归审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "方案 B：初始化完成后验证行情来源一致性；经差异及单测审阅",
+        "更新领域实现导入路径及兼容元数据",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "next 从首根逐根执行；维护和清理 bar 上下文，传递并保存初始资金。",
+        "接入每运行策略日志、源码定位、失败取回及优化隔离；保持原交易行为。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "增加参数实验的完整 Portfolio 持久化、仅 Portfolio 采集或可运行示例；保留既有公开行为",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "ee415dc5b6d9837c404383233eb957ec24b64932d75463d1ec49b7a9b2fd452c"
+    },
+    {
+      "target": "src/openbacktesting/simulation/optimization.py",
+      "sourceIds": [
+        "openbacktesting/engine.py"
+      ],
+      "changes": [
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "声明策略 grid 候选预校验及标题传输，SAMBO 明确拒绝；池先退出再释放共享内存",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "线程池退出时等待在途worker完成，再释放本次优化缓存，避免延迟worker在作用域结束后创建缓存",
+        "方案 B：优化执行前拒绝原生保留名参数；经差异及单测审阅",
+        "更新领域实现导入路径及兼容元数据",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "更新领域实现导入路径及兼容元数据",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "接入每运行策略日志、源码定位、失败取回及优化隔离；保持原交易行为。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "905561b2ac7b6cb254480137ff20ba624110dead3f695a3d2db8c0f5abaaa642"
+    },
+    {
+      "target": "src/openbacktesting/simulation/parallel.py",
+      "sourceIds": [
+        "openbacktesting/_util.py"
+      ],
+      "changes": [
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "更新领域实现导入路径及兼容元数据",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "时区传递保留 UTC 绝对时刻、原精度与时区，修复 DST 回拨和带时区列恢复。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "267f0a03490e10de5bd3b637afeed2c06a224c229bcf2217063d55835ff411e7"
+    },
+    {
+      "target": "src/openbacktesting/optimization.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "8198605e5898e49bf318108766748fb791f87fb1e1e2bea8fede37c282980b87",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/parallel.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "6d8c72541cf4990d24b8a4fd267eda7950cdb46d039240ce720cf0e8e6f5fd24",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/simulation/__init__.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "b26717818765d7baaf47f8a2c1675bfda38a06fd54d33c3492ffb457682dbca0",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/strategy/helpers.py",
+      "targetSha256": "cb7ade375b0dbc307b94e1ea623311287441ba845a3f8c28e93c743fc76b3154",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "从 lib 按领域搬迁既有定义，不改变函数体",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "统一 ta 交叉序列与 is_* 即时判断，移除 lib 交叉入口并同步使用说明与示例",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "自定义指标入口统一为 ind，移除 I 并同步作者契约与示例索引",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/strategy/templates.py",
+      "targetSha256": "5dc4df1fbfe3af75fbedf03ccb5ec2b84c671dacda83d3ed99440b91afe18282",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "从 lib 按领域搬迁既有定义，不改变函数体",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "自定义指标入口统一为 ind，移除 I 并同步作者契约与示例索引",
+        "稀疏信号移除 warmup 选项，明确逐根回调和 ATR 局部有效性防护。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/simulation/variants.py",
+      "targetSha256": "c375b5fc7cf6a491fd18e521f5c2982920f503b3359b4d6e8b9902442b687f00",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "从 lib 按领域搬迁既有定义，不改变函数体",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档体系：补齐公开说明并修正失效链接；运行 AST 不变。",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：迁移 simulation 导入、接入声明配置或上下文；保留其他低层契约。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/generators.py",
+      "targetSha256": "eaea539351cafc97528657db4c3d19f2d22dd4ef0c7d12dd7445daaa3f44929f",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "从 lib 按领域搬迁既有定义，不改变函数体",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/predicates.py",
+      "targetSha256": "f9c1c7f6630a330d4a0987dba2584cc512593f6bf1a07f8af46095514210e037",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交叉序列与即时布尔入口分离：实现或示例验证"
+      ]
+    },
+    {
+      "target": "examples/strategies/cross_signals.py",
+      "targetSha256": "7c61e26bf450b55bff17b5a198d7fbb0683038c1e0704e71564021da1f5d8f3f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交叉序列与即时布尔入口分离：实现或示例验证",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/advanced/run_author.py",
+      "targetSha256": "7eea68764b94fa7dcf287514fc2960f200b721e25335e6abc2c65bb92073e69c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "文档改版配套的首次回测与指标消费示例。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "新增三级策略日志与宿主消费示例、运行配方和阅读入口；展示时间、bar 与源码行及失败取回。",
+        "为全部 Input 示例提供 GOOG 前 120 根日线的宿主配方。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/advanced/indicator_reference.py",
+      "targetSha256": "5459fd57b8365f5da40b3c7ca65c286dc6cc2e47330d93e57802400eb8ba7e79",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "文档改版配套的首次回测与指标消费示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/first_backtest.py",
+      "targetSha256": "9c9598ba6b479b9e56169ba71a4557080b9963c363336e2ae366d7168e30352c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "文档改版配套的首次回测与指标消费示例。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/execution.py",
+      "targetSha256": "90e9612914ab0660782bda5776921c0bacecc855a4149da79809142805679e0a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/instrument.py",
+      "targetSha256": "b9c5e9b22d4da4b60a4af8eadde626363adcfc493518b0603e5ed40b39eb27dc",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/ledger.py",
+      "targetSha256": "d0df1625a1c6d60cac3ca88dffcdba7d415876c3bf00733107607b088b4a31b0",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/models.py",
+      "targetSha256": "81a2c3d34478cfb266865525acb3bfa091c813b697751cde83471ef21fc25087",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/strategy/sizing.py",
+      "targetSha256": "a19ba6f408bf59dea96ca1c70f0c6c626f82f6390e93c52dbb6184ad5cd0b641",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/fractional_sizing.py",
+      "targetSha256": "50cd1eb5da3caeebb4c4f492bf10ce0ac85abe0244b0174918a01f1929ce0886",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/managed_orders.py",
+      "targetSha256": "235e5e38c31c01f335b1eea29156b291c64295082b4a3e32bd3fa40e8dcdcaaa",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/trading_lifecycle.py",
+      "targetSha256": "0bf2d2c27a69418462fe1b81b70a1f45f3617ee077659be600fc730cc0ba45e7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/plotting/encoding.py",
+      "targetSha256": "21079d4f4d1f8ffecb74419d1195f0c389a5467a5529f0e9423911e324a8d15d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "纯数据 plotting 声明、冻结导出与可运行示例；保持无渲染依赖。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "增加 next 当根背景/K 线颜色事件、版本校验与配套示例文档，保持交易隔离。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/plotting/collector.py",
+      "targetSha256": "a6c4383b9991f3c0165834b1a046e8255ebba553e634bfa2b29c643e91bf745a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "纯数据 plotting 声明、冻结导出与可运行示例；保持无渲染依赖。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "增加 next 当根背景/K 线颜色事件、版本校验与配套示例文档，保持交易隔离。",
+        "接入 Color 值、统一颜色编码及颜色参数使用示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/plotting/__init__.py",
+      "targetSha256": "71f419030228b151c969d7287a97a8afd1c3442ec0874a7075f2df2703ddd24c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "纯数据 plotting 声明、冻结导出与可运行示例；保持无渲染依赖。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/plotting/types.py",
+      "targetSha256": "8029853cb6321d0095298851a7cf74e8c721fc1407a1ccff74c63d8b72f5b059",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "纯数据 plotting 声明、冻结导出与可运行示例；保持无渲染依赖。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "增加 next 当根背景/K 线颜色事件、版本校验与配套示例文档，保持交易隔离。"
+      ]
+    },
+    {
+      "target": "examples/advanced/plotting_export.py",
+      "targetSha256": "d4b02b15eed8a6d15fd495b9f4c4fd93b7ac6c861606b08e929cf7bc5fd9f80b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "纯数据 plotting 声明、冻结导出与可运行示例；保持无渲染依赖。",
+        "增加 next 当根背景/K 线颜色事件、版本校验与配套示例文档，保持交易隔离。",
+        "接入 Color 值、统一颜色编码及颜色参数使用示例。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/plotting.py",
+      "targetSha256": "1a2f94674dd563430ffdf7a7b7134cce9aa5a636120cebe71df666f53286f31c",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "纯数据 plotting 声明、冻结导出与可运行示例；保持无渲染依赖。",
+        "接入独立 plotting 声明与运行快照，不改变交易计算及旧渲染边界。",
+        "增加 next 当根背景/K 线颜色事件、版本校验与配套示例文档，保持交易隔离。",
+        "接入 Color 值、统一颜色编码及颜色参数使用示例。",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/colors.py",
+      "targetSha256": "00e84d5c8cce78169b52db1e6281a2ffefca5857f83be219d4c2bfb15e91dd9b",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "新增独立不可变 Color 值、颜色构造、透明度及固定预设。",
+        "本地内置能力扩展：纯值、指标参数或关闭片段统计；同步真实示例与公开契约，经差异审阅。"
+      ]
+    },
+    {
+      "target": "examples/strategies/custom_indicators.py",
+      "targetSha256": "41111d343ff226452bfcd91726a1918cf11f5f09ea55647a8c878375c80cdd92",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "新增自定义指标纯函数、双参数、具名多输出、跨策略与组合函数复用示例",
+        "声明回测与图表上下文：更新作者/宿主分工、公开契约及运行验证。",
+        "逐根执行消费者：标签索引改名、局部有效性防护、Bar 状态示例及宿主数据配方。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/timeframe.py",
+      "targetSha256": "daf5e0cec85a18f7efa7302fe456afa99ce5fde5e2340bfc21a9101629ca6e16",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增严格周期单位和值对象，保留日历语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/data/context.py",
+      "targetSha256": "c85fb004f64cf613ed22aeae2b29570db5fcab8fbf5fdabfc1542a1cd94abc53",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增冻结图表上下文与时区校验。",
+        "明确图表、策略日历与统计共用时区，保持现有字段与校验。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/strategy/declaration.py",
+      "targetSha256": "d720a4e053840e852d1b9ba84d40ee468fd208be57e5ebb3b568e7fc8c0390a7",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增保持策略类身份的无状态回测声明装饰器。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/simulation/config.py",
+      "targetSha256": "638e02553b37cf05e71e3f283f05f90a4008c00ed1189bad84646883177b65f8",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增回测默认设置白名单、验证与稀疏覆盖。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/advanced/chart_context.py",
+      "targetSha256": "4421fdd3cd114cf1b5dd82fe85609344369d7f70145f9b1c53aed8aa3652b4d0",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增跨品种/周期运行及参数、设置、快照验证示例。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "增加当地小时条件、图表日界统计和 DST 重复小时的离线可运行示例。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/advanced/strategy_settings.py",
+      "targetSha256": "1c76ce0dd0eeed6b6ffbd0cd24db4fc2b937fd6eba17b9034d25dadd99b5aa2e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增策略设置能力：纯值佣金、统计利率校验或组合设置使用示例。",
+        "回测声明平铺为枚举与数值，宿主严格覆盖及版本 2 快照；同步示例、类型与验证，经差异审阅。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/commission.py",
+      "targetSha256": "4629f5736465e5f5ee2d3c6713085c4fa1b8c3fb7cbf157bbf34541f941334b2",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增策略设置能力：纯值佣金、统计利率校验或组合设置使用示例。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/strategy/bar_state.py",
+      "targetSha256": "f1effe8d7c3bf219e2f33e2e418ddf36bd6b079682d0488cc75c097cd35f5e0d",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增冻结且有 slots 的 BarState 值类型，表示固定输入首末根。"
+      ]
+    },
+    {
+      "target": "examples/strategies/bar_states.py",
+      "targetSha256": "b7b68a672f7cea7a7fa1db2ebfaa637fba1816953e534990907be9e4c1e37d2a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增作者示例，展示位置/标签、首尾着色与指标局部有效性防护。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/logs.py",
+      "targetSha256": "54fe0ce88a051794c49e95c409e6a81ee8c4a95a1890b6593a5dba59cbc07ee9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增三级结构化日志、纯值快照、源码定位与宿主 RunLogs 会话。"
+      ]
+    },
+    {
+      "target": "examples/strategies/strategy_logs.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "新增三级策略日志与宿主消费示例、运行配方和阅读入口；展示时间、bar 与源码行及失败取回。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "0d12e65f376f5f2180cdeafdff6ddd624852debfbf3195decc463ea22ceae44c"
+    },
+    {
+      "target": "examples/advanced/strategy_logs.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "新增三级策略日志与宿主消费示例、运行配方和阅读入口；展示时间、bar 与源码行及失败取回。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "8b1493606ba348fce17651fca67ded78fea94b88283b26c525ee460fdc82125a"
+    },
+    {
+      "target": "examples/strategies/all_inputs.py",
+      "targetSha256": "243c7ec703ee68922c79ddb068a6742d88451da4864fb16a8a845ecce9f3f02f",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地原创：全部九种 Input 声明、枚举与颜色运行值、时间着色条件及时段规范化说明；配套默认与覆盖值执行验证。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/requests.py",
+      "targetSha256": "0c281c6f50a80406d2b7d3bb28d78b9830e11689cbd60f6e7f1b656a24699946",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "订单作者请求：冻结命名参数描述，复用无副作用的标签、价格和期限校验。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/sizing.py",
+      "targetSha256": "5dd4fc49588bd63795f89143a16a784faef84eb23b9c5f91e53cd1296a20f1ad",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "Broker 层共享纯规模意图校验与请求上下文解析，不依赖 Strategy。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/closed_trade_statistics.py",
+      "targetSha256": "790c2e3f7568af5961bfa0681a8f468b7b073635b2c713ecaa0d084772492f8a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地内置能力扩展：条件 VWAP、有限众数与真实作者示例；按提案契约实现并验证。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/local_builtin_indicators.py",
+      "targetSha256": "f7e32c585b2d7718a3a58832350b89adf8c86fff4b03b5c2036303f370f10593",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地内置能力扩展：条件 VWAP、有限众数与真实作者示例；按提案契约实现并验证。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "examples/strategies/local_value_helpers.py",
+      "targetSha256": "c14867a4f22cff55c5452a3f7ce529f4d987af9829ce2237cd6ccd0351967e7e",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地内置能力扩展：条件 VWAP、有限众数与真实作者示例；按提案契约实现并验证。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/anchored_vwap.py",
+      "targetSha256": "986685759735f143a709e79167a8935cde7695fbb19118f819cf66ad4bf56679",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地内置能力扩展：条件 VWAP、有限众数与真实作者示例；按提案契约实现并验证。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/overlap/anchored_vwap_bands.py",
+      "targetSha256": "d872cd5beb32490bed4060e5b72ace60168f74da8974c9bfd66ba09364080620",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地内置能力扩展：条件 VWAP、有限众数与真实作者示例；按提案契约实现并验证。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/indicators/statistics/mode.py",
+      "targetSha256": "4bb84ecd269ebaf02ea4f58ea295e158078b8fe2ba8819cfdfcb65a54ffcb0bc",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地内置能力扩展：条件 VWAP、有限众数与真实作者示例；按提案契约实现并验证。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/portfolio/__init__.py",
+      "origin": "local",
+      "sourceIds": [],
+      "targetSha256": "2ebf93fdcacdc4e69354202db8733411cb574f4552d1f7a7073a06f6238a8345",
+      "changes": [
+        "领域子包兼容入口，保持旧导出对象身份",
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/portfolio/analysis.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "b6b91e0af9253355d975764778298b4bdbbb1425a11e59d1a118d363189813ef"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/builder.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "301f13c49211e247b47abecb48810a983c694e8f83eeedda5010f9d312b94490"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/catalog.json",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。"
+      ],
+      "targetSha256": "cc160aac68ef05760429441233fa6309c96f622f3b8bf1a9f30a3dabbd6c2a5c"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/helpers.py",
+      "targetSha256": "0b54e90e13c5af0cf9524fa6f64e7b245bcd2ac39aa8638a3593ded1ae1895c1",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "删除绘图入口、样式与示例；保留计算结果，预热独立于展示；经差异审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "从 lib 按领域搬迁既有定义，不改变函数体",
+        "领域子包迁移：更新实现导入、兼容导出或源码导航",
+        "文档改版：补充使用说明、受测示例或文档标记；运行语义保持。",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "统计重算继承真实初始资金，历史缺失回退首权益，交易子集以本金起算。",
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "未发布阶段直接删除results/stats/_stats统计兼容入口，使用真实Portfolio模块身份与pickle路径。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/lib.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/portfolio/metrics.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "76cf77c18a7f502fdcf740978bf6f1e9c2c66f669f65db67d5f2e8ffff6eafec"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/models.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。"
+      ],
+      "targetSha256": "b164aef9cdaeeda02df1c7c02aefadf8787c11b6ecab8962c398d19f38f5822d"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/periods.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "deb211f9c6fba3ad260c40c5af54d2e6ae7169af09e11c75ba550c18276b6f74"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/rates.py",
+      "targetSha256": "11262312dd8b7f02d742b1063db62d10a5b5b0fa2bd8362c4dd1a708ac7b6c2a",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增策略设置能力：纯值佣金、统计利率校验或组合设置使用示例。",
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/portfolio/snapshot.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "aa3bc3bfb53cd6b2f04a952b464111e2de2664473b8ea02d82bb877a0cbabf0f"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/stats.py",
+      "targetSha256": "895da9dca80ab9883dac27dd8f3a1920126ad8e222dc72a34901f0ea06a8eb8f",
+      "changes": [
+        "自有命名、局部静态检查及格式适配",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "按无行为变更设计迁移职责与兼容路径；经方法体对照审阅",
+        "移除运行时文件名单下划线，更新导入并保留旧路径兼容；经方法体对照审阅",
+        "内置指标：统一游标/索引/就绪与缓存接入、消费者迁移及共享行情/统计物化优化；已逐项差异审阅",
+        "指标子包迁移及逐指标封装：保持公共入口，更新内部依赖、规范输出与实现身份",
+        "更新领域实现导入路径及兼容元数据",
+        "按领域迁移实现，保持执行行为与旧限定名",
+        "交易核心0.2：显式数量、独立账本与期末政策；同步消费者及回归断言。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "首根成本纳入本金、收益桶及回撤；买入持有以输入首根起算，优化探针使用有限权益。",
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "未发布阶段直接删除results/stats/_stats统计兼容入口，使用真实Portfolio模块身份与pickle路径。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "sourceIds": [
+        "openbacktesting/_stats.py"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/portfolio/trades.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "497bac387a44a86ab6b49bc7b6f452f5a86c5467062d11f9c514298556af6e76"
+    },
+    {
+      "target": "src/openbacktesting/portfolio/trading.py",
+      "targetSha256": "76076eb9fceb91787c4f4bd4b7d5fdcead484451139256bbc27d3e719a32c8f9",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "交易核心0.2：账本、精度、成本、仓位预算或配套作者示例。",
+        "扩展策略设置：接入默认数量、无风险利率或每单位佣金及对应文档示例；保留既有执行与账本语义。",
+        "订单命名参数接口：作者请求与规范化模型分离，OCO和目标调用迁移并补齐条件校验。",
+        "下单规模扩展：三模式请求、冻结来源与结果表，配套示例直接使用百分数。",
+        "Portfolio完整事实、纯值冻结与本地报告分析；迁移原统计口径，统计对象使用真实Portfolio身份。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ]
+    },
+    {
+      "target": "src/openbacktesting/broker/observations.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio只读观察与完整报告使用示例；已按事实、方法、因果与纯值边界审阅。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "合并完整bar的多空极值更新，移除重复价格投影和字段循环；保持首根因果边界、首次并列位置及部分观测状态。 输入高低字段倒置时仅规范化观察局部范围，不改变撮合输入。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "3557970ba72ccf9d4a98154e06cfbc802d2c638b6ad3108d498c75b564976615"
+    },
+    {
+      "target": "examples/advanced/portfolio_report.py",
+      "sourceIds": [],
+      "origin": "local",
+      "changes": [
+        "Portfolio只读观察与完整报告使用示例；已按事实、方法、因果与纯值边界审阅。",
+        "Portfolio重构：迁移导入、独立观察及冻结事实、报告示例或入口断言；保留既有撮合与账本政策。",
+        "未发布阶段直接删除results/stats/_stats统计兼容入口，使用真实Portfolio模块身份与pickle路径。",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "6d49233d27155a5ee44f45b6ff6fab2862c72812979ed1cad006cf42160948e0"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/plan.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "0174df435fce6134879600af0982560f883e4da9042a75eccf1e0337694430c5"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/runner.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "992094082af78b70963f3cac513662809ef200c2c26b5a5774dc09c7d3296242"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/_semantics.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护"
+      ],
+      "targetSha256": "f43232df64d8ab5f13af268079a54ace676b1eaa5f28cc2c82224cf6809a35e5"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/models.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护"
+      ],
+      "targetSha256": "c32ac2b12650fedbc31345f4d005fc3e88a5be7ca389ab5f6a609c20b76e3d67"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/query.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "e6dbbc3e9aaef5a061c19fa84d38adbb8df38f4887f02630c873c8d90cf40029"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/__init__.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "b9c037da6e7dbba0d19d1e046c32f57f3709ae5281f1ac9938aa6f37a0db2070"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/storage.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "ae44ab1b637647b6d1b1a9b0b8511794e67ec5e5bd191024c76193d1ea337153"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/identity.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "82a069adda2772c80130baa774f075a69b5f4c3e89f64b43c27d98af7c55cf37"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/portfolio-result.schema.json",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护"
+      ],
+      "targetSha256": "ce392fffa50847ebfc7961da8d49761b47d127494f37776e9392bf75e750771c"
+    },
+    {
+      "target": "src/openbacktesting/optimizer/validation.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "77697a8f9ee274720fac6fb59b327aac734d4b1932db539f8dc0f49741faa25b"
+    },
+    {
+      "target": "src/openbacktesting/simulation/collection.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护"
+      ],
+      "targetSha256": "301461823b8ae318f000e2dd97f709c7ace753667f8fca719a81306546fa1817"
+    },
+    {
+      "target": "examples/advanced/optimizer_results.py",
+      "origin": "local",
+      "sourceIds": [],
+      "changes": [
+        "本地新增 optimizer 的计划、执行、持久化、查询及示例；协议校验副本由统一生成器维护",
+        "统一 Core 发行与导入身份，保持既有计算语义。"
+      ],
+      "targetSha256": "4e160429d5d0728017143aa154a5c5c5f593f9d3b7c1eded19b2bf838f27bae2"
+    }
+  ]
+}

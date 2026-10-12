@@ -1,0 +1,4984 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metricsDefinitionVersion": {
+          "const": "openbacktesting_portfolio_v1"
+        },
+        "executionPolicyVersion": {
+          "type": "string"
+        },
+        "tradingSchemaVersion": {
+          "type": "integer"
+        },
+        "engineVersion": {
+          "type": "string"
+        },
+        "tradingViewCompatibility": {
+          "const": "not_verified"
+        },
+        "riskFreeRate": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "metricsDefinitionVersion",
+        "executionPolicyVersion",
+        "tradingSchemaVersion",
+        "engineVersion",
+        "tradingViewCompatibility",
+        "riskFreeRate"
+      ]
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "runId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "strategyRef": {
+          "$ref": "#/$defs/jsonValue"
+        },
+        "datasetRef": {
+          "$ref": "#/$defs/jsonValue"
+        },
+        "inputRange": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": ["aware", "naive", "ordinal"]
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": ["kind", "value"]
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "executedRange": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": ["aware", "naive", "ordinal"]
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": ["kind", "value"]
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "processedThroughBar": {
+          "type": "integer"
+        },
+        "terminationReason": {
+          "type": "string"
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "runId",
+        "strategyRef",
+        "datasetRef",
+        "inputRange",
+        "executedRange",
+        "processedThroughBar",
+        "terminationReason",
+        "complete"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "instrument": {
+          "$ref": "#/$defs/jsonValue"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "timeKind": {
+          "enum": ["aware", "naive", "ordinal"]
+        },
+        "dataContext": {
+          "$ref": "#/$defs/jsonValue"
+        },
+        "settings": {
+          "$ref": "#/$defs/jsonValue"
+        },
+        "inputs": {
+          "$ref": "#/$defs/jsonValue"
+        },
+        "backtest": {
+          "$ref": "#/$defs/jsonValue"
+        }
+      },
+      "required": [
+        "instrument",
+        "timezone",
+        "timeKind",
+        "dataContext",
+        "settings",
+        "inputs",
+        "backtest"
+      ]
+    },
+    "facts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "order_id",
+              "status",
+              "filled_qty",
+              "remaining_qty",
+              "avg_fill_price",
+              "reason",
+              "triggered",
+              "side",
+              "qty",
+              "limit",
+              "stop",
+              "sl",
+              "tp",
+              "reduce_only",
+              "trade_id",
+              "expires_at",
+              "valid_bars",
+              "tag_json",
+              "group_id",
+              "kind",
+              "created_bar"
+            ],
+            "properties": {
+              "order_id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "filled_qty": {
+                "type": "number"
+              },
+              "remaining_qty": {
+                "type": "number"
+              },
+              "avg_fill_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "triggered": {
+                "type": "boolean"
+              },
+              "side": {
+                "type": "string"
+              },
+              "qty": {
+                "type": "number"
+              },
+              "limit": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "stop": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sl": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tp": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reduce_only": {
+                "type": "boolean"
+              },
+              "trade_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "expires_at": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "enum": ["aware", "naive", "ordinal"]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["kind", "value"]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "valid_bars": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "tag_json": {
+                "type": "string"
+              },
+              "group_id": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "kind": {
+                "type": "string"
+              },
+              "created_bar": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "orderSizing": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "order_id",
+              "mode",
+              "source",
+              "value",
+              "equity",
+              "reference_price",
+              "budget",
+              "qty"
+            ],
+            "properties": {
+              "order_id": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "equity": {
+                "type": "number"
+              },
+              "reference_price": {
+                "type": "number"
+              },
+              "budget": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "qty": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "orderEvents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sequence",
+              "bar_index",
+              "timestamp",
+              "phase",
+              "order_id",
+              "status",
+              "filled_qty",
+              "remaining_qty",
+              "avg_fill_price",
+              "reason",
+              "triggered"
+            ],
+            "properties": {
+              "sequence": {
+                "type": "integer"
+              },
+              "bar_index": {
+                "type": "integer"
+              },
+              "timestamp": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": ["aware", "naive", "ordinal"]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["kind", "value"]
+              },
+              "phase": {
+                "type": "string"
+              },
+              "order_id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "filled_qty": {
+                "type": "number"
+              },
+              "remaining_qty": {
+                "type": "number"
+              },
+              "avg_fill_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "triggered": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "fills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fill_id": {
+                "type": "string"
+              },
+              "order_id": {
+                "type": "string"
+              },
+              "sequence": {
+                "type": "integer"
+              },
+              "side": {
+                "enum": ["buy", "sell"]
+              },
+              "qty": {
+                "type": "number"
+              },
+              "price": {
+                "type": "number"
+              },
+              "fee": {
+                "type": "number"
+              },
+              "bar_index": {
+                "type": "integer"
+              },
+              "timestamp": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": ["aware", "naive", "ordinal"]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["kind", "value"]
+              },
+              "phase": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "fill_id",
+              "order_id",
+              "sequence",
+              "side",
+              "qty",
+              "price",
+              "fee",
+              "bar_index",
+              "timestamp",
+              "phase",
+              "reason"
+            ]
+          }
+        },
+        "allocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "allocation_id": {
+                "type": "string"
+              },
+              "fill_id": {
+                "type": "string"
+              },
+              "trade_id": {
+                "type": "string"
+              },
+              "entry_fill_id": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": ["open", "close"]
+              },
+              "qty": {
+                "type": "number"
+              },
+              "fee": {
+                "type": "number"
+              },
+              "entry_fee": {
+                "type": "number"
+              },
+              "realized_pnl_gross": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "allocation_id",
+              "fill_id",
+              "trade_id",
+              "entry_fill_id",
+              "kind",
+              "qty",
+              "fee",
+              "entry_fee",
+              "realized_pnl_gross"
+            ]
+          }
+        }
+      },
+      "required": [
+        "orders",
+        "orderSizing",
+        "orderEvents",
+        "fills",
+        "allocations"
+      ]
+    },
+    "trades": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "closedFragments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fragmentId": {
+                "type": "string"
+              },
+              "lotId": {
+                "type": "string"
+              },
+              "displayOrdinal": {
+                "type": "integer"
+              },
+              "direction": {
+                "enum": ["long", "short"]
+              },
+              "status": {
+                "const": "closed"
+              },
+              "entry": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "fillId": {
+                    "type": "string"
+                  },
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "barIndex": {
+                    "type": "integer"
+                  },
+                  "time": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "enum": ["aware", "naive", "ordinal"]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["kind", "value"]
+                  },
+                  "phase": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "signal": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "comment": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "fillId",
+                  "orderId",
+                  "barIndex",
+                  "time",
+                  "phase",
+                  "sequence",
+                  "price",
+                  "signal",
+                  "comment"
+                ]
+              },
+              "exit": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "fillId": {
+                    "type": "string"
+                  },
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "barIndex": {
+                    "type": "integer"
+                  },
+                  "time": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "enum": ["aware", "naive", "ordinal"]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["kind", "value"]
+                  },
+                  "phase": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "signal": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "comment": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "fillId",
+                  "orderId",
+                  "barIndex",
+                  "time",
+                  "phase",
+                  "sequence",
+                  "price",
+                  "signal",
+                  "comment"
+                ]
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "signedQuantity": {
+                "type": "number"
+              },
+              "entryNotional": {
+                "type": "number"
+              },
+              "exitNotional": {
+                "type": "number"
+              },
+              "pnlGross": {
+                "type": "number"
+              },
+              "pnlNet": {
+                "type": "number"
+              },
+              "entryFeeAllocated": {
+                "type": "number"
+              },
+              "exitFee": {
+                "type": "number"
+              },
+              "feeTotal": {
+                "type": "number"
+              },
+              "returnFraction": {
+                "type": "number"
+              },
+              "barsElapsed": {
+                "type": "integer"
+              },
+              "barsHeld": {
+                "type": "integer"
+              },
+              "durationNs": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "cumulativeClosedPnl": {
+                "type": "number"
+              },
+              "fractionOfInitialCapital": {
+                "type": "number"
+              },
+              "excursion": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "mfeMoney": {
+                    "type": "number"
+                  },
+                  "maeMoney": {
+                    "type": "number"
+                  },
+                  "mfeFraction": {
+                    "type": "number"
+                  },
+                  "maeFraction": {
+                    "type": "number"
+                  },
+                  "mfeBar": {
+                    "type": "integer"
+                  },
+                  "maeBar": {
+                    "type": "integer"
+                  },
+                  "coverage": {
+                    "enum": ["partial", "complete_under_bar_model"]
+                  },
+                  "methodId": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "mfeMoney",
+                  "maeMoney",
+                  "mfeFraction",
+                  "maeFraction",
+                  "mfeBar",
+                  "maeBar",
+                  "coverage",
+                  "methodId",
+                  "reason"
+                ]
+              },
+              "extensions": {
+                "$ref": "#/$defs/jsonValue"
+              }
+            },
+            "required": [
+              "fragmentId",
+              "lotId",
+              "displayOrdinal",
+              "direction",
+              "status",
+              "entry",
+              "exit",
+              "quantity",
+              "signedQuantity",
+              "entryNotional",
+              "exitNotional",
+              "pnlGross",
+              "pnlNet",
+              "entryFeeAllocated",
+              "exitFee",
+              "feeTotal",
+              "returnFraction",
+              "barsElapsed",
+              "barsHeld",
+              "durationNs",
+              "cumulativeClosedPnl",
+              "fractionOfInitialCapital",
+              "excursion",
+              "extensions"
+            ]
+          }
+        },
+        "openLots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "lotId": {
+                "type": "string"
+              },
+              "status": {
+                "const": "open"
+              },
+              "direction": {
+                "enum": ["long", "short"]
+              },
+              "entry": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "fillId": {
+                    "type": "string"
+                  },
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "barIndex": {
+                    "type": "integer"
+                  },
+                  "time": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "enum": ["aware", "naive", "ordinal"]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["kind", "value"]
+                  },
+                  "phase": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "signal": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "comment": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "fillId",
+                  "orderId",
+                  "barIndex",
+                  "time",
+                  "phase",
+                  "sequence",
+                  "price",
+                  "signal",
+                  "comment"
+                ]
+              },
+              "exit": {
+                "type": "null"
+              },
+              "remainingQuantity": {
+                "type": "number"
+              },
+              "remainingEntryFee": {
+                "type": "number"
+              },
+              "openPnlGross": {
+                "type": "number"
+              },
+              "openPnlNet": {
+                "type": "number"
+              },
+              "returnFraction": {
+                "type": "number"
+              },
+              "markPrice": {
+                "type": "number"
+              },
+              "asOf": {
+                "type": "string"
+              },
+              "excursion": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "mfeMoney": {
+                    "type": "number"
+                  },
+                  "maeMoney": {
+                    "type": "number"
+                  },
+                  "mfeFraction": {
+                    "type": "number"
+                  },
+                  "maeFraction": {
+                    "type": "number"
+                  },
+                  "mfeBar": {
+                    "type": "integer"
+                  },
+                  "maeBar": {
+                    "type": "integer"
+                  },
+                  "coverage": {
+                    "enum": ["partial", "complete_under_bar_model"]
+                  },
+                  "methodId": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "mfeMoney",
+                  "maeMoney",
+                  "mfeFraction",
+                  "maeFraction",
+                  "mfeBar",
+                  "maeBar",
+                  "coverage",
+                  "methodId",
+                  "reason"
+                ]
+              },
+              "tag": {
+                "$ref": "#/$defs/jsonValue"
+              }
+            },
+            "required": [
+              "lotId",
+              "status",
+              "direction",
+              "entry",
+              "exit",
+              "remainingQuantity",
+              "remainingEntryFee",
+              "openPnlGross",
+              "openPnlNet",
+              "returnFraction",
+              "markPrice",
+              "asOf",
+              "excursion",
+              "tag"
+            ]
+          }
+        }
+      },
+      "required": ["closedFragments", "openLots"]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "type": "string"
+              },
+              "methodId": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "ok",
+                  "not_applicable",
+                  "insufficient_data",
+                  "unsupported",
+                  "undefined",
+                  "approximate"
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sampleCount": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reference": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "unit",
+              "methodId",
+              "status",
+              "reason",
+              "sampleCount",
+              "reference"
+            ]
+          },
+          "required": ["initialCapital", "closedFragmentCount", "openLotCount"]
+        },
+        "long": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "type": "string"
+              },
+              "methodId": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "ok",
+                  "not_applicable",
+                  "insufficient_data",
+                  "unsupported",
+                  "undefined",
+                  "approximate"
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sampleCount": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reference": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "unit",
+              "methodId",
+              "status",
+              "reason",
+              "sampleCount",
+              "reference"
+            ]
+          },
+          "required": ["initialCapital", "closedFragmentCount", "openLotCount"]
+        },
+        "short": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "type": "string"
+              },
+              "methodId": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "ok",
+                  "not_applicable",
+                  "insufficient_data",
+                  "unsupported",
+                  "undefined",
+                  "approximate"
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sampleCount": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reference": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "unit",
+              "methodId",
+              "status",
+              "reason",
+              "sampleCount",
+              "reference"
+            ]
+          },
+          "required": ["initialCapital", "closedFragmentCount", "openLotCount"]
+        }
+      },
+      "required": ["all", "long", "short"]
+    },
+    "series": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "account": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "observationId": {
+                "type": "string"
+              },
+              "observationSequence": {
+                "type": "integer"
+              },
+              "barIndex": {
+                "type": "integer"
+              },
+              "timestamp": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": ["aware", "naive", "ordinal"]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["kind", "value"]
+              },
+              "phase": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "fillSequence": {
+                "type": "integer"
+              },
+              "ordered": {
+                "type": "boolean"
+              },
+              "coverage": {
+                "enum": ["partial", "complete_under_bar_model"]
+              },
+              "balance": {
+                "type": "number"
+              },
+              "equity": {
+                "type": "number"
+              },
+              "realized_pnl_gross": {
+                "type": "number"
+              },
+              "unrealized_pnl_gross": {
+                "type": "number"
+              },
+              "fees_paid": {
+                "type": "number"
+              },
+              "margin_used": {
+                "type": "number"
+              },
+              "margin_available": {
+                "type": "number"
+              },
+              "gross_notional": {
+                "type": "number"
+              },
+              "net_notional": {
+                "type": "number"
+              },
+              "net_qty": {
+                "type": "number"
+              },
+              "gross_qty": {
+                "type": "number"
+              },
+              "long_qty": {
+                "type": "number"
+              },
+              "short_qty": {
+                "type": "number"
+              },
+              "unrealized_pnl_net": {
+                "type": "number"
+              },
+              "entry_fees_remaining": {
+                "type": "number"
+              },
+              "long_avg_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "short_avg_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "avg_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "return_fraction": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "observationId",
+              "observationSequence",
+              "barIndex",
+              "timestamp",
+              "phase",
+              "price",
+              "fillSequence",
+              "ordered",
+              "coverage",
+              "balance",
+              "equity",
+              "realized_pnl_gross",
+              "unrealized_pnl_gross",
+              "fees_paid",
+              "margin_used",
+              "margin_available",
+              "gross_notional",
+              "net_notional",
+              "net_qty",
+              "gross_qty",
+              "long_qty",
+              "short_qty",
+              "unrealized_pnl_net",
+              "entry_fees_remaining",
+              "long_avg_price",
+              "short_avg_price",
+              "avg_price",
+              "return_fraction"
+            ]
+          }
+        },
+        "close": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "observationId": {
+                "type": "string"
+              },
+              "observationSequence": {
+                "type": "integer"
+              },
+              "barIndex": {
+                "type": "integer"
+              },
+              "timestamp": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": ["aware", "naive", "ordinal"]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["kind", "value"]
+              },
+              "phase": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "fillSequence": {
+                "type": "integer"
+              },
+              "ordered": {
+                "type": "boolean"
+              },
+              "coverage": {
+                "enum": ["partial", "complete_under_bar_model"]
+              },
+              "balance": {
+                "type": "number"
+              },
+              "equity": {
+                "type": "number"
+              },
+              "realized_pnl_gross": {
+                "type": "number"
+              },
+              "unrealized_pnl_gross": {
+                "type": "number"
+              },
+              "fees_paid": {
+                "type": "number"
+              },
+              "margin_used": {
+                "type": "number"
+              },
+              "margin_available": {
+                "type": "number"
+              },
+              "gross_notional": {
+                "type": "number"
+              },
+              "net_notional": {
+                "type": "number"
+              },
+              "net_qty": {
+                "type": "number"
+              },
+              "gross_qty": {
+                "type": "number"
+              },
+              "long_qty": {
+                "type": "number"
+              },
+              "short_qty": {
+                "type": "number"
+              },
+              "unrealized_pnl_net": {
+                "type": "number"
+              },
+              "entry_fees_remaining": {
+                "type": "number"
+              },
+              "long_avg_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "short_avg_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "avg_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "return_fraction": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "observationId",
+              "observationSequence",
+              "barIndex",
+              "timestamp",
+              "phase",
+              "price",
+              "fillSequence",
+              "ordered",
+              "coverage",
+              "balance",
+              "equity",
+              "realized_pnl_gross",
+              "unrealized_pnl_gross",
+              "fees_paid",
+              "margin_used",
+              "margin_available",
+              "gross_notional",
+              "net_notional",
+              "net_qty",
+              "gross_qty",
+              "long_qty",
+              "short_qty",
+              "unrealized_pnl_net",
+              "entry_fees_remaining",
+              "long_avg_price",
+              "short_avg_price",
+              "avg_price",
+              "return_fraction"
+            ]
+          }
+        },
+        "directions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["long", "short"],
+          "properties": {
+            "long": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "observationId",
+                  "barIndex",
+                  "timestamp",
+                  "phase",
+                  "contribution",
+                  "equity"
+                ],
+                "properties": {
+                  "observationId": {
+                    "type": "string"
+                  },
+                  "barIndex": {
+                    "type": "integer"
+                  },
+                  "timestamp": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "enum": ["aware", "naive", "ordinal"]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["kind", "value"]
+                  },
+                  "phase": {
+                    "type": "string"
+                  },
+                  "contribution": {
+                    "type": "number"
+                  },
+                  "equity": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "short": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "observationId",
+                  "barIndex",
+                  "timestamp",
+                  "phase",
+                  "contribution",
+                  "equity"
+                ],
+                "properties": {
+                  "observationId": {
+                    "type": "string"
+                  },
+                  "barIndex": {
+                    "type": "integer"
+                  },
+                  "timestamp": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "enum": ["aware", "naive", "ordinal"]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["kind", "value"]
+                  },
+                  "phase": {
+                    "type": "string"
+                  },
+                  "contribution": {
+                    "type": "number"
+                  },
+                  "equity": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "benchmark": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["input_start_close", "first_entry_price"],
+          "properties": {
+            "input_start_close": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "quantity",
+                "cash",
+                "entryPrice",
+                "startBar",
+                "costPolicy",
+                "points",
+                "summary"
+              ],
+              "properties": {
+                "status": {
+                  "enum": ["ok"]
+                },
+                "quantity": {
+                  "type": "number"
+                },
+                "cash": {
+                  "type": "number"
+                },
+                "entryPrice": {
+                  "type": "number"
+                },
+                "startBar": {
+                  "type": "integer"
+                },
+                "costPolicy": {
+                  "enum": ["none"]
+                },
+                "points": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "observationId",
+                      "barIndex",
+                      "equity",
+                      "returnFraction",
+                      "strategyReturn",
+                      "outperformance",
+                      "outperformanceMoney",
+                      "pnlMoney"
+                    ],
+                    "properties": {
+                      "observationId": {
+                        "type": "string"
+                      },
+                      "barIndex": {
+                        "type": "integer"
+                      },
+                      "equity": {
+                        "type": "number"
+                      },
+                      "returnFraction": {
+                        "type": "number"
+                      },
+                      "strategyReturn": {
+                        "type": "number"
+                      },
+                      "outperformance": {
+                        "type": "number"
+                      },
+                      "outperformanceMoney": {
+                        "type": "number"
+                      },
+                      "pnlMoney": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "summary": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "returnFraction",
+                    "strategyReturn",
+                    "outperformance",
+                    "outperformanceMoney"
+                  ],
+                  "properties": {
+                    "returnFraction": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["minimum", "maximum", "current"],
+                      "properties": {
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "current": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "strategyReturn": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["minimum", "maximum", "current"],
+                      "properties": {
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "current": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "outperformance": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["minimum", "maximum", "current"],
+                      "properties": {
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "current": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "outperformanceMoney": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["minimum", "maximum", "current"],
+                      "properties": {
+                        "minimum": {
+                          "type": "number"
+                        },
+                        "maximum": {
+                          "type": "number"
+                        },
+                        "current": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "first_entry_price": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "status",
+                    "quantity",
+                    "cash",
+                    "entryPrice",
+                    "startBar",
+                    "costPolicy",
+                    "points",
+                    "summary"
+                  ],
+                  "properties": {
+                    "status": {
+                      "enum": ["ok"]
+                    },
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "cash": {
+                      "type": "number"
+                    },
+                    "entryPrice": {
+                      "type": "number"
+                    },
+                    "startBar": {
+                      "type": "integer"
+                    },
+                    "costPolicy": {
+                      "enum": ["none"]
+                    },
+                    "points": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "observationId",
+                          "barIndex",
+                          "equity",
+                          "returnFraction",
+                          "strategyReturn",
+                          "outperformance",
+                          "outperformanceMoney",
+                          "pnlMoney"
+                        ],
+                        "properties": {
+                          "observationId": {
+                            "type": "string"
+                          },
+                          "barIndex": {
+                            "type": "integer"
+                          },
+                          "equity": {
+                            "type": "number"
+                          },
+                          "returnFraction": {
+                            "type": "number"
+                          },
+                          "strategyReturn": {
+                            "type": "number"
+                          },
+                          "outperformance": {
+                            "type": "number"
+                          },
+                          "outperformanceMoney": {
+                            "type": "number"
+                          },
+                          "pnlMoney": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "summary": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "returnFraction",
+                        "strategyReturn",
+                        "outperformance",
+                        "outperformanceMoney"
+                      ],
+                      "properties": {
+                        "returnFraction": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": ["minimum", "maximum", "current"],
+                          "properties": {
+                            "minimum": {
+                              "type": "number"
+                            },
+                            "maximum": {
+                              "type": "number"
+                            },
+                            "current": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "strategyReturn": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": ["minimum", "maximum", "current"],
+                          "properties": {
+                            "minimum": {
+                              "type": "number"
+                            },
+                            "maximum": {
+                              "type": "number"
+                            },
+                            "current": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "outperformance": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": ["minimum", "maximum", "current"],
+                          "properties": {
+                            "minimum": {
+                              "type": "number"
+                            },
+                            "maximum": {
+                              "type": "number"
+                            },
+                            "current": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "outperformanceMoney": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": ["minimum", "maximum", "current"],
+                          "properties": {
+                            "minimum": {
+                              "type": "number"
+                            },
+                            "maximum": {
+                              "type": "number"
+                            },
+                            "current": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["status", "reason", "points"],
+                  "properties": {
+                    "status": {
+                      "enum": ["not_applicable"]
+                    },
+                    "reason": {
+                      "enum": ["no_entry"]
+                    },
+                    "points": {
+                      "type": "array",
+                      "maxItems": 0,
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "observationId",
+                          "barIndex",
+                          "equity",
+                          "returnFraction",
+                          "strategyReturn",
+                          "outperformance",
+                          "outperformanceMoney",
+                          "pnlMoney"
+                        ],
+                        "properties": {
+                          "observationId": {
+                            "type": "string"
+                          },
+                          "barIndex": {
+                            "type": "integer"
+                          },
+                          "equity": {
+                            "type": "number"
+                          },
+                          "returnFraction": {
+                            "type": "number"
+                          },
+                          "strategyReturn": {
+                            "type": "number"
+                          },
+                          "outperformance": {
+                            "type": "number"
+                          },
+                          "outperformanceMoney": {
+                            "type": "number"
+                          },
+                          "pnlMoney": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "closedCumulative": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fragmentId", "value", "fraction"],
+            "properties": {
+              "fragmentId": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "fraction": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "margin": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["observationId", "margin", "utilization"],
+            "properties": {
+              "observationId": {
+                "type": "string"
+              },
+              "margin": {
+                "type": "number"
+              },
+              "utilization": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "account",
+        "close",
+        "directions",
+        "benchmark",
+        "closedCumulative",
+        "margin"
+      ]
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "breakdown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["signal", "direction"],
+          "properties": {
+            "signal": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["key", "metrics", "openPnlNet"],
+                "properties": {
+                  "key": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "metrics": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "value": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "kind": {
+                                      "enum": ["aware", "naive", "ordinal"]
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["kind", "value"]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "unit": {
+                          "type": "string"
+                        },
+                        "methodId": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "enum": [
+                            "ok",
+                            "not_applicable",
+                            "insufficient_data",
+                            "unsupported",
+                            "undefined",
+                            "approximate"
+                          ]
+                        },
+                        "reason": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "sampleCount": {
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reference": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "unit",
+                        "methodId",
+                        "status",
+                        "reason",
+                        "sampleCount",
+                        "reference"
+                      ]
+                    }
+                  },
+                  "openPnlNet": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "direction": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["key", "metrics", "openPnlNet"],
+                "properties": {
+                  "key": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "metrics": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "value": {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "kind": {
+                                      "enum": ["aware", "naive", "ordinal"]
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["kind", "value"]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "unit": {
+                          "type": "string"
+                        },
+                        "methodId": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "enum": [
+                            "ok",
+                            "not_applicable",
+                            "insufficient_data",
+                            "unsupported",
+                            "undefined",
+                            "approximate"
+                          ]
+                        },
+                        "reason": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "sampleCount": {
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "reference": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "unit",
+                        "methodId",
+                        "status",
+                        "reason",
+                        "sampleCount",
+                        "reference"
+                      ]
+                    }
+                  },
+                  "openPnlNet": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "periodical": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason", "buckets", "correlations"],
+          "properties": {
+            "status": {
+              "enum": ["ok", "not_applicable"]
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "buckets": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [],
+              "properties": {
+                "daily": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "start",
+                      "endExclusive",
+                      "partial",
+                      "carriedForward",
+                      "count",
+                      "firstBar",
+                      "lastBar",
+                      "closedNetPnl",
+                      "grossProfit",
+                      "grossLoss",
+                      "closedFees",
+                      "fees",
+                      "equityReturn",
+                      "benchmarkReturn",
+                      "favorableExcursion",
+                      "adverseExcursion",
+                      "coverage",
+                      "outperformance"
+                    ],
+                    "properties": {
+                      "start": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "endExclusive": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "partial": {
+                        "type": "boolean"
+                      },
+                      "carriedForward": {
+                        "type": "boolean"
+                      },
+                      "count": {
+                        "type": "integer"
+                      },
+                      "firstBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lastBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "closedNetPnl": {
+                        "type": "number"
+                      },
+                      "grossProfit": {
+                        "type": "number"
+                      },
+                      "grossLoss": {
+                        "type": "number"
+                      },
+                      "closedFees": {
+                        "type": "number"
+                      },
+                      "fees": {
+                        "type": "number"
+                      },
+                      "equityReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "benchmarkReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "favorableExcursion": {
+                        "type": "number"
+                      },
+                      "adverseExcursion": {
+                        "type": "number"
+                      },
+                      "coverage": {
+                        "enum": ["partial", "complete_under_bar_model"]
+                      },
+                      "outperformance": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "weekly": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "start",
+                      "endExclusive",
+                      "partial",
+                      "carriedForward",
+                      "count",
+                      "firstBar",
+                      "lastBar",
+                      "closedNetPnl",
+                      "grossProfit",
+                      "grossLoss",
+                      "closedFees",
+                      "fees",
+                      "equityReturn",
+                      "benchmarkReturn",
+                      "favorableExcursion",
+                      "adverseExcursion",
+                      "coverage",
+                      "outperformance"
+                    ],
+                    "properties": {
+                      "start": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "endExclusive": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "partial": {
+                        "type": "boolean"
+                      },
+                      "carriedForward": {
+                        "type": "boolean"
+                      },
+                      "count": {
+                        "type": "integer"
+                      },
+                      "firstBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lastBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "closedNetPnl": {
+                        "type": "number"
+                      },
+                      "grossProfit": {
+                        "type": "number"
+                      },
+                      "grossLoss": {
+                        "type": "number"
+                      },
+                      "closedFees": {
+                        "type": "number"
+                      },
+                      "fees": {
+                        "type": "number"
+                      },
+                      "equityReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "benchmarkReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "favorableExcursion": {
+                        "type": "number"
+                      },
+                      "adverseExcursion": {
+                        "type": "number"
+                      },
+                      "coverage": {
+                        "enum": ["partial", "complete_under_bar_model"]
+                      },
+                      "outperformance": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "monthly": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "start",
+                      "endExclusive",
+                      "partial",
+                      "carriedForward",
+                      "count",
+                      "firstBar",
+                      "lastBar",
+                      "closedNetPnl",
+                      "grossProfit",
+                      "grossLoss",
+                      "closedFees",
+                      "fees",
+                      "equityReturn",
+                      "benchmarkReturn",
+                      "favorableExcursion",
+                      "adverseExcursion",
+                      "coverage",
+                      "outperformance"
+                    ],
+                    "properties": {
+                      "start": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "endExclusive": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "partial": {
+                        "type": "boolean"
+                      },
+                      "carriedForward": {
+                        "type": "boolean"
+                      },
+                      "count": {
+                        "type": "integer"
+                      },
+                      "firstBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lastBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "closedNetPnl": {
+                        "type": "number"
+                      },
+                      "grossProfit": {
+                        "type": "number"
+                      },
+                      "grossLoss": {
+                        "type": "number"
+                      },
+                      "closedFees": {
+                        "type": "number"
+                      },
+                      "fees": {
+                        "type": "number"
+                      },
+                      "equityReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "benchmarkReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "favorableExcursion": {
+                        "type": "number"
+                      },
+                      "adverseExcursion": {
+                        "type": "number"
+                      },
+                      "coverage": {
+                        "enum": ["partial", "complete_under_bar_model"]
+                      },
+                      "outperformance": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "quarterly": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "start",
+                      "endExclusive",
+                      "partial",
+                      "carriedForward",
+                      "count",
+                      "firstBar",
+                      "lastBar",
+                      "closedNetPnl",
+                      "grossProfit",
+                      "grossLoss",
+                      "closedFees",
+                      "fees",
+                      "equityReturn",
+                      "benchmarkReturn",
+                      "favorableExcursion",
+                      "adverseExcursion",
+                      "coverage",
+                      "outperformance"
+                    ],
+                    "properties": {
+                      "start": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "endExclusive": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "partial": {
+                        "type": "boolean"
+                      },
+                      "carriedForward": {
+                        "type": "boolean"
+                      },
+                      "count": {
+                        "type": "integer"
+                      },
+                      "firstBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lastBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "closedNetPnl": {
+                        "type": "number"
+                      },
+                      "grossProfit": {
+                        "type": "number"
+                      },
+                      "grossLoss": {
+                        "type": "number"
+                      },
+                      "closedFees": {
+                        "type": "number"
+                      },
+                      "fees": {
+                        "type": "number"
+                      },
+                      "equityReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "benchmarkReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "favorableExcursion": {
+                        "type": "number"
+                      },
+                      "adverseExcursion": {
+                        "type": "number"
+                      },
+                      "coverage": {
+                        "enum": ["partial", "complete_under_bar_model"]
+                      },
+                      "outperformance": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "yearly": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "start",
+                      "endExclusive",
+                      "partial",
+                      "carriedForward",
+                      "count",
+                      "firstBar",
+                      "lastBar",
+                      "closedNetPnl",
+                      "grossProfit",
+                      "grossLoss",
+                      "closedFees",
+                      "fees",
+                      "equityReturn",
+                      "benchmarkReturn",
+                      "favorableExcursion",
+                      "adverseExcursion",
+                      "coverage",
+                      "outperformance"
+                    ],
+                    "properties": {
+                      "start": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "endExclusive": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      },
+                      "partial": {
+                        "type": "boolean"
+                      },
+                      "carriedForward": {
+                        "type": "boolean"
+                      },
+                      "count": {
+                        "type": "integer"
+                      },
+                      "firstBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lastBar": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "closedNetPnl": {
+                        "type": "number"
+                      },
+                      "grossProfit": {
+                        "type": "number"
+                      },
+                      "grossLoss": {
+                        "type": "number"
+                      },
+                      "closedFees": {
+                        "type": "number"
+                      },
+                      "fees": {
+                        "type": "number"
+                      },
+                      "equityReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "benchmarkReturn": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "favorableExcursion": {
+                        "type": "number"
+                      },
+                      "adverseExcursion": {
+                        "type": "number"
+                      },
+                      "coverage": {
+                        "enum": ["partial", "complete_under_bar_model"]
+                      },
+                      "outperformance": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "correlations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [],
+              "properties": {
+                "daily": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "kind": {
+                                  "enum": ["aware", "naive", "ordinal"]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": ["kind", "value"]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "methodId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "not_applicable",
+                        "insufficient_data",
+                        "unsupported",
+                        "undefined",
+                        "approximate"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sampleCount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reference": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit",
+                    "methodId",
+                    "status",
+                    "reason",
+                    "sampleCount",
+                    "reference"
+                  ]
+                },
+                "weekly": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "kind": {
+                                  "enum": ["aware", "naive", "ordinal"]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": ["kind", "value"]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "methodId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "not_applicable",
+                        "insufficient_data",
+                        "unsupported",
+                        "undefined",
+                        "approximate"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sampleCount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reference": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit",
+                    "methodId",
+                    "status",
+                    "reason",
+                    "sampleCount",
+                    "reference"
+                  ]
+                },
+                "monthly": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "kind": {
+                                  "enum": ["aware", "naive", "ordinal"]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": ["kind", "value"]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "methodId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "not_applicable",
+                        "insufficient_data",
+                        "unsupported",
+                        "undefined",
+                        "approximate"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sampleCount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reference": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit",
+                    "methodId",
+                    "status",
+                    "reason",
+                    "sampleCount",
+                    "reference"
+                  ]
+                },
+                "quarterly": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "kind": {
+                                  "enum": ["aware", "naive", "ordinal"]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": ["kind", "value"]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "methodId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "not_applicable",
+                        "insufficient_data",
+                        "unsupported",
+                        "undefined",
+                        "approximate"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sampleCount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reference": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit",
+                    "methodId",
+                    "status",
+                    "reason",
+                    "sampleCount",
+                    "reference"
+                  ]
+                },
+                "yearly": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "kind": {
+                                  "enum": ["aware", "naive", "ordinal"]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": ["kind", "value"]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "methodId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "not_applicable",
+                        "insufficient_data",
+                        "unsupported",
+                        "undefined",
+                        "approximate"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sampleCount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reference": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit",
+                    "methodId",
+                    "status",
+                    "reason",
+                    "sampleCount",
+                    "reference"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "distribution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "histogram",
+            "interval",
+            "winners",
+            "losers",
+            "evens",
+            "averageProfitReturn",
+            "averageLossReturn",
+            "outliers"
+          ],
+          "properties": {
+            "histogram": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["lower", "upper", "count", "fragmentIds"],
+                "properties": {
+                  "lower": {
+                    "type": "number"
+                  },
+                  "upper": {
+                    "type": "number"
+                  },
+                  "count": {
+                    "type": "integer"
+                  },
+                  "fragmentIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "interval": {
+              "enum": ["left_closed_right_open"]
+            },
+            "winners": {
+              "type": "integer"
+            },
+            "losers": {
+              "type": "integer"
+            },
+            "evens": {
+              "type": "integer"
+            },
+            "averageProfitReturn": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "averageLossReturn": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "outliers": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "methodId",
+                "lower",
+                "upper",
+                "fragmentIds",
+                "count",
+                "pnl"
+              ],
+              "properties": {
+                "methodId": {
+                  "type": "string"
+                },
+                "lower": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "upper": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "fragmentIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "pnl": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "kind": {
+                                  "enum": ["aware", "naive", "ordinal"]
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": ["kind", "value"]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "methodId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "not_applicable",
+                        "insufficient_data",
+                        "unsupported",
+                        "undefined",
+                        "approximate"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "sampleCount": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reference": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit",
+                    "methodId",
+                    "status",
+                    "reason",
+                    "sampleCount",
+                    "reference"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "streaks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rows", "summary", "methodId"],
+          "properties": {
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "sign",
+                  "count",
+                  "amount",
+                  "startFragmentId",
+                  "endFragmentId",
+                  "current"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "sign": {
+                    "enum": [-1, 1]
+                  },
+                  "count": {
+                    "type": "integer"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "startFragmentId": {
+                    "type": "string"
+                  },
+                  "endFragmentId": {
+                    "type": "string"
+                  },
+                  "current": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "summary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["winning", "losing"],
+              "properties": {
+                "winning": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "longest",
+                    "average",
+                    "maximumAmount",
+                    "averageAmount"
+                  ],
+                  "properties": {
+                    "longest": {
+                      "type": "integer"
+                    },
+                    "average": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maximumAmount": {
+                      "type": "number"
+                    },
+                    "averageAmount": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "losing": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "longest",
+                    "average",
+                    "maximumAmount",
+                    "averageAmount"
+                  ],
+                  "properties": {
+                    "longest": {
+                      "type": "integer"
+                    },
+                    "average": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maximumAmount": {
+                      "type": "number"
+                    },
+                    "averageAmount": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "methodId": {
+              "type": "string"
+            }
+          }
+        },
+        "timePatterns": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reason", "groups"],
+          "properties": {
+            "status": {
+              "enum": ["ok", "not_applicable"]
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "groups": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [],
+              "properties": {
+                "hours": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["rows", "bestKeys"],
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "key",
+                          "count",
+                          "wins",
+                          "losses",
+                          "evens",
+                          "winRate",
+                          "pnl",
+                          "averageBars"
+                        ],
+                        "properties": {
+                          "key": {
+                            "type": "integer"
+                          },
+                          "count": {
+                            "type": "integer"
+                          },
+                          "wins": {
+                            "type": "integer"
+                          },
+                          "losses": {
+                            "type": "integer"
+                          },
+                          "evens": {
+                            "type": "integer"
+                          },
+                          "winRate": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "pnl": {
+                            "type": "number"
+                          },
+                          "averageBars": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "bestKeys": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "days": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["rows", "bestKeys"],
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "key",
+                          "count",
+                          "wins",
+                          "losses",
+                          "evens",
+                          "winRate",
+                          "pnl",
+                          "averageBars"
+                        ],
+                        "properties": {
+                          "key": {
+                            "type": "integer"
+                          },
+                          "count": {
+                            "type": "integer"
+                          },
+                          "wins": {
+                            "type": "integer"
+                          },
+                          "losses": {
+                            "type": "integer"
+                          },
+                          "evens": {
+                            "type": "integer"
+                          },
+                          "winRate": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "pnl": {
+                            "type": "number"
+                          },
+                          "averageBars": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "bestKeys": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "months": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["rows", "bestKeys"],
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "key",
+                          "count",
+                          "wins",
+                          "losses",
+                          "evens",
+                          "winRate",
+                          "pnl",
+                          "averageBars"
+                        ],
+                        "properties": {
+                          "key": {
+                            "type": "integer"
+                          },
+                          "count": {
+                            "type": "integer"
+                          },
+                          "wins": {
+                            "type": "integer"
+                          },
+                          "losses": {
+                            "type": "integer"
+                          },
+                          "evens": {
+                            "type": "integer"
+                          },
+                          "winRate": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "pnl": {
+                            "type": "number"
+                          },
+                          "averageBars": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "bestKeys": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "growthAndDecline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["drawdowns", "alternating", "summary"],
+          "properties": {
+            "drawdowns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "start",
+                  "end",
+                  "extreme",
+                  "amount",
+                  "fraction",
+                  "durationNs",
+                  "current",
+                  "recovered"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": ["drawdown", "runup", "decline"]
+                  },
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  },
+                  "extreme": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "fraction": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "durationNs": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "current": {
+                    "type": "boolean"
+                  },
+                  "recovered": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "alternating": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "start",
+                  "end",
+                  "extreme",
+                  "amount",
+                  "fraction",
+                  "durationNs",
+                  "current",
+                  "recovered"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": ["drawdown", "runup", "decline"]
+                  },
+                  "start": {
+                    "type": "string"
+                  },
+                  "end": {
+                    "type": "string"
+                  },
+                  "extreme": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "fraction": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "durationNs": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "current": {
+                    "type": "boolean"
+                  },
+                  "recovered": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "summary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["drawdown", "growth", "decline"],
+              "properties": {
+                "drawdown": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "maximum",
+                    "average",
+                    "maximumFraction",
+                    "averageFraction",
+                    "averageDurationNs",
+                    "current"
+                  ],
+                  "properties": {
+                    "maximum": {
+                      "type": "number"
+                    },
+                    "average": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maximumFraction": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "averageFraction": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "averageDurationNs": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "current": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "kind",
+                            "start",
+                            "end",
+                            "extreme",
+                            "amount",
+                            "fraction",
+                            "durationNs",
+                            "current",
+                            "recovered"
+                          ],
+                          "properties": {
+                            "kind": {
+                              "enum": ["drawdown", "runup", "decline"]
+                            },
+                            "start": {
+                              "type": "string"
+                            },
+                            "end": {
+                              "type": "string"
+                            },
+                            "extreme": {
+                              "type": "string"
+                            },
+                            "amount": {
+                              "type": "number"
+                            },
+                            "fraction": {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "durationNs": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "current": {
+                              "type": "boolean"
+                            },
+                            "recovered": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "growth": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "maximum",
+                    "average",
+                    "maximumFraction",
+                    "averageFraction",
+                    "averageDurationNs",
+                    "current"
+                  ],
+                  "properties": {
+                    "maximum": {
+                      "type": "number"
+                    },
+                    "average": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maximumFraction": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "averageFraction": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "averageDurationNs": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "current": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "kind",
+                            "start",
+                            "end",
+                            "extreme",
+                            "amount",
+                            "fraction",
+                            "durationNs",
+                            "current",
+                            "recovered"
+                          ],
+                          "properties": {
+                            "kind": {
+                              "enum": ["drawdown", "runup", "decline"]
+                            },
+                            "start": {
+                              "type": "string"
+                            },
+                            "end": {
+                              "type": "string"
+                            },
+                            "extreme": {
+                              "type": "string"
+                            },
+                            "amount": {
+                              "type": "number"
+                            },
+                            "fraction": {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "durationNs": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "current": {
+                              "type": "boolean"
+                            },
+                            "recovered": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "decline": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "maximum",
+                    "average",
+                    "maximumFraction",
+                    "averageFraction",
+                    "averageDurationNs",
+                    "current"
+                  ],
+                  "properties": {
+                    "maximum": {
+                      "type": "number"
+                    },
+                    "average": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maximumFraction": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "averageFraction": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "averageDurationNs": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "current": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "kind",
+                            "start",
+                            "end",
+                            "extreme",
+                            "amount",
+                            "fraction",
+                            "durationNs",
+                            "current",
+                            "recovered"
+                          ],
+                          "properties": {
+                            "kind": {
+                              "enum": ["drawdown", "runup", "decline"]
+                            },
+                            "start": {
+                              "type": "string"
+                            },
+                            "end": {
+                              "type": "string"
+                            },
+                            "extreme": {
+                              "type": "string"
+                            },
+                            "amount": {
+                              "type": "number"
+                            },
+                            "fraction": {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "durationNs": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "current": {
+                              "type": "boolean"
+                            },
+                            "recovered": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "liquidations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["insolvent", "end_liquidation"],
+          "properties": {
+            "insolvent": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["quantity", "notional"],
+              "properties": {
+                "quantity": {
+                  "type": "number"
+                },
+                "notional": {
+                  "type": "number"
+                }
+              }
+            },
+            "end_liquidation": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["quantity", "notional"],
+              "properties": {
+                "quantity": {
+                  "type": "number"
+                },
+                "notional": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "directionalMonthly": {
+          "type": "object",
+          "required": ["long", "short"],
+          "additionalProperties": false,
+          "properties": {
+            "long": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["equityReturn"],
+                "additionalProperties": false,
+                "properties": {
+                  "equityReturn": {
+                    "type": ["number", "null"]
+                  }
+                }
+              }
+            },
+            "short": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["equityReturn"],
+                "additionalProperties": false,
+                "properties": {
+                  "equityReturn": {
+                    "type": ["number", "null"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "breakdown",
+        "periodical",
+        "distribution",
+        "streaks",
+        "timePatterns",
+        "growthAndDecline",
+        "liquidations",
+        "directionalMonthly"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "legacy": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "kind": {
+                            "enum": ["aware", "naive", "ordinal"]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["kind", "value"]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "type": "string"
+              },
+              "methodId": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "ok",
+                  "not_applicable",
+                  "insufficient_data",
+                  "unsupported",
+                  "undefined",
+                  "approximate"
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sampleCount": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reference": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "unit",
+              "methodId",
+              "status",
+              "reason",
+              "sampleCount",
+              "reference"
+            ]
+          }
+        }
+      },
+      "required": ["legacy"]
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/jsonValue"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "semantics",
+    "run",
+    "context",
+    "facts",
+    "trades",
+    "summary",
+    "series",
+    "analysis",
+    "extensions",
+    "diagnostics"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PortfolioResult",
+  "$defs": {
+    "jsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/jsonValue"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/jsonValue"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "openbacktesting"
+version = "0.2.0"
+description = "OpenBacktesting 原生历史回测内核"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "numpy>=2,<3",
+    "pandas>=2.2,<4",
+    "pandas-ta-classic==0.8.32",
+]
+
+[project.optional-dependencies]
+optimize = ["sambo>=1.25,<2", "scikit-learn>=1.5,<2"]
+test = ["sambo>=1.25,<2", "scikit-learn>=1.5,<2", "tqdm>=4.66,<5", "ipywidgets>=8,<9", "pytest>=8.4,<10"]
+
+[dependency-groups]
+dev = ["ruff>=0.13,<1"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/openbacktesting"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/README.md", "/pyproject.toml", "/uv.lock", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
+exclude = ["**/__pycache__", "**/*.pyc", "**/.pytest_cache", "/.verification", "/.venv", "/dist"]
