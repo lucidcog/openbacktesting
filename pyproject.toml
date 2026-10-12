@@ -7,6 +7,8 @@ name = "openbacktesting"
 version = "0.2.0"
 description = "OpenBacktesting native historical backtesting engine"
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.12,<3.15"
 dependencies = [
     "numpy>=2,<3",
@@ -32,5 +34,5 @@ testpaths = ["tests"]
 packages = ["src/openbacktesting"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
+include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/LICENSE", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
 exclude = ["**/__pycache__", "**/*.pyc", "**/.pytest_cache", "/.verification", "/.venv", "/dist"]

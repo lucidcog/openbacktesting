@@ -3919,9 +3919,10 @@
       "source": "python/core/pyproject.toml",
       "sourceSha256": "650330f2216b1b8002eb96cab0b8e1357f1f2e6c0b5a71b7587807e5180c8546",
       "target": "pyproject.toml",
-      "targetSha256": "826a731564b63aef4f9c39fb54d26f56ab0828af42cd21b46bf1ae13b67a05d1",
+      "targetSha256": "ab011a17133d5a8b94d8e4144f7d1c69493dc5e146c1cff3368ccddaec142027",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Added the Apache-2.0 project license declaration and included the license in distribution artifacts."
       ]
     },
     {
@@ -6505,10 +6506,11 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "74b3e7a7e35d5fb896cbaaa1ac46b582c1d0625fb291cab9665b9fbea34610f8",
+      "targetSha256": "698b49f59865cfbee7384cd8da58ecf98ae319d6581c24ad4bbe85d5cdd5bd9a",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Documented the Apache-2.0 project declaration, retained third-party terms, and identified the upstream AGPL-3.0 relicensing constraint."
       ]
     }
   ]

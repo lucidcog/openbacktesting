@@ -71,3 +71,9 @@ Native `run()` returns a pandas Series with these fields:
 `Start`, `End`, `Duration`, `Exposure Time [%]`, `Equity Final [$]`, `Equity Peak [$]`, `Return [%]`, `Buy & Hold Return [%]`, `Return (Ann.) [%]`, `Volatility (Ann.) [%]`, `CAGR [%]`, `Sharpe Ratio`, `Sortino Ratio`, `Calmar Ratio`, `Alpha [%]`, `Beta`, `Max. Drawdown [%]`, `Avg. Drawdown [%]`, `Max. Drawdown Duration`, `Avg. Drawdown Duration`, `# Trades`, `Win Rate [%]`, `Best Trade [%]`, `Worst Trade [%]`, `Avg. Trade [%]`, `Max. Trade Duration`, `Avg. Trade Duration`, `Profit Factor`, `Expectancy [%]`, `SQN`, `Kelly Criterion`, `_strategy`, `_equity_curve`, `_trades`, `_orders`, `_order_sizing`, `_order_events`, `_fills`, `_trade_allocations`, `_positions`, `_account_curve`, `_final_account`, `_open_trades`, `Commissions [$]`, `# Closed Lots`.
 
 Underscored fields contain native diagnostic data and do not yet form a stable cross-language Result Contract. See `docs/core/guides/results.md` in the source repository.
+
+## License
+
+The project license declaration is [Apache-2.0](LICENSE). Third-party materials retain their original licensing terms, including the [indicator reference data](tests/fixtures/indicator_expansion/README.md).
+
+The [source manifest](source-manifest.json) records adaptations from an [AGPL-3.0 upstream snapshot](https://github.com/kernc/backtesting.py/blob/ca2e2611621e472542ba90f7243a1fa06a7d7108/LICENSE.md). The Apache-2.0 declaration does not replace those upstream terms; distributing the derived code under Apache-2.0 alone requires separate authorization.
