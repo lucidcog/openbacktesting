@@ -14,7 +14,7 @@
       </a>
       <span data-md-component="header-topic" hidden></span>
     </div>
-    <a class="ob-sponsor ob-sponsor--header" href="https://pineify.app" target="_blank" rel="sponsored noopener" aria-label="Sponsored by Pineify — explore the AI trading toolkit" data-nosnippet>
+    <a class="ob-sponsor ob-sponsor--header" href="https://pineify.app" target="_blank" rel="sponsored noopener" aria-label="Sponsored by Pineify — explore the AI trading toolkit" data-umami-event="docs-sponsor-click" data-umami-event-placement="header" data-nosnippet>
       <img src="{{ '_static/pineify-logo.svg' | url }}" width="30" height="30" alt="">
       <span class="ob-sponsor__brand"><small>Sponsored by</small><strong>Pineify</strong></span>
       <span class="ob-sponsor__pitch">AI Trading Toolkit <span aria-hidden="true">↗</span></span>
@@ -29,7 +29,7 @@
       {% endif %}
     {% endif %}
     {% if config.repo_url %}
-      <a class="md-header__button md-icon ob-repository" href="{{ config.repo_url }}" aria-label="OpenBacktesting on GitHub" title="OpenBacktesting on GitHub">
+      <a class="md-header__button md-icon ob-repository" href="{{ config.repo_url }}" aria-label="OpenBacktesting on GitHub" title="OpenBacktesting on GitHub" data-umami-event="docs-github-click" data-umami-event-placement="header">
         {% include ".icons/fontawesome/brands/github.svg" %}
       </a>
     {% endif %}

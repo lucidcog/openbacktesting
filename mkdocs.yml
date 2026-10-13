@@ -58,6 +58,8 @@ extra_css:
   - _static/site.css
 
 extra_javascript:
+  - path: _static/analytics.js
+    defer: true
   - path: _static/page-tools.js
     defer: true
 

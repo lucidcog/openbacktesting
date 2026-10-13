@@ -35,6 +35,28 @@ Choose the branch you want to publish as the production branch. Commit and push 
 
 The canonical production address is **`https://docs.openbacktesting.com/`**, configured in `mkdocs.yml`. Attach that custom domain to the Pages project. To move the site, override `DOCS_SITE_URL` with the new HTTPS root, including any path prefix, and rebuild. Internal navigation remains relative; canonical URLs, structured data, sitemap, and exported Markdown links share the configured root. No SPA catch-all redirect is needed: every documentation route has its own HTML page, and missing routes use the generated `404.html`.
 
+## Analytics
+
+The shared theme loads `https://umami.pineify.app/script.js` once per page with website ID `038fca77-0084-4fd6-a285-f3c22c7da604`. Umami records pageviews automatically and the following explicit click events:
+
+| Event | Action | Properties |
+| --- | --- | --- |
+| `docs-sponsor-click` | Open Pineify | `placement`: `header` or `footer` |
+| `docs-github-click` | Open the GitHub repository | `placement`: `header` |
+| `docs-quickstart-click` | Open the first backtest from the home page | `placement`: `home-primary` or `home-tutorials` |
+| `docs-examples-click` | Open runnable examples from the home page | `placement`: `home-tutorials` |
+| `docs-markdown-copy` | Click Copy as Markdown | None |
+| `docs-markdown-view` | Open View Markdown | None |
+| `docs-code-copy` | Click a code block's copy button | None |
+| `docs-company-click` | Open LucidCog | `placement`: `footer` |
+| `docs-llm-index-click` | Open the LLM index | `placement`: `footer` |
+
+Copy events measure clicks, not successful clipboard writes. Umami includes the current page URL and hostname; no clipboard contents, code, or search terms are added as event properties. Template and Markdown links use `data-umami-event` attributes; `_static/analytics.js` handles Material's dynamically created code-copy buttons.
+
+The same website ID can collect traffic from multiple subdomains. The dashboard's Domain field filters self-referrals; it is not a collection allowlist. This script has no `data-domains` restriction, so local and preview visits also report unless tracking is disabled. To restrict collection, list each allowed hostname explicitly with `data-domains`; a root domain does not automatically allow its subdomains. See Umami's [website settings](https://docs.umami.is/docs/add-a-website) and [tracker configuration](https://docs.umami.is/docs/tracker-configuration).
+
+For local checks, block `/api/send` or set `localStorage.setItem("umami.disabled", "1")` before loading the page. After deployment, verify a pageview and the relevant events in Umami, using the hostname filter to isolate `docs.openbacktesting.com`.
+
 ## Markdown and LLM access
 
 Every page has **Copy as Markdown** and **View Markdown** below its heading. Copying uses the authored Markdown, preserving fenced code and tables, with absolute links that work outside the browser. When clipboard access is unavailable, the page displays selectable Markdown for manual copying. Viewing Markdown works without JavaScript.

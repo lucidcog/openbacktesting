@@ -2,6 +2,7 @@
 
 {% block extrahead %}
   {{ super() }}
+  <script defer src="https://umami.pineify.app/script.js" data-website-id="038fca77-0084-4fd6-a285-f3c22c7da604"></script>
   {% if page and page.meta.discovery %}
     {% set discovery = page.meta.discovery %}
     <meta name="robots" content="{% if discovery.indexable %}index, follow, max-image-preview:large{% else %}noindex, follow{% endif %}">

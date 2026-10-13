@@ -7,7 +7,7 @@ description: Build and test Python trading strategies with OpenBacktesting. Lear
 
 Write a Python strategy, run it on historical OHLC data, and inspect trades and performance. This manual is for people using the framework.
 
-**[Run your first backtest →](quickstart.md)** — a complete script using bundled data, with no data download or application integration required.
+**[Run your first backtest →](quickstart.md){data-umami-event="docs-quickstart-click" data-umami-event-placement="home-primary"}** — a complete script using bundled data, with no data download or application integration required.
 
 ## Choose your next task
 
@@ -36,6 +36,6 @@ Write a Python strategy, run it on historical OHLC data, and inspect trades and 
 
 ## Tutorials and scope
 
-[First backtest](quickstart.md) · [Trading rules](guides/trading.md) · [Indicator recipes](guides/indicators.md) · [Runnable examples](examples.md)
+[First backtest](quickstart.md){data-umami-event="docs-quickstart-click" data-umami-event-placement="home-tutorials"} · [Trading rules](guides/trading.md) · [Indicator recipes](guides/indicators.md) · [Runnable examples](examples.md){data-umami-event="docs-examples-click" data-umami-event-placement="home-tutorials"}
 
 The engine models one asset and one settlement currency per run. It exports plotting data but includes no chart renderer or live-trading connection. See [supported boundaries](limitations.md) before interpreting results.
