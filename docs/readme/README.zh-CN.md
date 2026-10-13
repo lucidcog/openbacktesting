@@ -8,7 +8,7 @@
 
 **Python 3.12–3.14** · **版本 0.2.0** · 分发包名和导入名：`openbacktesting`
 
-[快速开始](#quick-start) · [使用手册](../core/index.md) · [示例](../../examples/README.md) · [反馈问题](https://github.com/lucidcog/openbacktesting/issues)
+[快速开始](#quick-start) · [使用手册](https://docs.openbacktesting.com/) · [示例](https://docs.openbacktesting.com/examples/) · [反馈问题](https://github.com/lucidcog/openbacktesting/issues)
 
 ## 顶级赞助商 — Pineify
 
@@ -40,7 +40,7 @@ uv sync --locked
 uv run --locked python examples/advanced/run_author.py
 ```
 
-示例使用包内附带的 GOOG 历史数据，无需下载行情。输出包含收益率、交易次数、最大回撤及结果表格。详细步骤见[第一次回测](../core/quickstart.md)。
+示例使用包内附带的 GOOG 历史数据，无需下载行情。输出包含收益率、交易次数、最大回撤及结果表格。详细步骤见[第一次回测](https://docs.openbacktesting.com/quickstart/)。
 
 也可以将已检出的源码安装到现有 Python 环境：
 
@@ -48,7 +48,7 @@ uv run --locked python examples/advanced/run_author.py
 python -m pip install .
 ```
 
-基础依赖为 NumPy、pandas 和 `pandas-ta-classic==0.8.32`。使用 SAMBO 优化时，执行 `python -m pip install '.[optimize]'` 或 `uv sync --locked --extra optimize`。以上为源码安装方式，不假定项目已发布到 PyPI。[构建与分发说明](../core/development.md)。
+基础依赖为 NumPy、pandas 和 `pandas-ta-classic==0.8.32`。使用 SAMBO 优化时，执行 `python -m pip install '.[optimize]'` 或 `uv sync --locked --extra optimize`。以上为源码安装方式，不假定项目已发布到 PyPI。[构建与分发说明](https://docs.openbacktesting.com/development/)。
 
 ## 最小回测示例
 
@@ -74,28 +74,30 @@ print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
 
 策略在第一根 K 线请求买入一个单位。默认在下一根 K 线开盘时成交；`close_at_last_close` 在最后一根 K 线收盘时平掉剩余仓位。
 
-`run()` 返回 pandas Series。通过 `result["_trades"]` 读取交易，通过 `result["_equity_curve"]` 读取权益历史。完整字段和 Portfolio 导出见[结果指南](../core/guides/results.md)；下划线开头的字段属于原生诊断数据，尚非稳定的跨语言数据契约。
+`run()` 返回 pandas Series。通过 `result["_trades"]` 读取交易，通过 `result["_equity_curve"]` 读取权益历史。完整字段和 Portfolio 导出见[结果指南](https://docs.openbacktesting.com/guides/results/)；下划线开头的字段属于原生诊断数据，尚非稳定的跨语言数据契约。
 
 ## 文档
+
+[使用手册](https://docs.openbacktesting.com/)
 
 详细手册和示例目前使用英文。
 
 | 主题 | 参考资料 |
 | --- | --- |
-| 入门 | [第一次回测](../core/quickstart.md) · [示例索引](../../examples/README.md) |
-| 策略与数据 | [策略生命周期](../core/guides/author.md) · [行情数据](../core/guides/data.md) · [核心 API](../core/reference/core.md) |
-| 指标 | [指标目录](../core/reference/indicators/index.md) |
-| 执行与优化 | [运行策略](../core/guides/runtime.md) · [参数实验](../core/guides/optimizer.md) |
-| 结果与绘图 | [结果及 Portfolio](../core/guides/results.md) · [绘图数据导出](../core/guides/plotting.md) |
-| 开发 | [验证与构建](../core/development.md) · [当前限制](../core/limitations.md) |
+| 入门 | [第一次回测](https://docs.openbacktesting.com/quickstart/) · [示例索引](https://docs.openbacktesting.com/examples/) |
+| 策略与数据 | [策略生命周期](https://docs.openbacktesting.com/guides/author/) · [行情数据](https://docs.openbacktesting.com/guides/data/) · [核心 API](https://docs.openbacktesting.com/reference/core/) |
+| 指标 | [指标目录](https://docs.openbacktesting.com/reference/indicators/) |
+| 执行与优化 | [运行策略](https://docs.openbacktesting.com/guides/runtime/) · [参数实验](https://docs.openbacktesting.com/guides/optimizer/) |
+| 结果与绘图 | [结果及 Portfolio](https://docs.openbacktesting.com/guides/results/) · [绘图数据导出](https://docs.openbacktesting.com/guides/plotting/) |
+| 开发 | [验证与构建](https://docs.openbacktesting.com/development/) · [当前限制](https://docs.openbacktesting.com/limitations/) |
 
 ## 能力范围与兼容性
 
 - 交易模型为**单资产、单结算币种**。Portfolio 报告描述单次运行，不是多资产组合账户。
 - 本包提供计算结果和绘图数据，**不包含图表渲染器、实盘交易引擎、代码沙箱或 Pine Script 转换器**，也不承诺与 Pine 具有相同语义。仅运行可信的策略代码。
-- Windows 支持及完整的 Pine 对比尚未通过验证。执行与市场模型的边界见[当前限制](../core/limitations.md)。
+- Windows 支持及完整的 Pine 对比尚未通过验证。执行与市场模型的边界见[当前限制](https://docs.openbacktesting.com/limitations/)。
 
-分发包名和导入名均为 `openbacktesting`，不提供旧名称入口。引用旧模块路径的 pickle 不会自动迁移，带有旧品牌标识的归档不保证可读，使用旧执行身份创建的实验需要重新运行。[迁移与来源说明](../core/development.md#provenance-and-behavioral-boundaries)。
+分发包名和导入名均为 `openbacktesting`，不提供旧名称入口。引用旧模块路径的 pickle 不会自动迁移，带有旧品牌标识的归档不保证可读，使用旧执行身份创建的实验需要重新运行。[迁移与来源说明](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries)。
 
 ## 获取帮助与参与贡献
 
@@ -110,7 +112,7 @@ uv run --locked python -m openbacktesting.test
 uv run --locked python scripts/check_package.py
 ```
 
-完整检查流程见[开发指南](../core/development.md)。公开行为变更需同步更新文档、可运行示例和执行验证。代码、注释及技术文档默认使用英文；README 译本属于有意提供的本地化内容。
+完整检查流程见[开发指南](https://docs.openbacktesting.com/development/)。公开行为变更需同步更新文档、可运行示例和执行验证。代码、注释及技术文档默认使用英文；README 译本属于有意提供的本地化内容。
 
 ## 翻译
 

@@ -21,7 +21,7 @@ This initial set follows the project's focus on Europe, the Americas, and India.
 
 1. Update the English README and every affected translation in the same change. Preserve section order and factual coverage, including sponsor disclosure, limitations, and license/provenance notices.
 2. Translate prose and link labels naturally. Keep commands, code blocks, package names, API identifiers, result keys, versions, and URLs unchanged. Do not imply that the detailed manual is translated.
-3. Resolve links relative to each file. From this directory, use `../../` for repository-root files, `../core/` for the manual, and `../assets/` for sponsor images. Check fragment identifiers against the destination headings.
+3. Link the manual to `https://docs.openbacktesting.com/` and its chapters and example index to their corresponding published pages. Keep source-file and language links relative to each file: use `../../` for repository-root files and `../assets/` for sponsor images. Check fragment identifiers against the destination headings.
 4. Retain Pineify's official, unmodified logo and linked top paid sponsor placement in every language. Keep asset provenance in [the asset notes](../assets/pineify-logo-attribution.md).
 5. Run `uv run --locked python scripts/check_package.py`, compare executable snippets against English, and execute changed examples. Review rendered Markdown, language navigation, local links, and logo display before submitting.
 

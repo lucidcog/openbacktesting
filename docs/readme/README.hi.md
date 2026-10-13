@@ -8,7 +8,7 @@
 
 **Python 3.12–3.14** · **संस्करण 0.2.0** · वितरण और इम्पोर्ट का नाम: `openbacktesting`
 
-[शुरुआत करें](#quick-start) · [मैनुअल](../core/index.md) · [उदाहरण](../../examples/README.md) · [समस्या बताएँ](https://github.com/lucidcog/openbacktesting/issues)
+[शुरुआत करें](#quick-start) · [मैनुअल](https://docs.openbacktesting.com/) · [उदाहरण](https://docs.openbacktesting.com/examples/) · [समस्या बताएँ](https://github.com/lucidcog/openbacktesting/issues)
 
 ## प्रमुख प्रायोजक — Pineify
 
@@ -40,7 +40,7 @@ uv sync --locked
 uv run --locked python examples/advanced/run_author.py
 ```
 
-यह उदाहरण पैकेज में शामिल GOOG के ऐतिहासिक डेटा का इस्तेमाल करता है; बाज़ार डेटा डाउनलोड करने की ज़रूरत नहीं है। यह रिटर्न, ट्रेड की संख्या, अधिकतम ड्रॉडाउन और नतीजों की तालिकाएँ दिखाता है। चरणों की व्याख्या के लिए [आपका पहला बैकटेस्ट](../core/quickstart.md) देखें।
+यह उदाहरण पैकेज में शामिल GOOG के ऐतिहासिक डेटा का इस्तेमाल करता है; बाज़ार डेटा डाउनलोड करने की ज़रूरत नहीं है। यह रिटर्न, ट्रेड की संख्या, अधिकतम ड्रॉडाउन और नतीजों की तालिकाएँ दिखाता है। चरणों की व्याख्या के लिए [आपका पहला बैकटेस्ट](https://docs.openbacktesting.com/quickstart/) देखें।
 
 वैकल्पिक रूप से, डाउनलोड किया हुआ सोर्स कोड किसी मौजूदा Python एनवायरनमेंट में इंस्टॉल करें:
 
@@ -48,7 +48,7 @@ uv run --locked python examples/advanced/run_author.py
 python -m pip install .
 ```
 
-मूल निर्भरताएँ NumPy, pandas और `pandas-ta-classic==0.8.32` हैं। SAMBO ऑप्टिमाइज़ेशन के लिए `python -m pip install '.[optimize]'` या `uv sync --locked --extra optimize` इस्तेमाल करें। ये सोर्स से इंस्टॉल करने के निर्देश हैं; इनमें PyPI पर रिलीज़ उपलब्ध होने की धारणा नहीं है। [बिल्ड और वितरण की जानकारी](../core/development.md)।
+मूल निर्भरताएँ NumPy, pandas और `pandas-ta-classic==0.8.32` हैं। SAMBO ऑप्टिमाइज़ेशन के लिए `python -m pip install '.[optimize]'` या `uv sync --locked --extra optimize` इस्तेमाल करें। ये सोर्स से इंस्टॉल करने के निर्देश हैं; इनमें PyPI पर रिलीज़ उपलब्ध होने की धारणा नहीं है। [बिल्ड और वितरण की जानकारी](https://docs.openbacktesting.com/development/)।
 
 ## न्यूनतम बैकटेस्ट
 
@@ -74,28 +74,30 @@ print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
 
 यह रणनीति पहली कैंडल पर एक यूनिट खरीदने का अनुरोध करती है। डिफ़ॉल्ट रूप से ऑर्डर अगली कैंडल के ओपन पर निष्पादित होता है; `close_at_last_close` बची हुई पोज़िशन को अंतिम क्लोज़ पर बंद करता है।
 
-`run()` एक pandas Series लौटाता है। ट्रेड के लिए `result["_trades"]` और इक्विटी इतिहास के लिए `result["_equity_curve"]` इस्तेमाल करें। सभी फ़ील्ड और Portfolio एक्सपोर्ट के लिए [नतीजों की गाइड](../core/guides/results.md) देखें; अंडरस्कोर से शुरू होने वाले फ़ील्ड मूल डायग्नोस्टिक डेटा हैं, अलग-अलग भाषाओं के बीच डेटा आदान-प्रदान का स्थिर अनुबंध नहीं।
+`run()` एक pandas Series लौटाता है। ट्रेड के लिए `result["_trades"]` और इक्विटी इतिहास के लिए `result["_equity_curve"]` इस्तेमाल करें। सभी फ़ील्ड और Portfolio एक्सपोर्ट के लिए [नतीजों की गाइड](https://docs.openbacktesting.com/guides/results/) देखें; अंडरस्कोर से शुरू होने वाले फ़ील्ड मूल डायग्नोस्टिक डेटा हैं, अलग-अलग भाषाओं के बीच डेटा आदान-प्रदान का स्थिर अनुबंध नहीं।
 
 ## दस्तावेज़
+
+[मैनुअल](https://docs.openbacktesting.com/)
 
 विस्तृत मैनुअल और उदाहरण फ़िलहाल अंग्रेज़ी में हैं।
 
 | विषय | संदर्भ |
 | --- | --- |
-| शुरुआती कदम | [पहला बैकटेस्ट](../core/quickstart.md) · [उदाहरणों की सूची](../../examples/README.md) |
-| रणनीतियाँ और डेटा | [रणनीति का जीवनचक्र](../core/guides/author.md) · [बाज़ार डेटा](../core/guides/data.md) · [मुख्य API](../core/reference/core.md) |
-| इंडिकेटर | [इंडिकेटर सूची](../core/reference/indicators/index.md) |
-| निष्पादन और ऑप्टिमाइज़ेशन | [रणनीतियाँ चलाएँ](../core/guides/runtime.md) · [पैरामीटर प्रयोग](../core/guides/optimizer.md) |
-| नतीजे और चार्ट | [नतीजे और Portfolio](../core/guides/results.md) · [चार्ट डेटा एक्सपोर्ट](../core/guides/plotting.md) |
-| डेवलपमेंट | [सत्यापन और बिल्ड](../core/development.md) · [मौजूदा सीमाएँ](../core/limitations.md) |
+| शुरुआती कदम | [पहला बैकटेस्ट](https://docs.openbacktesting.com/quickstart/) · [उदाहरणों की सूची](https://docs.openbacktesting.com/examples/) |
+| रणनीतियाँ और डेटा | [रणनीति का जीवनचक्र](https://docs.openbacktesting.com/guides/author/) · [बाज़ार डेटा](https://docs.openbacktesting.com/guides/data/) · [मुख्य API](https://docs.openbacktesting.com/reference/core/) |
+| इंडिकेटर | [इंडिकेटर सूची](https://docs.openbacktesting.com/reference/indicators/) |
+| निष्पादन और ऑप्टिमाइज़ेशन | [रणनीतियाँ चलाएँ](https://docs.openbacktesting.com/guides/runtime/) · [पैरामीटर प्रयोग](https://docs.openbacktesting.com/guides/optimizer/) |
+| नतीजे और चार्ट | [नतीजे और Portfolio](https://docs.openbacktesting.com/guides/results/) · [चार्ट डेटा एक्सपोर्ट](https://docs.openbacktesting.com/guides/plotting/) |
+| डेवलपमेंट | [सत्यापन और बिल्ड](https://docs.openbacktesting.com/development/) · [मौजूदा सीमाएँ](https://docs.openbacktesting.com/limitations/) |
 
 ## दायरा और अनुकूलता
 
 - ट्रेडिंग मॉडल में **एक एसेट और एक सेटलमेंट मुद्रा** होती है। Portfolio रिपोर्ट एक रन का विवरण देती है; यह कई एसेट वाला पोर्टफोलियो खाता नहीं है।
 - पैकेज गणना और चार्ट डेटा देता है। इसमें **चार्ट रेंडरर, लाइव ट्रेडिंग इंजन, कोड सैंडबॉक्स या Pine Script कन्वर्टर शामिल नहीं हैं**, और यह Pine जैसे निष्पादन अर्थ की गारंटी नहीं देता। केवल भरोसेमंद रणनीति कोड चलाएँ।
-- Windows समर्थन और Pine के साथ पूर्ण तुलना का सत्यापन नहीं हुआ है। निष्पादन और बाज़ार मॉडल की सीमाओं के लिए [मौजूदा सीमाएँ](../core/limitations.md) देखें।
+- Windows समर्थन और Pine के साथ पूर्ण तुलना का सत्यापन नहीं हुआ है। निष्पादन और बाज़ार मॉडल की सीमाओं के लिए [मौजूदा सीमाएँ](https://docs.openbacktesting.com/limitations/) देखें।
 
-वितरण और इम्पोर्ट, दोनों का नाम `openbacktesting` है; पुराने नामों वाले एंट्री पॉइंट नहीं हैं। पुराने मॉड्यूल पथ वाले pickle अपने-आप माइग्रेट नहीं होते, पुराने ब्रांड पहचानकर्ताओं वाले आर्काइव पढ़े जा सकने की गारंटी नहीं है और पुरानी निष्पादन पहचान वाले प्रयोग दोबारा चलाने होंगे। [माइग्रेशन और स्रोत की जानकारी](../core/development.md#provenance-and-behavioral-boundaries)।
+वितरण और इम्पोर्ट, दोनों का नाम `openbacktesting` है; पुराने नामों वाले एंट्री पॉइंट नहीं हैं। पुराने मॉड्यूल पथ वाले pickle अपने-आप माइग्रेट नहीं होते, पुराने ब्रांड पहचानकर्ताओं वाले आर्काइव पढ़े जा सकने की गारंटी नहीं है और पुरानी निष्पादन पहचान वाले प्रयोग दोबारा चलाने होंगे। [माइग्रेशन और स्रोत की जानकारी](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries)।
 
 ## सहायता और योगदान
 
@@ -110,7 +112,7 @@ uv run --locked python -m openbacktesting.test
 uv run --locked python scripts/check_package.py
 ```
 
-सभी जाँचों के लिए [डेवलपमेंट गाइड](../core/development.md) देखें। सार्वजनिक व्यवहार में बदलाव के साथ दस्तावेज़, चलने योग्य उदाहरण और उनके निष्पादन का सत्यापन ज़रूरी है। कोड, टिप्पणियाँ और तकनीकी दस्तावेज़ डिफ़ॉल्ट रूप से अंग्रेज़ी में हैं; README के अनुवाद जानबूझकर स्थानीयकृत सामग्री हैं।
+सभी जाँचों के लिए [डेवलपमेंट गाइड](https://docs.openbacktesting.com/development/) देखें। सार्वजनिक व्यवहार में बदलाव के साथ दस्तावेज़, चलने योग्य उदाहरण और उनके निष्पादन का सत्यापन ज़रूरी है। कोड, टिप्पणियाँ और तकनीकी दस्तावेज़ डिफ़ॉल्ट रूप से अंग्रेज़ी में हैं; README के अनुवाद जानबूझकर स्थानीयकृत सामग्री हैं।
 
 ## अनुवाद
 

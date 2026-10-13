@@ -8,7 +8,7 @@
 
 **Python 3.12–3.14** · **Version 0.2.0** · Distribution et import : `openbacktesting`
 
-[Démarrage rapide](#quick-start) · [Manuel](../core/index.md) · [Exemples](../../examples/README.md) · [Signaler un problème](https://github.com/lucidcog/openbacktesting/issues)
+[Démarrage rapide](#quick-start) · [Manuel](https://docs.openbacktesting.com/) · [Exemples](https://docs.openbacktesting.com/examples/) · [Signaler un problème](https://github.com/lucidcog/openbacktesting/issues)
 
 ## Sponsor principal — Pineify
 
@@ -40,7 +40,7 @@ uv sync --locked
 uv run --locked python examples/advanced/run_author.py
 ```
 
-L'exemple utilise les données historiques GOOG fournies avec le paquet ; aucun téléchargement de données de marché n'est nécessaire. Il affiche le rendement, le nombre de transactions, le drawdown maximal et les tableaux de résultats. Consultez [votre premier backtest](../core/quickstart.md) pour suivre les étapes.
+L'exemple utilise les données historiques GOOG fournies avec le paquet ; aucun téléchargement de données de marché n'est nécessaire. Il affiche le rendement, le nombre de transactions, le drawdown maximal et les tableaux de résultats. Consultez [votre premier backtest](https://docs.openbacktesting.com/quickstart/) pour suivre les étapes.
 
 Vous pouvez aussi installer les sources récupérées dans un environnement Python existant :
 
@@ -48,7 +48,7 @@ Vous pouvez aussi installer les sources récupérées dans un environnement Pyth
 python -m pip install .
 ```
 
-Les dépendances de base sont NumPy, pandas et `pandas-ta-classic==0.8.32`. Pour l'optimisation SAMBO, utilisez `python -m pip install '.[optimize]'` ou `uv sync --locked --extra optimize`. Ces instructions installent le paquet depuis les sources ; elles ne supposent pas une publication sur PyPI. [Détails de construction et de distribution](../core/development.md).
+Les dépendances de base sont NumPy, pandas et `pandas-ta-classic==0.8.32`. Pour l'optimisation SAMBO, utilisez `python -m pip install '.[optimize]'` ou `uv sync --locked --extra optimize`. Ces instructions installent le paquet depuis les sources ; elles ne supposent pas une publication sur PyPI. [Détails de construction et de distribution](https://docs.openbacktesting.com/development/).
 
 ## Backtest minimal
 
@@ -74,28 +74,30 @@ print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
 
 Cette stratégie demande l'achat d'une unité à la première bougie. Par défaut, l'ordre est exécuté à l'ouverture de la bougie suivante ; `close_at_last_close` clôture la position restante au dernier cours de clôture.
 
-`run()` renvoie une Series pandas. Utilisez `result["_trades"]` pour les transactions et `result["_equity_curve"]` pour l'historique des capitaux propres. Le [guide des résultats](../core/guides/results.md) présente tous les champs et l'export Portfolio ; les champs préfixés par un trait de soulignement sont des diagnostics natifs, pas un contrat stable entre langages.
+`run()` renvoie une Series pandas. Utilisez `result["_trades"]` pour les transactions et `result["_equity_curve"]` pour l'historique des capitaux propres. Le [guide des résultats](https://docs.openbacktesting.com/guides/results/) présente tous les champs et l'export Portfolio ; les champs préfixés par un trait de soulignement sont des diagnostics natifs, pas un contrat stable entre langages.
 
 ## Documentation
+
+[Manuel](https://docs.openbacktesting.com/)
 
 Le manuel détaillé et les exemples sont actuellement en anglais.
 
 | Sujet | Référence |
 | --- | --- |
-| Premiers pas | [Premier backtest](../core/quickstart.md) · [Index des exemples](../../examples/README.md) |
-| Stratégies et données | [Cycle de la stratégie](../core/guides/author.md) · [Données de marché](../core/guides/data.md) · [API principale](../core/reference/core.md) |
-| Indicateurs | [Catalogue des indicateurs](../core/reference/indicators/index.md) |
-| Exécution et optimisation | [Exécuter des stratégies](../core/guides/runtime.md) · [Expériences de paramètres](../core/guides/optimizer.md) |
-| Résultats et graphiques | [Résultats et Portfolio](../core/guides/results.md) · [Export des données graphiques](../core/guides/plotting.md) |
-| Développement | [Vérification et construction](../core/development.md) · [Limites actuelles](../core/limitations.md) |
+| Premiers pas | [Premier backtest](https://docs.openbacktesting.com/quickstart/) · [Index des exemples](https://docs.openbacktesting.com/examples/) |
+| Stratégies et données | [Cycle de la stratégie](https://docs.openbacktesting.com/guides/author/) · [Données de marché](https://docs.openbacktesting.com/guides/data/) · [API principale](https://docs.openbacktesting.com/reference/core/) |
+| Indicateurs | [Catalogue des indicateurs](https://docs.openbacktesting.com/reference/indicators/) |
+| Exécution et optimisation | [Exécuter des stratégies](https://docs.openbacktesting.com/guides/runtime/) · [Expériences de paramètres](https://docs.openbacktesting.com/guides/optimizer/) |
+| Résultats et graphiques | [Résultats et Portfolio](https://docs.openbacktesting.com/guides/results/) · [Export des données graphiques](https://docs.openbacktesting.com/guides/plotting/) |
+| Développement | [Vérification et construction](https://docs.openbacktesting.com/development/) · [Limites actuelles](https://docs.openbacktesting.com/limitations/) |
 
 ## Périmètre et compatibilité
 
 - Le modèle de trading gère **un seul actif et une seule devise de règlement**. Les rapports Portfolio décrivent une exécution ; ce ne sont pas des comptes de portefeuille multi-actifs.
 - Le paquet fournit des calculs et des données pour les graphiques. Il **n'inclut ni moteur de rendu graphique, ni moteur de trading en direct, ni bac à sable d'exécution, ni convertisseur Pine Script**, et ne garantit pas une sémantique équivalente à Pine. N'exécutez que du code de stratégie de confiance.
-- La prise en charge de Windows et les comparaisons complètes avec Pine n'ont pas été validées. Consultez les [limites actuelles](../core/limitations.md) concernant l'exécution et le modèle de marché.
+- La prise en charge de Windows et les comparaisons complètes avec Pine n'ont pas été validées. Consultez les [limites actuelles](https://docs.openbacktesting.com/limitations/) concernant l'exécution et le modèle de marché.
 
-Le nom de distribution et d'import est `openbacktesting` ; aucun point d'entrée sous un ancien nom n'est fourni. Les fichiers pickle utilisant d'anciens chemins de modules ne sont pas migrés automatiquement, la lecture des archives portant d'anciens identifiants de marque n'est pas garantie et les expériences associées à une ancienne identité d'exécution doivent être relancées. [Migration et provenance](../core/development.md#provenance-and-behavioral-boundaries).
+Le nom de distribution et d'import est `openbacktesting` ; aucun point d'entrée sous un ancien nom n'est fourni. Les fichiers pickle utilisant d'anciens chemins de modules ne sont pas migrés automatiquement, la lecture des archives portant d'anciens identifiants de marque n'est pas garantie et les expériences associées à une ancienne identité d'exécution doivent être relancées. [Migration et provenance](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries).
 
 ## Assistance et contributions
 
@@ -110,7 +112,7 @@ uv run --locked python -m openbacktesting.test
 uv run --locked python scripts/check_package.py
 ```
 
-Consultez le [guide de développement](../core/development.md) pour l'ensemble des vérifications. Toute modification du comportement public nécessite une documentation, des exemples exécutables et une validation de leur exécution. Le code, les commentaires et la documentation technique sont en anglais par défaut ; les traductions du README sont du contenu volontairement localisé.
+Consultez le [guide de développement](https://docs.openbacktesting.com/development/) pour l'ensemble des vérifications. Toute modification du comportement public nécessite une documentation, des exemples exécutables et une validation de leur exécution. Le code, les commentaires et la documentation technique sont en anglais par défaut ; les traductions du README sont du contenu volontairement localisé.
 
 ## Traductions
 
