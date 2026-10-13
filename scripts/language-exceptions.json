@@ -384,12 +384,6 @@
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "[源码清单](../../source-manifest.json) 记录了基于 [AGPL-3.0 上游快照](https://github.com/kernc/backtesting.py/blob/ca2e2611621e472542ba90f7243a1fa06a7d7108/LICENSE.md) 的改编。Apache-2.0 声明不替代这些上游条款；仅按 Apache-2.0 分发衍生代码需要另行授权。[提取清单](../../extraction-manifest.json) 记录了直接来源快照和路径映射。",
-      "count": 1,
-      "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
-    },
-    {
-      "path": "docs/readme/README.zh-CN.md",
       "value": "[使用手册](https://docs.openbacktesting.com/)",
       "count": 1,
       "reason": "Intentional Simplified Chinese link to the published documentation."

@@ -81,7 +81,7 @@ def verify_optimizer():
         try:
             resume_optimization(globals(), experiment_id=result.experiment_id, **incompatible)
         except OptimizationError as error:
-            assert "Identity" in str(error)
+            assert "identity or plan does not match" in str(error)
         else:
             raise AssertionError("Resume with a mismatched identity was not rejected")
         assert path.read_bytes() == before

@@ -128,5 +128,3 @@ This English README is the source of truth. Translations cover Simplified Chines
 ## License and provenance
 
 The project license declaration is [Apache-2.0](LICENSE). Third-party materials retain their original licensing terms, including the [indicator reference data](tests/fixtures/indicator_expansion/README.md).
-
-The [source manifest](source-manifest.json) records adaptations from an [AGPL-3.0 upstream snapshot](https://github.com/kernc/backtesting.py/blob/ca2e2611621e472542ba90f7243a1fa06a7d7108/LICENSE.md). The Apache-2.0 declaration does not replace those upstream terms; distributing the derived code under Apache-2.0 alone requires separate authorization. The [extraction manifest](extraction-manifest.json) records the direct source snapshot and path mappings.

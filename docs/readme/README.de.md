@@ -121,5 +121,3 @@ Die [englische README](../../README.md) ist die maßgebliche Fassung. Übersetzu
 ## Lizenz und Herkunft
 
 Die deklarierte Projektlizenz ist [Apache-2.0](../../LICENSE). Materialien Dritter behalten ihre ursprünglichen Lizenzbedingungen, darunter die [Indikator-Referenzdaten](../../tests/fixtures/indicator_expansion/README.md).
-
-Das [Quellmanifest](../../source-manifest.json) dokumentiert Anpassungen eines [AGPL-3.0-Upstream-Snapshots](https://github.com/kernc/backtesting.py/blob/ca2e2611621e472542ba90f7243a1fa06a7d7108/LICENSE.md). Die Apache-2.0-Deklaration ersetzt diese Bedingungen nicht; die Verbreitung des abgeleiteten Codes ausschließlich unter Apache-2.0 erfordert eine gesonderte Genehmigung. Das [Extraktionsmanifest](../../extraction-manifest.json) dokumentiert den direkten Quellstand und die Pfadzuordnungen.
