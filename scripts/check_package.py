@@ -248,6 +248,16 @@ def artifact(path, registry_data=None):
     if registry_data is None:
         registry_path = ROOT / REGISTRY
         registry_data = registry_path.read_bytes() if registry_path.is_file() else None
+    # Hatch embeds README.md in both metadata formats. Apply the same exact
+    # localization exceptions to each copy while still checking all headers.
+    for name in ("openbacktesting-0.2.0.dist-info/METADATA", "PKG-INFO"):
+        headers, separator, description = normalized.get(name, b"").partition(b"\n\n")
+        if separator and b"Description-Content-Type: text/markdown" in headers.splitlines():
+            normalized[name] = headers
+            issues.extend(
+                f"{name}: {issue}"
+                for issue in check_files({"README.md": description}, registry_data, subset=True)
+            )
     issues.extend(check_files(normalized, registry_data, subset=True))
     return issues, len(members)
 

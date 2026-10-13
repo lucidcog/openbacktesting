@@ -5,6 +5,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("language_check", ROOT / "scripts/check_language.py")
 LANGUAGE = importlib.util.module_from_spec(SPEC)
@@ -191,3 +193,25 @@ def test_sdist_artifact_uses_packaged_registry_and_checks_nested_escaped_copy(tm
     issues, _ = package.artifact(path, registry())
     assert len(issues) == 1
     assert "data.json:/payload/<json>/label: unintended Chinese text" in issues[0]
+
+
+@pytest.mark.parametrize("kind", ["wheel", "sdist"])
+def test_artifact_readme_translation_exceptions_keep_headers_and_body_checked(tmp_path, kind):
+    package = package_checker()
+    name = "openbacktesting-0.2.0.dist-info/METADATA" if kind == "wheel" else "PKG-INFO"
+    approved = registry(rule(path="README.md"))
+    headers = b"Name: openbacktesting\nVersion: 0.2.0\nDescription-Content-Type: text/markdown"
+
+    def inspect(body, extra_header=b""):
+        files = {name: headers + extra_header + b"\n\n" + body}
+        if kind == "sdist":
+            files.update({LANGUAGE.REGISTRY: approved, "README.md": COPY.encode()})
+        path = write_artifact(tmp_path, package, kind, files)
+        return package.artifact(path, approved)[0]
+
+    assert inspect(COPY.encode()) == []
+    assert any("unintended Chinese text" in issue for issue in inspect((COPY + " changed").encode()))
+    assert any("expected 1, found 2" in issue for issue in inspect(f"{COPY}\n{COPY}".encode()))
+    assert any("expected 1, found 0" in issue for issue in inspect(b"English only"))
+    issues = inspect(COPY.encode(), f"\nSummary: {COPY}".encode())
+    assert any(name in issue and "unintended Chinese text" in issue for issue in issues)

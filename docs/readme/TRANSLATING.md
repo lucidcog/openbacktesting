@@ -7,6 +7,7 @@
 | Language | File |
 | --- | --- |
 | English | [README.md](../../README.md) |
+| Simplified Chinese | [README.zh-CN.md](README.zh-CN.md) |
 | Spanish | [README.es.md](README.es.md) |
 | Brazilian Portuguese | [README.pt-BR.md](README.pt-BR.md) |
 | French | [README.fr.md](README.fr.md) |
@@ -14,7 +15,7 @@
 | Italian | [README.it.md](README.it.md) |
 | Hindi | [README.hi.md](README.hi.md) |
 
-This initial set follows the project's focus on Europe, the Americas, and India. It is a practical starting point, not a claim to cover every language in those regions; English remains available to all readers. Further languages can be added through a pull request.
+This initial set follows the project's focus on Europe, the Americas, and India. It is a practical starting point, not a claim to cover every language in those regions; English remains available to all readers. Simplified Chinese is also provided at the project owner's request. Keep English first and Simplified Chinese second in every language switcher. Further languages can be added through a pull request.
 
 ## Update rules
 

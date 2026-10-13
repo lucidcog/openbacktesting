@@ -2,7 +2,7 @@
 
 **Backtesting storico in Python, dalle regole della strategia a risultati che puoi esaminare.**
 
-[English](../../README.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · **Italiano** · [हिन्दी](README.hi.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · **Italiano** · [हिन्दी](README.hi.md)
 
 Scrivi strategie eseguite candela per candela, valutale su dati storici di mercato ed esamina ordini, operazioni, capitale e statistiche di rischio. OpenBacktesting è un pacchetto Python autonomo con indicatori, ottimizzazione dei parametri, report Portfolio ed esportazione di dati per grafici.
 
@@ -114,7 +114,7 @@ Consulta la [guida allo sviluppo](../core/development.md) per tutte le verifiche
 
 ## Traduzioni
 
-Il [README inglese](../../README.md) è il riferimento principale. Sono disponibili traduzioni in spagnolo, portoghese brasiliano, francese, tedesco, italiano e hindi. Usa i collegamenti alle lingue in alto e segui la [guida alla traduzione](TRANSLATING.md) per aggiornarle. Mantieni coerenti comandi, identificatori API, limiti funzionali e riconoscimento dello sponsor.
+Il [README inglese](../../README.md) è il riferimento principale. Sono disponibili traduzioni in cinese semplificato, spagnolo, portoghese brasiliano, francese, tedesco, italiano e hindi. Usa i collegamenti alle lingue in alto e segui la [guida alla traduzione](TRANSLATING.md) per aggiornarle. Mantieni coerenti comandi, identificatori API, limiti funzionali e riconoscimento dello sponsor.
 
 ## Licenza e provenienza
 
