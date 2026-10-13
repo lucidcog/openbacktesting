@@ -8,11 +8,11 @@
     <h1>{{ page.title | d(config.site_name, true) }}</h1>
   {% endif %}
   <div class="ob-page-tools" data-nosnippet>
-    <button type="button" class="ob-copy-markdown" data-copy-markdown data-markdown-url="{{ page.meta.discovery.markdown }}" aria-describedby="ob-copy-status" hidden>
+    <button type="button" class="ob-copy-markdown" data-copy-markdown data-markdown-url="{{ page.meta.discovery.markdown }}" data-umami-event="docs-markdown-copy" aria-describedby="ob-copy-status" hidden>
       <span class="md-icon" aria-hidden="true">{% include ".icons/material/content-copy.svg" %}</span>
       <span data-copy-label>Copy as Markdown</span>
     </button>
-    <a href="{{ page.meta.discovery.markdown }}" type="text/markdown">View Markdown</a>
+    <a href="{{ page.meta.discovery.markdown }}" type="text/markdown" data-umami-event="docs-markdown-view">View Markdown</a>
     <span id="ob-copy-status" role="status" aria-live="polite"></span>
   </div>
   <div class="ob-markdown-fallback" hidden data-nosnippet>
