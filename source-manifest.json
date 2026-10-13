@@ -398,7 +398,7 @@
     },
     {
       "target": "src/openbacktesting/test/_test.py",
-      "targetSha256": "98abcc924115bb30f3d527e678c0212e9e22b559ef070a191a664d5acc384933",
+      "targetSha256": "4e9c481e53bc6eeafecd215c568209d606dc2a1e123e82c6f9fe8ca067acae91",
       "changes": [
         "Project-specific naming, local static checks, and formatting adaptations",
         "Local paths, fixed-size deductions for offline resources, and tests without opening a browser; retained trading assertions",

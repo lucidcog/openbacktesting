@@ -3058,7 +3058,7 @@
       "source": "python/core/src/openbacktesting/test/_test.py",
       "sourceSha256": "8666616d43563fb688f23c96707f378bbe98b274d095cb145e97c40f9df862e1",
       "target": "src/openbacktesting/test/_test.py",
-      "targetSha256": "98abcc924115bb30f3d527e678c0212e9e22b559ef070a191a664d5acc384933",
+      "targetSha256": "4e9c481e53bc6eeafecd215c568209d606dc2a1e123e82c6f9fe8ca067acae91",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
       ]
@@ -3948,7 +3948,7 @@
       "source": "python/core/source-manifest.json",
       "sourceSha256": "e04f0f9f965de84e29de50595568e287c7ede358dea0da781dbd3620d1873cb6",
       "target": "source-manifest.json",
-      "targetSha256": "df86545d66b8d256c00711f8651bfac934b5b76afd7c9106e2c4888fd578771f",
+      "targetSha256": "1708f872f147c7090393c1162deba8308e4b68ca2abbbbfa742cf91492f02516",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
       ]
@@ -6783,11 +6783,10 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "29c5a28e0ed422677cb467036b68097df19b915f739f244bfb706445443c2410",
+      "targetSha256": "e21bcc84589e8b6fef438f6083bcd98af9cbd569b72add0e1c9f32b29ecdd9ef",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
-        "Documented the Apache-2.0 project declaration, retained third-party terms, and identified the upstream AGPL-3.0 relicensing constraint.",
         "Reorganized the English README, added multilingual navigation and Pineify paid sponsorship, and linked detailed reference material.",
         "Added Simplified Chinese as the second README language and updated translation coverage.",
         "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",

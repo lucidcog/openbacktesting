@@ -121,5 +121,3 @@ Le [README anglais](../../README.md) fait référence. Des traductions sont disp
 ## Licence et provenance
 
 La licence déclarée du projet est [Apache-2.0](../../LICENSE). Les éléments tiers conservent leurs licences d'origine, notamment les [données de référence des indicateurs](../../tests/fixtures/indicator_expansion/README.md).
-
-Le [manifeste des sources](../../source-manifest.json) répertorie les adaptations d'une [version du projet amont sous AGPL-3.0](https://github.com/kernc/backtesting.py/blob/ca2e2611621e472542ba90f7243a1fa06a7d7108/LICENSE.md). La déclaration Apache-2.0 ne remplace pas ces conditions ; distribuer le code dérivé uniquement sous Apache-2.0 nécessite une autorisation distincte. Le [manifeste d'extraction](../../extraction-manifest.json) consigne la version source directe et la correspondance des chemins.

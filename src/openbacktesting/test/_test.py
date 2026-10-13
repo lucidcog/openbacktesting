@@ -1139,12 +1139,22 @@ class TestDocs(TestCase):
         for key in stats.index:
             self.assertIn(key, _Backtest.run.__doc__)
 
-    def test_readme_contains_stats_keys(self):
-        with open(os.path.join(os.path.dirname(__file__), "..", "..", "..", "README.md")) as f:
-            readme = f.read()
-        stats = Backtest(SHORT_DATA, SmaCross).run()
-        for key in stats.index:
-            self.assertIn(key, readme)
+    def test_readme_backtest_example(self):
+        import re
+        from runpy import run_path
+        from tempfile import TemporaryDirectory
+
+        readme = (Path(self.DOCS_DIR) / "README.md").read_text()
+        examples = re.findall(r"```python\n(.*?)```", readme, re.DOTALL)
+        self.assertTrue(examples, "README must include a runnable Python example")
+        with TemporaryDirectory(prefix="readme-example-") as directory:
+            script = Path(directory) / "quickstart.py"
+            script.write_text("\n\n".join(examples))
+            namespace = run_path(str(script))
+        result = namespace["result"]
+        self.assertIsInstance(result, pd.Series)
+        self.assertGreater(result["# Trades"], 0)
+        self.assertEqual(len(result["_equity_curve"]), len(GOOG))
 
 
 class TestRegressions(TestCase):

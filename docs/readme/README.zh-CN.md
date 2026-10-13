@@ -121,5 +121,3 @@ uv run --locked python scripts/check_package.py
 ## 许可证与来源
 
 项目声明的许可证为 [Apache-2.0](../../LICENSE)。第三方材料保留其原有许可条款，包括[指标参考数据](../../tests/fixtures/indicator_expansion/README.md)。
-
-[源码清单](../../source-manifest.json) 记录了基于 [AGPL-3.0 上游快照](https://github.com/kernc/backtesting.py/blob/ca2e2611621e472542ba90f7243a1fa06a7d7108/LICENSE.md) 的改编。Apache-2.0 声明不替代这些上游条款；仅按 Apache-2.0 分发衍生代码需要另行授权。[提取清单](../../extraction-manifest.json) 记录了直接来源快照和路径映射。
