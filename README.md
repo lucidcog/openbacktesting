@@ -8,7 +8,7 @@ Write bar-by-bar strategies, evaluate them on historical market data, and inspec
 
 **Python 3.12–3.14** · **Version 0.2.0** · Distribution and import: `openbacktesting`
 
-[Quick start](#quick-start) · [Manual](docs/core/index.md) · [Examples](examples/README.md) · [Report an issue](https://github.com/lucidcog/openbacktesting/issues)
+[Quick start](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Examples](https://docs.openbacktesting.com/examples/) · [Report an issue](https://github.com/lucidcog/openbacktesting/issues)
 
 ## Top sponsor — Pineify
 
@@ -38,7 +38,7 @@ uv sync --locked
 uv run --locked python examples/advanced/native_run.py
 ```
 
-The example uses bundled GOOG historical data; no market-data download is required. It prints return, trade count, maximum drawdown, and result tables. See [your first backtest](docs/core/quickstart.md) for a walkthrough.
+The example uses bundled GOOG historical data; no market-data download is required. It prints return, trade count, maximum drawdown, and result tables. See [your first backtest](https://docs.openbacktesting.com/quickstart/) for a walkthrough.
 
 To install the checked-out source into an existing Python environment instead:
 
@@ -46,7 +46,7 @@ To install the checked-out source into an existing Python environment instead:
 python -m pip install .
 ```
 
-The base dependencies are NumPy, pandas, and `pandas-ta-classic==0.8.32`. For SAMBO optimization, use `python -m pip install '.[optimize]'` or `uv sync --locked --extra optimize`. These are source-installation instructions; they do not assume a PyPI release. [Build and distribution details](docs/core/development.md).
+The base dependencies are NumPy, pandas, and `pandas-ta-classic==0.8.32`. For SAMBO optimization, use `python -m pip install '.[optimize]'` or `uv sync --locked --extra optimize`. These are source-installation instructions; they do not assume a PyPI release. [Build and distribution details](https://docs.openbacktesting.com/development/).
 
 ## Minimal backtest
 
@@ -72,37 +72,39 @@ print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
 
 This strategy requests one unit on the first bar. Default execution occurs at the next bar's open; `close_at_last_close` closes the remaining position at the final close.
 
-`run()` returns a pandas Series. Use `result["_trades"]` for trades and `result["_equity_curve"]` for equity history. See the [results guide](docs/core/guides/results.md) for the full field list and Portfolio export; underscore-prefixed fields are native diagnostics, not a stable cross-language contract.
+`run()` returns a pandas Series. Use `result["_trades"]` for trades and `result["_equity_curve"]` for equity history. See the [results guide](https://docs.openbacktesting.com/guides/results/) for the full field list and Portfolio export; underscore-prefixed fields are native diagnostics, not a stable cross-language contract.
 
 ## Documentation
 
+[Manual](https://docs.openbacktesting.com/)
+
 The detailed manual and examples are currently in English.
 
-To browse the manual with sidebar navigation, page outlines, and full-text search:
+The online manual includes sidebar navigation, page outlines, and full-text search. To preview documentation changes locally:
 
 ```sh
 uv run --locked --group docs mkdocs serve
 ```
 
-Open `http://127.0.0.1:8000`. The server reloads when documentation changes. Build a static site with `bash scripts/build_docs.sh`; the output is in `build/docs/`. See [Cloudflare Pages deployment](docs/core/deployment.md) for the build settings.
+Open `http://127.0.0.1:8000`. The server reloads when documentation changes. Build a static site with `bash scripts/build_docs.sh`; the output is in `build/docs/`. See [Cloudflare Pages deployment](https://docs.openbacktesting.com/deployment/) for the build settings.
 
 | Topic | Reference |
 | --- | --- |
-| Getting started | [First backtest](docs/core/quickstart.md) · [Example index](examples/README.md) |
-| Strategies and data | [Strategy lifecycle](docs/core/guides/author.md) · [Market data](docs/core/guides/data.md) · [Strategy API](docs/core/reference/strategy.md) · [Backtest API](docs/core/reference/core.md) |
-| Orders and positions | [Order, Position, and Trade](docs/core/reference/trading.md) |
-| Indicators | [Indicator catalog](docs/core/reference/indicators/index.md) |
-| Execution and optimization | [Running strategies](docs/core/guides/runtime.md) · [Parameter experiments](docs/core/guides/optimizer.md) |
-| Results and plotting | [Results and Portfolio](docs/core/guides/results.md) · [Plotting-data export](docs/core/guides/plotting.md) |
-| Development | [Verification and builds](docs/core/development.md) · [Current limitations](docs/core/limitations.md) |
+| Getting started | [First backtest](https://docs.openbacktesting.com/quickstart/) · [Example index](https://docs.openbacktesting.com/examples/) |
+| Strategies and data | [Strategy lifecycle](https://docs.openbacktesting.com/guides/author/) · [Market data](https://docs.openbacktesting.com/guides/data/) · [Strategy API](https://docs.openbacktesting.com/reference/strategy/) · [Backtest API](https://docs.openbacktesting.com/reference/core/) |
+| Orders and positions | [Order, Position, and Trade](https://docs.openbacktesting.com/reference/trading/) |
+| Indicators | [Indicator catalog](https://docs.openbacktesting.com/reference/indicators/) |
+| Execution and optimization | [Running strategies](https://docs.openbacktesting.com/guides/runtime/) · [Parameter experiments](https://docs.openbacktesting.com/guides/optimizer/) |
+| Results and plotting | [Results and Portfolio](https://docs.openbacktesting.com/guides/results/) · [Plotting-data export](https://docs.openbacktesting.com/guides/plotting/) |
+| Development | [Verification and builds](https://docs.openbacktesting.com/development/) · [Current limitations](https://docs.openbacktesting.com/limitations/) |
 
 ## Scope and compatibility
 
 - The trading model is **single asset, single settlement currency**. Portfolio reports describe one run; they are not multi-asset portfolio accounts.
 - The package provides computation and plotting data. It includes **no chart renderer, live-trading engine, code sandbox, or Pine Script converter**, and does not promise Pine-equivalent semantics. Run only trusted strategy code.
-- Windows support and full Pine comparisons have not been validated. See [current limitations](docs/core/limitations.md) for execution and market-model boundaries.
+- Windows support and full Pine comparisons have not been validated. See [current limitations](https://docs.openbacktesting.com/limitations/) for execution and market-model boundaries.
 
-The distribution and import name are both `openbacktesting`; there are no legacy-name entry points. Old module-path pickles are not migrated automatically, earlier branded archives are not guaranteed to load, and experiments created under an old execution identity must be rerun. [Migration and provenance details](docs/core/development.md#provenance-and-behavioral-boundaries).
+The distribution and import name are both `openbacktesting`; there are no legacy-name entry points. Old module-path pickles are not migrated automatically, earlier branded archives are not guaranteed to load, and experiments created under an old execution identity must be rerun. [Migration and provenance details](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries).
 
 ## Support and contributing
 
@@ -117,7 +119,7 @@ uv run --locked python -m openbacktesting.test
 uv run --locked python scripts/check_package.py
 ```
 
-Follow the [development guide](docs/core/development.md) for the complete checks. Public behavior changes need corresponding documentation, runnable examples, and execution validation. Code, comments, and technical documentation default to English; localized README content is intentional.
+Follow the [development guide](https://docs.openbacktesting.com/development/) for the complete checks. Public behavior changes need corresponding documentation, runnable examples, and execution validation. Code, comments, and technical documentation default to English; localized README content is intentional.
 
 ## Translations
 

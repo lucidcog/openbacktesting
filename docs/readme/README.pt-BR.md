@@ -8,7 +8,7 @@ Escreva estratégias executadas candle a candle, avalie-as com dados históricos
 
 **Python 3.12–3.14** · **Versão 0.2.0** · Distribuição e importação: `openbacktesting`
 
-[Início rápido](#quick-start) · [Manual](../core/index.md) · [Exemplos](../../examples/README.md) · [Relatar um problema](https://github.com/lucidcog/openbacktesting/issues)
+[Início rápido](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Exemplos](https://docs.openbacktesting.com/examples/) · [Relatar um problema](https://github.com/lucidcog/openbacktesting/issues)
 
 ## Patrocinador principal — Pineify
 
@@ -40,7 +40,7 @@ uv sync --locked
 uv run --locked python examples/advanced/run_author.py
 ```
 
-O exemplo usa dados históricos de GOOG incluídos no pacote; não é necessário baixar dados de mercado. Ele mostra retorno, número de operações, drawdown máximo e tabelas de resultados. Veja [seu primeiro backtest](../core/quickstart.md) para acompanhar o passo a passo.
+O exemplo usa dados históricos de GOOG incluídos no pacote; não é necessário baixar dados de mercado. Ele mostra retorno, número de operações, drawdown máximo e tabelas de resultados. Veja [seu primeiro backtest](https://docs.openbacktesting.com/quickstart/) para acompanhar o passo a passo.
 
 Como alternativa, instale o código-fonte obtido em um ambiente Python existente:
 
@@ -48,7 +48,7 @@ Como alternativa, instale o código-fonte obtido em um ambiente Python existente
 python -m pip install .
 ```
 
-As dependências básicas são NumPy, pandas e `pandas-ta-classic==0.8.32`. Para otimização com SAMBO, use `python -m pip install '.[optimize]'` ou `uv sync --locked --extra optimize`. Estas instruções instalam a partir do código-fonte; não pressupõem uma publicação no PyPI. [Detalhes de build e distribuição](../core/development.md).
+As dependências básicas são NumPy, pandas e `pandas-ta-classic==0.8.32`. Para otimização com SAMBO, use `python -m pip install '.[optimize]'` ou `uv sync --locked --extra optimize`. Estas instruções instalam a partir do código-fonte; não pressupõem uma publicação no PyPI. [Detalhes de build e distribuição](https://docs.openbacktesting.com/development/).
 
 ## Backtest mínimo
 
@@ -74,28 +74,30 @@ print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
 
 Esta estratégia solicita uma unidade no primeiro candle. Por padrão, a ordem é executada na abertura do candle seguinte; `close_at_last_close` encerra a posição restante no último fechamento.
 
-`run()` retorna uma Series do pandas. Use `result["_trades"]` para as operações e `result["_equity_curve"]` para o histórico do patrimônio. O [guia de resultados](../core/guides/results.md) contém todos os campos e a exportação de Portfolio; campos iniciados por sublinhado são diagnósticos nativos, não um contrato estável entre linguagens.
+`run()` retorna uma Series do pandas. Use `result["_trades"]` para as operações e `result["_equity_curve"]` para o histórico do patrimônio. O [guia de resultados](https://docs.openbacktesting.com/guides/results/) contém todos os campos e a exportação de Portfolio; campos iniciados por sublinhado são diagnósticos nativos, não um contrato estável entre linguagens.
 
 ## Documentação
+
+[Manual](https://docs.openbacktesting.com/)
 
 O manual detalhado e os exemplos estão atualmente em inglês.
 
 | Assunto | Referência |
 | --- | --- |
-| Primeiros passos | [Primeiro backtest](../core/quickstart.md) · [Índice de exemplos](../../examples/README.md) |
-| Estratégias e dados | [Ciclo da estratégia](../core/guides/author.md) · [Dados de mercado](../core/guides/data.md) · [API principal](../core/reference/core.md) |
-| Indicadores | [Catálogo de indicadores](../core/reference/indicators/index.md) |
-| Execução e otimização | [Executar estratégias](../core/guides/runtime.md) · [Experimentos de parâmetros](../core/guides/optimizer.md) |
-| Resultados e gráficos | [Resultados e Portfolio](../core/guides/results.md) · [Exportar dados para gráficos](../core/guides/plotting.md) |
-| Desenvolvimento | [Verificação e builds](../core/development.md) · [Limitações atuais](../core/limitations.md) |
+| Primeiros passos | [Primeiro backtest](https://docs.openbacktesting.com/quickstart/) · [Índice de exemplos](https://docs.openbacktesting.com/examples/) |
+| Estratégias e dados | [Ciclo da estratégia](https://docs.openbacktesting.com/guides/author/) · [Dados de mercado](https://docs.openbacktesting.com/guides/data/) · [API principal](https://docs.openbacktesting.com/reference/core/) |
+| Indicadores | [Catálogo de indicadores](https://docs.openbacktesting.com/reference/indicators/) |
+| Execução e otimização | [Executar estratégias](https://docs.openbacktesting.com/guides/runtime/) · [Experimentos de parâmetros](https://docs.openbacktesting.com/guides/optimizer/) |
+| Resultados e gráficos | [Resultados e Portfolio](https://docs.openbacktesting.com/guides/results/) · [Exportar dados para gráficos](https://docs.openbacktesting.com/guides/plotting/) |
+| Desenvolvimento | [Verificação e builds](https://docs.openbacktesting.com/development/) · [Limitações atuais](https://docs.openbacktesting.com/limitations/) |
 
 ## Escopo e compatibilidade
 
 - O modelo opera com **um único ativo e uma única moeda de liquidação**. Os relatórios Portfolio descrevem uma execução; não são contas de carteira com múltiplos ativos.
 - O pacote fornece cálculos e dados para gráficos. **Não inclui renderizador de gráficos, motor de negociação ao vivo, ambiente isolado de execução nem conversor de Pine Script**, e não promete equivalência semântica com Pine. Execute apenas código de estratégia confiável.
-- O suporte ao Windows e as comparações completas com Pine não foram validados. Consulte as [limitações atuais](../core/limitations.md) sobre execução e modelagem de mercado.
+- O suporte ao Windows e as comparações completas com Pine não foram validados. Consulte as [limitações atuais](https://docs.openbacktesting.com/limitations/) sobre execução e modelagem de mercado.
 
-A distribuição e a importação se chamam `openbacktesting`; não há pontos de entrada com nomes antigos. Arquivos pickle com caminhos de módulos antigos não são migrados automaticamente, a leitura de arquivos com identificadores de marca anteriores não é garantida e experimentos com uma identidade de execução antiga precisam ser refeitos. [Migração e procedência](../core/development.md#provenance-and-behavioral-boundaries).
+A distribuição e a importação se chamam `openbacktesting`; não há pontos de entrada com nomes antigos. Arquivos pickle com caminhos de módulos antigos não são migrados automaticamente, a leitura de arquivos com identificadores de marca anteriores não é garantida e experimentos com uma identidade de execução antiga precisam ser refeitos. [Migração e procedência](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries).
 
 ## Suporte e contribuições
 
@@ -110,7 +112,7 @@ uv run --locked python -m openbacktesting.test
 uv run --locked python scripts/check_package.py
 ```
 
-Consulte o [guia de desenvolvimento](../core/development.md) para a lista completa de verificações. Mudanças no comportamento público exigem documentação, exemplos executáveis e validação da execução. Código, comentários e documentação técnica usam inglês por padrão; as traduções do README são conteúdo localizado intencionalmente.
+Consulte o [guia de desenvolvimento](https://docs.openbacktesting.com/development/) para a lista completa de verificações. Mudanças no comportamento público exigem documentação, exemplos executáveis e validação da execução. Código, comentários e documentação técnica usam inglês por padrão; as traduções do README são conteúdo localizado intencionalmente.
 
 ## Traduções
 

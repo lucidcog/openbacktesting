@@ -6783,14 +6783,15 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "4b30a163ceb02d14a8d912716a038270cf6c1718204626282fc337f7d8e71d17",
+      "targetSha256": "29c5a28e0ed422677cb467036b68097df19b915f739f244bfb706445443c2410",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
         "Documented the Apache-2.0 project declaration, retained third-party terms, and identified the upstream AGPL-3.0 relicensing constraint.",
         "Reorganized the English README, added multilingual navigation and Pineify paid sponsorship, and linked detailed reference material.",
         "Added Simplified Chinese as the second README language and updated translation coverage.",
-        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged."
+        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",
+        "Linked documentation entry points and chapter references to the published documentation site."
       ]
     }
   ]
