@@ -1,0 +1,94 @@
+# Strategy: define trading logic
+
+Subclass `openbacktesting.Strategy` and implement `init()` and `next()`. Pass the class to `Backtest`; the framework creates instances. A strategy normally computes indicators once and makes decisions on each bar.
+
+## A complete strategy
+
+```python
+from openbacktesting import Backtest, Strategy, inputs
+from openbacktesting.test import GOOG
+
+class EmaCross(Strategy):
+    fast_length = inputs.int(10, title="Fast length", minval=1)
+    slow_length = inputs.int(30, title="Slow length", minval=2)
+
+    def init(self):
+        self.fast = self.ta.ema(self.close, length=self.fast_length)
+        self.slow = self.ta.ema(self.close, length=self.slow_length)
+
+    def next(self):
+        if len(self.close) < 2:
+            return
+        if not (self.fast.valid[-2:].all() and self.slow.valid[-2:].all()):
+            return
+        if self.ta.is_crossover(self.fast, self.slow) and not self.position:
+            self.buy(qty=1, tag="cross-up")
+        elif self.ta.is_crossunder(self.fast, self.slow) and self.position:
+            self.position.close()
+
+result = Backtest(GOOG, EmaCross, end_policy="close_at_last_close").run()
+print(result["# Trades"])
+```
+
+## Lifecycle and visible data
+
+| Method | When it runs | What to do there |
+| --- | --- | --- |
+| `init()` | Once, with the full data history available | Register `self.ta`/`self.ind` indicators and static plots; initialize your own state. Do not place orders or calculate signals with future data. |
+| `on_start()` | Once before the bar loop | Optional setup or logging; no trading. |
+| `next()` | Every reached bar, including the first | Read the current prefix, check indicator validity, place/cancel orders, inspect positions. |
+| `on_order(event)` | Batched order-status notifications | Inspect `event.snapshot.order_id`, `event.snapshot.status`, and `event.snapshot.reason`. New orders cannot execute recursively in that notification. |
+| `on_fill(fill)` | After an actual execution | Inspect `fill.price`, `fill.qty`, and fees; a submitted order alone does not imply a fill. |
+| `on_finish(summary)` | At termination, including errors | Inspect completion/reason/error or log a summary; no trading. |
+
+`next()` is **not delayed until indicators are ready**. Check the channel's `valid[-1]` before consuming it; check length before `[-2]`. `init()` can see the future, so use trailing calculations there and retain handles, not precomputed future decisions.
+
+See [account snapshots and events](events.md) for a complete callback example and all returned fields.
+
+## Data and state you use most often
+
+| Attribute | Usage |
+| --- | --- |
+| `self.close[-1]`, `self.high[-1]`, etc. | Current bar values; `[-2]` is the previous bar. `self.close` is price data, not a close-position method. |
+| `self.data_index[-1]` | Current timestamp or index value. |
+| `self.bar_index` | Zero-based bar position; use `self.bar_state.is_first/is_last` for boundaries. |
+| `self.data`, `self.df` | Additional columns and the currently visible DataFrame; see [data](data.md). |
+| `self.equity`, `self.account` | Current account value and a frozen balance/margin snapshot. |
+| `self.position` | Aggregate exposure; close with `self.position.close()` or `self.close_position()`. |
+| `self.orders` | Pending orders; call an order's `cancel()` to withdraw it. |
+| `self.trades`, `self.closed_trades` | Open lots and closed fragments. Use `trade.sl`/`trade.tp` to change protection. |
+| `self.closed_trade_stats` | Running closed-fragment counts and net profit, without rescanning all closed trades. |
+| `self.instrument`, `self.timeframe` | Instrument rules and optional declared timeframe (`None` without context). |
+| `self.log`, `self.plotting` | [Logs](#strategylog) and [visual declarations](plotting.md). |
+
+## Place and manage orders
+
+`self.buy(qty=1)` and `self.sell(qty=1)` return an `Order`. You may instead specify `amount=1000` or `percent=20` (20% of equity); these are mutually exclusive incremental sizes. All prices (`limit`, `stop`, `sl`, `tp`) are absolute prices. See [orders](trading.md) for every parameter, exits, target positions, OCO, and execution timing.
+
+## Register custom calculations
+
+```python
+def init(self):
+    self.mean = self.ind(
+        lambda series, length: series.rolling(length).mean(),
+        self.close.s, 20, name="Custom mean",
+    )
+
+def next(self):
+    if self.mean.valid[-1]:
+        self.log.info(f"Mean: {self.mean[-1]:.2f}")
+```
+
+These methods belong inside your subclass. `ind(func, *args, name=None, **kwargs)` calls `func` during `init()` and wraps its result in an `IndicatorHandle`. Return a Series/DataFrame with exactly the market-data index, or a positional array of matching length. A DataFrame supplies multiple channels. Keep calculations causal; negative shifts introduce future information. Use `self.ta` for built-in formulas and see [indicator handles](indicator-api.md) for indexing and multi-output results.
+
+{{api openbacktesting.Strategy}}
+
+{{api openbacktesting.BarState}}
+
+## Write logs
+
+Call `self.log.info("entry submitted")`, `.warning(...)`, or `.error(...)` with one string. Read them with `bt.get_logs()` after running. Records include bar/time and source location. Logging does not itself change order state or raise a strategy error.
+
+{{api openbacktesting.logs.StrategyLog}}
+
+[Backtest](core.md) · [Strategy parameters](inputs.md) · [User manual](../index.md)

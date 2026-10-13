@@ -1,9 +1,11 @@
-# Current boundaries
+# Supported boundaries
 
-## Semantic boundaries
+The engine backtests one asset in one settlement currency per run, with linear margin and contract multiplier 1. `MultiBacktest` runs independent accounts; a Portfolio report describes one run.
 
-The current trading model has one asset, one settlement currency, and linear margin. Default execution is at the next bar's open; same_close is a single close phase on the current bar, and end_policy controls termination. Ambiguous protective orders follow deterministic policies and record diagnostics; this does not imply knowledge of the true intrabar path. next runs from the first bar, and indicator validity does not gate execution; strategies must check valid before consuming indicators.
+- Execution uses OHLC bars. Intrabar path, real liquidity, volume-based partial fills, and realized market slippage cannot be established from OHLC alone. Stops may fill beyond their requested prices after gaps.
+- There is no live-trading connection, multi-asset account, currency conversion, futures daily settlement, stock-borrow interest, or funding-fee model.
+- Strategy code is ordinary Python. Run code you trust; there is no sandbox. Causal calculations and proper validity checks are the strategy author's responsibility.
+- The package exports plotting data but contains no chart renderer. Session inputs and timeframe labels do not infer exchange calendars or resample data automatically.
+- Indicator and execution behavior follows this library's documented contracts; Pine/TradingView numerical equivalence is not guaranteed. Windows support has not been fully validated.
 
-Future development will build indicators, Series/state, broker, and multiple-timeframe capabilities individually through a semantic SDK owned by the project. The Python library provides no code sandbox; run only trusted code. Windows, full Pine comparisons, live execution, portfolio accounts, and desktop installation without a development environment have not been accepted.
-
-Volume fillers, multi-asset scheduling, futures contract multipliers/daily settlement, stock-borrow interest, funding fees, exchange sessions, and live-trading guarantees are unsupported. OHLC alone cannot validate actual slippage or liquidity; a stop-loss budget does not guarantee a maximum loss.
+[First backtest](quickstart.md) · [Execution rules](guides/trading.md) · [Indicator usage](reference/indicator-api.md)

@@ -1,0 +1,109 @@
+# Backtest: run and optimize
+
+Use `Backtest` to run a `Strategy` subclass against one asset's historical data. Import both from `openbacktesting`. Start with the [complete first backtest](../quickstart.md) if you do not have a strategy yet.
+
+## Run a strategy
+
+```python
+from openbacktesting import Backtest, Strategy
+from openbacktesting.test import GOOG
+
+class BuyAndHold(Strategy):
+    def init(self):
+        pass
+
+    def next(self):
+        if self.bar_index == 0:
+            self.buy(qty=1)
+
+bt = Backtest(GOOG, BuyAndHold, cash=10_000, commission=0.002,
+              end_policy="close_at_last_close")
+result = bt.run()
+print(result[["Return [%]", "# Trades", "Max. Drawdown [%]"]])
+print(result["_trades"])
+```
+
+`bt.run()` returns a pandas Series. Each call starts a new account and strategy instance. `commission=0.002` means **0.2% per execution**. The order placed on the first bar normally fills at the next bar's open. The end policy in this example closes remaining holdings at the final close.
+
+## Constructor parameters
+
+| Parameter | What to pass |
+| --- | --- |
+| `data` | pandas DataFrame with `Open`, `High`, `Low`, `Close`; `Volume` is optional unless an indicator needs it. See [data requirements](data.md). |
+| `strategy` | Your `Strategy` subclass, without constructing an instance. |
+| `cash` | Positive initial account balance; default 10,000. |
+| `commission` | Fraction of execution notional, `(fixed_fee, fraction)`, a `Commission`, or a callable `(signed_qty, price) -> fee`. Charged on entries and exits. |
+| `spread` | Fractional price adjustment on every execution; `0.001` means 0.1%. |
+| `slippage` | `Slippage("bps", 5)` or `Slippage("fixed", 0.01)`; see [costs](trading.md#costs). |
+| `margin` | Required margin as a fraction of notional, in `(0, 1]`; `1` is unleveraged. |
+| `execution_timing` | `"next_open"` (default), or `"same_close"` for unconditional market orders submitted in `next()`. |
+| `end_policy` | `"mark_to_market"` keeps final open holdings; `"close_at_last_close"` liquidates actual holdings and charges costs. |
+| `instrument` | `InstrumentSpec` for quantity steps, minimum size, and optional price ticks. |
+| `default_order_size` | `DefaultOrderSize("fixed", 1)` or `DefaultOrderSize("equity_fraction", 0.2)` used when `buy()`/`sell()` omit size. Default `None` requires explicit sizing. |
+| `allow_short` | Whether new short positions may be opened; default `True`. |
+| `max_gross_exposure` | Optional gross-notional/equity cap; valid exits remain allowed. |
+| `hedging` | `False` nets opposite orders against existing trades; `True` allows long and short lots together. |
+| `exclusive_orders` | A new ordinary entry cancels pending entries and submits exits for existing lots. Default `False`. |
+| `context` | Optional `DataContext` for timeframe/timezone. Requires a timezone-aware index. |
+| `risk_free_rate` | Annualized fraction used for statistics only; `0.03` means 3%. |
+| `plotting`, `plotting_limits` | Collect visual declarations and optionally set resource limits. See [plotting](plotting.md). |
+| `indicator_cache_bytes` | Retained indicator-cache budget; default 64 MiB, `0` disables reuse. Does not cap total process memory. |
+
+`Backtest` uses the arguments you pass; it does not apply an `@backtest` decorator's settings. Use [runtime.run](runtime.md) when you want that declaration applied.
+
+## Pass strategy parameters
+
+Declare a class attribute (`length = 20`) or an [input](inputs.md), then call `bt.run(length=30)`. Keys are Python attribute names. For a title-based input request, use `inputs.request_for(MyStrategy, {"length": 30})` and `bt.run_inputs(request)`.
+
+## Find a parameter combination
+
+```python
+from openbacktesting import Backtest, Strategy
+from openbacktesting.test import GOOG
+
+class MovingAverage(Strategy):
+    length = 20
+
+    def init(self):
+        self.average = self.ta.sma(length=self.length)
+
+    def next(self):
+        if not self.average.valid[-1]:
+            return
+        if self.close[-1] > self.average[-1] and not self.position:
+            self.buy(qty=1)
+        elif self.close[-1] < self.average[-1] and self.position:
+            self.position.close()
+
+if __name__ == "__main__":
+    bt = Backtest(GOOG, MovingAverage, end_policy="close_at_last_close")
+    best, scores = bt.optimize(length=[10, 20, 40], maximize="Return [%]",
+                               return_heatmap=True)
+    print(best["_strategy"])
+    print(scores)
+```
+
+Install the `optimize` extra before using optimization. Additional keyword arguments are candidate sequences for strategy parameters. `maximize` is a result key or a function receiving a result and returning a score; higher wins. `constraint=lambda p: p.fast < p.slow` filters combinations before running.
+
+| Option | Meaning |
+| --- | --- |
+| `method="grid"` | Evaluate the candidate product; input declarations support this method. |
+| `method="sambo"` | Model-based search for ordinary class parameters; unavailable for declared inputs. |
+| `max_tries` | Integer evaluation budget, or a fraction `(0, 1]` of the grid. Omit for an exhaustive grid; SAMBO defaults to 200. |
+| `random_state` | Fixed integer for repeatable search sampling. |
+| `return_heatmap=True` | Return `(best_result, scores)`; `scores` has a parameter MultiIndex. |
+| `return_optimization=True` | SAMBO only: append the optimizer's raw result to the returned tuple. |
+
+Use [saved experiments](optimizer.md) when you need complete reports for every candidate, filtering, or resume. `Backtest.optimize` returns the best run and optional scores.
+
+## Read results and logs
+
+`result["_equity_curve"]` contains the equity time series; `result["_trades"]` contains closed trade fragments. With the default end policy, open holdings appear in `result["_open_trades"]` and may contribute to return without contributing to `# Trades`. See [results](../guides/results.md) for units and tables, and [Portfolio](portfolio.md) for JSON reports.
+
+Call `bt.get_logs()` after success or failure to read messages written through `self.log.info/warning/error`. A subsequent run clears the previous run's logs.
+
+{{api openbacktesting.Backtest}}
+
+{{api openbacktesting.DefaultOrderSize}}
+
+[Strategy](strategy.md) · [Orders and positions](trading.md) · [User manual](../index.md)

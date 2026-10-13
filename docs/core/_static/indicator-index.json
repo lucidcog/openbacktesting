@@ -5,7 +5,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "aberration.html"
+    "href": "aberration.md"
   },
   {
     "id": "ta.ac",
@@ -13,7 +13,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "ac.html"
+    "href": "ac.md"
   },
   {
     "id": "ta.accbands",
@@ -21,7 +21,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "accbands.html"
+    "href": "accbands.md"
   },
   {
     "id": "ta.ad",
@@ -29,7 +29,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "ad.html"
+    "href": "ad.md"
   },
   {
     "id": "ta.adosc",
@@ -37,7 +37,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "adosc.html"
+    "href": "adosc.md"
   },
   {
     "id": "ta.adr",
@@ -45,7 +45,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "adr.html"
+    "href": "adr.md"
   },
   {
     "id": "ta.adx",
@@ -53,7 +53,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "adx.html"
+    "href": "adx.md"
   },
   {
     "id": "ta.adxr",
@@ -61,7 +61,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "adxr.html"
+    "href": "adxr.md"
   },
   {
     "id": "ta.alligator",
@@ -69,7 +69,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "alligator.html"
+    "href": "alligator.md"
   },
   {
     "id": "ta.alma",
@@ -77,7 +77,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "alma.html"
+    "href": "alma.md"
   },
   {
     "id": "ta.amat",
@@ -85,7 +85,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "amat.html"
+    "href": "amat.md"
   },
   {
     "id": "ta.anchored_vwap",
@@ -93,7 +93,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "anchored_vwap.html"
+    "href": "anchored_vwap.md"
   },
   {
     "id": "ta.anchored_vwap_bands",
@@ -101,7 +101,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "anchored_vwap_bands.html"
+    "href": "anchored_vwap_bands.md"
   },
   {
     "id": "ta.ao",
@@ -109,7 +109,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "ao.html"
+    "href": "ao.md"
   },
   {
     "id": "ta.aobv",
@@ -117,7 +117,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "aobv.html"
+    "href": "aobv.md"
   },
   {
     "id": "ta.apo",
@@ -125,7 +125,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "apo.html"
+    "href": "apo.md"
   },
   {
     "id": "ta.aroon",
@@ -133,7 +133,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "aroon.html"
+    "href": "aroon.md"
   },
   {
     "id": "ta.atr",
@@ -141,7 +141,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "atr.html"
+    "href": "atr.md"
   },
   {
     "id": "ta.atr_stop",
@@ -149,7 +149,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "atr_stop.html"
+    "href": "atr_stop.md"
   },
   {
     "id": "ta.avgprice",
@@ -157,7 +157,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "avgprice.html"
+    "href": "avgprice.md"
   },
   {
     "id": "ta.avolume",
@@ -165,7 +165,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "avolume.html"
+    "href": "avolume.md"
   },
   {
     "id": "ta.barssince",
@@ -173,7 +173,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "barssince.html"
+    "href": "barssince.md"
   },
   {
     "id": "ta.bbands",
@@ -181,7 +181,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "bbands.html"
+    "href": "bbands.md"
   },
   {
     "id": "ta.beta",
@@ -189,7 +189,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "beta.html"
+    "href": "beta.md"
   },
   {
     "id": "ta.bias",
@@ -197,7 +197,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "bias.html"
+    "href": "bias.md"
   },
   {
     "id": "ta.bop",
@@ -205,7 +205,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "bop.html"
+    "href": "bop.md"
   },
   {
     "id": "ta.brar",
@@ -213,7 +213,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "brar.html"
+    "href": "brar.md"
   },
   {
     "id": "ta.cci",
@@ -221,7 +221,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "cci.html"
+    "href": "cci.md"
   },
   {
     "id": "ta.cdl_doji",
@@ -229,7 +229,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_doji.html"
+    "href": "cdl_doji.md"
   },
   {
     "id": "ta.cdl_engulfing",
@@ -237,7 +237,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_engulfing.html"
+    "href": "cdl_engulfing.md"
   },
   {
     "id": "ta.cdl_eveningstar",
@@ -245,7 +245,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_eveningstar.html"
+    "href": "cdl_eveningstar.md"
   },
   {
     "id": "ta.cdl_hammer",
@@ -253,7 +253,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_hammer.html"
+    "href": "cdl_hammer.md"
   },
   {
     "id": "ta.cdl_harami",
@@ -261,7 +261,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_harami.html"
+    "href": "cdl_harami.md"
   },
   {
     "id": "ta.cdl_inside",
@@ -269,7 +269,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_inside.html"
+    "href": "cdl_inside.md"
   },
   {
     "id": "ta.cdl_marubozu",
@@ -277,7 +277,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_marubozu.html"
+    "href": "cdl_marubozu.md"
   },
   {
     "id": "ta.cdl_morningstar",
@@ -285,7 +285,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_morningstar.html"
+    "href": "cdl_morningstar.md"
   },
   {
     "id": "ta.cdl_pattern",
@@ -293,7 +293,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Pattern deferred",
-    "href": "cdl_pattern.html"
+    "href": "cdl_pattern.md"
   },
   {
     "id": "ta.cdl_shootingstar",
@@ -301,7 +301,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_shootingstar.html"
+    "href": "cdl_shootingstar.md"
   },
   {
     "id": "ta.cdl_z",
@@ -309,7 +309,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "cdl_z.html"
+    "href": "cdl_z.md"
   },
   {
     "id": "ta.ce",
@@ -317,7 +317,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "ce.html"
+    "href": "ce.md"
   },
   {
     "id": "ta.cfo",
@@ -325,7 +325,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "cfo.html"
+    "href": "cfo.md"
   },
   {
     "id": "ta.cg",
@@ -333,7 +333,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "cg.html"
+    "href": "cg.md"
   },
   {
     "id": "ta.change",
@@ -341,7 +341,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "change.html"
+    "href": "change.md"
   },
   {
     "id": "ta.chop",
@@ -349,7 +349,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "chop.html"
+    "href": "chop.md"
   },
   {
     "id": "ta.cksp",
@@ -357,7 +357,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "cksp.html"
+    "href": "cksp.md"
   },
   {
     "id": "ta.cmf",
@@ -365,7 +365,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "cmf.html"
+    "href": "cmf.md"
   },
   {
     "id": "ta.cmo",
@@ -373,7 +373,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "cmo.html"
+    "href": "cmo.md"
   },
   {
     "id": "ta.coppock",
@@ -381,7 +381,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "coppock.html"
+    "href": "coppock.md"
   },
   {
     "id": "ta.correl",
@@ -389,7 +389,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "correl.html"
+    "href": "correl.md"
   },
   {
     "id": "ta.cpr",
@@ -397,7 +397,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "cpr.html"
+    "href": "cpr.md"
   },
   {
     "id": "ta.cross",
@@ -405,7 +405,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "cross.html"
+    "href": "cross.md"
   },
   {
     "id": "ta.crossover",
@@ -413,7 +413,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "crossover.html"
+    "href": "crossover.md"
   },
   {
     "id": "ta.crossunder",
@@ -421,7 +421,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "crossunder.html"
+    "href": "crossunder.md"
   },
   {
     "id": "ta.crsi",
@@ -429,7 +429,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "crsi.html"
+    "href": "crsi.md"
   },
   {
     "id": "ta.cti",
@@ -437,7 +437,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "cti.html"
+    "href": "cti.md"
   },
   {
     "id": "ta.cum",
@@ -445,7 +445,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "cum.html"
+    "href": "cum.md"
   },
   {
     "id": "ta.cvi",
@@ -453,7 +453,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "cvi.html"
+    "href": "cvi.md"
   },
   {
     "id": "ta.decay",
@@ -461,7 +461,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "decay.html"
+    "href": "decay.md"
   },
   {
     "id": "ta.decreasing",
@@ -469,7 +469,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "decreasing.html"
+    "href": "decreasing.md"
   },
   {
     "id": "ta.dema",
@@ -477,7 +477,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "dema.html"
+    "href": "dema.md"
   },
   {
     "id": "ta.dm",
@@ -485,7 +485,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "dm.html"
+    "href": "dm.md"
   },
   {
     "id": "ta.donchian",
@@ -493,7 +493,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "donchian.html"
+    "href": "donchian.md"
   },
   {
     "id": "ta.dpo",
@@ -501,7 +501,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "dpo.html"
+    "href": "dpo.md"
   },
   {
     "id": "ta.drawdown",
@@ -509,7 +509,7 @@
     "category": "Returns and drawdowns",
     "aliases": [],
     "status": "Available",
-    "href": "drawdown.html"
+    "href": "drawdown.md"
   },
   {
     "id": "ta.dsp",
@@ -517,7 +517,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "dsp.html"
+    "href": "dsp.md"
   },
   {
     "id": "ta.dx",
@@ -525,7 +525,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "dx.html"
+    "href": "dx.md"
   },
   {
     "id": "ta.ebsw",
@@ -533,7 +533,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "ebsw.html"
+    "href": "ebsw.md"
   },
   {
     "id": "ta.edecay",
@@ -541,7 +541,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "edecay.html"
+    "href": "edecay.md"
   },
   {
     "id": "ta.efi",
@@ -549,7 +549,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "efi.html"
+    "href": "efi.md"
   },
   {
     "id": "ta.ema",
@@ -557,7 +557,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ema.html"
+    "href": "ema.md"
   },
   {
     "id": "ta.emv",
@@ -565,7 +565,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "emv.html"
+    "href": "emv.md"
   },
   {
     "id": "ta.entropy",
@@ -573,7 +573,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "entropy.html"
+    "href": "entropy.md"
   },
   {
     "id": "ta.eom",
@@ -581,7 +581,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "eom.html"
+    "href": "eom.md"
   },
   {
     "id": "ta.er",
@@ -589,7 +589,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "er.html"
+    "href": "er.md"
   },
   {
     "id": "ta.eri",
@@ -597,7 +597,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "eri.html"
+    "href": "eri.md"
   },
   {
     "id": "ta.falling",
@@ -605,7 +605,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "falling.html"
+    "href": "falling.md"
   },
   {
     "id": "ta.fisher",
@@ -613,7 +613,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "fisher.html"
+    "href": "fisher.md"
   },
   {
     "id": "ta.fosc",
@@ -621,7 +621,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "fosc.html"
+    "href": "fosc.md"
   },
   {
     "id": "ta.frama",
@@ -629,7 +629,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "frama.html"
+    "href": "frama.md"
   },
   {
     "id": "ta.fwma",
@@ -637,7 +637,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "fwma.html"
+    "href": "fwma.md"
   },
   {
     "id": "ta.gator",
@@ -645,7 +645,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "gator.html"
+    "href": "gator.md"
   },
   {
     "id": "ta.ha",
@@ -653,7 +653,7 @@
     "category": "Candles and patterns",
     "aliases": [],
     "status": "Available",
-    "href": "ha.html"
+    "href": "ha.md"
   },
   {
     "id": "ta.highest",
@@ -661,7 +661,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "highest.html"
+    "href": "highest.md"
   },
   {
     "id": "ta.highestbars",
@@ -669,7 +669,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "highestbars.html"
+    "href": "highestbars.md"
   },
   {
     "id": "ta.hilo",
@@ -677,7 +677,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "hilo.html"
+    "href": "hilo.md"
   },
   {
     "id": "ta.hl2",
@@ -685,7 +685,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "hl2.html"
+    "href": "hl2.md"
   },
   {
     "id": "ta.hlc3",
@@ -693,7 +693,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "hlc3.html"
+    "href": "hlc3.md"
   },
   {
     "id": "ta.hma",
@@ -701,7 +701,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "hma.html"
+    "href": "hma.md"
   },
   {
     "id": "ta.ht_dcperiod",
@@ -709,7 +709,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "ht_dcperiod.html"
+    "href": "ht_dcperiod.md"
   },
   {
     "id": "ta.ht_dcphase",
@@ -717,7 +717,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "ht_dcphase.html"
+    "href": "ht_dcphase.md"
   },
   {
     "id": "ta.ht_phasor",
@@ -725,7 +725,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "ht_phasor.html"
+    "href": "ht_phasor.md"
   },
   {
     "id": "ta.ht_sine",
@@ -733,7 +733,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "ht_sine.html"
+    "href": "ht_sine.md"
   },
   {
     "id": "ta.ht_trendline",
@@ -741,7 +741,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ht_trendline.html"
+    "href": "ht_trendline.md"
   },
   {
     "id": "ta.ht_trendmode",
@@ -749,7 +749,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "ht_trendmode.html"
+    "href": "ht_trendmode.md"
   },
   {
     "id": "ta.hvol",
@@ -757,7 +757,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "hvol.html"
+    "href": "hvol.md"
   },
   {
     "id": "ta.hwc",
@@ -765,7 +765,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "hwc.html"
+    "href": "hwc.md"
   },
   {
     "id": "ta.hwma",
@@ -773,7 +773,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "hwma.html"
+    "href": "hwma.md"
   },
   {
     "id": "ta.ibs",
@@ -781,7 +781,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "ibs.html"
+    "href": "ibs.md"
   },
   {
     "id": "ta.ichimoku",
@@ -789,7 +789,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ichimoku.html"
+    "href": "ichimoku.md"
   },
   {
     "id": "ta.iii",
@@ -797,7 +797,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "iii.html"
+    "href": "iii.md"
   },
   {
     "id": "ta.increasing",
@@ -805,7 +805,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "increasing.html"
+    "href": "increasing.md"
   },
   {
     "id": "ta.inertia",
@@ -813,7 +813,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "inertia.html"
+    "href": "inertia.md"
   },
   {
     "id": "ta.jma",
@@ -821,7 +821,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "jma.html"
+    "href": "jma.md"
   },
   {
     "id": "ta.kama",
@@ -829,7 +829,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "kama.html"
+    "href": "kama.md"
   },
   {
     "id": "ta.kc",
@@ -837,7 +837,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "kc.html"
+    "href": "kc.md"
   },
   {
     "id": "ta.kdj",
@@ -845,7 +845,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "kdj.html"
+    "href": "kdj.md"
   },
   {
     "id": "ta.kst",
@@ -853,7 +853,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "kst.html"
+    "href": "kst.md"
   },
   {
     "id": "ta.kurtosis",
@@ -861,7 +861,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "kurtosis.html"
+    "href": "kurtosis.md"
   },
   {
     "id": "ta.kvo",
@@ -869,7 +869,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "kvo.html"
+    "href": "kvo.md"
   },
   {
     "id": "ta.linreg",
@@ -877,7 +877,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "linreg.html"
+    "href": "linreg.md"
   },
   {
     "id": "ta.linregangle",
@@ -885,7 +885,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "linregangle.html"
+    "href": "linregangle.md"
   },
   {
     "id": "ta.linregintercept",
@@ -893,7 +893,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "linregintercept.html"
+    "href": "linregintercept.md"
   },
   {
     "id": "ta.linregslope",
@@ -901,7 +901,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "linregslope.html"
+    "href": "linregslope.md"
   },
   {
     "id": "ta.log_return",
@@ -909,7 +909,7 @@
     "category": "Returns and drawdowns",
     "aliases": [],
     "status": "Available",
-    "href": "log_return.html"
+    "href": "log_return.md"
   },
   {
     "id": "ta.long_run",
@@ -917,7 +917,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "long_run.html"
+    "href": "long_run.md"
   },
   {
     "id": "ta.lowest",
@@ -925,7 +925,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "lowest.html"
+    "href": "lowest.md"
   },
   {
     "id": "ta.lowestbars",
@@ -933,7 +933,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "lowestbars.html"
+    "href": "lowestbars.md"
   },
   {
     "id": "ta.lrsi",
@@ -941,7 +941,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "lrsi.html"
+    "href": "lrsi.md"
   },
   {
     "id": "ta.ma",
@@ -949,7 +949,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ma.html"
+    "href": "ma.md"
   },
   {
     "id": "ta.ma_envelopes",
@@ -957,7 +957,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ma_envelopes.html"
+    "href": "ma_envelopes.md"
   },
   {
     "id": "ta.macd",
@@ -967,7 +967,7 @@
       "line"
     ],
     "status": "Available",
-    "href": "macd.html"
+    "href": "macd.md"
   },
   {
     "id": "ta.macdext",
@@ -975,7 +975,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "macdext.html"
+    "href": "macdext.md"
   },
   {
     "id": "ta.macdfix",
@@ -983,7 +983,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "macdfix.html"
+    "href": "macdfix.md"
   },
   {
     "id": "ta.mad",
@@ -991,7 +991,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "mad.html"
+    "href": "mad.md"
   },
   {
     "id": "ta.mama",
@@ -999,7 +999,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "mama.html"
+    "href": "mama.md"
   },
   {
     "id": "ta.marketfi",
@@ -1007,7 +1007,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "marketfi.html"
+    "href": "marketfi.md"
   },
   {
     "id": "ta.massi",
@@ -1015,7 +1015,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "massi.html"
+    "href": "massi.md"
   },
   {
     "id": "ta.mavp",
@@ -1023,7 +1023,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "mavp.html"
+    "href": "mavp.md"
   },
   {
     "id": "ta.mcgd",
@@ -1031,7 +1031,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "mcgd.html"
+    "href": "mcgd.md"
   },
   {
     "id": "ta.md",
@@ -1039,7 +1039,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "md.html"
+    "href": "md.md"
   },
   {
     "id": "ta.median",
@@ -1047,7 +1047,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "median.html"
+    "href": "median.md"
   },
   {
     "id": "ta.medprice",
@@ -1055,7 +1055,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "medprice.html"
+    "href": "medprice.md"
   },
   {
     "id": "ta.mfi",
@@ -1063,7 +1063,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "mfi.html"
+    "href": "mfi.md"
   },
   {
     "id": "ta.midpoint",
@@ -1071,7 +1071,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "midpoint.html"
+    "href": "midpoint.md"
   },
   {
     "id": "ta.midprice",
@@ -1079,7 +1079,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "midprice.html"
+    "href": "midprice.md"
   },
   {
     "id": "ta.minus_dm",
@@ -1087,7 +1087,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "minus_dm.html"
+    "href": "minus_dm.md"
   },
   {
     "id": "ta.mmar",
@@ -1095,7 +1095,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "mmar.html"
+    "href": "mmar.md"
   },
   {
     "id": "ta.mode",
@@ -1103,7 +1103,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "mode.html"
+    "href": "mode.md"
   },
   {
     "id": "ta.mom",
@@ -1111,7 +1111,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "mom.html"
+    "href": "mom.md"
   },
   {
     "id": "ta.msw",
@@ -1119,7 +1119,7 @@
     "category": "Cycles",
     "aliases": [],
     "status": "Available",
-    "href": "msw.html"
+    "href": "msw.md"
   },
   {
     "id": "ta.natr",
@@ -1127,7 +1127,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "natr.html"
+    "href": "natr.md"
   },
   {
     "id": "ta.nvi",
@@ -1135,7 +1135,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "nvi.html"
+    "href": "nvi.md"
   },
   {
     "id": "ta.obv",
@@ -1143,7 +1143,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "obv.html"
+    "href": "obv.md"
   },
   {
     "id": "ta.ohlc4",
@@ -1151,7 +1151,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ohlc4.html"
+    "href": "ohlc4.md"
   },
   {
     "id": "ta.pdist",
@@ -1159,7 +1159,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "pdist.html"
+    "href": "pdist.md"
   },
   {
     "id": "ta.percent_return",
@@ -1167,7 +1167,7 @@
     "category": "Returns and drawdowns",
     "aliases": [],
     "status": "Available",
-    "href": "percent_return.html"
+    "href": "percent_return.md"
   },
   {
     "id": "ta.percentile_linear_interpolation",
@@ -1175,7 +1175,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "percentile_linear_interpolation.html"
+    "href": "percentile_linear_interpolation.md"
   },
   {
     "id": "ta.percentile_nearest_rank",
@@ -1183,7 +1183,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "percentile_nearest_rank.html"
+    "href": "percentile_nearest_rank.md"
   },
   {
     "id": "ta.percentrank",
@@ -1191,7 +1191,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "percentrank.html"
+    "href": "percentrank.md"
   },
   {
     "id": "ta.pgo",
@@ -1199,7 +1199,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "pgo.html"
+    "href": "pgo.md"
   },
   {
     "id": "ta.pivot_points",
@@ -1207,7 +1207,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "pivot_points.html"
+    "href": "pivot_points.md"
   },
   {
     "id": "ta.pivothigh",
@@ -1215,7 +1215,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "pivothigh.html"
+    "href": "pivothigh.md"
   },
   {
     "id": "ta.pivotlow",
@@ -1223,7 +1223,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "pivotlow.html"
+    "href": "pivotlow.md"
   },
   {
     "id": "ta.plus_dm",
@@ -1231,7 +1231,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "plus_dm.html"
+    "href": "plus_dm.md"
   },
   {
     "id": "ta.pmax",
@@ -1239,7 +1239,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "pmax.html"
+    "href": "pmax.md"
   },
   {
     "id": "ta.pmo",
@@ -1247,7 +1247,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "pmo.html"
+    "href": "pmo.md"
   },
   {
     "id": "ta.po",
@@ -1255,7 +1255,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "po.html"
+    "href": "po.md"
   },
   {
     "id": "ta.ppo",
@@ -1263,7 +1263,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "ppo.html"
+    "href": "ppo.md"
   },
   {
     "id": "ta.psar",
@@ -1271,7 +1271,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "psar.html"
+    "href": "psar.md"
   },
   {
     "id": "ta.psl",
@@ -1279,7 +1279,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "psl.html"
+    "href": "psl.md"
   },
   {
     "id": "ta.pvi",
@@ -1287,7 +1287,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "pvi.html"
+    "href": "pvi.md"
   },
   {
     "id": "ta.pvo",
@@ -1295,7 +1295,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "pvo.html"
+    "href": "pvo.md"
   },
   {
     "id": "ta.pvol",
@@ -1303,7 +1303,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "pvol.html"
+    "href": "pvol.md"
   },
   {
     "id": "ta.pvr",
@@ -1311,7 +1311,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "pvr.html"
+    "href": "pvr.md"
   },
   {
     "id": "ta.pvt",
@@ -1319,7 +1319,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "pvt.html"
+    "href": "pvt.md"
   },
   {
     "id": "ta.pwma",
@@ -1327,7 +1327,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "pwma.html"
+    "href": "pwma.md"
   },
   {
     "id": "ta.qqe",
@@ -1335,7 +1335,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "qqe.html"
+    "href": "qqe.md"
   },
   {
     "id": "ta.qstick",
@@ -1343,7 +1343,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "qstick.html"
+    "href": "qstick.md"
   },
   {
     "id": "ta.quantile",
@@ -1351,7 +1351,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "quantile.html"
+    "href": "quantile.md"
   },
   {
     "id": "ta.rainbow",
@@ -1359,7 +1359,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "rainbow.html"
+    "href": "rainbow.md"
   },
   {
     "id": "ta.range",
@@ -1367,7 +1367,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "range.html"
+    "href": "range.md"
   },
   {
     "id": "ta.rci",
@@ -1375,7 +1375,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rci.html"
+    "href": "rci.md"
   },
   {
     "id": "ta.rising",
@@ -1383,7 +1383,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "rising.html"
+    "href": "rising.md"
   },
   {
     "id": "ta.rma",
@@ -1391,7 +1391,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "rma.html"
+    "href": "rma.md"
   },
   {
     "id": "ta.rmi",
@@ -1399,7 +1399,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rmi.html"
+    "href": "rmi.md"
   },
   {
     "id": "ta.roc",
@@ -1407,7 +1407,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "roc.html"
+    "href": "roc.md"
   },
   {
     "id": "ta.rocp",
@@ -1415,7 +1415,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rocp.html"
+    "href": "rocp.md"
   },
   {
     "id": "ta.rocr",
@@ -1423,7 +1423,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rocr.html"
+    "href": "rocr.md"
   },
   {
     "id": "ta.rocr100",
@@ -1431,7 +1431,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rocr100.html"
+    "href": "rocr100.md"
   },
   {
     "id": "ta.rolling_count",
@@ -1439,7 +1439,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "rolling_count.html"
+    "href": "rolling_count.md"
   },
   {
     "id": "ta.rolling_sum",
@@ -1447,7 +1447,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "rolling_sum.html"
+    "href": "rolling_sum.md"
   },
   {
     "id": "ta.rsi",
@@ -1455,7 +1455,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rsi.html"
+    "href": "rsi.md"
   },
   {
     "id": "ta.rsx",
@@ -1463,7 +1463,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rsx.html"
+    "href": "rsx.md"
   },
   {
     "id": "ta.running_max",
@@ -1471,7 +1471,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "running_max.html"
+    "href": "running_max.md"
   },
   {
     "id": "ta.running_min",
@@ -1479,7 +1479,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "running_min.html"
+    "href": "running_min.md"
   },
   {
     "id": "ta.rvgi",
@@ -1487,7 +1487,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "rvgi.html"
+    "href": "rvgi.md"
   },
   {
     "id": "ta.rvi",
@@ -1495,7 +1495,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "rvi.html"
+    "href": "rvi.md"
   },
   {
     "id": "ta.rvol",
@@ -1503,7 +1503,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "rvol.html"
+    "href": "rvol.md"
   },
   {
     "id": "ta.sarext",
@@ -1511,7 +1511,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "sarext.html"
+    "href": "sarext.md"
   },
   {
     "id": "ta.shift",
@@ -1519,7 +1519,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "shift.html"
+    "href": "shift.md"
   },
   {
     "id": "ta.short_run",
@@ -1527,7 +1527,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "short_run.html"
+    "href": "short_run.md"
   },
   {
     "id": "ta.sinwma",
@@ -1535,7 +1535,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "sinwma.html"
+    "href": "sinwma.md"
   },
   {
     "id": "ta.skew",
@@ -1543,7 +1543,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "skew.html"
+    "href": "skew.md"
   },
   {
     "id": "ta.slope",
@@ -1551,7 +1551,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "slope.html"
+    "href": "slope.md"
   },
   {
     "id": "ta.sma",
@@ -1559,7 +1559,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "sma.html"
+    "href": "sma.md"
   },
   {
     "id": "ta.smc_sweep",
@@ -1567,7 +1567,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "smc_sweep.html"
+    "href": "smc_sweep.md"
   },
   {
     "id": "ta.smi",
@@ -1575,7 +1575,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "smi.html"
+    "href": "smi.md"
   },
   {
     "id": "ta.smi_stochastic",
@@ -1583,7 +1583,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "smi_stochastic.html"
+    "href": "smi_stochastic.md"
   },
   {
     "id": "ta.squeeze",
@@ -1591,7 +1591,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "squeeze.html"
+    "href": "squeeze.md"
   },
   {
     "id": "ta.squeeze_pro",
@@ -1599,7 +1599,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "squeeze_pro.html"
+    "href": "squeeze_pro.md"
   },
   {
     "id": "ta.ssf",
@@ -1607,7 +1607,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "ssf.html"
+    "href": "ssf.md"
   },
   {
     "id": "ta.starc",
@@ -1615,7 +1615,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "starc.html"
+    "href": "starc.md"
   },
   {
     "id": "ta.stc",
@@ -1623,7 +1623,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "stc.html"
+    "href": "stc.md"
   },
   {
     "id": "ta.stderr",
@@ -1631,7 +1631,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "stderr.html"
+    "href": "stderr.md"
   },
   {
     "id": "ta.stdev",
@@ -1639,7 +1639,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "stdev.html"
+    "href": "stdev.md"
   },
   {
     "id": "ta.stoch",
@@ -1647,7 +1647,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "stoch.html"
+    "href": "stoch.md"
   },
   {
     "id": "ta.stochf",
@@ -1655,7 +1655,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "stochf.html"
+    "href": "stochf.md"
   },
   {
     "id": "ta.stochrsi",
@@ -1663,7 +1663,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "stochrsi.html"
+    "href": "stochrsi.md"
   },
   {
     "id": "ta.supertrend",
@@ -1671,7 +1671,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "supertrend.html"
+    "href": "supertrend.md"
   },
   {
     "id": "ta.swma",
@@ -1679,7 +1679,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "swma.html"
+    "href": "swma.md"
   },
   {
     "id": "ta.t3",
@@ -1687,7 +1687,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "t3.html"
+    "href": "t3.md"
   },
   {
     "id": "ta.td_seq",
@@ -1695,7 +1695,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "td_seq.html"
+    "href": "td_seq.md"
   },
   {
     "id": "ta.tema",
@@ -1703,7 +1703,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "tema.html"
+    "href": "tema.md"
   },
   {
     "id": "ta.thermo",
@@ -1711,7 +1711,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "thermo.html"
+    "href": "thermo.md"
   },
   {
     "id": "ta.tos_stdevall",
@@ -1719,7 +1719,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Research only",
-    "href": "tos_stdevall.html"
+    "href": "tos_stdevall.md"
   },
   {
     "id": "ta.trima",
@@ -1727,7 +1727,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "trima.html"
+    "href": "trima.md"
   },
   {
     "id": "ta.trix",
@@ -1735,7 +1735,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "trix.html"
+    "href": "trix.md"
   },
   {
     "id": "ta.trixh",
@@ -1743,7 +1743,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "trixh.html"
+    "href": "trixh.md"
   },
   {
     "id": "ta.true_range",
@@ -1751,7 +1751,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "true_range.html"
+    "href": "true_range.md"
   },
   {
     "id": "ta.tsf",
@@ -1759,7 +1759,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "tsf.html"
+    "href": "tsf.md"
   },
   {
     "id": "ta.tsi",
@@ -1767,7 +1767,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "tsi.html"
+    "href": "tsi.md"
   },
   {
     "id": "ta.tsignals",
@@ -1775,7 +1775,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "tsignals.html"
+    "href": "tsignals.md"
   },
   {
     "id": "ta.ttm_trend",
@@ -1783,7 +1783,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "ttm_trend.html"
+    "href": "ttm_trend.md"
   },
   {
     "id": "ta.typprice",
@@ -1791,7 +1791,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "typprice.html"
+    "href": "typprice.md"
   },
   {
     "id": "ta.ui",
@@ -1799,7 +1799,7 @@
     "category": "Volatility",
     "aliases": [],
     "status": "Available",
-    "href": "ui.html"
+    "href": "ui.md"
   },
   {
     "id": "ta.uo",
@@ -1807,7 +1807,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "uo.html"
+    "href": "uo.md"
   },
   {
     "id": "ta.valuewhen",
@@ -1815,7 +1815,7 @@
     "category": "Series utilities",
     "aliases": [],
     "status": "Available",
-    "href": "valuewhen.html"
+    "href": "valuewhen.md"
   },
   {
     "id": "ta.variance",
@@ -1823,7 +1823,7 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "variance.html"
+    "href": "variance.md"
   },
   {
     "id": "ta.vfi",
@@ -1831,7 +1831,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "vfi.html"
+    "href": "vfi.md"
   },
   {
     "id": "ta.vhf",
@@ -1839,7 +1839,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "vhf.html"
+    "href": "vhf.md"
   },
   {
     "id": "ta.vidya",
@@ -1847,7 +1847,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "vidya.html"
+    "href": "vidya.md"
   },
   {
     "id": "ta.volatility_stop",
@@ -1855,7 +1855,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "volatility_stop.html"
+    "href": "volatility_stop.md"
   },
   {
     "id": "ta.vortex",
@@ -1863,7 +1863,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "vortex.html"
+    "href": "vortex.md"
   },
   {
     "id": "ta.vosc",
@@ -1871,7 +1871,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "vosc.html"
+    "href": "vosc.md"
   },
   {
     "id": "ta.vp",
@@ -1879,7 +1879,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Not a bar-by-bar series",
-    "href": "vp.html"
+    "href": "vp.md"
   },
   {
     "id": "ta.vwap",
@@ -1887,7 +1887,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "vwap.html"
+    "href": "vwap.md"
   },
   {
     "id": "ta.vwma",
@@ -1895,7 +1895,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "vwma.html"
+    "href": "vwma.md"
   },
   {
     "id": "ta.vwmacd",
@@ -1903,7 +1903,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "vwmacd.html"
+    "href": "vwmacd.md"
   },
   {
     "id": "ta.wad",
@@ -1911,7 +1911,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "wad.html"
+    "href": "wad.md"
   },
   {
     "id": "ta.wavetrend",
@@ -1919,7 +1919,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "wavetrend.html"
+    "href": "wavetrend.md"
   },
   {
     "id": "ta.wcp",
@@ -1927,7 +1927,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "wcp.html"
+    "href": "wcp.md"
   },
   {
     "id": "ta.willr",
@@ -1935,7 +1935,7 @@
     "category": "Momentum",
     "aliases": [],
     "status": "Available",
-    "href": "willr.html"
+    "href": "willr.md"
   },
   {
     "id": "ta.wma",
@@ -1943,7 +1943,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "wma.html"
+    "href": "wma.md"
   },
   {
     "id": "ta.wvad",
@@ -1951,7 +1951,7 @@
     "category": "Volume",
     "aliases": [],
     "status": "Available",
-    "href": "wvad.html"
+    "href": "wvad.md"
   },
   {
     "id": "ta.xsignals",
@@ -1959,7 +1959,7 @@
     "category": "Trend",
     "aliases": [],
     "status": "Available",
-    "href": "xsignals.html"
+    "href": "xsignals.md"
   },
   {
     "id": "ta.zlma",
@@ -1967,7 +1967,7 @@
     "category": "Moving averages and prices",
     "aliases": [],
     "status": "Available",
-    "href": "zlma.html"
+    "href": "zlma.md"
   },
   {
     "id": "ta.zscore",
@@ -1975,6 +1975,6 @@
     "category": "Statistics",
     "aliases": [],
     "status": "Available",
-    "href": "zscore.html"
+    "href": "zscore.md"
   }
 ]

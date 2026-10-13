@@ -18,7 +18,7 @@ Schreibe Strategien, die Kerze für Kerze ausgeführt werden, prüfe sie anhand 
 
 **[Pineify](https://pineify.app) ist der wichtigste zahlende Sponsor von OpenBacktesting.** Seine finanzielle Unterstützung trägt zur Finanzierung des Projekts bei.
 
-Pineify bietet KI-gestützte Pine-Script-Programmierung und einen visuellen Editor für TradingView-Indikatoren und -Strategien. [Pineify entdecken →](https://pineify.app)
+Pineify ist ein KI-Trading-Toolkit zum Erstellen von Indikatoren und Strategien für verschiedene Plattformen. Es vereint Pine Script AI, einen Finanzagenten, KI-gestützte Aktienauswahl, Markt-Screening, Chartanalyse und MCP-Tools. [Pineify entdecken →](https://pineify.app)
 
 ## Funktionen
 

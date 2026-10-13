@@ -1,0 +1,29 @@
+{% include "partials/tags.html" %}
+{% include "partials/actions.html" %}
+{% if page.meta.discovery %}
+  {% set parts = page.content.split('</h1>', 1) %}
+  {% if parts | length == 2 %}
+    {{ parts[0] }}</h1>
+  {% else %}
+    <h1>{{ page.title | d(config.site_name, true) }}</h1>
+  {% endif %}
+  <div class="ob-page-tools" data-nosnippet>
+    <button type="button" class="ob-copy-markdown" data-copy-markdown data-markdown-url="{{ page.meta.discovery.markdown }}" aria-describedby="ob-copy-status" hidden>
+      <span class="md-icon" aria-hidden="true">{% include ".icons/material/content-copy.svg" %}</span>
+      <span data-copy-label>Copy as Markdown</span>
+    </button>
+    <a href="{{ page.meta.discovery.markdown }}" type="text/markdown">View Markdown</a>
+    <span id="ob-copy-status" role="status" aria-live="polite"></span>
+  </div>
+  <div class="ob-markdown-fallback" hidden data-nosnippet>
+    <label for="ob-markdown-text">Copy this page's Markdown manually:</label>
+    <textarea id="ob-markdown-text" readonly rows="8"></textarea>
+  </div>
+  {{ parts[1] if parts | length == 2 else page.content }}
+{% else %}
+  {% if "<h1" not in page.content %}<h1>{{ page.title | d(config.site_name, true) }}</h1>{% endif %}
+  {{ page.content }}
+{% endif %}
+{% include "partials/source-file.html" %}
+{% include "partials/feedback.html" %}
+{% include "partials/comments.html" %}

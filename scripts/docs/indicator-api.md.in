@@ -1,0 +1,84 @@
+# Indicators: calculate, compose, and read values
+
+Use `self.ta` inside `Strategy.init()` for built-in indicators, `self.ind` for a custom function, and `indicators.compute` for a calculation outside a backtest. Browse the [indicator catalog](indicators/index.md) for every formula, its parameters, inputs, and outputs.
+
+## Single and multiple outputs
+
+```python
+from openbacktesting import Backtest, Strategy
+from openbacktesting.test import GOOG
+
+class IndicatorExample(Strategy):
+    def init(self):
+        self.ema = self.ta.ema(self.close, length=20)
+        self.macd = self.ta.macd(fast=12, slow=26, signal=9)
+        self.smooth = self.ta.sma(self.macd.histogram, length=3)
+
+    def next(self):
+        if self.ema.valid[-1] and self.smooth.valid[-1]:
+            if self.close[-1] > self.ema[-1] and self.smooth[-1] > 0:
+                if not self.position:
+                    self.buy(qty=1)
+            elif self.position:
+                self.position.close()
+
+result = Backtest(GOOG, IndicatorExample).run()
+print(result["Return [%]"])
+```
+
+An EMA returns an `IndicatorHandle`. A multi-output formula such as MACD returns an `IndicatorResult`; select `.macd`, `.signal`, or `.histogram` before passing a channel to another indicator. Bracket access such as `result["histogram"]` also works. Built-in calculations are registered only in `init()`.
+
+## Bind inputs and read outputs
+
+| Argument or operation | Meaning |
+| --- | --- |
+| `self.ta.ema(length=20)` | Use that indicator's default market column (Close here). |
+| `self.ta.ema(self.hl2, length=20)` | Use a same-run single-channel handle. A column name such as `"Close"` is also accepted. |
+| `inputs={"high": "High", "low": "Low", "close": "Close"}` | Explicit mapping of formula inputs to data columns or same-run channels; do not combine with positional source arguments. |
+| Formula keywords such as `length`, `fast`, `slow` | See each indicator's parameter table for defaults, allowed values, and meaning. |
+| `backend=None` | Use the formula's default implementation. Only documented alternatives are accepted. |
+| `required_outputs=None` | Use default outputs for readiness diagnostics; an explicit channel list changes readiness, not whether `next()` runs. |
+| `handle[-1]`, `handle[-2]` | Current and previous visible values; check history length. |
+| `handle.valid[-1]` | Whether this channel has a consumable current value. Check it before trading. |
+| `handle.ready[-1]` | Minimum-history/readiness diagnostic. It does not skip callbacks. |
+| `handle.s`, `handle.df`, `numpy.asarray(handle)` | Independent snapshots of the visible prefix. |
+
+During `next()`, saved handles and their slices follow the current bar. A saved array/Series or arithmetic result does not. `False` and zero may be valid signals; NaN is not a usable signal. Do not use `bool(NaN)` as a validity check. For a custom calculation, see [Strategy.ind](strategy.md#openbacktesting-strategy-ind).
+
+## Crosses and confirmed events
+
+`self.ta.is_crossover(a, b)` returns a boolean at the current bar; `is_crossunder` reverses direction and `is_cross` accepts either direction. Both operands need two valid visible observations. These predicates can be called in `next()`.
+
+`self.ta.crossover(a, b)` instead registers a whole signal history in `init()`. Use it when composing signals with `valuewhen` or `barssince`. A pivot becomes available when its right-hand confirmation window finishes; it does not backfill a tradable signal at the earlier extreme. Check the [pivot](indicators/pivothigh.md) and [session-level](indicators/pivot_points.md) pages before using those results.
+
+## Calculate outside a strategy
+
+```python
+from openbacktesting import indicators
+from openbacktesting.test import GOOG
+
+ema = indicators.compute("ta.ema", GOOG, parameters={"length": 20})
+print(ema.s.tail())
+description = indicators.describe("ta.ema")
+catalog = indicators.catalog()
+```
+
+`compute` returns an `IndicatorHandle` covering the full input. Multi-output offline results select channels by name, for example `macd["histogram"]`. `parameters` supplies formula options; `inputs` maps input names to frame columns. Ordinary offline calls can omit `cache` and `cursor`. `describe` returns one formula's specification and `catalog` lists the available definitions.
+
+{{api openbacktesting.indicators.compute}}
+
+{{api openbacktesting.indicators.catalog}}
+
+{{api openbacktesting.indicators.describe}}
+
+{{api openbacktesting.indicators.types.IndicatorHandle}}
+
+{{api openbacktesting.indicators.api.IndicatorResult}}
+
+{{api openbacktesting.indicators.methods.TechnicalAnalysis.is_cross}}
+
+{{api openbacktesting.indicators.methods.TechnicalAnalysis.is_crossover}}
+
+{{api openbacktesting.indicators.methods.TechnicalAnalysis.is_crossunder}}
+
+[Indicator catalog](indicators/index.md) · [Strategy](strategy.md) · [User manual](../index.md)

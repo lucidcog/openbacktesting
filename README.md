@@ -18,7 +18,7 @@ Write bar-by-bar strategies, evaluate them on historical market data, and inspec
 
 **[Pineify](https://pineify.app) is OpenBacktesting's top paid sponsor.** Its financial support helps fund this project.
 
-Pineify provides AI-assisted Pine Script coding and a visual editor for building TradingView indicators and strategies. [Explore Pineify →](https://pineify.app)
+Pineify is an AI trading toolkit for building indicators and strategies across multiple platforms. It brings together Pine Script AI, a Finance Agent, AI stock picking, market screening, chart analysis, and MCP tools. [Explore Pineify →](https://pineify.app)
 
 ## What you can do
 
@@ -35,7 +35,7 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and use Py
 git clone https://github.com/lucidcog/openbacktesting.git
 cd openbacktesting
 uv sync --locked
-uv run --locked python examples/advanced/run_author.py
+uv run --locked python examples/advanced/native_run.py
 ```
 
 The example uses bundled GOOG historical data; no market-data download is required. It prints return, trade count, maximum drawdown, and result tables. See [your first backtest](docs/core/quickstart.md) for a walkthrough.
@@ -78,10 +78,19 @@ This strategy requests one unit on the first bar. Default execution occurs at th
 
 The detailed manual and examples are currently in English.
 
+To browse the manual with sidebar navigation, page outlines, and full-text search:
+
+```sh
+uv run --locked --group docs mkdocs serve
+```
+
+Open `http://127.0.0.1:8000`. The server reloads when documentation changes. Build a static site with `bash scripts/build_docs.sh`; the output is in `build/docs/`. See [Cloudflare Pages deployment](docs/core/deployment.md) for the build settings.
+
 | Topic | Reference |
 | --- | --- |
 | Getting started | [First backtest](docs/core/quickstart.md) · [Example index](examples/README.md) |
-| Strategies and data | [Strategy lifecycle](docs/core/guides/author.md) · [Market data](docs/core/guides/data.md) · [Core API](docs/core/reference/core.md) |
+| Strategies and data | [Strategy lifecycle](docs/core/guides/author.md) · [Market data](docs/core/guides/data.md) · [Strategy API](docs/core/reference/strategy.md) · [Backtest API](docs/core/reference/core.md) |
+| Orders and positions | [Order, Position, and Trade](docs/core/reference/trading.md) |
 | Indicators | [Indicator catalog](docs/core/reference/indicators/index.md) |
 | Execution and optimization | [Running strategies](docs/core/guides/runtime.md) · [Parameter experiments](docs/core/guides/optimizer.md) |
 | Results and plotting | [Results and Portfolio](docs/core/guides/results.md) · [Plotting-data export](docs/core/guides/plotting.md) |

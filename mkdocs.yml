@@ -1,0 +1,122 @@
+site_name: OpenBacktesting
+site_url: !ENV [DOCS_SITE_URL, 'https://docs.openbacktesting.com/']
+site_description: Python backtesting — strategies, indicators, execution, and results.
+docs_dir: docs/core
+site_dir: build/docs
+dev_addr: 127.0.0.1:8000
+repo_url: https://github.com/lucidcog/openbacktesting
+repo_name: lucidcog/openbacktesting
+edit_uri: ""
+
+theme:
+  name: material
+  custom_dir: docs/theme
+  language: en
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    logo: material/chart-timeline-variant
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-_.]+'
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+
+extra_css:
+  - _static/site.css
+
+extra_javascript:
+  - path: _static/page-tools.js
+    defer: true
+
+hooks:
+  - scripts/docs_site.py
+  - scripts/docs_discovery.py
+
+watch:
+  - examples
+  - docs/assets
+  - docs/theme
+  - scripts/docs_site.py
+  - scripts/docs_discovery.py
+
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    anchors: warn
+    unrecognized_links: warn
+
+not_in_nav: |
+  /repository/**
+
+nav:
+  - Start here:
+      - Overview: index.md
+      - Your first backtest: quickstart.md
+      - Examples: examples.md
+      - Scope and limitations: limitations.md
+  - Guides:
+      - Writing strategies: guides/author.md
+      - Market data: guides/data.md
+      - Trading rules: guides/trading.md
+      - Indicators: guides/indicators.md
+      - Strategy inputs: guides/inputs.md
+      - Running strategies: guides/runtime.md
+      - Reading results: guides/results.md
+      - Parameter experiments: guides/optimizer.md
+      - Plotting data: guides/plotting.md
+  - API reference:
+      - Backtest: reference/core.md
+      - Strategy: reference/strategy.md
+      - Data and instruments: reference/data.md
+      - Orders, positions, and trades: reference/trading.md
+      - Accounts and events: reference/events.md
+      - Indicator API: reference/indicator-api.md
+      - Inputs: reference/inputs.md
+      - Runtime: reference/runtime.md
+      - Helpers: reference/helpers.md
+      - Portfolio: reference/portfolio.md
+      - Optimizer: reference/optimizer.md
+      - Plotting: reference/plotting.md
+      - Colors: reference/colors.md
+  - Indicators:
+      - Catalog: reference/indicators/index.md
+  - Maintenance:
+      - Development: development.md
+      - Deploy to Cloudflare Pages: deployment.md
+      - Build information: build-info.md
+      - Extraction verification: extraction-verification.md
+      - API inventory: reference/classification.md

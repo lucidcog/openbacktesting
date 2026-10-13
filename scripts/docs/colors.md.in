@@ -1,0 +1,34 @@
+# Colors
+
+Import `Color` and `colors` from `openbacktesting`. Colors are immutable RGBA values used by plotting and color inputs.
+
+```python
+from openbacktesting import Color, colors
+
+up = colors.GREEN
+faded = up.with_transparency(80)
+custom = Color.rgb(30, 120, 220, transparency=25)
+parsed = Color.from_hex("#2277AA")
+print(custom.to_hex())
+
+middle = Color.from_gradient(
+    50, lower=0, upper=100, lower_color=colors.RED, upper_color=colors.GREEN,
+)
+print(middle.to_hex())
+```
+
+`rgb` takes integer red/green/blue components in `0..255`. Transparency is `0..100`: zero is opaque, 100 is invisible. `from_hex` accepts only `#RRGGBB` or `#RRGGBBAA`; the alpha byte uses 255 for opaque. `to_hex()` returns uppercase `#RRGGBBAA` for saving or passing to another application.
+
+`from_gradient(value, lower, upper, lower_color, upper_color)` is called with keyword bounds/colors as shown above. It interpolates RGBA components and clamps values outside the bounds. Bounds must be finite and strictly increasing; endpoint colors must be `Color` values. Convert NumPy/indicator scalars with `float(...)` after checking validity.
+
+Use `self.plotting.line(self.average, color=faded)` for a static color, or compute a scalar gradient in `next()` and pass it to `self.plotting.bar_color(...)`. Color arrays are not accepted. For a user setting, declare `inputs.color(colors.TEAL, title="Line color")`; the runtime value is a Color.
+
+{{api openbacktesting.Color}}
+
+## Named presets
+
+The `colors` module exposes these Color constants. Use them directly or call `.with_transparency(...)`.
+
+{{colors}}
+
+[Plotting](plotting.md) · [Inputs](inputs.md) · [User manual](../index.md)

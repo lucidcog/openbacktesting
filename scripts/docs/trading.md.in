@@ -1,0 +1,148 @@
+# Orders, positions, and trades
+
+An **Order** is a request; a **Trade** is one filled lot; **Position** summarizes all open lots. Obtain them from `self.buy/sell`, `self.trades`, and `self.position`. Do not construct these handles yourself.
+
+## Submit an order
+
+Place these calls inside `Strategy.next()`:
+
+```python
+price = float(self.close[-1])
+order = self.buy(qty=1, limit=price * 0.99, sl=price * 0.95,
+                 tp=price * 1.05, valid_bars=3, tag="pullback")
+self.log.info(f"Submitted {order.order_id}: {order.status}")
+```
+
+| Argument to `buy()` / `sell()` | Meaning |
+| --- | --- |
+| `qty` | Positive asset units; must match the instrument quantity step. `qty=0.1` means one tenth of a unit. |
+| `amount` | Positive notional budget in settlement currency, excluding fees. |
+| `percent` | Percentage of request-time equity in `(0, 100]`; `20` means 20%. |
+| `limit` | Absolute limit price: a buy cannot execute above it; a sell cannot execute below it. |
+| `stop` | Absolute trigger price. With `limit`, creates a stop-limit order. |
+| `sl`, `tp` | Absolute stop-loss and take-profit prices attached to the filled lot. For a long entry, SL is below entry and TP above it; reversed for shorts. |
+| `tag` | Optional JSON-compatible label/data copied into trading records. |
+| `reduce_only` | Only reduce existing exposure; requires explicit `qty`. |
+| `valid_bars` | Allow execution on the next `n` bars, then expire; positive integer. |
+| `expires_at` | Alternative timezone-aware expiry timestamp; the data index must also be aware. |
+
+Choose exactly one sizing argument, or omit all to use a configured default. `None` is not a sizing value. `valid_bars` and `expires_at` cannot be combined. Without an expiry, an order remains active until filled, canceled, rejected, or the run ends.
+
+Amounts and percentages convert to quantity using Close/equity at submission. They do not reserve cash; gaps and fees may make an order fail at execution. A returned handle confirms submission, not execution. The default timing fills eligible market orders at the next open.
+
+## Cancel, exit, or change protection
+
+```python
+# Inside next(): iterate over a snapshot while canceling.
+for order in self.orders:
+    if order.tag == "pullback":
+        order.cancel()
+
+for trade in self.trades:
+    if trade.is_long:
+        trade.sl = float(self.close[-1]) * 0.95
+        trade.tp = None  # Remove take-profit protection.
+
+# Submit exits for every open lot.
+exits = self.position.close()
+```
+
+`Trade.close(qty=1)` exits an explicit quantity. `Trade.close(portion=0.5)` exits half, rounded toward zero to the quantity step; rounding to zero raises an error. Omit both to exit all. `Position.close(portion=...)` and `self.close_position(portion=...)` return tuples of exit orders, empty when flat. They submit requests, so exposure remains until execution.
+
+For a native trailing stop, call `trade.set_trailing_stop(amount=5)` or `trade.set_trailing_stop(percent=0.05)`; **here 0.05 means 5%**. Choose one positive distance. Favorable extremes update protection for subsequent bars; a stop does not guarantee the exit price after a gap.
+
+## Target a position
+
+| Method | Example and unit |
+| --- | --- |
+| `self.order_target_quantity(target=10)` | Target net holdings of 10 units. |
+| `self.order_target_value(target=2000)` | Target net notional of 2,000 currency units. |
+| `self.order_target_percent(target=0.2)` | Target net notional of **20%** of equity; this method uses a fraction, unlike `buy(percent=20)`. |
+
+Targets may be negative for short exposure or zero to exit. They support the same price/expiry/tag conditions as ordinary orders, return `Order` or `None`, and require `hedging=False`. Identical pending targets are reused; changing a target replaces it based on actual holdings. Other pending entry/manual-exit orders conflict with target orders. Target weight is calculated at submission and is not continuously rebalanced.
+
+## Submit one-cancels-other entries
+
+```python
+from openbacktesting.broker import OrderRequest
+
+def next(self):
+    if self.bar_index == 0:
+        price = float(self.close[-1])
+        self.entry_group = self.submit_oco(
+            first=OrderRequest(side="buy", qty=1, stop=price * 1.02),
+            second=OrderRequest(side="sell", qty=1, stop=price * 0.98),
+        )
+```
+
+Use this `next()` in a strategy with `init()` defined. `OrderRequest` requires `side="buy"/"sell"` and one explicit `qty`/`amount`/`percent`. Its other arguments follow the ordinary-order table. Submitting the group validates both entries together. Completion or cancellation of either terminates its peer; if both trigger within a bar, `first` takes priority. `group.orders` reads the pair and `group.cancel()` cancels pending members.
+
+## Interpret exposure and profit
+
+`position.size` is signed net quantity. With hedging, equal long/short holdings have zero net size but still have exposure: use `bool(position)` or `position.has_exposure`. `position.snapshot` separates gross/long/short quantities and their average entry prices. `Trade.pl` and `Position.pl` include the remaining entry fees; `return_fraction` uses fractional units and may be `None` for flat or hedged aggregate exposure.
+
+`self.account` gives balance, equity, margin, and cumulative fees. Balance includes realized gross P/L minus paid fees; equity adds unrealized gross P/L. `self.closed_trade_stats` counts closed fragments, so a partial exit can increase its count while a lot remains open.
+
+## Costs
+
+```python
+from openbacktesting.broker import Commission, Slippage
+
+commission = Commission(fixed=1, relative=0.001, per_unit=0.01)
+slippage = Slippage(mode="bps", value=5)
+```
+
+Pass these to `Backtest(..., commission=commission, slippage=slippage)`. Commission adds a fixed fee, a fraction of absolute notional, and a fee per executed unit. Slippage adds either basis points (`bps`) or a fixed price distance (`fixed`) in the adverse direction. Fees apply on each actual execution, including exits.
+
+OHLC bars cannot reveal intrabar price order. If a bar reaches both SL and TP, the framework chooses SL and records an ambiguity. Protection from a conditional or same-close entry starts on a later bar. See [execution rules](../guides/trading.md) for timing and end-of-data behavior.
+
+{{api openbacktesting.engine.Order}}
+
+{{api openbacktesting.engine.Position}}
+
+{{api openbacktesting.engine.Trade}}
+
+{{api openbacktesting.broker.OrderRequest}}
+
+{{api openbacktesting.broker.OrderGroup}}
+
+{{api openbacktesting.broker.OrderStatus}}
+
+`order.status.terminal` is True after a fill, cancellation, expiry, or rejection. Terminal orders cannot reopen; `order.cancel()` is safe to repeat.
+
+{{api openbacktesting.broker.Commission}}
+
+{{api openbacktesting.broker.Slippage}}
+
+## Size an order from a budget or stop
+
+The pure helpers in `openbacktesting.strategy.sizing` return a `SizingDecision`. Supply `reference_price`, usually `float(self.close[-1])`, and `instrument=self.instrument`. Budget-based helpers also take `account=self.account`. Submit only when `decision.qty > 0`; `decision.reason` explains a zero result.
+
+```python
+from openbacktesting.strategy.sizing import stop_risk
+
+def next(self):
+    if self.bar_index == 0:
+        price = float(self.close[-1])
+        stop = price * 0.95
+        decision = stop_risk(0.01, account=self.account, reference_price=price,
+                             stop_price=stop, side="buy", instrument=self.instrument)
+        if decision.qty > 0:
+            self.buy(qty=decision.qty, sl=stop)
+```
+
+`fixed_quantity(qty, ...)` rounds units toward zero; `equity_fraction(fraction, ...)` spends an equity fraction; `stop_risk(fraction, ..., stop_price, side)` budgets an equity fraction for the stop distance. `cost_per_unit` is your nonnegative estimate of costs, not a guarantee of actual fees or gap losses.
+
+{{api openbacktesting.strategy.sizing.fixed_quantity}}
+
+{{api openbacktesting.strategy.sizing.equity_fraction}}
+
+{{api openbacktesting.strategy.sizing.stop_risk}}
+
+{{api openbacktesting.strategy.sizing.SizingDecision}}
+
+## Account values and event callbacks
+
+Read `self.account` for balance/equity/margin, `self.position.snapshot` for exposure, and `self.closed_trade_stats` for running closed-fragment statistics. [Account snapshots and events](events.md) explains every returned field and shows `on_order`, `on_fill`, and `on_finish` in use.
+
+[Strategy](strategy.md) · [Results](../guides/results.md) · [User manual](../index.md)

@@ -1,0 +1,59 @@
+# Portfolio: read and save a complete report
+
+`Backtest.run()` returns a pandas statistics Series. The `openbacktesting.portfolio` module exports a complete report as plain values, suitable for JSON, applications, and later analysis.
+
+## Export a run
+
+```python
+import json
+from openbacktesting import Backtest, Strategy
+from openbacktesting.portfolio import export_result, get_snapshot
+from openbacktesting.test import GOOG
+
+class HoldOne(Strategy):
+    def init(self):
+        pass
+
+    def next(self):
+        if self.bar_index == 0:
+            self.buy(qty=1)
+
+result = Backtest(GOOG, HoldOne, end_policy="close_at_last_close").run()
+report = export_result(result)
+text = json.dumps(report, allow_nan=False)
+snapshot = get_snapshot(result)
+assert snapshot.to_dict() == report
+print(report["summary"]["all"]["totalReturn"])
+```
+
+Save `text` to a file if needed. Neither export function writes files or reruns the strategy. Reports remain independent of later edits to the returned dict, native result tables, or another backtest.
+
+## Read the report
+
+| Area | Use |
+| --- | --- |
+| `summary` | All/long/short performance metrics, including value, unit, and status. `summary.all.totalReturn.value` is a fraction. |
+| `trades.closedFragments`, `trades.openLots` | Closed portions and remaining open holdings. |
+| `facts.orders`, `facts.fills`, `facts.allocations` | Requests, actual executions, and their trade associations. |
+| `series.account` | Account/equity observations over time. |
+| `analysis` | Derived return, drawdown, and trade analyses. |
+| `context`, `semantics`, `run` | Effective settings, report/method versions, executed range, and termination information. |
+| `extensions` | Additional fields, including legacy statistics where available. |
+
+Inspect `report.keys()` and `report_catalog()` for the exact current field names and metric units. A missing/undefined statistic is not zero: read its status alongside value. A completed export does not imply that every data bar was processed; inspect termination information. See [results and metric units](../guides/results.md).
+
+## Snapshot and field catalog
+
+`get_snapshot(result)` returns the frozen `PortfolioSnapshot` captured by this run. Its `.to_dict()` produces an independent report. Obtain snapshots through this function; their constructor payload is an internal format. Old or partial results without complete captured facts are rejected.
+
+`report_catalog()` returns field definitions with metric identities and units. It is useful when building report displays or choosing fields for saved-experiment ranking. Use the [optimizer](optimizer.md) to store/query reports across parameter combinations.
+
+{{api openbacktesting.portfolio.export_result}}
+
+{{api openbacktesting.portfolio.get_snapshot}}
+
+{{api openbacktesting.portfolio.PortfolioSnapshot}}
+
+{{api openbacktesting.portfolio.report_catalog}}
+
+[Backtest](core.md) · [Results](../guides/results.md) · [User manual](../index.md)

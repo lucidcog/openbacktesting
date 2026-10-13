@@ -1,0 +1,77 @@
+# Plot declarations and export
+
+`self.plotting` describes strategy visuals: lines, histograms, levels, fills, markers, and bar colors. The package exports their data; it does **not** open or render an interactive chart. Use the exported payload with your own renderer.
+
+## Declare and export visuals
+
+```python
+from openbacktesting import Backtest, Strategy, colors
+from openbacktesting.plotting import export_result
+from openbacktesting.test import GOOG
+
+class VisualStrategy(Strategy):
+    def init(self):
+        self.average = self.ta.ema(length=20)
+        self.rsi = self.ta.rsi(length=14)
+        self.plotting.line(self.average, title="EMA 20", color=colors.BLUE)
+        pane = self.plotting.pane("momentum", title="Momentum")
+        self.plotting.line(self.rsi, title="RSI", pane=pane, color=colors.PURPLE)
+        self.plotting.level(70, pane=pane, color=colors.GRAY)
+
+    def next(self):
+        if self.average.valid[-1] and self.close[-1] > self.average[-1]:
+            self.plotting.bar_color(colors.GREEN)
+
+result = Backtest(GOOG, VisualStrategy).run()
+payload = export_result(result)
+print(len(payload["plots"]))
+```
+
+## Select a drawing method
+
+| Method | Arguments and returned value |
+| --- | --- |
+| `pane(id=None, title=None)` | Create a separate pane in `init()`; returns `PaneRef`. Omit `pane` elsewhere for the main price pane. |
+| `line(source, ...)` | Single-channel indicator/data handle; returns `PlotRef`. `style="line"` or `"step"`. |
+| `histogram(source, baseline=0, ...)` | Bars measured from the baseline; returns `PlotRef`. |
+| `level(value, ...)` | Finite scalar horizontal level; returns `PlotRef`. |
+| `fill(lower, upper, ...)` | Two compatible line/level references in the same pane; returns `FillRef`. |
+| `marker(..., position="above_bar")` | Mark an event in `next()`; returns `MarkerRef`. Use `below_bar` or `price` with a finite `price` for other positions. |
+| `bg_color(color, pane=None)` | Current-bar background, in `next()`; returns `None`. |
+| `bar_color(color)` | Current price candle color, in `next()`; returns `None`. |
+
+Create panes and static plots in `init()`. Sources must be same-run single-channel handles, not arrays or callbacks. Common arguments are `id` (optional unique identifier), `title` (display label), `pane`, and `color` (`Color` or six/eight-digit hex). References belong to one run and cannot be reused across backtests.
+
+`gap_policy="break"` leaves gaps at missing values; `"connect"` connects valid observations. `offset_bars` is a nonnegative visual shift, not a change to calculation timing. A marker's `shape` is `circle`, `square`, `triangle_up`, or `triangle_down`; `text` adds a label. `anchor_bar` can associate a confirmed event with an earlier bar, without making it known earlier.
+
+For fills, retain the returned lines, for example `lower = self.plotting.line(self.bands.lower)` and `upper = self.plotting.line(self.bands.upper)`, then `self.plotting.fill(lower, upper, color=colors.BLUE.with_transparency(85))`.
+
+## Colors and limits
+
+Colors accept `Color`, `"#RRGGBB"`, or `"#RRGGBBAA"`; see [Color](colors.md). `bg_color(None)` and `bar_color(None)` clear the current override. The last call for that bar/target wins; colors do not carry into the next bar unless you write them again.
+
+`Backtest(..., plotting=False)` disables historical visual collection. `PlottingLimits` adjusts positive budgets for panes, plots, points, events, text, and exported bytes; exceeding one raises `PlottingError`. Use `error.code` to identify issues such as `invalid-phase`, `invalid-reference`, or `PlottingLimitExceeded`.
+
+The export is a plain dictionary with market data, sources, drawing declarations, and actual execution facts. Write it with `json.dump(payload, file, allow_nan=False)` if you need a file; export itself has no file or browser side effects. Markers represent strategy calls, while fills represent actual executions, which can occur on different bars.
+
+{{api openbacktesting.plotting.Plotting}}
+
+{{api openbacktesting.plotting.export_result}}
+
+## Returned drawing references
+
+Use a `PaneRef` as a `pane` argument, and `PlotRef` values as fill boundaries. `.id` and `.title` identify a drawing. `FillRef` and `MarkerRef` identify completed declarations; do not construct reference objects yourself.
+
+{{api openbacktesting.plotting.PaneRef}}
+
+{{api openbacktesting.plotting.PlotRef}}
+
+{{api openbacktesting.plotting.FillRef}}
+
+{{api openbacktesting.plotting.MarkerRef}}
+
+{{api openbacktesting.plotting.PlottingLimits}}
+
+{{api openbacktesting.plotting.PlottingError}}
+
+[Colors](colors.md) · [Indicators](indicator-api.md) · [User manual](../index.md)

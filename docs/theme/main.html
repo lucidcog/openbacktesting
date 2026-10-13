@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% if page and page.meta.discovery %}
+    {% set discovery = page.meta.discovery %}
+    <meta name="robots" content="{% if discovery.indexable %}index, follow, max-image-preview:large{% else %}noindex, follow{% endif %}">
+    <link rel="alternate" type="text/markdown" title="Markdown" href="{{ discovery.markdown }}">
+    <link rel="describedby" type="text/plain" href="{{ 'llms.txt' | url }}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="{{ config.site_name }}">
+    <meta property="og:title" content="{{ page.meta.title }}">
+    <meta property="og:description" content="{{ page.meta.description }}">
+    <meta property="og:url" content="{{ page.canonical_url }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ page.meta.title }}">
+    <meta name="twitter:description" content="{{ page.meta.description }}">
+    {% if discovery.indexable %}
+      <script type="application/ld+json">{{ discovery.schema | tojson }}</script>
+    {% endif %}
+  {% else %}
+    <meta name="robots" content="noindex, follow">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if page and page.meta.discovery %}
+    <nav class="ob-breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        {% for crumb in page.meta.discovery.breadcrumbs %}
+          <li>{% if not loop.last %}<a href="{{ crumb.href }}">{{ crumb.title }}</a>{% else %}<span aria-current="page">{{ crumb.title }}</span>{% endif %}</li>
+        {% endfor %}
+      </ol>
+    </nav>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

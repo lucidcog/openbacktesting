@@ -1,0 +1,88 @@
+# Strategy parameters
+
+Use `openbacktesting.inputs` to declare configurable class attributes. Read the resolved values as `self.length`, `self.enabled`, etc. inside your strategy. Parameters are read-only during a run.
+
+## Declare and override parameters
+
+```python
+from openbacktesting import Backtest, Strategy, inputs
+from openbacktesting.test import GOOG
+
+class Configurable(Strategy):
+    length = inputs.int(20, title="Average length", minval=1, maxval=200)
+    enabled = inputs.bool(True, title="Trade")
+
+    def init(self):
+        self.average = self.ta.ema(length=self.length)
+
+    def next(self):
+        if self.enabled and self.average.valid[-1] and not self.position:
+            self.buy(qty=1)
+
+bt = Backtest(GOOG, Configurable, end_policy="close_at_last_close")
+result = bt.run(length=30, enabled=True)
+print(result["# Trades"])
+```
+
+`bt.run` uses Python field names; `title` is the unique display/configuration key. Duplicate titles, including inherited titles, are rejected. Defaults apply to omitted values. An invalid override raises `InputError` before strategy execution.
+
+## Choose a type
+
+| Factory and example | Runtime value | Optional domain controls |
+| --- | --- | --- |
+| `inputs.int(20, title="Length", minval=1)` | `int`; rejects bool and float | `options` **or** `minval/maxval/step` |
+| `inputs.float(0.5, title="Threshold", minval=0)` | Finite `float` | Same as int |
+| `inputs.bool(True, title="Enabled")` | `bool`, without numeric/string coercion | None |
+| `inputs.string("fast", title="Mode", options=["fast", "slow"])` | `str` | `options` |
+| `inputs.price(100.0, title="Entry price")` | Finite `float` | No numeric bounds/options |
+| `inputs.time(0, title="Start time")` | Integer Unix **milliseconds** | None |
+| `inputs.session("0930-1600:23456", title="Session")` | Normalized session string | None; does not filter data automatically |
+| `inputs.color("#22AA44", title="Line color")` | Immutable `Color` | None |
+| `inputs.enum(Mode.FAST, title="Mode")` | Member of your Python Enum | `options` of that enum type |
+
+All factories require a default and `title`. Numeric `options` cannot be combined with bounds or step. `step` is a suggested adjustment increment, not a divisibility check. Session weekday numbers are Sunday=1 through Saturday=7; `24x7` means all times/days. Your strategy must implement any session filter.
+
+Shared presentation arguments are `tooltip`, `group`, `inline`, `display`, `active`, and `confirm`. They describe controls for a consuming application; this package does not display a settings UI. `active={"title": "Enabled"}` can refer to a boolean input; inactive/hidden fields still validate and retain values.
+
+## Inspect or submit a title-based configuration
+
+```python
+schema = inputs.describe(Configurable)
+request = inputs.request_for(Configurable, {"length": 40})
+result = bt.run_inputs(request)
+print(result.attrs["input_snapshot"])
+```
+
+Continue from the first example. `request_for` accepts Python field names and constructs the title-keyed request, including schema identity. Applications can use `describe` to build controls and `run_inputs` to submit a request with `schemaVersion`, `schemaHash`, and `values`. Rediscover after changing declarations; old schema hashes are rejected. Native color overrides accept `Color` or hex strings, while serialized requests use hex strings. Enum requests use member names.
+
+## Declaration signatures
+
+The shared factory signatures expose all domain keywords; only the combinations in the type table are accepted. `...` below means omit that option, not pass `None` or an ellipsis.
+
+{{api openbacktesting.inputs.int}}
+
+{{api openbacktesting.inputs.float}}
+
+{{api openbacktesting.inputs.bool}}
+
+{{api openbacktesting.inputs.string}}
+
+{{api openbacktesting.inputs.price}}
+
+{{api openbacktesting.inputs.time}}
+
+{{api openbacktesting.inputs.session}}
+
+{{api openbacktesting.inputs.color}}
+
+{{api openbacktesting.inputs.enum}}
+
+{{api openbacktesting.inputs.describe}}
+
+{{api openbacktesting.inputs.request_for}}
+
+{{api openbacktesting.inputs.InputError}}
+
+Catch `InputError` when accepting user configuration. Its `code`, `title`, `expected`, and `actual_type` identify the rejected input.
+
+[Strategy](strategy.md) · [Colors](colors.md) · [Saved experiments](optimizer.md) · [User manual](../index.md)

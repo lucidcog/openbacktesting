@@ -18,7 +18,7 @@ Escribe estrategias que se ejecutan vela a vela, evalúalas con datos histórico
 
 **[Pineify](https://pineify.app) es el principal patrocinador de pago de OpenBacktesting.** Su apoyo económico contribuye a financiar este proyecto.
 
-Pineify ofrece programación de Pine Script asistida por IA y un editor visual para crear indicadores y estrategias de TradingView. [Descubre Pineify →](https://pineify.app)
+Pineify es un conjunto de herramientas de trading con IA para crear indicadores y estrategias en múltiples plataformas. Reúne Pine Script AI, un agente financiero, selección de acciones con IA, filtros de mercado, análisis de gráficos y herramientas MCP. [Descubre Pineify →](https://pineify.app)
 
 ## Qué puedes hacer
 

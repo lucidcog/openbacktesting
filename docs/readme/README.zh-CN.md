@@ -18,7 +18,7 @@
 
 **[Pineify](https://pineify.app) 是 OpenBacktesting 的顶级付费赞助商。** 其资金支持用于资助本项目。
 
-Pineify 提供 AI 辅助的 Pine Script 编程和可视化编辑器，用于创建 TradingView 指标与策略。[了解 Pineify →](https://pineify.app)
+Pineify 是一套 AI 交易工具集，支持为多个平台创建指标与策略，集成了 Pine Script AI、Finance Agent、AI 选股、市场筛选、图表分析和 MCP 工具。[了解 Pineify →](https://pineify.app)
 
 ## 主要功能
 

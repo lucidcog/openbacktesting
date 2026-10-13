@@ -3257,7 +3257,7 @@
     },
     {
       "target": "examples/README.md",
-      "targetSha256": "13144a70d6afec9680713da5d2c56960cfd5f3357272c12c3a2914c54e84129b",
+      "targetSha256": "50ccb07cad46fc7485ca2c22f933e6027d640853ee69659acfa2114ab8d0db07",
       "origin": "local",
       "sourceIds": [],
       "changes": [
@@ -3286,7 +3286,8 @@
         "Portfolio refactor: migrated imports, independent observations and frozen facts, report examples or entry assertions; retained order-matching and ledger policies.",
         "Added complete Portfolio persistence for parameter experiments, Portfolio-only collection, or executable examples; retained public behavior",
         "Unified Core distribution and import identities, preserving computational semantics.",
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged."
       ]
     },
     {
