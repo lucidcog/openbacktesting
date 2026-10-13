@@ -1,0 +1,70 @@
+# Market data, timeframes, and instruments
+
+`Backtest` accepts a pandas DataFrame for one asset. Load and clean your data before constructing the backtest.
+
+## Load a CSV
+
+```python
+import pandas as pd
+
+data = pd.read_csv("prices.csv", parse_dates=["Date"], index_col="Date")
+data = data.sort_index()
+data = data[["Open", "High", "Low", "Close", "Volume"]]
+```
+
+The CSV is your input file. For a ready-to-run alternative, use `from openbacktesting.test import GOOG` and `data = GOOG.copy()`.
+
+| Requirement | Reason |
+| --- | --- |
+| Exact column names `Open`, `High`, `Low`, `Close` | The broker reads these prices. Add `Volume` for volume indicators. |
+| Finite, positive OHLC; valid high/low ranges | Orders cannot be matched against missing or invalid prices. |
+| Increasing, unique index | Each row represents one bar in chronological order. A DatetimeIndex gives meaningful timestamps and calendar statistics. |
+| Extra numeric columns allowed | Access them with `self.data.MyColumn` or bind by name to indicators. |
+| No mutation after indicator registration | Preprocess before the run so indicators and execution use consistent prices. |
+
+## Read data inside a strategy
+
+`self.open`, `high`, `low`, `close`, and `volume` are read-only handles. `self.hl2=(H+L)/2`, `self.hlc3=(H+L+C)/3`, and `self.hlcc4=(H+L+2*C)/4`. During `next()`, `[-1]` means the current bar and `[-2]` the previous bar. During `init()`, the full input history is visible.
+
+Save handles such as `self.saved_close = self.close` to keep following the bar cursor. `.s`, `.df`, and `numpy.asarray(handle)` produce snapshots of currently visible data; a saved pandas object does not grow on later bars. Arithmetic also produces ordinary arrays. Register calculations through `self.ind` if they must be read through a handle.
+
+`self.data_index` is the visible index; `self.df` exposes the visible data table. `self.pip` is a data-derived estimate, not an exchange tick rule.
+
+## Specify timeframe and timezone
+
+```python
+from openbacktesting import DataContext, Timeframe
+from openbacktesting.test import GOOG
+
+data = GOOG.copy()
+data.index = data.index.tz_localize("America/New_York")
+context = DataContext(Timeframe.days(1), "America/New_York")
+```
+
+Pass `context=context` to `Backtest`, or to `runtime.run` where it is required. The index must be timezone-aware. The context converts display timezones while preserving instants; it does not resample bars. Use the actual timeframe of your input data. `self.timeframe` is `None` if no context is supplied.
+
+Construct intervals with `Timeframe.seconds/minutes/hours/days/weeks/months(multiplier)`. Multipliers are positive integers; months are calendar intervals, not a fixed number of seconds. `TimeframeUnit` supplies the corresponding enum values when constructing `Timeframe(unit, multiplier)` directly.
+
+{{api openbacktesting.Timeframe}}
+
+{{api openbacktesting.TimeframeUnit}}
+
+{{api openbacktesting.DataContext}}
+
+## Specify asset quantity and price rules
+
+```python
+from openbacktesting.broker import InstrumentSpec
+
+instrument = InstrumentSpec(symbol="ASSET", currency="USD",
+                            quantity_step=0.001, min_quantity=0.001,
+                            min_notional=5, price_tick=0.01)
+```
+
+Pass `instrument=instrument` to the run. `qty=0.1` remains one tenth of a unit; prices and indicators are not scaled. Defaults use whole units (`quantity_step=1`), minimum quantity equal to the step, no price tick, and no minimum notional. Direct quantities and all supplied prices must match configured grids; budget-based sizing can round quantity toward zero. Price grids also apply to OHLC data. Labels do not perform currency conversion.
+
+With an explicit `price_tick`, use `instrument.round_price_to_tick(price)` to obtain a grid-aligned price before setting protection. `quantity(value, floor=True)` can round units; `validate_data(frame)` checks the data against instrument rules.
+
+{{api openbacktesting.broker.InstrumentSpec}}
+
+[Backtest](core.md) · [Indicator handles](indicator-api.md) · [User manual](../index.md)

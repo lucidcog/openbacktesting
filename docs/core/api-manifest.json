@@ -66,16 +66,19 @@
     "openbacktesting.optimizer.Plan"
   ],
   "pages": {
-    "reference/core.md": "Backtests and strategies",
+    "reference/core.md": "Backtest: run and optimize",
     "reference/trading.md": "Orders, positions, and trades",
     "reference/helpers.md": "Strategy composition and helpers",
-    "reference/inputs.md": "Input declarations and resolution",
-    "reference/runtime.md": "Host runtime entry points",
+    "reference/inputs.md": "Strategy parameters",
+    "reference/runtime.md": "Decorated strategies and runtime",
     "reference/indicator-api.md": "Indicator computation and result handles",
     "reference/plotting.md": "Plot declarations and export",
     "reference/colors.md": "Color values and presets",
     "reference/portfolio.md": "Portfolio reports and frozen exports",
-    "reference/optimizer.md": "Parameter experiments and local result sets"
+    "reference/optimizer.md": "Parameter experiments and local result sets",
+    "reference/strategy.md": "Strategy: define trading logic",
+    "reference/data.md": "Market data, timeframes, and instruments",
+    "reference/events.md": "Account snapshots and execution events"
   },
   "objects": {
     "openbacktesting.Backtest": {
@@ -99,123 +102,123 @@
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Pool": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/core.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.Strategy": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.ind": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.buy": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.close": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.closed_trades": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.data": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.df": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.equity": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.high": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.hl2": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.hlc3": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.hlcc4": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.init": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.low": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.next": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.open": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.orders": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.pip": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.position": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.sell": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.ta": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.trades": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.Strategy.volume": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.aggregation": {
@@ -224,7 +227,7 @@
     },
     "openbacktesting.backtest": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.broker": {
@@ -356,12 +359,14 @@
     "openbacktesting.engine.Trade.entry_time": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "summary": "Market-data index value at entry (a timestamp when the data has a DatetimeIndex)."
     },
     "openbacktesting.engine.Trade.exit_time": {
       "status": "recommended",
       "page": "reference/trading.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "summary": "Market-data index value at exit, or None while open."
     },
     "openbacktesting.engine.Trade.is_long": {
       "status": "recommended",
@@ -428,25 +433,25 @@
       "reason": "Namespace or implementation subpackage; select recommended entry points from the manual. Stability is not recursively guaranteed for every member."
     },
     "openbacktesting.indicators.DEFAULT_CACHE_BYTES": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points.",
       "summary": "Default retained-byte budget for one indicator cache, not a process memory limit."
     },
     "openbacktesting.indicators.IndicatorCache": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.IndicatorCache.clear": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.IndicatorCache.get": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.api": {
       "status": "internal",
@@ -610,121 +615,121 @@
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.indicators.types.IndicatorSpec": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public result type, usually returned by computation or input entry points; its fields and methods support result consumption."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.aliases": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.causal": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.default_backend": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.dtype": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.fixed": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.history_offset": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.history_required": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.history_sum": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.input_args": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.input_defaults": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.kind": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.minimum": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.missing_policy": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.normalize": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.parameters": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.reason": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.required": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.status": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.unit": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.validity": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.version": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.IndicatorSpec.windows": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.Parameter": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public result type, usually returned by computation or input entry points; its fields and methods support result consumption."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.Parameter.choices": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.Parameter.maximum": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.Parameter.minimum": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.types.Parameter.normalize": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/indicator-api.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.indicators.utility": {
       "status": "internal",
@@ -748,64 +753,64 @@
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.InputSpec": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.bindings": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.bounds": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.encode": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.enum_type": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.export": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.metadata": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.normalize": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.InputSpec.options": {
       "status": "internal",
-      "reason": "Declaration-record field documented in its class's field table; it is not independently callable."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.ResolvedInputs": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.ResolvedInputs.overrides": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.ResolvedInputs.snapshot": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.SCHEMA_VERSION": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use.",
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points.",
       "summary": "Schema version used for input discovery and requests."
     },
     "openbacktesting.inputs.bool": {
@@ -849,14 +854,14 @@
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.inputs.resolve_native": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.resolve_request": {
-      "status": "recommended",
+      "status": "internal",
       "page": "reference/inputs.md",
-      "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
+      "reason": "Framework integration or implementation utility; ordinary strategies use the documented user entry points."
     },
     "openbacktesting.inputs.session": {
       "status": "recommended",
@@ -1273,57 +1278,57 @@
     "openbacktesting.Strategy.instrument": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.order_target_value": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.order_target_quantity": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.order_target_percent": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.on_finish": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.close_position": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.on_start": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.on_fill": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.account": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.submit_oco": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.Strategy.on_order": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.engine.Order.status": {
       "status": "recommended",
@@ -1488,12 +1493,12 @@
     "openbacktesting.broker.PositionSnapshot": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.AccountSnapshot": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.OrderStatus": {
       "status": "recommended",
@@ -1501,9 +1506,10 @@
       "page": "reference/trading.md"
     },
     "openbacktesting.broker.Trade": {
-      "status": "recommended",
-      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "status": "compatibility",
+      "reason": "Same object as the trading handle documented on the orders and positions page.",
+      "page": "reference/trading.md",
+      "canonical": "openbacktesting.engine.Trade"
     },
     "openbacktesting.broker.OrderGroup": {
       "status": "recommended",
@@ -1524,19 +1530,20 @@
       "reason": "Trading-core implementation dependency, not an author entry point."
     },
     "openbacktesting.broker.Position": {
-      "status": "recommended",
-      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "status": "compatibility",
+      "reason": "Same object as the trading handle documented on the orders and positions page.",
+      "page": "reference/trading.md",
+      "canonical": "openbacktesting.engine.Position"
     },
     "openbacktesting.broker.RunSummary": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.TradeAllocation": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.Slippage": {
       "status": "recommended",
@@ -1546,7 +1553,7 @@
     "openbacktesting.broker.OrderSnapshot": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.execution": {
       "status": "internal",
@@ -1555,7 +1562,7 @@
     "openbacktesting.broker.Fill": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.core": {
       "status": "internal",
@@ -1564,17 +1571,18 @@
     "openbacktesting.broker.InstrumentSpec": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.OrderEvent": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.Order": {
-      "status": "recommended",
-      "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "status": "compatibility",
+      "reason": "Same object as the trading handle documented on the orders and positions page.",
+      "page": "reference/trading.md",
+      "canonical": "openbacktesting.engine.Order"
     },
     "openbacktesting.strategy.sizing.finite": {
       "status": "internal",
@@ -1621,47 +1629,47 @@
     "openbacktesting.broker.InstrumentSpec.symbol": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.price_tick": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.currency": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.price": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.min_quantity": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.quantity": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.min_notional": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.validate_data": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.InstrumentSpec.quantity_step": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.broker.Slippage.cost": {
       "status": "recommended",
@@ -1716,12 +1724,12 @@
     "openbacktesting.broker.PositionSnapshot.has_exposure": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.RunSummary.error": {
       "status": "recommended",
       "reason": "0.2 trading interface; see the trading guide for units, lifecycle, budgets, and reasons.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.strategy.sizing.SizingDecision.budget": {
       "status": "recommended",
@@ -1865,7 +1873,7 @@
     },
     "openbacktesting.Strategy.plotting": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Read-only plotting entry point."
     },
     "openbacktesting.lib.SignalStrategy.plotting": {
@@ -2038,17 +2046,17 @@
     },
     "openbacktesting.TimeframeUnit": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.DataContext": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.runtime.discover": {
@@ -2058,47 +2066,47 @@
     },
     "openbacktesting.Strategy.timeframe": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.seconds": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.snapshot": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.hours": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.days": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.minutes": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.weeks": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.Timeframe.months": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.DataContext.snapshot": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/data.md",
       "reason": "Public contract for strategy declarations or host chart context; see the runtime guide for specific limitations."
     },
     "openbacktesting.simulation": {
@@ -2161,17 +2169,17 @@
     },
     "openbacktesting.DefaultOrderSize": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/core.md",
       "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.DefaultOrderSize.snapshot": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/core.md",
       "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.DefaultOrderSize.from_snapshot": {
       "status": "recommended",
-      "page": "reference/runtime.md",
+      "page": "reference/core.md",
       "reason": "Advanced pure-value model for low-level Backtest; @backtest author declarations use flat enums and numeric values."
     },
     "openbacktesting.broker.Commission": {
@@ -2214,7 +2222,7 @@
     },
     "openbacktesting.Strategy.data_index": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Public entry point; read the corresponding guide's execution phases, value domains, and limitations before use."
     },
     "openbacktesting.lib.SignalStrategy.data_index": {
@@ -2229,12 +2237,12 @@
     },
     "openbacktesting.Strategy.bar_index": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Read-only position and frozen state of the currently executing bar; see the market-data guide for lifecycle boundaries."
     },
     "openbacktesting.Strategy.bar_state": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Read-only position and frozen state of the currently executing bar; see the market-data guide for lifecycle boundaries."
     },
     "openbacktesting.lib.SignalStrategy.bar_index": {
@@ -2259,17 +2267,17 @@
     },
     "openbacktesting.BarState": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Frozen boolean snapshot identifying the first and last bars of fixed input."
     },
     "openbacktesting.BarState.is_first": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Frozen boolean snapshot identifying the first and last bars of fixed input."
     },
     "openbacktesting.BarState.is_last": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Frozen boolean snapshot identifying the first and last bars of fixed input."
     },
     "openbacktesting.RunLogs": {
@@ -2289,27 +2297,27 @@
     },
     "openbacktesting.Strategy.log": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog.info": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog.warning": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs.StrategyLog.error": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/strategy.md",
       "reason": "Structured logs for this run: time, bar, and source location; retained on failure, with queries returning copies."
     },
     "openbacktesting.logs": {
@@ -2345,103 +2353,103 @@
     },
     "openbacktesting.CommissionType": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
       "summary": "Complete members: `CommissionType.PERCENT = \"percent\"`, `CommissionType.CASH_PER_ORDER = \"cash_per_order\"`, `CommissionType.CASH_PER_CONTRACT = \"cash_per_contract\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.CommissionType.PERCENT": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is percent.",
       "summary": "Host JSON value: `\"percent\"`."
     },
     "openbacktesting.CommissionType.CASH_PER_ORDER": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is cash_per_order.",
       "summary": "Host JSON value: `\"cash_per_order\"`."
     },
     "openbacktesting.CommissionType.CASH_PER_CONTRACT": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is cash_per_contract.",
       "summary": "Host JSON value: `\"cash_per_contract\"`."
     },
     "openbacktesting.QuantityType": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
       "summary": "Complete members: `QuantityType.FIXED = \"fixed\"`, `QuantityType.PERCENT_OF_EQUITY = \"percent_of_equity\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.QuantityType.FIXED": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is fixed.",
       "summary": "Host JSON value: `\"fixed\"`."
     },
     "openbacktesting.QuantityType.PERCENT_OF_EQUITY": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is percent_of_equity.",
       "summary": "Host JSON value: `\"percent_of_equity\"`."
     },
     "openbacktesting.SlippageType": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
       "summary": "Complete members: `SlippageType.FIXED = \"fixed\"`, `SlippageType.BPS = \"bps\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.SlippageType.FIXED": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is fixed.",
       "summary": "Host JSON value: `\"fixed\"`."
     },
     "openbacktesting.SlippageType.BPS": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is bps.",
       "summary": "Host JSON value: `\"bps\"`."
     },
     "openbacktesting.ExecutionTiming": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
       "summary": "Complete members: `ExecutionTiming.NEXT_OPEN = \"next_open\"`, `ExecutionTiming.SAME_CLOSE = \"same_close\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.ExecutionTiming.NEXT_OPEN": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is next_open.",
       "summary": "Host JSON value: `\"next_open\"`."
     },
     "openbacktesting.ExecutionTiming.SAME_CLOSE": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is same_close.",
       "summary": "Host JSON value: `\"same_close\"`."
     },
     "openbacktesting.EndPolicy": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Categorical enum for flat author configuration; corresponding strings are accepted only at the host boundary.",
       "summary": "Complete members: `EndPolicy.MARK_TO_MARKET = \"mark_to_market\"`, `EndPolicy.CLOSE_AT_LAST_CLOSE = \"close_at_last_close\"`. See the [author parameter table](../guides/author.md#flat-backtest-settings) for units and ranges."
     },
     "openbacktesting.EndPolicy.MARK_TO_MARKET": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is mark_to_market.",
       "summary": "Host JSON value: `\"mark_to_market\"`."
     },
     "openbacktesting.EndPolicy.CLOSE_AT_LAST_CLOSE": {
       "status": "recommended",
-      "page": "reference/core.md",
+      "page": "reference/runtime.md",
       "reason": "Public enum member; its JSON value is close_at_last_close.",
       "summary": "Host JSON value: `\"close_at_last_close\"`."
     },
     "openbacktesting.broker.OrderSizingSnapshot": {
       "status": "recommended",
-      "page": "reference/trading.md",
+      "page": "reference/events.md",
       "reason": "Public order-sizing entry point and frozen observations; the three modes are mutually exclusive, and percentage 20 means 20%."
     },
     "openbacktesting.engine.Order.sizing": {
@@ -2471,7 +2479,7 @@
     "openbacktesting.Strategy.closed_trade_stats": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/core.md"
+      "page": "reference/strategy.md"
     },
     "openbacktesting.lib.SignalStrategy.closed_trade_stats": {
       "status": "recommended",
@@ -2486,12 +2494,12 @@
     "openbacktesting.broker.ClosedTradeStats": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.InstrumentSpec.round_price_to_tick": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/data.md"
     },
     "openbacktesting.Color.from_gradient": {
       "status": "recommended",
@@ -2501,47 +2509,47 @@
     "openbacktesting.broker.ClosedTradeStats.even_count": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.closed_count": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.win_count": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.winning_profit": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.loss_count": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.average_profit": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.win_rate": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.net_profit": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.broker.ClosedTradeStats.losing_amount": {
       "status": "recommended",
       "reason": "Local pure values or closed-fragment statistics; see the usage guide for precision, fees, and read timing.",
-      "page": "reference/trading.md"
+      "page": "reference/events.md"
     },
     "openbacktesting.portfolio": {
       "status": "internal",
@@ -2759,19 +2767,19 @@
   "instance_fields": {
     "openbacktesting.engine.Trade.entry_bar": {
       "page": "reference/trading.md",
-      "summary": "Trade.entry_bar remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
+      "summary": "Zero-based bar position at entry."
     },
     "openbacktesting.engine.Trade.entry_price": {
       "page": "reference/trading.md",
-      "summary": "Trade.entry_price remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
+      "summary": "Actual entry price."
     },
     "openbacktesting.engine.Trade.exit_bar": {
       "page": "reference/trading.md",
-      "summary": "Trade.exit_bar remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
+      "summary": "Zero-based exit bar, or None while the lot is open."
     },
     "openbacktesting.engine.Trade.exit_price": {
       "page": "reference/trading.md",
-      "summary": "Trade.exit_price remains a lot instance field. The corresponding result table retains EntryBar/EntryPrice/ExitBar/ExitPrice; exit fields are empty for active lots."
+      "summary": "Actual exit price, or None while the lot is open."
     },
     "openbacktesting.plotting.PaneRef.id": {
       "page": "reference/plotting.md",

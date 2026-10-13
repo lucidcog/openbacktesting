@@ -1,0 +1,98 @@
+# Decorated strategies and runtime
+
+Use `@backtest` plus `runtime.run` when a strategy file should carry its default execution settings. For a script or notebook that constructs the run itself, [Backtest](core.md) is the shorter path.
+
+## Define and run a decorated strategy
+
+```python
+from openbacktesting import (
+    Strategy, backtest, runtime, DataContext, Timeframe, EndPolicy,
+)
+from openbacktesting.broker import InstrumentSpec
+from openbacktesting.test import GOOG
+
+@backtest(cash=10_000, commission_value=0.2,
+          end_policy=EndPolicy.CLOSE_AT_LAST_CLOSE)
+class HoldOne(Strategy):
+    def init(self):
+        pass
+
+    def next(self):
+        if self.bar_index == 0:
+            self.buy(qty=1)
+
+data = GOOG.copy()
+data.index = data.index.tz_localize("UTC")
+description = runtime.describe(globals())
+result = runtime.run(
+    globals(), data=data, context=DataContext(Timeframe.days(1), "UTC"),
+    instrument=InstrumentSpec(symbol="GOOG"),
+)
+print(result["Return [%]"])
+```
+
+Here `commission_value=0.2` means **0.2%**, whereas the direct `Backtest` argument is `commission=0.002`. A declaration stores settings without running the strategy. `runtime.run` adopts them; plain `Backtest` does not.
+
+## Decorator settings
+
+| Setting | Values and units |
+| --- | --- |
+| `cash`, `spread`, `margin`, `risk_free_rate` | Initial balance, fractional execution spread, margin fraction, and annualized statistics rate. See [Backtest](core.md#constructor-parameters). |
+| `commission_type`, `commission_value` | `CommissionType.PERCENT` uses percentage points; `CASH_PER_ORDER` uses fee per fill; `CASH_PER_CONTRACT` uses fee per asset unit. |
+| `default_qty_type`, `default_qty_value` | `QuantityType.FIXED` uses asset units; `PERCENT_OF_EQUITY` uses `(0, 100]`, e.g. `20` for 20%. `None` requires explicit order sizing. |
+| `slippage_type`, `slippage_value` | `SlippageType.BPS` uses basis points; `FIXED` uses price distance. |
+| `execution_timing` | `ExecutionTiming.NEXT_OPEN` or `SAME_CLOSE`. |
+| `end_policy` | `EndPolicy.MARK_TO_MARKET` or `CLOSE_AT_LAST_CLOSE`. |
+| `allow_short`, `max_gross_exposure`, `hedging`, `exclusive_orders` | Trading controls described on [Backtest](core.md). |
+
+Use the enums imported from `openbacktesting` in decorators. Strategy parameters belong in [inputs](inputs.md), not decorator settings. Instrument rules and timeframe come from the data supplied for each run.
+
+## Runtime arguments and discovery
+
+`namespace` is the loaded module mapping (`globals()` in the example, or `vars(module)`). It must contain exactly one concrete strategy directly decorated in that module. `runtime.discover(namespace)` returns the class; `runtime.describe(namespace)` returns its input schema and settings without running it.
+
+| `runtime.run` argument | What to pass |
+| --- | --- |
+| `request` | Optional title-based input request from `inputs.request_for`; omit to use defaults. |
+| `data`, `context`, `instrument` | Required chart data, timezone/timeframe, and asset rules. Data must have an aware DatetimeIndex. |
+| `settings` | Sparse dictionary overriding declaration settings, e.g. `{"cash": 20000}`. Changing a quantity/cost type requires its value too. |
+| `options` | Optional `indicator_cache_bytes`, `plotting`, and `plotting_limits` controls. |
+| `logs` | Optional `RunLogs()` to retain logs when execution raises. |
+
+The result is the same statistics Series as `Backtest.run`, with effective settings in `result.attrs["backtest_snapshot"]`. `runtime` runs an already loaded module; loading arbitrary Python executes code and should be limited to scripts you trust.
+
+For a separate strategy file, load it as an importable Python module, then pass `vars(module)`. The [file runner example](../../../examples/advanced/run_author.py) demonstrates this from a source checkout.
+
+{{api openbacktesting.backtest}}
+
+{{api openbacktesting.runtime.discover}}
+
+{{api openbacktesting.runtime.describe}}
+
+{{api openbacktesting.runtime.run}}
+
+{{api openbacktesting.RunLogs}}
+
+Create `logs = RunLogs()`, pass it to `runtime.run(..., logs=logs)`, and read `logs.get_logs()` after success or in an exception handler. Reusing it for another run clears the previous records.
+
+## Setting enums
+
+{{api openbacktesting.CommissionType}}
+
+{{api openbacktesting.QuantityType}}
+
+{{api openbacktesting.SlippageType}}
+
+{{api openbacktesting.ExecutionTiming}}
+
+{{api openbacktesting.EndPolicy}}
+
+## Parameter experiments
+
+`runtime.optimize` saves every candidate's Portfolio; `runtime.resume_optimization` continues an existing experiment with matching inputs, source identity, and market data. See [saved experiments](optimizer.md) for a complete example and argument meanings.
+
+{{api openbacktesting.runtime.optimize}}
+
+{{api openbacktesting.runtime.resume_optimization}}
+
+[Data and instruments](data.md) · [Strategy parameters](inputs.md) · [User manual](../index.md)

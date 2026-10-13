@@ -4,14 +4,12 @@ from __future__ import annotations
 
 import argparse
 import ast
-import dataclasses
 import functools
 import hashlib
 import importlib
 import inspect
 import json
 import re
-from enum import Enum
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,31 +52,6 @@ def doc_object(obj):
     if isinstance(obj, (property, staticmethod, classmethod)):
         return obj.fget if isinstance(obj, property) else obj.__func__
     return obj
-
-
-def signature(obj):
-    if not callable(obj):
-        return ""
-    # inputs uses a private sentinel for omitted values; display a stable label rather than a memory address.
-    return re.sub(r"<object object at 0x[0-9a-fA-F]+>", "not supplied", str(inspect.signature(obj)))
-
-
-def source_path(obj):
-    obj = doc_object(obj)
-    if inspect.isclass(obj):
-        # Historical __module__ is retained for pickle; the function code location identifies the implementation.
-        for member in vars(obj).values():
-            member = doc_object(member)
-            if (
-                inspect.isfunction(member)
-                and Path(member.__code__.co_filename).is_file()
-                and Path(member.__code__.co_filename).resolve().is_relative_to(ROOT)
-            ):
-                return Path(member.__code__.co_filename).resolve().relative_to(ROOT).as_posix()
-    try:
-        return Path(inspect.getsourcefile(obj)).resolve().relative_to(ROOT).as_posix()
-    except (TypeError, ValueError):
-        return ""
 
 
 def check_manifest(manifest, docs=DOCS):
@@ -127,7 +100,9 @@ def check_manifest(manifest, docs=DOCS):
                     r"^    (\*{0,2}\w+)(?: \([^\n]+\))?:", section[1], re.MULTILINE
                 ):
                     if parameter.lstrip("*") not in params:
-                        issues.append(f"Documented parameter is absent from the signature: {name}.{parameter}")
+                        issues.append(
+                            f"Documented parameter is absent from the signature: {name}.{parameter}"
+                        )
     return issues
 
 
@@ -136,150 +111,24 @@ def code(value):
 
 
 def reference_pages(manifest):
-    pages = {}
-    guide_map = {
-        "reference/colors.md": (
-            "../guides/plotting.md#color-values-and-strings",
-            "Color values support construction, component access, and transparency replacement. Color parameters are Color values inside strategies and strings in configuration and plotting exports.",
-        ),
-        "reference/core.md": (
-            "../quickstart.md",
-            "Authors declare strategy defaults with backtest; the host constructs and executes Backtest, and Strategy defines initialization and bar-by-bar trading logic.",
-        ),
-        "reference/trading.md": (
-            "../guides/trading.md",
-            "Order represents a pending order, Trade an individual trade, and Position the current aggregate position. Close requests and fills occur in different phases.",
-        ),
-        "reference/helpers.md": (
-            "../examples.md",
-            "Helpers and composable strategy bases support resampling, signals, trailing stops, and batch research. Call super as documented when extending a base.",
-        ),
-        "reference/inputs.md": (
-            "../guides/inputs.md",
-            "Declare parameters on a strategy class, then discover and inject values by unique title. Definitions, resolution, and runtime values are managed separately.",
-        ),
-        "reference/runtime.md": (
-            "../guides/runtime.md",
-            "The host discovers directly decorated strategies, injects chart data, context, and instrument details, and executes them. Discovery requires no market data.",
-        ),
-        "reference/optimizer.md": (
-            "../guides/optimizer.md",
-            "Parameter experiments freeze the current configuration and save a complete Portfolio for each candidate. Result collections support reopening, filtering, and sorting.",
-        ),
-        "reference/indicator-api.md": (
-            "../guides/indicators.md",
-            "Strategies register indicators through self.ta; handles follow the run cursor and explicit conversions create snapshots. Use compute for offline calculations.",
-        ),
-    }
-    ordered = []
+    from user_docs import reference_pages as render_user_pages
 
-    def append_members(name):
-        ordered.append(name)
-        for child, metadata in manifest["objects"].items():
-            if child.rpartition(".")[0] == name and metadata["status"] == "recommended":
-                append_members(child)
-
-    for name, entry in manifest["objects"].items():
-        parent = manifest["objects"].get(name.rpartition(".")[0], {})
-        if entry["status"] == "recommended" and parent.get("status") != "recommended":
-            append_members(name)
-    for name in ordered:
-        entry = manifest["objects"][name]
-        if entry["status"] != "recommended":
-            continue
-        obj = resolve(name)
-        guide, introduction = guide_map.get(entry["page"], ("../index.md", "Public object reference."))
-        lines = pages.setdefault(
-            entry["page"],
-            [
-                f"# {manifest['pages'][entry['page']]}",
-                "",
-                GENERATED,
-                "",
-                introduction,
-                "",
-                f"[Usage guide]({guide}) · [Compatibility and internal entries](classification.md)",
-                "",
-            ],
-        )
-        parent = name.rpartition(".")[0]
-        nested = (
-            parent in manifest["objects"] and manifest["objects"][parent]["status"] == "recommended"
-        )
-        title = name.rsplit(".", 1)[-1]
-        # Preserve object anchors so deep links in the Markdown manual still locate the corresponding objects.
-        anchor = name.lower().replace("_", "-").replace(".", "-")
-        # The decorator and historical Backtest class differ only by case; preserve the old class anchor.
-        if name == "openbacktesting.backtest":
-            anchor += "-declaration"
-        elif inspect.isfunction(obj) and any(
-            other != name and other.lower() == name.lower() for other in ordered
-        ):
-            anchor += "-function"
-        lines += [f'<a id="{anchor}"></a>', "", f"{'###' if nested else '##'} {title}", ""]
-        if entry.get("summary"):
-            lines += [entry["summary"], ""]
-        path = source_path(obj)
-
-        documented = (
-            isinstance(obj, (functools.partial, classmethod, staticmethod, property, Enum))
-            or inspect.isfunction(obj)
-            or inspect.isclass(obj)
-            or nested
-            and dataclasses.is_dataclass(resolve(parent))
-        )
-        if not documented:
-            lines += [f"{code(name)} = {code(obj)}。", ""]
-            continue
-        lines += [f"Qualified object: `{name}`", ""]
-        target = doc_object(obj)
-        if callable(target):
-            signature = re.sub(r" at 0x[0-9a-f]+", "", str(inspect.signature(target)))
-            lines += ["```python", f"{name}{signature}", "```", ""]
-        description = inspect.getdoc(target)
-        if description:
-            lines += [description, ""]
-        if path:
-            lines += [f"Source: {code(path)}。", ""]
-        if dataclasses.is_dataclass(obj):
-            lines += [
-                "Fields are extracted from definitions; constructor signatures show defaults. See the corresponding guide for field semantics.",
-                "",
-                "| Field | Type |",
-                "| --- | --- |",
-            ]
-            lines += [
-                f"| {code(field.name)} | {code(field.type)} |"
-                for field in dataclasses.fields(obj)
-                if not field.name.startswith("_")
-            ]
-            lines += [""]
-    for name, entry in manifest.get("instance_fields", {}).items():
-        anchor = name.lower().replace("_", "-").replace(".", "-")
-        pages[entry["page"]] += [
-            f'<a id="{anchor}"></a>',
-            "",
-            f"## {name.rsplit('.', 1)[-1]} Instance fields",
-            "",
-            entry["summary"],
-            "",
-        ]
+    pages = render_user_pages(manifest, resolve, doc_object, GENERATED)
     lines = [
-        "# API classification and compatibility entries",
+        "# Maintainer API inventory",
         "",
         GENERATED,
         "",
-        "Classifications distinguish recommended calls, existing aliases, and internal dependencies. See the topic guides for current usage.",
+        "This inventory supports API auditing. Start with the [user manual](../index.md) for usage.",
         "",
-        "| Path | Classification | Rationale and recommended path |",
+        "| Path | Classification | Reason |",
         "| --- | --- | --- |",
     ]
     for name, entry in manifest["objects"].items():
         if entry["status"] != "recommended":
-            note = entry["reason"] + ("；" + entry["canonical"] if entry.get("canonical") else "")
-            lines.append(f"| {code(name)} | {entry['status']} | {note} |")
-    pages["reference/classification.md"] = lines + [""]
-    return {path: "\n".join(lines) for path, lines in pages.items()}
+            lines.append(f"| {code(name)} | {entry['status']} | {entry['reason']} |")
+    pages["reference/classification.md"] = "\n".join(lines) + "\n"
+    return pages
 
 
 CATEGORIES = {
@@ -368,7 +217,11 @@ def input_explanation(row):
         "source": "source uses close prices",
     }
     extra = [descriptions[key] for key in row["inputs"] if key in descriptions]
-    return "Example inputs: " + ("；".join(extra) if extra else "corresponding market-data columns from bundled GOOG") + "。"
+    return (
+        "Example inputs: "
+        + ("；".join(extra) if extra else "corresponding market-data columns from bundled GOOG")
+        + "。"
+    )
 
 
 def constraint_text(rule):
@@ -380,168 +233,277 @@ def constraint_text(rule):
     return "；".join(parts) or "No additional constraints"
 
 
+def indicator_example(row, note):
+    """A standalone sample uses only bundled data and installed package APIs."""
+    setup = {
+        "source": "data.Close",
+        "benchmark": "data.Close.shift(1)",
+        "periods": "10.0",
+        "fast": "data.Close.rolling(3).mean()",
+        "slow": "data.Close.rolling(10).mean()",
+        "left": "data.Close.rolling(3).mean()",
+        "right": "data.Close.rolling(10).mean()",
+        "condition": "(data.Close > data.Open).astype(float)",
+        "trend": "(data.Close > data.Open).astype(float)",
+        "signal": "data.Close.pct_change() * 100",
+        "anchor": "(np.arange(len(data)) % 20 == 0).astype(float)",
+    }
+    lines = [
+        "import numpy as np",
+        "from openbacktesting import Backtest, Strategy",
+        "from openbacktesting.test import GOOG",
+        "",
+        "data = GOOG.copy()",
+    ]
+    for name in row["inputs"]:
+        if name in setup:
+            lines.append(f'data["{name}"] = {setup[name]}')
+    lines += ["", "class Example(Strategy):"]
+    lines += [
+        "    " + line if line else "" for line in indicator_usage(row, note).rstrip().splitlines()
+    ]
+    lines += [
+        "",
+        "result = Backtest(data, Example).run()",
+        'print(result["_strategy"].latest_value)',
+    ]
+    return "\n".join(lines)
+
+
 def indicator_pages(entries):
+    from user_docs import call_signature
+
     from openbacktesting.indicators.methods import TechnicalAnalysis
-    from openbacktesting.indicators.registry import BINDINGS
 
     notes = json.loads((DOCS / "indicator-notes.json").read_text())
-    pages = {}
-    groups = {}
-    for row in sorted(entries, key=lambda row: row["id"]):
+    parameters = json.loads((DOCS / "indicator-parameters.json").read_text())
+    pages, groups = {}, {}
+    output_names = {
+        "signal": "Signal line",
+        "histogram": "Difference between the main and signal lines",
+        "lower": "Lower band",
+        "upper": "Upper band",
+        "middle": "Middle line",
+        "direction": "Direction state",
+        "value": "Confirmed pivot price",
+        "pivot_bar": "Zero-based position of the earlier extreme",
+        "confirmed_at": "Zero-based confirmation bar",
+        "long": "Long-side output",
+        "short": "Short-side output",
+        "positive": "Positive-direction component",
+        "negative": "Negative-direction component",
+        "on": "Squeeze-on flag",
+        "off": "Squeeze-off flag",
+        "none": "Neither squeeze-on nor squeeze-off flag",
+        "entries": "Entry signal",
+        "exits": "Exit signal",
+        "trades": "Signed change in trend state",
+        "k": "%K line",
+        "d": "%D line",
+        "j": "KDJ J line",
+        "span_a": "Span A on the current input index",
+        "span_b": "Span B on the current input index",
+        "tenkan": "Conversion line",
+        "kijun": "Base line",
+        "fama": "Following adaptive moving average",
+        "stop": "Trailing stop price",
+        "absolute": "Absolute decline from the running peak",
+        "percent": "Fractional drawdown",
+        "logarithmic": "Logarithmic drawdown",
+        "inphase": "In-phase Hilbert component",
+        "quadrature": "Quadrature Hilbert component",
+        "lead_sine": "Leading sine component",
+        "sine": "Sine component",
+        "acceleration": "SAR acceleration factor",
+        "reversal": "SAR reversal flag",
+        "p": "Central pivot level",
+        "pivot": "Central pivot level",
+        "top": "Top central-pivot boundary",
+        "bottom": "Bottom central-pivot boundary",
+        "bandwidth": "Band width relative to the middle line",
+        "width": "Absolute central-pivot width",
+        "width_percent": "Central-pivot width relative to the pivot",
+        "position": "Price position relative to the range",
+        "width_class": "Central-pivot width classification",
+        "basis_long": "Long QQE basis",
+        "basis_short": "Short QQE basis",
+        "smoothed_rsi": "Smoothed RSI",
+        "bull_power": "Bull power",
+        "bear_power": "Bear power",
+        "minimum": "Rolling minimum",
+        "maximum": "Rolling maximum",
+        "on_wide": "Wide squeeze flag",
+        "on_normal": "Normal squeeze flag",
+        "on_narrow": "Narrow squeeze flag",
+    }
+    for row in sorted(entries, key=lambda r: r["id"]):
         name = row["id"].removeprefix("ta.")
-        if not re.fullmatch(r"[a-z][a-z0-9_]*", name):
-            raise ValueError(f"Invalid indicator ID: {name}")
+        note = notes[row["id"]]
         groups.setdefault(row["category"], []).append(row)
         lines = [
-            f"# {row['id']}",
+            f"# {note['name']} (`ta.{name}`)",
             "",
             GENERATED,
             "",
-            f"Category: {CATEGORIES[row['category']]}; status: {STATUS_NAMES[row['status']]}。",
+            f'<a id="ta-{name.replace(chr(95), chr(45))}"></a>',
+            "",
+            note["summary"],
+            "",
+            "[Indicator catalog](index.md) · [How to use indicators](../indicator-api.md)",
             "",
         ]
-        note = notes[row["id"]]
-        lines[4:4] = [f"**{note['name']}**。{note['summary']}", ""]
-        if row["status"] == "available":
-            lines += [
-                "## Usage",
-                "",
-                "Register in `init()`, then check the selected channel's `valid` flag in `next()` before reading its current value.",
-                "",
-                "```python",
-                indicator_usage(row, note).rstrip(),
-                "```",
-                "",
-                f"The example selects channel  {code(note['channel'])}; all channels appear in the output table below.",
-                "",
-                f"Complete executable source: [Explore indicators](../../../../{note['example']}), entry point  {code(note['symbol'])}. Run from the repository root:",
-                "",
-                "```sh",
-                f"uv run --locked python {note['example']} --indicator {row['id']}",
-                "```",
-                "",
-                input_explanation(row),
-                "",
-                "`ready` describes required outputs and minimum-history readiness; `valid` says whether the current channel can be consumed. Neither controls strategy callbacks: next runs from the first bar. Examples check valid per channel; NaN must not enter trading decisions.",
-                "",
-                "### Call signature",
-                "",
-            ]
         if row["status"] != "available":
-            lines += [f"Not callable yet: {row['reason']}", ""]
-        else:
-            method = getattr(TechnicalAnalysis, name)
-            params = inspect.signature(method).parameters
-            inputs = row.get("input_args") or (["source"] if len(row["inputs"]) == 1 else [])
-            expected = {
-                "self",
-                "inputs",
-                "backend",
-                "required_outputs",
-                *inputs,
-                *row["parameters"],
-            }
-            if set(params) != expected:
-                raise ValueError(f"Indicator method parameters differ from the catalog: {row['id']}")
-            for key, rule in row["parameters"].items():
-                if key not in params or params[key].default != rule["default"]:
-                    raise ValueError(f"Indicator method signature differs from the catalog: {row['id']}.{key}")
-            lines += [
-                "```python",
-                f"self.ta.{name}{signature(method).replace('(self, ', '(')}",
-                "```",
-                "",
-            ]
+            lines += [f"**Not available:** {row['reason']}", ""]
+            pages[f"reference/indicators/{name}.md"] = "\n".join(lines)
+            continue
+        method = getattr(TechnicalAnalysis, name)
+        actual = inspect.signature(method).parameters
+        for key, rule in row["parameters"].items():
+            if key not in actual or actual[key].default != rule["default"]:
+                raise ValueError(f"Indicator signature differs from catalog: {row['id']}.{key}")
         lines += [
-            "## Inputs, outputs, and parameters",
+            "## Run this example",
             "",
-            f"Inputs: {code(', '.join(row['inputs']))}. Canonical output names: {code(', '.join(row['outputs']))}。",
+            "This complete script uses bundled data. It observes the selected output without placing trades.",
             "",
-            "Output aliases: "
-            + (
-                "；".join(f"{code(k)} → {code(v)}" for k, v in row.get("aliases", {}).items())
-                or "None"
-            )
-            + "。",
+            "```python",
+            indicator_example(row, note),
+            "```",
             "",
-            "| Parameter | Type | Default | Constraints |",
-            "| --- | --- | --- | --- |",
+        ]
+        if any(key not in {"open_", "high", "low", "close", "volume"} for key in row["inputs"]):
+            lines += [input_explanation(row).replace("；", "; ").replace("。", "."), ""]
+        lines += [
+            "## Call and parameters",
+            "",
+            call_signature(method, f"self.ta.{name}"),
+            "",
+            "Register in `init()`. Read the returned channel in `next()` after checking `valid[-1]`.",
+            "",
+            "| Parameter | Meaning | Type | Default | Allowed values |",
+            "| --- | --- | --- | --- | --- |",
         ]
         for key, rule in row["parameters"].items():
-            lines += [
-                f"| {code(key)} | {code(rule['kind'])} | {code(rule['default'])} | {constraint_text(rule)} |"
-            ]
+            meaning = (
+                parameters["overrides"].get(row["id"], {}).get(key, parameters["common"].get(key))
+            )
+            if not meaning:
+                raise ValueError(f"Missing parameter explanation: {row['id']}.{key}")
+            lines.append(
+                f"| {code(key)} | {meaning} | {code(rule['kind'])} | {code(rule['default'])} | {constraint_text(rule).replace('；', '; ').replace('：', ': ')} |"
+            )
         if not row["parameters"]:
-            lines += ["| None | — | — | — |"]
+            lines.append("| — | No formula parameters. | — | — | — |")
         lines += [
             "",
-            "## Semantics and calculation source",
+            "`source`/named source arguments accept a column name or same-run single-channel handle. Alternatively, `inputs` maps each input below to a column or handle. `backend` selects a supported implementation; `required_outputs` selects channels for readiness diagnostics. See [shared arguments and handles](../indicator-api.md#bind-inputs-and-read-outputs).",
             "",
-            f"Semantic version: {code(row['version'])}。",
+            "## Inputs and outputs",
             "",
-            "Parameters and outputs follow this page's catalog fields. The [shared indicator contract](../../guides/indicators.md) explains call phases, missing data, validity, confirmation timing, and cache boundaries. Algorithms do not promise Pine equivalence.",
+            "Required inputs: " + ", ".join(code(n) for n in row["inputs"]) + ".",
             "",
-            "| Field | Reviewed value |",
+            "| Channel | Meaning |",
             "| --- | --- |",
         ]
-        for key in [
-            "source",
-            "kind",
-            "dtype",
-            "unit",
-            "missing_policy",
-            "validity",
-            "causal",
-            "minimum",
-            "windows",
-            "history_sum",
-            "history_offset",
-            "required",
-            "fixed",
-            "input_args",
-            "input_defaults",
-        ]:
-            if key in row:
-                lines += [f"| {code(key)} | {code(row[key])} |"]
+        for output in row["outputs"]:
+            meaning = output_names.get(output, output.replace("_", " ").capitalize() + " output")
+            if output.startswith("r") and output[1:].isdigit():
+                meaning = f"Resistance level {output[1:]}"
+            elif output.startswith("s") and output[1:].isdigit():
+                meaning = f"Support level {output[1:]}"
+            elif output.startswith("ma") and output[2:].isdigit():
+                meaning = f"Moving-average component {output[2:]}"
+            if len(row["outputs"]) == 1:
+                meaning = note["name"] + " value"
+            if row["id"] == "ta.bbands" and output == "percent":
+                meaning = "Position between the lower and upper bands (fraction)"
+            lines.append(f"| {code(output)} | {meaning} |")
+        if row.get("aliases"):
+            lines += [
+                "",
+                "Equivalent channel names: "
+                + "; ".join(f"{code(k)} → {code(v)}" for k, v in row["aliases"].items())
+                + ".",
+            ]
         lines += [
             "",
-            "`required=None` uses the default required outputs; `required=[]` requires no ready output channels. minimum/windows/history_sum/history_offset jointly determine minimum history. This metadata does not control callbacks; consumers must also check valid. Omitted fields use definition defaults; see [IndicatorSpec](../indicator-api.md).",
+            "## Reading values safely",
+            "",
+            "Insufficient history or missing inputs can make a channel invalid. Check that channel's `valid` mask; `ready` is diagnostic and never suppresses `next()`. Multi-output results may have different valid channels on the same bar.",
             "",
         ]
-        if row["status"] == "available":
-            bindings = [(key, binding) for key, binding in BINDINGS.items() if key[0] == row["id"]]
-            for key, binding in sorted(bindings):
-                lines += [
-                    f"Backend  {code(key[1])}; implementation version  {code(binding.implementation_version)}; source  {code(source_path(binding.compute))}。",
-                    "",
-                ]
+        if name in {"pivothigh", "pivotlow"}:
             lines += [
-                f"Default backend: {code(row.get('default_backend', 'pandas-ta-classic.native'))}。",
+                "The pivot is published on its confirmation bar after `right` later bars, not backdated to the extreme. Ties choose the rightmost extreme.",
+                "",
+            ]
+        if name in {"pivot_points", "anchored_vwap", "anchored_vwap_bands"}:
+            lines += [
+                "Supply a complete 0/1 anchor series. The example resets every 20 bars only to demonstrate binding; replace it with your intended periods. Exchange sessions are not inferred.",
+                "",
+            ]
+        if name == "mode":
+            lines += [
+                "The window counts finite observations; missing rows do not consume it. Ties choose the smallest value.",
+                "",
+            ]
+        if name == "ichimoku":
+            lines += [
+                "Outputs remain on the input index; Chikou and future extension are disabled.",
+                "",
+            ]
+        if name.startswith("cdl_"):
+            lines += [
+                "Zero can be a valid non-triggered pattern; validity is separate from its score. A score is not an order or a guaranteed direction signal.",
                 "",
             ]
         lines += [
-            f"Validation location: {code(row['test'])}; complete examples appear in the [example guide](../../examples.md).",
-            "",
-            "[Return to category index](index.md)",
+            "[Indicator catalog](index.md) · [Custom calculations](../strategy.md#register-custom-calculations)",
             "",
         ]
         pages[f"reference/indicators/{name}.md"] = "\n".join(lines)
+    available = sum(row["status"] == "available" for row in entries)
     lines = [
         "# Indicator catalog",
         "",
         GENERATED,
         "",
-        f"The reviewed catalog contains  {len(entries)}  entries, of which  {sum(r['status'] == 'available' for r in entries)}  are available. Counts come from the current catalog and exclude channel aliases.",
+        f"Choose from {available} callable indicators. Each page contains a complete example, parameter meanings, and named outputs.",
+        "",
+        "Start with [EMA](ema.md), [RSI](rsi.md), [MACD](macd.md), [Bollinger Bands](bbands.md), or [ATR](atr.md). Read [indicator usage](../indicator-api.md) for registration and validity checks. Use the documentation site's search to find names or IDs, or your reader's Find command when reading Markdown.",
+        "",
+        " · ".join(f"[{title}](#{key})" for key, title in CATEGORIES.items()),
         "",
     ]
-    lines += [
-        "```{raw} html",
-        '<div class="indicator-search"><label for="indicator-query">Search names, IDs, or output aliases</label>',
-        '<input id="indicator-query" type="search" placeholder="For example: Exponential moving average / ta.ema" aria-describedby="indicator-status">',
-        '<p id="indicator-status" aria-live="polite">Enter a name or ID, or browse the categories below.</p><ul id="indicator-results"></ul></div>',
-        "```",
-        "",
-    ]
+    for category, rows in sorted(groups.items()):
+        lines += [
+            f'<a id="{category}"></a>',
+            "",
+            f"## {CATEGORIES[category]}",
+            "",
+            "| Indicator | Use |",
+            "| --- | --- |",
+        ]
+        for row in rows:
+            if row["status"] == "available":
+                name = row["id"].removeprefix("ta.")
+                lines.append(
+                    f"| [{notes[row['id']]['name']} (`{name}`)]({name}.md) | {notes[row['id']]['summary']} |"
+                )
+        lines += [""]
+    unavailable = [row for row in entries if row["status"] != "available"]
+    if unavailable:
+        lines += [
+            "## Unavailable entries",
+            "",
+            "These names cannot be called; their pages explain the boundary.",
+            "",
+        ]
+        lines += [
+            f"- [{row['id']}]({row['id'].removeprefix('ta.')}.md): {row['reason']}"
+            for row in unavailable
+        ]
+    pages["reference/indicators/index.md"] = "\n".join(lines) + "\n"
     pages["_static/indicator-index.json"] = (
         json.dumps(
             [
@@ -551,31 +513,14 @@ def indicator_pages(entries):
                     "category": CATEGORIES[row["category"]],
                     "aliases": list(row.get("aliases", {})),
                     "status": STATUS_NAMES[row["status"]],
-                    "href": row["id"].removeprefix("ta.") + ".html",
+                    "href": row["id"].removeprefix("ta.") + ".md",
                 }
                 for row in sorted(entries, key=lambda row: row["id"])
             ],
-            ensure_ascii=False,
             indent=2,
         )
         + "\n"
     )
-    for category, rows in sorted(groups.items()):
-        lines += [f"({category})=", "", f"## {CATEGORIES[category]}", ""]
-        lines += [
-            f"- [{notes[r['id']]['name']} · {r['id']}]({r['id'].removeprefix('ta.')}.md)：{STATUS_NAMES[r['status']]}"
-            for r in rows
-        ]
-        lines += [""]
-    lines += [
-        "```{toctree}",
-        ":hidden:",
-        "",
-        *[r["id"].removeprefix("ta.") for r in sorted(entries, key=lambda r: r["id"])],
-        "```",
-        "",
-    ]
-    pages["reference/indicators/index.md"] = "\n".join(lines)
     return pages
 
 
@@ -640,7 +585,11 @@ def main():
         issues += check_manifest(manifest) + check_examples()
     if issues:
         raise SystemExit("\n".join(issues))
-    print("Documentation sources and generated references match" if args.check else "Generated public API and indicator references")
+    print(
+        "Documentation sources and generated references match"
+        if args.check
+        else "Generated public API and indicator references"
+    )
 
 
 if __name__ == "__main__":

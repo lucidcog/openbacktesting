@@ -1,0 +1,112 @@
+# Saved parameter experiments
+
+Use `runtime.optimize` to save a complete Portfolio for every parameter combination to a local SQLite file. Reopen that file to rank, filter, or inspect reports without rerunning strategies. Use [Backtest.optimize](core.md#find-a-parameter-combination) if you only need the best run and a score grid.
+
+## Run and query an experiment
+
+Save this complete example as `experiment.py`, then run `python experiment.py`. The temporary directory gives each invocation a new result file; replace it with a new persistent path to retain the experiment.
+
+```python
+import hashlib
+import tempfile
+from pathlib import Path
+from openbacktesting import Strategy, backtest, inputs, runtime, DataContext, Timeframe
+from openbacktesting.broker import InstrumentSpec
+from openbacktesting.optimizer import ExecutionIdentity, Range, open_result
+from openbacktesting.test import GOOG
+
+@backtest()
+class Experiment(Strategy):
+    quantity = inputs.int(1, title="Quantity", minval=1)
+
+    def init(self):
+        pass
+
+    def next(self):
+        if self.bar_index == 0:
+            self.buy(qty=self.quantity)
+        elif self.bar_index == 10:
+            self.position.close()
+
+if __name__ == "__main__":
+    data = GOOG.iloc[:30].copy()
+    data.index = data.index.tz_localize("UTC")
+    identity = ExecutionIdentity(
+        strategy_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        dependencies_sha256=hashlib.sha256(b"no local dependencies").hexdigest(),
+    )
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "experiment.db"
+        saved = runtime.optimize(
+            globals(), {"Quantity": Range(1, 3, 1)}, path=path, identity=identity,
+            data=data, context=DataContext(Timeframe.days(1), "UTC"),
+            instrument=InstrumentSpec(symbol="GOOG"),
+        )
+        reopened = open_result(path)
+        ranking = reopened.query(order_by=["summary.all.totalReturn.value"])
+        print(ranking)
+        trial = ranking["rows"][0]
+        report = reopened.load_portfolio(trial["trial_id"])
+        print(report["summary"]["all"]["totalReturn"])
+```
+
+## Choose search domains
+
+Search keys are unique **input titles**, not Python attribute names. `Values([10, 20, 40])` supplies explicit choices. `Range(5, 25, 5)` supplies an integer grid, including the stop only if it lies on the grid. Use decimal strings for exact float ranges, e.g. `Range("0.1", "0.3", "0.1")`. Empty domains, duplicates, and invalid candidates are rejected.
+
+Parameters not in `search` use the current `request` (from `inputs.request_for`) or declaration defaults. Every candidate starts a fresh account. This interface retains Portfolios but disables plot/log history; it does not automatically choose or rerun a winner.
+
+## Execution arguments
+
+| Argument | Meaning |
+| --- | --- |
+| `namespace`, `data`, `context`, `instrument` | Same loaded strategy and chart arguments as [runtime.run](runtime.md). |
+| `path` | New local database path. Use resume for an existing experiment. |
+| `identity` | `ExecutionIdentity` with SHA256 digests of the strategy source and its local dependencies. Include all code that affects the strategy. |
+| `request`, `settings` | Current input request and sparse backtest setting overrides. |
+| `constraint` | Optional predicate receiving complete serialized input values and returning bool. Requires a stable `constraint_id`. False records a skipped candidate. |
+| `cancel` | Optional zero-argument callable; returning True stops dispatch after the in-flight candidate completes. |
+| `on_progress` | Called after a candidate commits. Its event includes `trial_id`; committed reports are already readable. |
+
+The library checks data/settings/environment identity on resume. Call `runtime.resume_optimization(namespace, path=path, experiment_id=saved.experiment_id, identity=identity, data=data, context=context, instrument=instrument, ...)` with the same current inputs/settings/constraint. Changed material requires a new experiment. Successful, failed, and skipped candidates are not automatically rerun; interrupted or undispatched work can continue.
+
+## Inspect results
+
+| Method | Result and arguments |
+| --- | --- |
+| `info()` | Experiment metadata and counts. |
+| `trials(limit=100, offset=0)` | Visited candidate records with `trial_id`, `state`, and any `error`, including failures. |
+| `fields()` | Queryable scalar paths, units, and suggested sort direction. |
+| `query(order_by=..., filters=..., fields=..., limit=100, cursor=None)` | A page of ranked/filtered candidates. Limit is 1..1000. |
+| `load_portfolio(trial_id)` | One successful candidate's complete report. |
+| `backup(destination)` | Safe database copy, including committed work while a run is active. |
+
+For explicit sorting, use `order_by=[("summary.all.totalReturn.value", "desc")]`. Filters are `(path, operator, value)` tuples; operators include `eq`, `ne`, `lt`, `le`, `gt`, `ge`, and `status`. `fields` selects scalars to return. Null values sort last. Use the returned cursor for the next page; restart without it to include newer commits.
+
+{{api openbacktesting.optimizer.Values}}
+
+{{api openbacktesting.optimizer.Range}}
+
+{{api openbacktesting.optimizer.ExecutionIdentity}}
+
+{{api openbacktesting.optimizer.open_result}}
+
+{{api openbacktesting.optimizer.ExperimentResult}}
+
+{{api openbacktesting.optimizer.OptimizationError}}
+
+An `OptimizationError` identifies the path, experiment, and last known committed count. A failed strategy is recorded as a failed candidate; a storage failure stops the experiment. Already committed results remain available for inspection.
+
+## Advanced: supply your own executor
+
+Most users should call `runtime.optimize`. If integrating a separate executor, `plan(strategy_class, search, base_inputs=..., execution=..., constraint_id=...)` validates and freezes the search. `execution` supplies the execution identity mapping; `base_inputs` is the title-based input request. A `Plan` exposes `.total` and `.snapshot()`.
+
+`execute(plan_value, executor, path, ...)` calls your executor for each input request; it must return the complete Portfolio report. Supply `experiment_id` to resume the matching plan. Cancellation, progress, and constraints have the same role as above. See the [complete runtime example](../../../examples/advanced/optimizer_results.py) for the supported default path.
+
+{{api openbacktesting.optimizer.plan}}
+
+{{api openbacktesting.optimizer.Plan}}
+
+{{api openbacktesting.optimizer.execute}}
+
+[Portfolio](portfolio.md) · [Runtime](runtime.md) · [User manual](../index.md)

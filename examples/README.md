@@ -1,12 +1,12 @@
-# Core examples
+# Runnable examples
 
-Start user strategies with a recommended author script: declare settings with `@backtest(...)` and let the framework inject the current chart context and run the strategy. Advanced tutorials demonstrate native calls, custom algorithms, and research workflows. Explanations and code serve both readers and AI. See the [manual](../docs/core/index.md) for the full contract, the [package overview](../README.md) for standalone installation, and the [manifest](../source-manifest.json) for provenance.
+Start with the [first backtest](../docs/core/quickstart.md), which runs directly from an installed package. The examples here offer longer recipes: `advanced/` files run directly; `strategies/` files declare a strategy and use the example runner to supply data.
 
 ## Choose by topic
 
 Use [advanced/optimizer_results.py](advanced/optimizer_results.py) for parameter experiments: retain complete Portfolio results, fix unselected inputs at current values, submit results individually, cancel and resume, reopen offline, and sort by fields.
 
-The table follows learning order. Checks read its path, execution category, and recommendation columns. Base dependencies are the NumPy, pandas, and fixed indicator backend declared by core. Bundled GOOG daily and EURUSD hourly data are read locally without downloads.
+Choose the topic you need. Bundled GOOG daily and EURUSD hourly data are read locally without downloads. The commands below run from a source checkout.
 
 | Path | Execution category | Recommendation | Topic and prerequisites | Data and extra dependencies |
 | --- | --- | --- | --- | --- |
@@ -33,15 +33,13 @@ The table follows learning order. Checks read its path, execution category, and 
 | [strategies/data_sources.py](strategies/data_sources.py) | Author script | Recommended | Eight data sources, saved handles, and derived prices; read the preferred template first | GOOG; none |
 | [strategies/cross_signals.py](strategies/cross_signals.py) | Author script | Recommended | Crossover composition and current is_* booleans; understand init/next | GOOG; none |
 | [strategies/confirmed_events.py](strategies/confirmed_events.py) | Author script | Advanced | Composition, confirmed events, patterns, and monthly anchors; understand validity/time alignment | GOOG; none |
-| [strategies/ema_inputs.py](strategies/ema_inputs.py) | Author script | Recommended | Built-in EMA and inputs; understand warmup | GOOG; none |
+| [strategies/ema_inputs.py](strategies/ema_inputs.py) | Author script | Recommended | Built-in EMA and inputs; check indicator validity | GOOG; none |
 | [strategies/all_inputs.py](strategies/all_inputs.py) | Author script | Recommended | All nine inputs, enum/color runtime values, and time/session boundaries | First 120 GOOG bars; none |
-| [advanced/native_run.py](advanced/native_run.py) | Imperative tutorial | Advanced | Native runs, statistics/equity/trade tables; framework development entry | GOOG; none |
+| [advanced/native_run.py](advanced/native_run.py) | Imperative tutorial | Advanced | Native runs, statistics/equity/trade tables; direct Python script | GOOG; none |
 | [advanced/composable_strategies.py](advanced/composable_strategies.py) | Imperative tutorial | Advanced | Signal and trailing-stop base classes; understand super call order | GOOG; none |
 | [advanced/multiple_time_frames.py](advanced/multiple_time_frames.py) | Imperative tutorial | Advanced | Built-in daily/weekly RSI; understand resampling, completed periods, and calendar assumptions | GOOG; none |
 | [advanced/parameter_optimization.py](advanced/parameter_optimization.py) | Imperative tutorial | Advanced | Four grid combinations and parameter scores; understand native parameters | GOOG; SAMBO requires optimize extra |
 | [advanced/machine_learning.py](advanced/machine_learning.py) | Imperative tutorial | Research only | Feature columns, one-time/rolling training; requires ML and time-series evaluation knowledge | EURUSD; scikit-learn in test extra |
-
-AI reading order: choose a topic here → read its code and necessary API documentation → generate code for its execution category. Ordinary user strategies start from `strategies/`; do not copy tutorial run or optimization calls into author-script top-level code. `self.ta` is the only public registration entry for built-in strategy indicators, including SMA in advanced examples. `self.ind` serves user-defined indicators only; an advanced category does not justify rewriting existing built-ins. Offline ML features and separate calendars such as weekly data reuse built-in algorithms through public `indicators.compute`; `resample_apply` then aligns weekly results to the main calendar. Do not pass weekly data directly to daily-bound `self.ta`. Native optimization can still use ordinary class parameters.
 
 See [advanced/strategy_settings.py](advanced/strategy_settings.py) for a complete flat-configuration run covering five enum categories, three commission modes, two quantity modes, two slippage modes, JSON overrides, rejection of type changes without values, None clearing, and version 2 envelopes. It retains low-level composite fees and compares inherited interest with explicit zero. `test_flat_backtest_settings.py`, `test_strategy_settings.py`, and `test_examples.py` verify these cases. Quantity budgets do not reserve fees, so actual fills can still fail for insufficient funds.
 
@@ -86,9 +84,7 @@ uv run --locked python examples/advanced/parameter_optimization.py --method samb
 uv run --locked python examples/advanced/machine_learning.py
 ```
 
-Optimization defaults to four grid combinations; SAMBO uses at most 40 attempts with a fixed seed and requires `pip install 'openbacktesting[optimize]'`. ML runs a random-split classification demonstration and two full backtests, predicts every bar, and retrains every 20 bars. This slow example requires `pip install 'openbacktesting[test]'`. Neither installs dependencies automatically.
-
-Run `uv run --locked python -m pytest tests/test_examples.py` from the package root to verify the full index, loading boundaries, and lightweight execution. Parameterized tests with `execution` in their names display file paths. `test_script_runtime.py`, `test_indicators.py`, and `test_indicator_expansion.py` also retain parameter and confirmation-timing checks for author examples. Enable full ML training explicitly with `OPENBACKTESTING_RUN_SLOW_EXAMPLES=1 uv run --locked python -m pytest tests/test_examples.py -k slow`; the migrated Linux tutorial tests still cover the complete entry point. Platform/dependency skips are reported separately; successful loading does not establish successful full execution.
+Optimization defaults to four grid combinations; SAMBO uses at most 40 attempts with a fixed seed and requires `python -m pip install '.[optimize]'`. ML runs a random-split classification demonstration and two full backtests, predicts every bar, and retrains every 20 bars. This slow example requires `python -m pip install '.[test]'`. Neither installs dependencies automatically.
 
 ## Essential semantics
 
@@ -98,25 +94,4 @@ Run `uv run --locked python -m pytest tests/test_examples.py` from the package r
 - Random-split ML accuracy does not establish time-series out-of-sample performance. Label horizons, temporal splits, and gaps require independent evaluation, so the example remains Research only.
 - Each docstring explains fees, sizing, and end-of-run liquidation choices. Return output is the calculation for that particular data and configuration.
 
-## Add or modify features
-
-A new core feature must add or extend a runnable example in the same change, update this index and its execution checks, and record “feature → example path → validation command and result.” The example must actually use the feature; unit tests, comments, and links are insufficient. One example may cover related features. The table grows with functionality and is not fixed at nine examples. Internal refactoring needs no new example; public-usage changes must update existing examples.
-
-Use this file order: English purpose/constraints → imports → necessary helpers → strategy class (configuration, init, next), or guarded main for imperative tutorials. Author scripts decorate the strategy with @backtest and do not prepare data. Maintain shared guidance here and explain unique data, parameters, output, side effects, and boundaries near the relevant code. Refresh manifest target digests for new or changed content while preserving source identities. New examples must join actual execution coverage; syntax checks alone are insufficient.
-
-## Legacy path migration
-
-The following legacy filenames have moved; there are no compatibility wrapper scripts.
-
-| Legacy filename | Current path |
-| ------------------------------------------------- | ------------------------------------ |
-| `built_in_indicators.py`                          | `strategies/ema_macd.py`             |
-| `expanded_indicators.py`                          | `strategies/confirmed_events.py`     |
-| `ema_inputs.py` / `advanced/custom_ema_inputs.py` | `strategies/ema_inputs.py`           |
-| `Quick Start User Guide.py`                       | `advanced/native_run.py`             |
-| `Multiple Time Frames.py`                         | `advanced/multiple_time_frames.py`   |
-| `Parameter Heatmap & Optimization.py`             | `advanced/parameter_optimization.py` |
-| `Strategies Library.py`                           | `advanced/composable_strategies.py`  |
-| `Trading with Machine Learning.py`                | `advanced/machine_learning.py`       |
-
-Full Portfolio report: `uv run --locked python examples/advanced/portfolio_report.py`. `test_portfolio.py` and `test_examples.py` verify amounts, states, freezing, the field catalog, and chart-timezone buckets.
+For maintenance and validation, see the [development guide](../docs/core/development.md).

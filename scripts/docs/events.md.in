@@ -1,0 +1,66 @@
+# Account snapshots and execution events
+
+Use snapshots to inspect current account state and callbacks to react to actual order changes. These values are created by the framework and are read-only.
+
+## Log an execution and inspect the account
+
+```python
+from openbacktesting import Backtest, Strategy
+from openbacktesting.test import GOOG
+
+class ObserveExecution(Strategy):
+    def init(self):
+        self.fill_prices = []
+
+    def next(self):
+        if self.bar_index == 0:
+            self.buy(qty=1)
+        elif self.bar_index == 5:
+            self.position.close()
+
+    def on_order(self, event):
+        order = event.snapshot
+        self.log.info(f"{order.order_id}: {order.status}; {order.reason}")
+
+    def on_fill(self, fill):
+        self.fill_prices.append(fill.price)
+        self.log.info(f"Executed {fill.qty} at {fill.price}; fee {fill.fee}")
+
+    def on_finish(self, summary):
+        self.log.info(f"Finished: {summary.reason}; equity {summary.account.equity}")
+
+bt = Backtest(GOOG.iloc[:20], ObserveExecution)
+result = bt.run()
+print(result["_strategy"].fill_prices)
+print(bt.get_logs()[-1])
+```
+
+`on_order` receives an event whose **snapshot** contains the order ID/status/reason. `on_fill` receives the actual execution directly. `on_finish` receives the final account and termination reason. A saved snapshot does not change when another fill occurs. Orders submitted in notifications cannot match recursively; `on_start` and `on_finish` do not permit trading.
+
+## Read the current state
+
+Inside `next()`, read `self.account.equity`, `.margin_available`, or `.fees_paid`; use `self.position.snapshot.long_qty/short_qty` for two-sided exposure. `self.closed_trade_stats.win_rate` is a fraction (0.5 means 50%) and is None before any closure. These counts describe closed portions, including partial exits.
+
+## Values returned by trading and callbacks
+
+These are read-only records, not objects you need to construct. `Order.snapshot` and `.sizing` describe status and the original sizing decision. `on_order(event)` receives an `OrderEvent`; `on_fill(fill)` receives a `Fill`. `on_finish(summary)` receives a `RunSummary`. Result ledgers expose the same facts as plain tables. Timestamps/bar positions identify when something happened; IDs join orders, fills, and trade allocations.
+
+{{api openbacktesting.broker.AccountSnapshot}}
+
+{{api openbacktesting.broker.PositionSnapshot}}
+
+{{api openbacktesting.broker.ClosedTradeStats}}
+
+{{api openbacktesting.broker.OrderSnapshot}}
+
+{{api openbacktesting.broker.OrderSizingSnapshot}}
+
+{{api openbacktesting.broker.OrderEvent}}
+
+{{api openbacktesting.broker.Fill}}
+
+{{api openbacktesting.broker.TradeAllocation}}
+
+{{api openbacktesting.broker.RunSummary}}
+
+[Orders and positions](trading.md) · [Strategy](strategy.md) · [Results](../guides/results.md)

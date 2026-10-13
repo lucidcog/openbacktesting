@@ -1,0 +1,39 @@
+{# Keep Material's search, palette, and drawer components with a permanent brand. #}
+<header class="md-header ob-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Open navigation">
+      {% include ".icons/material/menu.svg" %}
+    </label>
+    <a href="{{ nav.homepage.url | url }}" class="md-header__button md-logo ob-logo" aria-label="OpenBacktesting home" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+    <div class="md-header__title ob-brand" data-md-component="header-title">
+      <a href="{{ nav.homepage.url | url }}" class="ob-brand__link">
+        <strong>{{ config.site_name }}</strong>
+        <span>Python backtesting</span>
+      </a>
+      <span data-md-component="header-topic" hidden></span>
+    </div>
+    <a class="ob-sponsor ob-sponsor--header" href="https://pineify.app" target="_blank" rel="sponsored noopener" aria-label="Sponsored by Pineify — explore the AI trading toolkit" data-nosnippet>
+      <img src="{{ '_static/pineify-logo.svg' | url }}" width="30" height="30" alt="">
+      <span class="ob-sponsor__brand"><small>Sponsored by</small><strong>Pineify</strong></span>
+      <span class="ob-sponsor__pitch">AI Trading Toolkit <span aria-hidden="true">↗</span></span>
+    </a>
+    {% if "material/search" in config.plugins %}
+      {% set search = config.plugins["material/search"] | attr("config") %}
+      {% if search.enabled %}
+        <label class="md-header__button md-icon" for="__search" aria-label="Open search">
+          {% include ".icons/material/magnify.svg" %}
+        </label>
+        {% include "partials/search.html" %}
+      {% endif %}
+    {% endif %}
+    {% if config.repo_url %}
+      <a class="md-header__button md-icon ob-repository" href="{{ config.repo_url }}" aria-label="OpenBacktesting on GitHub" title="OpenBacktesting on GitHub">
+        {% include ".icons/fontawesome/brands/github.svg" %}
+      </a>
+    {% endif %}
+    {% include "partials/palette.html" %}
+    {% include "partials/javascripts/palette.html" %}
+  </nav>
+</header>

@@ -1,0 +1,97 @@
+# Reusable strategies and analysis helpers
+
+Import helpers from `openbacktesting.lib`. Use the base strategies to reuse signal execution or trailing-stop behavior, and the functions for resampling or analyzing results.
+
+## SignalStrategy: trade a signal series
+
+```python
+from openbacktesting import Backtest
+from openbacktesting.lib import SignalStrategy
+from openbacktesting.test import GOOG
+
+class Signals(SignalStrategy):
+    def init(self):
+        super().init()
+        entry = (self.close.s > self.close.s.shift(1)).astype(float)
+        self.set_signal(entry_size=entry, exit_portion=entry * 0 + 1)
+
+    def next(self):
+        super().next()
+
+result = Backtest(GOOG, Signals).run()
+print(result["# Trades"])
+```
+
+`entry_size` is a same-length signed series: positive buys, negative sells, zero does nothing. Sizes are asset units. `exit_portion` is a signed series specifying portions to close for the relevant side; zero does nothing. Signals are read on the current bar and orders follow ordinary matching timing. Call `super().init()` and `super().next()` when overriding composable bases so their behavior still runs.
+
+{{api openbacktesting.lib.SignalStrategy}}
+
+## TrailingStrategy: update ATR-based protection
+
+```python
+from openbacktesting import Backtest
+from openbacktesting.lib import TrailingStrategy
+from openbacktesting.test import GOOG
+
+class TrailingEntry(TrailingStrategy):
+    def init(self):
+        super().init()
+        self.set_trailing_sl(n_atr=3)
+
+    def next(self):
+        super().next()
+        if self.bar_index == 120:
+            self.buy(qty=1)
+
+result = Backtest(GOOG, TrailingEntry).run()
+print(result["Return [%]"])
+```
+
+`set_atr_periods(periods=100)` sets the ATR lookback. `set_trailing_sl(n_atr=6)` sets a multiple of ATR, updated by the base `next()`. `set_trailing_pct(pct=0.05)` instead trails by 5% of the current confirmed close, independently of ATR readiness. Stops ratchet in the favorable direction and updates take effect no earlier than the next bar. The base strategy manages protection but does not create entry signals for you.
+
+{{api openbacktesting.lib.TrailingStrategy}}
+
+## Use a higher timeframe
+
+In `init()`, `resample_apply(rule, func, series, *args, agg=None, **kwargs)` resamples indexed market data, runs a calculation, and aligns the completed values to the original bars. For example, use a daily rolling mean from hourly data. The result inside a strategy is a registered handle; check its validity in `next()`. `rule` is a pandas resampling rule; `agg` chooses aggregation or defaults to the appropriate OHLCV rule. Your function must return an aligned result for the resampled series.
+
+```python
+from openbacktesting.lib import resample_apply
+
+def init(self):
+    self.weekly_mean = resample_apply(
+        "W-FRI", lambda values: values.rolling(3).mean(), self.data.Close,
+    )
+```
+
+{{api openbacktesting.lib.resample_apply}}
+
+## Compare several assets
+
+`MultiBacktest([data_a, data_b], MyStrategy, **backtest_kwargs)` runs the same strategy independently for each dataset. `.run(**strategy_params)` returns a DataFrame of results; `.optimize(**search_options)` returns per-dataset parameter scores. This is a collection of separate accounts, not a multi-asset portfolio sharing capital.
+
+{{api openbacktesting.lib.MultiBacktest}}
+
+## Analyze or generate data
+
+| Helper | Usage |
+| --- | --- |
+| `barssince(condition, default=inf)` | Number of bars since the most recent truthy value; returns `default` if none. |
+| `quantile(series, quantile=None)` | Omit quantile for the last value's rank; pass a fraction such as `0.9` for that quantile value. |
+| `compute_stats(stats=result, data=data, trades=subset)` | Recompute statistics for a selected trade table, optionally with `risk_free_rate`. Does not rerun orders. |
+| `random_ohlc_data(data, frac=1.0, random_state=0)` | Generator of synthetic OHLC samples; `next(generator)` returns a DataFrame. |
+| `OHLCV_AGG`, `TRADES_AGG` | Dictionaries for pandas resampling/aggregation. |
+
+{{api openbacktesting.lib.barssince}}
+
+{{api openbacktesting.lib.quantile}}
+
+{{api openbacktesting.lib.compute_stats}}
+
+{{api openbacktesting.lib.random_ohlc_data}}
+
+{{api openbacktesting.lib.OHLCV_AGG}}
+
+{{api openbacktesting.lib.TRADES_AGG}}
+
+[Strategy](strategy.md) · [Backtest](core.md) · [User manual](../index.md)

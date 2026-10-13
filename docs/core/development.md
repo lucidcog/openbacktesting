@@ -23,7 +23,7 @@ In addition to SAMBO, the `optimize` extra declares scikit-learn, which brings i
 
 ## Documentation and generated interfaces
 
-The manual is directly readable Markdown and requires no website build. The public API manifest is `api-manifest.json`; indicator names, purposes, and example relationships are in `indicator-notes.json`. After changing interfaces or the catalog, regenerate and check:
+The manual is readable as Markdown or as a MkDocs Material site. The public API inventory is `api-manifest.json`. User-facing reference introductions live in `scripts/docs/*.md.in`; `scripts/user_docs.py` combines them with current callable signatures and attribute summaries. Indicator purposes are in `indicator-notes.json`; parameter meanings are in `indicator-parameters.json`. After changing interfaces or the catalog, regenerate and check:
 
 ```sh
 uv run --locked python scripts/generate_indicator_api.py
@@ -31,7 +31,24 @@ uv run --locked python scripts/core_docs.py
 uv run --locked python scripts/check_package.py
 ```
 
-`generate_indicator_api.py` generates indicator methods from the fixed catalog. `core_docs.py` generates API signatures, docstrings, and indicator references from installed objects and the catalog. Handwritten guides are not overwritten. Machine checks confirm structural consistency; prose semantics still require review.
+`generate_indicator_api.py` generates indicator methods from the fixed catalog. `core_docs.py` generates references from the reviewed templates and installed objects, keeping private constructors and maintenance inventories out of the user path. Edit templates rather than generated reference pages. Guides and the quickstart are handwritten. Run `uv run --locked python -m pytest tests/test_user_documentation.py tests/test_examples.py` to execute the complete manual examples, every available indicator-page example, and the repository tutorials; navigation checks also validate local anchors. Review prose against implementation before regenerating. The [maintainer API inventory](reference/classification.md) retains compatibility/internal classifications separately from the user navigation.
+
+### Preview and build the documentation site
+
+```sh
+uv run --locked --group docs mkdocs serve
+uv run --locked --group docs mkdocs build --strict
+```
+
+The preview runs at `http://127.0.0.1:8000` with live reload; the static build is written to `build/docs/`. Use `--dev-addr 127.0.0.1:8001` if the default port is occupied. The `docs` dependency group is locked separately from runtime dependencies. The site needs no JavaScript toolchain, external search service, or remote fonts.
+
+For an isolated build suitable for hosting, run `bash scripts/build_docs.sh`. It installs only documentation dependencies into `build/docs-env/`. The [Cloudflare Pages deployment guide](deployment.md) lists the exact build command, output directory, and environment settings.
+
+`mkdocs.yml` defines the navigation, theme, and browser-side search. `scripts/docs_site.py` groups indicator pages from the generated index and includes linked repository examples as highlighted source pages. It rewrites links only during the build, so the same Markdown remains readable in the repository. All manual pages participate in search; use names such as `Backtest`, `OrderRequest`, or `ta.ema`. The strict build rejects missing navigation targets, broken local links, and broken anchors. Building or serving the site renders the current Markdown; regenerate API references separately after source or template changes using the commands above.
+
+`scripts/docs_discovery.py` derives page titles and summaries from the visible content unless front matter explicitly supplies them. It generates portable Markdown, LLM indexes, canonical metadata, structured data, sitemap filtering, and crawler headers. Keep the full introductory heading descriptive even when a sidebar label is abbreviated. The publication and preview policies are documented in the [deployment guide](deployment.md#search-visibility).
+
+Run `uv run --locked --group docs --extra test python -m pytest tests/test_docs_discovery.py` after changing the site pipeline. This builds production and preview sites, checks every HTML/Markdown counterpart, verifies all published Markdown links and source code fences, and confirms sitemap coverage, unique metadata, structured data, and preview indexing controls. When Node.js is available, `node --test tests/test_page_tools.cjs` checks exact clipboard contents, unavailable/denied clipboard access, failed downloads, retry, and repeated clicks without npm dependencies. Node.js is not required to build or serve the documentation. Also check the copy button in the browser with keyboard access, both color schemes, and narrow viewports.
 
 ## Distribution integrity
 

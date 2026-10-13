@@ -162,7 +162,7 @@
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "Pineify 提供 AI 辅助的 Pine Script 编程和可视化编辑器，用于创建 TradingView 指标与策略。[了解 Pineify →](https://pineify.app)",
+      "value": "Pineify 是一套 AI 交易工具集，支持为多个平台创建指标与策略，集成了 Pine Script AI、Finance Agent、AI 选股、市场筛选、图表分析和 MCP 工具。[了解 Pineify →](https://pineify.app)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
