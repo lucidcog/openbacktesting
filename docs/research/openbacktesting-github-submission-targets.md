@@ -1,5 +1,7 @@
 # OpenBacktesting: GitHub directory submission targets
 
+> **Submission update (2026-10-14):** After the research-only phase, the user authorized browser submissions. [Submission results](openbacktesting-github-submission-results.md) record 25 PRs and 18 issues across 43 repositories after two authorized submission rounds; the remaining two repositories are archived. The record also corrects the EliteQuant eligibility assessment. The research snapshot below preserves the earlier findings and scope.
+
 **There are 21 topically reasonable directories to prepare submissions for, led by `wilsonfreitas/awesome-quant`, `paperswithbacktest/awesome-systematic-trading`, `wangzhe3224/awesome-systematic-trading`, `thuquant/awesome-quant` and `r0f1/datascience`; the project's two-day public history makes several prominent Python lists premature.**
 
 Research snapshot: **2026-10-14** (Asia/Shanghai). This is a researched plan for a possible broad submission round, not an endorsement by the target maintainers. The latest instruction is to research and organize proposed submissions first; actual submission remains out of scope. No issues, PRs, comments or remote changes were created.
