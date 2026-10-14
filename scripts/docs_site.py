@@ -54,6 +54,13 @@ def on_files(files, config):
     files.append(
         File.generated(
             config,
+            "install-studio.sh",
+            abs_src_path=str(ROOT / "scripts/install-studio.sh"),
+        )
+    )
+    files.append(
+        File.generated(
+            config,
             "_static/pineify-logo.svg",
             abs_src_path=str(ROOT / "docs/assets/pineify-logo.svg"),
         )

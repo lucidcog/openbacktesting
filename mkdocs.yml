@@ -93,7 +93,16 @@ nav:
       - Examples: examples.md
       - Scope and limitations: limitations.md
   - Studio:
-      - Install and use Studio: studio/index.md
+      - Overview: studio/index.md
+      - Install and launch: studio/installation.md
+      - Choose your workspace: studio/workspace.md
+      - Run your first strategy: studio/first-backtest.md
+      - Read charts and results: studio/results.md
+      - Edit code and parameters: studio/editing.md
+      - Inspect logs: studio/logs.md
+      - Compare parameters: studio/optimizer.md
+      - Save, share, and reopen: studio/sharing.md
+      - Troubleshooting: studio/troubleshooting.md
   - Guides:
       - Writing strategies: guides/author.md
       - Market data: guides/data.md

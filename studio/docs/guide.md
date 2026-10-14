@@ -10,15 +10,18 @@ The repository contains two independently built Python distributions.
 
 ## Installation and launch
 
-For this unreleased source version, first build the frontend as described in the
-[maintainer guide](development.md), then install the built distributions into the
-same Python 3.12–3.14 environment:
+On macOS, paste this command into Terminal:
 
 ```sh
-python -m pip install /path/to/openbacktesting-0.2.1-py3-none-any.whl
-python -m pip install /path/to/openbacktesting_studio-0.1.0-py3-none-any.whl
-openbacktesting-studio /path/to/strategy-workspace --no-open
+curl -fsSL https://docs.openbacktesting.com/install-studio.sh | bash
 ```
+
+The installer prepares Python and build tools privately, installs both packages, and
+opens Studio. No existing Python, Node, Git, or administrator setup is needed. Next time,
+double-click `~/Applications/OpenBacktesting Studio.command`, or run
+`~/.local/share/openbacktesting-studio/studio`. Repeat the install command to update;
+workspace history and edited examples are preserved. For manual installation, see the
+[maintainer guide](development.md).
 
 Open the printed loopback URL, including its one-time fragment token. Studio first
 asks you to choose a directory; the CLI path is only the initial location in the
@@ -36,7 +39,7 @@ Nothing terminates that other process. `--python /absolute/path/to/python` choos
 the strategy interpreter; install compatible core and Studio packages and the
 strategy's dependencies there first. Studio does not install or switch environments.
 
-End users need Python and a browser, not Node, npm, Electron or a CDN connection.
+The installer manages Python and build tools automatically. The running application needs only its installed Python environment and a browser.
 Both the wheel and sdist contain compiled assets, the local Monaco worker and chart
 notices. Installing from the sdist uses a Python build backend, not a frontend build.
 Once releases are published, `pip install openbacktesting-studio` can resolve its

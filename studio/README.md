@@ -4,6 +4,15 @@ An optional local web workspace for the OpenBacktesting Python framework.
 Core-only users do not install Studio or its web dependencies. This package supplies
 its own loopback host, prebuilt UI, chart library and editor worker.
 
+On macOS, install and open Studio with one command:
+
+```sh
+curl -fsSL https://docs.openbacktesting.com/install-studio.sh | bash
+```
+
+The installer prepares all dependencies automatically. Reopen Studio by double-clicking
+`~/Applications/OpenBacktesting Studio.command`.
+
 - [Illustrated getting started guide](https://docs.openbacktesting.com/studio/)
 - [Installation and workflow](docs/guide.md)
 - [Troubleshooting](docs/troubleshooting.md)

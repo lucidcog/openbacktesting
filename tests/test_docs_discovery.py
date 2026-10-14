@@ -92,6 +92,10 @@ def sitemap_urls(site):
     return [el.text for el in root.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
 
 
+def test_installer_is_published_without_modification(site):
+    assert (site / "install-studio.sh").read_bytes() == (ROOT / "scripts/install-studio.sh").read_bytes()
+
+
 def target_path(site, url, base=BASE):
     parts = urlsplit(url)
     assert parts.netloc == urlsplit(base).netloc

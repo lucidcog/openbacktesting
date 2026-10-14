@@ -42,3 +42,27 @@ See [the provenance guide](../vendor-metadata/README.md) before changing or upgr
 chart source. Upstream tests are retained. Source maps, frontend source and Node runtime
 are not needed by end users. Keep generated web assets out of Git while including them
 in distributions through the explicit Hatch artifact rule.
+
+## Installer maintenance
+
+The user installer is `scripts/install-studio.sh`, published unchanged at
+`/install-studio.sh` by the documentation build. It downloads the main branch archive,
+bootstraps a private Python 3.12 with [uv](https://docs.astral.sh/uv/reference/installer/),
+and verifies the Node 22 archive against the official SHA-256 list before building.
+Temporary Node and source files are removed after installation. Python environments
+stay in versioned directories so updates do not invalidate their interpreter paths.
+The active version changes only after installation and the CLI smoke check succeed;
+previous versions are retained for running processes. Example files are copied only
+when absent so user edits and workspace history survive updates. The installer does
+not modify shell profiles; the command symlink is available when `~/.local/bin` is on
+PATH, and the application shortcut works regardless of PATH.
+
+Test an unpublished checkout without launching the browser or creating a shortcut:
+
+```sh
+bash scripts/install-studio.sh --source "$PWD" --no-launch --no-shortcut \
+  --prefix /tmp/studio-install-check --bin-dir /tmp/studio-install-bin
+```
+
+Use `--help` for options. A fresh installation needs network access to GitHub, Astral,
+Node.js, npm, and Python package indexes. macOS is the supported installer platform.
