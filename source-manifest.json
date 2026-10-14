@@ -257,7 +257,7 @@
   "targets": [
     {
       "target": "src/openbacktesting/__init__.py",
-      "targetSha256": "39358912ae268f2852182557e7c5bd70211b65d4df530fcdab20062e06effa8e",
+      "targetSha256": "faf63094d41c0d83422b596fa1273a910c6377579aae2e5d9f7e95e4052430d6",
       "changes": [
         "Project-specific naming, local static checks, and formatting adaptations",
         "Removed the original project introduction and licensing notices; local version 0.1.0",
@@ -280,7 +280,8 @@
         "Portfolio refactor: migrated imports, independent observations and frozen facts, report examples or entry assertions; retained order-matching and ledger policies.",
         "Removed results/stats/_stats compatibility entries before release, using actual Portfolio module identities and pickle paths.",
         "Unified Core distribution and import identities, preserving computational semantics.",
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ],
       "sourceIds": [
         "openbacktesting/__init__.py"

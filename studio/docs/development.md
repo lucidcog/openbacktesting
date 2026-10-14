@@ -30,7 +30,7 @@ Set up the Python development environment with `uv venv studio/.venv`, then
 Launch with `studio/.venv/bin/python -m openbacktesting_studio.cli examples/strategies --no-open` and open the complete printed URL. Rebuild after frontend changes and reload the page; restart the host after Python host changes. Vite currently has no API proxy or integrated session setup, so `npm run dev` alone is not a complete Studio server.
 
 Run `studio/.venv/bin/python -m pytest studio/tests`, and preserve the existing core
-regression/integrity/language checks when changing shared scripts. The editable install resolves declared dependency ranges. The separate Studio lockfile selects a released core package, so it does not replace explicitly installing the local core checkout. Use the root locked environment for core baseline comparisons.
+regression/integrity/language checks when changing shared scripts. The editable install resolves declared dependency ranges. The separate Studio lockfile selects the local core checkout through `[tool.uv.sources]`; after building web assets, `uv sync --project studio --locked --extra test` installs both editable packages. Built distributions retain `openbacktesting>=0.2.1,<0.3` as their dependency, without a local path. Use the root locked environment for core baseline comparisons.
 
 The UI uses React/TypeScript, shadcn/ui (Radix), compact TradingView-inspired tokens,
 IBM Plex Sans/Mono, and the local Lightweight Charts build. Chart projection, form parsing,

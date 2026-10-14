@@ -34,7 +34,7 @@ The build compiles the vendored chart library and packages the interface and edi
 If you have the matching core and Studio wheels, install them into the same Python environment. This route needs **no Node.js or npm**:
 
 ```sh
-python -m pip install /path/to/openbacktesting-0.2.0-py3-none-any.whl /path/to/openbacktesting_studio-0.1.0-py3-none-any.whl
+python -m pip install /path/to/openbacktesting-0.2.1-py3-none-any.whl /path/to/openbacktesting_studio-0.1.0-py3-none-any.whl
 openbacktesting-studio /path/to/strategies
 ```
 

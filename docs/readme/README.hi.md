@@ -6,7 +6,7 @@
 
 हर कैंडल पर चलने वाली रणनीतियाँ लिखें, ऐतिहासिक बाज़ार डेटा पर उनका मूल्यांकन करें और ऑर्डर, ट्रेड, इक्विटी तथा जोखिम के आँकड़े जाँचें। OpenBacktesting एक स्वतंत्र Python पैकेज है, जिसमें इंडिकेटर, पैरामीटर ऑप्टिमाइज़ेशन, Portfolio रिपोर्ट और चार्ट के लिए डेटा एक्सपोर्ट शामिल हैं।
 
-**Python 3.12–3.14** · **संस्करण 0.2.0** · वितरण और इम्पोर्ट का नाम: `openbacktesting`
+**Python 3.12–3.14** · **संस्करण 0.2.1** · वितरण और इम्पोर्ट का नाम: `openbacktesting`
 
 [शुरुआत करें](#quick-start) · [मैनुअल](https://docs.openbacktesting.com/) · [उदाहरण](https://docs.openbacktesting.com/examples/) · [समस्या बताएँ](https://github.com/lucidcog/openbacktesting/issues)
 

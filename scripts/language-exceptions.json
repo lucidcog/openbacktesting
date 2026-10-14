@@ -138,7 +138,7 @@
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "**Python 3.12\u20133.14** \u00b7 **\u7248\u672c 0.2.0** \u00b7 \u5206\u53d1\u5305\u540d\u548c\u5bfc\u5165\u540d\uff1a`openbacktesting`",
+      "value": "**Python 3.12\u20133.14** \u00b7 **\u7248\u672c 0.2.1** \u00b7 \u5206\u53d1\u5305\u540d\u548c\u5bfc\u5165\u540d\uff1a`openbacktesting`",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },

@@ -11,7 +11,7 @@ license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.12,<3.15"
 dependencies = [
-    "openbacktesting>=0.2.0,<0.3",
+    "openbacktesting>=0.2.1,<0.3",
     "fastapi>=0.115,<1",
     "uvicorn>=0.34,<1",
     "pydantic>=2.10,<3",
@@ -43,3 +43,6 @@ line-length = 100
 
 [tool.hatch.build.hooks.custom]
 path = "hatch_build.py"
+
+[tool.uv.sources]
+openbacktesting = { path = "..", editable = true }

@@ -50,7 +50,7 @@ def test_pre_migration_values_masks_signatures(spec):
         "ta.macd": {"offset": 0, "asmode": False, "signal_indicators": False},
     }
     previous["fixed"] |= additions.get(spec.id, {})
-    previous.update(kind="indicator", validity="current-inputs", engine_version="0.2.0")
+    previous.update(kind="indicator", validity="current-inputs", engine_version="0.2.1")
     assert actual == previous
 
 

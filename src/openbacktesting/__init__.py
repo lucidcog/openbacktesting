@@ -2,7 +2,7 @@
 
 import sys as _sys
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 from . import colors, indicators, inputs, lib, runtime  # noqa: F401
 from .colors import Color as Color

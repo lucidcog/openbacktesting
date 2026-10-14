@@ -165,7 +165,7 @@ def write_artifact(tmp_path, package, kind, files):
     if kind == "wheel":
         path = tmp_path / "sample.whl"
         members = {"openbacktesting/" + name: b"" for name in package.RESOURCES}
-        members["openbacktesting-0.2.0.dist-info/METADATA"] = b"Name: openbacktesting\nVersion: 0.2.0\n"
+        members["openbacktesting-0.2.1.dist-info/METADATA"] = b"Name: openbacktesting\nVersion: 0.2.1\n"
         members.update(files)
         with zipfile.ZipFile(path, "w") as archive:
             for name, data in members.items():
@@ -184,7 +184,7 @@ def write_artifact(tmp_path, package, kind, files):
         members.update(files)
         with tarfile.open(path, "w:gz") as archive:
             for name, data in members.items():
-                info = tarfile.TarInfo("openbacktesting-0.2.0/" + name)
+                info = tarfile.TarInfo("openbacktesting-0.2.1/" + name)
                 info.size = len(data)
                 archive.addfile(info, io.BytesIO(data))
     return path
@@ -223,9 +223,9 @@ def test_sdist_artifact_uses_packaged_registry_and_checks_nested_escaped_copy(tm
 @pytest.mark.parametrize("kind", ["wheel", "sdist"])
 def test_artifact_readme_translation_exceptions_keep_headers_and_body_checked(tmp_path, kind):
     package = package_checker()
-    name = "openbacktesting-0.2.0.dist-info/METADATA" if kind == "wheel" else "PKG-INFO"
+    name = "openbacktesting-0.2.1.dist-info/METADATA" if kind == "wheel" else "PKG-INFO"
     approved = registry(rule(path="README.md"))
-    headers = b"Name: openbacktesting\nVersion: 0.2.0\nDescription-Content-Type: text/markdown"
+    headers = b"Name: openbacktesting\nVersion: 0.2.1\nDescription-Content-Type: text/markdown"
 
     def inspect(body, extra_header=b""):
         files = {name: headers + extra_header + b"\n\n" + body}

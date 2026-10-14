@@ -48,7 +48,7 @@ uv run --locked python scripts/check_package.py
 uv run --locked python scripts/generate_indicator_api.py --check
 uv run --locked python scripts/core_docs.py --check
 uv build --no-sources
-uv run --locked python scripts/check_package.py --artifact dist/openbacktesting-0.2.0-py3-none-any.whl --artifact dist/openbacktesting-0.2.0.tar.gz
+uv run --locked python scripts/check_package.py --artifact dist/openbacktesting-0.2.1-py3-none-any.whl --artifact dist/openbacktesting-0.2.1.tar.gz
 ```
 
 `uv.lock` fixes this repository's validation environment and is distributed with the sdist. Independent installations resolve dependencies from `pyproject.toml` and do not require the lockfile. After extracting the sdist, establish the environment with `uv sync --locked --extra test`, then run the same Python test commands. Historical baselines compare dependency-version fields exactly, so full regression requires the locked environment; identity differences from other dependency versions must not be treated as numerical regressions. Enable the complete slow ML examples explicitly with `OPENBACKTESTING_RUN_SLOW_EXAMPLES=1`; they do not run by default.
@@ -69,7 +69,7 @@ studio/.venv/bin/python -m openbacktesting_studio.cli examples/strategies --no-o
 
 Open the complete terminal URL, including the one-time token, in your browser. Select a workspace directory and use the [Studio walkthrough](studio/index.md) to run a sample strategy. The default port is 8765; use a different fixed `--port` when occupied. Ctrl+C stops the host. The commands above use a dedicated environment, so a later root `uv sync` cannot remove Studio's dependencies from it.
 
-Both packages are editable in this environment: changes to core or Studio Python code are read from the checkout. This command resolves the declared dependency ranges; it is not a replay of the root lockfile. Use the root locked environment for core baseline comparisons. The separate Studio lockfile resolves a released core dependency and does not itself select your local core edits.
+Both packages are editable in this environment: changes to core or Studio Python code are read from the checkout. This command resolves the declared dependency ranges; it is not a replay of the root lockfile. Use the root locked environment for core baseline comparisons. The separate Studio lockfile uses the local core checkout through `[tool.uv.sources]`; after building web assets, `uv sync --project studio --locked --extra test` installs both editable packages. This source override is for repository development only; wheel metadata retains the core version requirement. Install both built distributions together when testing an unpublished core release.
 
 ### Edit, rebuild, and inspect
 

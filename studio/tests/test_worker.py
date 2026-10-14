@@ -41,6 +41,27 @@ def test_probe_and_fresh_discovery(tmp_path):
 
 
 @pytest.mark.parametrize(
+    "core_version, compatible",
+    [("0.2.0", False), ("0.2.1", True), ("0.2.2", True), ("0.3.0", False)],
+)
+def test_probe_requires_core_serialization_fix(monkeypatch, core_version, compatible):
+    import json
+    import subprocess
+
+    from openbacktesting_studio import __version__
+
+    info = {
+        "protocolVersion": 1, "coreVersion": core_version,
+        "studioVersion": __version__, "pythonVersion": "3.12.0",
+    }
+    monkeypatch.setattr(
+        subprocess, "run",
+        lambda *args, **kwargs: subprocess.CompletedProcess(args, 0, json.dumps(info)),
+    )
+    assert probe(sys.executable)["compatible"] is compatible
+
+
+@pytest.mark.parametrize(
     "text", ["broken syntax ???", "import missing_studio_test_dependency", "value = 1"]
 )
 def test_discovery_errors_have_diagnostics(tmp_path, text):

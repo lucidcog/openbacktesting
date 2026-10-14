@@ -123,7 +123,7 @@ def probe(python):
             raise ValueError("Install a compatible openbacktesting-studio into this interpreter")
         info = json.loads(result.stdout)
         if info["protocolVersion"] != 1 or Version(info["coreVersion"]) not in SpecifierSet(
-            ">=0.2.0,<0.3"
+            ">=0.2.1,<0.3"
         ):
             raise ValueError("Worker protocol or framework version is incompatible")
         if info["studioVersion"] != version("openbacktesting-studio"):

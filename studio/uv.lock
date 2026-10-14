@@ -229,16 +229,34 @@ wheels = [
 
 [[package]]
 name = "openbacktesting"
-version = "0.2.0"
-source = { registry = "https://pypi.org/simple" }
+version = "0.2.1"
+source = { editable = "../" }
 dependencies = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "pandas-ta-classic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/44/80/a5ffa0cf83f7f8ba9c51e34fee375a3b91ca2cc933a523987ae783006f5b/openbacktesting-0.2.0.tar.gz", hash = "sha256:917ed8c33590fd5819e28c6537577a499c14790212fa2ecbee274ce296467fc6", size = 1066186, upload-time = "2026-10-13T08:02:24.641Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/dd/2a12d3ceb70322c2734f91c9d62cf1c915e36803c7dde10c12f670eab3ba/openbacktesting-0.2.0-py3-none-any.whl", hash = "sha256:7131281ebb8000bde99d3de1ff328360e483a242d56f106b746b822fd375dfbe", size = 441839, upload-time = "2026-10-13T08:02:22.57Z" },
+
+[package.metadata]
+requires-dist = [
+    { name = "ipywidgets", marker = "extra == 'test'", specifier = ">=8,<9" },
+    { name = "numpy", specifier = ">=2,<3" },
+    { name = "pandas", specifier = ">=2.2,<4" },
+    { name = "pandas-ta-classic", specifier = "==0.8.32" },
+    { name = "pytest", marker = "extra == 'test'", specifier = ">=8.4,<10" },
+    { name = "sambo", marker = "extra == 'optimize'", specifier = ">=1.25,<2" },
+    { name = "sambo", marker = "extra == 'test'", specifier = ">=1.25,<2" },
+    { name = "scikit-learn", marker = "extra == 'optimize'", specifier = ">=1.5,<2" },
+    { name = "scikit-learn", marker = "extra == 'test'", specifier = ">=1.5,<2" },
+    { name = "tqdm", marker = "extra == 'test'", specifier = ">=4.66,<5" },
+]
+provides-extras = ["optimize", "test"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruff", specifier = ">=0.13,<1" }]
+docs = [
+    { name = "mkdocs", specifier = ">=1.6,<2" },
+    { name = "mkdocs-material", specifier = ">=9.7,<10" },
 ]
 
 [[package]]
@@ -265,7 +283,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115,<1" },
     { name = "httpx", marker = "extra == 'test'", specifier = ">=0.28,<1" },
     { name = "jsonschema", specifier = ">=4.23,<5" },
-    { name = "openbacktesting", specifier = ">=0.2.0,<0.3" },
+    { name = "openbacktesting", editable = "../" },
     { name = "packaging", specifier = ">=24,<27" },
     { name = "pydantic", specifier = ">=2.10,<3" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8.4,<10" },
