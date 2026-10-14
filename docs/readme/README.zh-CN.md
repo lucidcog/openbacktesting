@@ -6,7 +6,7 @@
 
 编写逐根 K 线执行的策略，使用历史行情进行回测，并检查订单、交易、权益及风险统计。OpenBacktesting 是独立的 Python 包，提供指标、参数优化、Portfolio 报告和绘图数据导出。
 
-**Python 3.12–3.14** · **版本 0.2.0** · 分发包名和导入名：`openbacktesting`
+**Python 3.12–3.14** · **版本 0.2.1** · 分发包名和导入名：`openbacktesting`
 
 [快速开始](#quick-start) · [使用手册](https://docs.openbacktesting.com/) · [示例](https://docs.openbacktesting.com/examples/) · [反馈问题](https://github.com/lucidcog/openbacktesting/issues)
 

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "baseRevision": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Baserevision",
+      "type": "string"
+    },
+    "content": {
+      "title": "Content",
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "baseRevision",
+    "content"
+  ],
+  "title": "FileWrite",
+  "type": "object"
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import io
 import json
 import re
@@ -16,6 +17,80 @@ HAN = re.compile(
     r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff"
     r"\U00020000-\U0002fa1f\U00030000-\U000323af]"
 )
+
+
+def exact_path(value):
+    return (
+        isinstance(value, str)
+        and bool(value)
+        and not Path(value).is_absolute()
+        and ".." not in Path(value).parts
+        and not any(character in value for character in "*?[]")
+    )
+
+
+def file_exemptions(files, registry, issues, *, subset=False):
+    """Approve exact document bytes and recorded upstream originals, never directories."""
+    approved = set()
+    rules = registry.get("documents", [])
+    if not isinstance(rules, list):
+        issues.append("Invalid document exemptions: expected a list")
+        return approved
+    rules = list(rules)
+    manifests = registry.get("sourceManifests", [])
+    if not isinstance(manifests, list):
+        issues.append("Invalid source manifests: expected a list")
+        return approved
+    for name in manifests:
+        if not exact_path(name):
+            issues.append("Invalid source manifest path")
+            continue
+        if name not in files:
+            if not subset:
+                issues.append(f"Missing source manifest: {name}")
+            continue
+        try:
+            manifest = json.loads(files[name])
+            root = manifest["root"]
+            if not exact_path(root) or not re.fullmatch(r"[0-9a-f]{40}", manifest["commit"]):
+                raise ValueError("invalid root or upstream commit")
+            for row in manifest["files"]:
+                if not exact_path(row["path"]):
+                    raise ValueError("invalid upstream file path")
+                # Only byte-identical originals qualify. Modified source is checked normally.
+                rules.append({
+                    "path": f"{root}/{row['path']}",
+                    "sha256": row["sha256"],
+                    "reason": f"Original third-party source recorded in {name}",
+                    "upstream": True,
+                })
+        except (ValueError, KeyError, TypeError) as error:
+            issues.append(f"Invalid source manifest {name}: {error}")
+    seen = set()
+    for rule in rules:
+        if (
+            not isinstance(rule, dict)
+            or not exact_path(rule.get("path"))
+            or not isinstance(rule.get("sha256"), str)
+            or not re.fullmatch(r"[0-9a-f]{64}", rule["sha256"])
+            or not isinstance(rule.get("reason"), str)
+            or not rule["reason"].strip()
+            or HAN.search(rule["reason"])
+        ):
+            issues.append("Invalid file exemption: require exact path, SHA-256, and English rationale")
+            continue
+        name = rule["path"]
+        if name in seen:
+            issues.append(f"Duplicate file exemption: {name}")
+        seen.add(name)
+        if name not in files:
+            if not subset:
+                issues.append(f"Unused file exemption: {name}")
+        elif hashlib.sha256(files[name]).hexdigest() == rule["sha256"]:
+            approved.add(name)
+        elif not rule.get("upstream"):
+            issues.append(f"File exemption digest mismatch: {name}")
+    return approved
 
 
 def python_scopes(text):
@@ -134,6 +209,7 @@ def check_files(files, registry_data=None, *, subset=False):
             raise TypeError("exceptions must be a list")
     except (ValueError, TypeError, KeyError) as error:
         return [f"Invalid language exception registry: {error}"]
+    approved = file_exemptions(files, registry, issues, subset=subset)
     expected = {}
     for rule in rules:
         if (
@@ -166,6 +242,8 @@ def check_files(files, registry_data=None, *, subset=False):
         expected[key] = rule["count"]
     seen = Counter()
     for name, data in files.items():
+        if name in approved:
+            continue
         for value, location, selector in text_units(name, data):
             if not HAN.search(value):
                 continue

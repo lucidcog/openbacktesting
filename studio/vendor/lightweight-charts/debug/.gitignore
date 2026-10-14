@@ -1,0 +1,12 @@
+*
+
+!default/
+!.gitignore
+!.npmrc
+!README.md
+!default/.global.json
+!default/.local.json
+!default/index.html
+!default/index.ts
+!default/tsconfig.json
+!package.json

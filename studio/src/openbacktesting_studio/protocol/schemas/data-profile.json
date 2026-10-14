@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "InstrumentConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "minLength": 1,
+          "title": "Symbol",
+          "type": "string"
+        },
+        "quantity_step": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "title": "Quantity Step",
+          "type": "number"
+        },
+        "min_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Quantity"
+        },
+        "price_tick": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Tick"
+        },
+        "min_notional": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Min Notional",
+          "type": "number"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        }
+      },
+      "required": [
+        "symbol"
+      ],
+      "title": "InstrumentConfig",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "TimeframeConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": {
+          "enum": [
+            "second",
+            "minute",
+            "day",
+            "week",
+            "month"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "multiplier": {
+          "exclusiveMinimum": 0,
+          "title": "Multiplier",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "unit",
+        "multiplier"
+      ],
+      "title": "TimeframeConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "sample",
+        "csv",
+        "loader"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "sample": {
+      "anyOf": [
+        {
+          "enum": [
+            "GOOG",
+            "BTCUSD",
+            "EURUSD"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sample"
+    },
+    "path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Path"
+    },
+    "function": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Function"
+    },
+    "columns": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Columns",
+      "type": "object"
+    },
+    "timeColumn": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Timecolumn"
+    },
+    "timeUnit": {
+      "anyOf": [
+        {
+          "enum": [
+            "s",
+            "ms",
+            "us",
+            "ns"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Timeunit"
+    },
+    "sourceTimezone": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sourcetimezone"
+    },
+    "timezone": {
+      "title": "Timezone",
+      "type": "string"
+    },
+    "timeframe": {
+      "$ref": "#/$defs/TimeframeConfig"
+    },
+    "instrument": {
+      "$ref": "#/$defs/InstrumentConfig"
+    },
+    "start": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Start"
+    },
+    "end": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "End"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "resources": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Resources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "kind",
+    "timezone",
+    "timeframe",
+    "instrument"
+  ],
+  "title": "DataProfile",
+  "type": "object"
+}

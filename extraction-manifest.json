@@ -16,9 +16,10 @@
       "source": "python/core/src/openbacktesting/__init__.py",
       "sourceSha256": "6144e160063f3020caa237a2c8c8316efa0dc7b2cfd3a6be58bce8b8c5552025",
       "target": "src/openbacktesting/__init__.py",
-      "targetSha256": "39358912ae268f2852182557e7c5bd70211b65d4df530fcdab20062e06effa8e",
+      "targetSha256": "faf63094d41c0d83422b596fa1273a910c6377579aae2e5d9f7e95e4052430d6",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -2833,9 +2834,10 @@
       "source": "python/core/src/openbacktesting/portfolio/snapshot.py",
       "sourceSha256": "5d0e15c05f7a7b63127591757edfe2c9905cc3e4440ce13677fb1c7e1f132a27",
       "target": "src/openbacktesting/portfolio/snapshot.py",
-      "targetSha256": "bfb2ee0c67f51b5d9eb6dd31623887cbcf73e654aab8365f1bea986ff6705a37",
+      "targetSha256": "d8d65dcce56bec24ce010c573678127eb3358f0e47d9d94b7ae18e6a32f27b22",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Normalize computed Portfolio reports to plain JSON values for Studio and persisted optimizer results."
       ]
     },
     {
@@ -3373,9 +3375,10 @@
       "source": "python/core/tests/test_indicator_modules.py",
       "sourceSha256": "c28545779d1b99c3e5535e8f065d8b5e9d32fba15618d220502d03a5bb2e0a17",
       "target": "tests/test_indicator_modules.py",
-      "targetSha256": "b6090cbfb01b0d2b312303fbc9ca99fdf5ba0e83e30c78368cb7de11cedfe9c5",
+      "targetSha256": "0cf92d0dc9e584b85e088e774a48b1a9117776170bd111a7952eff2ce9161d0a",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -3481,9 +3484,10 @@
       "source": "python/core/tests/test_optimizer.py",
       "sourceSha256": "0d370ede668b62bb11dc3d3bbc68619f076078a1eb289487b0dbad292aa89c5b",
       "target": "tests/test_optimizer.py",
-      "targetSha256": "005d17252704963fa720e2803ac9259b0d4e72f9c01548d151ba86a3ff4df1d0",
+      "targetSha256": "9a85101015548d1287a82d0fb0b206e5f3b8b6e1a1de3b5bcb2119a969665aba",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Cover strict JSON persistence of real EMA strategy reports with NumPy-derived outlier bounds."
       ]
     },
     {
@@ -3508,9 +3512,10 @@
       "source": "python/core/tests/test_package_identity.py",
       "sourceSha256": "67b1f00d59d9517628207c41fbe5f4f97ae9ffecb4b38da4c028a063cee59380",
       "target": "tests/test_package_identity.py",
-      "targetSha256": "4a440d43baad38c2184ef8d86f56c275d56bd4b6370e62f44fc46d8e7e64f047",
+      "targetSha256": "a884ac5674877e7b3d4be931efb343425154ef01bda93747aeed3fc9181233b8",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -3920,10 +3925,12 @@
       "source": "python/core/pyproject.toml",
       "sourceSha256": "650330f2216b1b8002eb96cab0b8e1357f1f2e6c0b5a71b7587807e5180c8546",
       "target": "pyproject.toml",
-      "targetSha256": "4503ac07de9b447d805dabb2c2a850acef0ce67d707bb88d9372f93f5d10304a",
+      "targetSha256": "a4c17cf06b4ec08b40cda09f699ecd9a71e5505cd02803a0d5e76c6d94905494",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
-        "Added the Apache-2.0 project license declaration and included the license in distribution artifacts."
+        "Added the Apache-2.0 project license declaration and included the license in distribution artifacts.",
+        "Include the contributor guide in the core source distribution.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -3948,9 +3955,11 @@
       "source": "python/core/source-manifest.json",
       "sourceSha256": "e04f0f9f965de84e29de50595568e287c7ede358dea0da781dbd3620d1873cb6",
       "target": "source-manifest.json",
-      "targetSha256": "1708f872f147c7090393c1162deba8308e4b68ca2abbbbfa742cf91492f02516",
+      "targetSha256": "832c18d370c17d401c25116d9c5da39375bba9d54b43a3c7616e17e39bff0ab9",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Refresh the Portfolio report target identity after strict JSON normalization; original source identities are retained.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -3987,9 +3996,10 @@
       "source": "docs/core/build-info.md",
       "sourceSha256": "0168afdd6264ddbf5926becd3f8c15908ea710a67a2b53809a746b08cb7c5c28",
       "target": "docs/core/build-info.md",
-      "targetSha256": "418968300e4d9508bfc72f78e6c76e6dd27b765a918b4292006f5cc9cd1e32e9",
+      "targetSha256": "13163ef7cf5e435bbfafa549e8888efaf0cb103b2a7bc9b5088abb5601e2840b",
       "changes": [
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -4001,10 +4011,12 @@
       "source": "docs/core/development.md",
       "sourceSha256": "258e4fc261fc7875e434aded5bcda6be0eb0d269c935b5bf265b3455aef1ef4c",
       "target": "docs/core/development.md",
-      "targetSha256": "556b918a447cf6405580875528e0a8b28ba512094e2b1286a99ea6aae056c205",
+      "targetSha256": "4de2445f74d777038c52c68339a840df5591a7d20d9f84e41ca6ae59fc459603",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
-        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged."
+        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",
+        "Document independent core and Studio development environments, builds, and verification commands.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     },
     {
@@ -4111,10 +4123,12 @@
       "source": "docs/core/index.md",
       "sourceSha256": "0ca3b08cd946c8fbff8fda92d14653de255261b092ea69fec5e25ce8762ed15a",
       "target": "docs/core/index.md",
-      "targetSha256": "7cbbfcdfcf34bc9219e14b048b006242cded202fbd4c5e235a1377335e1e31e1",
+      "targetSha256": "09ff5d88d53d658845f837949895ae168562a33753e838cc4511c093626be812",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
-        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged."
+        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",
+        "Refresh target identity for previously committed documentation banner; original source digest retained.",
+        "Link Studio, local development, and contribution guides."
       ]
     },
     {
@@ -4130,10 +4144,11 @@
       "source": "docs/core/limitations.md",
       "sourceSha256": "6a8cc05f97f7dc906938f7a8eae183ef199ccdb1085beee0c897a99c8be2c369",
       "target": "docs/core/limitations.md",
-      "targetSha256": "3fda02eb41ec3deeeefd9298391ba1dbfd1c9ba99bf24d52843e157a7a1c63b7",
+      "targetSha256": "7925bc3d98931067f3dda2b8eebe5c4dcb8f73032a3cb3fe4b6546eee3e2e575",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
-        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged."
+        "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",
+        "Clarify that the optional Studio provides browser rendering independently of the core package."
       ]
     },
     {
@@ -6783,14 +6798,16 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "e21bcc84589e8b6fef438f6083bcd98af9cbd569b72add0e1c9f32b29ecdd9ef",
+      "targetSha256": "32ea191084bf3a16de791e1f123335a4503559e3c87041ac3b94d673f324b433",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
         "Reorganized the English README, added multilingual navigation and Pineify paid sponsorship, and linked detailed reference material.",
         "Added Simplified Chinese as the second README language and updated translation coverage.",
         "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",
-        "Linked documentation entry points and chapter references to the published documentation site."
+        "Linked documentation entry points and chapter references to the published documentation site.",
+        "Document optional Studio setup, local development, and contribution workflows.",
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
       ]
     }
   ]

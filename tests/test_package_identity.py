@@ -8,7 +8,7 @@ from openbacktesting import Backtest, Strategy
 
 
 def test_new_identity_resources_and_pickle_without_old_import_alias():
-    assert version("openbacktesting") == "0.2.0"
+    assert version("openbacktesting") == "0.2.1"
     roots = {
         str(path).split("/", 1)[0]
         for path in distribution("openbacktesting").files

@@ -117,7 +117,7 @@ def main():
     package_path = Path(api.__file__).resolve()
     assert package_path.is_relative_to(Path(sys.prefix).resolve()), package_path
     assert "site-packages" in package_path.parts
-    assert version("openbacktesting") == api.__version__ == "0.2.0"
+    assert version("openbacktesting") == api.__version__ == "0.2.1"
     roots = {
         str(path).split("/", 1)[0]
         for path in distribution("openbacktesting").files

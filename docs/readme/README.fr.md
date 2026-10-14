@@ -6,7 +6,7 @@
 
 Écrivez des stratégies exécutées bougie par bougie, évaluez-les sur des données historiques de marché et examinez les ordres, les transactions, les capitaux propres et les statistiques de risque. OpenBacktesting est un paquet Python autonome avec indicateurs, optimisation des paramètres, rapports Portfolio et export de données pour les graphiques.
 
-**Python 3.12–3.14** · **Version 0.2.0** · Distribution et import : `openbacktesting`
+**Python 3.12–3.14** · **Version 0.2.1** · Distribution et import : `openbacktesting`
 
 [Démarrage rapide](#quick-start) · [Manuel](https://docs.openbacktesting.com/) · [Exemples](https://docs.openbacktesting.com/examples/) · [Signaler un problème](https://github.com/lucidcog/openbacktesting/issues)
 

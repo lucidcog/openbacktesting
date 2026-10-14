@@ -92,6 +92,8 @@ nav:
       - Your first backtest: quickstart.md
       - Examples: examples.md
       - Scope and limitations: limitations.md
+  - Studio:
+      - Install and use Studio: studio/index.md
   - Guides:
       - Writing strategies: guides/author.md
       - Market data: guides/data.md
@@ -119,7 +121,8 @@ nav:
   - Indicators:
       - Catalog: reference/indicators/index.md
   - Maintenance:
-      - Development: development.md
+      - Local development: development.md
+      - Contributing: contributing.md
       - Deploy to Cloudflare Pages: deployment.md
       - Build information: build-info.md
       - Extraction verification: extraction-verification.md

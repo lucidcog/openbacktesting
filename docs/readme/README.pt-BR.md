@@ -6,7 +6,7 @@
 
 Escreva estratégias executadas candle a candle, avalie-as com dados históricos de mercado e examine ordens, operações, patrimônio e estatísticas de risco. O OpenBacktesting é um pacote Python independente com indicadores, otimização de parâmetros, relatórios Portfolio e exportação de dados para gráficos.
 
-**Python 3.12–3.14** · **Versão 0.2.0** · Distribuição e importação: `openbacktesting`
+**Python 3.12–3.14** · **Versão 0.2.1** · Distribuição e importação: `openbacktesting`
 
 [Início rápido](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Exemplos](https://docs.openbacktesting.com/examples/) · [Relatar um problema](https://github.com/lucidcog/openbacktesting/issues)
 

@@ -3,390 +3,507 @@
   "exceptions": [
     {
       "path": "tests/test_strategy_logs.py",
-      "value": "中文\n第二行",
+      "value": "\u4e2d\u6587\n\u7b2c\u4e8c\u884c",
       "count": 2,
       "reason": "Multilingual log text must round-trip with its newline intact.",
       "selector": "test_levels_locations_full_history_and_copies"
     },
     {
       "path": "tests/test_inputs.py",
-      "value": "快速",
+      "value": "\u5feb\u901f",
       "count": 1,
       "reason": "Localized enum value used to verify declaration and serialization.",
       "selector": "Mode"
     },
     {
       "path": "tests/test_inputs.py",
-      "value": "快速",
+      "value": "\u5feb\u901f",
       "count": 1,
       "reason": "Localized enum value used to verify declaration and serialization.",
       "selector": "Other"
     },
     {
       "path": "tests/test_inputs.py",
-      "value": "慢速",
+      "value": "\u6162\u901f",
       "count": 1,
       "reason": "Localized enum value used to verify declaration and serialization.",
       "selector": "Mode"
     },
     {
       "path": "tests/test_order_api.py",
-      "value": "突破",
+      "value": "\u7a81\u7834",
       "count": 2,
       "reason": "Unicode order tag retained to verify immutable copies and serialization.",
       "selector": "test_request_is_frozen_detached_and_pickle_safe"
     },
     {
       "path": "tests/test_order_api.py",
-      "value": "突破",
+      "value": "\u7a81\u7834",
       "count": 2,
       "reason": "Unicode order tag retained to verify immutable copies and serialization.",
       "selector": "test_request_reuse_in_init_and_independent_runs"
     },
     {
       "path": "openspec/changes/archive/2026-10-12-standardize-repository-english/specs/extraction-parity/spec.md",
-      "value": "- FROM: `### Requirement: 保持既有计算语义`",
+      "value": "- FROM: `### Requirement: \u4fdd\u6301\u65e2\u6709\u8ba1\u7b97\u8bed\u4e49`",
       "count": 1,
       "reason": "Historical requirement identifier retained for exact OpenSpec delta matching."
     },
     {
       "path": "openspec/changes/archive/2026-10-12-standardize-repository-english/specs/extraction-parity/spec.md",
-      "value": "- FROM: `### Requirement: 测试和示例独立运行`",
+      "value": "- FROM: `### Requirement: \u6d4b\u8bd5\u548c\u793a\u4f8b\u72ec\u7acb\u8fd0\u884c`",
       "count": 1,
       "reason": "Historical requirement identifier retained for exact OpenSpec delta matching."
     },
     {
       "path": "tests/test_inputs.py",
-      "value": "周期",
+      "value": "\u5468\u671f",
       "count": 1,
       "selector": "test_schema_hash_and_renaming",
       "reason": "Historical localized-title schema fingerprint remains compatibility evidence alongside the English-title fingerprint."
     },
     {
       "path": "tests/test_modularization.py",
-      "value": "旧指标",
+      "value": "\u65e7\u6307\u6807",
       "count": 1,
       "selector": "test_pre_migration_objects_and_results",
       "reason": "The unchanged trusted historical pickle preserves its localized indicator name."
     },
     {
       "path": "tests/test_subpackages.py",
-      "value": "周期",
+      "value": "\u5468\u671f",
       "count": 3,
       "selector": "test_old_definitions_keep_signatures_metadata_and_pickle",
       "reason": "The unchanged trusted historical pickle preserves the input title and resolved snapshot keys."
     },
     {
       "path": "README.md",
-      "value": "**English** · [简体中文](docs/readme/README.zh-CN.md) · [Español](docs/readme/README.es.md) · [Português (Brasil)](docs/readme/README.pt-BR.md) · [Français](docs/readme/README.fr.md) · [Deutsch](docs/readme/README.de.md) · [Italiano](docs/readme/README.it.md) · [हिन्दी](docs/readme/README.hi.md)",
+      "value": "**English** \u00b7 [\u7b80\u4f53\u4e2d\u6587](docs/readme/README.zh-CN.md) \u00b7 [Espa\u00f1ol](docs/readme/README.es.md) \u00b7 [Portugu\u00eas (Brasil)](docs/readme/README.pt-BR.md) \u00b7 [Fran\u00e7ais](docs/readme/README.fr.md) \u00b7 [Deutsch](docs/readme/README.de.md) \u00b7 [Italiano](docs/readme/README.it.md) \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](docs/readme/README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.de.md",
-      "value": "[English](../../README.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · **Deutsch** · [Italiano](README.it.md) · [हिन्दी](README.hi.md)",
+      "value": "[English](../../README.md) \u00b7 [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md) \u00b7 [Espa\u00f1ol](README.es.md) \u00b7 [Portugu\u00eas (Brasil)](README.pt-BR.md) \u00b7 [Fran\u00e7ais](README.fr.md) \u00b7 **Deutsch** \u00b7 [Italiano](README.it.md) \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.es.md",
-      "value": "[English](../../README.md) · [简体中文](README.zh-CN.md) · **Español** · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · [हिन्दी](README.hi.md)",
+      "value": "[English](../../README.md) \u00b7 [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md) \u00b7 **Espa\u00f1ol** \u00b7 [Portugu\u00eas (Brasil)](README.pt-BR.md) \u00b7 [Fran\u00e7ais](README.fr.md) \u00b7 [Deutsch](README.de.md) \u00b7 [Italiano](README.it.md) \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.fr.md",
-      "value": "[English](../../README.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · **Français** · [Deutsch](README.de.md) · [Italiano](README.it.md) · [हिन्दी](README.hi.md)",
+      "value": "[English](../../README.md) \u00b7 [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md) \u00b7 [Espa\u00f1ol](README.es.md) \u00b7 [Portugu\u00eas (Brasil)](README.pt-BR.md) \u00b7 **Fran\u00e7ais** \u00b7 [Deutsch](README.de.md) \u00b7 [Italiano](README.it.md) \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.hi.md",
-      "value": "[English](../../README.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · **हिन्दी**",
+      "value": "[English](../../README.md) \u00b7 [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md) \u00b7 [Espa\u00f1ol](README.es.md) \u00b7 [Portugu\u00eas (Brasil)](README.pt-BR.md) \u00b7 [Fran\u00e7ais](README.fr.md) \u00b7 [Deutsch](README.de.md) \u00b7 [Italiano](README.it.md) \u00b7 **\u0939\u093f\u0928\u094d\u0926\u0940**",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.it.md",
-      "value": "[English](../../README.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · **Italiano** · [हिन्दी](README.hi.md)",
+      "value": "[English](../../README.md) \u00b7 [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md) \u00b7 [Espa\u00f1ol](README.es.md) \u00b7 [Portugu\u00eas (Brasil)](README.pt-BR.md) \u00b7 [Fran\u00e7ais](README.fr.md) \u00b7 [Deutsch](README.de.md) \u00b7 **Italiano** \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.pt-BR.md",
-      "value": "[English](../../README.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · **Português (Brasil)** · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · [हिन्दी](README.hi.md)",
+      "value": "[English](../../README.md) \u00b7 [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md) \u00b7 [Espa\u00f1ol](README.es.md) \u00b7 **Portugu\u00eas (Brasil)** \u00b7 [Fran\u00e7ais](README.fr.md) \u00b7 [Deutsch](README.de.md) \u00b7 [Italiano](README.it.md) \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "**Python 历史回测：从策略规则到可检查的回测结果。**",
+      "value": "**Python \u5386\u53f2\u56de\u6d4b\uff1a\u4ece\u7b56\u7565\u89c4\u5219\u5230\u53ef\u68c0\u67e5\u7684\u56de\u6d4b\u7ed3\u679c\u3002**",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "[English](../../README.md) · **简体中文** · [Español](README.es.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · [हिन्दी](README.hi.md)",
+      "value": "[English](../../README.md) \u00b7 **\u7b80\u4f53\u4e2d\u6587** \u00b7 [Espa\u00f1ol](README.es.md) \u00b7 [Portugu\u00eas (Brasil)](README.pt-BR.md) \u00b7 [Fran\u00e7ais](README.fr.md) \u00b7 [Deutsch](README.de.md) \u00b7 [Italiano](README.it.md) \u00b7 [\u0939\u093f\u0928\u094d\u0926\u0940](README.hi.md)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "编写逐根 K 线执行的策略，使用历史行情进行回测，并检查订单、交易、权益及风险统计。OpenBacktesting 是独立的 Python 包，提供指标、参数优化、Portfolio 报告和绘图数据导出。",
+      "value": "\u7f16\u5199\u9010\u6839 K \u7ebf\u6267\u884c\u7684\u7b56\u7565\uff0c\u4f7f\u7528\u5386\u53f2\u884c\u60c5\u8fdb\u884c\u56de\u6d4b\uff0c\u5e76\u68c0\u67e5\u8ba2\u5355\u3001\u4ea4\u6613\u3001\u6743\u76ca\u53ca\u98ce\u9669\u7edf\u8ba1\u3002OpenBacktesting \u662f\u72ec\u7acb\u7684 Python \u5305\uff0c\u63d0\u4f9b\u6307\u6807\u3001\u53c2\u6570\u4f18\u5316\u3001Portfolio \u62a5\u544a\u548c\u7ed8\u56fe\u6570\u636e\u5bfc\u51fa\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "**Python 3.12–3.14** · **版本 0.2.0** · 分发包名和导入名：`openbacktesting`",
+      "value": "**Python 3.12\u20133.14** \u00b7 **\u7248\u672c 0.2.1** \u00b7 \u5206\u53d1\u5305\u540d\u548c\u5bfc\u5165\u540d\uff1a`openbacktesting`",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "[快速开始](#quick-start) · [使用手册](https://docs.openbacktesting.com/) · [示例](https://docs.openbacktesting.com/examples/) · [反馈问题](https://github.com/lucidcog/openbacktesting/issues)",
+      "value": "[\u5feb\u901f\u5f00\u59cb](#quick-start) \u00b7 [\u4f7f\u7528\u624b\u518c](https://docs.openbacktesting.com/) \u00b7 [\u793a\u4f8b](https://docs.openbacktesting.com/examples/) \u00b7 [\u53cd\u9988\u95ee\u9898](https://github.com/lucidcog/openbacktesting/issues)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 顶级赞助商 — Pineify",
+      "value": "## \u9876\u7ea7\u8d5e\u52a9\u5546 \u2014 Pineify",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "**[Pineify](https://pineify.app) 是 OpenBacktesting 的顶级付费赞助商。** 其资金支持用于资助本项目。",
+      "value": "**[Pineify](https://pineify.app) \u662f OpenBacktesting \u7684\u9876\u7ea7\u4ed8\u8d39\u8d5e\u52a9\u5546\u3002** \u5176\u8d44\u91d1\u652f\u6301\u7528\u4e8e\u8d44\u52a9\u672c\u9879\u76ee\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "Pineify 是一套 AI 交易工具集，支持为多个平台创建指标与策略，集成了 Pine Script AI、Finance Agent、AI 选股、市场筛选、图表分析和 MCP 工具。[了解 Pineify →](https://pineify.app)",
+      "value": "Pineify \u662f\u4e00\u5957 AI \u4ea4\u6613\u5de5\u5177\u96c6\uff0c\u652f\u6301\u4e3a\u591a\u4e2a\u5e73\u53f0\u521b\u5efa\u6307\u6807\u4e0e\u7b56\u7565\uff0c\u96c6\u6210\u4e86 Pine Script AI\u3001Finance Agent\u3001AI \u9009\u80a1\u3001\u5e02\u573a\u7b5b\u9009\u3001\u56fe\u8868\u5206\u6790\u548c MCP \u5de5\u5177\u3002[\u4e86\u89e3 Pineify \u2192](https://pineify.app)",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 主要功能",
+      "value": "## \u4e3b\u8981\u529f\u80fd",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- **编写策略**：使用逐根 K 线执行的生命周期、带类型的输入、内置指标和可组合的辅助函数。",
+      "value": "- **\u7f16\u5199\u7b56\u7565**\uff1a\u4f7f\u7528\u9010\u6839 K \u7ebf\u6267\u884c\u7684\u751f\u547d\u5468\u671f\u3001\u5e26\u7c7b\u578b\u7684\u8f93\u5165\u3001\u5185\u7f6e\u6307\u6807\u548c\u53ef\u7ec4\u5408\u7684\u8f85\u52a9\u51fd\u6570\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- **检查执行过程**：查看订单、成交、仓位规模、费用、已平仓交易和未平仓批次。",
+      "value": "- **\u68c0\u67e5\u6267\u884c\u8fc7\u7a0b**\uff1a\u67e5\u770b\u8ba2\u5355\u3001\u6210\u4ea4\u3001\u4ed3\u4f4d\u89c4\u6a21\u3001\u8d39\u7528\u3001\u5df2\u5e73\u4ed3\u4ea4\u6613\u548c\u672a\u5e73\u4ed3\u6279\u6b21\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- **分析结果**：读取 pandas 统计数据、权益曲线和每次运行的不可变 Portfolio 报告。",
+      "value": "- **\u5206\u6790\u7ed3\u679c**\uff1a\u8bfb\u53d6 pandas \u7edf\u8ba1\u6570\u636e\u3001\u6743\u76ca\u66f2\u7ebf\u548c\u6bcf\u6b21\u8fd0\u884c\u7684\u4e0d\u53ef\u53d8 Portfolio \u62a5\u544a\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- **比较参数**：运行网格搜索或可选的 SAMBO 优化，保存实验结果，并为自己的渲染器导出绘图数据。",
+      "value": "- **\u6bd4\u8f83\u53c2\u6570**\uff1a\u8fd0\u884c\u7f51\u683c\u641c\u7d22\u6216\u53ef\u9009\u7684 SAMBO \u4f18\u5316\uff0c\u4fdd\u5b58\u5b9e\u9a8c\u7ed3\u679c\uff0c\u5e76\u4e3a\u81ea\u5df1\u7684\u6e32\u67d3\u5668\u5bfc\u51fa\u7ed8\u56fe\u6570\u636e\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 快速开始",
+      "value": "## \u5feb\u901f\u5f00\u59cb",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，使用 Python `>=3.12,<3.15`，在终端执行：",
+      "value": "\u5b89\u88c5 [uv](https://docs.astral.sh/uv/getting-started/installation/)\uff0c\u4f7f\u7528 Python `>=3.12,<3.15`\uff0c\u5728\u7ec8\u7aef\u6267\u884c\uff1a",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "示例使用包内附带的 GOOG 历史数据，无需下载行情。输出包含收益率、交易次数、最大回撤及结果表格。详细步骤见[第一次回测](https://docs.openbacktesting.com/quickstart/)。",
+      "value": "\u793a\u4f8b\u4f7f\u7528\u5305\u5185\u9644\u5e26\u7684 GOOG \u5386\u53f2\u6570\u636e\uff0c\u65e0\u9700\u4e0b\u8f7d\u884c\u60c5\u3002\u8f93\u51fa\u5305\u542b\u6536\u76ca\u7387\u3001\u4ea4\u6613\u6b21\u6570\u3001\u6700\u5927\u56de\u64a4\u53ca\u7ed3\u679c\u8868\u683c\u3002\u8be6\u7ec6\u6b65\u9aa4\u89c1[\u7b2c\u4e00\u6b21\u56de\u6d4b](https://docs.openbacktesting.com/quickstart/)\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "也可以将已检出的源码安装到现有 Python 环境：",
+      "value": "\u4e5f\u53ef\u4ee5\u5c06\u5df2\u68c0\u51fa\u7684\u6e90\u7801\u5b89\u88c5\u5230\u73b0\u6709 Python \u73af\u5883\uff1a",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "基础依赖为 NumPy、pandas 和 `pandas-ta-classic==0.8.32`。使用 SAMBO 优化时，执行 `python -m pip install '.[optimize]'` 或 `uv sync --locked --extra optimize`。以上为源码安装方式，不假定项目已发布到 PyPI。[构建与分发说明](https://docs.openbacktesting.com/development/)。",
+      "value": "\u57fa\u7840\u4f9d\u8d56\u4e3a NumPy\u3001pandas \u548c `pandas-ta-classic==0.8.32`\u3002\u4f7f\u7528 SAMBO \u4f18\u5316\u65f6\uff0c\u6267\u884c `python -m pip install '.[optimize]'` \u6216 `uv sync --locked --extra optimize`\u3002\u4ee5\u4e0a\u4e3a\u6e90\u7801\u5b89\u88c5\u65b9\u5f0f\uff0c\u4e0d\u5047\u5b9a\u9879\u76ee\u5df2\u53d1\u5e03\u5230 PyPI\u3002[\u6784\u5efa\u4e0e\u5206\u53d1\u8bf4\u660e](https://docs.openbacktesting.com/development/)\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 最小回测示例",
+      "value": "## \u6700\u5c0f\u56de\u6d4b\u793a\u4f8b",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "将以下代码保存为仓库根目录下的 `quickstart.py`，运行 `uv run --locked python quickstart.py`：",
+      "value": "\u5c06\u4ee5\u4e0b\u4ee3\u7801\u4fdd\u5b58\u4e3a\u4ed3\u5e93\u6839\u76ee\u5f55\u4e0b\u7684 `quickstart.py`\uff0c\u8fd0\u884c `uv run --locked python quickstart.py`\uff1a",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "策略在第一根 K 线请求买入一个单位。默认在下一根 K 线开盘时成交；`close_at_last_close` 在最后一根 K 线收盘时平掉剩余仓位。",
+      "value": "\u7b56\u7565\u5728\u7b2c\u4e00\u6839 K \u7ebf\u8bf7\u6c42\u4e70\u5165\u4e00\u4e2a\u5355\u4f4d\u3002\u9ed8\u8ba4\u5728\u4e0b\u4e00\u6839 K \u7ebf\u5f00\u76d8\u65f6\u6210\u4ea4\uff1b`close_at_last_close` \u5728\u6700\u540e\u4e00\u6839 K \u7ebf\u6536\u76d8\u65f6\u5e73\u6389\u5269\u4f59\u4ed3\u4f4d\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "`run()` 返回 pandas Series。通过 `result[\"_trades\"]` 读取交易，通过 `result[\"_equity_curve\"]` 读取权益历史。完整字段和 Portfolio 导出见[结果指南](https://docs.openbacktesting.com/guides/results/)；下划线开头的字段属于原生诊断数据，尚非稳定的跨语言数据契约。",
+      "value": "`run()` \u8fd4\u56de pandas Series\u3002\u901a\u8fc7 `result[\"_trades\"]` \u8bfb\u53d6\u4ea4\u6613\uff0c\u901a\u8fc7 `result[\"_equity_curve\"]` \u8bfb\u53d6\u6743\u76ca\u5386\u53f2\u3002\u5b8c\u6574\u5b57\u6bb5\u548c Portfolio \u5bfc\u51fa\u89c1[\u7ed3\u679c\u6307\u5357](https://docs.openbacktesting.com/guides/results/)\uff1b\u4e0b\u5212\u7ebf\u5f00\u5934\u7684\u5b57\u6bb5\u5c5e\u4e8e\u539f\u751f\u8bca\u65ad\u6570\u636e\uff0c\u5c1a\u975e\u7a33\u5b9a\u7684\u8de8\u8bed\u8a00\u6570\u636e\u5951\u7ea6\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 文档",
+      "value": "## \u6587\u6863",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "详细手册和示例目前使用英文。",
+      "value": "\u8be6\u7ec6\u624b\u518c\u548c\u793a\u4f8b\u76ee\u524d\u4f7f\u7528\u82f1\u6587\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 主题 | 参考资料 |",
+      "value": "| \u4e3b\u9898 | \u53c2\u8003\u8d44\u6599 |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 入门 | [第一次回测](https://docs.openbacktesting.com/quickstart/) · [示例索引](https://docs.openbacktesting.com/examples/) |",
+      "value": "| \u5165\u95e8 | [\u7b2c\u4e00\u6b21\u56de\u6d4b](https://docs.openbacktesting.com/quickstart/) \u00b7 [\u793a\u4f8b\u7d22\u5f15](https://docs.openbacktesting.com/examples/) |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 策略与数据 | [策略生命周期](https://docs.openbacktesting.com/guides/author/) · [行情数据](https://docs.openbacktesting.com/guides/data/) · [核心 API](https://docs.openbacktesting.com/reference/core/) |",
+      "value": "| \u7b56\u7565\u4e0e\u6570\u636e | [\u7b56\u7565\u751f\u547d\u5468\u671f](https://docs.openbacktesting.com/guides/author/) \u00b7 [\u884c\u60c5\u6570\u636e](https://docs.openbacktesting.com/guides/data/) \u00b7 [\u6838\u5fc3 API](https://docs.openbacktesting.com/reference/core/) |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 指标 | [指标目录](https://docs.openbacktesting.com/reference/indicators/) |",
+      "value": "| \u6307\u6807 | [\u6307\u6807\u76ee\u5f55](https://docs.openbacktesting.com/reference/indicators/) |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 执行与优化 | [运行策略](https://docs.openbacktesting.com/guides/runtime/) · [参数实验](https://docs.openbacktesting.com/guides/optimizer/) |",
+      "value": "| \u6267\u884c\u4e0e\u4f18\u5316 | [\u8fd0\u884c\u7b56\u7565](https://docs.openbacktesting.com/guides/runtime/) \u00b7 [\u53c2\u6570\u5b9e\u9a8c](https://docs.openbacktesting.com/guides/optimizer/) |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 结果与绘图 | [结果及 Portfolio](https://docs.openbacktesting.com/guides/results/) · [绘图数据导出](https://docs.openbacktesting.com/guides/plotting/) |",
+      "value": "| \u7ed3\u679c\u4e0e\u7ed8\u56fe | [\u7ed3\u679c\u53ca Portfolio](https://docs.openbacktesting.com/guides/results/) \u00b7 [\u7ed8\u56fe\u6570\u636e\u5bfc\u51fa](https://docs.openbacktesting.com/guides/plotting/) |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "| 开发 | [验证与构建](https://docs.openbacktesting.com/development/) · [当前限制](https://docs.openbacktesting.com/limitations/) |",
+      "value": "| \u5f00\u53d1 | [\u9a8c\u8bc1\u4e0e\u6784\u5efa](https://docs.openbacktesting.com/development/) \u00b7 [\u5f53\u524d\u9650\u5236](https://docs.openbacktesting.com/limitations/) |",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 能力范围与兼容性",
+      "value": "## \u80fd\u529b\u8303\u56f4\u4e0e\u517c\u5bb9\u6027",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- 交易模型为**单资产、单结算币种**。Portfolio 报告描述单次运行，不是多资产组合账户。",
+      "value": "- \u4ea4\u6613\u6a21\u578b\u4e3a**\u5355\u8d44\u4ea7\u3001\u5355\u7ed3\u7b97\u5e01\u79cd**\u3002Portfolio \u62a5\u544a\u63cf\u8ff0\u5355\u6b21\u8fd0\u884c\uff0c\u4e0d\u662f\u591a\u8d44\u4ea7\u7ec4\u5408\u8d26\u6237\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- 本包提供计算结果和绘图数据，**不包含图表渲染器、实盘交易引擎、代码沙箱或 Pine Script 转换器**，也不承诺与 Pine 具有相同语义。仅运行可信的策略代码。",
+      "value": "- \u672c\u5305\u63d0\u4f9b\u8ba1\u7b97\u7ed3\u679c\u548c\u7ed8\u56fe\u6570\u636e\uff0c**\u4e0d\u5305\u542b\u56fe\u8868\u6e32\u67d3\u5668\u3001\u5b9e\u76d8\u4ea4\u6613\u5f15\u64ce\u3001\u4ee3\u7801\u6c99\u7bb1\u6216 Pine Script \u8f6c\u6362\u5668**\uff0c\u4e5f\u4e0d\u627f\u8bfa\u4e0e Pine \u5177\u6709\u76f8\u540c\u8bed\u4e49\u3002\u4ec5\u8fd0\u884c\u53ef\u4fe1\u7684\u7b56\u7565\u4ee3\u7801\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "- Windows 支持及完整的 Pine 对比尚未通过验证。执行与市场模型的边界见[当前限制](https://docs.openbacktesting.com/limitations/)。",
+      "value": "- Windows \u652f\u6301\u53ca\u5b8c\u6574\u7684 Pine \u5bf9\u6bd4\u5c1a\u672a\u901a\u8fc7\u9a8c\u8bc1\u3002\u6267\u884c\u4e0e\u5e02\u573a\u6a21\u578b\u7684\u8fb9\u754c\u89c1[\u5f53\u524d\u9650\u5236](https://docs.openbacktesting.com/limitations/)\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "分发包名和导入名均为 `openbacktesting`，不提供旧名称入口。引用旧模块路径的 pickle 不会自动迁移，带有旧品牌标识的归档不保证可读，使用旧执行身份创建的实验需要重新运行。[迁移与来源说明](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries)。",
+      "value": "\u5206\u53d1\u5305\u540d\u548c\u5bfc\u5165\u540d\u5747\u4e3a `openbacktesting`\uff0c\u4e0d\u63d0\u4f9b\u65e7\u540d\u79f0\u5165\u53e3\u3002\u5f15\u7528\u65e7\u6a21\u5757\u8def\u5f84\u7684 pickle \u4e0d\u4f1a\u81ea\u52a8\u8fc1\u79fb\uff0c\u5e26\u6709\u65e7\u54c1\u724c\u6807\u8bc6\u7684\u5f52\u6863\u4e0d\u4fdd\u8bc1\u53ef\u8bfb\uff0c\u4f7f\u7528\u65e7\u6267\u884c\u8eab\u4efd\u521b\u5efa\u7684\u5b9e\u9a8c\u9700\u8981\u91cd\u65b0\u8fd0\u884c\u3002[\u8fc1\u79fb\u4e0e\u6765\u6e90\u8bf4\u660e](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries)\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 获取帮助与参与贡献",
+      "value": "## \u83b7\u53d6\u5e2e\u52a9\u4e0e\u53c2\u4e0e\u8d21\u732e",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "通过 [GitHub Issues](https://github.com/lucidcog/openbacktesting/issues) 提交缺陷、问题和功能建议。请附上 Python 与包版本、最小复现示例，以及预期行为和实际行为。欢迎通过 [Pull Request](https://github.com/lucidcog/openbacktesting/pulls) 贡献改进。",
+      "value": "\u901a\u8fc7 [GitHub Issues](https://github.com/lucidcog/openbacktesting/issues) \u63d0\u4ea4\u7f3a\u9677\u3001\u95ee\u9898\u548c\u529f\u80fd\u5efa\u8bae\u3002\u8bf7\u9644\u4e0a Python \u4e0e\u5305\u7248\u672c\u3001\u6700\u5c0f\u590d\u73b0\u793a\u4f8b\uff0c\u4ee5\u53ca\u9884\u671f\u884c\u4e3a\u548c\u5b9e\u9645\u884c\u4e3a\u3002\u6b22\u8fce\u901a\u8fc7 [Pull Request](https://github.com/lucidcog/openbacktesting/pulls) \u8d21\u732e\u6539\u8fdb\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "提交代码变更前，请运行：",
+      "value": "\u63d0\u4ea4\u4ee3\u7801\u53d8\u66f4\u524d\uff0c\u8bf7\u8fd0\u884c\uff1a",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "完整检查流程见[开发指南](https://docs.openbacktesting.com/development/)。公开行为变更需同步更新文档、可运行示例和执行验证。代码、注释及技术文档默认使用英文；README 译本属于有意提供的本地化内容。",
+      "value": "\u5b8c\u6574\u68c0\u67e5\u6d41\u7a0b\u89c1[\u5f00\u53d1\u6307\u5357](https://docs.openbacktesting.com/development/)\u3002\u516c\u5f00\u884c\u4e3a\u53d8\u66f4\u9700\u540c\u6b65\u66f4\u65b0\u6587\u6863\u3001\u53ef\u8fd0\u884c\u793a\u4f8b\u548c\u6267\u884c\u9a8c\u8bc1\u3002\u4ee3\u7801\u3001\u6ce8\u91ca\u53ca\u6280\u672f\u6587\u6863\u9ed8\u8ba4\u4f7f\u7528\u82f1\u6587\uff1bREADME \u8bd1\u672c\u5c5e\u4e8e\u6709\u610f\u63d0\u4f9b\u7684\u672c\u5730\u5316\u5185\u5bb9\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 翻译",
+      "value": "## \u7ffb\u8bd1",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "[英文 README](../../README.md) 是内容基准。现有简体中文、西班牙语、巴西葡萄牙语、法语、德语、意大利语和印地语译本。可通过顶部导航切换语言，更新时请遵循[翻译维护指南](TRANSLATING.md)。各语言版本的命令、API 标识符、能力边界和赞助商说明应保持一致。",
+      "value": "[\u82f1\u6587 README](../../README.md) \u662f\u5185\u5bb9\u57fa\u51c6\u3002\u73b0\u6709\u7b80\u4f53\u4e2d\u6587\u3001\u897f\u73ed\u7259\u8bed\u3001\u5df4\u897f\u8461\u8404\u7259\u8bed\u3001\u6cd5\u8bed\u3001\u5fb7\u8bed\u3001\u610f\u5927\u5229\u8bed\u548c\u5370\u5730\u8bed\u8bd1\u672c\u3002\u53ef\u901a\u8fc7\u9876\u90e8\u5bfc\u822a\u5207\u6362\u8bed\u8a00\uff0c\u66f4\u65b0\u65f6\u8bf7\u9075\u5faa[\u7ffb\u8bd1\u7ef4\u62a4\u6307\u5357](TRANSLATING.md)\u3002\u5404\u8bed\u8a00\u7248\u672c\u7684\u547d\u4ee4\u3001API \u6807\u8bc6\u7b26\u3001\u80fd\u529b\u8fb9\u754c\u548c\u8d5e\u52a9\u5546\u8bf4\u660e\u5e94\u4fdd\u6301\u4e00\u81f4\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "## 许可证与来源",
+      "value": "## \u8bb8\u53ef\u8bc1\u4e0e\u6765\u6e90",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "项目声明的许可证为 [Apache-2.0](../../LICENSE)。第三方材料保留其原有许可条款，包括[指标参考数据](../../tests/fixtures/indicator_expansion/README.md)。",
+      "value": "\u9879\u76ee\u58f0\u660e\u7684\u8bb8\u53ef\u8bc1\u4e3a [Apache-2.0](../../LICENSE)\u3002\u7b2c\u4e09\u65b9\u6750\u6599\u4fdd\u7559\u5176\u539f\u6709\u8bb8\u53ef\u6761\u6b3e\uff0c\u5305\u62ec[\u6307\u6807\u53c2\u8003\u6570\u636e](../../tests/fixtures/indicator_expansion/README.md)\u3002",
       "count": 1,
       "reason": "Intentional Simplified Chinese README translation or language navigation requested by the project owner."
     },
     {
       "path": "docs/readme/README.zh-CN.md",
-      "value": "[使用手册](https://docs.openbacktesting.com/)",
+      "value": "[\u4f7f\u7528\u624b\u518c](https://docs.openbacktesting.com/)",
       "count": 1,
       "reason": "Intentional Simplified Chinese link to the published documentation."
+    },
+    {
+      "path": "docs/research/openbacktesting-github-submission-targets.md",
+      "value": "| **[thuquant/awesome-quant](https://github.com/thuquant/awesome-quant)**<br>`README.md` \u2192 \u56de\u6d4b | Strong Chinese-language specialist target with Zipline, rqalpha and Manifold-BT already listed. Prepare one objective Chinese bullet for a single-asset historical backtesting library. Root contains README, LICENSE and papers.md, with no dedicated contribution guide/template found. The latest default-branch commit merges an added resource. Chinese presentation is not an India/China-market-only gate; existing international frameworks show general engines belong.<br>Sources: [README.md](https://github.com/thuquant/awesome-quant/blob/ec1df0d178371cca05f30c804e2830cd6f56ff1d/README.md) |",
+      "count": 1,
+      "reason": "Exact quoted section title in an external Chinese-language directory; reference text, not product copy."
+    },
+    {
+      "path": "docs/research/openbacktesting-github-submission-targets.md",
+      "value": "| **[akfamily/quant](https://github.com/akfamily/quant)**<br>`README.md` \u2192 \u6295\u7814\u6846\u67b6 | Chinese resource collection with relevant research frameworks; last default-branch commit 2024-12-06 and no sampled PR review history. No dedicated contribution policy found. A concise linked entry under the Chinese research-framework category is reasonable; use Chinese prose and the existing format. This is lower priority, not ineligible.<br>Sources: [README](https://github.com/akfamily/quant/blob/4d57030c612f3242affb867cce3c05eee1fbf567/README.md) |",
+      "count": 1,
+      "reason": "Exact quoted section title in an external Chinese-language directory; reference text, not product copy."
     }
+  ],
+  "documents": [
+    {
+      "path": "docs/research/openbacktesting-studio-architecture.md",
+      "sha256": "ae3eae65ebf614e8c42e79e7df9f5030f635ba2e40a977643588cb4959b1e833",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/design.md",
+      "sha256": "747988e4678df5b8746aed8281c1ae6da34237ee4298fef613e4e719c79c0458",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/proposal.md",
+      "sha256": "482f4457f73b5dcead194aaf9e2113f44f5a03e610e47e8930bd0c79c6092214",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/package-identity/spec.md",
+      "sha256": "e157851b5def166ce0475f627c236305cde05f7cd6839a01ad3881f6d0ae4c2b",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/repository-language-policy/spec.md",
+      "sha256": "f218af7f38436f883e7e37b4b89b9af81915c328f649fd7d38c97e8a80ef4c61",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/standalone-python-package/spec.md",
+      "sha256": "af4ad9598a2afc931e0c75122e2912569d2bb4c6ebe7dc1aea8a7f53ee45b64e",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-chart-rendering/spec.md",
+      "sha256": "bc096c1396423f27fc30fc14a37d6566d8bf75d414a71e7e624f30df70975fa2",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-distribution/spec.md",
+      "sha256": "c1216596060b860af6b749b2ffe3ea62e6e822bc7c9b3c216c7635ab6329de6e",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-results-report/spec.md",
+      "sha256": "26c7431c2fcd581e748fb585021e91d16c340a19d0e43c99bedbf82b8c163155",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-run-artifacts/spec.md",
+      "sha256": "a070bf86d6e8fe0c2cbd9dde1cff13d1b82c3761d9a32b048d8acd28bb0b0d79",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-run-lifecycle/spec.md",
+      "sha256": "b1622401b60dbf9c4a1f05815a73d4d5c4658fc48721d979e96bbd60d3931e08",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-source-editor/spec.md",
+      "sha256": "87e4a5e8e11bdbb3cfc93f228b476f6232176614c154d38a9607a80010bccc6c",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-strategy-configuration/spec.md",
+      "sha256": "6b71bc6a4c92d00826e989c263d9ae5f986477e70d5ea0da2e64425d43368420",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-ui-design/spec.md",
+      "sha256": "419105ce0adfa7ac438082fa60a74af4c62018a925e4cf43e2624455c0955a4b",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-vendored-charts/spec.md",
+      "sha256": "d0d3c199f546aad1f72c062c9b85f63ea5b4bb272945c8479b4cb48e8b711bff",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-workspace-host/spec.md",
+      "sha256": "3c73198e95b2620edcff5b1555c16346bdde5c339dcdd1e035fe056e746d7b30",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/tasks.md",
+      "sha256": "857acf1408b7df48cd3cf710de27b06e2ae9950b5fc5e86faea236c2e9774f81",
+      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/implementation.md",
+      "sha256": "903dd70e23730a89ae697c9e4cafe4591185ab02b4b06707e64e4fc6e6545e25",
+      "reason": "User-authorized Simplified Chinese OpenSpec implementation and verification record."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/ui-verification.md",
+      "sha256": "4965e3b7aa9a06275cc91d616758ffdc46c39d4b2ef447c9d5f038b1e8e18ce6",
+      "reason": "User-authorized Simplified Chinese OpenSpec UI verification record."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-optimizer/spec.md",
+      "sha256": "b25fc917122de093a13fbd3dc7449dd1b608ebe12823a0c465513a669a78e7be",
+      "reason": "User-authorized Simplified Chinese Studio OpenSpec extension."
+    }
+  ],
+  "sourceManifests": [
+    "studio/vendor-metadata/lightweight-charts.json"
   ]
 }

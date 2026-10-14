@@ -1,6 +1,7 @@
 schema: spec-driven
 context: |
-  Use English by default for repository code, comments, docstrings, documentation,
-  OpenSpec artifacts, and project-authored messages. Preserve intentional
-  multilingual or localized copy and associated test fixtures. Keep established
-  identifiers, numerical behavior, and machine-readable contracts stable.
+  Write OpenSpec planning artifacts and implementation records in Simplified Chinese.
+  Preserve structural keywords, identifiers, commands, and machine-readable contracts.
+  Keep code, comments, default product copy, diagnostics, and general documentation
+  in English. Register user-authorized Chinese documents by exact path and digest.
+  Preserve multilingual inputs, fixtures, and recorded third-party originals.

@@ -1,0 +1,488 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "DataProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1,
+          "default": 1,
+          "title": "Schemaversion",
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "sample",
+            "csv",
+            "loader"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "sample": {
+          "anyOf": [
+            {
+              "enum": [
+                "GOOG",
+                "BTCUSD",
+                "EURUSD"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "function": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Function"
+        },
+        "columns": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Columns",
+          "type": "object"
+        },
+        "timeColumn": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timecolumn"
+        },
+        "timeUnit": {
+          "anyOf": [
+            {
+              "enum": [
+                "s",
+                "ms",
+                "us",
+                "ns"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timeunit"
+        },
+        "sourceTimezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourcetimezone"
+        },
+        "timezone": {
+          "title": "Timezone",
+          "type": "string"
+        },
+        "timeframe": {
+          "$ref": "#/$defs/TimeframeConfig"
+        },
+        "instrument": {
+          "$ref": "#/$defs/InstrumentConfig"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End"
+        },
+        "parameters": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "timezone",
+        "timeframe",
+        "instrument"
+      ],
+      "title": "DataProfile",
+      "type": "object"
+    },
+    "InputRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "schemaHash": {
+          "title": "Schemahash",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "schemaHash"
+      ],
+      "title": "InputRequest",
+      "type": "object"
+    },
+    "InstrumentConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "minLength": 1,
+          "title": "Symbol",
+          "type": "string"
+        },
+        "quantity_step": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "title": "Quantity Step",
+          "type": "number"
+        },
+        "min_quantity": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Quantity"
+        },
+        "price_tick": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Tick"
+        },
+        "min_notional": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Min Notional",
+          "type": "number"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        }
+      },
+      "required": [
+        "symbol"
+      ],
+      "title": "InstrumentConfig",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "RunRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/SourceRequest"
+        },
+        "inputs": {
+          "$ref": "#/$defs/InputRequest"
+        },
+        "settings": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Settings",
+          "type": "object"
+        },
+        "data": {
+          "$ref": "#/$defs/DataProfile"
+        },
+        "idempotencyKey": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "parentRunId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parentrunid"
+        }
+      },
+      "required": [
+        "source",
+        "inputs",
+        "data",
+        "idempotencyKey"
+      ],
+      "title": "RunRequest",
+      "type": "object"
+    },
+    "SearchDomain": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "values",
+            "range"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "maxItems": 100000,
+          "title": "Values",
+          "type": "array"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        },
+        "stop": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop"
+        },
+        "step": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Step"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "SearchDomain",
+      "type": "object"
+    },
+    "SourceRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Revision",
+          "type": "string"
+        },
+        "roots": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Roots",
+          "type": "array"
+        },
+        "resources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "revision"
+      ],
+      "title": "SourceRequest",
+      "type": "object"
+    },
+    "TimeframeConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": {
+          "enum": [
+            "second",
+            "minute",
+            "day",
+            "week",
+            "month"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "multiplier": {
+          "exclusiveMinimum": 0,
+          "title": "Multiplier",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "unit",
+        "multiplier"
+      ],
+      "title": "TimeframeConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "run": {
+      "$ref": "#/$defs/RunRequest"
+    },
+    "search": {
+      "additionalProperties": {
+        "$ref": "#/$defs/SearchDomain"
+      },
+      "minProperties": 1,
+      "title": "Search",
+      "type": "object"
+    },
+    "constraint": {
+      "anyOf": [
+        {
+          "pattern": "^[a-zA-Z_]\\w*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Constraint"
+    }
+  },
+  "required": [
+    "run",
+    "search"
+  ],
+  "title": "OptimizationRequest",
+  "type": "object"
+}
