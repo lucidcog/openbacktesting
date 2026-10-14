@@ -132,6 +132,31 @@ def package_checker():
     return package
 
 
+def test_manifest_scan_ignores_studio_state_but_requires_example_registration(tmp_path):
+    package = package_checker()
+    for name, key in (("source-manifest.json", "targets"), ("extraction-manifest.json", "files")):
+        (tmp_path / name).write_text(json.dumps({"sourceFileCount": 0, "sources": [], key: []}))
+    state = tmp_path / "examples/strategies/.openbacktesting/studio/index.sqlite"
+    state.parent.mkdir(parents=True)
+    state.write_bytes(b"local run history")
+    assert package.manifests(tmp_path) == []
+    assert state not in package.project_files(tmp_path)
+    example = tmp_path / "examples/strategies/new_strategy.py"
+    example.write_text("pass\n")
+    assert package.manifests(tmp_path) == [
+        f"{name}: unregistered file: examples/strategies/new_strategy.py"
+        for name in ("source-manifest.json", "extraction-manifest.json")
+    ]
+
+
+@pytest.mark.parametrize("kind", ["wheel", "sdist"])
+def test_artifact_rejects_studio_run_history(tmp_path, kind):
+    package = package_checker()
+    path = write_artifact(tmp_path, package, kind, {".openbacktesting/studio/index.sqlite": b"history"})
+    issues, _ = package.artifact(path, registry())
+    assert any("Artifact contains local cache or build output" in issue for issue in issues)
+
+
 def write_artifact(tmp_path, package, kind, files):
     import io
     import tarfile
@@ -215,3 +240,62 @@ def test_artifact_readme_translation_exceptions_keep_headers_and_body_checked(tm
     assert any("expected 1, found 0" in issue for issue in inspect(b"English only"))
     issues = inspect(COPY.encode(), f"\nSummary: {COPY}".encode())
     assert any(name in issue and "unintended Chinese text" in issue for issue in issues)
+
+
+def test_document_exemption_requires_exact_current_bytes():
+    import hashlib
+
+    payload = COPY.encode()
+    record = {"path": "docs/approved.md", "sha256": hashlib.sha256(payload).hexdigest(),
+              "reason": "User-authorized planning document"}
+    data = json.dumps({"exceptions": [], "documents": [record]}).encode()
+    assert not LANGUAGE.check_files({"docs/approved.md": payload}, data)
+    assert LANGUAGE.check_files({"docs/approved.md": payload + b" changed"}, data)
+    assert LANGUAGE.check_files({"docs/unapproved.md": payload}, data)
+    assert LANGUAGE.check_files({}, data)
+    assert not LANGUAGE.check_files({}, data, subset=True)
+    record["path"] = "docs/*.md"
+    assert LANGUAGE.check_files({}, json.dumps({"exceptions": [], "documents": [record]}))
+
+
+def test_upstream_exemption_is_bound_to_original_bytes():
+    import hashlib
+
+    payload = COPY.encode()
+    manifest = {"root": "vendor/library", "commit": "a" * 40,
+                "files": [{"path": "guide.md", "sha256": hashlib.sha256(payload).hexdigest()}]}
+    data = json.dumps({"exceptions": [], "sourceManifests": ["vendor-metadata/library.json"]})
+    files = {"vendor-metadata/library.json": json.dumps(manifest).encode(),
+             "vendor/library/guide.md": payload}
+    assert not LANGUAGE.check_files(files, data)
+    files["vendor/library/new.md"] = payload
+    assert any("new.md" in issue for issue in LANGUAGE.check_files(files, data))
+    del files["vendor/library/new.md"]
+    files["vendor/library/guide.md"] += b" local addition"
+    assert any("unintended Chinese" in issue for issue in LANGUAGE.check_files(files, data))
+    del files["vendor/library/guide.md"]
+    assert any("Unused" in issue for issue in LANGUAGE.check_files(files, data))
+
+
+def test_companion_identity_and_dependency_direction(tmp_path):
+    package = package_checker()
+    (tmp_path / 'pyproject.toml').write_text('[project]\nname="openbacktesting"\ndependencies=[]\n')
+    studio = tmp_path / 'studio'
+    module = studio / 'src/openbacktesting_studio'
+    module.mkdir(parents=True)
+    (module / '__init__.py').write_text('')
+    metadata = studio / 'pyproject.toml'
+    metadata.write_text('[project]\nname="openbacktesting-studio"\ndependencies=["openbacktesting>=0.2,<0.3"]\n')
+    assert not package.package_identities(tmp_path)
+    metadata.write_text('[project]\nname="wrong-alias"\ndependencies=[]\n')
+    assert len(package.package_identities(tmp_path)) == 2
+    (tmp_path / 'pyproject.toml').write_text('[project]\nname="openbacktesting"\ndependencies=["openbacktesting-studio"]\n')
+    assert 'Core must not depend on Studio' in package.package_identities(tmp_path)
+
+
+def test_link_examples_in_inline_code_are_not_navigation_targets(tmp_path):
+    package = package_checker()
+    path = tmp_path / 'guide.md'
+    path.write_text('Use `[label](URL)` as an example.\n[broken](missing.md)\n')
+    issues = package.links(tmp_path, [path])
+    assert len(issues) == 1 and 'missing.md' in issues[0]

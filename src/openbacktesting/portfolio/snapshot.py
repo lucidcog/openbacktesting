@@ -23,7 +23,7 @@ class PortfolioSnapshot(str):
 
     def to_dict(self) -> dict:
         """Compute and return an independent strict JSON report without modifying the snapshot or executing strategies."""
-        return build_report(json.loads(self))
+        return plain(build_report(json.loads(self)))
 
 
 def freeze(payload):

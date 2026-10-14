@@ -772,7 +772,9 @@ def test_schema_keywords_match_independent_validator():
     }
 
     def check(schema):
-        assert set(schema) <= supported, "New Schema keywords must extend the standalone package checker"
+        assert set(schema) <= supported, (
+            "New Schema keywords must extend the standalone package checker"
+        )
         for key in ("$defs", "properties"):
             for child in schema.get(key, {}).values():
                 check(child)
@@ -944,3 +946,46 @@ def test_core_identity_reads_historical_results_but_rejects_cross_identity_resum
         namespace(), path=current.path, experiment_id=current.experiment_id, **kwargs()
     )
     assert restored.info()["committed"] == 2
+
+
+def test_real_ema_report_has_only_plain_values_and_can_be_optimized(tmp_path):
+    import runpy
+
+    from openbacktesting.portfolio import export_result
+    from openbacktesting.test import GOOG
+
+    ns = runpy.run_path(str(ROOT / "examples/strategies/ema_inputs.py"))
+    ns["__name__"] = ns["EmaCross"].__module__
+    market = GOOG.copy()
+    market.index = market.index.tz_localize("UTC")
+    config = {"data": market, "context": CONTEXT, "instrument": InstrumentSpec(symbol="GOOG")}
+    report = export_result(
+        run(
+            ns,
+            request_for(
+                ns["EmaCross"], {"fast": 12, "slow": 26, "units": 1, "short_enabled": False}
+            ),
+            options={"plotting": False},
+            **config,
+        )
+    )
+
+    def assert_plain(value):
+        assert type(value) in (dict, list, str, int, float, bool, type(None))
+        if isinstance(value, dict):
+            for child in value.values():
+                assert_plain(child)
+        elif isinstance(value, list):
+            for child in value:
+                assert_plain(child)
+
+    # IQR outlier bounds previously leaked numpy.float64 and failed optimizer validation.
+    assert_plain(report)
+    assert type(report["analysis"]["distribution"]["outliers"]["lower"]) is float
+    experiment = optimize(
+        ns, {"Fast period": Values([12, 13])}, path=tmp_path / "ema.db", identity=IDENTITY, **config
+    )
+    assert experiment.info()["committed"] == 2
+    assert experiment.info()["failed"] == 0
+    saved = experiment.load_portfolio(experiment.trials()[0]["trial_id"])
+    assert saved == report

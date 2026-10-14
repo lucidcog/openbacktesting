@@ -13,6 +13,8 @@ Write a Python strategy, run it on historical OHLC data, and inspect trades and 
 
 | I want to… | Read |
 | --- | --- |
+| Develop the project or contribute a change | [Local development](development.md) · [Contribution guide](contributing.md) |
+| Edit, run, and inspect strategies in a browser | [Install and use Studio](studio/index.md) |
 | Load market data or set asset rules | [Data, timeframes, and instruments](reference/data.md) |
 | Define entry and exit logic | [Strategy](reference/strategy.md) |
 | Set cash, fees, and execution timing | [Backtest](reference/core.md) |
@@ -38,4 +40,4 @@ Write a Python strategy, run it on historical OHLC data, and inspect trades and 
 
 [First backtest](quickstart.md){data-umami-event="docs-quickstart-click" data-umami-event-placement="home-tutorials"} · [Trading rules](guides/trading.md) · [Indicator recipes](guides/indicators.md) · [Runnable examples](examples.md){data-umami-event="docs-examples-click" data-umami-event-placement="home-tutorials"}
 
-The engine models one asset and one settlement currency per run. It exports plotting data but includes no chart renderer or live-trading connection. See [supported boundaries](limitations.md) before interpreting results.
+The engine models one asset and one settlement currency per run. The core package exports plotting data without a chart renderer; the optional [Studio](studio/index.md) supplies the local web interface. There is no live-trading connection. See [supported boundaries](limitations.md) before interpreting results.

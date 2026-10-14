@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "1.0.0",
+  "inputs": [
+    {
+      "title": "Show highlights",
+      "attribute": "highlight",
+      "kind": "bool",
+      "default": true,
+      "tooltip": "",
+      "group": "Display",
+      "inline": "",
+      "display": "none",
+      "active": true,
+      "confirm": false
+    },
+    {
+      "title": "Moving-average period",
+      "attribute": "length",
+      "kind": "int",
+      "default": 20,
+      "minval": 2,
+      "maxval": 100,
+      "step": 1,
+      "tooltip": "",
+      "group": "Moving average",
+      "inline": "",
+      "display": "all",
+      "active": true,
+      "confirm": false
+    },
+    {
+      "title": "Highlight multiplier",
+      "attribute": "multiplier",
+      "kind": "float",
+      "default": 1.02,
+      "minval": 1.0,
+      "maxval": 2.0,
+      "step": 0.01,
+      "tooltip": "Color when close exceeds the moving average times this multiplier; step is an adjustment increment, not a divisibility constraint.",
+      "group": "Display",
+      "inline": "",
+      "display": "all",
+      "active": {
+        "title": "Show highlights"
+      },
+      "confirm": false
+    },
+    {
+      "title": "Price source",
+      "attribute": "source",
+      "kind": "string",
+      "default": "close",
+      "tooltip": "",
+      "group": "Moving average",
+      "inline": "Selection",
+      "display": "all",
+      "active": true,
+      "confirm": false,
+      "options": [
+        "close",
+        "hl2"
+      ]
+    },
+    {
+      "title": "Moving-average type",
+      "attribute": "average_kind",
+      "kind": "enum",
+      "default": "EMA",
+      "tooltip": "",
+      "group": "Moving average",
+      "inline": "Selection",
+      "display": "all",
+      "active": true,
+      "confirm": false,
+      "options": [
+        "EMA",
+        "SMA"
+      ],
+      "enumTypeId": "studio_inputs_fixture.AverageKind",
+      "members": [
+        {
+          "name": "EMA",
+          "title": "EMA"
+        },
+        {
+          "name": "SMA",
+          "title": "SMA"
+        }
+      ]
+    },
+    {
+      "title": "Reference price",
+      "attribute": "reference_price",
+      "kind": "price",
+      "default": 100.0,
+      "tooltip": "Draw a horizontal line only; price does not support minval/maxval/step/options.",
+      "group": "Display",
+      "inline": "",
+      "display": "all",
+      "active": true,
+      "confirm": true
+    },
+    {
+      "title": "Highlight start",
+      "attribute": "start_time",
+      "kind": "time",
+      "default": 1092873600000,
+      "tooltip": "2004-08-19 00:00:00 UTC, in milliseconds.",
+      "group": "Display",
+      "inline": "",
+      "display": "all",
+      "active": true,
+      "confirm": false
+    },
+    {
+      "title": "Session description",
+      "attribute": "session",
+      "kind": "session",
+      "default": "0000-0000:1234567",
+      "tooltip": "Show the normalized value only, without filtering data; 24x7 becomes 0000-0000:1234567.",
+      "group": "",
+      "inline": "",
+      "display": "data_window",
+      "active": true,
+      "confirm": false
+    },
+    {
+      "title": "Moving-average color",
+      "attribute": "line_color",
+      "kind": "color",
+      "default": "#22AA44FF",
+      "tooltip": "",
+      "group": "Display",
+      "inline": "",
+      "display": "none",
+      "active": true,
+      "confirm": false
+    }
+  ],
+  "schemaHash": "bde02c9cea966571a35c5e164e55b7ba9ecf05cd4c37cfc02ef864680f346434",
+  "backtest": {
+    "schemaVersion": 2,
+    "settings": {
+      "cash": 10000.0,
+      "spread": 0.0,
+      "commission_type": "percent",
+      "commission_value": 0.0,
+      "risk_free_rate": 0.0,
+      "default_qty_type": "fixed",
+      "default_qty_value": null,
+      "margin": 1.0,
+      "execution_timing": "next_open",
+      "slippage_type": "bps",
+      "slippage_value": 0.0,
+      "allow_short": true,
+      "max_gross_exposure": null,
+      "hedging": false,
+      "exclusive_orders": false,
+      "end_policy": "mark_to_market"
+    }
+  }
+}

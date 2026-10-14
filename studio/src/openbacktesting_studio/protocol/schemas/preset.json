@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "InputRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "schemaHash": {
+          "title": "Schemahash",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "schemaHash"
+      ],
+      "title": "InputRequest",
+      "type": "object"
+    },
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "default": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "inputs": {
+      "$ref": "#/$defs/InputRequest"
+    },
+    "settings": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Settings",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "inputs"
+  ],
+  "title": "Preset",
+  "type": "object"
+}

@@ -13,7 +13,7 @@ import zipfile
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-from check_language import REGISTRY, check_files
+from check_language import REGISTRY, check_files, file_exemptions
 
 ROOT = Path(__file__).resolve().parents[1]
 # Character-code rules keep forbidden names out of the checker configuration itself.
@@ -28,12 +28,14 @@ LOCAL_OUTPUTS = {
     ".git",
     ".venv",
     ".verification",
+    ".openbacktesting",
     ".pytest_cache",
     ".ruff_cache",
     "__pycache__",
     "dist",
     "build",
     "htmlcov",
+    "node_modules",
 }
 RESOURCES = (
     "py.typed",
@@ -134,7 +136,7 @@ def manifests(root):
                 issues.append(f"Target digest mismatch: {name}")
         for folder in ("src", "examples"):
             for path in (root / folder).rglob("*"):
-                if path.is_file() and "__pycache__" not in path.parts:
+                if path.is_file() and not set(path.relative_to(root).parts) & LOCAL_OUTPUTS:
                     name = path.relative_to(root).as_posix()
                     if name not in seen:
                         issues.append(f"{filename}: unregistered file: {name}")
@@ -148,6 +150,7 @@ def links(root, paths):
             continue
         # Code inside fences is not a Markdown link.
         text = re.sub(r"```.*?```", "", path.read_text(), flags=re.DOTALL)
+        text = re.sub(r"(`+).*?\1", "", text)
         for link in re.findall(r"\]\(([^\s)]+)", text):
             parts = urlsplit(link.strip("<>"))
             if parts.scheme or parts.netloc or not parts.path:
@@ -173,7 +176,20 @@ def repository(root):
             except SyntaxError as error:
                 issues.append(f"Python syntax error: {name}: {error}")
     issues.extend(manifests(root))
-    issues.extend(links(root, paths))
+    files = {path.relative_to(root).as_posix(): path.read_bytes() for path in paths}
+    registry = json.loads(files.get(REGISTRY, b"{}"))
+    approved = file_exemptions(files, registry, [], subset=False)
+    upstream_roots = []
+    for name in registry.get("sourceManifests", []):
+        if name in files:
+            upstream_roots.append(json.loads(files[name])["root"] + "/")
+    # Original upstream docs use their own website link resolver. Local changes
+    # remain subject to our ordinary link checks; no directory-wide exemption.
+    local_docs = [path for path in paths if not (
+        (name := path.relative_to(root).as_posix()) in approved
+        and any(name.startswith(prefix) for prefix in upstream_roots)
+    )]
+    issues.extend(links(root, local_docs))
     issues.extend(
         check_files({path.relative_to(root).as_posix(): path.read_bytes() for path in paths})
     )
@@ -181,10 +197,33 @@ def repository(root):
     project = metadata["project"]
     if project["name"] != "openbacktesting" or project["version"] != "0.2.0":
         issues.append("Distribution identity or version mismatch")
+    issues.extend(package_identities(root))
     for name in RESOURCES:
         if not (root / "src/openbacktesting" / name).is_file():
             issues.append(f"Missing runtime resource: {name}")
     return issues, len(paths)
+
+
+def package_identities(root):
+    """The companion has its own identity; dependency direction stays one-way."""
+    issues = []
+    core = tomllib.loads((root / "pyproject.toml").read_text())["project"]
+    if any(re.match(r"openbacktesting[-_]studio(?:\b|[<>=])", dep)
+           for dep in core.get("dependencies", [])):
+        issues.append("Core must not depend on Studio")
+    studio = root / "studio/pyproject.toml"
+    if studio.is_file():
+        project = tomllib.loads(studio.read_text())["project"]
+        if project["name"] != "openbacktesting-studio":
+            issues.append("Studio distribution identity mismatch")
+        roots = {p.name for p in (root / "studio/src").iterdir()
+                 if p.is_dir() and (p / "__init__.py").is_file()}
+        if roots != {"openbacktesting_studio"}:
+            issues.append("Studio must expose only its own Python import root")
+        if not any(re.match(r"openbacktesting[<>=]", dep)
+                   for dep in project.get("dependencies", [])):
+            issues.append("Studio must declare a compatible core dependency")
+    return issues
 
 
 def artifact(path, registry_data=None):

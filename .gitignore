@@ -11,3 +11,9 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+node_modules/
+*.tsbuildinfo
+/studio/src/openbacktesting_studio/web/
+.openbacktesting/
+/studio/web/public/chart-provenance.json
+/studio/web/public/lightweight-charts-*.txt

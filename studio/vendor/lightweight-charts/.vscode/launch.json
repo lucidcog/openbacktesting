@@ -1,0 +1,58 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Unittests",
+            "command": "npm run test",
+            "cwd": "${workspaceFolder}",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Graphics tests",
+            "command": "npx esno ./tests/e2e/graphics/runner.ts ${input:goldenStandalonePath} ${input:testStandalonePath}",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Memleaks tests",
+            "command": "npm run e2e:memleaks ${input:testStandalonePath}",
+            "cwd": "${workspaceFolder}",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Coverage tests",
+            "command": "npm run e2e:coverage ${input:testStandalonePath}",
+            "cwd": "${workspaceFolder}",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Interaction tests",
+            "command": "npm run e2e:interactions ${input:testStandalonePath}",
+            "cwd": "${workspaceFolder}",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "goldenStandalonePath",
+            "description": "Please enter path (local file or URL) to GOLDEN standalone module",
+            "default": "./dist/lightweight-charts.standalone.development.js"
+        },
+        {
+            "type": "promptString",
+            "id": "testStandalonePath",
+            "description": "Please enter path (local file or URL) to TEST standalone module",
+            "default": "./dist/lightweight-charts.standalone.development.js"
+        }
+    ]
+}

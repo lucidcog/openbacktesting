@@ -4364,9 +4364,10 @@
         "Complete Portfolio facts, plain-value freezing, and local report analysis; migrated existing statistics and used actual Portfolio identities.",
         "Portfolio refactor: migrated imports, independent observations and frozen facts, report examples or entry assertions; retained order-matching and ledger policies.",
         "Unified Core distribution and import identities, preserving computational semantics.",
-        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
+        "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
+        "Normalize computed Portfolio reports to plain JSON values for Studio and persisted optimizer results."
       ],
-      "targetSha256": "bfb2ee0c67f51b5d9eb6dd31623887cbcf73e654aab8365f1bea986ff6705a37"
+      "targetSha256": "d8d65dcce56bec24ce010c573678127eb3358f0e47d9d94b7ae18e6a32f27b22"
     },
     {
       "target": "src/openbacktesting/portfolio/stats.py",

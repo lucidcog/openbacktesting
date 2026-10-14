@@ -8,7 +8,7 @@ Write bar-by-bar strategies, evaluate them on historical market data, and inspec
 
 **Python 3.12–3.14** · **Version 0.2.0** · Distribution and import: `openbacktesting`
 
-[Quick start](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Examples](https://docs.openbacktesting.com/examples/) · [Report an issue](https://github.com/lucidcog/openbacktesting/issues)
+[Quick start](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Examples](https://docs.openbacktesting.com/examples/) · [Local development](#local-development) · [Contribute](CONTRIBUTING.md) · [Report an issue](https://github.com/lucidcog/openbacktesting/issues)
 
 ## Top sponsor — Pineify
 
@@ -47,6 +47,10 @@ python -m pip install .
 ```
 
 The base dependencies are NumPy, pandas, and `pandas-ta-classic==0.8.32`. For SAMBO optimization, use `python -m pip install '.[optimize]'` or `uv sync --locked --extra optimize`. These are source-installation instructions; they do not assume a PyPI release. [Build and distribution details](https://docs.openbacktesting.com/development/).
+
+## Optional Studio
+
+Use [OpenBacktesting Studio](docs/core/studio/index.md) to edit local strategy files, configure inputs, inspect charts and reports, and compare parameter experiments in your browser. It is a separate Python distribution; framework-only users do not install its web assets. The illustrated guide covers building and installing the current source version, launching Studio, and running your first strategy.
 
 ## Minimal backtest
 
@@ -96,30 +100,42 @@ Open `http://127.0.0.1:8000`. The server reloads when documentation changes. Bui
 | Indicators | [Indicator catalog](https://docs.openbacktesting.com/reference/indicators/) |
 | Execution and optimization | [Running strategies](https://docs.openbacktesting.com/guides/runtime/) · [Parameter experiments](https://docs.openbacktesting.com/guides/optimizer/) |
 | Results and plotting | [Results and Portfolio](https://docs.openbacktesting.com/guides/results/) · [Plotting-data export](https://docs.openbacktesting.com/guides/plotting/) |
-| Development | [Verification and builds](https://docs.openbacktesting.com/development/) · [Current limitations](https://docs.openbacktesting.com/limitations/) |
+| Development and contributions | [Local development](docs/core/development.md) · [Contribution guide](docs/core/contributing.md) · [Current limitations](https://docs.openbacktesting.com/limitations/) |
 
 ## Scope and compatibility
 
 - The trading model is **single asset, single settlement currency**. Portfolio reports describe one run; they are not multi-asset portfolio accounts.
-- The package provides computation and plotting data. It includes **no chart renderer, live-trading engine, code sandbox, or Pine Script converter**, and does not promise Pine-equivalent semantics. Run only trusted strategy code.
+- The core package provides computation and plotting data. It includes **no chart renderer, live-trading engine, code sandbox, or Pine Script converter**, and does not promise Pine-equivalent semantics. Run only trusted strategy code.
 - Windows support and full Pine comparisons have not been validated. See [current limitations](https://docs.openbacktesting.com/limitations/) for execution and market-model boundaries.
 
 The distribution and import name are both `openbacktesting`; there are no legacy-name entry points. Old module-path pickles are not migrated automatically, earlier branded archives are not guaranteed to load, and experiments created under an old execution identity must be rerun. [Migration and provenance details](https://docs.openbacktesting.com/development/#provenance-and-behavioral-boundaries).
 
-## Support and contributing
+## Local development
 
-Use [GitHub Issues](https://github.com/lucidcog/openbacktesting/issues) for bugs, questions, and feature requests. Include your Python/package versions, a minimal reproducer, and expected versus actual behavior. Contributions are welcome through [pull requests](https://github.com/lucidcog/openbacktesting/pulls).
-
-Before submitting a code change, run:
+From a checkout, use Python **3.12–3.14** and [uv](https://docs.astral.sh/uv/getting-started/installation/):
 
 ```sh
-uv sync --locked --extra test
-uv run --locked python -m pytest
-uv run --locked python -m openbacktesting.test
-uv run --locked python scripts/check_package.py
+uv sync --locked --extra test --group docs
+uv run --locked python examples/advanced/native_run.py
+uv run --locked python -m pytest tests/test_inputs.py -q
+uv run --locked --group docs mkdocs serve
 ```
 
-Follow the [development guide](https://docs.openbacktesting.com/development/) for the complete checks. Public behavior changes need corresponding documentation, runnable examples, and execution validation. Code, comments, and technical documentation default to English; localized README content is intentional.
+The last command keeps a live documentation preview at `http://127.0.0.1:8000`; use Ctrl+C to stop it. Core source is under `src/openbacktesting/`, tests under `tests/`, and the manual under `docs/core/`.
+
+Studio has its own Python host, frontend, and tests under `studio/`. To develop it, build the interface with Node.js **22.12+**, install core and Studio in editable mode, then run the local Python host. Follow the [Studio development steps](docs/core/development.md#studio-development) for exact commands and the current frontend rebuild workflow. Core-only and documentation work do not require Node.js.
+
+See [local development and validation](docs/core/development.md) for environment setup, focused and full checks, generated documentation, and clean package-installation checks.
+
+## Share code and contribute
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [contribution guide](docs/core/contributing.md) for the full workflow:
+
+1. Search [issues](https://github.com/lucidcog/openbacktesting/issues) and [PRs](https://github.com/lucidcog/openbacktesting/pulls); discuss substantial features or compatibility changes first.
+2. Fork the repository, create a focused branch from upstream `main`, and make the change with appropriate tests, examples, and documentation.
+3. Run the relevant checks, inspect the staged diff, and open a PR against `lucidcog/openbacktesting:main` describing the problem, resulting behavior, and actual validation.
+
+For bug reports or shared strategies, include a minimal reproducer, versions, settings, and small synthetic or redistributable data. Keep credentials, private datasets, generated assets, and local run history out of commits. Studio result archives can be shared separately; include source and data only when intended and permitted. Code and general documentation use English; OpenSpec planning records use Simplified Chinese. Preserve the [project license](LICENSE) and third-party notices.
 
 ## Translations
 

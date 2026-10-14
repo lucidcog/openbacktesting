@@ -38,5 +38,5 @@ testpaths = ["tests"]
 packages = ["src/openbacktesting"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/LICENSE", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/mkdocs.yml", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
+include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/CONTRIBUTING.md", "/LICENSE", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/mkdocs.yml", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
 exclude = ["**/__pycache__", "**/*.pyc", "**/.pytest_cache", "/.verification", "/.venv", "/dist"]

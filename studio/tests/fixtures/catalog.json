@@ -1,0 +1,1911 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "closedFragmentCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "closedFragmentCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "openLotCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "openLotCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "closedLotCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "closedLotCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "openedLotCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "openedLotCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "winningCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "winningCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "losingCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "losingCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "evenCount",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "evenCount"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "closedNetPnl",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "closedNetPnl"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "grossProfit",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "grossProfit"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "grossLoss",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "grossLoss"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "expectedPayoff",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "expectedPayoff"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageProfit",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageProfit"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageLoss",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageLoss"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "closedFees",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "closedFees"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "profitFactorMoney",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "profitFactorMoney"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "winRate",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "winRate"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "meanTradeReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "meanTradeReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageTradeBars",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageTradeBars"
+      ],
+      "unit": "bars",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageWinningBars",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageWinningBars"
+      ],
+      "unit": "bars",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageLosingBars",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageLosingBars"
+      ],
+      "unit": "bars",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageProfitReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageProfitReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestProfit",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestProfit"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestProfitReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestProfitReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestProfitShare",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestProfitShare"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageLossReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageLossReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestLoss",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestLoss"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestLossReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestLossReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestLossShare",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestLossShare"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageProfitLossRatio",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageProfitLossRatio"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxTradeDurationNs",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxTradeDurationNs"
+      ],
+      "unit": "nanoseconds",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "averageTradeDurationNs",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageTradeDurationNs"
+      ],
+      "unit": "nanoseconds",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxDrawdown",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxDrawdown"
+      ],
+      "unit": "money",
+      "methodId": "close_path_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxRunup",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxRunup"
+      ],
+      "unit": "money",
+      "methodId": "close_path_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxDrawdownFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxDrawdownFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "close_path_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxRunupFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxRunupFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "close_path_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxDrawdownInitialFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxDrawdownInitialFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "close_path_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxRunupInitialFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxRunupInitialFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "close_path_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "initialCapital",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "initialCapital"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "equityFinal",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "equityFinal"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "equityPeak",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "equityPeak"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "totalPnl",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "totalPnl"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "totalReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "totalReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "openPnlGross",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "openPnlGross"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "openPnlNet",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "openPnlNet"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "remainingEntryFees",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "remainingEntryFees"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "balance",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "balance"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "feesPaid",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "feesPaid"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "commissionLoad",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "commissionLoad"
+      ],
+      "unit": "ratio",
+      "methodId": "commission_load_gross_activity_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py",
+      "definition": {
+        "numerator": "feesPaid",
+        "denominator": "sum(abs(fill.qty * fill.price))",
+        "scope": "all_fills"
+      }
+    },
+    {
+      "id": "averageMarginUsed",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "averageMarginUsed"
+      ],
+      "unit": "money",
+      "methodId": "bar_close_mean_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxMarginUsed",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxMarginUsed"
+      ],
+      "unit": "money",
+      "methodId": "execution_samples_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxGrossQuantity",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxGrossQuantity"
+      ],
+      "unit": "quantity",
+      "methodId": "execution_samples_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxLongQuantity",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxLongQuantity"
+      ],
+      "unit": "quantity",
+      "methodId": "execution_samples_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxShortQuantity",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxShortQuantity"
+      ],
+      "unit": "quantity",
+      "methodId": "execution_samples_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "maxNetQuantity",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "maxNetQuantity"
+      ],
+      "unit": "quantity",
+      "methodId": "execution_samples_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "intrabar.maxDrawdown",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "intrabar.maxDrawdown"
+      ],
+      "unit": "money",
+      "methodId": "sampled_bounds_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "intrabar.maxRunup",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "intrabar.maxRunup"
+      ],
+      "unit": "money",
+      "methodId": "sampled_bounds_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "intrabar.maxDrawdownFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "intrabar.maxDrawdownFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "sampled_bounds_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "intrabar.maxRunupFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "intrabar.maxRunupFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "sampled_bounds_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "intrabar.maxDrawdownInitialFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "intrabar.maxDrawdownInitialFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "sampled_bounds_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "intrabar.maxRunupInitialFraction",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "intrabar.maxRunupInitialFraction"
+      ],
+      "unit": "ratio",
+      "methodId": "sampled_bounds_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "observedCapitalRequired",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "observedCapitalRequired"
+      ],
+      "unit": "money",
+      "methodId": "observed_capital_requirement_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "returnOnInitialCapital",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "returnOnInitialCapital"
+      ],
+      "unit": "ratio",
+      "methodId": "observed_capital_efficiency_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py",
+      "definition": {
+        "numerator": "closedNetPnl",
+        "denominator": "initialCapital",
+        "scope": "executed_range"
+      }
+    },
+    {
+      "id": "returnOnMaxDrawdown",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "returnOnMaxDrawdown"
+      ],
+      "unit": "ratio",
+      "methodId": "observed_capital_efficiency_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py",
+      "definition": {
+        "numerator": "closedNetPnl",
+        "denominator": "intrabar.maxDrawdown",
+        "scope": "ordered_samples_and_unordered_bar_bounds"
+      }
+    },
+    {
+      "id": "netPnlToLargestLoss",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "netPnlToLargestLoss"
+      ],
+      "unit": "ratio",
+      "methodId": "observed_capital_efficiency_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py",
+      "definition": {
+        "numerator": "closedNetPnl",
+        "denominator": "largestLoss",
+        "scope": "closed_fragments"
+      }
+    },
+    {
+      "id": "marginEfficiency",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "marginEfficiency"
+      ],
+      "unit": "ratio",
+      "methodId": "observed_capital_efficiency_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py",
+      "definition": {
+        "numerator": "closedNetPnl",
+        "denominator": "averageMarginUsed",
+        "scope": "bar_close_mean"
+      }
+    },
+    {
+      "id": "returnOnObservedCapital",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "returnOnObservedCapital"
+      ],
+      "unit": "ratio",
+      "methodId": "observed_capital_efficiency_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py",
+      "definition": {
+        "numerator": "closedNetPnl",
+        "denominator": "observedCapitalRequired",
+        "scope": "execution_samples"
+      }
+    },
+    {
+      "id": "marginCalls",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "marginCalls"
+      ],
+      "unit": "count",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "totalMarginLiquidatedVolume",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "totalMarginLiquidatedVolume"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "largestMarginLiquidatedVolume",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "largestMarginLiquidatedVolume"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "tvAccountSizeRequired",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "tvAccountSizeRequired"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "tvReturnOnAccountSize",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "tvReturnOnAccountSize"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "currencyConversion",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "currencyConversion"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "contractMultiplier",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "contractMultiplier"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "unsupported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "sharpe",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "sharpe"
+      ],
+      "unit": "ratio",
+      "methodId": "monthly_compounded_rf_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "sortino",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "sortino"
+      ],
+      "unit": "ratio",
+      "methodId": "monthly_compounded_rf_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "cagr",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "cagr"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "buyHoldReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "buyHoldReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "outperformance",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "outperformance"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "correlation",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "correlation"
+      ],
+      "unit": "ratio",
+      "methodId": "paired_period_returns_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Performance:series.account",
+      "region": "Performance",
+      "path": [
+        "series",
+        "account"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Performance:series.closedCumulative",
+      "region": "Performance",
+      "path": [
+        "series",
+        "closedCumulative"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Performance:series.benchmark",
+      "region": "Performance",
+      "path": [
+        "series",
+        "benchmark"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Breakdown:analysis.breakdown",
+      "region": "Breakdown",
+      "path": [
+        "analysis",
+        "breakdown"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Periodical:analysis.periodical",
+      "region": "Periodical",
+      "path": [
+        "analysis",
+        "periodical"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Benchmarking:series.benchmark",
+      "region": "Benchmarking",
+      "path": [
+        "series",
+        "benchmark"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Margin usage:series.margin",
+      "region": "Margin usage",
+      "path": [
+        "series",
+        "margin"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Growth and decline:analysis.growthAndDecline",
+      "region": "Growth and decline",
+      "path": [
+        "analysis",
+        "growthAndDecline"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Distribution:analysis.distribution",
+      "region": "Distribution",
+      "path": [
+        "analysis",
+        "distribution"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Streaks:analysis.streaks",
+      "region": "Streaks",
+      "path": [
+        "analysis",
+        "streaks"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "Time patterns:analysis.timePatterns",
+      "region": "Time patterns",
+      "path": [
+        "analysis",
+        "timePatterns"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "List of Trades:trades.closedFragments",
+      "region": "List of Trades",
+      "path": [
+        "trades",
+        "closedFragments"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "List of Trades:trades.openLots",
+      "region": "List of Trades",
+      "path": [
+        "trades",
+        "openLots"
+      ],
+      "unit": "dataset",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Start",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Start"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:End",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "End"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Duration",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Duration"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Exposure Time [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Exposure Time [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Equity Final [$]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Equity Final [$]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Equity Peak [$]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Equity Peak [$]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Return [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Return [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Buy & Hold Return [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Buy & Hold Return [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Return (Ann.) [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Return (Ann.) [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Volatility (Ann.) [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Volatility (Ann.) [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:CAGR [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "CAGR [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Sharpe Ratio",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Sharpe Ratio"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Sortino Ratio",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Sortino Ratio"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Calmar Ratio",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Calmar Ratio"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Alpha [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Alpha [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Beta",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Beta"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Max. Drawdown [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Max. Drawdown [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Avg. Drawdown [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Avg. Drawdown [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Max. Drawdown Duration",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Max. Drawdown Duration"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Avg. Drawdown Duration",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Avg. Drawdown Duration"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:# Trades",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "# Trades"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Win Rate [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Win Rate [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Best Trade [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Best Trade [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Worst Trade [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Worst Trade [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Avg. Trade [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Avg. Trade [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Max. Trade Duration",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Max. Trade Duration"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Avg. Trade Duration",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Avg. Trade Duration"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Profit Factor",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Profit Factor"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Expectancy [%]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Expectancy [%]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:SQN",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "SQN"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Kelly Criterion",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Kelly Criterion"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:Commissions [$]",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "Commissions [$]"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "legacy:# Closed Lots",
+      "region": "Native",
+      "path": [
+        "extensions",
+        "legacy",
+        "# Closed Lots"
+      ],
+      "unit": "native",
+      "methodId": "engine_legacy_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "closedPnlGross",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "closedPnlGross"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "totalPnlGross",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "totalPnlGross"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "closedReturn",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "closedReturn"
+      ],
+      "unit": "ratio",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    },
+    {
+      "id": "buyHoldPnl",
+      "region": "Metrics",
+      "path": [
+        "summary",
+        "all",
+        "buyHoldPnl"
+      ],
+      "unit": "money",
+      "methodId": "openbacktesting_portfolio_v1",
+      "availability": "supported",
+      "example": "advanced/portfolio_report.py",
+      "verification": "test_portfolio.py"
+    }
+  ],
+  "research": "docs/research/engine-portfolio-tradingview-report-design.md",
+  "schemaVersion": "1.0.0",
+  "regions": {
+    "Key stats": [
+      "totalPnl",
+      "maxDrawdown",
+      "winningCount",
+      "closedFragmentCount",
+      "winRate",
+      "profitFactorMoney"
+    ],
+    "Performance": [
+      "Performance:series.account",
+      "Performance:series.closedCumulative",
+      "Performance:series.benchmark",
+      "List of Trades:trades.closedFragments"
+    ],
+    "Breakdown": [
+      "grossProfit",
+      "grossLoss",
+      "profitFactorMoney",
+      "commissionLoad",
+      "Breakdown:analysis.breakdown"
+    ],
+    "Periodical": [
+      "cagr",
+      "totalReturn",
+      "sharpe",
+      "sortino",
+      "Periodical:analysis.periodical"
+    ],
+    "Benchmarking": [
+      "buyHoldReturn",
+      "outperformance",
+      "correlation",
+      "Benchmarking:series.benchmark"
+    ],
+    "Margin usage": [
+      "marginEfficiency",
+      "averageMarginUsed",
+      "marginCalls",
+      "totalMarginLiquidatedVolume",
+      "Margin usage:series.margin"
+    ],
+    "Growth and decline": [
+      "maxDrawdown",
+      "maxDrawdownFraction",
+      "maxDrawdownInitialFraction",
+      "Growth and decline:analysis.growthAndDecline"
+    ],
+    "Distribution": [
+      "expectedPayoff",
+      "largestProfit",
+      "largestLoss",
+      "Distribution:analysis.distribution"
+    ],
+    "Streaks": [
+      "Streaks:analysis.streaks"
+    ],
+    "Time patterns": [
+      "Time patterns:analysis.timePatterns"
+    ],
+    "List of Trades": [
+      "List of Trades:trades.closedFragments",
+      "List of Trades:trades.openLots"
+    ]
+  },
+  "tradeColumns": {
+    "Trade number": "fragmentId/displayOrdinal",
+    "Long/Short": "direction",
+    "Type": "entry/exit/status",
+    "Date and time": "entry.time/exit.time",
+    "Signal": "entry.signal/exit.signal",
+    "Price": "entry.price/exit.price",
+    "Size": "quantity/entryNotional/exitNotional",
+    "Net PnL": "pnlNet",
+    "Return": "returnFraction",
+    "Commission": "feeTotal",
+    "Favorable excursion": "excursion.mfeMoney/mfeFraction",
+    "Adverse excursion": "excursion.maeMoney/maeFraction",
+    "Cumulative PnL": "cumulativeClosedPnl/fractionOfInitialCapital",
+    "Duration (bars)": "barsHeld/barsElapsed/durationNs"
+  }
+}
