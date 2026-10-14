@@ -41,7 +41,7 @@ The shared theme loads `https://umami.pineify.app/script.js` once per page with 
 
 | Event | Action | Properties |
 | --- | --- | --- |
-| `docs-sponsor-click` | Open Pineify | `placement`: `header` or `footer` |
+| `docs-sponsor-click` | Open Pineify | `placement`: `content-banner`, `header`, or `footer` |
 | `docs-github-click` | Open the GitHub repository | `placement`: `header` |
 | `docs-quickstart-click` | Open the first backtest from the home page | `placement`: `home-primary` or `home-tutorials` |
 | `docs-examples-click` | Open runnable examples from the home page | `placement`: `home-tutorials` |
