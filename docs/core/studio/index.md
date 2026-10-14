@@ -11,7 +11,18 @@ Click any screenshot to open it at full size.
 
 ## 1. Install and launch
 
-These instructions target the Studio source checkout. They do not assume that `openbacktesting-studio` has been published on PyPI. Use Python **3.12–3.14**; the current Studio has been exercised on **macOS**. Linux and Windows have not been verified, and workspace file protection currently uses POSIX directory descriptors.
+Use Python **3.12–3.14**; the current Studio has been exercised on **macOS**. Linux and Windows have not been verified, and workspace file protection currently uses POSIX directory descriptors.
+
+### From PyPI
+
+Install Studio and launch it with the initial location for your workspace picker:
+
+```sh
+python -m pip install openbacktesting-studio==0.1.0
+openbacktesting-studio /path/to/strategies
+```
+
+This installs a compatible core (`openbacktesting>=0.2.1,<0.3`) and the compiled interface. **Node.js and npm are not required.** Framework-only users can install `openbacktesting==0.2.1` independently.
 
 ### From a source checkout
 

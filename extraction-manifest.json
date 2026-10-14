@@ -6798,7 +6798,7 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "32ea191084bf3a16de791e1f123335a4503559e3c87041ac3b94d673f324b433",
+      "targetSha256": "4b58e84f0f7975eaf0c9cb9d3da96ec00f287533b7831b1afe2f280af6b4ab53",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
@@ -6807,7 +6807,8 @@
         "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",
         "Linked documentation entry points and chapter references to the published documentation site.",
         "Document optional Studio setup, local development, and contribution workflows.",
-        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities."
+        "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities.",
+        "Document PyPI installation of core 0.2.1 and the optional Studio 0.1.0 release."
       ]
     }
   ]

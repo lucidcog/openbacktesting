@@ -10,9 +10,16 @@ The repository contains two independently built Python distributions.
 
 ## Installation and launch
 
-For this unreleased source version, first build the frontend as described in the
-[maintainer guide](development.md), then install the built distributions into the
-same Python 3.12–3.14 environment:
+Install into a Python 3.12–3.14 environment. Studio installs its compatible core
+dependency automatically:
+
+```sh
+python -m pip install openbacktesting-studio==0.1.0
+openbacktesting-studio /path/to/strategy-workspace --no-open
+```
+
+For source development, build the frontend as described in the
+[maintainer guide](development.md). To install locally built distributions instead:
 
 ```sh
 python -m pip install /path/to/openbacktesting-0.2.1-py3-none-any.whl
@@ -39,8 +46,7 @@ strategy's dependencies there first. Studio does not install or switch environme
 End users need Python and a browser, not Node, npm, Electron or a CDN connection.
 Both the wheel and sdist contain compiled assets, the local Monaco worker and chart
 notices. Installing from the sdist uses a Python build backend, not a frontend build.
-Once releases are published, `pip install openbacktesting-studio` can resolve its
-compatible core dependency. This document does not claim that release is published.
+Studio 0.1.0 requires `openbacktesting>=0.2.1,<0.3`.
 
 The implementation is verified on macOS. Linux and Windows were not exercised in
 this change; filesystem protection currently uses POSIX directory descriptors.

@@ -11,7 +11,14 @@ its own loopback host, prebuilt UI, chart library and editor worker.
 - [Versioned host protocol](docs/protocol.md)
 - [Chart source and licenses](vendor-metadata/README.md)
 
-Studio is currently a source-checkout implementation, not a claimed published release.
-Build instructions produce independent wheel and sdist artifacts; end-user installation
+Install Studio 0.1.0 into a Python 3.12–3.14 environment:
+
+```sh
+python -m pip install openbacktesting-studio==0.1.0
+openbacktesting-studio /path/to/strategies
+```
+
+Installation includes a compatible core (`openbacktesting>=0.2.1,<0.3`).
+Independent wheel and sdist artifacts include the compiled interface; end-user installation
 requires no Node or CDN. The verified platform is macOS with Python 3.12–3.14 compatibility
 checks; platform verification details are recorded with the implementing OpenSpec change.

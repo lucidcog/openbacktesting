@@ -29,6 +29,14 @@ Pineify is an AI trading toolkit for building indicators and strategies across m
 
 ## Quick start
 
+Install the Python framework from PyPI into a Python 3.12–3.14 environment:
+
+```sh
+python -m pip install openbacktesting==0.2.1
+```
+
+For the repository examples and local development, use a source checkout:
+
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and use Python `>=3.12,<3.15`. From a terminal:
 
 ```sh
@@ -50,7 +58,14 @@ The base dependencies are NumPy, pandas, and `pandas-ta-classic==0.8.32`. For SA
 
 ## Optional Studio
 
-Use [OpenBacktesting Studio](docs/core/studio/index.md) to edit local strategy files, configure inputs, inspect charts and reports, and compare parameter experiments in your browser. It is a separate Python distribution; framework-only users do not install its web assets. The illustrated guide covers building and installing the current source version, launching Studio, and running your first strategy.
+Use [OpenBacktesting Studio](docs/core/studio/index.md) to edit local strategy files, configure inputs, inspect charts and reports, and compare parameter experiments in your browser. It is a separate Python distribution; framework-only users do not install its web assets. The illustrated guide covers installation, launching Studio, and running your first strategy.
+
+```sh
+python -m pip install openbacktesting-studio==0.1.0
+openbacktesting-studio /path/to/strategies
+```
+
+Studio installs its compatible core dependency automatically and includes the compiled web interface. End users do not need Node.js or npm.
 
 ## Minimal backtest
 
