@@ -24,7 +24,7 @@ uv run --locked python scripts/verify.py --profile studio
 uv run --locked python scripts/verify.py --profile full
 ```
 
-Omitting `--profile` selects `full`. `--list` prints selected check IDs without executing them. The single catalogue is `scripts/harness_checks.py`; CI calls this same entry point. `HARNESS_PYTHON` selects an installed or uv-managed Python version for both locked environments. Root and Studio environments remain separate. Preparation synchronizes locked dependencies; it never updates lockfiles. Studio builds its web assets before synchronizing its Python environment.
+Omitting `--profile` selects `full`. `--list` prints selected check IDs without executing them. The single catalogue is `scripts/harness_checks.py`. `HARNESS_PYTHON` selects an installed or uv-managed Python version for both locked environments. Root and Studio environments remain separate. Preparation synchronizes locked dependencies; it never updates lockfiles. Studio builds its web assets before synchronizing its Python environment.
 
 `docs` and `core` need no Node or browser. `studio` and `full` additionally need Node 22.12+ and the development browser. After installing frontend dependencies, install it explicitly:
 
@@ -53,6 +53,6 @@ Dependencies may be downloaded during setup; runtime fixtures reject external co
 
 Architecture checks protect core independence, reviewed lower-layer dependencies and exact Studio internal adapters. Exceptions require a reason, owner role and removal condition; unused exceptions fail. Dynamic imports that cannot be statically resolved are explicitly reported as coverage limits. Behavioral regression tests remain authoritative for numerical and event semantics.
 
-Run `uv run --locked python scripts/doc_gardening.py` after preparing the root and Studio environments. It reuses read-only checks and emits JSON plus candidate repair notes. `--previous <maintenance.json>` compares finding identities; without prior evidence it marks history as unknown. It does not rewrite files, push commits, create PRs or merge. Weekly CI stores reports for 14 days. Maintainers turn recurring findings into a targeted regression or rule and update [quality evidence](harness-quality.md).
+Run `uv run --locked python scripts/doc_gardening.py` after preparing the root and Studio environments. It reuses read-only checks and emits JSON plus candidate repair notes. `--previous <maintenance.json>` compares finding identities; without prior evidence it marks history as unknown. It does not rewrite files, push commits, create PRs or merge. Preserve local reports when comparing later runs. Maintainers turn recurring findings into a targeted regression or rule and update [quality evidence](harness-quality.md).
 
-Local results, actual remote CI runs and required-check configuration are separate evidence. A workflow file alone does not prove that remote branch protection is enabled.
+GitHub Actions workflows are currently removed. Verification and maintenance run locally through the commands above; archived plans describe the earlier CI design.
