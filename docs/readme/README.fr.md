@@ -10,7 +10,7 @@
 
 [Démarrage rapide](#quick-start) · [Manuel](https://docs.openbacktesting.com/) · [Exemples](https://docs.openbacktesting.com/examples/) · [Signaler un problème](https://github.com/lucidcog/openbacktesting/issues)
 
-[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results-light.jpg)](../core/_static/studio/backtest-results-light.jpg)
 
 ## Sponsor principal — Pineify
 

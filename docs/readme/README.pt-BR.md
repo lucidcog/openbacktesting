@@ -10,7 +10,7 @@ Escreva estratégias executadas candle a candle, avalie-as com dados históricos
 
 [Início rápido](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Exemplos](https://docs.openbacktesting.com/examples/) · [Relatar um problema](https://github.com/lucidcog/openbacktesting/issues)
 
-[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results-light.jpg)](../core/_static/studio/backtest-results-light.jpg)
 
 ## Patrocinador principal — Pineify
 
