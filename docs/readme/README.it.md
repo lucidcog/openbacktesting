@@ -10,6 +10,8 @@ Scrivi strategie eseguite candela per candela, valutale su dati storici di merca
 
 [Avvio rapido](#quick-start) · [Manuale](https://docs.openbacktesting.com/) · [Esempi](https://docs.openbacktesting.com/examples/) · [Segnala un problema](https://github.com/lucidcog/openbacktesting/issues)
 
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+
 ## Sponsor principale — Pineify
 
 <a href="https://pineify.app">

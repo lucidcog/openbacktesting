@@ -10,6 +10,8 @@ Write bar-by-bar strategies, evaluate them on historical market data, and inspec
 
 [Quick start](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Examples](https://docs.openbacktesting.com/examples/) · [Local development](#local-development) · [Contribute](CONTRIBUTING.md) · [Report an issue](https://github.com/lucidcog/openbacktesting/issues)
 
+[![OpenBacktesting Studio](docs/core/_static/studio/backtest-results.png)](docs/core/_static/studio/backtest-results.png)
+
 ## Top sponsor — Pineify
 
 <a href="https://pineify.app">

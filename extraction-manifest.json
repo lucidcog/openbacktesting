@@ -6798,7 +6798,7 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "32ea191084bf3a16de791e1f123335a4503559e3c87041ac3b94d673f324b433",
+      "targetSha256": "e161e8d2b1516eee28ba2ce043b276573f0104d641c521398ebb52e55b98f666",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",

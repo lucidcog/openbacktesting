@@ -10,6 +10,8 @@
 
 [快速开始](#quick-start) · [使用手册](https://docs.openbacktesting.com/) · [示例](https://docs.openbacktesting.com/examples/) · [反馈问题](https://github.com/lucidcog/openbacktesting/issues)
 
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+
 ## 顶级赞助商 — Pineify
 
 <a href="https://pineify.app">

@@ -10,6 +10,8 @@
 
 [शुरुआत करें](#quick-start) · [मैनुअल](https://docs.openbacktesting.com/) · [उदाहरण](https://docs.openbacktesting.com/examples/) · [समस्या बताएँ](https://github.com/lucidcog/openbacktesting/issues)
 
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+
 ## प्रमुख प्रायोजक — Pineify
 
 <a href="https://pineify.app">

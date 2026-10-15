@@ -10,6 +10,8 @@ Schreibe Strategien, die Kerze für Kerze ausgeführt werden, prüfe sie anhand 
 
 [Schnellstart](#quick-start) · [Handbuch](https://docs.openbacktesting.com/) · [Beispiele](https://docs.openbacktesting.com/examples/) · [Problem melden](https://github.com/lucidcog/openbacktesting/issues)
 
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+
 ## Hauptsponsor — Pineify
 
 <a href="https://pineify.app">

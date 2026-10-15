@@ -10,6 +10,8 @@ Escribe estrategias que se ejecutan vela a vela, evalúalas con datos histórico
 
 [Inicio rápido](#quick-start) · [Manual](https://docs.openbacktesting.com/) · [Ejemplos](https://docs.openbacktesting.com/examples/) · [Informar de un problema](https://github.com/lucidcog/openbacktesting/issues)
 
+[![OpenBacktesting Studio](../core/_static/studio/backtest-results.png)](../core/_static/studio/backtest-results.png)
+
 ## Patrocinador principal — Pineify
 
 <a href="https://pineify.app">
