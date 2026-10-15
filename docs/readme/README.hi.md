@@ -1,4 +1,9 @@
-# OpenBacktesting
+<h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../assets/brand/wordmark-white.svg">
+  <img src="../assets/brand/wordmark.svg" alt="OpenBacktesting" width="300" height="36">
+</picture>
+</h1>
 
 **Python में ऐतिहासिक बैकटेस्टिंग: रणनीति के नियमों से लेकर जाँचने योग्य नतीजों तक।**
 

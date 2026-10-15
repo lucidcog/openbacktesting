@@ -18,7 +18,8 @@ async function inventory(root, prefix = '') {
 }
 const inputs = {}
 for (const [name, hash] of Object.entries(await inventory(join(studio, 'web/src')))) inputs['web/src/' + name] = hash
-for (const name of ['web/package.json', 'web/package-lock.json', 'web/vite.config.ts', 'web/tsconfig.json', 'web/scripts/build-chart.mjs', 'web/scripts/collect-notices.mjs', 'web/scripts/write-build-manifest.mjs', 'vendor-metadata/lightweight-charts.json']) inputs[name] = digest(await readFile(join(studio, name)))
+for (const name of ['web/index.html', 'web/package.json', 'web/package-lock.json', 'web/vite.config.ts', 'web/tsconfig.json', 'web/scripts/build-chart.mjs', 'web/scripts/collect-notices.mjs', 'web/scripts/write-build-manifest.mjs', 'vendor-metadata/lightweight-charts.json']) inputs[name] = digest(await readFile(join(studio, name)))
+for (const [name, hash] of Object.entries(await inventory(join(studio, '../docs/assets/brand')))) inputs['../docs/assets/brand/' + name] = hash
 const assets = await inventory(web)
 delete assets['build-manifest.json']
 await writeFile(join(web, 'build-manifest.json'), JSON.stringify({ schemaVersion: 1, inputs, assets }, null, 2) + '\n')

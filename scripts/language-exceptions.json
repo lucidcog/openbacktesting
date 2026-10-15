@@ -422,6 +422,31 @@
       "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/implementation.md",
       "reason": "User-authorized Simplified Chinese OpenSpec implementation record.",
       "sha256": "afa775616ec6e626bb5a13f440756109d98fca3c934d16155d1e40d297770cfb"
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-15-unify-brand-wordmark/design.md",
+      "sha256": "ccaf296e20b56abcb6918a8cdcf28f21406309ab9b4e4221f5fb8704ba9afe64",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for the unified OpenBacktesting brand wordmark."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-15-unify-brand-wordmark/proposal.md",
+      "sha256": "bbf183f22b8d59771d3f3d76da1b7b6e6637bd7b0762b2868782ad614a2e859b",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for the unified OpenBacktesting brand wordmark."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-15-unify-brand-wordmark/specs/brand-identity/spec.md",
+      "sha256": "375f9b6a48c421e154be3cceb6520884756056bf9afbb7d8bfc9b69413473eed",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for the unified OpenBacktesting brand wordmark."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-15-unify-brand-wordmark/tasks.md",
+      "sha256": "ccecf70ebe3ff0b1eeb11f4c22b87245b789d53ae332a5147c7c00b34b17ab31",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for the unified OpenBacktesting brand wordmark."
+    },
+    {
+      "path": "openspec/changes/archive/2026-10-15-unify-brand-wordmark/implementation.md",
+      "reason": "User-authorized Simplified Chinese OpenSpec brand implementation record.",
+      "sha256": "d10d46448980395af5150a9012aab8ebb08275aece0fe3789924879236f788c3"
     }
   ],
   "sourceManifests": [

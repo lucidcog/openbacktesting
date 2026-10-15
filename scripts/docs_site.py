@@ -51,6 +51,8 @@ def on_config(config):
 
 def on_files(files, config):
     """Include only repository files linked by the manual, without copying sources."""
+    for asset in sorted((ROOT / "docs/assets/brand").glob("*.svg")):
+        files.append(File.generated(config, "_static/brand/" + asset.name, abs_src_path=str(asset)))
     files.append(
         File.generated(
             config,

@@ -93,7 +93,50 @@ def sitemap_urls(site):
 
 
 def test_installer_is_published_without_modification(site):
-    assert (site / "install-studio.sh").read_bytes() == (ROOT / "scripts/install-studio.sh").read_bytes()
+    assert (site / "install-studio.sh").read_bytes() == (
+        ROOT / "scripts/install-studio.sh"
+    ).read_bytes()
+
+
+def test_brand_assets_resolve_from_nested_pages_and_readmes(site):
+    assets = ROOT / "docs/assets/brand"
+    for source in assets.glob("*.svg"):
+        assert (site / "_static/brand" / source.name).read_bytes() == source.read_bytes()
+        svg = ElementTree.parse(source).getroot()
+        assert svg.attrib.get("viewBox")
+        assert all(
+            node.tag.rsplit("}", 1)[-1] not in {"text", "script", "image"} for node in svg.iter()
+        )
+    for relative in ["index.html", "studio/index.html", "reference/indicators/ema/index.html"]:
+        page = Document(site / relative)
+        base = BASE + relative.removesuffix("index.html")
+        home = page.elements("a", **{"aria-label": "OpenBacktesting home"})
+        assert (
+            len(home) == 1
+            and target_path(site, urljoin(base, home[0]["href"])) == site / "index.html"
+        )
+        icons = page.elements("link", rel="icon")
+        assert len(icons) == 1
+        assert (
+            target_path(site, urljoin(base, icons[0]["href"])).read_bytes()
+            == (assets / "favicon.svg").read_bytes()
+        )
+        brand = [img for img in page.elements("img") if "_static/brand/" in img.get("src", "")]
+        assert len(brand) == 5
+        for img in brand:
+            assert img["alt"] == "" and target_path(site, urljoin(base, img["src"])).is_file()
+    for readme in [
+        ROOT / "README.md",
+        ROOT / "studio/README.md",
+        *sorted((ROOT / "docs/readme").glob("README.*.md")),
+    ]:
+        parsed = Document(readme)
+        wordmark = parsed.elements("img", alt="OpenBacktesting")
+        assert len(wordmark) == 1
+        assert (readme.parent / wordmark[0]["src"]).resolve() == assets / "wordmark.svg"
+        dark = parsed.elements("source", media="(prefers-color-scheme: dark)")
+        assert len(dark) == 1
+        assert (readme.parent / dark[0]["srcset"]).resolve() == assets / "wordmark-white.svg"
 
 
 def target_path(site, url, base=BASE):

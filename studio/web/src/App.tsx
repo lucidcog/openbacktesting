@@ -1,5 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Activity, PanelLeft, Play, Save, Settings2, Sun, Moon, Download, Upload, Square, X, ChevronDown, ChevronUp, FileCode2, RefreshCw, Search, FolderOpen, PanelBottom, PanelRight } from 'lucide-react'
+import { Brand } from '@/components/Brand'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -288,7 +289,7 @@ export default function App() {
   return <TooltipProvider><div className="flex h-dvh min-h-96 flex-col overflow-hidden bg-background text-xs text-foreground">
     <header className="flex h-12 shrink-0 items-center gap-2 border-b px-3">
       <Button variant="ghost" size="icon-sm" aria-label="Toggle file sidebar" onClick={() => setSidebar(!sidebar)}><PanelLeft /></Button>
-      <div className="mr-3 flex items-center gap-2 font-semibold tracking-tight"><Activity className="size-5 text-primary" /><span className="hidden sm:inline">OpenBacktesting</span><span className="font-normal text-muted-foreground">Studio</span></div>
+      <Brand />
       <span className="min-w-0 truncate font-mono text-[11px] text-muted-foreground">{path || (cap?.mode === 'view' ? 'Read-only report' : 'Select a strategy')}</span>
       {buffer && dirty(buffer) && <Badge variant="outline">Unsaved</Badge>}
       <div className="ml-auto flex shrink-0 items-center gap-1">

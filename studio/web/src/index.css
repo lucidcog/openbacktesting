@@ -138,3 +138,21 @@
 :root { --background: #fff; --foreground: #131722; --card: #f8f9fd; --card-foreground: #131722; --popover: #fff; --popover-foreground: #131722; --primary: #2962ff; --primary-foreground: #fff; --secondary: #f0f3fa; --secondary-foreground: #131722; --muted: #f0f3fa; --muted-foreground: #787b86; --accent: #e8edfa; --accent-foreground: #131722; --destructive: #f23645; --border: #e0e3eb; --input: #d1d4dc; --ring: #2962ff; --radius: .25rem; }
 .dark { --background: #131722; --foreground: #d1d4dc; --card: #181c27; --card-foreground: #d1d4dc; --popover: #1e222d; --popover-foreground: #d1d4dc; --primary: #2962ff; --primary-foreground: #fff; --secondary: #2a2e39; --secondary-foreground: #d1d4dc; --muted: #1e222d; --muted-foreground: #868993; --accent: #2a2e39; --accent-foreground: #fff; --destructive: #f23645; --border: #2a2e39; --input: #363a45; --ring: #2962ff; }
 @layer base { body { margin: 0; } button, input, textarea { font: inherit; } pre, td { font-variant-numeric: tabular-nums; } * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; } }
+
+.studio-brand { display: flex; flex: none; align-items: center; gap: 10px; margin-right: 12px; }
+.studio-brand-mark { display: block; width: 150px; height: 18px; }
+.studio-brand-mark img { display: block; width: 100%; height: 100%; }
+.studio-brand-label { color: var(--muted-foreground); font-size: 12px; }
+.studio-brand-mark .brand-dark, .studio-brand-mark .brand-compact { display: none; }
+.dark .studio-brand-mark .brand-light { display: none; }
+.dark .studio-brand-mark .brand-full.brand-dark { display: block; }
+@media (max-width: 639px) {
+  .studio-brand { gap: 6px; margin-right: 0; }
+  .studio-brand-mark { width: 31.2px; }
+  .studio-brand-mark .brand-full, .dark .studio-brand-mark .brand-full.brand-dark { display: none; }
+  .studio-brand-mark .brand-compact.brand-light, .dark .studio-brand-mark .brand-compact.brand-dark { display: block; }
+  .dark .studio-brand-mark .brand-compact.brand-light { display: none; }
+}
+@media (max-width: 374px) {
+  .studio-brand-label { display: none; }
+}

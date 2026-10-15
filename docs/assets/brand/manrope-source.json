@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/manrope/Manrope%5Bwght%5D.ttf",
+      "file": "manrope.ttf",
+      "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/manrope/OFL.txt",
+      "file": "manrope-OFL.txt",
+      "sha256": "58172e0c0fac2cda8a37b348164bb55e44b0e69051e557e92b1d3f6910141f7b"
+    }
+  ],
+  "commit": "94301472b4d809299b4775bc6502592b83dd6934"
+}

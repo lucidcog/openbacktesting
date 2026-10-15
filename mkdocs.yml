@@ -13,6 +13,8 @@ theme:
   custom_dir: docs/theme
   language: en
   font: false
+  favicon: _static/brand/favicon.svg
+  logo: _static/brand/favicon.svg
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -28,8 +30,6 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
-  icon:
-    logo: material/chart-timeline-variant
   features:
     - navigation.sections
     - navigation.indexes

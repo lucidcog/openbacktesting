@@ -4,13 +4,15 @@
     <label class="md-header__button md-icon" for="__drawer" aria-label="Open navigation">
       {% include ".icons/material/menu.svg" %}
     </label>
-    <a href="{{ nav.homepage.url | url }}" class="md-header__button md-logo ob-logo" aria-label="OpenBacktesting home" data-md-component="logo">
-      {% include "partials/logo.html" %}
-    </a>
     <div class="md-header__title ob-brand" data-md-component="header-title">
-      <a href="{{ nav.homepage.url | url }}" class="ob-brand__link">
-        <strong>{{ config.site_name }}</strong>
-        <span>Python backtesting</span>
+      <a href="{{ nav.homepage.url | url }}" class="ob-brand__link" aria-label="OpenBacktesting home" data-md-component="logo">
+        <span class="ob-brand-mark" aria-hidden="true">
+          <img class="ob-wordmark ob-brand-light" src="{{ '_static/brand/wordmark.svg' | url }}" width="200" height="24" alt="">
+          <img class="ob-wordmark ob-brand-dark" src="{{ '_static/brand/wordmark-white.svg' | url }}" width="200" height="24" alt="">
+          <img class="ob-monogram ob-brand-light" src="{{ '_static/brand/monogram.svg' | url }}" width="31.2" height="18" alt="">
+          <img class="ob-monogram ob-brand-dark" src="{{ '_static/brand/monogram-white.svg' | url }}" width="31.2" height="18" alt="">
+        </span>
+        <span class="ob-brand__tagline">Python backtesting</span>
       </a>
       <span data-md-component="header-topic" hidden></span>
     </div>

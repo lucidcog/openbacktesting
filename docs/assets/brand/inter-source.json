@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+      "file": "inter.ttf",
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google/fonts/94301472b4d809299b4775bc6502592b83dd6934/ofl/inter/OFL.txt",
+      "file": "inter-OFL.txt",
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    }
+  ],
+  "commit": "94301472b4d809299b4775bc6502592b83dd6934"
+}
