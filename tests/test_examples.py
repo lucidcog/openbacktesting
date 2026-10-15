@@ -78,7 +78,7 @@ def read_index(root):
         assert category.strip() in ("Author script", "Imperative tutorial"), category
         assert status.strip() in ("Recommended", "Advanced", "Research only"), status
         entries[target] = (category.strip(), status.strip())
-    actual = {p.relative_to(root).as_posix() for p in root.rglob("*.py")}
+    actual = {p.relative_to(root).as_posix() for p in root.rglob("*.py") if ".openbacktesting" not in p.relative_to(root).parts}
     assert entries and set(entries) == actual, f"Index does not match file set: {set(entries) ^ actual}"
     for target in re.findall(r"\]\(([^)]+)\)", text):
         if not target.startswith(("https://", "http://", "#")):

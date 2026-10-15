@@ -1,0 +1,46 @@
+name: Repository maintenance
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HARNESS_PYTHON: '3.12'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.4'
+          enable-cache: true
+          cache-dependency-glob: |
+            uv.lock
+            studio/uv.lock
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+          cache: npm
+          cache-dependency-path: studio/web/package-lock.json
+      - name: Retrieve optional previous evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python scripts/maintenance_history.py
+      - name: Scan without automatic repairs
+        run: python scripts/doc_gardening.py --previous .verification/previous/maintenance.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: maintenance
+          path: .verification/harness/
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn

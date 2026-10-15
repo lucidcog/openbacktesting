@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import tempfile
 import time
+import tomllib
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -48,6 +49,16 @@ def no_browser(*args, **kwargs):
     raise RuntimeError('Browser opening forbidden in --no-open test')
 webbrowser.open = no_browser
 """
+
+
+def current_artifact(project, kind):
+    metadata = tomllib.loads((project / "pyproject.toml").read_text())["project"]
+    stem = metadata["name"].replace("-", "_") + "-" + metadata["version"]
+    suffix = "-py3-none-any.whl" if kind == "wheel" else ".tar.gz"
+    path = project / "dist" / (stem + suffix)
+    if not path.is_file():
+        raise FileNotFoundError(f"Build the current artifact first: {path}")
+    return path
 
 
 def run(command, cwd, **kwargs):
@@ -208,14 +219,14 @@ def main():
         guard = root / "guard"
         guard.mkdir()
         (guard / "sitecustomize.py").write_text(GUARD)
-        for kind, extension in [("wheel", "*.whl"), ("sdist", "*.tar.gz")]:
+        for kind in ["wheel", "sdist"]:
             directory = root / kind
             directory.mkdir()
             environment = directory / "environment"
             run([uv, "venv", "--python", args.python, str(environment)], directory)
             python = environment / "bin/python"
-            core = next((ROOT / "dist").glob(extension))
-            studio = next((ROOT / "studio/dist").glob(extension))
+            core = current_artifact(ROOT, kind)
+            studio = current_artifact(ROOT / "studio", kind)
             run(
                 [uv, "pip", "install", "--python", str(python), str(core)],
                 directory,

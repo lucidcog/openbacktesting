@@ -26,6 +26,10 @@ uv run --locked python examples/advanced/native_run.py
 
 `uv sync` creates `.venv` and installs the core project for development. The example uses bundled data. Work on the source under `src/`; you do not need to rebuild a wheel for each Python edit. All commands below run from the repository root unless stated otherwise.
 
+## Unified verification
+
+Use the [repository harness](harness.md) for shared local and CI profiles, failure reports and maintenance responsibilities. The commands below remain the individual building blocks for focused work.
+
 ## Core development
 
 Start with the test module relevant to your change, for example:

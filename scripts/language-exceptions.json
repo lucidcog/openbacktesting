@@ -44,18 +44,6 @@
       "selector": "test_request_reuse_in_init_and_independent_runs"
     },
     {
-      "path": "openspec/changes/archive/2026-10-12-standardize-repository-english/specs/extraction-parity/spec.md",
-      "value": "- FROM: `### Requirement: \u4fdd\u6301\u65e2\u6709\u8ba1\u7b97\u8bed\u4e49`",
-      "count": 1,
-      "reason": "Historical requirement identifier retained for exact OpenSpec delta matching."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-12-standardize-repository-english/specs/extraction-parity/spec.md",
-      "value": "- FROM: `### Requirement: \u6d4b\u8bd5\u548c\u793a\u4f8b\u72ec\u7acb\u8fd0\u884c`",
-      "count": 1,
-      "reason": "Historical requirement identifier retained for exact OpenSpec delta matching."
-    },
-    {
       "path": "tests/test_inputs.py",
       "value": "\u5468\u671f",
       "count": 1,
@@ -387,120 +375,53 @@
       "value": "[\u4f7f\u7528\u624b\u518c](https://docs.openbacktesting.com/)",
       "count": 1,
       "reason": "Intentional Simplified Chinese link to the published documentation."
-    },
-    {
-      "path": "docs/research/openbacktesting-github-submission-targets.md",
-      "value": "| **[thuquant/awesome-quant](https://github.com/thuquant/awesome-quant)**<br>`README.md` \u2192 \u56de\u6d4b | Strong Chinese-language specialist target with Zipline, rqalpha and Manifold-BT already listed. Prepare one objective Chinese bullet for a single-asset historical backtesting library. Root contains README, LICENSE and papers.md, with no dedicated contribution guide/template found. The latest default-branch commit merges an added resource. Chinese presentation is not an India/China-market-only gate; existing international frameworks show general engines belong.<br>Sources: [README.md](https://github.com/thuquant/awesome-quant/blob/ec1df0d178371cca05f30c804e2830cd6f56ff1d/README.md) |",
-      "count": 1,
-      "reason": "Exact quoted section title in an external Chinese-language directory; reference text, not product copy."
-    },
-    {
-      "path": "docs/research/openbacktesting-github-submission-targets.md",
-      "value": "| **[akfamily/quant](https://github.com/akfamily/quant)**<br>`README.md` \u2192 \u6295\u7814\u6846\u67b6 | Chinese resource collection with relevant research frameworks; last default-branch commit 2024-12-06 and no sampled PR review history. No dedicated contribution policy found. A concise linked entry under the Chinese research-framework category is reasonable; use Chinese prose and the existing format. This is lower priority, not ineligible.<br>Sources: [README](https://github.com/akfamily/quant/blob/4d57030c612f3242affb867cce3c05eee1fbf567/README.md) |",
-      "count": 1,
-      "reason": "Exact quoted section title in an external Chinese-language directory; reference text, not product copy."
     }
   ],
   "documents": [
     {
-      "path": "docs/research/openbacktesting-studio-architecture.md",
-      "sha256": "ae3eae65ebf614e8c42e79e7df9f5030f635ba2e40a977643588cb4959b1e833",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/design.md",
+      "sha256": "0136c52713fbd98f3267713180700408274bc64d5620095fa59262a655006892",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/design.md",
-      "sha256": "747988e4678df5b8746aed8281c1ae6da34237ee4298fef613e4e719c79c0458",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/proposal.md",
+      "sha256": "188fa2aca491b2168f3c2fa77a174d5dea5088c4a6e7eff675047ffa7e23a769",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/proposal.md",
-      "sha256": "482f4457f73b5dcead194aaf9e2113f44f5a03e610e47e8930bd0c79c6092214",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/specs/architecture-boundary-enforcement/spec.md",
+      "sha256": "c19fec071b577453c21c47cc4fd80af6c45d5aab4d7a535bf96cf05d400fcd0c",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/package-identity/spec.md",
-      "sha256": "e157851b5def166ce0475f627c236305cde05f7cd6839a01ad3881f6d0ae4c2b",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/specs/repository-harness-navigation/spec.md",
+      "sha256": "d7b520b28542638c2c4b987a258495339706a5c311c8b0c99e3691de83633722",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/repository-language-policy/spec.md",
-      "sha256": "f218af7f38436f883e7e37b4b89b9af81915c328f649fd7d38c97e8a80ef4c61",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/specs/repository-maintenance-feedback/spec.md",
+      "sha256": "0aa35530768e95b19795bbeb84dcce3444b50a940550d48dfc11e9fe5a0da531",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/standalone-python-package/spec.md",
-      "sha256": "af4ad9598a2afc931e0c75122e2912569d2bb4c6ebe7dc1aea8a7f53ee45b64e",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/specs/repository-verification/spec.md",
+      "sha256": "7174abba5ef713b544a24ce2b7c50a74c66940d4c093e2f361ce999363468b4a",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-chart-rendering/spec.md",
-      "sha256": "bc096c1396423f27fc30fc14a37d6566d8bf75d414a71e7e624f30df70975fa2",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/specs/studio-browser-verification/spec.md",
+      "sha256": "724152d5740d92564cdb1debd57d4cd0e09c19b3fc10a8506d1e1bcbe0c1cb16",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-distribution/spec.md",
-      "sha256": "c1216596060b860af6b749b2ffe3ea62e6e822bc7c9b3c216c7635ab6329de6e",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/tasks.md",
+      "sha256": "e16ac7a6ff05a72267c311634cc2d58ff318b370663b8c9fbba5b157e63698d7",
+      "reason": "User-authorized Simplified Chinese OpenSpec planning for repository Harness Engineering."
     },
     {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-results-report/spec.md",
-      "sha256": "26c7431c2fcd581e748fb585021e91d16c340a19d0e43c99bedbf82b8c163155",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-run-artifacts/spec.md",
-      "sha256": "a070bf86d6e8fe0c2cbd9dde1cff13d1b82c3761d9a32b048d8acd28bb0b0d79",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-run-lifecycle/spec.md",
-      "sha256": "b1622401b60dbf9c4a1f05815a73d4d5c4658fc48721d979e96bbd60d3931e08",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-source-editor/spec.md",
-      "sha256": "87e4a5e8e11bdbb3cfc93f228b476f6232176614c154d38a9607a80010bccc6c",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-strategy-configuration/spec.md",
-      "sha256": "6b71bc6a4c92d00826e989c263d9ae5f986477e70d5ea0da2e64425d43368420",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-ui-design/spec.md",
-      "sha256": "419105ce0adfa7ac438082fa60a74af4c62018a925e4cf43e2624455c0955a4b",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-vendored-charts/spec.md",
-      "sha256": "d0d3c199f546aad1f72c062c9b85f63ea5b4bb272945c8479b4cb48e8b711bff",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-workspace-host/spec.md",
-      "sha256": "3c73198e95b2620edcff5b1555c16346bdde5c339dcdd1e035fe056e746d7b30",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/tasks.md",
-      "sha256": "857acf1408b7df48cd3cf710de27b06e2ae9950b5fc5e86faea236c2e9774f81",
-      "reason": "User-authorized Simplified Chinese Studio research and OpenSpec planning."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/implementation.md",
-      "sha256": "903dd70e23730a89ae697c9e4cafe4591185ab02b4b06707e64e4fc6e6545e25",
-      "reason": "User-authorized Simplified Chinese OpenSpec implementation and verification record."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/ui-verification.md",
-      "sha256": "4965e3b7aa9a06275cc91d616758ffdc46c39d4b2ef447c9d5f038b1e8e18ce6",
-      "reason": "User-authorized Simplified Chinese OpenSpec UI verification record."
-    },
-    {
-      "path": "openspec/changes/archive/2026-10-14-add-openbacktesting-studio/specs/studio-optimizer/spec.md",
-      "sha256": "b25fc917122de093a13fbd3dc7449dd1b608ebe12823a0c465513a669a78e7be",
-      "reason": "User-authorized Simplified Chinese Studio OpenSpec extension."
+      "path": "openspec/changes/archive/2026-10-15-add-repository-harness-engineering/implementation.md",
+      "reason": "User-authorized Simplified Chinese OpenSpec implementation record.",
+      "sha256": "afa775616ec6e626bb5a13f440756109d98fca3c934d16155d1e40d297770cfb"
     }
   ],
   "sourceManifests": [

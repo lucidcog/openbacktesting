@@ -3330,7 +3330,7 @@
       "source": "python/core/tests/test_examples.py",
       "sourceSha256": "6af05523e513ab23f17b28f39bf34c9d50129d6110c4e1522af83a629f0115b1",
       "target": "tests/test_examples.py",
-      "targetSha256": "a5882696cf99140491d5c4aa29482447e5668b1eefbcbab50e82a4fe146b92e7",
+      "targetSha256": "f0904d4d823252dc19dc422714b1e6030c7968f3c7f9b7fb2f419d5531ae7964",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved."
       ]
@@ -4011,7 +4011,7 @@
       "source": "docs/core/development.md",
       "sourceSha256": "258e4fc261fc7875e434aded5bcda6be0eb0d269c935b5bf265b3455aef1ef4c",
       "target": "docs/core/development.md",
-      "targetSha256": "4de2445f74d777038c52c68339a840df5591a7d20d9f84e41ca6ae59fc459603",
+      "targetSha256": "816c6bf5315e373268c50d6a4d54095eb1262228621b293156e95c3b7ba747ba",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
         "Reworked user documentation, runnable recipes, module navigation, and reference generation; runtime behavior unchanged.",

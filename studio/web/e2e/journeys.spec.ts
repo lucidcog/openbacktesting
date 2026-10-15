@@ -1,0 +1,55 @@
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { test, expect, strategy, edit, configure, run, fills, enter } from './fixtures'
+
+test('edit, discover, save and execute a deterministic strategy', async ({ page, studio }) => {
+  const changed = strategy + '\n# Saved through the real editor.\n'
+  await edit(page, changed)
+  expect(await readFile(join(studio.workspace, 'strategy.py'), 'utf8')).toBe(changed)
+  await configure(page)
+  const id = await run(page)
+  await fills(page)
+  const frozen = await readFile(join(studio.workspace, '.openbacktesting/studio/runs', id, 'result/source/strategy.py'), 'utf8')
+  expect(frozen).toBe(changed)
+})
+
+test('link fills to a real chart and reopen an export in a read-only viewer', async ({ page, studio }, info) => {
+  await configure(page)
+  await run(page)
+  const original = await fills(page)
+  const chart = page.getByLabel('Market chart with linked strategy panes', { exact: true })
+  await expect(chart.locator('canvas').first()).toBeVisible()
+  const before = await chart.screenshot()
+  await page.getByRole('button', { name: 'Details', exact: true }).first().click()
+  await expect(page.getByRole('button', { name: 'Clear fill selection', exact: true })).toBeVisible()
+  await expect(page.getByText('Raw record · full precision', { exact: true })).toBeVisible()
+  await expect.poll(async () => (await chart.screenshot()).equals(before)).toBe(false)
+  await page.screenshot({ path: info.outputPath('linked-chart.png') })
+  await page.getByRole('button', { name: 'Export result', exact: true }).click()
+  const downloaded = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Download .obstudio', exact: true }).click()
+  const path = join(studio.directory, 'export.obstudio')
+  await (await downloaded).saveAs(path)
+  await enter(page, await studio.viewer(path))
+  await expect(page.getByText('Read-only · no source execution', { exact: true })).toBeVisible()
+  expect((await fills(page)).rows).toEqual(original.rows)
+  await expect(page.getByRole('button', { name: 'Run', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('tab', { name: 'Code', exact: true })).toHaveCount(0)
+  await expect(page.getByLabel('Market chart with linked strategy panes').locator('canvas').first()).toBeVisible()
+})
+
+test('preserve a failed run, inspect diagnostics, repair and create a new run', async ({ page, studio }) => {
+  await edit(page, strategy.replace('if self.bar_index == 0: self.buy(qty=self.quantity)', 'if self.bar_index == 0: raise RuntimeError("HARNESS_CONTROLLED_FAILURE")'))
+  await configure(page)
+  const failed = await run(page, 'failed')
+  await expect(page.getByLabel('Backtest results panel')).toContainText('HARNESS_CONTROLLED_FAILURE')
+  const location = join(studio.workspace, '.openbacktesting/studio/runs', failed, 'response.json')
+  const previous = await readFile(location, 'utf8')
+  await page.getByRole('button', { name: 'strategy.py', exact: true }).click()
+  await edit(page, strategy)
+  await configure(page)
+  const succeeded = await run(page)
+  expect(succeeded).not.toBe(failed)
+  expect(await readFile(location, 'utf8')).toBe(previous)
+  await fills(page)
+})

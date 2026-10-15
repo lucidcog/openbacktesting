@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "exceptions": [
+    {"file": "studio/src/openbacktesting_studio/execution/data.py", "target": "openbacktesting.data.timeframe.TimeframeUnit", "reason": "Existing adapter constructs the explicit timeframe for normalized data profiles.", "owner": "Studio maintainers", "removeWhen": "The adapter uses the documented root enum entry point."},
+    {"file": "studio/src/openbacktesting_studio/execution/data.py", "target": "openbacktesting.test", "reason": "Existing sample-data loader reads bundled offline datasets, not arbitrary test modules.", "owner": "Studio maintainers", "removeWhen": "Bundled sample datasets have a separate public resource API."},
+    {"file": "studio/src/openbacktesting_studio/execution/optimization_worker.py", "target": "openbacktesting.data.timeframe.TimeframeUnit", "reason": "Existing optimizer adapter reconstructs the frozen data context.", "owner": "Studio maintainers", "removeWhen": "The adapter uses the documented root enum entry point."},
+    {"file": "studio/src/openbacktesting_studio/execution/optimization_worker.py", "target": "openbacktesting.optimizer.identity.execution_identity", "reason": "Existing worker records the exact core execution identity for resume compatibility.", "owner": "Core and Studio maintainers", "removeWhen": "A documented identity adapter replaces this internal call."},
+    {"file": "studio/src/openbacktesting_studio/execution/optimization_worker.py", "target": "openbacktesting.strategy.declaration.declaration", "reason": "Existing optimization worker inspects the registered strategy declaration.", "owner": "Core and Studio maintainers", "removeWhen": "A documented discovery contract exposes the required declaration."},
+    {"file": "studio/src/openbacktesting_studio/execution/worker.py", "target": "openbacktesting.data.timeframe.TimeframeUnit", "reason": "Existing run worker reconstructs explicit timeframe semantics.", "owner": "Studio maintainers", "removeWhen": "The adapter uses the documented root enum entry point."},
+    {"file": "studio/src/openbacktesting_studio/execution/worker.py", "target": "openbacktesting.strategy.declaration.declaration", "reason": "Existing run worker validates the selected registered strategy.", "owner": "Core and Studio maintainers", "removeWhen": "A documented discovery contract exposes the required declaration."},
+    {"file": "studio/src/openbacktesting_studio/execution/worker.py", "target": "openbacktesting.strategy.inputs.resolve_request", "reason": "Existing run worker resolves the frozen request with core input validation.", "owner": "Core and Studio maintainers", "removeWhen": "A documented request-resolution adapter replaces this internal call."}
+  ]
+}

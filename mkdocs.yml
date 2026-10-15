@@ -131,6 +131,8 @@ nav:
       - Catalog: reference/indicators/index.md
   - Maintenance:
       - Local development: development.md
+      - Repository harness: harness.md
+      - Harness quality: harness-quality.md
       - Contributing: contributing.md
       - Deploy to Cloudflare Pages: deployment.md
       - Build information: build-info.md
