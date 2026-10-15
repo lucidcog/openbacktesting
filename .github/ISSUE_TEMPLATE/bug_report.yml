@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible problem in the framework or Studio.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. For suspected vulnerabilities, use [private reporting](https://github.com/lucidcog/openbacktesting/security/advisories/new), not this public form. Remove credentials and private market data.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected component
+      options:
+        - Core backtesting engine
+        - Indicators
+        - Optimization
+        - Studio
+        - Installation or packaging
+        - Documentation or examples
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include the commit or package version, Python version, OS, installation command, and relevant dependency versions. For Studio, include its version and browser.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Provide runnable code, exact commands and settings, and small synthetic or redistributable data. For Studio, include the steps to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the full traceback or relevant output. Remove tokens, private paths, and confidential data.
+    validations:
+      required: true

@@ -10,6 +10,7 @@ readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.12,<3.15"
+keywords = ["backtesting", "strategy-research", "technical-analysis", "openbacktesting"]
 dependencies = [
     "openbacktesting>=0.2.1,<0.3",
     "fastapi>=0.115,<1",
@@ -18,6 +19,13 @@ dependencies = [
     "packaging>=24,<27",
     "jsonschema>=4.23,<5",
 ]
+
+[project.urls]
+Homepage = "https://openbacktesting.com/"
+Documentation = "https://docs.openbacktesting.com/studio/"
+Repository = "https://github.com/lucidcog/openbacktesting"
+Issues = "https://github.com/lucidcog/openbacktesting/issues"
+Discussions = "https://github.com/lucidcog/openbacktesting/discussions"
 
 [project.scripts]
 openbacktesting-studio = "openbacktesting_studio.cli:main"

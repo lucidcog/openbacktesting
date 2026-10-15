@@ -1,0 +1,22 @@
+name: Documentation or example improvement
+description: Report unclear guidance, broken links, translation drift, or missing examples.
+labels: [documentation]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Page URL or file path
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What needs to change?
+      description: Include the confusing or incorrect guidance and the behavior you observed.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: Describe a correction or an example that would help.

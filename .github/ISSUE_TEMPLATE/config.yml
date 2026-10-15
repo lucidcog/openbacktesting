@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and strategy discussions
+    url: https://github.com/lucidcog/openbacktesting/discussions
+    about: Ask usage questions or discuss strategy research with the community.
+  - name: Documentation and examples
+    url: https://docs.openbacktesting.com/
+    about: Read installation instructions, API references, and runnable examples.
+  - name: Report a security vulnerability privately
+    url: https://github.com/lucidcog/openbacktesting/security/advisories/new
+    about: Report potential vulnerabilities without disclosing details in a public issue.

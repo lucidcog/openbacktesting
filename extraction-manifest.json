@@ -3925,7 +3925,7 @@
       "source": "python/core/pyproject.toml",
       "sourceSha256": "650330f2216b1b8002eb96cab0b8e1357f1f2e6c0b5a71b7587807e5180c8546",
       "target": "pyproject.toml",
-      "targetSha256": "a4c17cf06b4ec08b40cda09f699ecd9a71e5505cd02803a0d5e76c6d94905494",
+      "targetSha256": "3543ba363bf805738e565a6d67b0a72cdb0cd97ca2b8584241ce4a2383bb3b98",
       "changes": [
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
         "Added the Apache-2.0 project license declaration and included the license in distribution artifacts.",

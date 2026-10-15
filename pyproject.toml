@@ -10,11 +10,32 @@ readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.12,<3.15"
+keywords = ["backtesting", "algorithmic-trading", "quantitative-finance", "technical-analysis", "strategy-optimization"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+]
 dependencies = [
     "numpy>=2,<3",
     "pandas>=2.2,<4",
     "pandas-ta-classic==0.8.32",
 ]
+
+[project.urls]
+Homepage = "https://openbacktesting.com/"
+Documentation = "https://docs.openbacktesting.com/"
+Repository = "https://github.com/lucidcog/openbacktesting"
+Issues = "https://github.com/lucidcog/openbacktesting/issues"
+Discussions = "https://github.com/lucidcog/openbacktesting/discussions"
+Changelog = "https://github.com/lucidcog/openbacktesting/releases"
 
 [project.optional-dependencies]
 optimize = ["sambo>=1.25,<2", "scikit-learn>=1.5,<2"]
@@ -38,5 +59,5 @@ testpaths = ["tests"]
 packages = ["src/openbacktesting"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/CONTRIBUTING.md", "/LICENSE", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/mkdocs.yml", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
+include = ["/src", "/examples", "/tests", "/docs", "/scripts", "/openspec", "/README.md", "/CONTRIBUTING.md", "/SECURITY.md", "/LICENSE", "/AGENTS.md", "/pyproject.toml", "/uv.lock", "/mkdocs.yml", "/source-manifest.json", "/extraction-manifest.json", "/conftest.py", "/.coveragerc", "/.gitignore"]
 exclude = ["**/__pycache__", "**/*.pyc", "**/.pytest_cache", "/.verification", "/.venv", "/dist"]
