@@ -1,6 +1,6 @@
 ## Context
 
-动机与范围见 [proposal.md](proposal.md)。依据 [字标研究](../../../docs/research/openbacktesting-wordmark-design.md)，采用原创几何粗字标；研究中的权重、字距和尺寸均是试验起点。
+动机与范围见 [proposal.md](proposal.md)。依据 [字标研究](../../../../docs/research/openbacktesting-wordmark-design.md)，采用原创几何粗字标；研究中的权重、字距和尺寸均是试验起点。
 
 当前 Studio 使用 IBM Plex Sans 和 Activity 图标，顶栏高 48px；Docs 使用系统字体、通用图标及独立页头模板。`studio/web/index.html` 尚无 favicon 声明。Docs 的实际内容根目录为 `docs/core/`，共享资源通过 `scripts/docs_site.py` 纳入站点。README 包括根目录、七种语言版本及 `studio/README.md`。`docs/core/_static/studio/` 中七张现行截图需要逐一检查旧品牌露出。
 

@@ -98,7 +98,7 @@ def test_installer_is_published_without_modification(site):
     ).read_bytes()
 
 
-def test_brand_assets_resolve_from_nested_pages_and_readmes(site):
+def test_brand_assets_resolve_from_nested_pages(site):
     assets = ROOT / "docs/assets/brand"
     for source in assets.glob("*.svg"):
         assert (site / "_static/brand" / source.name).read_bytes() == source.read_bytes()
@@ -130,13 +130,8 @@ def test_brand_assets_resolve_from_nested_pages_and_readmes(site):
         ROOT / "studio/README.md",
         *sorted((ROOT / "docs/readme").glob("README.*.md")),
     ]:
-        parsed = Document(readme)
-        wordmark = parsed.elements("img", alt="OpenBacktesting")
-        assert len(wordmark) == 1
-        assert (readme.parent / wordmark[0]["src"]).resolve() == assets / "wordmark.svg"
-        dark = parsed.elements("source", media="(prefers-color-scheme: dark)")
-        assert len(dark) == 1
-        assert (readme.parent / dark[0]["srcset"]).resolve() == assets / "wordmark-white.svg"
+        title = "OpenBacktesting Studio" if readme.parent.name == "studio" else "OpenBacktesting"
+        assert readme.read_text().splitlines()[0] == f"# {title}"
 
 
 def target_path(site, url, base=BASE):

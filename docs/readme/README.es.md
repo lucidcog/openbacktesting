@@ -1,9 +1,4 @@
-<h1>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../assets/brand/wordmark-white.svg">
-  <img src="../assets/brand/wordmark.svg" alt="OpenBacktesting" width="300" height="36">
-</picture>
-</h1>
+# OpenBacktesting
 
 **Backtesting histórico en Python: de las reglas de estrategia a resultados que puedes examinar.**
 

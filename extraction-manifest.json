@@ -6798,7 +6798,7 @@
       "source": "python/core/README.md",
       "sourceSha256": "46505b2068203d3966dc8f658b4c162e5b45f84247a644f275e16bce4d6dac5a",
       "target": "README.md",
-      "targetSha256": "5f3f7e2c8a5da48a1dc5ccea3df8cbdaa9706c2ca9a789897f178add702ac125",
+      "targetSha256": "1ab10d9666dd0416447444a7860638a3c3091baf76cadf14015d247a0da3a09c",
       "changes": [
         "Rewrote standalone package installation, development, minimal backtest, and identity-compatibility instructions.",
         "English language standardization of project-authored prose and diagnostics; numerical behavior and established identifiers preserved.",
@@ -6808,7 +6808,8 @@
         "Linked documentation entry points and chapter references to the published documentation site.",
         "Document optional Studio setup, local development, and contribution workflows.",
         "Synchronize core 0.2.1 release identity, development instructions, and validation expectations; retain historical source identities.",
-        "Replace the README heading artwork with the shared, theme-aware OpenBacktesting wordmark; retain accessible heading semantics, project prose, and historical source identity."
+        "Replace the README heading artwork with the shared, theme-aware OpenBacktesting wordmark; retain accessible heading semantics, project prose, and historical source identity.",
+        "Restore a plain Markdown product heading after the GitHub README image heading rendered blank; preserve historical source identity."
       ]
     }
   ]

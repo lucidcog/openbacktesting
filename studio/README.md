@@ -1,9 +1,4 @@
-<h1>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../docs/assets/brand/wordmark-white.svg">
-  <img src="../docs/assets/brand/wordmark.svg" alt="OpenBacktesting" width="300" height="36">
-</picture> Studio
-</h1>
+# OpenBacktesting Studio
 
 An optional local web workspace for the OpenBacktesting Python framework.
 Core-only users do not install Studio or its web dependencies. This package supplies
